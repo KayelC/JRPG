@@ -1,7 +1,7 @@
 # JRPG
 JRPG Game Inspired by the Persona Series, and Metaphor: Refantazio games by ATLUS.
 
-Full development and design notes are available in the [Doc.ipynb](./JRPG/Documentation/Doc.ipynb) Jupyter Notebook.
+Full development and design notes are available in the [Doc.ipynb](/Documentation/Doc.ipynb) Jupyter Notebook.
 
 All Rights Reserved License
 

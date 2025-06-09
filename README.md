@@ -1,5 +1,5 @@
 # JRPG
-JRPG Game Inspired by ATLUS games.
+JRPG Game Inspired by the Persona Series, and Metaphor: Refantazio games by ATLUS.
 
 All Rights Reserved License
 

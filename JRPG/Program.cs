@@ -11,21 +11,31 @@ namespace JRPGPrototype
 
             Console.WriteLine("\n=== BATTLE SIMULATOR INITIALIZING ===");
 
-            // 2. Create Test Combatants
-            // --- Player ---
+            // 2. Initialize Inventory & Add Test Items
+            InventoryManager inventory = new InventoryManager();
+            inventory.AddItem("101", 3); // Medicine x3
+            inventory.AddItem("106", 1); // Snuff Soul x1
+            inventory.AddItem("112", 2); // Dis-Poison x2
+            Console.WriteLine("[System] Inventory Initialized with Test Items.");
+
+            // 3. Create Test Combatants
             Combatant player = new Combatant("Hero");
 
-            // Set base stats suitable for testing (Balanced AGI/LUK)
+            // Set stats - Reduced HP to test healing
             player.CharacterStats[StatType.STR] = 15;
             player.CharacterStats[StatType.AGI] = 15;
             player.CharacterStats[StatType.LUK] = 15;
             player.CharacterStats[StatType.END] = 12;
             player.CharacterStats[StatType.INT] = 10;
 
-            if (Database.Personas.TryGetValue("slime", out var pData))
+            if (Database.Personas.TryGetValue("orpheus", out var pData))
             {
                 player.ActivePersona = pData.ToPersona();
                 player.RecalculateResources();
+
+                // Damage player to test healing
+                player.CurrentHP -= 50;
+                player.CurrentSP -= 20;
             }
 
             // --- Enemy ---
@@ -43,13 +53,8 @@ namespace JRPGPrototype
                 enemy.RecalculateResources();
             }
 
-            // 3. Manual Weapon Injection
-            // CHANGE THIS ID TO TEST DIFFERENT WEAPONS:
-            // "1"  = Shortsword (Slash, Melee, 92 Acc) -> Miss causes [DOWN]
-            // "8"  = Short Bow (Pierce, Ranged, 98 Acc) -> -20% Acc Penalty, No Down penalty
-            // "17" = Gae Bolg (Wind, Melee, 94 Acc) -> Elemental Melee
-            // "25" = Scrub Brush (Strike, Melee, 30 Acc) -> High chance to Miss and Fall
-            string weaponIdToTest = "25";
+            // 4. Manual Weapon Injection
+            string weaponIdToTest = "17";
 
             if (Database.Weapons.TryGetValue(weaponIdToTest, out var weapon))
             {
@@ -60,47 +65,30 @@ namespace JRPGPrototype
                 Console.WriteLine($"[Warning] Weapon ID '{weaponIdToTest}' not found. Defaulting to Unarmed.");
             }
 
-            // Give enemy a basic weapon
             if (Database.Weapons.TryGetValue("1", out var enemyWeapon))
             {
                 enemy.EquippedWeapon = enemyWeapon;
             }
 
-            // 4. Console Verification
+            // 5. Console Verification
             Console.WriteLine("\n--- SIMULATION CONFIGURATION ---");
-            Console.WriteLine($"Player: {player.Name} (AGI: {player.GetStat(StatType.AGI)})");
+            Console.WriteLine($"Player: {player.Name} (HP: {player.CurrentHP}/{player.MaxHP} | SP: {player.CurrentSP}/{player.MaxSP})");
+            Console.WriteLine(">> Player starts damaged to facilitate ITEM testing.");
 
             if (player.EquippedWeapon != null)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Equipped Weapon: {player.EquippedWeapon.Name} (ID: {player.EquippedWeapon.Id})");
-                Console.WriteLine($"Stats: Type [{player.EquippedWeapon.Type}] | Power [{player.EquippedWeapon.Power}] | Base Acc [{player.EquippedWeapon.Accuracy}%]");
-
-                Console.Write("Mechanic Check: ");
-                if (player.IsLongRange)
-                {
-                    Console.WriteLine("RANGED [TRUE]");
-                    Console.WriteLine(">> Logic: Attacks will suffer -20% Accuracy, but missing is safe.");
-                }
-                else
-                {
-                    Console.WriteLine("RANGED [FALSE] (Melee)");
-                    Console.WriteLine(">> Logic: Standard Accuracy. WARNING: Missing an attack will cause [DOWN] state.");
-                }
+                Console.WriteLine($"Equipped Weapon: {player.EquippedWeapon.Name}");
                 Console.ResetColor();
-            }
-            else
-            {
-                Console.WriteLine("Weapon: Unarmed (Strike / Melee)");
             }
             Console.WriteLine("--------------------------------\n");
             Console.WriteLine("Press Enter to Start Battle...");
             Console.ReadLine();
 
-            // 5. Run the Battle
+            // 6. Run the Battle (with Inventory)
             if (player.ActivePersona != null && enemy.ActivePersona != null)
             {
-                new BattleManager(player, enemy).StartBattle();
+                new BattleManager(player, enemy, inventory).StartBattle();
             }
             else
             {

@@ -13,8 +13,6 @@
     { "id": "111", "name": "Patra Card", "type": "Cure", "effect_value": 0, "description": "Cures Fear, Confusion, and Distress." },
     { "id": "112", "name": "Dis-Poison", "type": "Cure", "effect_value": 0, "description": "Cures Poison." },
     { "id": "113", "name": "Traesto Gem", "type": "Utility", "effect_value": 0, "description": "Instantly escape from the dungeon." },
-    { "id": "114", "name": "Goho-M", "type": "Utility", "effect_value": 0, "description": "Returns the party to the entrance." },
-    { "id": "115", "name": "Attack Mirror", "type": "Barrier", "effect_value": 0, "description": "Reflects one physical attack." },
-    { "id": "116", "name": "Magic Mirror", "type": "Barrier", "effect_value": 0, "description": "Reflects one magic attack." }
+    { "id": "114", "name": "Goho-M", "type": "Utility", "effect_value": 0, "description": "Returns the party to the entrance." }
   ]
 }

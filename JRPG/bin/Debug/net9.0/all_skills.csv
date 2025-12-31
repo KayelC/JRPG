@@ -1,4 +1,4 @@
-Skill,Effect,Power,Accuracy,Critical,Cost,Category
+,Effect,Power,Accuracy,Critical,Cost,Category
 Cleave,Deals light Slash damage to one foe.,30,90%,10%,7% HP,Slash Skills
 Power Slash,Deals light Slash damage to one foe.,88,92%,5%,10% HP,Slash Skills
 Zan-ei,"Deals medium Slash damage to one foe. (Higher damage bonus given the closer to the ""New Moon,"" during ""New Moon"" 1.5x damage.)",120,80%,3%,10% HP,Slash Skills

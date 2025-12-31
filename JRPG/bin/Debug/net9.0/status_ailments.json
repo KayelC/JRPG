@@ -1,0 +1,93 @@
+{
+  "ailments": [
+    {
+      "name": "Poison",
+      "action_restriction": "None",
+      "evasion_mult": 1.0,
+      "crit_bonus_chance": 0.0,
+      "damage_taken_mult": 1.0,
+      "dot_percent": 0.20,
+      "removal_triggers": ["NaturalRoll", "CureSkill"],
+      "cure_keyword": "Poison",
+      "description": "20% Max HP damage per turn (min 1HP)."
+    },
+    {
+      "name": "Freeze",
+      "action_restriction": "SkipTurn",
+      "evasion_mult": 0.0,
+      "crit_bonus_chance": 1.0,
+      "damage_taken_mult": 1.0,
+      "dot_percent": 0.0,
+      "removal_triggers": ["OneTurn", "CureSkill"],
+      "cure_keyword": "Freeze",
+      "description": "Cannot move. 100% Critical hit rate against target."
+    },
+    {
+      "name": "Shock",
+      "action_restriction": "SkipTurn",
+      "evasion_mult": 0.0,
+      "crit_bonus_chance": 1.0,
+      "damage_taken_mult": 1.0,
+      "dot_percent": 0.0,
+      "removal_triggers": ["OneTurn", "CureSkill"],
+      "cure_keyword": "Shock",
+      "description": "Cannot move. 100% Critical hit rate against target."
+    },
+    {
+      "name": "Fear",
+      "action_restriction": "ChanceSkipOrFlee",
+      "evasion_mult": 1.0,
+      "crit_bonus_chance": 0.5,
+      "damage_taken_mult": 1.0,
+      "dot_percent": 0.0,
+      "removal_triggers": ["NaturalRoll", "CureSkill"],
+      "cure_keyword": "Fear",
+      "description": "May skip turn or flee. High critical rate against target."
+    },
+    {
+      "name": "Panic",
+      "action_restriction": "ChanceSkip",
+      "evasion_mult": 1.0,
+      "crit_bonus_chance": 0.4,
+      "damage_taken_mult": 1.0,
+      "dot_percent": 0.0,
+      "removal_triggers": ["NaturalRoll", "CureSkill"],
+      "cure_keyword": "Panic",
+      "description": "Prevent skills. +40% Crit chance against target."
+    },
+    {
+      "name": "Charm",
+      "action_restriction": "ConfusedAction",
+      "evasion_mult": 1.0,
+      "crit_bonus_chance": 0.0,
+      "damage_taken_mult": 1.0,
+      "dot_percent": 0.0,
+      "removal_triggers": ["NaturalRoll", "CureSkill"],
+      "cure_keyword": "Charm",
+      "description": "May skip turn, attack allies, or heal enemies."
+    },
+    {
+      "name": "Rage",
+      "action_restriction": "ForceAttack",
+      "evasion_mult": 1.0,
+      "crit_bonus_chance": 0.0,
+      "damage_taken_mult": 3.0,
+      "extra_turns": 1,
+      "damage_deal_mult": 1.5,
+      "removal_triggers": ["NaturalRoll", "CureSkill"],
+      "cure_keyword": "Rage",
+      "description": "Auto-attack. 2 turns, 1.5x damage dealt, 3x damage taken."
+    },
+    {
+      "name": "Distress",
+      "action_restriction": "None",
+      "evasion_mult": 0.0,
+      "crit_bonus_chance": 0.5,
+      "damage_taken_mult": 1.5,
+      "dot_percent": 0.0,
+      "removal_triggers": ["NaturalRoll", "CureSkill"],
+      "cure_keyword": "Distress",
+      "description": "0 Evasion. +50% Crit chance. 1.5x damage taken."
+    }
+  ]
+}

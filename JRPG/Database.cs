@@ -9,6 +9,7 @@ namespace JRPGPrototype
     {
         public static Dictionary<string, SkillData> Skills = new Dictionary<string, SkillData>();
         public static Dictionary<string, PersonaData> Personas = new Dictionary<string, PersonaData>();
+        public static Dictionary<string, AilmentData> Ailments = new Dictionary<string, AilmentData>();
 
         public static void LoadData()
         {
@@ -45,6 +46,25 @@ namespace JRPGPrototype
             else
             {
                 Console.WriteLine("[Error] persona_data.json not found!");
+            }
+
+            // Load Ailments
+            if (File.Exists("status_ailments.json"))
+            {
+                string json = File.ReadAllText("status_ailments.json");
+                var root = JsonConvert.DeserializeObject<Dictionary<string, List<AilmentData>>>(json);
+                if (root != null && root.ContainsKey("ailments"))
+                {
+                    foreach (var a in root["ailments"])
+                    {
+                        if (!Ailments.ContainsKey(a.Name)) Ailments.Add(a.Name, a);
+                    }
+                }
+                Console.WriteLine($"[System] Loaded {Ailments.Count} ailments.");
+            }
+            else
+            {
+                Console.WriteLine("[Error] status_ailments.json not found!");
             }
         }
     }

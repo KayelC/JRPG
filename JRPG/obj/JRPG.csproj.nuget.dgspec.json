@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "K:\\JRPG\\JRPG\\JRPG.csproj": {}
+    "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\JRPG.csproj": {}
   },
   "projects": {
-    "K:\\JRPG\\JRPG\\JRPG.csproj": {
+    "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\JRPG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "K:\\JRPG\\JRPG\\JRPG.csproj",
+        "projectUniqueName": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\JRPG.csproj",
         "projectName": "JRPG",
-        "projectPath": "K:\\JRPG\\JRPG\\JRPG.csproj",
-        "packagesPath": "C:\\Users\\kayel\\.nuget\\packages\\",
-        "outputPath": "K:\\JRPG\\JRPG\\obj\\",
+        "projectPath": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\JRPG.csproj",
+        "packagesPath": "C:\\Users\\Kayel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\kayel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Kayel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,11 +44,17 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -65,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

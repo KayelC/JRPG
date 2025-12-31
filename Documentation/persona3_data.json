@@ -1,0 +1,4365 @@
+[
+  {
+    "Id": "orpheus",
+    "Name": "Orpheus",
+    "Level": 1,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 3,
+      "MAG": 1,
+      "END": 2,
+      "AGI": 3,
+      "LUK": 1
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Agi"
+    ],
+    "LearnedSkills": {
+      "3": "Dia",
+      "4": "Bash",
+      "5": "Tarunda"
+    }
+  },
+  {
+    "Id": "slime",
+    "Name": "Slime",
+    "Level": 12,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 10,
+      "MAG": 6,
+      "END": 14,
+      "AGI": 6,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "arsene",
+    "Name": "Arsene",
+    "Level": 23,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 17,
+      "MAG": 17,
+      "END": 14,
+      "AGI": 18,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "legion",
+    "Name": "Legion",
+    "Level": 26,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 16,
+      "MAG": 14,
+      "END": 26,
+      "AGI": 9,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Light": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "black-frost",
+    "Name": "Black Frost",
+    "Level": 37,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 22,
+      "MAG": 34,
+      "END": 23,
+      "AGI": 25,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Fire": "Null",
+      "Ice": "Absorb",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "ose",
+    "Name": "Ose",
+    "Level": 41,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 32,
+      "MAG": 23,
+      "END": 28,
+      "AGI": 25,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "izanagi",
+    "Name": "Izanagi",
+    "Level": 46,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 31,
+      "MAG": 30,
+      "END": 25,
+      "AGI": 31,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "decarabia",
+    "Name": "Decarabia",
+    "Level": 54,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 35,
+      "MAG": 35,
+      "END": 35,
+      "AGI": 35,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Slash": "Weak"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "loki",
+    "Name": "Loki",
+    "Level": 69,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 48,
+      "MAG": 60,
+      "END": 45,
+      "AGI": 42,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Resist",
+      "Ice": "Null",
+      "Wind": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "susano-o",
+    "Name": "Susano-o",
+    "Level": 77,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 71,
+      "MAG": 35,
+      "END": 43,
+      "AGI": 49,
+      "LUK": 55
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Weak",
+      "Wind": "Null",
+      "Pierce": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "satanael",
+    "Name": "Satanael",
+    "Level": 89,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 63,
+      "MAG": 60,
+      "END": 57,
+      "AGI": 56,
+      "LUK": 56
+    },
+    "Affinities": {
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "orpheus-telos",
+    "Name": "Orpheus Telos",
+    "Level": 91,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 63,
+      "MAG": 63,
+      "END": 63,
+      "AGI": 63,
+      "LUK": 63
+    },
+    "Affinities": {
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Light": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "hermes",
+    "Name": "Hermes",
+    "Level": 1,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 3,
+      "MAG": 1,
+      "END": 2,
+      "AGI": 3,
+      "LUK": 1
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "trismegistus",
+    "Name": "Trismegistus",
+    "Level": 1,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 3,
+      "MAG": 1,
+      "END": 2,
+      "AGI": 3,
+      "LUK": 1
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "nekomata",
+    "Name": "Nekomata",
+    "Level": 3,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 4,
+      "MAG": 4,
+      "END": 2,
+      "AGI": 5,
+      "LUK": 2
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "jack-frost",
+    "Name": "Jack Frost",
+    "Level": 8,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 5,
+      "MAG": 9,
+      "END": 8,
+      "AGI": 6,
+      "LUK": 4
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "jack-o-lantern",
+    "Name": "Jack-o'-Lantern",
+    "Level": 15,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 8,
+      "MAG": 15,
+      "END": 9,
+      "AGI": 9,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "hua-po",
+    "Name": "Hua Po",
+    "Level": 19,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 8,
+      "MAG": 21,
+      "END": 13,
+      "AGI": 17,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "zorro",
+    "Name": "Zorro",
+    "Level": 22,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 13,
+      "MAG": 17,
+      "END": 13,
+      "AGI": 15,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "sati",
+    "Name": "Sati",
+    "Level": 29,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 13,
+      "MAG": 27,
+      "END": 13,
+      "AGI": 21,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "orobas",
+    "Name": "Orobas",
+    "Level": 39,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 22,
+      "MAG": 33,
+      "END": 22,
+      "AGI": 28,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Dark": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mercurius",
+    "Name": "Mercurius",
+    "Level": 43,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 23,
+      "MAG": 31,
+      "END": 22,
+      "AGI": 33,
+      "LUK": 27
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "rangda",
+    "Name": "Rangda",
+    "Level": 50,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 33,
+      "MAG": 39,
+      "END": 28,
+      "AGI": 30,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Strike": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "surt",
+    "Name": "Surt",
+    "Level": 60,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 43,
+      "MAG": 51,
+      "END": 40,
+      "AGI": 28,
+      "LUK": 34
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "futsunushi",
+    "Name": "Futsunushi",
+    "Level": 74,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 62,
+      "MAG": 49,
+      "END": 50,
+      "AGI": 42,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Strike": "Resist",
+      "Electric": "Resist",
+      "Slash": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "apsaras",
+    "Name": "Apsaras",
+    "Level": 2,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 2,
+      "MAG": 4,
+      "END": 2,
+      "AGI": 3,
+      "LUK": 2
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "unicorn",
+    "Name": "Unicorn",
+    "Level": 11,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 5,
+      "MAG": 10,
+      "END": 12,
+      "AGI": 8,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Dark": "Weak",
+      "Ice": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "lucia",
+    "Name": "Lucia",
+    "Level": 18,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 9,
+      "MAG": 15,
+      "END": 12,
+      "AGI": 13,
+      "LUK": 12
+    },
+    "Affinities": {},
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "juno",
+    "Name": "Juno",
+    "Level": 18,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 9,
+      "MAG": 15,
+      "END": 12,
+      "AGI": 13,
+      "LUK": 12
+    },
+    "Affinities": {},
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "high-pixie",
+    "Name": "High Pixie",
+    "Level": 20,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 11,
+      "MAG": 20,
+      "END": 10,
+      "AGI": 13,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "johanna",
+    "Name": "Johanna",
+    "Level": 28,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 19,
+      "MAG": 19,
+      "END": 17,
+      "AGI": 21,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Strike": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "sarasvati",
+    "Name": "Sarasvati",
+    "Level": 32,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 17,
+      "MAG": 26,
+      "END": 16,
+      "AGI": 24,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "ganga",
+    "Name": "Ganga",
+    "Level": 41,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 24,
+      "MAG": 30,
+      "END": 26,
+      "AGI": 22,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Weak",
+      "Pierce": "Resist",
+      "Ice": "Resist",
+      "Light": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "parvati",
+    "Name": "Parvati",
+    "Level": 48,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 26,
+      "MAG": 40,
+      "END": 26,
+      "AGI": 31,
+      "LUK": 31
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "anat",
+    "Name": "Anat",
+    "Level": 53,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 36,
+      "MAG": 39,
+      "END": 33,
+      "AGI": 37,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Resist",
+      "Strike": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kikuri-hime",
+    "Name": "Kikuri-Hime",
+    "Level": 61,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 29,
+      "MAG": 50,
+      "END": 34,
+      "AGI": 41,
+      "LUK": 39
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "scathach",
+    "Name": "Scathach",
+    "Level": 75,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 55,
+      "MAG": 58,
+      "END": 40,
+      "AGI": 49,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Light": "Resist",
+      "Pierce": "Null",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "penthesilea",
+    "Name": "Penthesilea",
+    "Level": 20,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 13,
+      "MAG": 17,
+      "END": 11,
+      "AGI": 15,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "artemisia",
+    "Name": "Artemisia",
+    "Level": 20,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 13,
+      "MAG": 17,
+      "END": 11,
+      "AGI": 15,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "leanan-sidhe",
+    "Name": "Leanan Sidhe",
+    "Level": 21,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 12,
+      "MAG": 22,
+      "END": 13,
+      "AGI": 15,
+      "LUK": 14
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "yakshini",
+    "Name": "Yakshini",
+    "Level": 32,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 33,
+      "MAG": 16,
+      "END": 13,
+      "AGI": 25,
+      "LUK": 18
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "milady",
+    "Name": "Milady",
+    "Level": 36,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 27,
+      "MAG": 24,
+      "END": 22,
+      "AGI": 22,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "hariti",
+    "Name": "Hariti",
+    "Level": 48,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 24,
+      "MAG": 42,
+      "END": 31,
+      "AGI": 28,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Absorb",
+      "Light": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "astarte",
+    "Name": "Astarte",
+    "Level": 54,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 42,
+      "MAG": 36,
+      "END": 33,
+      "AGI": 33,
+      "LUK": 31
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Resist",
+      "Pierce": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "gabriel",
+    "Name": "Gabriel",
+    "Level": 62,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 40,
+      "MAG": 52,
+      "END": 35,
+      "AGI": 41,
+      "LUK": 37
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Dark": "Weak",
+      "Light": "Null",
+      "Ice": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "skadi",
+    "Name": "Skadi",
+    "Level": 68,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 52,
+      "MAG": 58,
+      "END": 33,
+      "AGI": 40,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Ice": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mother-harlot",
+    "Name": "Mother Harlot",
+    "Level": 77,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 44,
+      "MAG": 65,
+      "END": 60,
+      "AGI": 36,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Weak",
+      "Strike": "Null",
+      "Dark": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "alilat",
+    "Name": "Alilat",
+    "Level": 84,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 51,
+      "MAG": 70,
+      "END": 60,
+      "AGI": 51,
+      "LUK": 51
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Weak",
+      "Wind": "Resist",
+      "Ice": "Null",
+      "Slash": "Reflect",
+      "Strike": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "forneus",
+    "Name": "Forneus",
+    "Level": 7,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 5,
+      "MAG": 6,
+      "END": 7,
+      "AGI": 6,
+      "LUK": 4
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "polydeuces",
+    "Name": "Polydeuces",
+    "Level": 14,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 12,
+      "MAG": 10,
+      "END": 9,
+      "AGI": 11,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "caesar",
+    "Name": "Caesar",
+    "Level": 14,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 12,
+      "MAG": 10,
+      "END": 9,
+      "AGI": 11,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "oberon",
+    "Name": "Oberon",
+    "Level": 16,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 11,
+      "MAG": 15,
+      "END": 9,
+      "AGI": 12,
+      "LUK": 8
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Resist",
+      "Dark": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "take-mikazuchi",
+    "Name": "Take-Mikazuchi",
+    "Level": 23,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 18,
+      "MAG": 17,
+      "END": 13,
+      "AGI": 15,
+      "LUK": 14
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Slash": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "goemon",
+    "Name": "Goemon",
+    "Level": 27,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 24,
+      "MAG": 16,
+      "END": 18,
+      "AGI": 17,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "king-frost",
+    "Name": "King Frost",
+    "Level": 34,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 18,
+      "MAG": 31,
+      "END": 26,
+      "AGI": 14,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "naga-raja",
+    "Name": "Naga Raja",
+    "Level": 43,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 33,
+      "MAG": 31,
+      "END": 22,
+      "AGI": 27,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kamu-susano-o",
+    "Name": "Kamu Susano-o",
+    "Level": 47,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 40,
+      "MAG": 25,
+      "END": 30,
+      "AGI": 30,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "belphegor",
+    "Name": "Belphegor",
+    "Level": 53,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 34,
+      "MAG": 43,
+      "END": 38,
+      "AGI": 28,
+      "LUK": 29
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "barong",
+    "Name": "Barong",
+    "Level": 63,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 43,
+      "MAG": 55,
+      "END": 41,
+      "AGI": 31,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "odin",
+    "Name": "Odin",
+    "Level": 74,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 44,
+      "MAG": 63,
+      "END": 42,
+      "AGI": 46,
+      "LUK": 49
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "omoikane",
+    "Name": "Omoikane",
+    "Level": 7,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 4,
+      "MAG": 8,
+      "END": 6,
+      "AGI": 4,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "berith",
+    "Name": "Berith",
+    "Level": 13,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 12,
+      "MAG": 7,
+      "END": 10,
+      "AGI": 11,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "shiisaa",
+    "Name": "Shiisaa",
+    "Level": 23,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 15,
+      "MAG": 15,
+      "END": 19,
+      "AGI": 16,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Strike": "Resist",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "flauros",
+    "Name": "Flauros",
+    "Level": 33,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 27,
+      "MAG": 25,
+      "END": 20,
+      "AGI": 18,
+      "LUK": 16
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Wind": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "castor",
+    "Name": "Castor",
+    "Level": 39,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 42,
+      "MAG": 18,
+      "END": 37,
+      "AGI": 23,
+      "LUK": 17
+    },
+    "Affinities": {},
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "thoth",
+    "Name": "Thoth",
+    "Level": 40,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 20,
+      "MAG": 40,
+      "END": 20,
+      "AGI": 25,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Dark": "Weak",
+      "Electric": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mishaguji",
+    "Name": "Mishaguji",
+    "Level": 48,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 36,
+      "MAG": 35,
+      "END": 30,
+      "AGI": 24,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "daisoujou",
+    "Name": "Daisoujou",
+    "Level": 59,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 33,
+      "MAG": 49,
+      "END": 38,
+      "AGI": 31,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kohryu",
+    "Name": "Kohryu",
+    "Level": 71,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 44,
+      "MAG": 53,
+      "END": 58,
+      "AGI": 31,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Light": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "io",
+    "Name": "Io",
+    "Level": 1,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 2,
+      "MAG": 3,
+      "END": 1,
+      "AGI": 2,
+      "LUK": 2
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "isis",
+    "Name": "Isis",
+    "Level": 1,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 2,
+      "MAG": 3,
+      "END": 1,
+      "AGI": 2,
+      "LUK": 2
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "pixie",
+    "Name": "Pixie",
+    "Level": 2,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 2,
+      "MAG": 2,
+      "END": 2,
+      "AGI": 4,
+      "LUK": 3
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "silky",
+    "Name": "Silky",
+    "Level": 5,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 3,
+      "MAG": 7,
+      "END": 3,
+      "AGI": 4,
+      "LUK": 5
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Electric": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "tam-lin",
+    "Name": "Tam Lin",
+    "Level": 13,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 12,
+      "MAG": 11,
+      "END": 8,
+      "AGI": 10,
+      "LUK": 5
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Light": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "carmen",
+    "Name": "Carmen",
+    "Level": 19,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 8,
+      "MAG": 18,
+      "END": 12,
+      "AGI": 14,
+      "LUK": 12
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "narcissus",
+    "Name": "Narcissus",
+    "Level": 23,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 12,
+      "MAG": 18,
+      "END": 10,
+      "AGI": 17,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "queen-medb",
+    "Name": "Queen Medb",
+    "Level": 28,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 14,
+      "MAG": 26,
+      "END": 15,
+      "AGI": 19,
+      "LUK": 17
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "saki-mitama",
+    "Name": "Saki Mitama",
+    "Level": 36,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 16,
+      "MAG": 30,
+      "END": 20,
+      "AGI": 22,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "hecate",
+    "Name": "Hecate",
+    "Level": 42,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 22,
+      "MAG": 35,
+      "END": 24,
+      "AGI": 26,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "titania",
+    "Name": "Titania",
+    "Level": 49,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 19,
+      "MAG": 45,
+      "END": 23,
+      "AGI": 34,
+      "LUK": 36
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "raphael",
+    "Name": "Raphael",
+    "Level": 60,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 46,
+      "MAG": 42,
+      "END": 37,
+      "AGI": 31,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Fire": "Resist",
+      "Wind": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "cybele",
+    "Name": "Cybele",
+    "Level": 67,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 39,
+      "MAG": 54,
+      "END": 40,
+      "AGI": 42,
+      "LUK": 45
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "ara-mitama",
+    "Name": "Ara Mitama",
+    "Level": 6,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 8,
+      "MAG": 3,
+      "END": 4,
+      "AGI": 5,
+      "LUK": 5
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "chimera",
+    "Name": "Chimera",
+    "Level": 9,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 8,
+      "MAG": 4,
+      "END": 12,
+      "AGI": 4,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Strike": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "zouchouten",
+    "Name": "Zouchouten",
+    "Level": 14,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 14,
+      "MAG": 7,
+      "END": 13,
+      "AGI": 6,
+      "LUK": 10
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "captain-kidd",
+    "Name": "Captain Kidd",
+    "Level": 18,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 14,
+      "MAG": 8,
+      "END": 16,
+      "AGI": 12,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mithras",
+    "Name": "Mithras",
+    "Level": 24,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 16,
+      "MAG": 19,
+      "END": 15,
+      "AGI": 14,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Slash": "Resist",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "palladion",
+    "Name": "Palladion",
+    "Level": 27,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 21,
+      "MAG": 15,
+      "END": 24,
+      "AGI": 15,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Pierce": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "athena",
+    "Name": "Athena",
+    "Level": 27,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 21,
+      "MAG": 15,
+      "END": 24,
+      "AGI": 15,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Pierce": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "oni",
+    "Name": "Oni",
+    "Level": 31,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 30,
+      "MAG": 13,
+      "END": 26,
+      "AGI": 21,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Strike": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "seiten-taisei",
+    "Name": "Seiten Taisei",
+    "Level": 40,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 30,
+      "MAG": 20,
+      "END": 33,
+      "AGI": 24,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "shiki-ouji",
+    "Name": "Shiki-Ouji",
+    "Level": 45,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 33,
+      "MAG": 28,
+      "END": 28,
+      "AGI": 25,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Weak",
+      "Light": "Resist",
+      "Dark": "Resist",
+      "Pierce": "Null",
+      "Strike": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "koumokuten",
+    "Name": "Koumokuten ",
+    "Level": 52,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 40,
+      "MAG": 35,
+      "END": 40,
+      "AGI": 25,
+      "LUK": 29
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "thor",
+    "Name": "Thor",
+    "Level": 64,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 54,
+      "MAG": 50,
+      "END": 42,
+      "AGI": 30,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Null",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "angel",
+    "Name": "Angel",
+    "Level": 4,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 4,
+      "MAG": 5,
+      "END": 3,
+      "AGI": 4,
+      "LUK": 3
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Electric": "Resist",
+      "Light": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "archangel",
+    "Name": "Archangel",
+    "Level": 10,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 8,
+      "MAG": 8,
+      "END": 8,
+      "AGI": 7,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "principality",
+    "Name": "Principality",
+    "Level": 16,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 11,
+      "MAG": 13,
+      "END": 7,
+      "AGI": 12,
+      "LUK": 12
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Fire": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "power",
+    "Name": "Power",
+    "Level": 25,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 20,
+      "MAG": 16,
+      "END": 15,
+      "AGI": 16,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Pierce": "Resist",
+      "Wind": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "virtue",
+    "Name": "Virtue",
+    "Level": 32,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 21,
+      "MAG": 24,
+      "END": 15,
+      "AGI": 22,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Wind": "Resist",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "robin-hood",
+    "Name": "Robin Hood",
+    "Level": 37,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 25,
+      "MAG": 27,
+      "END": 22,
+      "AGI": 24,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "nemesis",
+    "Name": "Nemesis",
+    "Level": 37,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 19,
+      "MAG": 28,
+      "END": 23,
+      "AGI": 25,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kala-nemi",
+    "Name": "Kala-Nemi",
+    "Level": 37,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 19,
+      "MAG": 28,
+      "END": 23,
+      "AGI": 25,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "dominion",
+    "Name": "Dominion",
+    "Level": 42,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 25,
+      "MAG": 32,
+      "END": 24,
+      "AGI": 26,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Wind": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "throne",
+    "Name": "Throne",
+    "Level": 52,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 39,
+      "MAG": 35,
+      "END": 30,
+      "AGI": 30,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Dark": "Weak",
+      "Fire": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "loki-a",
+    "Name": "Loki A",
+    "Level": 60,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 44,
+      "MAG": 42,
+      "END": 33,
+      "AGI": 38,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "melchizedek",
+    "Name": "Melchizedek",
+    "Level": 66,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 54,
+      "MAG": 47,
+      "END": 47,
+      "AGI": 35,
+      "LUK": 31
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Reflect",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "onmoraki",
+    "Name": "Onmoraki",
+    "Level": 8,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 4,
+      "MAG": 7,
+      "END": 6,
+      "AGI": 10,
+      "LUK": 4
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Light": "Weak",
+      "Fire": "Resist",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "naga",
+    "Name": "Naga",
+    "Level": 17,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 14,
+      "MAG": 10,
+      "END": 11,
+      "AGI": 14,
+      "LUK": 9
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Electric": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "lamia",
+    "Name": "Lamia",
+    "Level": 25,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 15,
+      "MAG": 20,
+      "END": 16,
+      "AGI": 14,
+      "LUK": 17
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Electric": "Resist",
+      "Dark": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mothman",
+    "Name": "Mothman",
+    "Level": 31,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 15,
+      "MAG": 25,
+      "END": 18,
+      "AGI": 27,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Ice": "Weak",
+      "Fire": "Resist",
+      "Dark": "Resist",
+      "Wind": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "dakini",
+    "Name": "Dakini",
+    "Level": 38,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 36,
+      "MAG": 22,
+      "END": 16,
+      "AGI": 29,
+      "LUK": 18
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Strike": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kurama-tengu",
+    "Name": "Kurama Tengu",
+    "Level": 46,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 26,
+      "MAG": 32,
+      "END": 25,
+      "AGI": 37,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Resist",
+      "Wind": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "nebiros",
+    "Name": "Nebiros",
+    "Level": 52,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 28,
+      "MAG": 42,
+      "END": 31,
+      "AGI": 31,
+      "LUK": 37
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Null",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kumbhanda",
+    "Name": "Kumbhanda",
+    "Level": 61,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 48,
+      "MAG": 44,
+      "END": 39,
+      "AGI": 45,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Resist",
+      "Wind": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "arahabaki",
+    "Name": "Arahabaki",
+    "Level": 68,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 47,
+      "MAG": 52,
+      "END": 53,
+      "AGI": 32,
+      "LUK": 36
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Ice": "Weak",
+      "Dark": "Weak",
+      "Light": "Resist",
+      "Slash": "Reflect",
+      "Pierce": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "fortuna",
+    "Name": "Fortuna",
+    "Level": 15,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 7,
+      "MAG": 17,
+      "END": 10,
+      "AGI": 13,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Fire": "Null",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "sandman",
+    "Name": "Sandman",
+    "Level": 20,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 13,
+      "MAG": 13,
+      "END": 15,
+      "AGI": 15,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Weak",
+      "Fire": "Null",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kushi-mitama",
+    "Name": "Kushi Mitama",
+    "Level": 28,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 16,
+      "MAG": 22,
+      "END": 18,
+      "AGI": 13,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Electric": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "clotho",
+    "Name": "Clotho",
+    "Level": 37,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 20,
+      "MAG": 29,
+      "END": 22,
+      "AGI": 24,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "lachesis",
+    "Name": "Lachesis",
+    "Level": 44,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 22,
+      "MAG": 37,
+      "END": 23,
+      "AGI": 30,
+      "LUK": 29
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "atropos",
+    "Name": "Atropos",
+    "Level": 56,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 26,
+      "MAG": 45,
+      "END": 32,
+      "AGI": 36,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Resist",
+      "Dark": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "hypnos",
+    "Name": "Hypnos",
+    "Level": 56,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 50,
+      "MAG": 55,
+      "END": 45,
+      "AGI": 40,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Dark": "Absorb",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "moros",
+    "Name": "Moros",
+    "Level": 56,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 46,
+      "MAG": 50,
+      "END": 42,
+      "AGI": 45,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Fire": "Reflect",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "norn",
+    "Name": "Norn",
+    "Level": 65,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 37,
+      "MAG": 60,
+      "END": 40,
+      "AGI": 37,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Fire": "Null",
+      "Wind": "Absorb",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "lakshmi",
+    "Name": "Lakshmi",
+    "Level": 73,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 39,
+      "MAG": 61,
+      "END": 38,
+      "AGI": 45,
+      "LUK": 52
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "valkyrie",
+    "Name": "Valkyrie",
+    "Level": 10,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 11,
+      "MAG": 7,
+      "END": 6,
+      "AGI": 8,
+      "LUK": 5
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "rakshasa",
+    "Name": "Rakshasa",
+    "Level": 15,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 17,
+      "MAG": 8,
+      "END": 13,
+      "AGI": 11,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Slash": "Resist",
+      "Pierce": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "matador",
+    "Name": "Matador",
+    "Level": 22,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 17,
+      "MAG": 14,
+      "END": 12,
+      "AGI": 23,
+      "LUK": 10
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Null",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "jikokuten",
+    "Name": "Jikokuten",
+    "Level": 29,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 27,
+      "MAG": 13,
+      "END": 25,
+      "AGI": 12,
+      "LUK": 17
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Slash": "Resist",
+      "Light": "Resist",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "cerberus",
+    "Name": "Cerberus",
+    "Level": 35,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 25,
+      "MAG": 24,
+      "END": 21,
+      "AGI": 29,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Fire": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "hanuman",
+    "Name": "Hanuman",
+    "Level": 36,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 30,
+      "MAG": 17,
+      "END": 24,
+      "AGI": 22,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Slash": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "white-rider",
+    "Name": "White Rider",
+    "Level": 46,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 36,
+      "MAG": 27,
+      "END": 30,
+      "AGI": 27,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Resist",
+      "Light": "Null",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "siegfried",
+    "Name": "Siegfried",
+    "Level": 54,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 44,
+      "MAG": 29,
+      "END": 38,
+      "AGI": 36,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Strike": "Resist",
+      "Slash": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kali",
+    "Name": "Kali",
+    "Level": 63,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 53,
+      "MAG": 30,
+      "END": 34,
+      "AGI": 48,
+      "LUK": 34
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist",
+      "Slash": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "atavaka",
+    "Name": "Atavaka",
+    "Level": 72,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 63,
+      "MAG": 37,
+      "END": 64,
+      "AGI": 39,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Pierce": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "inugami",
+    "Name": "Inugami",
+    "Level": 10,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 4,
+      "MAG": 8,
+      "END": 7,
+      "AGI": 7,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Dark": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "take-minakata",
+    "Name": "Take-Minakata",
+    "Level": 20,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 14,
+      "MAG": 14,
+      "END": 21,
+      "AGI": 10,
+      "LUK": 10
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Weak",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "orthrus",
+    "Name": "Orthrus",
+    "Level": 27,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 22,
+      "MAG": 14,
+      "END": 20,
+      "AGI": 18,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Dark": "Resist",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "vasuki",
+    "Name": "Vasuki",
+    "Level": 38,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 27,
+      "MAG": 27,
+      "END": 35,
+      "AGI": 15,
+      "LUK": 17
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "hecatoncheires",
+    "Name": "Hecatoncheires",
+    "Level": 47,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 37,
+      "MAG": 24,
+      "END": 48,
+      "AGI": 20,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mada",
+    "Name": "Mada",
+    "Level": 57,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 42,
+      "MAG": 48,
+      "END": 45,
+      "AGI": 33,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Strike": "Resist",
+      "Electric": "Resist",
+      "Dark": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "medea",
+    "Name": "Medea",
+    "Level": 63,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 53,
+      "MAG": 65,
+      "END": 42,
+      "AGI": 46,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "hell-biker",
+    "Name": "Hell Biker",
+    "Level": 65,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 48,
+      "MAG": 51,
+      "END": 50,
+      "AGI": 40,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Fire": "Reflect",
+      "Wind": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "attis",
+    "Name": "Attis",
+    "Level": 73,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 45,
+      "MAG": 53,
+      "END": 51,
+      "AGI": 57,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Null",
+      "Wind": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "pisaca",
+    "Name": "Pisaca",
+    "Level": 15,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 10,
+      "MAG": 13,
+      "END": 16,
+      "AGI": 9,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Strike": "Resist",
+      "Electric": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "pale-rider",
+    "Name": "Pale Rider",
+    "Level": 23,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 20,
+      "MAG": 18,
+      "END": 13,
+      "AGI": 17,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Wind": "Resist",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "loa",
+    "Name": "Loa",
+    "Level": 33,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 21,
+      "MAG": 26,
+      "END": 24,
+      "AGI": 19,
+      "LUK": 18
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Electric": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "samael",
+    "Name": "Samael",
+    "Level": 41,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 26,
+      "MAG": 31,
+      "END": 27,
+      "AGI": 21,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Ice": "Resist",
+      "Electric": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mot",
+    "Name": "Mot",
+    "Level": 58,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 37,
+      "MAG": 42,
+      "END": 44,
+      "AGI": 29,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Null",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "alice",
+    "Name": "Alice",
+    "Level": 68,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 35,
+      "MAG": 62,
+      "END": 31,
+      "AGI": 51,
+      "LUK": 44
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "thanatos",
+    "Name": "Thanatos",
+    "Level": 78,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 52,
+      "MAG": 66,
+      "END": 53,
+      "AGI": 45,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "nigi-mitama",
+    "Name": "Nigi Mitama",
+    "Level": 12,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 6,
+      "MAG": 10,
+      "END": 9,
+      "AGI": 10,
+      "LUK": 8
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Resist",
+      "Dark": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mitra",
+    "Name": "Mitra",
+    "Level": 22,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 13,
+      "MAG": 19,
+      "END": 16,
+      "AGI": 10,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "genbu",
+    "Name": "Genbu",
+    "Level": 30,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 18,
+      "MAG": 17,
+      "END": 30,
+      "AGI": 12,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "seiryu",
+    "Name": "Seiryu",
+    "Level": 38,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 24,
+      "MAG": 31,
+      "END": 27,
+      "AGI": 21,
+      "LUK": 18
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "okuninushi",
+    "Name": "Okuninushi",
+    "Level": 44,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 35,
+      "MAG": 32,
+      "END": 29,
+      "AGI": 24,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Resist",
+      "Fire": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "suzaku",
+    "Name": "Suzaku",
+    "Level": 55,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 31,
+      "MAG": 40,
+      "END": 32,
+      "AGI": 42,
+      "LUK": 31
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Resist",
+      "Fire": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "byakko",
+    "Name": "Byakko",
+    "Level": 63,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 45,
+      "MAG": 44,
+      "END": 50,
+      "AGI": 39,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "yurlungur",
+    "Name": "Yurlungur",
+    "Level": 71,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 41,
+      "MAG": 45,
+      "END": 63,
+      "AGI": 42,
+      "LUK": 38
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Fire": "Resist",
+      "Electric": "Resist",
+      "Light": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "lilim",
+    "Name": "Lilim",
+    "Level": 8,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 4,
+      "MAG": 10,
+      "END": 4,
+      "AGI": 6,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Electric": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mokoi",
+    "Name": "Mokoi",
+    "Level": 18,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 7,
+      "MAG": 7,
+      "END": 12,
+      "AGI": 16,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "baphomet",
+    "Name": "Baphomet",
+    "Level": 30,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 20,
+      "MAG": 25,
+      "END": 22,
+      "AGI": 16,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Fire": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "incubus",
+    "Name": "Incubus",
+    "Level": 37,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 22,
+      "MAG": 30,
+      "END": 20,
+      "AGI": 21,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Light": "Weak",
+      "Fire": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "succubus",
+    "Name": "Succubus",
+    "Level": 47,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 26,
+      "MAG": 41,
+      "END": 28,
+      "AGI": 33,
+      "LUK": 27
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Light": "Weak",
+      "Dark": "Absorb",
+      "Fire": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "pazuzu",
+    "Name": "Pazuzu",
+    "Level": 56,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 34,
+      "MAG": 42,
+      "END": 35,
+      "AGI": 32,
+      "LUK": 34
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Weak",
+      "Dark": "Resist",
+      "Wind": "Null",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "lilith",
+    "Name": "Lilith",
+    "Level": 65,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 35,
+      "MAG": 56,
+      "END": 38,
+      "AGI": 44,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Resist",
+      "Dark": "Null",
+      "Electric": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "abaddon",
+    "Name": "Abaddon",
+    "Level": 76,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 53,
+      "MAG": 61,
+      "END": 48,
+      "AGI": 33,
+      "LUK": 46
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Weak",
+      "Fire": "Null",
+      "Slash": "Absorb",
+      "Strike": "Absorb",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "beelzebub",
+    "Name": "Beelzebub",
+    "Level": 81,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 50,
+      "MAG": 62,
+      "END": 50,
+      "AGI": 60,
+      "LUK": 52
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Strike": "Null",
+      "Electric": "Null",
+      "Wind": "Null",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "eligor",
+    "Name": "Eligor",
+    "Level": 31,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 26,
+      "MAG": 21,
+      "END": 24,
+      "AGI": 20,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "cu-chulainn",
+    "Name": "Cu Chulainn",
+    "Level": 40,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 33,
+      "MAG": 29,
+      "END": 24,
+      "AGI": 26,
+      "LUK": 21
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Pierce": "Resist",
+      "Electric": "Resist",
+      "Wind": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "magatsu-izanagi",
+    "Name": "Magatsu-Izanagi",
+    "Level": 50,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 42,
+      "MAG": 39,
+      "END": 36,
+      "AGI": 28,
+      "LUK": 17
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Pierce": "Resist",
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "bishamonten",
+    "Name": "Bishamonten",
+    "Level": 60,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 50,
+      "MAG": 38,
+      "END": 45,
+      "AGI": 36,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Resist",
+      "Strike": "Null",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "qitian-dasheng",
+    "Name": "Qitian Dasheng",
+    "Level": 67,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 52,
+      "MAG": 38,
+      "END": 39,
+      "AGI": 50,
+      "LUK": 41
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Pierce": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mara",
+    "Name": "Mara",
+    "Level": 75,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 60,
+      "MAG": 50,
+      "END": 50,
+      "AGI": 48,
+      "LUK": 39
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Weak",
+      "Strike": "Absorb",
+      "Fire": "Absorb",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "masakado",
+    "Name": "Masakado",
+    "Level": 79,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 67,
+      "MAG": 46,
+      "END": 55,
+      "AGI": 43,
+      "LUK": 48
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "shiva",
+    "Name": "Shiva",
+    "Level": 82,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 63,
+      "MAG": 57,
+      "END": 48,
+      "AGI": 57,
+      "LUK": 55
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Pierce": "Null",
+      "Light": "Null",
+      "Electric": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "chi-you",
+    "Name": "Chi You",
+    "Level": 86,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 69,
+      "MAG": 50,
+      "END": 63,
+      "AGI": 53,
+      "LUK": 60
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Slash": "Resist",
+      "Pierce": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "neko-shogun",
+    "Name": "Neko Shogun",
+    "Level": 17,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 15,
+      "MAG": 12,
+      "END": 10,
+      "AGI": 14,
+      "LUK": 8
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Resist",
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "setanta",
+    "Name": "Setanta",
+    "Level": 29,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 26,
+      "MAG": 19,
+      "END": 17,
+      "AGI": 21,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Weak",
+      "Pierce": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "cendrillon",
+    "Name": "Cendrillon",
+    "Level": 36,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 25,
+      "MAG": 22,
+      "END": 20,
+      "AGI": 28,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kaiwan",
+    "Name": "Kaiwan",
+    "Level": 42,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 23,
+      "MAG": 28,
+      "END": 25,
+      "AGI": 25,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "ganesha",
+    "Name": "Ganesha",
+    "Level": 51,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 39,
+      "MAG": 31,
+      "END": 34,
+      "AGI": 20,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Pierce": "Null",
+      "Wind": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "vanadis",
+    "Name": "Vanadis",
+    "Level": 58,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 43,
+      "MAG": 38,
+      "END": 30,
+      "AGI": 42,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "garuda",
+    "Name": "Garuda",
+    "Level": 64,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 45,
+      "MAG": 41,
+      "END": 35,
+      "AGI": 51,
+      "LUK": 36
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Fire": "Resist",
+      "Wind": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "houou",
+    "Name": "Houou",
+    "Level": 70,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 35,
+      "MAG": 57,
+      "END": 39,
+      "AGI": 54,
+      "LUK": 41
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Electric": "Weak",
+      "Ice": "Resist",
+      "Wind": "Null",
+      "Fire": "Absorb",
+      "Light": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "saturnus",
+    "Name": "Saturnus",
+    "Level": 76,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 43,
+      "MAG": 70,
+      "END": 45,
+      "AGI": 51,
+      "LUK": 41
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Wind": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "helel",
+    "Name": "Helel",
+    "Level": 88,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 63,
+      "MAG": 63,
+      "END": 62,
+      "AGI": 58,
+      "LUK": 58
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Light": "Absorb",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "gurulu",
+    "Name": "Gurulu",
+    "Level": 14,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 13,
+      "MAG": 8,
+      "END": 10,
+      "AGI": 12,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Wind": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "yamata-no-orochi",
+    "Name": "Yamata-no-Orochi",
+    "Level": 25,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 19,
+      "MAG": 19,
+      "END": 17,
+      "AGI": 13,
+      "LUK": 14
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Ice": "Null",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kaguya",
+    "Name": "Kaguya",
+    "Level": 34,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 19,
+      "MAG": 32,
+      "END": 28,
+      "AGI": 19,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "girimekhala",
+    "Name": "Girimekhala",
+    "Level": 39,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 36,
+      "MAG": 26,
+      "END": 28,
+      "AGI": 20,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Slash": "Reflect",
+      "Pierce": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "dionysus",
+    "Name": "Dionysus",
+    "Level": 49,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 30,
+      "MAG": 38,
+      "END": 26,
+      "AGI": 30,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Resist",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "chernobog",
+    "Name": "Chernobog",
+    "Level": 56,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 48,
+      "MAG": 41,
+      "END": 31,
+      "AGI": 35,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist",
+      "Slash": "Null",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "seth",
+    "Name": "Seth",
+    "Level": 62,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 47,
+      "MAG": 49,
+      "END": 42,
+      "AGI": 29,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Weak",
+      "Dark": "Resist",
+      "Fire": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "baal-zebul",
+    "Name": "Baal Zebul",
+    "Level": 72,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 51,
+      "MAG": 56,
+      "END": 45,
+      "AGI": 42,
+      "LUK": 41
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "sandalphon",
+    "Name": "Sandalphon",
+    "Level": 80,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 53,
+      "MAG": 53,
+      "END": 67,
+      "AGI": 46,
+      "LUK": 49
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Electric": "Resist",
+      "Slash": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "yatagarasu",
+    "Name": "Yatagarasu",
+    "Level": 24,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 16,
+      "MAG": 16,
+      "END": 14,
+      "AGI": 24,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Wind": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "thunderbird",
+    "Name": "Thunderbird",
+    "Level": 35,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 18,
+      "MAG": 28,
+      "END": 18,
+      "AGI": 32,
+      "LUK": 21
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Light": "Null",
+      "Electric": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "quetzalcoatl",
+    "Name": "Quetzalcoatl",
+    "Level": 45,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 25,
+      "MAG": 35,
+      "END": 33,
+      "AGI": 30,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Wind": "Resist",
+      "Ice": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "jatayu",
+    "Name": "Jatayu",
+    "Level": 55,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 33,
+      "MAG": 40,
+      "END": 30,
+      "AGI": 50,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Light": "Resist",
+      "Wind": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "horus",
+    "Name": "Horus",
+    "Level": 67,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 42,
+      "MAG": 53,
+      "END": 34,
+      "AGI": 48,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Ice": "Resist",
+      "Electric": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "vishnu",
+    "Name": "Vishnu",
+    "Level": 78,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 65,
+      "MAG": 55,
+      "END": 50,
+      "AGI": 53,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Ice": "Null",
+      "Electric": "Null",
+      "Light": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "asura",
+    "Name": "Asura",
+    "Level": 85,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 75,
+      "MAG": 55,
+      "END": 58,
+      "AGI": 50,
+      "LUK": 54
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Null",
+      "Light": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "anubis",
+    "Name": "Anubis",
+    "Level": 40,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 27,
+      "MAG": 35,
+      "END": 30,
+      "AGI": 21,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "trumpeter",
+    "Name": "Trumpeter",
+    "Level": 59,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 44,
+      "MAG": 44,
+      "END": 37,
+      "AGI": 35,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Ice": "Null",
+      "Dark": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "michael",
+    "Name": "Michael",
+    "Level": 70,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 56,
+      "MAG": 48,
+      "END": 46,
+      "AGI": 37,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "satan",
+    "Name": "Satan",
+    "Level": 82,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 55,
+      "MAG": 68,
+      "END": 52,
+      "AGI": 43,
+      "LUK": 53
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist",
+      "Dark": "Absorb",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "lucifer",
+    "Name": "Lucifer",
+    "Level": 89,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 70,
+      "MAG": 70,
+      "END": 61,
+      "AGI": 51,
+      "LUK": 55
+    },
+    "Affinities": {
+      "Fire": "Absorb",
+      "Electric": "Absorb",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "messiah",
+    "Name": "Messiah",
+    "Level": 91,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 65,
+      "MAG": 70,
+      "END": 62,
+      "AGI": 59,
+      "LUK": 59
+    },
+    "Affinities": {
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Light": "Reflect",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "nidhoggr",
+    "Name": "Nidhoggr",
+    "Level": 47,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 36,
+      "MAG": 29,
+      "END": 43,
+      "AGI": 21,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Ice": "Null",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "uriel",
+    "Name": "Uriel",
+    "Level": 57,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 47,
+      "MAG": 42,
+      "END": 35,
+      "AGI": 36,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Electric": "Null",
+      "Light": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "ananta",
+    "Name": "Ananta",
+    "Level": 73,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 51,
+      "MAG": 51,
+      "END": 68,
+      "AGI": 35,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Electric": "Weak",
+      "Pierce": "Resist",
+      "Light": "Null",
+      "Ice": "Absorb"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "metatron",
+    "Name": "Metatron",
+    "Level": 87,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 60,
+      "MAG": 65,
+      "END": 65,
+      "AGI": 55,
+      "LUK": 53
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Ice": "Resist",
+      "Fire": "Reflect",
+      "Wind": "Reflect",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  }
+]

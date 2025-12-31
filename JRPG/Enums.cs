@@ -1,34 +1,37 @@
 namespace JRPGPrototype
 {
-    // Based on your Element System table
     public enum Element
     {
         Slash, Strike, Pierce, // Physical
         Fire, Ice, Elec, Wind, // Magical
-        Light, Dark, Almighty, // Instakill/Special
-        None // For support/passive
+        Light, Dark, Almighty, // Special
+        None
     }
 
-    // Based on Affinities table
     public enum Affinity
     {
         Normal,
-        Weak,   // Takes extra damage, causes Knockdown
-        Resist, // Takes reduced damage
-        Null,   // 0 Damage
-        Repel,  // Reflects damage
-        Absorb  // Heals HP
+        Weak,   // 1.5x Dmg + One More
+        Resist, // 0.5x Dmg
+        Null,   // 0 Dmg
+        Repel,  // Reflect
+        Absorb  // Heal
     }
 
-    // Based on Human Side stats
     public enum StatType
     {
-        STR, // Strength (Physical)
-        MAG, // Magic (Spells)
-        AGI, // Turn order/Evasion
-        CHA, // Negotiation
-        LUK, // Crits/Status
-        END, // Defense/HP calculation
-        INT  // SP calculation
+        STR, MAG, AGI, END, LUK, // Common
+        INT, CHA                 // Operator Exclusive
+    }
+
+    public enum HitType
+    {
+        Normal,
+        Critical,
+        Weakness,
+        Miss,
+        Repel,
+        Absorb,
+        Null
     }
 }

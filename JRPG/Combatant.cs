@@ -1,79 +1,128 @@
+using System;
+using System.Collections.Generic;
+
 namespace JRPGPrototype
 {
     public class Combatant
     {
         public string Name { get; set; }
-        public bool IsPlayer { get; set; }
 
-        // Resources
+        // Resource Pools
         public int MaxHP { get; set; }
         public int CurrentHP { get; set; }
         public int MaxSP { get; set; }
         public int CurrentSP { get; set; }
 
-        // Base Stats
-        public Dictionary<StatType, int> Stats { get; set; }
+        // Battle States
+        public bool IsDown { get; set; }   // Knocked down: Eligible for Dizzy or One More
+        public bool IsDizzy { get; set; }  // Hit while Down: Turn is skipped
 
-        // The equipped Persona (Null for basic enemies)
+        // The "Operator" base stats (Innate potential)
+        public Dictionary<StatType, int> CharacterStats { get; set; } = new Dictionary<StatType, int>();
+
+        // The equipped Persona (The Amplifier)
         public Persona ActivePersona { get; set; }
 
-        public Combatant(string name, int str, int mag, int agi, int hp, int sp)
+        public Combatant(string name)
         {
             Name = name;
-            Stats = new Dictionary<StatType, int>
-            {
-                { StatType.STR, str },
-                { StatType.MAG, mag },
-                { StatType.AGI, agi }
-                // Add others (LUK, CHA, etc.)
-            };
-            MaxHP = hp; CurrentHP = hp;
-            MaxSP = sp; CurrentSP = sp;
+            // Initialize defaults
+            foreach (StatType type in Enum.GetValues(typeof(StatType)))
+                CharacterStats[type] = 10;
         }
 
-        // Calculation for taking damage
-        public void ReceiveDamage(int damage, Element element)
+        /// <summary>
+        /// Calculates final stats: Final = Character + (Persona * Multiplier)
+        /// </summary>
+        public int GetStat(StatType type)
         {
-            Affinity aff = Affinity.Normal;
+            int charVal = CharacterStats.ContainsKey(type) ? CharacterStats[type] : 0;
 
-            // If we have a Persona, check its affinities
-            if (ActivePersona != null)
+            if (ActivePersona == null || !ActivePersona.StatModifiers.ContainsKey(type))
+                return charVal;
+
+            int personaVal = ActivePersona.StatModifiers[type];
+
+            double finalValue = type switch
             {
-                aff = ActivePersona.GetAffinity(element);
-            }
+                StatType.STR => charVal + (personaVal * 0.4),
+                StatType.MAG => charVal + (personaVal * 0.4),
+                StatType.END => charVal + (personaVal * 0.25),
+                StatType.AGI => charVal + (personaVal * 0.25),
+                StatType.LUK => charVal + (personaVal * 0.5),
+                // INT and CHA are Operator Exclusive
+                _ => charVal
+            };
 
-            int finalDamage = damage;
-            string message = "";
+            return (int)Math.Floor(finalValue);
+        }
+
+        public void RecalculateResources()
+        {
+            int totalEnd = GetStat(StatType.END);
+            int totalInt = GetStat(StatType.INT);
+
+            // Formula: Base + (Stat * GrowthFactor)
+            MaxHP = 100 + (totalEnd * 10);
+            MaxSP = 40 + (totalInt * 5);
+
+            CurrentHP = MaxHP;
+            CurrentSP = MaxSP;
+        }
+
+        public CombatResult ReceiveDamage(int damage, Element element)
+        {
+            Affinity aff = ActivePersona?.GetAffinity(element) ?? Affinity.Normal;
+            var result = new CombatResult();
 
             switch (aff)
             {
                 case Affinity.Weak:
-                    finalDamage = (int)(damage * 1.5f);
-                    message = "WEAKNESS STRUCK! (One More!)";
-                    // TODO: Trigger 'One More' state here
+                    result.Type = HitType.Weakness;
+                    result.DamageDealt = (int)(damage * 1.5f);
+
+                    if (IsDown)
+                    {
+                        IsDizzy = true;
+                        result.Message = "!!! DIZZY !!!";
+                    }
+                    else
+                    {
+                        IsDown = true;
+                        result.Message = "WEAKNESS STRUCK!";
+                    }
                     break;
+
                 case Affinity.Resist:
-                    finalDamage = (int)(damage * 0.5f);
-                    message = "Resisted.";
+                    result.Type = HitType.Normal;
+                    result.DamageDealt = (int)(damage * 0.5f);
+                    result.Message = "Resisted.";
                     break;
                 case Affinity.Null:
-                    finalDamage = 0;
-                    message = "Blocked!";
+                    result.Type = HitType.Null;
+                    result.DamageDealt = 0;
+                    result.Message = "Blocked!";
                     break;
                 case Affinity.Repel:
-                    message = "Repelled!";
-                    // Logic to reflect damage back would go here
-                    return;
+                    result.Type = HitType.Repel;
+                    result.DamageDealt = 0;
+                    result.Message = "Repelled!";
+                    break;
                 case Affinity.Absorb:
-                    CurrentHP += damage;
-                    if (CurrentHP > MaxHP) CurrentHP = MaxHP;
-                    Console.WriteLine($"{Name} absorbed {damage} HP!");
-                    return;
+                    result.Type = HitType.Absorb;
+                    int heal = damage;
+                    CurrentHP = Math.Min(MaxHP, CurrentHP + heal);
+                    result.DamageDealt = 0;
+                    result.Message = $"Absorbed {heal} HP!";
+                    return result;
+                default:
+                    result.Type = HitType.Normal;
+                    result.DamageDealt = damage;
+                    break;
             }
 
-            CurrentHP -= finalDamage;
-            Console.WriteLine($"{Name} took {finalDamage} damage ({element}). {message}");
-            if (CurrentHP <= 0) Console.WriteLine($"{Name} has collapsed.");
+            CurrentHP = Math.Max(0, CurrentHP - result.DamageDealt);
+            return result;
         }
     }
 }

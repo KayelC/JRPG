@@ -10,7 +10,8 @@ namespace JRPGPrototype
     {
         private Combatant _p;
         private Combatant _e;
-        private InventoryManager _inv; // Reference to Inventory
+        private InventoryManager _inv;
+        private EconomyManager _eco;
         private Random _rnd = new Random();
 
         private readonly Dictionary<string, string> _effectToAilmentMap = new Dictionary<string, string>
@@ -25,12 +26,12 @@ namespace JRPGPrototype
             { "Freezes", "Freeze" }
         };
 
-        // Updated Constructor to accept InventoryManager
-        public BattleManager(Combatant player, Combatant enemy, InventoryManager inventory)
+        public BattleManager(Combatant player, Combatant enemy, InventoryManager inventory, EconomyManager economy)
         {
             _p = player;
             _e = enemy;
             _inv = inventory;
+            _eco = economy;
         }
 
         public void StartBattle()
@@ -106,7 +107,33 @@ namespace JRPGPrototype
                 Thread.Sleep(1200);
             }
 
-            Console.WriteLine(_p.CurrentHP > 0 ? "\n[VICTORY] Shadow Dissipated." : "\n[GAMEOVER] The journey ends here...");
+            if (_p.CurrentHP > 0)
+            {
+                Console.WriteLine("\n[VICTORY] Shadow Dissipated.");
+                int levelDiff = _e.Level - _p.Level;
+                double multiplier = 0.10;
+                if (levelDiff >= 10) multiplier = 1.75;
+                else if (levelDiff >= 5) multiplier = 1.30;
+                else if (levelDiff >= -4) multiplier = 1.00;
+                else if (levelDiff >= -9) multiplier = 0.50;
+
+                int baseExp = _e.Level * 10;
+                int totalExp = (int)(baseExp * multiplier);
+                int expPerMember = (int)(totalExp);
+
+                Console.WriteLine($"EXP Gained: {expPerMember} (Mult: x{multiplier})");
+
+                _p.GainExp(expPerMember);
+                if (_p.ActivePersona != null) _p.ActivePersona.GainExp(expPerMember);
+
+                double maccaMod = Math.Clamp(1 + (_e.Level - _p.Level) * 0.04, 0.9, 1.5);
+                int maccaGain = (int)((_e.Level * 40) * maccaMod);
+                _eco.AddMacca(maccaGain);
+            }
+            else
+            {
+                Console.WriteLine("\n[GAMEOVER] The journey ends here...");
+            }
         }
 
         private bool ProcessTurnStart(Combatant c)
@@ -150,6 +177,9 @@ namespace JRPGPrototype
 
         private void ProcessTurnEnd(Combatant c)
         {
+            // Tick Buffs
+            c.TickBuffs();
+
             if (c.CurrentAilment == null) return;
             if (c.CurrentAilment.DotPercent > 0)
             {
@@ -176,6 +206,10 @@ namespace JRPGPrototype
             if (_e.IsDizzy) eStatus += " [DIZZY]";
             else if (_e.IsDown) eStatus += " [DOWN]";
             else if (_e.IsImmuneToDown) eStatus += " [GUARD]";
+
+            // Show Buffs on Enemy
+            foreach (var b in _e.Buffs) if (b.Value > 0) eStatus += $" [{b.Key}]";
+
             Console.WriteLine($"{_e.Name.ToUpper()} (Lv.{_e.ActivePersona?.Level}){eStatus}");
             Console.WriteLine($"HP: {_e.CurrentHP}/{_e.MaxHP}");
             Console.ResetColor();
@@ -187,6 +221,10 @@ namespace JRPGPrototype
             if (_p.IsDizzy) pStatus += " [DIZZY]";
             else if (_p.IsDown) pStatus += " [DOWN]";
             else if (_p.IsImmuneToDown) pStatus += " [GUARD]";
+
+            // Show Buffs on Player
+            foreach (var b in _p.Buffs) if (b.Value > 0) pStatus += $" [{b.Key}]";
+
             Console.WriteLine($"{_p.Name} [Persona: {_p.ActivePersona?.Name}]{pStatus}");
             Console.WriteLine($"HP: {_p.CurrentHP}/{_p.MaxHP} | SP: {_p.CurrentSP}/{_p.MaxSP}");
             Console.ResetColor();
@@ -210,7 +248,6 @@ namespace JRPGPrototype
                 }
                 else if (choice == "3")
                 {
-                    // If ExecuteItemMenu returns true, an item was used successfully
                     if (ExecuteItemMenu()) return false;
                 }
                 else if (choice == "1")
@@ -249,10 +286,7 @@ namespace JRPGPrototype
 
         private bool ExecuteItemMenu()
         {
-            // Filter: Only Items with Quantity > 0
-            var usableItems = Database.Items.Values
-                                      .Where(i => _inv.GetQuantity(i.Id) > 0)
-                                      .ToList();
+            var usableItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
 
             if (usableItems.Count == 0)
             {
@@ -263,8 +297,7 @@ namespace JRPGPrototype
             Console.WriteLine("\n--- INVENTORY ---");
             for (int i = 0; i < usableItems.Count; i++)
             {
-                int qty = _inv.GetQuantity(usableItems[i].Id);
-                Console.WriteLine($"{i + 1}. {usableItems[i].Name} x{qty} - {usableItems[i].Description}");
+                Console.WriteLine($"{i + 1}. {usableItems[i].Name} x{_inv.GetQuantity(usableItems[i].Id)}");
             }
 
             Console.Write("Select Item # (or 'b' for back): ");
@@ -274,35 +307,18 @@ namespace JRPGPrototype
             if (int.TryParse(input, out int idx) && idx > 0 && idx <= usableItems.Count)
             {
                 ItemData selectedItem = usableItems[idx - 1];
-
-                // Double-Check Validation
-                if (!_inv.HasItem(selectedItem.Id))
+                if (PerformItem(selectedItem, _p))
                 {
-                    Console.WriteLine("Error: Item count is 0.");
-                    return false;
-                }
-
-                // Try to use item
-                bool success = PerformItem(selectedItem, _p);
-
-                if (success)
-                {
-                    // Item Consumption
                     _inv.RemoveItem(selectedItem.Id, 1);
                     return true;
                 }
             }
-            else
-            {
-                Console.WriteLine("Invalid selection.");
-            }
-
             return false;
         }
 
         private bool PerformItem(ItemData item, Combatant target)
         {
-            Console.WriteLine($"\n[ITEM] {_p.Name} attempts to use {item.Name}...");
+            Console.WriteLine($"\n[ITEM] {_p.Name} uses {item.Name}...");
 
             switch (item.Type)
             {
@@ -311,20 +327,20 @@ namespace JRPGPrototype
                     int heal = item.EffectValue;
                     int oldHp = target.CurrentHP;
                     target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
-                    Console.WriteLine($"-> Restored {target.CurrentHP - oldHp} HP to {target.Name}.");
+                    Console.WriteLine($"-> Restored {target.CurrentHP - oldHp} HP.");
                     return true;
 
                 case "Spirit":
                     int spHeal = item.EffectValue;
                     int oldSp = target.CurrentSP;
                     target.CurrentSP = Math.Min(target.MaxSP, target.CurrentSP + spHeal);
-                    Console.WriteLine($"-> Restored {target.CurrentSP - oldSp} SP to {target.Name}.");
+                    Console.WriteLine($"-> Restored {target.CurrentSP - oldSp} SP.");
                     return true;
 
                 case "Revive":
                     if (target.CurrentHP > 0)
                     {
-                        Console.WriteLine("-> No effect! Target is already alive.");
+                        Console.WriteLine("-> No effect! Target is alive.");
                         return false;
                     }
                     else
@@ -333,17 +349,16 @@ namespace JRPGPrototype
                         target.CurrentHP = Math.Max(1, reviveHp);
                         target.IsDown = false;
                         target.IsDizzy = false;
-                        Console.WriteLine($"-> {target.Name} is revived with {target.CurrentHP} HP!");
+                        Console.WriteLine($"-> {target.Name} revived with {target.CurrentHP} HP!");
                         return true;
                     }
 
                 case "Cure":
                     if (target.CurrentAilment == null)
                     {
-                        Console.WriteLine("-> No effect! Target has no ailment.");
+                        Console.WriteLine("-> No effect! Target healthy.");
                         return false;
                     }
-
                     bool cured = false;
                     if (item.Name == "Dis-Poison" && target.CurrentAilment.Name == "Poison")
                     {
@@ -355,20 +370,12 @@ namespace JRPGPrototype
                         if (target.CheckCure("Cure All")) cured = true;
                     }
 
-                    if (cured)
-                    {
-                        Console.WriteLine($"-> Cured!");
-                        return true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("-> No effect on this ailment.");
-                        return false;
-                    }
+                    if (cured) { Console.WriteLine($"-> Cured!"); return true; }
+                    else { Console.WriteLine("-> No effect on this ailment."); return false; }
 
                 case "Barrier":
                 case "Utility":
-                    Console.WriteLine($"-> {item.Name} used! (Effect not yet implemented in damage calc)");
+                    Console.WriteLine($"-> {item.Name} used! (Placeholder effect)");
                     return true;
 
                 default:
@@ -397,6 +404,53 @@ namespace JRPGPrototype
         {
             Console.WriteLine($"\n{user.Name} invokes {name}!");
 
+            string category = "Physical"; // Default for Attack
+            if (Database.Skills.TryGetValue(name, out var skillData)) category = skillData.Category;
+
+            // --- BRANCH 1: RECOVERY SKILLS ---
+            if (category.Contains("Recovery"))
+            {
+                // In 1v1, user always heals self
+                int heal = power;
+                if (heal == 0) heal = 50; // Fallback for Dia if JSON Power is 0/null
+
+                int oldHp = user.CurrentHP;
+                user.CurrentHP = Math.Min(user.MaxHP, user.CurrentHP + heal);
+                Console.WriteLine($"-> {user.Name} restored {user.CurrentHP - oldHp} HP to themselves!");
+                return false; // No One More
+            }
+
+            // --- BRANCH 2: ENHANCE SKILLS (Buffs/Debuffs) ---
+            if (category.Contains("Enhance"))
+            {
+                // Simplified Buff Logic based on Name string
+                if (name.Contains("Taru")) // Tarukaja / Matarukaja
+                {
+                    if (name.Contains("nda")) { target.AddBuff("AttackDown", 3); Console.WriteLine($"-> {target.Name}'s Attack decreased!"); }
+                    else { user.AddBuff("Attack", 3); Console.WriteLine($"-> {user.Name}'s Attack increased!"); }
+                }
+                else if (name.Contains("Raku")) // Rakukaja / Rakunda
+                {
+                    if (name.Contains("nda")) { target.AddBuff("DefenseDown", 3); Console.WriteLine($"-> {target.Name}'s Defense decreased!"); }
+                    else { user.AddBuff("Defense", 3); Console.WriteLine($"-> {user.Name}'s Defense increased!"); }
+                }
+                else if (name.Contains("Suku")) // Sukukaja / Sukunda
+                {
+                    if (name.Contains("nda")) { target.AddBuff("AgilityDown", 3); Console.WriteLine($"-> {target.Name}'s Agility decreased!"); }
+                    else { user.AddBuff("Agility", 3); Console.WriteLine($"-> {user.Name}'s Agility increased!"); }
+                }
+                else if (name.Contains("Charge")) // Power/Mind Charge
+                {
+                    Console.WriteLine("-> Focused energy! (Next attack boosted - logic pending)");
+                }
+                else
+                {
+                    Console.WriteLine("-> Effect applied.");
+                }
+                return false; // No One More
+            }
+
+            // --- BRANCH 3: OFFENSIVE (Damage) ---
             int baseAcc = 95;
             if (name == "Attack" && user.EquippedWeapon != null) baseAcc = user.EquippedWeapon.Accuracy;
             else if (Database.Skills.TryGetValue(name, out var sd)) int.TryParse(sd.Accuracy?.Replace("%", ""), out baseAcc);
@@ -416,7 +470,6 @@ namespace JRPGPrototype
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"-> MISS! {target.Name} evaded the attack.");
                 Console.ResetColor();
-
                 if (!user.IsLongRange && (elem == Element.Slash || elem == Element.Strike || elem == Element.Pierce))
                 {
                     Console.WriteLine($"-> {user.Name} overextended and fell! [DOWN]");
@@ -453,16 +506,17 @@ namespace JRPGPrototype
 
             Console.WriteLine($"{target.Name} takes {res.DamageDealt} {elem} dmg. {res.Message}");
 
-            if (Database.Skills.TryGetValue(name, out var skillData))
+            // Infliction Logic
+            if (Database.Skills.TryGetValue(name, out var sDataInflict))
             {
                 foreach (var kvp in _effectToAilmentMap)
                 {
-                    if (skillData.Effect.Contains(kvp.Key))
+                    if (sDataInflict.Effect.Contains(kvp.Key))
                     {
                         if (Database.Ailments.TryGetValue(kvp.Value, out var ailmentData))
                         {
                             int chance = 100;
-                            var matchChance = Regex.Match(skillData.Effect, @"\((\d+)% chance\)");
+                            var matchChance = Regex.Match(sDataInflict.Effect, @"\((\d+)% chance\)");
                             if (matchChance.Success) int.TryParse(matchChance.Groups[1].Value, out chance);
 
                             if (_rnd.Next(100) < chance)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace JRPGPrototype
 {
@@ -9,11 +9,13 @@ namespace JRPGPrototype
     {
         private Combatant _player;
         private InventoryManager _inventory;
+        private EconomyManager _economy;
 
-        public FieldManager(Combatant player, InventoryManager inventory)
+        public FieldManager(Combatant player, InventoryManager inventory, EconomyManager economy)
         {
             _player = player;
             _inventory = inventory;
+            _economy = economy;
         }
 
         public void NavigateMenus()
@@ -23,49 +25,77 @@ namespace JRPGPrototype
             {
                 Console.Clear();
                 Console.WriteLine("\n=== FIELD PREPARATION MENU ===");
+                Console.WriteLine($"Macca: {_economy.Macca}");
+                Console.WriteLine("------------------------------");
                 Console.WriteLine($"[1] Use Item");
                 Console.WriteLine($"[2] Use Skill");
                 Console.WriteLine($"[3] Equipment");
                 Console.WriteLine($"[4] Status");
-                Console.WriteLine($"[5] Proceed to Battle");
+
+                if (_player.StatPoints > 0)
+                    Console.WriteLine($"[!] Allocate Stats ({_player.StatPoints} pts)");
+                else
+                    Console.WriteLine($"[5] Allocate Stats (0 pts)");
+
+                Console.WriteLine($"[6] Proceed to Battle");
                 Console.Write("> ");
 
                 string input = Console.ReadLine();
                 switch (input)
                 {
-                    case "1":
-                        ShowItemMenu();
-                        break;
-                    case "2":
-                        ShowSkillMenu();
-                        break;
-                    case "3":
-                        ShowEquipMenu();
-                        break;
-                    case "4":
-                        ShowStatus();
-                        break;
+                    case "1": ShowItemMenu(); break;
+                    case "2": ShowSkillMenu(); break;
+                    case "3": ShowEquipMenu(); break;
+                    case "4": ShowStatus(); break;
                     case "5":
-                        stayInMenu = false;
+                    case "!":
+                        if (_player.StatPoints > 0) StatAllocationModule.OpenMenu(_player);
+                        else Console.WriteLine("No points to allocate.");
                         break;
-                    default:
-                        Console.WriteLine("Invalid selection.");
-                        break;
+                    case "6": stayInMenu = false; break;
+                    default: Console.WriteLine("Invalid selection."); break;
                 }
 
-                if (stayInMenu)
-                {
-                    Console.WriteLine("\nPress Enter to continue...");
-                    Console.ReadLine();
-                }
+                if (stayInMenu) { Console.WriteLine("\nPress Enter..."); Console.ReadLine(); }
             }
+        }
+
+        private void ShowStatus()
+        {
+            Console.WriteLine("\n=== STATUS SHEET ===");
+            Console.WriteLine($"Name:  {_player.Name} (Lv.{_player.Level})");
+            Console.WriteLine($"Class: Operator");
+            Console.WriteLine($"EXP:   {_player.Exp}/{_player.ExpRequired}");
+            Console.WriteLine($"HP:    {_player.CurrentHP}/{_player.MaxHP}");
+            Console.WriteLine($"SP:    {_player.CurrentSP}/{_player.MaxSP}");
+            Console.WriteLine($"Cond:  {(_player.CurrentAilment?.Name ?? "Healthy")}");
+            Console.WriteLine($"Wep:   {_player.EquippedWeapon?.Name ?? "Unarmed"}");
+            Console.WriteLine($"Macca: {_economy.Macca}");
+
+            Console.WriteLine("\n--- STATS BREAKDOWN ---");
+            // Helper to get persona stat safely
+            int GetPStat(StatType t) => _player.ActivePersona?.StatModifiers.ContainsKey(t) == true ? _player.ActivePersona.StatModifiers[t] : 0;
+
+            string personaName = _player.ActivePersona?.Name ?? "None";
+            Console.WriteLine($"Persona: {personaName} (Lv.{_player.ActivePersona?.Level ?? 0})");
+            Console.WriteLine("       [Total]   [Base]   [Persona]");
+
+            Console.WriteLine($"STR:   {_player.GetStat(StatType.STR),-9} {_player.CharacterStats[StatType.STR],-8} +{GetPStat(StatType.STR)}");
+            Console.WriteLine($"MAG:   {_player.GetStat(StatType.MAG),-9} {_player.CharacterStats[StatType.MAG],-8} +{GetPStat(StatType.MAG)}");
+            Console.WriteLine($"END:   {_player.GetStat(StatType.END),-9} {_player.CharacterStats[StatType.END],-8} +{GetPStat(StatType.END)}");
+            Console.WriteLine($"AGI:   {_player.GetStat(StatType.AGI),-9} {_player.CharacterStats[StatType.AGI],-8} +{GetPStat(StatType.AGI)}");
+            Console.WriteLine($"LUK:   {_player.GetStat(StatType.LUK),-9} {_player.CharacterStats[StatType.LUK],-8} +{GetPStat(StatType.LUK)}");
+
+            Console.WriteLine("\n--- OPERATOR EXCLUSIVE ---");
+            Console.WriteLine($"INT:   {_player.CharacterStats[StatType.INT]} (Determines MaxSP)");
+            Console.WriteLine($"CHA:   {_player.CharacterStats[StatType.CHA]} (Negotiation)");
+            Console.WriteLine("--------------------------");
         }
 
         // --- ITEM LOGIC ---
         private void ShowItemMenu()
         {
             Console.WriteLine("\n--- FIELD ITEM MENU ---");
-            // Filter inventory for items we actually have
             var items = Database.Items.Values
                 .Where(i => _inventory.GetQuantity(i.Id) > 0)
                 .ToList();
@@ -106,10 +136,7 @@ namespace JRPGPrototype
             {
                 case "Healing":
                 case "Healing_All":
-                    if (target.CurrentHP >= target.MaxHP)
-                    {
-                        Console.WriteLine("HP is already full.");
-                    }
+                    if (target.CurrentHP >= target.MaxHP) { Console.WriteLine("HP is already full."); }
                     else
                     {
                         int old = target.CurrentHP;
@@ -120,10 +147,7 @@ namespace JRPGPrototype
                     break;
 
                 case "Spirit":
-                    if (target.CurrentSP >= target.MaxSP)
-                    {
-                        Console.WriteLine("SP is already full.");
-                    }
+                    if (target.CurrentSP >= target.MaxSP) { Console.WriteLine("SP is already full."); }
                     else
                     {
                         int old = target.CurrentSP;
@@ -134,13 +158,9 @@ namespace JRPGPrototype
                     break;
 
                 case "Cure":
-                    if (target.CurrentAilment == null)
-                    {
-                        Console.WriteLine("Target is healthy.");
-                    }
+                    if (target.CurrentAilment == null) { Console.WriteLine("Target is healthy."); }
                     else
                     {
-                        // Logic to check specific cures
                         bool cured = false;
                         if (item.Name == "Dis-Poison" && target.CurrentAilment.Name == "Poison") cured = true;
                         else if (item.Name == "Patra Card")
@@ -154,10 +174,7 @@ namespace JRPGPrototype
                             target.RemoveAilment();
                             used = true;
                         }
-                        else
-                        {
-                            Console.WriteLine("This item does not cure the current ailment.");
-                        }
+                        else Console.WriteLine("This item does not cure the current ailment.");
                     }
                     break;
 
@@ -166,10 +183,7 @@ namespace JRPGPrototype
                     break;
             }
 
-            if (used)
-            {
-                _inventory.RemoveItem(itemId, 1);
-            }
+            if (used) _inventory.RemoveItem(itemId, 1);
         }
 
         // --- SKILL LOGIC ---
@@ -179,7 +193,6 @@ namespace JRPGPrototype
             var skills = _player.ActivePersona.SkillSet;
             var usableSkills = new List<string>();
 
-            // Filter logic: Check if skill is Recovery or Cure type
             foreach (var sName in skills)
             {
                 if (Database.Skills.TryGetValue(sName, out var sData))
@@ -222,42 +235,21 @@ namespace JRPGPrototype
 
         private void UseSkillField(SkillData skill, Combatant user, Combatant target)
         {
-            // Safety Check: No attacks
-            if (!skill.Category.Contains("Recovery") && !skill.Effect.Contains("Cure") && !skill.Effect.Contains("restore"))
-            {
-                Console.WriteLine("Cannot use attack/utility skills here.");
-                return;
-            }
-
             var cost = skill.ParseCost();
-
-            // Resource Check
-            if (cost.isHP)
-            {
-                if (user.CurrentHP <= cost.value) { Console.WriteLine("Not enough HP!"); return; }
-            }
-            else
-            {
-                if (user.CurrentSP < cost.value) { Console.WriteLine("Not enough SP!"); return; }
-            }
+            if (cost.isHP) { if (user.CurrentHP <= cost.value) { Console.WriteLine("Not enough HP!"); return; } }
+            else { if (user.CurrentSP < cost.value) { Console.WriteLine("Not enough SP!"); return; } }
 
             bool effectApplied = false;
 
-            // Apply Healing
             if (skill.Effect.Contains("restores", StringComparison.OrdinalIgnoreCase))
             {
-                if (target.CurrentHP >= target.MaxHP)
-                {
-                    Console.WriteLine("HP is already max!");
-                    return;
-                }
+                if (target.CurrentHP >= target.MaxHP) { Console.WriteLine("HP is already max!"); return; }
 
-                int healAmount = 50; // Default
+                int healAmount = 50;
                 if (skill.Effect.Contains("Slightly")) healAmount = 50;
                 else if (skill.Effect.Contains("Moderately")) healAmount = 150;
                 else if (skill.Effect.Contains("Fully")) healAmount = 9999;
 
-                // Regex override
                 var match = Regex.Match(skill.Effect, @"\((\d+)\)");
                 if (match.Success) int.TryParse(match.Groups[1].Value, out healAmount);
 
@@ -265,28 +257,17 @@ namespace JRPGPrototype
                 Console.WriteLine($"[{user.Name}] cast {skill.Name}! Restored HP to {target.CurrentHP}/{target.MaxHP}.");
                 effectApplied = true;
             }
-            // Apply Cure
             else if (skill.Effect.Contains("Cure") || skill.Effect.Contains("Dispels"))
             {
-                if (target.CurrentAilment == null)
-                {
-                    Console.WriteLine("No ailment to cure!");
-                    return;
-                }
-
+                if (target.CurrentAilment == null) { Console.WriteLine("No ailment to cure!"); return; }
                 if (target.CheckCure(skill.Effect))
                 {
                     Console.WriteLine($"[{user.Name}] cast {skill.Name}! Ailment removed.");
                     effectApplied = true;
                 }
-                else
-                {
-                    Console.WriteLine("Skill had no effect on this ailment.");
-                    return; // Don't consume cost if it failed logic
-                }
+                else { Console.WriteLine("Skill had no effect on this ailment."); return; }
             }
 
-            // Deduct Cost
             if (effectApplied)
             {
                 if (cost.isHP) user.CurrentHP -= cost.value;
@@ -294,7 +275,7 @@ namespace JRPGPrototype
             }
         }
 
-        // --- EQUIPMENT & STATUS ---
+        // --- EQUIPMENT ---
         private void ShowEquipMenu()
         {
             Console.WriteLine("\n--- EQUIPMENT MENU ---");
@@ -327,18 +308,6 @@ namespace JRPGPrototype
                     Console.WriteLine($"Equipped {newWep.Name}!");
                 }
             }
-        }
-
-        private void ShowStatus()
-        {
-            Console.WriteLine("\n--- STATUS ---");
-            Console.WriteLine($"Name: {_player.Name}");
-            Console.WriteLine($"HP:   {_player.CurrentHP}/{_player.MaxHP}");
-            Console.WriteLine($"SP:   {_player.CurrentSP}/{_player.MaxSP}");
-            Console.WriteLine($"Condition: {(_player.CurrentAilment?.Name ?? "Healthy")}");
-            Console.WriteLine($"Weapon: {_player.EquippedWeapon?.Name ?? "Unarmed"}");
-            Console.WriteLine($"Persona: {_player.ActivePersona?.Name ?? "None"}");
-            Console.WriteLine("--------------");
         }
     }
 }

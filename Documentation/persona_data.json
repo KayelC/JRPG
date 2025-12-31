@@ -5422,5 +5422,793 @@
       "94": "Spell Master",
       "95": "Almighty Boost"
     }
+  },
+  {
+    "Id": "gurulu",
+    "Name": "Gurulu",
+    "Level": 14,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 13,
+      "MAG": 8,
+      "END": 10,
+      "AGI": 12,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Wind": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Eiha",
+      "Power Slash",
+      "Growth 1"
+    ],
+    "LearnedSkills": {
+      "15": "Raging Tiger",
+      "16": "Auto Sukukaja",
+      "18": "Poison Mist",
+      "19": "Poison Boost"
+    }
+  },
+  {
+    "Id": "yamata-no-orochi",
+    "Name": "Yamata-no-Orochi",
+    "Level": 25,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 19,
+      "MAG": 19,
+      "END": 17,
+      "AGI": 13,
+      "LUK": 14
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Ice": "Null",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Bufula",
+      "Zio",
+      "Single Shot"
+    ],
+    "LearnedSkills": {
+      "26": "Single-Target Boost",
+      "27": "Null Freeze",
+      "29": "Marakukaja",
+      "30": "Cruel Attack"
+    }
+  },
+  {
+    "Id": "kaguya",
+    "Name": "Kaguya",
+    "Level": 34,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 19,
+      "MAG": 32,
+      "END": 28,
+      "AGI": 19,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Shining Arrows",
+      "Mediarama",
+      "Divine Grace"
+    ],
+    "LearnedSkills": {
+      "35": "Multi-Target Boost",
+      "37": "High Counter",
+      "38": "Amrita Shower",
+      "39": "Diarahan"
+    }
+  },
+  {
+    "Id": "girimekhala",
+    "Name": "Girimekhala",
+    "Level": 39,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 36,
+      "MAG": 26,
+      "END": 28,
+      "AGI": 20,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Slash": "Reflect",
+      "Pierce": "Reflect"
+    },
+    "BaseSkills": [
+      "Cruel Attack",
+      "Mudoon",
+      "Marakunda"
+    ],
+    "LearnedSkills": {
+      "40": "Virus Breath",
+      "42": "Heat Wave",
+      "44": "Mamudoon",
+      "46": "Repel Slash"
+    }
+  },
+  {
+    "Id": "dionysus",
+    "Name": "Dionysus",
+    "Level": 49,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 30,
+      "MAG": 38,
+      "END": 26,
+      "AGI": 30,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Resist",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [
+      "Ziodyne",
+      "Marakukaja",
+      "Makarakarn"
+    ],
+    "LearnedSkills": {
+      "50": "Resist Slash",
+      "51": "Mazionga",
+      "52": "Heat Wave",
+      "54": "Regenerate 3"
+    }
+  },
+  {
+    "Id": "chernobog",
+    "Name": "Chernobog",
+    "Level": 56,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 48,
+      "MAG": 41,
+      "END": 31,
+      "AGI": 35,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist",
+      "Slash": "Null",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [
+      "Tempest Slash",
+      "Maeiga",
+      "Apt Pupil"
+    ],
+    "LearnedSkills": {
+      "57": "Eigaon",
+      "58": "Poison Mist",
+      "60": "Shift Amp",
+      "61": "Brave Blade"
+    }
+  },
+  {
+    "Id": "seth",
+    "Name": "Seth",
+    "Level": 62,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 47,
+      "MAG": 49,
+      "END": 42,
+      "AGI": 29,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Weak",
+      "Dark": "Resist",
+      "Fire": "Reflect"
+    },
+    "BaseSkills": [
+      "Agidyne",
+      "Garudyne",
+      "Tetrakarn"
+    ],
+    "LearnedSkills": {
+      "63": "Makarakarn",
+      "64": "Fire Break",
+      "66": "Maragidyne",
+      "68": "Repel Ice"
+    }
+  },
+  {
+    "Id": "baal-zebul",
+    "Name": "Baal Zebul",
+    "Level": 72,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 51,
+      "MAG": 56,
+      "END": 45,
+      "AGI": 42,
+      "LUK": 41
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Magarudyne",
+      "Eigaon",
+      "Megidola"
+    ],
+    "LearnedSkills": {
+      "73": "Matarukaja",
+      "74": "Ziodyne",
+      "76": "Maeigaon",
+      "78": "Panta Rhei"
+    }
+  },
+  {
+    "Id": "sandalphon",
+    "Name": "Sandalphon",
+    "Level": 80,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 53,
+      "MAG": 53,
+      "END": 67,
+      "AGI": 46,
+      "LUK": 49
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Electric": "Resist",
+      "Slash": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Divine Judgment",
+      "Mediarahan",
+      "Akasha Arts"
+    ],
+    "LearnedSkills": {
+      "81": "Angelic Grace",
+      "83": "Makougaon",
+      "84": "Salvation",
+      "87": "Drain Dark"
+    }
+  },
+  {
+    "Id": "yatagarasu",
+    "Name": "Yatagarasu",
+    "Level": 24,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 16,
+      "MAG": 16,
+      "END": 14,
+      "AGI": 24,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Wind": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Growth 1",
+      "Sukunda",
+      "Zan-ei"
+    ],
+    "LearnedSkills": {
+      "25": "Sukukaja",
+      "26": "Diarama",
+      "28": "Infuriate",
+      "30": "Masukunda"
+    }
+  },
+  {
+    "Id": "thunderbird",
+    "Name": "Thunderbird",
+    "Level": 35,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 18,
+      "MAG": 28,
+      "END": 18,
+      "AGI": 32,
+      "LUK": 21
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Light": "Null",
+      "Electric": "Absorb"
+    },
+    "BaseSkills": [
+      "Mazionga",
+      "Shock Boost"
+    ],
+    "LearnedSkills": {
+      "36": "Counterstrike",
+      "37": "Rebellion",
+      "39": "Ziodyne",
+      "41": "Null Elec"
+    }
+  },
+  {
+    "Id": "quetzalcoatl",
+    "Name": "Quetzalcoatl",
+    "Level": 45,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 25,
+      "MAG": 35,
+      "END": 33,
+      "AGI": 30,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Wind": "Resist",
+      "Ice": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Bufula",
+      "Garudyne",
+      "Growth 3"
+    ],
+    "LearnedSkills": {
+      "46": "Single-Target Boost",
+      "48": "Bufudyne",
+      "50": "Resist Ailments",
+      "51": "Ice Amp"
+    }
+  },
+  {
+    "Id": "jatayu",
+    "Name": "Jatayu",
+    "Level": 55,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 33,
+      "MAG": 40,
+      "END": 30,
+      "AGI": 50,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Light": "Resist",
+      "Wind": "Absorb"
+    },
+    "BaseSkills": [
+      "Garudyne",
+      "Magarula",
+      "Growth 3"
+    ],
+    "LearnedSkills": {
+      "56": "Masukunda",
+      "58": "Evade Pierce",
+      "59": "Amrita Shower",
+      "61": "Magarudyne"
+    }
+  },
+  {
+    "Id": "horus",
+    "Name": "Horus",
+    "Level": 67,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 42,
+      "MAG": 53,
+      "END": 34,
+      "AGI": 48,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Ice": "Resist",
+      "Electric": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Mahamaon",
+      "Growth 3",
+      "Auto Masuku"
+    ],
+    "LearnedSkills": {
+      "68": "Samarecarm",
+      "70": "Kougaon",
+      "71": "Amrita Shower",
+      "73": "Evade Dark"
+    }
+  },
+  {
+    "Id": "vishnu",
+    "Name": "Vishnu",
+    "Level": 78,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 65,
+      "MAG": 55,
+      "END": 50,
+      "AGI": 53,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Ice": "Null",
+      "Electric": "Null",
+      "Light": "Absorb"
+    },
+    "BaseSkills": [
+      "Akasha Arts",
+      "Bufudyne",
+      "Ziodyne"
+    ],
+    "LearnedSkills": {
+      "79": "Panta Rhei",
+      "80": "Concentrate",
+      "82": "Ali Dance",
+      "84": "Salvation"
+    }
+  },
+  {
+    "Id": "asura",
+    "Name": "Asura",
+    "Level": 85,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 75,
+      "MAG": 55,
+      "END": 58,
+      "AGI": 50,
+      "LUK": 54
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Null",
+      "Light": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Agidyne",
+      "Akasha Arts",
+      "Unshaken Will"
+    ],
+    "LearnedSkills": {
+      "86": "Heat Riser",
+      "88": "Strike Amp",
+      "90": "God's Hand",
+      "91": "Firm Stance"
+    }
+  },
+  {
+    "Id": "anubis",
+    "Name": "Anubis",
+    "Level": 40,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 27,
+      "MAG": 35,
+      "END": 30,
+      "AGI": 21,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Hamaon",
+      "Mudoon",
+      "Maeiga"
+    ],
+    "LearnedSkills": {
+      "41": "Makouga",
+      "43": "Makarakarn",
+      "44": "Growth 2",
+      "45": "Resist Dark"
+    }
+  },
+  {
+    "Id": "trumpeter",
+    "Name": "Trumpeter",
+    "Level": 59,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 44,
+      "MAG": 44,
+      "END": 37,
+      "AGI": 35,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Ice": "Null",
+      "Dark": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Hamaon",
+      "Mudoon",
+      "High Counter"
+    ],
+    "LearnedSkills": {
+      "60": "Makougaon",
+      "62": "Resist Ailments",
+      "63": "Mediarahan",
+      "65": "Debilitate"
+    }
+  },
+  {
+    "Id": "michael",
+    "Name": "Michael",
+    "Level": 70,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 56,
+      "MAG": 48,
+      "END": 46,
+      "AGI": 37,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Heaven's Blade",
+      "Divine Judgment",
+      "Angelic Grace"
+    ],
+    "LearnedSkills": {
+      "72": "Makougaon",
+      "73": "Maziodyne",
+      "75": "Heat Riser",
+      "77": "Drain Pierce"
+    }
+  },
+  {
+    "Id": "satan",
+    "Name": "Satan",
+    "Level": 82,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 55,
+      "MAG": 68,
+      "END": 52,
+      "AGI": 43,
+      "LUK": 53
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist",
+      "Dark": "Absorb",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [
+      "Diamond Dust",
+      "Maeigaon",
+      "Resist Ailments"
+    ],
+    "LearnedSkills": {
+      "83": "Megidolaon",
+      "84": "Concentrate",
+      "86": "Debilitate",
+      "88": "Repel Wind",
+      "89": "Black Viper"
+    }
+  },
+  {
+    "Id": "lucifer",
+    "Name": "Lucifer",
+    "Level": 89,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 70,
+      "MAG": 70,
+      "END": 61,
+      "AGI": 51,
+      "LUK": 55
+    },
+    "Affinities": {
+      "Fire": "Absorb",
+      "Electric": "Absorb",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Megidolaon",
+      "Debilitate",
+      "Brave Blade"
+    ],
+    "LearnedSkills": {
+      "90": "Inferno",
+      "92": "Panta Rhei",
+      "94": "Diamond Dust",
+      "96": "Resist Phys"
+    }
+  },
+  {
+    "Id": "messiah",
+    "Name": "Messiah",
+    "Level": 91,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 65,
+      "MAG": 70,
+      "END": 62,
+      "AGI": 59,
+      "LUK": 59
+    },
+    "Affinities": {
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Light": "Reflect",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Megidolaon",
+      "God's Hand",
+      "Salvation"
+    ],
+    "LearnedSkills": {
+      "92": "Enduring Soul",
+      "93": "Regenerate 3",
+      "94": "Invigorate 3",
+      "96": "Null Phys",
+      "98": "Magic Ability"
+    }
+  },
+  {
+    "Id": "nidhoggr",
+    "Name": "Nidhoggr",
+    "Level": 47,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 36,
+      "MAG": 29,
+      "END": 43,
+      "AGI": 21,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Ice": "Null",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Matarunda",
+      "Mudoon",
+      "Heat Wave"
+    ],
+    "LearnedSkills": {
+      "48": "Virus Breath",
+      "49": "Stagnant Air",
+      "51": "Ailment Boost",
+      "53": "Null Light"
+    }
+  },
+  {
+    "Id": "uriel",
+    "Name": "Uriel",
+    "Level": 57,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 47,
+      "MAG": 42,
+      "END": 35,
+      "AGI": 36,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Electric": "Null",
+      "Light": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Vorpal Blade",
+      "Kougaon",
+      "Sharp Student"
+    ],
+    "LearnedSkills": {
+      "58": "Agidyne",
+      "60": "Angelic Grace",
+      "61": "Mahamaon",
+      "63": "Heaven's Blade"
+    }
+  },
+  {
+    "Id": "ananta",
+    "Name": "Ananta",
+    "Level": 73,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 51,
+      "MAG": 51,
+      "END": 68,
+      "AGI": 35,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Electric": "Weak",
+      "Pierce": "Resist",
+      "Light": "Null",
+      "Ice": "Absorb"
+    },
+    "BaseSkills": [
+      "Vile Assault",
+      "Dekunda",
+      "Auto Maraku"
+    ],
+    "LearnedSkills": {
+      "74": "Evade Slash",
+      "75": "Resist Ailments",
+      "77": "Growth 3",
+      "80": "Drain Slash"
+    }
+  },
+  {
+    "Id": "metatron",
+    "Name": "Metatron",
+    "Level": 87,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 60,
+      "MAG": 65,
+      "END": 65,
+      "AGI": 55,
+      "LUK": 53
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Ice": "Resist",
+      "Fire": "Reflect",
+      "Wind": "Reflect",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Makougaon",
+      "Divine Judgment",
+      "God's Hand"
+    ],
+    "LearnedSkills": {
+      "89": "Megidolaon",
+      "90": "Salvation",
+      "92": "Light Amp",
+      "94": "Repel Elec"
+    }
   }
-  ]
+]

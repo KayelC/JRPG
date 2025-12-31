@@ -14,8 +14,9 @@ namespace JRPGPrototype
         public int CurrentSP { get; set; }
 
         // Battle States
-        public bool IsDown { get; set; }   // Knocked down: Eligible for Dizzy or One More
-        public bool IsDizzy { get; set; }  // Hit while Down: Turn is skipped
+        public bool IsDown { get; set; }
+        public bool IsDizzy { get; set; }
+        public bool IsImmuneToDown { get; set; } // New Property: Prevents stun-lock loops
 
         // The "Operator" base stats (Innate potential)
         public Dictionary<StatType, int> CharacterStats { get; set; } = new Dictionary<StatType, int>();
@@ -88,8 +89,16 @@ namespace JRPGPrototype
                     }
                     else
                     {
-                        IsDown = true;
-                        result.Message = "WEAKNESS STRUCK!";
+                        // Check Immunity logic
+                        if (IsImmuneToDown)
+                        {
+                            result.Message = "Stood Firm!"; // Bonus dmg applied, but no Down state
+                        }
+                        else
+                        {
+                            IsDown = true;
+                            result.Message = "WEAKNESS STRUCK!";
+                        }
                     }
                     break;
 
@@ -98,16 +107,19 @@ namespace JRPGPrototype
                     result.DamageDealt = (int)(damage * 0.5f);
                     result.Message = "Resisted.";
                     break;
+
                 case Affinity.Null:
                     result.Type = HitType.Null;
                     result.DamageDealt = 0;
                     result.Message = "Blocked!";
                     break;
+
                 case Affinity.Repel:
                     result.Type = HitType.Repel;
                     result.DamageDealt = 0;
                     result.Message = "Repelled!";
                     break;
+
                 case Affinity.Absorb:
                     result.Type = HitType.Absorb;
                     int heal = damage;
@@ -115,6 +127,7 @@ namespace JRPGPrototype
                     result.DamageDealt = 0;
                     result.Message = $"Absorbed {heal} HP!";
                     return result;
+
                 default:
                     result.Type = HitType.Normal;
                     result.DamageDealt = damage;

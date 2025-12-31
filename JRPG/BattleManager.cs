@@ -34,13 +34,22 @@ namespace JRPGPrototype
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"\n[RECOVERY] {active.Name} is dizzy! They spend the turn standing up...");
                     Console.ResetColor();
+
                     active.IsDizzy = false;
                     active.IsDown = false;
+
+                    // Immunity Trigger: Prevents immediate re-stun after recovery
+                    active.IsImmuneToDown = true;
+
                     Thread.Sleep(2000);
                 }
                 else
                 {
                     active.IsDown = false; // Normal stand up
+
+                    // Immunity Expiration: Wears off as soon as they take their turn
+                    if (active.IsImmuneToDown)
+                        active.IsImmuneToDown = false;
 
                     bool getOneMore = playerTurn ? ExecutePlayerTurn() : ExecuteEnemyTurn();
 
@@ -69,15 +78,17 @@ namespace JRPGPrototype
             // Enemy
             Console.ForegroundColor = ConsoleColor.Red;
             string eStatus = _e.IsDizzy ? " [DIZZY]" : (_e.IsDown ? " [DOWN]" : "");
+            if (_e.IsImmuneToDown) eStatus += " [GUARD]";
             Console.WriteLine($"{_e.Name.ToUpper()} (Lv.{_e.ActivePersona?.Level}){eStatus}");
             Console.WriteLine($"HP: {_e.CurrentHP}/{_e.MaxHP}");
             Console.ResetColor();
 
-            Console.WriteLine("\n        vs\n");
+            Console.WriteLine("\n vs\n");
 
             // Player
             Console.ForegroundColor = ConsoleColor.Cyan;
             string pStatus = _p.IsDizzy ? " [DIZZY]" : (_p.IsDown ? " [DOWN]" : "");
+            if (_p.IsImmuneToDown) pStatus += " [GUARD]";
             Console.WriteLine($"{_p.Name} [Persona: {_p.ActivePersona?.Name}]{pStatus}");
             Console.WriteLine($"HP: {_p.CurrentHP}/{_p.MaxHP} | SP: {_p.CurrentSP}/{_p.MaxSP}");
             Console.ResetColor();
@@ -86,7 +97,7 @@ namespace JRPGPrototype
 
         private bool ExecutePlayerTurn()
         {
-            Console.WriteLine("\nActions: [1] Skill  [2] Attack");
+            Console.WriteLine("\nActions: [1] Skill [2] Attack");
             Console.Write("> ");
             string choice = Console.ReadLine();
 
@@ -133,7 +144,8 @@ namespace JRPGPrototype
 
             // 1. Accuracy Check
             int baseAcc = 95;
-            if (Database.Skills.TryGetValue(name, out var sd)) int.TryParse(sd.Accuracy?.Replace("%", ""), out baseAcc);
+            if (Database.Skills.TryGetValue(name, out var sd))
+                int.TryParse(sd.Accuracy?.Replace("%", ""), out baseAcc);
 
             int uAgi = user.GetStat(StatType.AGI);
             int tAgi = target.GetStat(StatType.AGI);
@@ -165,8 +177,8 @@ namespace JRPGPrototype
 
             Console.WriteLine($"{target.Name} takes {res.DamageDealt} {elem} dmg. {res.Message}");
 
-            // One More condition
-            return (res.Type == HitType.Weakness && !wasAlreadyDown);
+            // One More condition: Weakness AND Not Already Down AND Not Immune
+            return (res.Type == HitType.Weakness && !wasAlreadyDown && !target.IsImmuneToDown);
         }
     }
 }

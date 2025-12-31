@@ -5,8 +5,13 @@ namespace JRPGPrototype
 {
     public class InventoryManager
     {
+        // Items (ID -> Quantity)
         private Dictionary<string, int> _inventory = new Dictionary<string, int>();
 
+        // Weapons (List of IDs)
+        public List<string> OwnedWeapons { get; private set; } = new List<string>();
+
+        // --- Item Management ---
         public void AddItem(string itemId, int quantity)
         {
             if (Database.Items.ContainsKey(itemId))
@@ -32,10 +37,15 @@ namespace JRPGPrototype
             }
         }
 
-        // Optional: Helper to check if item exists and has stock
-        public bool HasItem(string itemId)
+        public bool HasItem(string itemId) => GetQuantity(itemId) > 0;
+
+        // --- Weapon Management ---
+        public void AddWeapon(string weaponId)
         {
-            return GetQuantity(itemId) > 0;
+            if (Database.Weapons.ContainsKey(weaponId) && !OwnedWeapons.Contains(weaponId))
+            {
+                OwnedWeapons.Add(weaponId);
+            }
         }
     }
 }

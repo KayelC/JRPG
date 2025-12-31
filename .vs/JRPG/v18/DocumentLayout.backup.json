@@ -11,12 +11,16 @@
       "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\combatant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\ailmentdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\ailmentdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,11 +54,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
+              "Title": "AilmentData.cs",
+              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\AilmentData.cs",
+              "RelativeDocumentMoniker": "JRPG\\AilmentData.cs",
+              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\AilmentData.cs",
+              "RelativeToolTip": "JRPG\\AilmentData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T11:29:54.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "ElementHelper.cs",
               "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\ElementHelper.cs",
               "RelativeDocumentMoniker": "JRPG\\ElementHelper.cs",
@@ -66,19 +83,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Database.cs",
               "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Database.cs",
               "RelativeDocumentMoniker": "JRPG\\Database.cs",
               "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Database.cs",
               "RelativeToolTip": "JRPG\\Database.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAADwv0YAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T08:03:19.686Z"
+              "WhenOpened": "2025-12-31T08:03:19.686Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "PersonaData.cs",
               "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\PersonaData.cs",
               "RelativeDocumentMoniker": "JRPG\\PersonaData.cs",
@@ -90,7 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Persona.cs",
               "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Persona.cs",
               "RelativeDocumentMoniker": "JRPG\\Persona.cs",
@@ -102,7 +120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "SkillData.cs",
               "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\SkillData.cs",
               "RelativeDocumentMoniker": "JRPG\\SkillData.cs",
@@ -114,7 +132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Enums.cs",
               "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Enums.cs",
               "RelativeDocumentMoniker": "JRPG\\Enums.cs",
@@ -132,14 +150,14 @@
               "RelativeDocumentMoniker": "JRPG\\BattleManager.cs",
               "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\BattleManager.cs",
               "RelativeToolTip": "JRPG\\BattleManager.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwJoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAM4AAAAAAAAAAAAswFsBAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-31T07:52:52.809Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "CombatResult.cs",
               "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\CombatResult.cs",
               "RelativeDocumentMoniker": "JRPG\\CombatResult.cs",
@@ -151,13 +169,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
               "RelativeDocumentMoniker": "JRPG\\Program.cs",
               "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
               "RelativeToolTip": "JRPG\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAIwCkAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-29T08:58:40.26Z",
               "EditorCaption": ""
@@ -170,7 +188,7 @@
               "RelativeDocumentMoniker": "JRPG\\Combatant.cs",
               "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Combatant.cs",
               "RelativeToolTip": "JRPG\\Combatant.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIwAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-29T08:57:16.357Z",
               "EditorCaption": ""

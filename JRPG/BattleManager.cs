@@ -16,7 +16,7 @@ namespace JRPGPrototype
         {
             { "Poisons", "Poison" },
             { "Instills Fear", "Fear" },
-            { "Panic", "Panic" }, // "Makes 1 foe Panic"
+            { "Panic", "Panic" },
             { "Distresses", "Distress" },
             { "Charms", "Charm" },
             { "Enrages", "Rage" },
@@ -44,7 +44,7 @@ namespace JRPGPrototype
 
                 DrawUI();
 
-                // 1. Process Ailment Start (DoTs, Restrictions)
+                // 1. Process Ailment Start
                 bool canAct = ProcessTurnStart(active);
 
                 if (active.IsDizzy)
@@ -59,8 +59,7 @@ namespace JRPGPrototype
                 }
                 else if (canAct)
                 {
-                    active.IsDown = false;
-
+                    // Stand up if Down (Costs turn)
                     if (active.IsDown)
                     {
                         Console.WriteLine($"\n{active.Name} spends the turn standing up.");
@@ -78,21 +77,19 @@ namespace JRPGPrototype
                             Console.WriteLine($"\n{active.Name} is Enraged! Attacking automatically!");
                             Console.ResetColor();
 
-                            // Rage Extra Turns Logic (JSON says extra_turns: 1)
                             int attacks = 1 + active.CurrentAilment.ExtraTurns;
                             for (int i = 0; i < attacks; i++)
                             {
                                 if (target.CurrentHP <= 0) break;
-                                PerformMove(active, target, "Attack", 30, Element.Strike);
+                                // Rage forces basic weapon attack
+                                PerformMove(active, target, "Attack", 30, active.WeaponElement);
                                 Thread.Sleep(800);
                             }
                         }
                         else
                         {
-                            // Normal Turn
                             bool getOneMore = playerTurn ? ExecutePlayerTurn() : ExecuteEnemyTurn();
 
-                            // One More Logic
                             if (getOneMore && target.CurrentHP > 0)
                             {
                                 Console.BackgroundColor = ConsoleColor.DarkBlue;
@@ -106,7 +103,7 @@ namespace JRPGPrototype
                     }
                 }
 
-                // 2. Process Turn End (Poison damage, duration tick)
+                // 2. Process Turn End
                 ProcessTurnEnd(active);
 
                 playerTurn = !playerTurn;
@@ -119,26 +116,23 @@ namespace JRPGPrototype
         private bool ProcessTurnStart(Combatant c)
         {
             if (c.CurrentAilment == null) return true;
-
             Console.ForegroundColor = ConsoleColor.Magenta;
             bool act = true;
 
             switch (c.CurrentAilment.ActionRestriction)
             {
-                case "SkipTurn": // Freeze, Shock
+                case "SkipTurn":
                     Console.WriteLine($"\n{c.Name} is {c.CurrentAilment.Name} and cannot move!");
                     act = false;
                     break;
-                case "ChanceSkipOrFlee": // Fear
+                case "ChanceSkipOrFlee":
                     int roll = _rnd.Next(100);
                     if (roll < 30) { Console.WriteLine($"\n{c.Name} is paralyzed by Fear!"); act = false; }
-                    else if (roll < 50) { Console.WriteLine($"\n{c.Name} runs away in Fear! (Battle End - Not Impl)"); act = false; }
                     break;
-                case "ChanceSkip": // Panic
-                    // Panic blocks skills (Menu) AND has a chance to skip turn entirely
+                case "ChanceSkip":
                     if (_rnd.Next(100) < 40) { Console.WriteLine($"\n{c.Name} is Panicking and does nothing!"); act = false; }
                     break;
-                case "ConfusedAction": // Charm
+                case "ConfusedAction":
                     Console.WriteLine($"\n{c.Name} is Charmed!");
                     if (_rnd.Next(100) < 50)
                     {
@@ -150,12 +144,11 @@ namespace JRPGPrototype
                     else
                     {
                         Console.WriteLine("...and attacks themselves!");
-                        PerformMove(c, c, "Attack", 20, Element.Strike);
+                        PerformMove(c, c, "Attack", 20, c.WeaponElement);
                         act = false;
                     }
                     break;
             }
-
             Console.ResetColor();
             return act;
         }
@@ -163,8 +156,6 @@ namespace JRPGPrototype
         private void ProcessTurnEnd(Combatant c)
         {
             if (c.CurrentAilment == null) return;
-
-            // Dot Damage
             if (c.CurrentAilment.DotPercent > 0)
             {
                 int dmg = (int)(c.MaxHP * c.CurrentAilment.DotPercent);
@@ -173,8 +164,6 @@ namespace JRPGPrototype
                 Console.WriteLine($"\n{c.Name} takes {dmg} damage from {c.CurrentAilment.Name}.");
                 Console.ResetColor();
             }
-
-            // Duration and Removal
             c.AilmentDuration--;
             if (c.AilmentDuration <= 0)
             {
@@ -193,7 +182,6 @@ namespace JRPGPrototype
             if (_e.IsDizzy) eStatus += " [DIZZY]";
             else if (_e.IsDown) eStatus += " [DOWN]";
             else if (_e.IsImmuneToDown) eStatus += " [GUARD]";
-
             Console.WriteLine($"{_e.Name.ToUpper()} (Lv.{_e.ActivePersona?.Level}){eStatus}");
             Console.WriteLine($"HP: {_e.CurrentHP}/{_e.MaxHP}");
             Console.ResetColor();
@@ -206,7 +194,6 @@ namespace JRPGPrototype
             if (_p.IsDizzy) pStatus += " [DIZZY]";
             else if (_p.IsDown) pStatus += " [DOWN]";
             else if (_p.IsImmuneToDown) pStatus += " [GUARD]";
-
             Console.WriteLine($"{_p.Name} [Persona: {_p.ActivePersona?.Name}]{pStatus}");
             Console.WriteLine($"HP: {_p.CurrentHP}/{_p.MaxHP} | SP: {_p.CurrentSP}/{_p.MaxSP}");
             Console.ResetColor();
@@ -217,7 +204,7 @@ namespace JRPGPrototype
         {
             bool isPanicked = _p.CurrentAilment?.Name == "Panic";
 
-            while (true) // Menu Loop
+            while (true)
             {
                 Console.WriteLine($"\nActions: [1] Skill {(isPanicked ? "(Blocked)" : "")} [2] Attack");
                 Console.Write("> ");
@@ -225,15 +212,12 @@ namespace JRPGPrototype
 
                 if (choice == "2")
                 {
-                    return PerformMove(_p, _e, "Attack", 30, Element.Slash);
+                    // Weapon-Ready Attack: Uses Player's specific weapon element
+                    return PerformMove(_p, _e, "Attack", 30, _p.WeaponElement);
                 }
                 else if (choice == "1")
                 {
-                    if (isPanicked)
-                    {
-                        Console.WriteLine("You are Panicking and cannot use skills!");
-                        continue; // Loop back
-                    }
+                    if (isPanicked) { Console.WriteLine("You are Panicking and cannot use skills!"); continue; }
 
                     var skills = _p.ActivePersona.SkillSet;
                     for (int i = 0; i < skills.Count; i++)
@@ -241,14 +225,9 @@ namespace JRPGPrototype
                         if (Database.Skills.TryGetValue(skills[i], out var s))
                             Console.WriteLine($"{i + 1}. {skills[i]} ({s.Cost}) - {s.Effect}");
                     }
-
                     Console.Write("Select Skill # (or 'b' for back): ");
                     string input = Console.ReadLine();
-
-                    if (input.ToLower() == "b")
-                    {
-                        continue; // Loop back to [1] Skill [2] Attack
-                    }
+                    if (input.ToLower() == "b") continue;
 
                     if (int.TryParse(input, out int idx) && idx > 0 && idx <= skills.Count)
                     {
@@ -256,18 +235,9 @@ namespace JRPGPrototype
                         if (Database.Skills.TryGetValue(sName, out var sData))
                         {
                             var cost = sData.ParseCost();
-                            if (cost.isHP)
-                            {
-                                if (_p.CurrentHP > cost.value) _p.CurrentHP -= cost.value;
-                                else { Console.WriteLine("Not enough HP!"); continue; }
-                            }
-                            else
-                            {
-                                if (_p.CurrentSP >= cost.value) _p.CurrentSP -= cost.value;
-                                else { Console.WriteLine("Not enough SP!"); continue; }
-                            }
+                            if (cost.isHP) { if (_p.CurrentHP > cost.value) _p.CurrentHP -= cost.value; else { Console.WriteLine("Not enough HP!"); continue; } }
+                            else { if (_p.CurrentSP >= cost.value) _p.CurrentSP -= cost.value; else { Console.WriteLine("Not enough SP!"); continue; } }
 
-                            // Check Cures (Skills that cure ailments)
                             _e.CheckCure(sData.Effect);
                             _p.CheckCure(sData.Effect);
 
@@ -276,10 +246,6 @@ namespace JRPGPrototype
                     }
                     Console.WriteLine("Invalid selection.");
                 }
-                else
-                {
-                    Console.WriteLine("Invalid choice.");
-                }
             }
         }
 
@@ -287,8 +253,6 @@ namespace JRPGPrototype
         {
             var skills = _e.ActivePersona.SkillSet;
             string sName = (_rnd.Next(100) < 70 && skills.Count > 0) ? skills[_rnd.Next(skills.Count)] : "Attack";
-
-            // Enemy Panic Check
             if (_e.CurrentAilment?.Name == "Panic") sName = "Attack";
 
             if (sName != "Attack" && Database.Skills.TryGetValue(sName, out var sData))
@@ -297,28 +261,30 @@ namespace JRPGPrototype
                 _e.CheckCure(sData.Effect);
                 return PerformMove(_e, _p, sName, sData.GetPowerVal(), ElementHelper.FromCategory(sData.Category));
             }
-
-            return PerformMove(_e, _p, "Attack", 25, Element.Strike);
+            // Weapon-Ready Attack: Uses Enemy's weapon element
+            return PerformMove(_e, _p, "Attack", 25, _e.WeaponElement);
         }
 
         private bool PerformMove(Combatant user, Combatant target, string name, int power, Element elem)
         {
             Console.WriteLine($"\n{user.Name} invokes {name}!");
 
-            // --- 1. Accuracy Check ---
+            // --- 1. Accuracy & Range Check ---
             int baseAcc = 95;
             if (Database.Skills.TryGetValue(name, out var sd))
                 int.TryParse(sd.Accuracy?.Replace("%", ""), out baseAcc);
 
-            double tEvasionMult = target.CurrentAilment?.EvasionMult ?? 1.0;
+            // Ranged Penalty
+            if (user.IsLongRange) baseAcc -= 20;
 
-            if (target.IsDown || target.IsDizzy) tEvasionMult = 0.0;
+            double tEvasionMult = target.CurrentAilment?.EvasionMult ?? 1.0;
+            if (target.IsDown || target.IsDizzy || target.IsRigidBody) tEvasionMult = 0.0; // Rigid Body also 0 evasion
 
             int uAgi = user.GetStat(StatType.AGI);
             int tAgi = (int)(target.GetStat(StatType.AGI) * tEvasionMult);
 
             int finalHit = Math.Clamp(baseAcc + (uAgi - tAgi), 5, 99);
-            if (tEvasionMult == 0.0) finalHit = 100; // Guaranteed hit if 0 evasion
+            if (tEvasionMult == 0.0) finalHit = 100;
 
             if (_rnd.Next(1, 101) > finalHit)
             {
@@ -326,36 +292,49 @@ namespace JRPGPrototype
                 Console.WriteLine($"-> MISS! {target.Name} evaded the attack.");
                 Console.ResetColor();
 
-                // Melee Miss Penalty
-                if (elem == Element.Slash || elem == Element.Strike)
+                // Miss Penalty: Melee user falls Down
+                if (!user.IsLongRange && (elem == Element.Slash || elem == Element.Strike || elem == Element.Pierce))
                 {
-                    Console.WriteLine($"-> {user.Name} lost balance and fell!");
+                    Console.WriteLine($"-> {user.Name} overextended and fell! [DOWN]");
                     user.IsDown = true;
                 }
                 return false;
             }
 
-            // --- 2. Damage Math ---
-            bool isPhys = (elem <= Element.Pierce);
-            int atk = isPhys ? user.GetStat(StatType.STR) : user.GetStat(StatType.MAG);
+            // --- 2. Critical Check (Physical Only) ---
+            bool isPhysical = (elem == Element.Slash || elem == Element.Strike || elem == Element.Pierce);
+            bool isCritical = false;
+
+            if (isPhysical)
+            {
+                int critChance = (user.GetStat(StatType.LUK) - target.GetStat(StatType.LUK)) + 5;
+
+                // Ailment Synergy
+                if (target.CurrentAilment?.Name == "Freeze" || target.CurrentAilment?.Name == "Shock") critChance = 100;
+                else if (target.CurrentAilment?.Name == "Distress") critChance += 50;
+
+                if (_rnd.Next(1, 101) <= critChance) isCritical = true;
+            }
+
+            // --- 3. Damage Math ---
+            int atk = isPhysical ? user.GetStat(StatType.STR) : user.GetStat(StatType.MAG);
             int def = target.GetStat(StatType.END);
 
             if (user.CurrentAilment != null) atk = (int)(atk * user.CurrentAilment.DamageDealMult);
             if (target.IsDown || target.IsDizzy) def = (int)(def * 0.5);
 
             double dmgBase = Math.Sqrt(power) * ((double)atk / Math.Max(1, def)) * 7;
-
             if (target.CurrentAilment != null) dmgBase *= target.CurrentAilment.DamageTakenMult;
 
             int damage = (int)(dmgBase * (0.95 + _rnd.NextDouble() * 0.1));
 
-            // --- 3. Resolve & Infliction ---
+            // --- 4. Resolve & Infliction ---
             bool wasAlreadyDown = target.IsDown;
-            var res = target.ReceiveDamage(damage, elem);
+            var res = target.ReceiveDamage(damage, elem, isCritical);
 
             Console.WriteLine($"{target.Name} takes {res.DamageDealt} {elem} dmg. {res.Message}");
 
-            // Robust Infliction Logic
+            // Infliction Logic
             if (Database.Skills.TryGetValue(name, out var skillData))
             {
                 foreach (var kvp in _effectToAilmentMap)
@@ -364,12 +343,9 @@ namespace JRPGPrototype
                     {
                         if (Database.Ailments.TryGetValue(kvp.Value, out var ailmentData))
                         {
-                            // Parse Chance
                             int chance = 100;
                             var matchChance = Regex.Match(skillData.Effect, @"\((\d+)% chance\)");
                             if (matchChance.Success) int.TryParse(matchChance.Groups[1].Value, out chance);
-
-                            // Apply Ailment Boost (if passive implemented later, add here)
 
                             if (_rnd.Next(100) < chance)
                             {
@@ -385,15 +361,29 @@ namespace JRPGPrototype
                 }
             }
 
-            // One More condition: Weakness AND Not Already Down AND Not Immune AND User is Not Afflicted
-            bool canOneMore = (res.Type == HitType.Weakness && !wasAlreadyDown && !target.IsImmuneToDown);
-            if (user.CurrentAilment != null && canOneMore)
+            // --- 5. One More Logic ---
+            // Conditions: Hit Weakness OR Critical, Target not Immune, User not Afflicted.
+            // Rigid Body Exception: Even if standing (not Down), Rigid Body allows One More logic to pass "wasAlreadyDown" check logic effectively.
+
+            bool hitCondition = (res.Type == HitType.Weakness || res.IsCritical);
+            bool immunityBlock = target.IsImmuneToDown;
+            bool userAfflictedBlock = (user.CurrentAilment != null);
+
+            // If RigidBody, we get One More regardless of 'wasAlreadyDown' state (since they stay standing)
+            // If Normal, we only get One More if they weren't already down.
+            bool loopCheck = target.IsRigidBody || !wasAlreadyDown;
+
+            if (hitCondition && !immunityBlock && loopCheck)
             {
-                Console.WriteLine($"-> {user.Name} hit a weakness, but suffering from {user.CurrentAilment.Name} prevented a One More!");
-                return false;
+                if (userAfflictedBlock)
+                {
+                    Console.WriteLine($"-> {user.Name} hit a vulnerable spot, but {user.CurrentAilment.Name} prevented a One More!");
+                    return false;
+                }
+                return true;
             }
 
-            return canOneMore;
+            return false;
         }
     }
 }

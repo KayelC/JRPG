@@ -49,56 +49,58 @@ namespace JRPGPrototype
 
                 if (active.IsDizzy)
                 {
+                    // Dizzy STILL skips the turn
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"\n[RECOVERY] {active.Name} is dizzy! They spend the turn standing up...");
                     Console.ResetColor();
                     active.IsDizzy = false;
                     active.IsDown = false;
-                    active.IsImmuneToDown = true;
+                    active.IsImmuneToDown = true; // Grant immunity after recovering from Dizzy
                     Thread.Sleep(2000);
                 }
                 else if (canAct)
                 {
-                    // Stand up if Down (Costs turn)
+                    // UPDATED: Down state no longer skips the turn.
                     if (active.IsDown)
                     {
-                        Console.WriteLine($"\n{active.Name} spends the turn standing up.");
+                        Console.WriteLine($"\n{active.Name} gets back on their feet.");
                         active.IsDown = false;
-                        Thread.Sleep(1000);
+                        // No return/continue here; they proceed to act immediately.
+                    }
+
+                    // Remove Immunity at start of acting turn
+                    if (active.IsImmuneToDown) active.IsImmuneToDown = false;
+
+                    // Check for Rage (Forced Action)
+                    if (active.CurrentAilment?.ActionRestriction == "ForceAttack")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"\n{active.Name} is Enraged! Attacking automatically!");
+                        Console.ResetColor();
+
+                        int attacks = 1 + active.CurrentAilment.ExtraTurns;
+                        for (int i = 0; i < attacks; i++)
+                        {
+                            if (target.CurrentHP <= 0) break;
+                            // Rage forces basic weapon attack
+                            PerformMove(active, target, "Attack", 30, active.WeaponElement);
+                            Thread.Sleep(800);
+                        }
                     }
                     else
                     {
-                        if (active.IsImmuneToDown) active.IsImmuneToDown = false;
+                        // Normal Turn Execution
+                        bool getOneMore = playerTurn ? ExecutePlayerTurn() : ExecuteEnemyTurn();
 
-                        // Check for Rage (Forced Action)
-                        if (active.CurrentAilment?.ActionRestriction == "ForceAttack")
+                        // One More Logic
+                        if (getOneMore && target.CurrentHP > 0)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"\n{active.Name} is Enraged! Attacking automatically!");
+                            Console.BackgroundColor = ConsoleColor.DarkBlue;
+                            Console.WriteLine("\n >>> ONE MORE! <<< ");
                             Console.ResetColor();
-
-                            int attacks = 1 + active.CurrentAilment.ExtraTurns;
-                            for (int i = 0; i < attacks; i++)
-                            {
-                                if (target.CurrentHP <= 0) break;
-                                // Rage forces basic weapon attack
-                                PerformMove(active, target, "Attack", 30, active.WeaponElement);
-                                Thread.Sleep(800);
-                            }
-                        }
-                        else
-                        {
-                            bool getOneMore = playerTurn ? ExecutePlayerTurn() : ExecuteEnemyTurn();
-
-                            if (getOneMore && target.CurrentHP > 0)
-                            {
-                                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                                Console.WriteLine("\n >>> ONE MORE! <<< ");
-                                Console.ResetColor();
-                                Thread.Sleep(1000);
-                                DrawUI();
-                                if (playerTurn) ExecutePlayerTurn(); else ExecuteEnemyTurn();
-                            }
+                            Thread.Sleep(1000);
+                            DrawUI();
+                            if (playerTurn) ExecutePlayerTurn(); else ExecuteEnemyTurn();
                         }
                     }
                 }
@@ -212,8 +214,8 @@ namespace JRPGPrototype
 
                 if (choice == "2")
                 {
-                    // Weapon-Ready Attack: Uses Player's specific weapon element
-                    return PerformMove(_p, _e, "Attack", 30, _p.WeaponElement);
+                    int power = _p.EquippedWeapon?.Power ?? 20;
+                    return PerformMove(_p, _e, "Attack", power, _p.WeaponElement);
                 }
                 else if (choice == "1")
                 {
@@ -261,8 +263,8 @@ namespace JRPGPrototype
                 _e.CheckCure(sData.Effect);
                 return PerformMove(_e, _p, sName, sData.GetPowerVal(), ElementHelper.FromCategory(sData.Category));
             }
-            // Weapon-Ready Attack: Uses Enemy's weapon element
-            return PerformMove(_e, _p, "Attack", 25, _e.WeaponElement);
+            int power = _e.EquippedWeapon?.Power ?? 25;
+            return PerformMove(_e, _p, "Attack", power, _e.WeaponElement);
         }
 
         private bool PerformMove(Combatant user, Combatant target, string name, int power, Element elem)
@@ -271,14 +273,16 @@ namespace JRPGPrototype
 
             // --- 1. Accuracy & Range Check ---
             int baseAcc = 95;
-            if (Database.Skills.TryGetValue(name, out var sd))
+
+            if (name == "Attack" && user.EquippedWeapon != null)
+                baseAcc = user.EquippedWeapon.Accuracy;
+            else if (Database.Skills.TryGetValue(name, out var sd))
                 int.TryParse(sd.Accuracy?.Replace("%", ""), out baseAcc);
 
-            // Ranged Penalty
             if (user.IsLongRange) baseAcc -= 20;
 
             double tEvasionMult = target.CurrentAilment?.EvasionMult ?? 1.0;
-            if (target.IsDown || target.IsDizzy || target.IsRigidBody) tEvasionMult = 0.0; // Rigid Body also 0 evasion
+            if (target.IsDown || target.IsDizzy || target.IsRigidBody) tEvasionMult = 0.0;
 
             int uAgi = user.GetStat(StatType.AGI);
             int tAgi = (int)(target.GetStat(StatType.AGI) * tEvasionMult);
@@ -292,7 +296,6 @@ namespace JRPGPrototype
                 Console.WriteLine($"-> MISS! {target.Name} evaded the attack.");
                 Console.ResetColor();
 
-                // Miss Penalty: Melee user falls Down
                 if (!user.IsLongRange && (elem == Element.Slash || elem == Element.Strike || elem == Element.Pierce))
                 {
                     Console.WriteLine($"-> {user.Name} overextended and fell! [DOWN]");
@@ -301,15 +304,13 @@ namespace JRPGPrototype
                 return false;
             }
 
-            // --- 2. Critical Check (Physical Only) ---
+            // --- 2. Critical Check ---
             bool isPhysical = (elem == Element.Slash || elem == Element.Strike || elem == Element.Pierce);
             bool isCritical = false;
 
             if (isPhysical)
             {
                 int critChance = (user.GetStat(StatType.LUK) - target.GetStat(StatType.LUK)) + 5;
-
-                // Ailment Synergy
                 if (target.CurrentAilment?.Name == "Freeze" || target.CurrentAilment?.Name == "Shock") critChance = 100;
                 else if (target.CurrentAilment?.Name == "Distress") critChance += 50;
 
@@ -334,7 +335,6 @@ namespace JRPGPrototype
 
             Console.WriteLine($"{target.Name} takes {res.DamageDealt} {elem} dmg. {res.Message}");
 
-            // Infliction Logic
             if (Database.Skills.TryGetValue(name, out var skillData))
             {
                 foreach (var kvp in _effectToAilmentMap)
@@ -362,15 +362,9 @@ namespace JRPGPrototype
             }
 
             // --- 5. One More Logic ---
-            // Conditions: Hit Weakness OR Critical, Target not Immune, User not Afflicted.
-            // Rigid Body Exception: Even if standing (not Down), Rigid Body allows One More logic to pass "wasAlreadyDown" check logic effectively.
-
             bool hitCondition = (res.Type == HitType.Weakness || res.IsCritical);
             bool immunityBlock = target.IsImmuneToDown;
             bool userAfflictedBlock = (user.CurrentAilment != null);
-
-            // If RigidBody, we get One More regardless of 'wasAlreadyDown' state (since they stay standing)
-            // If Normal, we only get One More if they weren't already down.
             bool loopCheck = target.IsRigidBody || !wasAlreadyDown;
 
             if (hitCondition && !immunityBlock && loopCheck)

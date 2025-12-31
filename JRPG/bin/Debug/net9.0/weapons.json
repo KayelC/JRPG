@@ -1,0 +1,30 @@
+{
+  "weapons": [
+    { "id": "1", "name": "Shortsword", "type": "Slash", "power": 20, "accuracy": 92, "is_long_range": false },
+    { "id": "2", "name": "Steel Sword", "type": "Slash", "power": 45, "accuracy": 90, "is_long_range": false },
+    { "id": "3", "name": "Bastard Sword", "type": "Slash", "power": 80, "accuracy": 88, "is_long_range": false },
+    { "id": "4", "name": "Gladius", "type": "Slash", "power": 120, "accuracy": 90, "is_long_range": false },
+    { "id": "5", "name": "Two-handed Sword", "type": "Slash", "power": 35, "accuracy": 85, "is_long_range": false },
+    { "id": "6", "name": "Zweihander", "type": "Slash", "power": 110, "accuracy": 82, "is_long_range": false },
+    { "id": "7", "name": "Claymore", "type": "Slash", "power": 160, "accuracy": 80, "is_long_range": false },
+    { "id": "8", "name": "Short Bow", "type": "Pierce", "power": 18, "accuracy": 98, "is_long_range": true },
+    { "id": "9", "name": "Long Bow", "type": "Pierce", "power": 40, "accuracy": 96, "is_long_range": true },
+    { "id": "10", "name": "Hunter's Bow", "type": "Pierce", "power": 90, "accuracy": 98, "is_long_range": true },
+    { "id": "11", "name": "Dagger", "type": "Slash", "power": 15, "accuracy": 95, "is_long_range": false },
+    { "id": "12", "name": "Stiletto", "type": "Slash", "power": 55, "accuracy": 95, "is_long_range": false },
+    { "id": "13", "name": "Kris", "type": "Slash", "power": 105, "accuracy": 94, "is_long_range": false },
+    { "id": "14", "name": "Spear", "type": "Pierce", "power": 25, "accuracy": 98, "is_long_range": true },
+    { "id": "15", "name": "Lance", "type": "Pierce", "power": 65, "accuracy": 95, "is_long_range": true },
+    { "id": "16", "name": "Naginata", "type": "Slash", "power": 115, "accuracy": 95, "is_long_range": true },
+    { "id": "17", "name": "Gae Bolg", "type": "Wind", "power": 180, "accuracy": 94, "is_long_range": false },
+    { "id": "18", "name": "Brass Knuckles", "type": "Strike", "power": 22, "accuracy": 98, "is_long_range": false },
+    { "id": "19", "name": "Iron Fists", "type": "Strike", "power": 50, "accuracy": 96, "is_long_range": false },
+    { "id": "20", "name": "Machine Gun", "type": "Pierce", "power": 35, "accuracy": 98, "is_long_range": true },
+    { "id": "21", "name": "Gatling Gun", "type": "Pierce", "power": 95, "accuracy": 98, "is_long_range": true },
+    { "id": "22", "name": "Heavy Axe", "type": "Strike", "power": 40, "accuracy": 80, "is_long_range": false },
+    { "id": "23", "name": "Battle Axe", "type": "Strike", "power": 100, "accuracy": 78, "is_long_range": false },
+    { "id": "24", "name": "Morning Star", "type": "Strike", "power": 180, "accuracy": 75, "is_long_range": false },
+    { "id": "25", "name": "Scrub Brush", "type": "Strike", "power": 1, "accuracy": 30, "is_long_range": false },
+    { "id": "26", "name": "Mjolnir", "type": "Electric", "power": 180, "accuracy": 94, "is_long_range": false }
+  ]
+}

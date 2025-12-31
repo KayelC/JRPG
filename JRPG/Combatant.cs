@@ -22,9 +22,27 @@ namespace JRPGPrototype
         public AilmentData CurrentAilment { get; private set; }
         public int AilmentDuration { get; set; }
 
-        // Weapon Configuration (New)
-        public Element WeaponElement { get; set; } = Element.Slash;
-        public bool IsLongRange { get; set; } = false;
+        // Weapon Configuration (Refactored)
+        public WeaponData EquippedWeapon { get; set; }
+
+        // Computed Properties based on EquippedWeapon
+        public Element WeaponElement
+        {
+            get
+            {
+                if (EquippedWeapon != null)
+                    return ElementHelper.FromCategory(EquippedWeapon.Type);
+                return Element.Strike; // Default fallback (Unarmed)
+            }
+        }
+
+        public bool IsLongRange
+        {
+            get
+            {
+                return EquippedWeapon != null && EquippedWeapon.IsLongRange;
+            }
+        }
 
         // The "Operator" base stats
         public Dictionary<StatType, int> CharacterStats { get; set; } = new Dictionary<StatType, int>();
@@ -38,9 +56,7 @@ namespace JRPGPrototype
             foreach (StatType type in Enum.GetValues(typeof(StatType)))
                 CharacterStats[type] = 10;
 
-            // Default Weapon Config
-            if (name == "Hero") { WeaponElement = Element.Slash; IsLongRange = false; }
-            else { WeaponElement = Element.Strike; IsLongRange = false; }
+            // Note: EquippedWeapon should be assigned by the Inventory/Setup logic externally
         }
 
         public int GetStat(StatType type)
@@ -103,7 +119,6 @@ namespace JRPGPrototype
             return false;
         }
 
-        // Rigid Body Exception: Frozen or Shocked targets are physically locked
         public bool IsRigidBody => CurrentAilment != null &&
                                    (CurrentAilment.Name == "Freeze" || CurrentAilment.Name == "Shock");
 
@@ -113,7 +128,6 @@ namespace JRPGPrototype
             var result = new CombatResult();
             result.IsCritical = isCritical;
 
-            // Critical Damage Multiplier (1.5x)
             if (isCritical) damage = (int)(damage * 1.5);
 
             switch (aff)
@@ -129,21 +143,9 @@ namespace JRPGPrototype
                     }
                     else
                     {
-                        // Immunity Logic
-                        if (IsImmuneToDown)
-                        {
-                            result.Message = "Stood Firm!";
-                        }
-                        // Rigid Body Exception: Do not knock down if Frozen/Shocked
-                        else if (IsRigidBody)
-                        {
-                            result.Message = "CRITICAL HIT! (Rigid)";
-                        }
-                        else
-                        {
-                            IsDown = true;
-                            result.Message = "WEAKNESS STRUCK!";
-                        }
+                        if (IsImmuneToDown) result.Message = "Stood Firm!";
+                        else if (IsRigidBody) result.Message = "CRITICAL HIT! (Rigid)";
+                        else { IsDown = true; result.Message = "WEAKNESS STRUCK!"; }
                     }
                     break;
 
@@ -173,27 +175,14 @@ namespace JRPGPrototype
                     result.Message = $"Absorbed {heal} HP!";
                     return result;
 
-                default: // Normal
+                default:
                     result.Type = HitType.Normal;
                     result.DamageDealt = damage;
-
-                    // Critical Knockdown Logic (Normal Affinity)
                     if (isCritical)
                     {
-                        if (IsDown)
-                        {
-                            IsDizzy = true;
-                            result.Message = "!!! DIZZY (CRIT) !!!";
-                        }
-                        else if (!IsImmuneToDown && !IsRigidBody)
-                        {
-                            IsDown = true;
-                            result.Message = "CRITICAL HIT! [DOWN]";
-                        }
-                        else
-                        {
-                            result.Message = "CRITICAL HIT!";
-                        }
+                        if (IsDown) { IsDizzy = true; result.Message = "!!! DIZZY (CRIT) !!!"; }
+                        else if (!IsImmuneToDown && !IsRigidBody) { IsDown = true; result.Message = "CRITICAL HIT! [DOWN]"; }
+                        else result.Message = "CRITICAL HIT!";
                     }
                     break;
             }

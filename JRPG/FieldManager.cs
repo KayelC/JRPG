@@ -10,12 +10,14 @@ namespace JRPGPrototype
         private Combatant _player;
         private InventoryManager _inventory;
         private EconomyManager _economy;
+        private ShopManager _shop;
 
         public FieldManager(Combatant player, InventoryManager inventory, EconomyManager economy)
         {
             _player = player;
             _inventory = inventory;
             _economy = economy;
+            _shop = new ShopManager(inventory, economy);
         }
 
         public void NavigateMenus()
@@ -38,6 +40,7 @@ namespace JRPGPrototype
                     Console.WriteLine($"[5] Allocate Stats (0 pts)");
 
                 Console.WriteLine($"[6] Proceed to Battle");
+                Console.WriteLine($"[7] Weapon/Item Shop"); // New Shop Option
                 Console.Write("> ");
 
                 string input = Console.ReadLine();
@@ -53,46 +56,19 @@ namespace JRPGPrototype
                         else Console.WriteLine("No points to allocate.");
                         break;
                     case "6": stayInMenu = false; break;
+                    case "7": _shop.OpenShop(_player); break;
                     default: Console.WriteLine("Invalid selection."); break;
                 }
 
-                if (stayInMenu) { Console.WriteLine("\nPress Enter..."); Console.ReadLine(); }
+                // Don't pause if returning from Shop (7) or Proceeding (6)
+                if (stayInMenu && input != "7")
+                {
+                    Console.WriteLine("\nPress Enter...");
+                    Console.ReadLine();
+                }
             }
         }
 
-        private void ShowStatus()
-        {
-            Console.WriteLine("\n=== STATUS SHEET ===");
-            Console.WriteLine($"Name:  {_player.Name} (Lv.{_player.Level})");
-            Console.WriteLine($"Class: Operator");
-            Console.WriteLine($"EXP:   {_player.Exp}/{_player.ExpRequired}");
-            Console.WriteLine($"HP:    {_player.CurrentHP}/{_player.MaxHP}");
-            Console.WriteLine($"SP:    {_player.CurrentSP}/{_player.MaxSP}");
-            Console.WriteLine($"Cond:  {(_player.CurrentAilment?.Name ?? "Healthy")}");
-            Console.WriteLine($"Wep:   {_player.EquippedWeapon?.Name ?? "Unarmed"}");
-            Console.WriteLine($"Macca: {_economy.Macca}");
-
-            Console.WriteLine("\n--- STATS BREAKDOWN ---");
-            // Helper to get persona stat safely
-            int GetPStat(StatType t) => _player.ActivePersona?.StatModifiers.ContainsKey(t) == true ? _player.ActivePersona.StatModifiers[t] : 0;
-
-            string personaName = _player.ActivePersona?.Name ?? "None";
-            Console.WriteLine($"Persona: {personaName} (Lv.{_player.ActivePersona?.Level ?? 0})");
-            Console.WriteLine("       [Total]   [Base]   [Persona]");
-
-            Console.WriteLine($"STR:   {_player.GetStat(StatType.STR),-9} {_player.CharacterStats[StatType.STR],-8} +{GetPStat(StatType.STR)}");
-            Console.WriteLine($"MAG:   {_player.GetStat(StatType.MAG),-9} {_player.CharacterStats[StatType.MAG],-8} +{GetPStat(StatType.MAG)}");
-            Console.WriteLine($"END:   {_player.GetStat(StatType.END),-9} {_player.CharacterStats[StatType.END],-8} +{GetPStat(StatType.END)}");
-            Console.WriteLine($"AGI:   {_player.GetStat(StatType.AGI),-9} {_player.CharacterStats[StatType.AGI],-8} +{GetPStat(StatType.AGI)}");
-            Console.WriteLine($"LUK:   {_player.GetStat(StatType.LUK),-9} {_player.CharacterStats[StatType.LUK],-8} +{GetPStat(StatType.LUK)}");
-
-            Console.WriteLine("\n--- OPERATOR EXCLUSIVE ---");
-            Console.WriteLine($"INT:   {_player.CharacterStats[StatType.INT]} (Determines MaxSP)");
-            Console.WriteLine($"CHA:   {_player.CharacterStats[StatType.CHA]} (Negotiation)");
-            Console.WriteLine("--------------------------");
-        }
-
-        // --- ITEM LOGIC ---
         private void ShowItemMenu()
         {
             Console.WriteLine("\n--- FIELD ITEM MENU ---");
@@ -186,7 +162,6 @@ namespace JRPGPrototype
             if (used) _inventory.RemoveItem(itemId, 1);
         }
 
-        // --- SKILL LOGIC ---
         private void ShowSkillMenu()
         {
             Console.WriteLine("\n--- FIELD SKILL MENU ---");
@@ -275,7 +250,6 @@ namespace JRPGPrototype
             }
         }
 
-        // --- EQUIPMENT ---
         private void ShowEquipMenu()
         {
             Console.WriteLine("\n--- EQUIPMENT MENU ---");
@@ -308,6 +282,37 @@ namespace JRPGPrototype
                     Console.WriteLine($"Equipped {newWep.Name}!");
                 }
             }
+        }
+
+        private void ShowStatus()
+        {
+            Console.WriteLine("\n=== STATUS SHEET ===");
+            Console.WriteLine($"Name:  {_player.Name} (Lv.{_player.Level})");
+            Console.WriteLine($"Class: Operator");
+            Console.WriteLine($"EXP:   {_player.Exp}/{_player.ExpRequired}");
+            Console.WriteLine($"HP:    {_player.CurrentHP}/{_player.MaxHP}");
+            Console.WriteLine($"SP:    {_player.CurrentSP}/{_player.MaxSP}");
+            Console.WriteLine($"Cond:  {(_player.CurrentAilment?.Name ?? "Healthy")}");
+            Console.WriteLine($"Wep:   {_player.EquippedWeapon?.Name ?? "Unarmed"}");
+            Console.WriteLine($"Macca: {_economy.Macca}");
+
+            Console.WriteLine("\n--- STATS BREAKDOWN ---");
+            int GetPStat(StatType t) => _player.ActivePersona?.StatModifiers.ContainsKey(t) == true ? _player.ActivePersona.StatModifiers[t] : 0;
+
+            string personaName = _player.ActivePersona?.Name ?? "None";
+            Console.WriteLine($"Persona: {personaName} (Lv.{_player.ActivePersona?.Level ?? 0})");
+            Console.WriteLine("       [Total]   [Base]   [Persona]");
+
+            Console.WriteLine($"STR:   {_player.GetStat(StatType.STR),-9} {_player.CharacterStats[StatType.STR],-8} +{GetPStat(StatType.STR)}");
+            Console.WriteLine($"MAG:   {_player.GetStat(StatType.MAG),-9} {_player.CharacterStats[StatType.MAG],-8} +{GetPStat(StatType.MAG)}");
+            Console.WriteLine($"END:   {_player.GetStat(StatType.END),-9} {_player.CharacterStats[StatType.END],-8} +{GetPStat(StatType.END)}");
+            Console.WriteLine($"AGI:   {_player.GetStat(StatType.AGI),-9} {_player.CharacterStats[StatType.AGI],-8} +{GetPStat(StatType.AGI)}");
+            Console.WriteLine($"LUK:   {_player.GetStat(StatType.LUK),-9} {_player.CharacterStats[StatType.LUK],-8} +{GetPStat(StatType.LUK)}");
+
+            Console.WriteLine("\n--- OPERATOR EXCLUSIVE ---");
+            Console.WriteLine($"INT:   {_player.CharacterStats[StatType.INT]} (Determines MaxSP)");
+            Console.WriteLine($"CHA:   {_player.CharacterStats[StatType.CHA]} (Negotiation & Shop Discount)");
+            Console.WriteLine("--------------------------");
         }
     }
 }

@@ -10,10 +10,11 @@ namespace JRPGPrototype
         public static Dictionary<string, SkillData> Skills = new Dictionary<string, SkillData>();
         public static Dictionary<string, PersonaData> Personas = new Dictionary<string, PersonaData>();
         public static Dictionary<string, AilmentData> Ailments = new Dictionary<string, AilmentData>();
-
-        // New Dictionaries
         public static Dictionary<string, WeaponData> Weapons = new Dictionary<string, WeaponData>();
         public static Dictionary<string, ItemData> Items = new Dictionary<string, ItemData>();
+
+        // Unified Shop List
+        public static List<ShopEntry> ShopInventory = new List<ShopEntry>();
 
         public static void LoadData()
         {
@@ -59,6 +60,41 @@ namespace JRPGPrototype
                     foreach (var i in root["items"])
                         if (!Items.ContainsKey(i.Id)) Items.Add(i.Id, i);
                 Console.WriteLine($"[System] Loaded {Items.Count} items.");
+            });
+
+            // 6. Load Shop Inventory
+            LoadFile("shop_inventory.json", (json) => {
+                var root = JsonConvert.DeserializeObject<ShopJsonRoot>(json);
+                ShopInventory.Clear();
+
+                if (root.Items != null)
+                {
+                    foreach (var item in root.Items)
+                    {
+                        ShopInventory.Add(new ShopEntry
+                        {
+                            Id = item.Id,
+                            Name = item.Name,
+                            BasePrice = item.Price,
+                            IsWeapon = false
+                        });
+                    }
+                }
+
+                if (root.Weapons != null)
+                {
+                    foreach (var wep in root.Weapons)
+                    {
+                        ShopInventory.Add(new ShopEntry
+                        {
+                            Id = wep.Id,
+                            Name = wep.Name,
+                            BasePrice = wep.Price,
+                            IsWeapon = true
+                        });
+                    }
+                }
+                Console.WriteLine($"[System] Loaded {ShopInventory.Count} shop entries.");
             });
         }
 

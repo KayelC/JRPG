@@ -1,0 +1,7 @@
+{
+  "accessories": [
+    { "id": "401", "name": "Strength Wristband", "description": "Focuses the wearer's physical might.", "modifierStat": "STR", "modifierValue": 5 },
+    { "id": "402", "name": "Crystal Ring", "description": "Enhances spiritual resonance.", "modifierStat": "MAG", "modifierValue": 5 },
+    { "id": "403", "name": "Lucky Coin", "description": "A charm that seems to sway fate in your favor.", "modifierStat": "LUK", "modifierValue": 10 }
+  ]
+}

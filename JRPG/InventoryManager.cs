@@ -9,8 +9,11 @@ namespace JRPGPrototype
         // Items (ID -> Quantity)
         private Dictionary<string, int> _inventory = new Dictionary<string, int>();
 
-        // Weapons (List of IDs)
+        // Equipment Lists (IDs of owned gear)
         public List<string> OwnedWeapons { get; private set; } = new List<string>();
+        public List<string> OwnedArmor { get; private set; } = new List<string>();
+        public List<string> OwnedBoots { get; private set; } = new List<string>();
+        public List<string> OwnedAccessories { get; private set; } = new List<string>();
 
         // --- Item Management ---
         public void AddItem(string itemId, int quantity)
@@ -23,10 +26,7 @@ namespace JRPGPrototype
             }
         }
 
-        public int GetQuantity(string itemId)
-        {
-            return _inventory.ContainsKey(itemId) ? _inventory[itemId] : 0;
-        }
+        public int GetQuantity(string itemId) => _inventory.ContainsKey(itemId) ? _inventory[itemId] : 0;
 
         public void RemoveItem(string itemId, int quantity)
         {
@@ -40,28 +40,36 @@ namespace JRPGPrototype
 
         public bool HasItem(string itemId) => GetQuantity(itemId) > 0;
 
-        /// <summary>
-        /// Returns all item IDs currently in inventory. Used for Selling/Listing.
-        /// </summary>
-        public List<string> GetAllItemIds()
-        {
-            return _inventory.Keys.ToList();
-        }
+        public List<string> GetAllItemIds() => _inventory.Keys.ToList();
 
-        // --- Weapon Management ---
-        public void AddWeapon(string weaponId)
+        // --- Equipment Management ---
+        public void AddEquipment(string id, ShopCategory category)
         {
-            if (Database.Weapons.ContainsKey(weaponId) && !OwnedWeapons.Contains(weaponId))
+            switch (category)
             {
-                OwnedWeapons.Add(weaponId);
+                case ShopCategory.Weapon:
+                    if (!OwnedWeapons.Contains(id) && Database.Weapons.ContainsKey(id)) OwnedWeapons.Add(id);
+                    break;
+                case ShopCategory.Armor:
+                    if (!OwnedArmor.Contains(id) && Database.Armors.ContainsKey(id)) OwnedArmor.Add(id);
+                    break;
+                case ShopCategory.Boots:
+                    if (!OwnedBoots.Contains(id) && Database.Boots.ContainsKey(id)) OwnedBoots.Add(id);
+                    break;
+                case ShopCategory.Accessory:
+                    if (!OwnedAccessories.Contains(id) && Database.Accessories.ContainsKey(id)) OwnedAccessories.Add(id);
+                    break;
             }
         }
 
-        public void RemoveWeapon(string weaponId)
+        public void RemoveEquipment(string id, ShopCategory category)
         {
-            if (OwnedWeapons.Contains(weaponId))
+            switch (category)
             {
-                OwnedWeapons.Remove(weaponId);
+                case ShopCategory.Weapon: OwnedWeapons.Remove(id); break;
+                case ShopCategory.Armor: OwnedArmor.Remove(id); break;
+                case ShopCategory.Boots: OwnedBoots.Remove(id); break;
+                case ShopCategory.Accessory: OwnedAccessories.Remove(id); break;
             }
         }
     }

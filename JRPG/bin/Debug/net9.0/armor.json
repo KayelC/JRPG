@@ -1,0 +1,7 @@
+{
+  "armor": [
+    { "id": "201", "name": "School Uniform", "description": "Standard attire. Offers negligible protection.", "defense": 5, "evasion": 0 },
+    { "id": "202", "name": "Leather Jacket", "description": "Thick enough to dampen physical impacts.", "defense": 18, "evasion": 2 },
+    { "id": "203", "name": "Liquid Armor", "description": "Experimental tech that hardens upon impact.", "defense": 45, "evasion": 5 }
+  ]
+}

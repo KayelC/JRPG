@@ -32,13 +32,33 @@ namespace JRPGPrototype
         public AilmentData CurrentAilment { get; private set; }
         public int AilmentDuration { get; set; }
 
-        // Buff State (Key: "Attack", "Defense", "Agility" | Value: Turns Remaining)
+        // Buff State
         public Dictionary<string, int> Buffs { get; set; } = new Dictionary<string, int>();
 
-        // Equipment
+        // --- EQUIPMENT SLOTS ---
         public WeaponData EquippedWeapon { get; set; }
+        public ArmorData EquippedArmor { get; set; }
+        public BootData EquippedBoots { get; set; }
+        public AccessoryData EquippedAccessory { get; set; }
+
+        // Computed Properties
         public Element WeaponElement => EquippedWeapon != null ? ElementHelper.FromCategory(EquippedWeapon.Type) : Element.Strike;
         public bool IsLongRange => EquippedWeapon != null && EquippedWeapon.IsLongRange;
+
+        // Derived Stats (From Gear)
+        public int GetDefense()
+        {
+            int def = EquippedArmor != null ? EquippedArmor.Defense : 0;
+            return def;
+        }
+
+        public int GetEvasion()
+        {
+            int eva = 0;
+            if (EquippedArmor != null) eva += EquippedArmor.Evasion;
+            if (EquippedBoots != null) eva += EquippedBoots.Evasion;
+            return eva;
+        }
 
         // Stats
         public Dictionary<StatType, int> CharacterStats { get; set; } = new Dictionary<StatType, int>();
@@ -58,6 +78,15 @@ namespace JRPGPrototype
         {
             int charVal = CharacterStats.ContainsKey(type) ? CharacterStats[type] : 0;
 
+            // 1. Accessory Modifier
+            if (EquippedAccessory != null)
+            {
+                if (Enum.TryParse(EquippedAccessory.ModifierStat, true, out StatType accStat))
+                {
+                    if (accStat == type) charVal += EquippedAccessory.ModifierValue;
+                }
+            }
+
             if (type == StatType.CHA || type == StatType.INT)
                 return charVal;
 
@@ -75,22 +104,21 @@ namespace JRPGPrototype
                 _ => charVal
             };
 
-            // --- BUFF LOGIC ---
-            // SMT Logic: Buffs usually give ~1.2x to 1.4x multiplier
+            // Buff Logic
             if (type == StatType.STR || type == StatType.MAG)
             {
-                if (Buffs.ContainsKey("Attack") && Buffs["Attack"] > 0) finalValue *= 1.4; // Tarukaja
-                if (Buffs.ContainsKey("AttackDown") && Buffs["AttackDown"] > 0) finalValue *= 0.6; // Tarunda
+                if (Buffs.ContainsKey("Attack") && Buffs["Attack"] > 0) finalValue *= 1.4;
+                if (Buffs.ContainsKey("AttackDown") && Buffs["AttackDown"] > 0) finalValue *= 0.6;
             }
             if (type == StatType.END)
             {
-                if (Buffs.ContainsKey("Defense") && Buffs["Defense"] > 0) finalValue *= 1.4; // Rakukaja
-                if (Buffs.ContainsKey("DefenseDown") && Buffs["DefenseDown"] > 0) finalValue *= 0.6; // Rakunda
+                if (Buffs.ContainsKey("Defense") && Buffs["Defense"] > 0) finalValue *= 1.4;
+                if (Buffs.ContainsKey("DefenseDown") && Buffs["DefenseDown"] > 0) finalValue *= 0.6;
             }
             if (type == StatType.AGI)
             {
-                if (Buffs.ContainsKey("Agility") && Buffs["Agility"] > 0) finalValue *= 1.4; // Sukukaja
-                if (Buffs.ContainsKey("AgilityDown") && Buffs["AgilityDown"] > 0) finalValue *= 0.6; // Sukunda
+                if (Buffs.ContainsKey("Agility") && Buffs["Agility"] > 0) finalValue *= 1.4;
+                if (Buffs.ContainsKey("AgilityDown") && Buffs["AgilityDown"] > 0) finalValue *= 0.6;
             }
 
             return (int)Math.Floor(finalValue);
@@ -98,7 +126,7 @@ namespace JRPGPrototype
 
         public void AddBuff(string buffType, int turns)
         {
-            if (Buffs.ContainsKey(buffType)) Buffs[buffType] = Math.Max(Buffs[buffType], turns); // Refresh or Extend
+            if (Buffs.ContainsKey(buffType)) Buffs[buffType] = Math.Max(Buffs[buffType], turns);
             else Buffs[buffType] = turns;
         }
 
@@ -129,7 +157,6 @@ namespace JRPGPrototype
             if (CurrentHP <= 0 && !Name.Contains("Shadow")) CurrentHP = 1;
         }
 
-        // --- Progression, Ailment, Damage Logic (Same as before) ---
         public int ExpRequired => (int)(1.5 * Math.Pow(Level, 3));
 
         public void GainExp(int amount)

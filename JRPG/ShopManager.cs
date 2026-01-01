@@ -5,6 +5,9 @@ using System.Threading;
 
 namespace JRPGPrototype
 {
+    // Enum used by FieldManager to tell the shop which section to open
+    public enum ShopType { Weapon, Item, Armor, Boots, Accessory }
+
     public class ShopManager
     {
         private InventoryManager _inventory;
@@ -16,39 +19,37 @@ namespace JRPGPrototype
             _economy = economy;
         }
 
-        /// <summary>
-        /// Opens the Shop Menu.
-        /// </summary>
-        /// <param name="player">The buying entity.</param>
-        /// <param name="isWeaponShop">If true, shows only weapons. If false, shows only items.</param>
-        public void OpenShop(Combatant player, bool isWeaponShop)
+        public void OpenShop(Combatant player, ShopType shopType)
         {
             int shopIndex = 0;
-            string shopType = isWeaponShop ? "WEAPON" : "ITEM";
+            string title = shopType.ToString().ToUpper() + " SHOP";
 
             while (true)
             {
-                string header = $"--- {shopType} SHOP ---\nMacca: {_economy.Macca}";
+                string header = $"--- {title} ---\nMacca: {_economy.Macca}";
                 List<string> options = new List<string> { "Buy", "Sell", "Exit" };
 
                 int choice = MenuUI.RenderMenu(header, options, shopIndex);
 
-                if (choice == -1) return; // Exit
+                if (choice == -1) return;
                 shopIndex = choice;
 
-                if (choice == 0) BuyMenu(player, isWeaponShop);
-                else if (choice == 1) SellMenu(player, isWeaponShop);
+                if (choice == 0) BuyMenu(player, shopType);
+                else if (choice == 1) SellMenu(player, shopType);
                 else return;
             }
         }
 
-        private void BuyMenu(Combatant player, bool isWeaponShop)
+        private void BuyMenu(Combatant player, ShopType shopType)
         {
             int listIndex = 0;
 
-            // Filter Shop Inventory based on Shop Type
+            // Map the FieldManager's ShopType to the Database's ShopCategory
+            ShopCategory targetCategory = MapTypeToCategory(shopType);
+
+            // Filter the unified list based on the new Category property
             var filteredInventory = Database.ShopInventory
-                .Where(e => e.IsWeapon == isWeaponShop)
+                .Where(e => e.Category == targetCategory)
                 .ToList();
 
             if (filteredInventory.Count == 0)
@@ -63,11 +64,10 @@ namespace JRPGPrototype
                 List<string> options = new List<string>();
                 foreach (var entry in filteredInventory)
                 {
-                    string typeLabel = entry.IsWeapon ? "[WEP]" : "[ITM]";
-                    options.Add($"{typeLabel} {entry.Name,-15} {entry.BasePrice,5} M");
+                    options.Add($"{entry.Name,-18} {entry.BasePrice,5} M");
                 }
 
-                string header = $"--- BUY ({(isWeaponShop ? "WEAPONS" : "ITEMS")}) ---\nMacca: {_economy.Macca}";
+                string header = $"--- BUY ({shopType}) ---\nMacca: {_economy.Macca}";
 
                 int idx = MenuUI.RenderMenu(header, options, listIndex, null, (index) =>
                 {
@@ -75,7 +75,7 @@ namespace JRPGPrototype
                     InspectItem(entry, player, true);
                 });
 
-                if (idx == -1) return; // Back
+                if (idx == -1) return;
 
                 listIndex = idx;
                 var selected = filteredInventory[idx];
@@ -85,8 +85,15 @@ namespace JRPGPrototype
                 {
                     if (_economy.SpendMacca(finalPrice))
                     {
-                        if (selected.IsWeapon) _inventory.AddWeapon(selected.Id);
-                        else _inventory.AddItem(selected.Id, 1);
+                        // Add to specific inventory list based on category
+                        switch (selected.Category)
+                        {
+                            case ShopCategory.Weapon: _inventory.AddEquipment(selected.Id, ShopCategory.Weapon); break;
+                            case ShopCategory.Armor: _inventory.AddEquipment(selected.Id, ShopCategory.Armor); break;
+                            case ShopCategory.Boots: _inventory.AddEquipment(selected.Id, ShopCategory.Boots); break;
+                            case ShopCategory.Accessory: _inventory.AddEquipment(selected.Id, ShopCategory.Accessory); break;
+                            case ShopCategory.Item: _inventory.AddItem(selected.Id, 1); break;
+                        }
 
                         Console.WriteLine("\nBought!");
                         Thread.Sleep(500);
@@ -100,9 +107,10 @@ namespace JRPGPrototype
             }
         }
 
-        private void SellMenu(Combatant player, bool isWeaponShop)
+        private void SellMenu(Combatant player, ShopType shopType)
         {
             int listIndex = 0;
+            ShopCategory targetCategory = MapTypeToCategory(shopType);
 
             while (true)
             {
@@ -110,34 +118,68 @@ namespace JRPGPrototype
                 List<string> options = new List<string>();
                 List<bool> disabled = new List<bool>();
 
-                if (isWeaponShop)
+                // Build list based on specific shop type
+                if (targetCategory == ShopCategory.Weapon)
                 {
-                    // Filter Weapons only
                     foreach (var id in _inventory.OwnedWeapons)
                     {
-                        if (Database.Weapons.TryGetValue(id, out var wep))
+                        if (Database.Weapons.TryGetValue(id, out var obj))
                         {
-                            sellables.Add(wep);
-                            bool isEquipped = (player.EquippedWeapon?.Id == id);
-                            string equippedTag = isEquipped ? " [EQUIPPED]" : "";
-                            int price = GetSellPrice(wep.Id, true, player);
-
-                            options.Add($"[WEP] {wep.Name,-15}{equippedTag} ({price} M)");
-                            disabled.Add(isEquipped);
+                            sellables.Add(obj);
+                            bool equipped = player.EquippedWeapon?.Id == id;
+                            options.Add($"{obj.Name,-15}{(equipped ? "[E]" : "")} ({GetSellPrice(obj.Id, targetCategory, player)} M)");
+                            disabled.Add(equipped);
                         }
                     }
                 }
-                else
+                else if (targetCategory == ShopCategory.Armor)
                 {
-                    // Filter Items only
+                    foreach (var id in _inventory.OwnedArmor)
+                    {
+                        if (Database.Armors.TryGetValue(id, out var obj))
+                        {
+                            sellables.Add(obj);
+                            bool equipped = player.EquippedArmor?.Id == id;
+                            options.Add($"{obj.Name,-15}{(equipped ? "[E]" : "")} ({GetSellPrice(obj.Id, targetCategory, player)} M)");
+                            disabled.Add(equipped);
+                        }
+                    }
+                }
+                else if (targetCategory == ShopCategory.Boots)
+                {
+                    foreach (var id in _inventory.OwnedBoots)
+                    {
+                        if (Database.Boots.TryGetValue(id, out var obj))
+                        {
+                            sellables.Add(obj);
+                            bool equipped = player.EquippedBoots?.Id == id;
+                            options.Add($"{obj.Name,-15}{(equipped ? "[E]" : "")} ({GetSellPrice(obj.Id, targetCategory, player)} M)");
+                            disabled.Add(equipped);
+                        }
+                    }
+                }
+                else if (targetCategory == ShopCategory.Accessory)
+                {
+                    foreach (var id in _inventory.OwnedAccessories)
+                    {
+                        if (Database.Accessories.TryGetValue(id, out var obj))
+                        {
+                            sellables.Add(obj);
+                            bool equipped = player.EquippedAccessory?.Id == id;
+                            options.Add($"{obj.Name,-15}{(equipped ? "[E]" : "")} ({GetSellPrice(obj.Id, targetCategory, player)} M)");
+                            disabled.Add(equipped);
+                        }
+                    }
+                }
+                else // Items
+                {
                     foreach (var id in _inventory.GetAllItemIds())
                     {
-                        if (Database.Items.TryGetValue(id, out var item))
+                        if (Database.Items.TryGetValue(id, out var obj))
                         {
-                            sellables.Add(item);
+                            sellables.Add(obj);
                             int qty = _inventory.GetQuantity(id);
-                            int price = GetSellPrice(item.Id, false, player);
-                            options.Add($"[ITM] {item.Name,-15} x{qty} ({price} M)");
+                            options.Add($"{obj.Name,-15} x{qty} ({GetSellPrice(obj.Id, targetCategory, player)} M)");
                             disabled.Add(false);
                         }
                     }
@@ -152,7 +194,7 @@ namespace JRPGPrototype
 
                 if (listIndex >= sellables.Count) listIndex = Math.Max(0, sellables.Count - 1);
 
-                string header = $"--- SELL ({(isWeaponShop ? "WEAPONS" : "ITEMS")}) ---\nMacca: {_economy.Macca}";
+                string header = $"--- SELL ({shopType}) ---\nMacca: {_economy.Macca}";
 
                 int idx = MenuUI.RenderMenu(header, options, listIndex, disabled, (index) =>
                 {
@@ -162,21 +204,45 @@ namespace JRPGPrototype
                 if (idx == -1) return;
 
                 listIndex = idx;
-                var obj = sellables[idx];
+                var selectedObj = sellables[idx];
 
-                if (obj is WeaponData w)
+                // Sell Execution
+                string sellId = "";
+                if (selectedObj is WeaponData w) sellId = w.Id;
+                if (selectedObj is ArmorData a) sellId = a.Id;
+                if (selectedObj is BootData b) sellId = b.Id;
+                if (selectedObj is AccessoryData acc) sellId = acc.Id;
+                if (selectedObj is ItemData i) sellId = i.Id;
+
+                if (targetCategory == ShopCategory.Item)
                 {
-                    _inventory.RemoveWeapon(w.Id);
-                    _economy.AddMacca(GetSellPrice(w.Id, true, player));
+                    _inventory.RemoveItem(sellId, 1);
                 }
-                else if (obj is ItemData i)
+                else
                 {
-                    _inventory.RemoveItem(i.Id, 1);
-                    _economy.AddMacca(GetSellPrice(i.Id, false, player));
+                    _inventory.RemoveEquipment(sellId, targetCategory);
                 }
+
+                _economy.AddMacca(GetSellPrice(sellId, targetCategory, player));
+
                 Console.WriteLine("\nSold!");
                 Thread.Sleep(500);
             }
+        }
+
+        // --- HELPERS ---
+
+        private ShopCategory MapTypeToCategory(ShopType type)
+        {
+            return type switch
+            {
+                ShopType.Weapon => ShopCategory.Weapon,
+                ShopType.Item => ShopCategory.Item,
+                ShopType.Armor => ShopCategory.Armor,
+                ShopType.Boots => ShopCategory.Boots,
+                ShopType.Accessory => ShopCategory.Accessory,
+                _ => ShopCategory.Item
+            };
         }
 
         private bool ConfirmPurchase(string name, int price)
@@ -193,9 +259,9 @@ namespace JRPGPrototype
             return (int)(entry.BasePrice * discountMult);
         }
 
-        private int GetSellPrice(string id, bool isWeapon, Combatant player)
+        private int GetSellPrice(string id, ShopCategory cat, Combatant player)
         {
-            var entry = Database.ShopInventory.FirstOrDefault(e => e.Id == id && e.IsWeapon == isWeapon);
+            var entry = Database.ShopInventory.FirstOrDefault(e => e.Id == id && e.Category == cat);
             int basePrice = entry?.BasePrice ?? 100;
 
             int luk = player.GetStat(StatType.LUK);
@@ -206,19 +272,40 @@ namespace JRPGPrototype
         private void InspectItem(ShopEntry entry, Combatant player, bool isBuying)
         {
             string desc = "";
-            if (entry.IsWeapon)
+            string stats = "";
+
+            switch (entry.Category)
             {
-                var w = Database.Weapons[entry.Id];
-                desc = $"Pow: {w.Power} | Acc: {w.Accuracy} | {(w.IsLongRange ? "Ranged" : "Melee")}";
-            }
-            else
-            {
-                var i = Database.Items[entry.Id];
-                desc = i.Description;
+                case ShopCategory.Weapon:
+                    var w = Database.Weapons[entry.Id];
+                    desc = $"Type: {w.Type}";
+                    stats = $"Pow: {w.Power} Acc: {w.Accuracy}";
+                    break;
+                case ShopCategory.Armor:
+                    var a = Database.Armors[entry.Id];
+                    desc = a.Description;
+                    stats = $"DEF: {a.Defense} EVA: {a.Evasion}";
+                    break;
+                case ShopCategory.Boots:
+                    var b = Database.Boots[entry.Id];
+                    desc = b.Description;
+                    stats = $"EVA: {b.Evasion}";
+                    break;
+                case ShopCategory.Accessory:
+                    var acc = Database.Accessories[entry.Id];
+                    desc = acc.Description;
+                    stats = $"{acc.ModifierStat} +{acc.ModifierValue}";
+                    break;
+                case ShopCategory.Item:
+                    var i = Database.Items[entry.Id];
+                    desc = i.Description;
+                    stats = $"Effect: {i.EffectValue}";
+                    break;
             }
 
             int price = isBuying ? GetBuyPrice(entry, player) : 0;
-            Console.WriteLine($"Stats: {desc}");
+            Console.WriteLine($"Info: {desc}");
+            Console.WriteLine($"Stats: {stats}");
             if (isBuying) Console.WriteLine($"Price: {price} M (Base: {entry.BasePrice})");
         }
     }

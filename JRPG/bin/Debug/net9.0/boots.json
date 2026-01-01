@@ -1,0 +1,7 @@
+{
+  "boots": [
+    { "id": "301", "name": "Rubber Soles", "description": "Quiet and flexible. Good for staying light on your feet.", "evasion": 3 },
+    { "id": "302", "name": "Combat Boots", "description": "Heavy-duty grip for stable movement.", "evasion": 8 },
+    { "id": "303", "name": "Hermes Sandals", "description": "Winged footwear that makes the wearer hard to catch.", "evasion": 20 }
+  ]
+}

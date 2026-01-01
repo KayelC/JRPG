@@ -23,5 +23,20 @@
     { "id": "10", "_name": "Long Bow",        "price": 5200 },
     { "id": "15", "_name": "Lance",           "price": 6800 },
     { "id": "23", "_name": "Battle Axe",      "price": 8500 }
+  ],
+  "armor": [
+    { "id": "201", "_name": "School Uniform", "price": 500 },
+    { "id": "202", "_name": "Leather Jacket", "price": 2200 },
+    { "id": "203", "_name": "Liquid Armor", "price": 7500 }
+  ],
+  "boots": [
+    { "id": "301", "_name": "Rubber Soles", "price": 800 },
+    { "id": "302", "_name": "Combat Boots", "price": 2500 },
+    { "id": "303", "_name": "Hermes Sandals", "price": 6000 }
+  ],
+  "accessories": [
+    { "id": "401", "_name": "Strength Wristband", "price": 3000 },
+    { "id": "402", "_name": "Crystal Ring", "price": 3000 },
+    { "id": "403", "_name": "Lucky Coin", "price": 1500 }
   ]
 }

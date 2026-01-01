@@ -14,6 +14,9 @@ namespace JRPGPrototype
         private EconomyManager _eco;
         private Random _rnd = new Random();
 
+        // Used to store the selected skill during menu navigation
+        private string? _selectedSkillName;
+
         private readonly Dictionary<string, string> _effectToAilmentMap = new Dictionary<string, string>
         {
             { "Poisons", "Poison" },
@@ -33,6 +36,51 @@ namespace JRPGPrototype
             _inv = inventory;
             _eco = economy;
         }
+
+        // --- HUD & UI HELPERS ---
+
+        /// <summary>
+        /// Generates the static Battle HUD string.
+        /// Passed to MenuUI as the header so it persists during menu navigation.
+        /// </summary>
+        private string GetBattleStatusString()
+        {
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("=================================================");
+
+            // Enemy Info
+            string eStatus = _e.CurrentAilment != null ? $" [{_e.CurrentAilment.Name}]" : "";
+            if (_e.IsDizzy) eStatus += " [DIZZY]";
+            else if (_e.IsDown) eStatus += " [DOWN]";
+            else if (_e.IsImmuneToDown) eStatus += " [GUARD]";
+            foreach (var b in _e.Buffs) if (b.Value > 0) eStatus += $" [{b.Key}]";
+
+            sb.AppendLine($"ENEMY: {_e.Name.ToUpper()} (Lv.{_e.ActivePersona?.Level}){eStatus}");
+            sb.AppendLine($"HP: {_e.CurrentHP}/{_e.MaxHP}");
+            sb.AppendLine("\n vs\n");
+
+            // Player Info
+            string pStatus = _p.CurrentAilment != null ? $" [{_p.CurrentAilment.Name}]" : "";
+            if (_p.IsDizzy) pStatus += " [DIZZY]";
+            else if (_p.IsDown) pStatus += " [DOWN]";
+            else if (_p.IsImmuneToDown) pStatus += " [GUARD]";
+            foreach (var b in _p.Buffs) if (b.Value > 0) pStatus += $" [{b.Key}]";
+
+            sb.AppendLine($"PLAYER: {_p.Name} [Persona: {_p.ActivePersona?.Name}]{pStatus}");
+            sb.AppendLine($"HP: {_p.CurrentHP}/{_p.MaxHP} | SP: {_p.CurrentSP}/{_p.MaxSP}");
+            sb.AppendLine("=================================================");
+
+            return sb.ToString();
+        }
+
+        // Helper to draw UI during non-interactive phases (AI turn, animations)
+        private void DrawUI()
+        {
+            Console.Clear();
+            Console.WriteLine(GetBattleStatusString());
+        }
+
+        // --- MAIN BATTLE LOGIC ---
 
         public void StartBattle()
         {
@@ -68,9 +116,9 @@ namespace JRPGPrototype
                         active.IsDown = false;
                         Thread.Sleep(1000);
                     }
-
                     if (active.IsImmuneToDown) active.IsImmuneToDown = false;
 
+                    // Rage Check
                     if (active.CurrentAilment?.ActionRestriction == "ForceAttack")
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -88,7 +136,6 @@ namespace JRPGPrototype
                     else
                     {
                         bool getOneMore = playerTurn ? ExecutePlayerTurn() : ExecuteEnemyTurn();
-
                         if (getOneMore && target.CurrentHP > 0)
                         {
                             Console.BackgroundColor = ConsoleColor.DarkBlue;
@@ -100,9 +147,7 @@ namespace JRPGPrototype
                         }
                     }
                 }
-
                 ProcessTurnEnd(active);
-
                 playerTurn = !playerTurn;
                 Thread.Sleep(1200);
             }
@@ -110,6 +155,7 @@ namespace JRPGPrototype
             if (_p.CurrentHP > 0)
             {
                 Console.WriteLine("\n[VICTORY] Shadow Dissipated.");
+
                 int levelDiff = _e.Level - _p.Level;
                 double multiplier = 0.10;
                 if (levelDiff >= 10) multiplier = 1.75;
@@ -119,12 +165,10 @@ namespace JRPGPrototype
 
                 int baseExp = _e.Level * 10;
                 int totalExp = (int)(baseExp * multiplier);
-                int expPerMember = (int)(totalExp);
 
-                Console.WriteLine($"EXP Gained: {expPerMember} (Mult: x{multiplier})");
-
-                _p.GainExp(expPerMember);
-                if (_p.ActivePersona != null) _p.ActivePersona.GainExp(expPerMember);
+                Console.WriteLine($"EXP Gained: {totalExp} (Mult: x{multiplier})");
+                _p.GainExp(totalExp);
+                if (_p.ActivePersona != null) _p.ActivePersona.GainExp(totalExp);
 
                 double maccaMod = Math.Clamp(1 + (_e.Level - _p.Level) * 0.04, 0.9, 1.5);
                 int maccaGain = (int)((_e.Level * 40) * maccaMod);
@@ -135,6 +179,8 @@ namespace JRPGPrototype
                 Console.WriteLine("\n[GAMEOVER] The journey ends here...");
             }
         }
+
+        // --- TURN LOGIC & AILMENTS ---
 
         private bool ProcessTurnStart(Combatant c)
         {
@@ -152,22 +198,18 @@ namespace JRPGPrototype
                     if (_rnd.Next(100) < 30) { Console.WriteLine($"\n{c.Name} is paralyzed by Fear!"); act = false; }
                     break;
                 case "ChanceSkip":
-                    if (_rnd.Next(100) < 40) { Console.WriteLine($"\n{c.Name} is Panicking and does nothing!"); act = false; }
+                    if (_rnd.Next(100) < 40) { Console.WriteLine($"\n{c.Name} is Panicking!"); act = false; }
                     break;
                 case "ConfusedAction":
                     Console.WriteLine($"\n{c.Name} is Charmed!");
                     if (_rnd.Next(100) < 50)
                     {
                         Console.WriteLine("...and heals the enemy!");
-                        Combatant foe = (c == _p) ? _e : _p;
-                        foe.CurrentHP = Math.Min(foe.MaxHP, foe.CurrentHP + 50);
-                        act = false;
+                        Combatant foe = (c == _p) ? _e : _p; foe.CurrentHP = Math.Min(foe.MaxHP, foe.CurrentHP + 50); act = false;
                     }
                     else
                     {
-                        Console.WriteLine("...and attacks themselves!");
-                        PerformMove(c, c, "Attack", 20, c.WeaponElement);
-                        act = false;
+                        Console.WriteLine("...and attacks themselves!"); PerformMove(c, c, "Attack", 20, c.WeaponElement); act = false;
                     }
                     break;
             }
@@ -177,17 +219,12 @@ namespace JRPGPrototype
 
         private void ProcessTurnEnd(Combatant c)
         {
-            // Tick Buffs
             c.TickBuffs();
-
             if (c.CurrentAilment == null) return;
             if (c.CurrentAilment.DotPercent > 0)
             {
-                int dmg = (int)(c.MaxHP * c.CurrentAilment.DotPercent);
-                c.CurrentHP = Math.Max(1, c.CurrentHP - dmg);
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine($"\n{c.Name} takes {dmg} damage from {c.CurrentAilment.Name}.");
-                Console.ResetColor();
+                int dmg = (int)(c.MaxHP * c.CurrentAilment.DotPercent); c.CurrentHP = Math.Max(1, c.CurrentHP - dmg);
+                Console.ForegroundColor = ConsoleColor.DarkMagenta; Console.WriteLine($"\n{c.Name} takes {dmg} damage from {c.CurrentAilment.Name}."); Console.ResetColor();
             }
             c.AilmentDuration--;
             if (c.AilmentDuration <= 0)
@@ -197,129 +234,151 @@ namespace JRPGPrototype
             }
         }
 
-        private void DrawUI()
-        {
-            Console.Clear();
-            Console.WriteLine("=================================================");
-            Console.ForegroundColor = ConsoleColor.Red;
-            string eStatus = _e.CurrentAilment != null ? $" [{_e.CurrentAilment.Name}]" : "";
-            if (_e.IsDizzy) eStatus += " [DIZZY]";
-            else if (_e.IsDown) eStatus += " [DOWN]";
-            else if (_e.IsImmuneToDown) eStatus += " [GUARD]";
-
-            // Show Buffs on Enemy
-            foreach (var b in _e.Buffs) if (b.Value > 0) eStatus += $" [{b.Key}]";
-
-            Console.WriteLine($"{_e.Name.ToUpper()} (Lv.{_e.ActivePersona?.Level}){eStatus}");
-            Console.WriteLine($"HP: {_e.CurrentHP}/{_e.MaxHP}");
-            Console.ResetColor();
-
-            Console.WriteLine("\n vs\n");
-
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            string pStatus = _p.CurrentAilment != null ? $" [{_p.CurrentAilment.Name}]" : "";
-            if (_p.IsDizzy) pStatus += " [DIZZY]";
-            else if (_p.IsDown) pStatus += " [DOWN]";
-            else if (_p.IsImmuneToDown) pStatus += " [GUARD]";
-
-            // Show Buffs on Player
-            foreach (var b in _p.Buffs) if (b.Value > 0) pStatus += $" [{b.Key}]";
-
-            Console.WriteLine($"{_p.Name} [Persona: {_p.ActivePersona?.Name}]{pStatus}");
-            Console.WriteLine($"HP: {_p.CurrentHP}/{_p.MaxHP} | SP: {_p.CurrentSP}/{_p.MaxSP}");
-            Console.ResetColor();
-            Console.WriteLine("=================================================");
-        }
+        // --- PLAYER MENU SYSTEM ---
 
         private bool ExecutePlayerTurn()
         {
             bool isPanicked = _p.CurrentAilment?.Name == "Panic";
+            int menuIndex = 0; // Remembers cursor position
 
             while (true)
             {
-                Console.WriteLine($"\nActions: [1] Skill {(isPanicked ? "(Blocked)" : "")} [2] Attack [3] Item");
-                Console.Write("> ");
-                string choice = Console.ReadLine();
+                // Prepare Menu Options
+                List<string> options = new List<string> { "Attack", "Skill", "Item" };
+                List<bool> disabled = new List<bool> { false, isPanicked, false };
 
-                if (choice == "2")
+                if (isPanicked) options[1] = "Skill (Blocked)";
+
+                string header = GetBattleStatusString() + "\n=== PLAYER TURN ===";
+
+                int choice = MenuUI.RenderMenu(header, options, menuIndex, disabled);
+
+                if (choice != -1) menuIndex = choice; // Persist selection
+
+                if (choice == 0) // Attack
                 {
                     int power = _p.EquippedWeapon?.Power ?? 20;
                     return PerformMove(_p, _e, "Attack", power, _p.WeaponElement);
                 }
-                else if (choice == "3")
+                else if (choice == 1) // Skill
                 {
-                    if (ExecuteItemMenu()) return false;
+                    if (isPanicked) continue;
+                    if (ExecuteSkillMenu())
+                    {
+                        return PerformMoveFromSkill();
+                    }
                 }
-                else if (choice == "1")
+                else if (choice == 2) // Item
                 {
-                    if (isPanicked) { Console.WriteLine("You are Panicking and cannot use skills!"); continue; }
-
-                    var skills = _p.ActivePersona.SkillSet;
-                    for (int i = 0; i < skills.Count; i++)
-                    {
-                        if (Database.Skills.TryGetValue(skills[i], out var s))
-                            Console.WriteLine($"{i + 1}. {skills[i]} ({s.Cost}) - {s.Effect}");
-                    }
-                    Console.Write("Select Skill # (or 'b' for back): ");
-                    string input = Console.ReadLine();
-                    if (input.ToLower() == "b") continue;
-
-                    if (int.TryParse(input, out int idx) && idx > 0 && idx <= skills.Count)
-                    {
-                        string sName = skills[idx - 1];
-                        if (Database.Skills.TryGetValue(sName, out var sData))
-                        {
-                            var cost = sData.ParseCost();
-                            if (cost.isHP) { if (_p.CurrentHP > cost.value) _p.CurrentHP -= cost.value; else { Console.WriteLine("Not enough HP!"); continue; } }
-                            else { if (_p.CurrentSP >= cost.value) _p.CurrentSP -= cost.value; else { Console.WriteLine("Not enough SP!"); continue; } }
-
-                            _e.CheckCure(sData.Effect);
-                            _p.CheckCure(sData.Effect);
-
-                            return PerformMove(_p, _e, sName, sData.GetPowerVal(), ElementHelper.FromCategory(sData.Category));
-                        }
-                    }
-                    Console.WriteLine("Invalid selection.");
+                    if (ExecuteItemMenu()) return false; // Used item, turn ends
                 }
             }
+        }
+
+        private bool ExecuteSkillMenu()
+        {
+            var skills = _p.ActivePersona.SkillSet;
+            if (skills.Count == 0) return false;
+
+            List<string> options = new List<string>();
+            List<bool> disabled = new List<bool>();
+
+            // Build list with visual clarity (Cost + Greying out)
+            foreach (var s in skills)
+            {
+                string label = s;
+                bool cannotAfford = false;
+
+                if (Database.Skills.TryGetValue(s, out var data))
+                {
+                    label = $"{s,-15} ({data.Cost})";
+                    var cost = data.ParseCost();
+                    if ((cost.isHP && _p.CurrentHP <= cost.value) || (!cost.isHP && _p.CurrentSP < cost.value))
+                    {
+                        cannotAfford = true;
+                    }
+                }
+                options.Add(label);
+                disabled.Add(cannotAfford);
+            }
+
+            // Render Skill Menu
+            string header = GetBattleStatusString() + "\n=== SKILLS ===";
+            int idx = MenuUI.RenderMenu(header, options, 0, disabled, (index) =>
+            {
+                // Footer: Skill Description
+                string sName = skills[index];
+                if (Database.Skills.TryGetValue(sName, out var d))
+                    Console.WriteLine($"Effect: {d.Effect}\nPower: {d.Power} | Acc: {d.Accuracy}");
+            });
+
+            if (idx != -1)
+            {
+                _selectedSkillName = skills[idx];
+                return true;
+            }
+            return false;
+        }
+
+        private bool PerformMoveFromSkill()
+        {
+            if (string.IsNullOrEmpty(_selectedSkillName)) return false;
+
+            if (Database.Skills.TryGetValue(_selectedSkillName, out var sData))
+            {
+                // Pay Cost
+                var cost = sData.ParseCost();
+                if (cost.isHP) _p.CurrentHP -= cost.value; else _p.CurrentSP -= cost.value;
+
+                _e.CheckCure(sData.Effect);
+                _p.CheckCure(sData.Effect);
+
+                return PerformMove(_p, _e, _selectedSkillName, sData.GetPowerVal(), ElementHelper.FromCategory(sData.Category));
+            }
+            return false;
         }
 
         private bool ExecuteItemMenu()
         {
             var usableItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
-
             if (usableItems.Count == 0)
             {
                 Console.WriteLine("Inventory is empty!");
+                Thread.Sleep(800);
                 return false;
             }
 
-            Console.WriteLine("\n--- INVENTORY ---");
-            for (int i = 0; i < usableItems.Count; i++)
+            List<string> options = new List<string>();
+            foreach (var item in usableItems)
             {
-                Console.WriteLine($"{i + 1}. {usableItems[i].Name} x{_inv.GetQuantity(usableItems[i].Id)}");
+                options.Add($"{item.Name} x{_inv.GetQuantity(item.Id)}");
             }
 
-            Console.Write("Select Item # (or 'b' for back): ");
-            string input = Console.ReadLine();
-            if (input.ToLower() == "b") return false;
-
-            if (int.TryParse(input, out int idx) && idx > 0 && idx <= usableItems.Count)
+            string header = GetBattleStatusString() + "\n=== ITEMS ===";
+            int idx = MenuUI.RenderMenu(header, options, 0, null, (index) =>
             {
-                ItemData selectedItem = usableItems[idx - 1];
+                Console.WriteLine($"Description: {usableItems[index].Description}");
+            });
+
+            if (idx != -1)
+            {
+                ItemData selectedItem = usableItems[idx];
                 if (PerformItem(selectedItem, _p))
                 {
                     _inv.RemoveItem(selectedItem.Id, 1);
                     return true;
                 }
+                else Thread.Sleep(1000);
             }
             return false;
         }
 
+        // --- ACTION EXECUTION ---
+
         private bool PerformItem(ItemData item, Combatant target)
         {
             Console.WriteLine($"\n[ITEM] {_p.Name} uses {item.Name}...");
-
+            bool used = false;
             switch (item.Type)
             {
                 case "Healing":
@@ -328,20 +387,19 @@ namespace JRPGPrototype
                     int oldHp = target.CurrentHP;
                     target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
                     Console.WriteLine($"-> Restored {target.CurrentHP - oldHp} HP.");
-                    return true;
-
+                    used = true;
+                    break;
                 case "Spirit":
                     int spHeal = item.EffectValue;
                     int oldSp = target.CurrentSP;
                     target.CurrentSP = Math.Min(target.MaxSP, target.CurrentSP + spHeal);
                     Console.WriteLine($"-> Restored {target.CurrentSP - oldSp} SP.");
-                    return true;
-
+                    used = true;
+                    break;
                 case "Revive":
                     if (target.CurrentHP > 0)
                     {
                         Console.WriteLine("-> No effect! Target is alive.");
-                        return false;
                     }
                     else
                     {
@@ -350,38 +408,47 @@ namespace JRPGPrototype
                         target.IsDown = false;
                         target.IsDizzy = false;
                         Console.WriteLine($"-> {target.Name} revived with {target.CurrentHP} HP!");
-                        return true;
+                        used = true;
                     }
-
+                    break;
                 case "Cure":
                     if (target.CurrentAilment == null)
                     {
                         Console.WriteLine("-> No effect! Target healthy.");
-                        return false;
                     }
-                    bool cured = false;
-                    if (item.Name == "Dis-Poison" && target.CurrentAilment.Name == "Poison")
+                    else
                     {
-                        target.RemoveAilment();
-                        cured = true;
+                        bool cured = false;
+                        if (item.Name == "Dis-Poison" && target.CurrentAilment.Name == "Poison")
+                        {
+                            target.RemoveAilment();
+                            cured = true;
+                        }
+                        else if (item.Name == "Patra Card")
+                        {
+                            if (target.CheckCure("Cure All")) cured = true;
+                        }
+                        if (cured)
+                        {
+                            Console.WriteLine($"-> Cured!");
+                            used = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("-> No effect on this ailment.");
+                        }
                     }
-                    else if (item.Name == "Patra Card")
-                    {
-                        if (target.CheckCure("Cure All")) cured = true;
-                    }
-
-                    if (cured) { Console.WriteLine($"-> Cured!"); return true; }
-                    else { Console.WriteLine("-> No effect on this ailment."); return false; }
-
+                    break;
                 case "Barrier":
                 case "Utility":
                     Console.WriteLine($"-> {item.Name} used! (Placeholder effect)");
-                    return true;
-
+                    used = true;
+                    break;
                 default:
                     Console.WriteLine("-> Effect not implemented.");
-                    return false;
+                    break;
             }
+            return used;
         }
 
         private bool ExecuteEnemyTurn()
@@ -396,136 +463,107 @@ namespace JRPGPrototype
                 _e.CheckCure(sData.Effect);
                 return PerformMove(_e, _p, sName, sData.GetPowerVal(), ElementHelper.FromCategory(sData.Category));
             }
-            int power = _e.EquippedWeapon?.Power ?? 25;
-            return PerformMove(_e, _p, "Attack", power, _e.WeaponElement);
+            return PerformMove(_e, _p, "Attack", _e.EquippedWeapon?.Power ?? 25, _e.WeaponElement);
         }
 
         private bool PerformMove(Combatant user, Combatant target, string name, int power, Element elem)
         {
             Console.WriteLine($"\n{user.Name} invokes {name}!");
 
-            string category = "Physical"; // Default for Attack
-            if (Database.Skills.TryGetValue(name, out var skillData)) category = skillData.Category;
+            string category = "Physical";
+            if (Database.Skills.TryGetValue(name, out var skillDataVal)) category = skillDataVal.Category;
 
-            // --- BRANCH 1: RECOVERY SKILLS ---
+            // RECOVERY
             if (category.Contains("Recovery"))
             {
-                // In 1v1, user always heals self
-                int heal = power;
-                if (heal == 0) heal = 50; // Fallback for Dia if JSON Power is 0/null
-
-                int oldHp = user.CurrentHP;
-                user.CurrentHP = Math.Min(user.MaxHP, user.CurrentHP + heal);
-                Console.WriteLine($"-> {user.Name} restored {user.CurrentHP - oldHp} HP to themselves!");
-                return false; // No One More
+                int h = power == 0 ? 50 : power;
+                int old = user.CurrentHP;
+                user.CurrentHP = Math.Min(user.MaxHP, user.CurrentHP + h);
+                Console.WriteLine($"-> Restored {user.CurrentHP - old} HP.");
+                return false;
             }
-
-            // --- BRANCH 2: ENHANCE SKILLS (Buffs/Debuffs) ---
+            // ENHANCE
             if (category.Contains("Enhance"))
             {
-                // Simplified Buff Logic based on Name string
-                if (name.Contains("Taru")) // Tarukaja / Matarukaja
+                if (name.Contains("Taru"))
                 {
                     if (name.Contains("nda")) { target.AddBuff("AttackDown", 3); Console.WriteLine($"-> {target.Name}'s Attack decreased!"); }
                     else { user.AddBuff("Attack", 3); Console.WriteLine($"-> {user.Name}'s Attack increased!"); }
                 }
-                else if (name.Contains("Raku")) // Rakukaja / Rakunda
+                else if (name.Contains("Raku"))
                 {
                     if (name.Contains("nda")) { target.AddBuff("DefenseDown", 3); Console.WriteLine($"-> {target.Name}'s Defense decreased!"); }
                     else { user.AddBuff("Defense", 3); Console.WriteLine($"-> {user.Name}'s Defense increased!"); }
                 }
-                else if (name.Contains("Suku")) // Sukukaja / Sukunda
+                else if (name.Contains("Suku"))
                 {
                     if (name.Contains("nda")) { target.AddBuff("AgilityDown", 3); Console.WriteLine($"-> {target.Name}'s Agility decreased!"); }
                     else { user.AddBuff("Agility", 3); Console.WriteLine($"-> {user.Name}'s Agility increased!"); }
                 }
-                else if (name.Contains("Charge")) // Power/Mind Charge
-                {
-                    Console.WriteLine("-> Focused energy! (Next attack boosted - logic pending)");
-                }
-                else
-                {
-                    Console.WriteLine("-> Effect applied.");
-                }
-                return false; // No One More
+                else Console.WriteLine("-> Effect applied.");
+                return false;
             }
 
-            // --- BRANCH 3: OFFENSIVE (Damage) ---
+            // ATTACK
             int baseAcc = 95;
             if (name == "Attack" && user.EquippedWeapon != null) baseAcc = user.EquippedWeapon.Accuracy;
             else if (Database.Skills.TryGetValue(name, out var sd)) int.TryParse(sd.Accuracy?.Replace("%", ""), out baseAcc);
-
             if (user.IsLongRange) baseAcc -= 20;
 
-            double tEvasionMult = target.CurrentAilment?.EvasionMult ?? 1.0;
-            if (target.IsDown || target.IsDizzy || target.IsRigidBody) tEvasionMult = 0.0;
-
-            int uAgi = user.GetStat(StatType.AGI);
-            int tAgi = (int)(target.GetStat(StatType.AGI) * tEvasionMult);
-            int finalHit = Math.Clamp(baseAcc + (uAgi - tAgi), 5, 99);
-            if (tEvasionMult == 0.0) finalHit = 100;
+            double tEvasion = target.CurrentAilment?.EvasionMult ?? 1.0;
+            if (target.IsDown || target.IsDizzy || target.IsRigidBody) tEvasion = 0.0;
+            int finalHit = Math.Clamp(baseAcc + (user.GetStat(StatType.AGI) - (int)(target.GetStat(StatType.AGI) * tEvasion)), 5, 99);
+            if (tEvasion == 0.0) finalHit = 100;
 
             if (_rnd.Next(1, 101) > finalHit)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"-> MISS! {target.Name} evaded the attack.");
+                Console.WriteLine("-> MISS!");
                 Console.ResetColor();
-                if (!user.IsLongRange && (elem == Element.Slash || elem == Element.Strike || elem == Element.Pierce))
+                if (!user.IsLongRange && (elem <= Element.Pierce))
                 {
-                    Console.WriteLine($"-> {user.Name} overextended and fell! [DOWN]");
+                    Console.WriteLine("-> Fell down!");
                     user.IsDown = true;
                 }
                 return false;
             }
 
-            bool isPhysical = (elem == Element.Slash || elem == Element.Strike || elem == Element.Pierce);
-            bool isCritical = false;
-
-            if (isPhysical)
+            bool isPhys = (elem <= Element.Pierce);
+            bool isCrit = false;
+            if (isPhys)
             {
-                int critChance = (user.GetStat(StatType.LUK) - target.GetStat(StatType.LUK)) + 5;
-                if (target.CurrentAilment?.Name == "Freeze" || target.CurrentAilment?.Name == "Shock") critChance = 100;
-                else if (target.CurrentAilment?.Name == "Distress") critChance += 50;
-
-                if (_rnd.Next(1, 101) <= critChance) isCritical = true;
+                int critC = (user.GetStat(StatType.LUK) - target.GetStat(StatType.LUK)) + 5;
+                if (target.CurrentAilment?.Name == "Freeze" || target.CurrentAilment?.Name == "Shock") critC = 100;
+                if (_rnd.Next(1, 101) <= critC) isCrit = true;
             }
 
-            int atk = isPhysical ? user.GetStat(StatType.STR) : user.GetStat(StatType.MAG);
+            int atk = isPhys ? user.GetStat(StatType.STR) : user.GetStat(StatType.MAG);
             int def = target.GetStat(StatType.END);
-
             if (user.CurrentAilment != null) atk = (int)(atk * user.CurrentAilment.DamageDealMult);
             if (target.IsDown || target.IsDizzy) def = (int)(def * 0.5);
 
             double dmgBase = Math.Sqrt(power) * ((double)atk / Math.Max(1, def)) * 7;
             if (target.CurrentAilment != null) dmgBase *= target.CurrentAilment.DamageTakenMult;
-
             int damage = (int)(dmgBase * (0.95 + _rnd.NextDouble() * 0.1));
 
-            bool wasAlreadyDown = target.IsDown;
-            var res = target.ReceiveDamage(damage, elem, isCritical);
-
+            bool wasDown = target.IsDown;
+            var res = target.ReceiveDamage(damage, elem, isCrit);
             Console.WriteLine($"{target.Name} takes {res.DamageDealt} {elem} dmg. {res.Message}");
 
-            // Infliction Logic
-            if (Database.Skills.TryGetValue(name, out var sDataInflict))
+            // Infliction
+            if (Database.Skills.TryGetValue(name, out var sInf))
             {
                 foreach (var kvp in _effectToAilmentMap)
                 {
-                    if (sDataInflict.Effect.Contains(kvp.Key))
+                    if (sInf.Effect.Contains(kvp.Key))
                     {
-                        if (Database.Ailments.TryGetValue(kvp.Value, out var ailmentData))
+                        if (Database.Ailments.TryGetValue(kvp.Value, out var aData))
                         {
-                            int chance = 100;
-                            var matchChance = Regex.Match(sDataInflict.Effect, @"\((\d+)% chance\)");
-                            if (matchChance.Success) int.TryParse(matchChance.Groups[1].Value, out chance);
-
-                            if (_rnd.Next(100) < chance)
+                            if (_rnd.Next(100) < 40)
                             {
-                                if (target.InflictAilment(ailmentData, 3))
+                                if (target.InflictAilment(aData))
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Magenta;
-                                    Console.WriteLine($"-> {target.Name} is afflicted with {ailmentData.Name}!");
-                                    Console.ResetColor();
+                                    Console.WriteLine($"-> Afflicted {aData.Name}!");
                                 }
                             }
                         }
@@ -533,22 +571,9 @@ namespace JRPGPrototype
                 }
             }
 
-            bool hitCondition = (res.Type == HitType.Weakness || res.IsCritical);
-            bool immunityBlock = target.IsImmuneToDown;
-            bool userAfflictedBlock = (user.CurrentAilment != null);
-            bool loopCheck = target.IsRigidBody || !wasAlreadyDown;
-
-            if (hitCondition && !immunityBlock && loopCheck)
-            {
-                if (userAfflictedBlock)
-                {
-                    Console.WriteLine($"-> {user.Name} hit a vulnerable spot, but {user.CurrentAilment.Name} prevented a One More!");
-                    return false;
-                }
-                return true;
-            }
-
-            return false;
+            bool canOneMore = (res.Type == HitType.Weakness || res.IsCritical) && !target.IsImmuneToDown && (target.IsRigidBody || !wasDown);
+            if (user.CurrentAilment != null && canOneMore) return false;
+            return canOneMore;
         }
     }
 }

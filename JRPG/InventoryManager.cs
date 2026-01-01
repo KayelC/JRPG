@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JRPGPrototype
 {
@@ -39,12 +40,28 @@ namespace JRPGPrototype
 
         public bool HasItem(string itemId) => GetQuantity(itemId) > 0;
 
+        /// <summary>
+        /// Returns all item IDs currently in inventory. Used for Selling/Listing.
+        /// </summary>
+        public List<string> GetAllItemIds()
+        {
+            return _inventory.Keys.ToList();
+        }
+
         // --- Weapon Management ---
         public void AddWeapon(string weaponId)
         {
             if (Database.Weapons.ContainsKey(weaponId) && !OwnedWeapons.Contains(weaponId))
             {
                 OwnedWeapons.Add(weaponId);
+            }
+        }
+
+        public void RemoveWeapon(string weaponId)
+        {
+            if (OwnedWeapons.Contains(weaponId))
+            {
+                OwnedWeapons.Remove(weaponId);
             }
         }
     }

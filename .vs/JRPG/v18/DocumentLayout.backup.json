@@ -112,7 +112,7 @@
               "RelativeDocumentMoniker": "JRPG\\FieldManager.cs",
               "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\FieldManager.cs",
               "RelativeToolTip": "JRPG\\FieldManager.cs",
-              "ViewState": "AgIAAHYBAAAAAAAAAAAcwJUBAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAHYBAAAAAAAAAAAcwJABAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-31T18:14:58.015Z",
               "EditorCaption": ""
@@ -199,8 +199,7 @@
               "RelativeToolTip": "JRPG\\ShopManager.cs",
               "ViewState": "AgIAAL0AAAAAAAAAAAAgwOAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T14:49:52.341Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-01T14:49:52.341Z"
             },
             {
               "$type": "Document",

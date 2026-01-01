@@ -147,7 +147,7 @@ namespace JRPGPrototype
 
             string personaName = _player.ActivePersona?.Name ?? "None";
             Console.WriteLine($"Persona: {personaName}");
-            Console.WriteLine("       [Total]   [Base]   [Persona]");
+            Console.WriteLine("    [Total]   [Base]   ");
 
             Console.WriteLine($"STR:   {_player.GetStat(StatType.STR),-5} (Base: {_player.CharacterStats[StatType.STR]})");
             Console.WriteLine($"MAG:   {_player.GetStat(StatType.MAG),-5} (Base: {_player.CharacterStats[StatType.MAG]})");

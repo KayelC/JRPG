@@ -102,8 +102,7 @@
               "RelativeToolTip": "JRPG\\MenuUI.cs",
               "ViewState": "AgIAAEIAAAAAAAAAAAAAAGMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T15:45:50.208Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-01T15:45:50.208Z"
             },
             {
               "$type": "Document",
@@ -113,7 +112,7 @@
               "RelativeDocumentMoniker": "JRPG\\FieldManager.cs",
               "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\FieldManager.cs",
               "RelativeToolTip": "JRPG\\FieldManager.cs",
-              "ViewState": "AgIAAOkAAAAAAAAAAAAswAkBAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAHcBAAAAAAAAAAAowJcBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-31T18:14:58.015Z",
               "EditorCaption": ""
@@ -140,8 +139,7 @@
               "RelativeToolTip": "JRPG\\StatAllocationModule.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T19:45:56.493Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-31T19:45:56.493Z"
             },
             {
               "$type": "Document",
@@ -165,8 +163,7 @@
               "RelativeToolTip": "JRPG\\BattleManager.cs",
               "ViewState": "AgIAABYCAAAAAAAAAAAQwCoCAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T07:52:52.809Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-31T07:52:52.809Z"
             },
             {
               "$type": "Document",
@@ -190,8 +187,7 @@
               "RelativeToolTip": "JRPG\\InventoryManager.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAAwEMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T14:36:59.492Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-31T14:36:59.492Z"
             },
             {
               "$type": "Document",
@@ -203,8 +199,7 @@
               "RelativeToolTip": "JRPG\\ShopManager.cs",
               "ViewState": "AgIAAJ0AAAAAAAAAAAAgwMQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T14:49:52.341Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-01T14:49:52.341Z"
             },
             {
               "$type": "Document",

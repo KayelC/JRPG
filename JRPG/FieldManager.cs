@@ -15,9 +15,11 @@ namespace JRPGPrototype
 
         // Persistent Cursors for Menu Hierarchies
         private int _mainMenuIndex = 0;
-        private int _inventoryMenuIndex = 0;
         private int _statusMenuIndex = 0;
-        private int _cityMenuIndex = 0;
+        private int _inventoryMenuIndex = 0;
+        private int _itemMenuIndex = 0;
+        private int _skillMenuIndex = 0;
+        private int _equipMenuIndex = 0;
 
         public FieldManager(Combatant player, InventoryManager inventory, EconomyManager economy)
         {
@@ -31,60 +33,70 @@ namespace JRPGPrototype
         {
             while (true)
             {
-                string header = $"=== FIELD MENU ===\nMacca: {_economy.Macca}\nHP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
-
-                // Main Menu Options
-                List<string> options = new List<string> { "Inventory", "Status", "City" };
-
-                if (_player.StatPoints > 0)
-                    options.Add($"Allocate Stats ({_player.StatPoints} pts)");
-                else
-                    options.Add("Allocate Stats (0 pts)");
-
-                options.Add("Proceed to Battle");
+                // 1. Main Menu Consolidation
+                string header = $"=== FIELD MENU ===\nLocation: Tokyo Overworld\nMacca: {_economy.Macca}";
+                List<string> options = new List<string>
+                {
+                    "City",         // 0
+                    "Inventory",    // 1
+                    "Status",       // 2
+                    "Proceed to Battle" // 3
+                };
 
                 int choice = MenuUI.RenderMenu(header, options, _mainMenuIndex);
 
-                if (choice != -1) _mainMenuIndex = choice;
+                if (choice == -1)
+                {
+                    // Root level escape: Do nothing or confirm exit (keeping it loop for now)
+                    continue;
+                }
 
-                // Handle Selections
+                _mainMenuIndex = choice;
+
                 switch (choice)
                 {
-                    case 0: OpenInventoryMenu(); break; // New Sub-Menu
-                    case 1: OpenStatusMenu(); break;    // New Sub-Menu
-                    case 2: OpenCityMenu(); break;      // New Sub-Menu
-                    case 3: // Allocate Stats
-                        if (_player.StatPoints > 0) StatAllocationModule.OpenMenu(_player);
-                        else
-                        {
-                            Console.WriteLine("No points to allocate.");
-                            Thread.Sleep(500);
-                        }
-                        break;
-                    case 4: return; // Proceed
-                    case -1: // Escape handling (Root Level)
-                        // Do nothing, just loop (effectively ignores Escape at root)
-                        break;
+                    case 0: OpenCityMenu(); break;
+                    case 1: OpenInventoryMenu(); break;
+                    case 2: OpenStatusMenu(); break;
+                    case 3: return; // Triggers Battle in Program.cs
                 }
             }
         }
 
-        // --- SUB-MENU LAYERS ---
+        // --- SUB-MENU: CITY ---
+        private void OpenCityMenu()
+        {
+            // Rebranded Shop Service
+            // Currently only one option, but structured for expansion
+            int cityIndex = 0;
+            while (true)
+            {
+                string header = $"=== CITY SERVICES ===\nMacca: {_economy.Macca}";
+                List<string> options = new List<string> { "Weapon & Item Shop" };
 
+                int cityChoice = MenuUI.RenderMenu(header, options, cityIndex);
+
+                if (cityChoice == -1) return; // Back to Main
+                cityIndex = cityChoice;
+
+                if (cityChoice == 0) _shop.OpenShop(_player);
+            }
+        }
+
+        // --- SUB-MENU: INVENTORY ---
         private void OpenInventoryMenu()
         {
             while (true)
             {
-                string header = "=== INVENTORY MANAGEMENT ===";
+                string header = "=== INVENTORY ===";
                 List<string> options = new List<string> { "Use Item", "Use Skill", "Equipment" };
 
-                int inventoryChoice = MenuUI.RenderMenu(header, options, _inventoryMenuIndex);
+                int invChoice = MenuUI.RenderMenu(header, options, _inventoryMenuIndex);
 
-                if (inventoryChoice == -1) return; // Back to Main Menu
+                if (invChoice == -1) return; // Back to Main
+                _inventoryMenuIndex = invChoice;
 
-                _inventoryMenuIndex = inventoryChoice; // Persist
-
-                switch (inventoryChoice)
+                switch (invChoice)
                 {
                     case 0: ShowItemMenu(); break;
                     case 1: ShowSkillMenu(); break;
@@ -93,83 +105,65 @@ namespace JRPGPrototype
             }
         }
 
+        // --- SUB-MENU: STATUS TREE ---
         private void OpenStatusMenu()
         {
             while (true)
             {
-                string header = "=== STATUS ===";
-                List<string> options = new List<string> { "Operator Status", "Persona Status" };
+                string header = $"=== STATUS & GROWTH ===\nName: {_player.Name} (Lv.{_player.Level})";
+                List<string> options = new List<string> { "Operator Sheet", "Persona Sheet" };
+
+                // UX Requirement: Only show Allocate if points exist
+                bool canAllocate = _player.StatPoints > 0;
+                if (canAllocate)
+                {
+                    options.Add($"Allocate Stats ({_player.StatPoints} pts)");
+                }
 
                 int statusChoice = MenuUI.RenderMenu(header, options, _statusMenuIndex);
 
-                if (statusChoice == -1) return; // Back to Main Menu
+                if (statusChoice == -1) return; // Back to Main
+                _statusMenuIndex = statusChoice;
 
-                _statusMenuIndex = statusChoice; // Persist
-
-                switch (statusChoice)
+                if (statusChoice == 0) ShowOperatorStatus();
+                else if (statusChoice == 1) ShowPersonaStatus();
+                else if (statusChoice == 2 && canAllocate)
                 {
-                    case 0: ShowOperatorStatus(); break;
-                    case 1: ShowPersonaStatus(); break;
+                    StatAllocationModule.OpenMenu(_player);
                 }
             }
         }
 
-        private void OpenCityMenu()
-        {
-            while (true)
-            {
-                string header = $"=== CITY SERVICES ===\nMacca: {_economy.Macca}";
-                List<string> options = new List<string> { "Weapon/Item Shop" };
-
-                int cityChoice = MenuUI.RenderMenu(header, options, _cityMenuIndex);
-
-                if (cityChoice == -1) return; // Back to Main Menu
-
-                _cityMenuIndex = cityChoice; // Persist
-
-                switch (cityChoice)
-                {
-                    case 0: _shop.OpenShop(_player); break;
-                }
-            }
-        }
-
-        // --- STATUS SCREENS ---
-
+        // --- VIEW: OPERATOR STATUS ---
         private void ShowOperatorStatus()
         {
             Console.Clear();
             Console.WriteLine("\n=== OPERATOR STATUS ===");
             Console.WriteLine($"Name:  {_player.Name} (Lv.{_player.Level})");
-            Console.WriteLine($"Class: Operator");
             Console.WriteLine($"EXP:   {_player.Exp}/{_player.ExpRequired}");
             Console.WriteLine($"HP:    {_player.CurrentHP}/{_player.MaxHP}");
             Console.WriteLine($"SP:    {_player.CurrentSP}/{_player.MaxSP}");
             Console.WriteLine($"Cond:  {(_player.CurrentAilment?.Name ?? "Healthy")}");
             Console.WriteLine($"Wep:   {_player.EquippedWeapon?.Name ?? "Unarmed"}");
-            Console.WriteLine($"Macca: {_economy.Macca}");
 
-            Console.WriteLine("\n--- STATS BREAKDOWN ---");
+            Console.WriteLine("\n--- STATS BREAKDOWN (Base + Persona) ---");
             // Safe accessor for persona stats
             int GetPStat(StatType t) => _player.ActivePersona?.StatModifiers.ContainsKey(t) == true ? _player.ActivePersona.StatModifiers[t] : 0;
 
-            string personaName = _player.ActivePersona?.Name ?? "None";
-            Console.WriteLine($"Persona: {personaName}");
-            Console.WriteLine("       [Total]   [Base]   [Persona]");
-
-            Console.WriteLine($"STR:   {_player.GetStat(StatType.STR),-9} {_player.CharacterStats[StatType.STR],-8} +{GetPStat(StatType.STR)}");
-            Console.WriteLine($"MAG:   {_player.GetStat(StatType.MAG),-9} {_player.CharacterStats[StatType.MAG],-8} +{GetPStat(StatType.MAG)}");
-            Console.WriteLine($"END:   {_player.GetStat(StatType.END),-9} {_player.CharacterStats[StatType.END],-8} +{GetPStat(StatType.END)}");
-            Console.WriteLine($"AGI:   {_player.GetStat(StatType.AGI),-9} {_player.CharacterStats[StatType.AGI],-8} +{GetPStat(StatType.AGI)}");
-            Console.WriteLine($"LUK:   {_player.GetStat(StatType.LUK),-9} {_player.CharacterStats[StatType.LUK],-8} +{GetPStat(StatType.LUK)}");
+            Console.WriteLine($"STR:   {_player.GetStat(StatType.STR),-5} (Base: {_player.CharacterStats[StatType.STR]})");
+            Console.WriteLine($"MAG:   {_player.GetStat(StatType.MAG),-5} (Base: {_player.CharacterStats[StatType.MAG]})");
+            Console.WriteLine($"END:   {_player.GetStat(StatType.END),-5} (Base: {_player.CharacterStats[StatType.END]})");
+            Console.WriteLine($"AGI:   {_player.GetStat(StatType.AGI),-5} (Base: {_player.CharacterStats[StatType.AGI]})");
+            Console.WriteLine($"LUK:   {_player.GetStat(StatType.LUK),-5} (Base: {_player.CharacterStats[StatType.LUK]})");
 
             Console.WriteLine("\n--- OPERATOR EXCLUSIVE ---");
-            Console.WriteLine($"INT:   {_player.CharacterStats[StatType.INT]} (Determines MaxSP)");
-            Console.WriteLine($"CHA:   {_player.CharacterStats[StatType.CHA]} (Negotiation & Shop Discount)");
-            Console.WriteLine("\nPress any key to return...");
+            Console.WriteLine($"INT:   {_player.CharacterStats[StatType.INT]} (Max SP Scaling)");
+            Console.WriteLine($"CHA:   {_player.CharacterStats[StatType.CHA]} (Shop Discount)");
+            Console.WriteLine("\n[ESC] Back");
             Console.ReadKey(true);
         }
 
+        // --- VIEW: PERSONA DEEP DIVE ---
         private void ShowPersonaStatus()
         {
             Console.Clear();
@@ -178,36 +172,38 @@ namespace JRPGPrototype
             if (p == null)
             {
                 Console.WriteLine("\nNo Active Persona equipped.");
-                Console.WriteLine("\nPress any key to return...");
                 Console.ReadKey(true);
                 return;
             }
 
-            Console.WriteLine($"\n=== PERSONA STATUS: {p.Name.ToUpper()} ===");
+            Console.WriteLine($"\n=== PERSONA SHEET: {p.Name.ToUpper()} ===");
             Console.WriteLine($"Level:  {p.Level}");
             Console.WriteLine($"Arcana: {p.Arcana}");
             Console.WriteLine($"EXP:    {p.Exp}/{p.ExpRequired}");
 
-            Console.WriteLine("\n--- STAT MODIFIERS ---");
-            foreach (var kvp in p.StatModifiers)
+            Console.WriteLine("\n--- RAW STATS (Modifiers applied to Operator) ---");
+            // Iterating specifically relevant combat stats
+            var displayStats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
+            foreach (var stat in displayStats)
             {
-                Console.WriteLine($"{kvp.Key,-4}: +{kvp.Value}");
+                int val = p.StatModifiers.ContainsKey(stat) ? p.StatModifiers[stat] : 0;
+                Console.WriteLine($"{stat,-4}: {val,3}");
             }
 
-            Console.WriteLine("\n--- CURRENT SKILL SET ---");
+            Console.WriteLine("\n--- EQUIPPED SKILLS ---");
+            if (p.SkillSet.Count == 0) Console.WriteLine("(None)");
             foreach (var skill in p.SkillSet)
             {
                 string details = "";
                 if (Database.Skills.TryGetValue(skill, out var sData))
                 {
-                    details = $"({sData.Cost}) - {sData.Effect}";
+                    details = $"| {sData.Cost,-5} | {sData.Effect}";
                 }
                 Console.WriteLine($"- {skill,-15} {details}");
             }
 
-            Console.WriteLine("\n--- SKILLS TO LEARN ---");
-            // Filter skills that have a level higher than current level
-            var futureSkills = p.SkillsToLearn.Where(k => k.Key > p.Level).OrderBy(k => k.Key);
+            Console.WriteLine("\n--- POTENTIAL (Future Skills) ---");
+            var futureSkills = p.SkillsToLearn.Where(k => k.Key > p.Level).OrderBy(k => k.Key).ToList();
 
             if (futureSkills.Any())
             {
@@ -218,18 +214,17 @@ namespace JRPGPrototype
             }
             else
             {
-                Console.WriteLine("(No upcoming skills known)");
+                Console.WriteLine("(Mastered)");
             }
 
-            Console.WriteLine("\nPress any key to return...");
+            Console.WriteLine("\n[ESC] Back");
             Console.ReadKey(true);
         }
 
-        // --- FUNCTIONALITY IMPLEMENTATIONS ---
+        // --- INVENTORY LOGIC (Items, Skills, Equip) ---
 
         private void ShowItemMenu()
         {
-            int listIndex = 0;
             while (true)
             {
                 var items = Database.Items.Values.Where(itm => _inventory.GetQuantity(itm.Id) > 0).ToList();
@@ -241,15 +236,16 @@ namespace JRPGPrototype
                     options.Add($"{item.Name} x{_inventory.GetQuantity(item.Id)}");
                 }
 
-                if (listIndex >= options.Count) listIndex = Math.Max(0, options.Count - 1);
+                // Initial index handling
+                if (_itemMenuIndex >= options.Count) _itemMenuIndex = 0;
 
-                int idx = MenuUI.RenderMenu("=== ITEM MENU ===", options, listIndex, null, (index) =>
+                int idx = MenuUI.RenderMenu("=== USE ITEM ===", options, _itemMenuIndex, null, (index) =>
                 {
                     Console.WriteLine($"Effect: {items[index].Description}");
                 });
 
                 if (idx == -1) return;
-                listIndex = idx;
+                _itemMenuIndex = idx;
 
                 UseItemField(items[idx].Id, _player);
             }
@@ -304,7 +300,6 @@ namespace JRPGPrototype
 
         private void ShowSkillMenu()
         {
-            int listIndex = 0;
             while (true)
             {
                 var skills = _player.ActivePersona.SkillSet;
@@ -326,13 +321,15 @@ namespace JRPGPrototype
                     options.Add($"{skillName} ({d.Cost})");
                 }
 
-                int idx = MenuUI.RenderMenu("=== FIELD SKILLS ===", options, listIndex, null, (index) =>
+                if (_skillMenuIndex >= options.Count) _skillMenuIndex = 0;
+
+                int idx = MenuUI.RenderMenu("=== FIELD SKILLS ===", options, _skillMenuIndex, null, (index) =>
                 {
                     Console.WriteLine($"Effect: {Database.Skills[usableSkills[index]].Effect}");
                 });
 
                 if (idx == -1) return;
-                listIndex = idx;
+                _skillMenuIndex = idx;
 
                 UseSkillField(Database.Skills[usableSkills[idx]], _player, _player);
             }
@@ -371,7 +368,6 @@ namespace JRPGPrototype
 
         private void ShowEquipMenu()
         {
-            int listIndex = 0;
             while (true)
             {
                 if (_inventory.OwnedWeapons.Count == 0) { Console.WriteLine("No weapons."); Thread.Sleep(800); return; }
@@ -384,9 +380,9 @@ namespace JRPGPrototype
                     options.Add($"{w.Name}{equipMark}");
                 }
 
-                if (listIndex >= options.Count) listIndex = Math.Max(0, options.Count - 1);
+                if (_equipMenuIndex >= options.Count) _equipMenuIndex = 0;
 
-                int idx = MenuUI.RenderMenu("=== EQUIP WEAPON ===", options, listIndex, null, (index) =>
+                int idx = MenuUI.RenderMenu("=== EQUIP WEAPON ===", options, _equipMenuIndex, null, (index) =>
                 {
                     string wId = _inventory.OwnedWeapons[index];
                     var w = Database.Weapons[wId];
@@ -398,7 +394,7 @@ namespace JRPGPrototype
                 });
 
                 if (idx == -1) return;
-                listIndex = idx;
+                _equipMenuIndex = idx;
 
                 string selectedWeaponId = _inventory.OwnedWeapons[idx];
                 _player.EquippedWeapon = Database.Weapons[selectedWeaponId];

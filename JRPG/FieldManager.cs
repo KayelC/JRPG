@@ -20,6 +20,7 @@ namespace JRPGPrototype
         private int _itemMenuIndex = 0;
         private int _skillMenuIndex = 0;
         private int _equipMenuIndex = 0;
+        private int _cityMenuIndex = 0;
 
         public FieldManager(Combatant player, InventoryManager inventory, EconomyManager economy)
         {
@@ -33,8 +34,9 @@ namespace JRPGPrototype
         {
             while (true)
             {
-                // 1. Main Menu Consolidation
-                string header = $"=== FIELD MENU ===\nLocation: Tokyo Overworld\nMacca: {_economy.Macca}";
+                // Removed Location, Ensured HP/SP are visible
+                string header = $"=== FIELD MENU ===\nMacca: {_economy.Macca}\nHP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
+
                 List<string> options = new List<string>
                 {
                     "City",         // 0
@@ -45,11 +47,7 @@ namespace JRPGPrototype
 
                 int choice = MenuUI.RenderMenu(header, options, _mainMenuIndex);
 
-                if (choice == -1)
-                {
-                    // Root level escape: Do nothing or confirm exit (keeping it loop for now)
-                    continue;
-                }
+                if (choice == -1) continue; // Loop at root
 
                 _mainMenuIndex = choice;
 
@@ -58,7 +56,7 @@ namespace JRPGPrototype
                     case 0: OpenCityMenu(); break;
                     case 1: OpenInventoryMenu(); break;
                     case 2: OpenStatusMenu(); break;
-                    case 3: return; // Triggers Battle in Program.cs
+                    case 3: return; // Proceed to Battle
                 }
             }
         }
@@ -66,20 +64,18 @@ namespace JRPGPrototype
         // --- SUB-MENU: CITY ---
         private void OpenCityMenu()
         {
-            // Rebranded Shop Service
-            // Currently only one option, but structured for expansion
-            int cityIndex = 0;
             while (true)
             {
-                string header = $"=== CITY SERVICES ===\nMacca: {_economy.Macca}";
-                List<string> options = new List<string> { "Weapon & Item Shop" };
+                string header = $"=== CITY SERVICES ===\nMacca: {_economy.Macca}\nHP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
+                List<string> options = new List<string> { "Weapon Shop", "Item Shop" };
 
-                int cityChoice = MenuUI.RenderMenu(header, options, cityIndex);
+                int cityChoice = MenuUI.RenderMenu(header, options, _cityMenuIndex);
 
                 if (cityChoice == -1) return; // Back to Main
-                cityIndex = cityChoice;
+                _cityMenuIndex = cityChoice;
 
-                if (cityChoice == 0) _shop.OpenShop(_player);
+                if (cityChoice == 0) _shop.OpenShop(_player, isWeaponShop: true);
+                else if (cityChoice == 1) _shop.OpenShop(_player, isWeaponShop: false);
             }
         }
 
@@ -88,7 +84,7 @@ namespace JRPGPrototype
         {
             while (true)
             {
-                string header = "=== INVENTORY ===";
+                string header = $"=== INVENTORY ===\nHP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
                 List<string> options = new List<string> { "Use Item", "Use Skill", "Equipment" };
 
                 int invChoice = MenuUI.RenderMenu(header, options, _inventoryMenuIndex);
@@ -113,7 +109,6 @@ namespace JRPGPrototype
                 string header = $"=== STATUS & GROWTH ===\nName: {_player.Name} (Lv.{_player.Level})";
                 List<string> options = new List<string> { "Operator Sheet", "Persona Sheet" };
 
-                // UX Requirement: Only show Allocate if points exist
                 bool canAllocate = _player.StatPoints > 0;
                 if (canAllocate)
                 {
@@ -140,6 +135,7 @@ namespace JRPGPrototype
             Console.Clear();
             Console.WriteLine("\n=== OPERATOR STATUS ===");
             Console.WriteLine($"Name:  {_player.Name} (Lv.{_player.Level})");
+            Console.WriteLine($"Class: Operator");
             Console.WriteLine($"EXP:   {_player.Exp}/{_player.ExpRequired}");
             Console.WriteLine($"HP:    {_player.CurrentHP}/{_player.MaxHP}");
             Console.WriteLine($"SP:    {_player.CurrentSP}/{_player.MaxSP}");
@@ -147,8 +143,11 @@ namespace JRPGPrototype
             Console.WriteLine($"Wep:   {_player.EquippedWeapon?.Name ?? "Unarmed"}");
 
             Console.WriteLine("\n--- STATS BREAKDOWN (Base + Persona) ---");
-            // Safe accessor for persona stats
             int GetPStat(StatType t) => _player.ActivePersona?.StatModifiers.ContainsKey(t) == true ? _player.ActivePersona.StatModifiers[t] : 0;
+
+            string personaName = _player.ActivePersona?.Name ?? "None";
+            Console.WriteLine($"Persona: {personaName}");
+            Console.WriteLine("       [Total]   [Base]   [Persona]");
 
             Console.WriteLine($"STR:   {_player.GetStat(StatType.STR),-5} (Base: {_player.CharacterStats[StatType.STR]})");
             Console.WriteLine($"MAG:   {_player.GetStat(StatType.MAG),-5} (Base: {_player.CharacterStats[StatType.MAG]})");
@@ -157,8 +156,8 @@ namespace JRPGPrototype
             Console.WriteLine($"LUK:   {_player.GetStat(StatType.LUK),-5} (Base: {_player.CharacterStats[StatType.LUK]})");
 
             Console.WriteLine("\n--- OPERATOR EXCLUSIVE ---");
-            Console.WriteLine($"INT:   {_player.CharacterStats[StatType.INT]} (Max SP Scaling)");
-            Console.WriteLine($"CHA:   {_player.CharacterStats[StatType.CHA]} (Shop Discount)");
+            Console.WriteLine($"INT:   {_player.CharacterStats[StatType.INT]} (Determines MaxSP)");
+            Console.WriteLine($"CHA:   {_player.CharacterStats[StatType.CHA]} (Negotiation & Shop Discount)");
             Console.WriteLine("\n[ESC] Back");
             Console.ReadKey(true);
         }
@@ -181,8 +180,7 @@ namespace JRPGPrototype
             Console.WriteLine($"Arcana: {p.Arcana}");
             Console.WriteLine($"EXP:    {p.Exp}/{p.ExpRequired}");
 
-            Console.WriteLine("\n--- RAW STATS (Modifiers applied to Operator) ---");
-            // Iterating specifically relevant combat stats
+            Console.WriteLine("\n--- RAW STATS ---");
             var displayStats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
             foreach (var stat in displayStats)
             {
@@ -236,10 +234,12 @@ namespace JRPGPrototype
                     options.Add($"{item.Name} x{_inventory.GetQuantity(item.Id)}");
                 }
 
-                // Initial index handling
+                // Header now includes HP/SP for real-time tracking
+                string header = $"=== USE ITEM ===\nHP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
+
                 if (_itemMenuIndex >= options.Count) _itemMenuIndex = 0;
 
-                int idx = MenuUI.RenderMenu("=== USE ITEM ===", options, _itemMenuIndex, null, (index) =>
+                int idx = MenuUI.RenderMenu(header, options, _itemMenuIndex, null, (index) =>
                 {
                     Console.WriteLine($"Effect: {items[index].Description}");
                 });
@@ -323,7 +323,9 @@ namespace JRPGPrototype
 
                 if (_skillMenuIndex >= options.Count) _skillMenuIndex = 0;
 
-                int idx = MenuUI.RenderMenu("=== FIELD SKILLS ===", options, _skillMenuIndex, null, (index) =>
+                string header = $"=== FIELD SKILLS ===\nHP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
+
+                int idx = MenuUI.RenderMenu(header, options, _skillMenuIndex, null, (index) =>
                 {
                     Console.WriteLine($"Effect: {Database.Skills[usableSkills[index]].Effect}");
                 });

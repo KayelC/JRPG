@@ -1,0 +1,7064 @@
+[
+  {
+    "Id": "E_orpheus",
+    "PersonaId": "orpheus",
+    "Name": "Orpheus",
+    "Level": 1,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 3,
+      "MAG": 1,
+      "END": 2,
+      "AGI": 3,
+      "LUK": 1
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Agi"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 5,
+    "MaccaYield": 22,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_slime",
+    "PersonaId": "slime",
+    "Name": "Slime",
+    "Level": 12,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 10,
+      "MAG": 6,
+      "END": 14,
+      "AGI": 6,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [
+      "Bash",
+      "Evil Touch",
+      "Raging Tiger"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 267,
+    "MaccaYield": 600,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_arsene",
+    "PersonaId": "arsene",
+    "Name": "Arsene",
+    "Level": 23,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 17,
+      "MAG": 17,
+      "END": 14,
+      "AGI": 18,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [
+      "Eiga",
+      "Fatal End",
+      "Dark Driver"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 1575,
+    "MaccaYield": 1782,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_legion",
+    "PersonaId": "legion",
+    "Name": "Legion",
+    "Level": 26,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 16,
+      "MAG": 14,
+      "END": 26,
+      "AGI": 9,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Light": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Assault Dive",
+      "Pulinpa",
+      "Rebellion"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 2238,
+    "MaccaYield": 2210,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_black-frost",
+    "PersonaId": "black-frost",
+    "Name": "Black Frost",
+    "Level": 37,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 22,
+      "MAG": 34,
+      "END": 23,
+      "AGI": 25,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Fire": "Null",
+      "Ice": "Absorb",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Maeiga",
+      "Bufula",
+      "Matarukaja"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 6263,
+    "MaccaYield": 4162,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_ose",
+    "PersonaId": "ose",
+    "Name": "Ose",
+    "Level": 41,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 32,
+      "MAG": 23,
+      "END": 28,
+      "AGI": 25,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Blade of Fury",
+      "Matarunda",
+      "Multi-Target Boost"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 8474,
+    "MaccaYield": 5022,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_izanagi",
+    "PersonaId": "izanagi",
+    "Name": "Izanagi",
+    "Level": 46,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 31,
+      "MAG": 30,
+      "END": 25,
+      "AGI": 31,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Cross Slash",
+      "Ziodyne",
+      "Marakukaja"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 11909,
+    "MaccaYield": 6210,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_decarabia",
+    "PersonaId": "decarabia",
+    "Name": "Decarabia",
+    "Level": 54,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 35,
+      "MAG": 35,
+      "END": 35,
+      "AGI": 35,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Slash": "Weak"
+    },
+    "BaseSkills": [
+      "Megido",
+      "Tetrakarn",
+      "Invigorate 2"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 19163,
+    "MaccaYield": 8370,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_loki",
+    "PersonaId": "loki",
+    "Name": "Loki",
+    "Level": 69,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 48,
+      "MAG": 60,
+      "END": 45,
+      "AGI": 42,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Resist",
+      "Ice": "Null",
+      "Wind": "Absorb"
+    },
+    "BaseSkills": [
+      "Agidyne",
+      "Bufudyne",
+      "Ziodyne",
+      "Garudyne"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 39755,
+    "MaccaYield": 13282,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_susano-o",
+    "PersonaId": "susano-o",
+    "Name": "Susano-o",
+    "Level": 77,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 71,
+      "MAG": 35,
+      "END": 43,
+      "AGI": 49,
+      "LUK": 55
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Weak",
+      "Wind": "Null",
+      "Pierce": "Reflect"
+    },
+    "BaseSkills": [
+      "Brave Blade",
+      "Vorpal Blade",
+      "Charge"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 55172,
+    "MaccaYield": 16365,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_satanael",
+    "PersonaId": "satanael",
+    "Name": "Satanael",
+    "Level": 89,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 63,
+      "MAG": 60,
+      "END": 57,
+      "AGI": 56,
+      "LUK": 56
+    },
+    "Affinities": {
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [
+      "Sinful Shell",
+      "Maeigaon",
+      "Survival Trick"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 85040,
+    "MaccaYield": 21582,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_orpheus-telos",
+    "PersonaId": "orpheus-telos",
+    "Name": "Orpheus Telos",
+    "Level": 91,
+    "Arcana": "Fool",
+    "Stats": {
+      "STR": 63,
+      "MAG": 63,
+      "END": 63,
+      "AGI": 63,
+      "LUK": 63
+    },
+    "Affinities": {
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Light": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [
+      "Victory Cry"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 90883,
+    "MaccaYield": 22522,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_hermes",
+    "PersonaId": "hermes",
+    "Name": "Hermes",
+    "Level": 1,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 3,
+      "MAG": 1,
+      "END": 2,
+      "AGI": 3,
+      "LUK": 1
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Power Slash"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 5,
+    "MaccaYield": 22,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_trismegistus",
+    "PersonaId": "trismegistus",
+    "Name": "Trismegistus",
+    "Level": 1,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 3,
+      "MAG": 1,
+      "END": 2,
+      "AGI": 3,
+      "LUK": 1
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Null"
+    },
+    "BaseSkills": [],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 5,
+    "MaccaYield": 22,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_nekomata",
+    "PersonaId": "nekomata",
+    "Name": "Nekomata",
+    "Level": 3,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 4,
+      "MAG": 4,
+      "END": 2,
+      "AGI": 5,
+      "LUK": 2
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [
+      "Agi",
+      "Rakunda"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 18,
+    "MaccaYield": 82,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_jack-frost",
+    "PersonaId": "jack-frost",
+    "Name": "Jack Frost",
+    "Level": 8,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 5,
+      "MAG": 9,
+      "END": 8,
+      "AGI": 6,
+      "LUK": 4
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Bufu",
+      "Pulinpa"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 101,
+    "MaccaYield": 320,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_jack-o-lantern",
+    "PersonaId": "jack-o-lantern",
+    "Name": "Jack-o'-Lantern",
+    "Level": 15,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 8,
+      "MAG": 15,
+      "END": 9,
+      "AGI": 9,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Null"
+    },
+    "BaseSkills": [
+      "Agi",
+      "Maragi",
+      "Provoke"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 480,
+    "MaccaYield": 862,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_hua-po",
+    "PersonaId": "hua-po",
+    "Name": "Hua Po",
+    "Level": 19,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 8,
+      "MAG": 21,
+      "END": 13,
+      "AGI": 17,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Maragi",
+      "Baisudi",
+      "Rakunda"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 917,
+    "MaccaYield": 1282,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_zorro",
+    "PersonaId": "zorro",
+    "Name": "Zorro",
+    "Level": 22,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 13,
+      "MAG": 17,
+      "END": 13,
+      "AGI": 15,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [
+      "Garula",
+      "Magarula",
+      "Miracle Punch"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 1387,
+    "MaccaYield": 1650,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_sati",
+    "PersonaId": "sati",
+    "Name": "Sati",
+    "Level": 29,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 13,
+      "MAG": 27,
+      "END": 13,
+      "AGI": 21,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Null"
+    },
+    "BaseSkills": [
+      "Agilao",
+      "Recarm",
+      "Rakukaja"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 3071,
+    "MaccaYield": 2682,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_orobas",
+    "PersonaId": "orobas",
+    "Name": "Orobas",
+    "Level": 39,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 22,
+      "MAG": 33,
+      "END": 22,
+      "AGI": 28,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Dark": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Agilao",
+      "Dekaja",
+      "Auto-Sukukaja"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 7313,
+    "MaccaYield": 4582,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mercurius",
+    "PersonaId": "mercurius",
+    "Name": "Mercurius",
+    "Level": 43,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 23,
+      "MAG": 31,
+      "END": 22,
+      "AGI": 33,
+      "LUK": 27
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Garudyne",
+      "Magarudyne",
+      "Wind Boost"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 9758,
+    "MaccaYield": 5482,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_rangda",
+    "PersonaId": "rangda",
+    "Name": "Rangda",
+    "Level": 50,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 33,
+      "MAG": 39,
+      "END": 28,
+      "AGI": 30,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Strike": "Reflect"
+    },
+    "BaseSkills": [
+      "Eigaon",
+      "Mudoon",
+      "Bloody Glee"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 15250,
+    "MaccaYield": 7250,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_surt",
+    "PersonaId": "surt",
+    "Name": "Surt",
+    "Level": 60,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 43,
+      "MAG": 51,
+      "END": 40,
+      "AGI": 28,
+      "LUK": 34
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Agidyne",
+      "Maragidyne",
+      "Fire Amp"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 26220,
+    "MaccaYield": 10200,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_futsunushi",
+    "PersonaId": "futsunushi",
+    "Name": "Futsunushi",
+    "Level": 74,
+    "Arcana": "Magician",
+    "Stats": {
+      "STR": 62,
+      "MAG": 49,
+      "END": 50,
+      "AGI": 42,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Strike": "Resist",
+      "Electric": "Resist",
+      "Slash": "Null"
+    },
+    "BaseSkills": [
+      "Myriad Arrows",
+      "Matarukaja",
+      "Apt Pupil"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 48991,
+    "MaccaYield": 15170,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_apsaras",
+    "PersonaId": "apsaras",
+    "Name": "Apsaras",
+    "Level": 2,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 2,
+      "MAG": 4,
+      "END": 2,
+      "AGI": 3,
+      "LUK": 2
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [
+      "Bufu",
+      "Patra"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 10,
+    "MaccaYield": 50,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_unicorn",
+    "PersonaId": "unicorn",
+    "Name": "Unicorn",
+    "Level": 11,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 5,
+      "MAG": 10,
+      "END": 12,
+      "AGI": 8,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Dark": "Weak",
+      "Ice": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Zio",
+      "Dia",
+      "Me Patra"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 214,
+    "MaccaYield": 522,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_lucia",
+    "PersonaId": "lucia",
+    "Name": "Lucia",
+    "Level": 18,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 9,
+      "MAG": 15,
+      "END": 12,
+      "AGI": 13,
+      "LUK": 12
+    },
+    "Affinities": {},
+    "BaseSkills": [
+      "Full Analysis",
+      "Analysis Plus",
+      "Analysis Mastery"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 789,
+    "MaccaYield": 1170,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_juno",
+    "PersonaId": "juno",
+    "Name": "Juno",
+    "Level": 18,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 9,
+      "MAG": 15,
+      "END": 12,
+      "AGI": 13,
+      "LUK": 12
+    },
+    "Affinities": {},
+    "BaseSkills": [],
+    "NegotiationType": "Formal",
+    "ExpYield": 789,
+    "MaccaYield": 1170,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_high-pixie",
+    "PersonaId": "high-pixie",
+    "Name": "High Pixie",
+    "Level": 20,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 11,
+      "MAG": 20,
+      "END": 10,
+      "AGI": 13,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Media",
+      "Zio",
+      "Pulinpa"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 1060,
+    "MaccaYield": 1400,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_johanna",
+    "PersonaId": "johanna",
+    "Name": "Johanna",
+    "Level": 28,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 19,
+      "MAG": 19,
+      "END": 17,
+      "AGI": 21,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Strike": "Resist"
+    },
+    "BaseSkills": [
+      "Freila",
+      "Vajra Blast",
+      "Mafreila"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 2774,
+    "MaccaYield": 2520,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_sarasvati",
+    "PersonaId": "sarasvati",
+    "Name": "Sarasvati",
+    "Level": 32,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 17,
+      "MAG": 26,
+      "END": 16,
+      "AGI": 24,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Bufula",
+      "Media",
+      "Tentarafoo"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 4092,
+    "MaccaYield": 3200,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_ganga",
+    "PersonaId": "ganga",
+    "Name": "Ganga",
+    "Level": 41,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 24,
+      "MAG": 30,
+      "END": 26,
+      "AGI": 22,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Weak",
+      "Pierce": "Resist",
+      "Ice": "Resist",
+      "Light": "Resist"
+    },
+    "BaseSkills": [
+      "Mabufula",
+      "Diara",
+      "Confuse Boost"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 8474,
+    "MaccaYield": 5022,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_parvati",
+    "PersonaId": "parvati",
+    "Name": "Parvati",
+    "Level": 48,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 26,
+      "MAG": 40,
+      "END": 26,
+      "AGI": 31,
+      "LUK": 31
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Mediarama",
+      "Hamaon",
+      "Dodge Fire"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 13507,
+    "MaccaYield": 6720,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_anat",
+    "PersonaId": "anat",
+    "Name": "Anat",
+    "Level": 53,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 36,
+      "MAG": 39,
+      "END": 33,
+      "AGI": 37,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Resist",
+      "Strike": "Null"
+    },
+    "BaseSkills": [
+      "Freidyne",
+      "Mafreidyne",
+      "Nuclear Boost"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 18130,
+    "MaccaYield": 8082,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kikuri-hime",
+    "PersonaId": "kikuri-hime",
+    "Name": "Kikuri-Hime",
+    "Level": 61,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 29,
+      "MAG": 50,
+      "END": 34,
+      "AGI": 41,
+      "LUK": 39
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Mediarahan",
+      "Tetrakarn",
+      "Ali Dance"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 27546,
+    "MaccaYield": 10522,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_scathach",
+    "PersonaId": "scathach",
+    "Name": "Scathach",
+    "Level": 75,
+    "Arcana": "Priestess",
+    "Stats": {
+      "STR": 55,
+      "MAG": 58,
+      "END": 40,
+      "AGI": 49,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Light": "Resist",
+      "Pierce": "Null",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Magarudyne",
+      "Ice Amp"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 51000,
+    "MaccaYield": 15562,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_penthesilea",
+    "PersonaId": "penthesilea",
+    "Name": "Penthesilea",
+    "Level": 20,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 13,
+      "MAG": 17,
+      "END": 11,
+      "AGI": 15,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [
+      "Bufu",
+      "Mabufu",
+      "Rakunda",
+      "Marin Karin"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 1060,
+    "MaccaYield": 1400,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_artemisia",
+    "PersonaId": "artemisia",
+    "Name": "Artemisia",
+    "Level": 20,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 13,
+      "MAG": 17,
+      "END": 11,
+      "AGI": 15,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [],
+    "NegotiationType": "Formal",
+    "ExpYield": 1060,
+    "MaccaYield": 1400,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_leanan-sidhe",
+    "PersonaId": "leanan-sidhe",
+    "Name": "Leanan Sidhe",
+    "Level": 21,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 12,
+      "MAG": 22,
+      "END": 13,
+      "AGI": 15,
+      "LUK": 14
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [
+      "Media",
+      "Diarama",
+      "Patra"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 1216,
+    "MaccaYield": 1522,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_yakshini",
+    "PersonaId": "yakshini",
+    "Name": "Yakshini",
+    "Level": 32,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 33,
+      "MAG": 16,
+      "END": 13,
+      "AGI": 25,
+      "LUK": 18
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Sexy Dance",
+      "Fatal End"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 4092,
+    "MaccaYield": 3200,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_milady",
+    "PersonaId": "milady",
+    "Name": "Milady",
+    "Level": 36,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 27,
+      "MAG": 24,
+      "END": 22,
+      "AGI": 22,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist"
+    },
+    "BaseSkills": [
+      "Torrent Shot",
+      "Amrita Drop",
+      "Pierce Driver"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 5779,
+    "MaccaYield": 3960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_hariti",
+    "PersonaId": "hariti",
+    "Name": "Hariti",
+    "Level": 48,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 24,
+      "MAG": 42,
+      "END": 31,
+      "AGI": 28,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Absorb",
+      "Light": "Absorb"
+    },
+    "BaseSkills": [
+      "Mediarama",
+      "Samarecarm",
+      "Me Patra"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 13507,
+    "MaccaYield": 6720,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_astarte",
+    "PersonaId": "astarte",
+    "Name": "Astarte",
+    "Level": 54,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 42,
+      "MAG": 36,
+      "END": 33,
+      "AGI": 33,
+      "LUK": 31
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Resist",
+      "Pierce": "Null"
+    },
+    "BaseSkills": [
+      "One-shot Kill",
+      "Tetrakarn",
+      "Makarakarn"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 19163,
+    "MaccaYield": 8370,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_gabriel",
+    "PersonaId": "gabriel",
+    "Name": "Gabriel",
+    "Level": 62,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 40,
+      "MAG": 52,
+      "END": 35,
+      "AGI": 41,
+      "LUK": 37
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Dark": "Weak",
+      "Light": "Null",
+      "Ice": "Absorb"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Ziodyne",
+      "Diarahan"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 28913,
+    "MaccaYield": 10850,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_skadi",
+    "PersonaId": "skadi",
+    "Name": "Skadi",
+    "Level": 68,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 52,
+      "MAG": 58,
+      "END": 33,
+      "AGI": 40,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Ice": "Absorb"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Tetrakarn",
+      "Vorpal Blade"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 38069,
+    "MaccaYield": 12920,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mother-harlot",
+    "PersonaId": "mother-harlot",
+    "Name": "Mother Harlot",
+    "Level": 77,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 44,
+      "MAG": 65,
+      "END": 60,
+      "AGI": 36,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Weak",
+      "Strike": "Null",
+      "Dark": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [
+      "Mamudoon",
+      "Ziodyne",
+      "Sexy Dance"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 55172,
+    "MaccaYield": 16365,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_alilat",
+    "PersonaId": "alilat",
+    "Name": "Alilat",
+    "Level": 84,
+    "Arcana": "Empress",
+    "Stats": {
+      "STR": 51,
+      "MAG": 70,
+      "END": 60,
+      "AGI": 51,
+      "LUK": 51
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Weak",
+      "Wind": "Resist",
+      "Ice": "Null",
+      "Slash": "Reflect",
+      "Strike": "Reflect"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Maziodyne",
+      "Makarakarn"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 71542,
+    "MaccaYield": 19320,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_forneus",
+    "PersonaId": "forneus",
+    "Name": "Forneus",
+    "Level": 7,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 5,
+      "MAG": 6,
+      "END": 7,
+      "AGI": 6,
+      "LUK": 4
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [
+      "Bufu",
+      "Bash",
+      "Tarukaja"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 76,
+    "MaccaYield": 262,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_polydeuces",
+    "PersonaId": "polydeuces",
+    "Name": "Polydeuces",
+    "Level": 14,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 12,
+      "MAG": 10,
+      "END": 9,
+      "AGI": 11,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [
+      "Zio",
+      "Dia",
+      "Sonic Punch",
+      "Mazio"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 399,
+    "MaccaYield": 770,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_caesar",
+    "PersonaId": "caesar",
+    "Name": "Caesar",
+    "Level": 14,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 12,
+      "MAG": 10,
+      "END": 9,
+      "AGI": 11,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Null"
+    },
+    "BaseSkills": [],
+    "NegotiationType": "Formal",
+    "ExpYield": 399,
+    "MaccaYield": 770,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_oberon",
+    "PersonaId": "oberon",
+    "Name": "Oberon",
+    "Level": 16,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 11,
+      "MAG": 15,
+      "END": 9,
+      "AGI": 12,
+      "LUK": 8
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Resist",
+      "Dark": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Zio",
+      "Media"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 571,
+    "MaccaYield": 960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_take-mikazuchi",
+    "PersonaId": "take-mikazuchi",
+    "Name": "Take-Mikazuchi",
+    "Level": 23,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 18,
+      "MAG": 17,
+      "END": 13,
+      "AGI": 15,
+      "LUK": 14
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Slash": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Mazio",
+      "Fatal End",
+      "Elec Break"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 1575,
+    "MaccaYield": 1782,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_goemon",
+    "PersonaId": "goemon",
+    "Name": "Goemon",
+    "Level": 27,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 24,
+      "MAG": 16,
+      "END": 18,
+      "AGI": 17,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [
+      "Bufula",
+      "Getsu-ei",
+      "Ice Driver"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 2496,
+    "MaccaYield": 2362,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_king-frost",
+    "PersonaId": "king-frost",
+    "Name": "King Frost",
+    "Level": 34,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 18,
+      "MAG": 31,
+      "END": 26,
+      "AGI": 14,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Absorb"
+    },
+    "BaseSkills": [
+      "Bufula",
+      "Freeze Boost",
+      "Rakukaja"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 4885,
+    "MaccaYield": 3570,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_naga-raja",
+    "PersonaId": "naga-raja",
+    "Name": "Naga Raja",
+    "Level": 43,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 33,
+      "MAG": 31,
+      "END": 22,
+      "AGI": 27,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Mazionga",
+      "Cruel Attack",
+      "Tentarafoo"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 9758,
+    "MaccaYield": 5482,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kamu-susano-o",
+    "PersonaId": "kamu-susano-o",
+    "Name": "Kamu Susano-o",
+    "Level": 47,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 40,
+      "MAG": 25,
+      "END": 30,
+      "AGI": 30,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Ice Age",
+      "Tempest Slash",
+      "Masukukaja"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 12693,
+    "MaccaYield": 6462,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_belphegor",
+    "PersonaId": "belphegor",
+    "Name": "Belphegor",
+    "Level": 53,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 34,
+      "MAG": 43,
+      "END": 38,
+      "AGI": 28,
+      "LUK": 29
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [
+      "Mabufula",
+      "Maeiga",
+      "Dodge Light"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 18130,
+    "MaccaYield": 8082,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_barong",
+    "PersonaId": "barong",
+    "Name": "Barong",
+    "Level": 63,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 43,
+      "MAG": 55,
+      "END": 41,
+      "AGI": 31,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Ziodyne",
+      "Elec Boost",
+      "Elec Break"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 30313,
+    "MaccaYield": 11182,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_odin",
+    "PersonaId": "odin",
+    "Name": "Odin",
+    "Level": 74,
+    "Arcana": "Emperor",
+    "Stats": {
+      "STR": 44,
+      "MAG": 63,
+      "END": 42,
+      "AGI": 46,
+      "LUK": 49
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Absorb"
+    },
+    "BaseSkills": [
+      "Maziodyne",
+      "Primal Force",
+      "Marakunda"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 48991,
+    "MaccaYield": 15170,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_omoikane",
+    "PersonaId": "omoikane",
+    "Name": "Omoikane",
+    "Level": 7,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 4,
+      "MAG": 8,
+      "END": 6,
+      "AGI": 4,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [
+      "Zio",
+      "Dia"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 76,
+    "MaccaYield": 262,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_berith",
+    "PersonaId": "berith",
+    "Name": "Berith",
+    "Level": 13,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 12,
+      "MAG": 7,
+      "END": 10,
+      "AGI": 11,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [
+      "Single Shot",
+      "Agi",
+      "Rakukaja"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 328,
+    "MaccaYield": 682,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_shiisaa",
+    "PersonaId": "shiisaa",
+    "Name": "Shiisaa",
+    "Level": 23,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 15,
+      "MAG": 15,
+      "END": 19,
+      "AGI": 16,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Strike": "Resist",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Mabufu",
+      "Assault Dive"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 1575,
+    "MaccaYield": 1782,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_flauros",
+    "PersonaId": "flauros",
+    "Name": "Flauros",
+    "Level": 33,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 27,
+      "MAG": 25,
+      "END": 20,
+      "AGI": 18,
+      "LUK": 16
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Wind": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [
+      "Agilao",
+      "Swift Strike",
+      "Auto Sukukaja"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 4476,
+    "MaccaYield": 3382,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_castor",
+    "PersonaId": "castor",
+    "Name": "Castor",
+    "Level": 39,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 42,
+      "MAG": 18,
+      "END": 37,
+      "AGI": 23,
+      "LUK": 17
+    },
+    "Affinities": {},
+    "BaseSkills": [
+      "Fatal End",
+      "Blade of Fury",
+      "Heat Wave",
+      "Bloody Charge",
+      "Endure"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 7313,
+    "MaccaYield": 4582,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_thoth",
+    "PersonaId": "thoth",
+    "Name": "Thoth",
+    "Level": 40,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 20,
+      "MAG": 40,
+      "END": 20,
+      "AGI": 25,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Dark": "Weak",
+      "Electric": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Zionga",
+      "Mahama",
+      "Diarama"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 7880,
+    "MaccaYield": 4800,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mishaguji",
+    "PersonaId": "mishaguji",
+    "Name": "Mishaguji",
+    "Level": 48,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 36,
+      "MAG": 35,
+      "END": 30,
+      "AGI": 24,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Mazionga",
+      "Deathbound",
+      "Marin Karin"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 13507,
+    "MaccaYield": 6720,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_daisoujou",
+    "PersonaId": "daisoujou",
+    "Name": "Daisoujou",
+    "Level": 59,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 33,
+      "MAG": 49,
+      "END": 38,
+      "AGI": 31,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Hamaon",
+      "Diarahan",
+      "Growth 3"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 24940,
+    "MaccaYield": 9882,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kohryu",
+    "PersonaId": "kohryu",
+    "Name": "Kohryu",
+    "Level": 71,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 44,
+      "MAG": 53,
+      "END": 58,
+      "AGI": 31,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Light": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [
+      "Makougaon",
+      "Mediarahan",
+      "Invigorate 3"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 43336,
+    "MaccaYield": 14022,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_io",
+    "PersonaId": "io",
+    "Name": "Io",
+    "Level": 1,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 2,
+      "MAG": 3,
+      "END": 1,
+      "AGI": 2,
+      "LUK": 2
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [
+      "Garu",
+      "Dia"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 5,
+    "MaccaYield": 22,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_isis",
+    "PersonaId": "isis",
+    "Name": "Isis",
+    "Level": 1,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 2,
+      "MAG": 3,
+      "END": 1,
+      "AGI": 2,
+      "LUK": 2
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Wind": "Null"
+    },
+    "BaseSkills": [],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 5,
+    "MaccaYield": 22,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_pixie",
+    "PersonaId": "pixie",
+    "Name": "Pixie",
+    "Level": 2,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 2,
+      "MAG": 2,
+      "END": 2,
+      "AGI": 4,
+      "LUK": 3
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [
+      "Dia",
+      "Pulinpa"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 10,
+    "MaccaYield": 50,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_silky",
+    "PersonaId": "silky",
+    "Name": "Silky",
+    "Level": 5,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 3,
+      "MAG": 7,
+      "END": 3,
+      "AGI": 4,
+      "LUK": 5
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Electric": "Weak",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [
+      "Bewilder",
+      "Bufu"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 40,
+    "MaccaYield": 162,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_tam-lin",
+    "PersonaId": "tam-lin",
+    "Name": "Tam Lin",
+    "Level": 13,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 12,
+      "MAG": 11,
+      "END": 8,
+      "AGI": 10,
+      "LUK": 5
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Light": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Power Slash",
+      "Zio",
+      "Sukukaja"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 328,
+    "MaccaYield": 682,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_carmen",
+    "PersonaId": "carmen",
+    "Name": "Carmen",
+    "Level": 19,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 8,
+      "MAG": 18,
+      "END": 12,
+      "AGI": 14,
+      "LUK": 12
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Agilao",
+      "Tarunda",
+      "Fire Driver"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 917,
+    "MaccaYield": 1282,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_narcissus",
+    "PersonaId": "narcissus",
+    "Name": "Narcissus",
+    "Level": 23,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 12,
+      "MAG": 18,
+      "END": 10,
+      "AGI": 17,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [
+      "Marin Karin",
+      "Charm Boost",
+      "Magaru"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 1575,
+    "MaccaYield": 1782,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_queen-medb",
+    "PersonaId": "queen-medb",
+    "Name": "Queen Medb",
+    "Level": 28,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 14,
+      "MAG": 26,
+      "END": 15,
+      "AGI": 19,
+      "LUK": 17
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Me Patra",
+      "Mazio",
+      "Maragi"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 2774,
+    "MaccaYield": 2520,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_saki-mitama",
+    "PersonaId": "saki-mitama",
+    "Name": "Saki Mitama",
+    "Level": 36,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 16,
+      "MAG": 30,
+      "END": 20,
+      "AGI": 22,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [
+      "Diarama",
+      "Mabufu",
+      "Ice Break"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 5779,
+    "MaccaYield": 3960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_hecate",
+    "PersonaId": "hecate",
+    "Name": "Hecate",
+    "Level": 42,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 22,
+      "MAG": 35,
+      "END": 24,
+      "AGI": 26,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [
+      "Blazing Hell",
+      "Sexy Dance",
+      "Matarunda"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 9100,
+    "MaccaYield": 5250,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_titania",
+    "PersonaId": "titania",
+    "Name": "Titania",
+    "Level": 49,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 19,
+      "MAG": 45,
+      "END": 23,
+      "AGI": 34,
+      "LUK": 36
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Bufudyne",
+      "Mabufula"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 14361,
+    "MaccaYield": 6982,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_raphael",
+    "PersonaId": "raphael",
+    "Name": "Raphael",
+    "Level": 60,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 46,
+      "MAG": 42,
+      "END": 37,
+      "AGI": 31,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Fire": "Resist",
+      "Wind": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Tempest Slash",
+      "Mediarama",
+      "Dekaja"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 26220,
+    "MaccaYield": 10200,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_cybele",
+    "PersonaId": "cybele",
+    "Name": "Cybele",
+    "Level": 67,
+    "Arcana": "Lovers",
+    "Stats": {
+      "STR": 39,
+      "MAG": 54,
+      "END": 40,
+      "AGI": 42,
+      "LUK": 45
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Light": "Resist",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Makougaon",
+      "Garudyne",
+      "Diarahan"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 36427,
+    "MaccaYield": 12562,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_ara-mitama",
+    "PersonaId": "ara-mitama",
+    "Name": "Ara Mitama",
+    "Level": 6,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 8,
+      "MAG": 3,
+      "END": 4,
+      "AGI": 5,
+      "LUK": 5
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Bash",
+      "Rakukaja",
+      "Provoke"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 55,
+    "MaccaYield": 210,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_chimera",
+    "PersonaId": "chimera",
+    "Name": "Chimera",
+    "Level": 9,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 8,
+      "MAG": 4,
+      "END": 12,
+      "AGI": 4,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Strike": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Power Slash",
+      "Bewilder"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 132,
+    "MaccaYield": 382,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_zouchouten",
+    "PersonaId": "zouchouten",
+    "Name": "Zouchouten",
+    "Level": 14,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 14,
+      "MAG": 7,
+      "END": 13,
+      "AGI": 6,
+      "LUK": 10
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Resist"
+    },
+    "BaseSkills": [
+      "Bash",
+      "Zio",
+      "Crit Rate Boost"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 399,
+    "MaccaYield": 770,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_captain-kidd",
+    "PersonaId": "captain-kidd",
+    "Name": "Captain Kidd",
+    "Level": 18,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 14,
+      "MAG": 8,
+      "END": 16,
+      "AGI": 12,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [
+      "Mazio",
+      "Assault Dive",
+      "Elec Driver"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 789,
+    "MaccaYield": 1170,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mithras",
+    "PersonaId": "mithras",
+    "Name": "Mithras",
+    "Level": 24,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 16,
+      "MAG": 19,
+      "END": 15,
+      "AGI": 14,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Slash": "Resist",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Makouha",
+      "Zan-ei",
+      "Rakunda"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 1778,
+    "MaccaYield": 1920,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_palladion",
+    "PersonaId": "palladion",
+    "Name": "Palladion",
+    "Level": 27,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 21,
+      "MAG": 15,
+      "END": 24,
+      "AGI": 15,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Pierce": "Resist"
+    },
+    "BaseSkills": [
+      "Arrow Rain",
+      "Swift Strike",
+      "Tarukaja",
+      "Rakukaja",
+      "Dekunda"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 2496,
+    "MaccaYield": 2362,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_athena",
+    "PersonaId": "athena",
+    "Name": "Athena",
+    "Level": 27,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 21,
+      "MAG": 15,
+      "END": 24,
+      "AGI": 15,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Pierce": "Null"
+    },
+    "BaseSkills": [],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 2496,
+    "MaccaYield": 2362,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_oni",
+    "PersonaId": "oni",
+    "Name": "Oni",
+    "Level": 31,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 30,
+      "MAG": 13,
+      "END": 26,
+      "AGI": 21,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Strike": "Resist"
+    },
+    "BaseSkills": [
+      "Bash",
+      "Counter",
+      "Regenerate 1"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 3728,
+    "MaccaYield": 3022,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_seiten-taisei",
+    "PersonaId": "seiten-taisei",
+    "Name": "Seiten Taisei",
+    "Level": 40,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 30,
+      "MAG": 20,
+      "END": 33,
+      "AGI": 24,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Wild Thunder",
+      "Deathbound",
+      "Auto Tarukaja"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 7880,
+    "MaccaYield": 4800,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_shiki-ouji",
+    "PersonaId": "shiki-ouji",
+    "Name": "Shiki-Ouji",
+    "Level": 45,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 33,
+      "MAG": 28,
+      "END": 28,
+      "AGI": 25,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Weak",
+      "Light": "Resist",
+      "Dark": "Resist",
+      "Pierce": "Null",
+      "Strike": "Reflect"
+    },
+    "BaseSkills": [
+      "Torrent Shot",
+      "Dekaja",
+      "Kouga"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 11162,
+    "MaccaYield": 5962,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_koumokuten",
+    "PersonaId": "koumokuten",
+    "Name": "Koumokuten ",
+    "Level": 52,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 40,
+      "MAG": 35,
+      "END": 40,
+      "AGI": 25,
+      "LUK": 29
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Herculean Strike",
+      "Magarula",
+      "Masukukaja"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 17135,
+    "MaccaYield": 7800,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_thor",
+    "PersonaId": "thor",
+    "Name": "Thor",
+    "Level": 64,
+    "Arcana": "Chariot",
+    "Stats": {
+      "STR": 54,
+      "MAG": 50,
+      "END": 42,
+      "AGI": 30,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Null",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Ziodyne",
+      "Maziodyne",
+      "Gigantic Fist"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 31765,
+    "MaccaYield": 11520,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_angel",
+    "PersonaId": "angel",
+    "Name": "Angel",
+    "Level": 4,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 4,
+      "MAG": 5,
+      "END": 3,
+      "AGI": 4,
+      "LUK": 3
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Electric": "Resist",
+      "Light": "Resist"
+    },
+    "BaseSkills": [
+      "Garu",
+      "Sukukaja"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 27,
+    "MaccaYield": 120,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_archangel",
+    "PersonaId": "archangel",
+    "Name": "Archangel",
+    "Level": 10,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 8,
+      "MAG": 8,
+      "END": 8,
+      "AGI": 7,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Kouha",
+      "Single Shot",
+      "Baisudi"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 170,
+    "MaccaYield": 450,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_principality",
+    "PersonaId": "principality",
+    "Name": "Principality",
+    "Level": 16,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 11,
+      "MAG": 13,
+      "END": 7,
+      "AGI": 12,
+      "LUK": 12
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Fire": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Hama",
+      "Kouha",
+      "Holy Arrow"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 571,
+    "MaccaYield": 960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_power",
+    "PersonaId": "power",
+    "Name": "Power",
+    "Level": 25,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 20,
+      "MAG": 16,
+      "END": 15,
+      "AGI": 16,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Pierce": "Resist",
+      "Wind": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Hama",
+      "Magaru",
+      "Arrow Rain"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 2000,
+    "MaccaYield": 2062,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_virtue",
+    "PersonaId": "virtue",
+    "Name": "Virtue",
+    "Level": 32,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 21,
+      "MAG": 24,
+      "END": 15,
+      "AGI": 22,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Wind": "Resist",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Magaru",
+      "Kouga"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 4092,
+    "MaccaYield": 3200,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_robin-hood",
+    "PersonaId": "robin-hood",
+    "Name": "Robin Hood",
+    "Level": 37,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 25,
+      "MAG": 27,
+      "END": 22,
+      "AGI": 24,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Resist"
+    },
+    "BaseSkills": [
+      "Kouga",
+      "Eiga",
+      "Light Driver"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 6263,
+    "MaccaYield": 4162,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_nemesis",
+    "PersonaId": "nemesis",
+    "Name": "Nemesis",
+    "Level": 37,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 19,
+      "MAG": 28,
+      "END": 23,
+      "AGI": 25,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Resist"
+    },
+    "BaseSkills": [
+      "Zionga",
+      "Kougaon",
+      "Mediarama",
+      "Makarakarn",
+      "Dekaja"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 6263,
+    "MaccaYield": 4162,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kala-nemi",
+    "PersonaId": "kala-nemi",
+    "Name": "Kala-Nemi",
+    "Level": 37,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 19,
+      "MAG": 28,
+      "END": 23,
+      "AGI": 25,
+      "LUK": 23
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Null"
+    },
+    "BaseSkills": [],
+    "NegotiationType": "Formal",
+    "ExpYield": 6263,
+    "MaccaYield": 4162,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_dominion",
+    "PersonaId": "dominion",
+    "Name": "Dominion",
+    "Level": 42,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 25,
+      "MAG": 32,
+      "END": 24,
+      "AGI": 26,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Wind": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Makouga",
+      "Hamaon",
+      "Infuriate"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 9100,
+    "MaccaYield": 5250,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_throne",
+    "PersonaId": "throne",
+    "Name": "Throne",
+    "Level": 52,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 39,
+      "MAG": 35,
+      "END": 30,
+      "AGI": 30,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Dark": "Weak",
+      "Fire": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Mahama",
+      "Maragion",
+      "Recarmdra"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 17135,
+    "MaccaYield": 7800,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_loki-a",
+    "PersonaId": "loki-a",
+    "Name": "Loki A",
+    "Level": 60,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 44,
+      "MAG": 42,
+      "END": 33,
+      "AGI": 38,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Rebellion Blade",
+      "Eigaon",
+      "Resist Ailments"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 26220,
+    "MaccaYield": 10200,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_melchizedek",
+    "PersonaId": "melchizedek",
+    "Name": "Melchizedek",
+    "Level": 66,
+    "Arcana": "Justice",
+    "Stats": {
+      "STR": 54,
+      "MAG": 47,
+      "END": 47,
+      "AGI": 35,
+      "LUK": 31
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Reflect",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Gigantic Fist",
+      "Hamaon",
+      "Revolution"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 34822,
+    "MaccaYield": 12210,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_onmoraki",
+    "PersonaId": "onmoraki",
+    "Name": "Onmoraki",
+    "Level": 8,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 4,
+      "MAG": 7,
+      "END": 6,
+      "AGI": 10,
+      "LUK": 4
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Light": "Weak",
+      "Fire": "Resist",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [
+      "Evil Touch",
+      "Tarunda",
+      "Garu"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 101,
+    "MaccaYield": 320,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_naga",
+    "PersonaId": "naga",
+    "Name": "Naga",
+    "Level": 17,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 14,
+      "MAG": 10,
+      "END": 11,
+      "AGI": 14,
+      "LUK": 9
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Electric": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [
+      "Bewilder",
+      "Single Shot"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 674,
+    "MaccaYield": 1062,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_lamia",
+    "PersonaId": "lamia",
+    "Name": "Lamia",
+    "Level": 25,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 15,
+      "MAG": 20,
+      "END": 16,
+      "AGI": 14,
+      "LUK": 17
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Electric": "Resist",
+      "Dark": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [
+      "Agilao",
+      "Poisma",
+      "Resist Charm"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 2000,
+    "MaccaYield": 2062,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mothman",
+    "PersonaId": "mothman",
+    "Name": "Mothman",
+    "Level": 31,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 15,
+      "MAG": 25,
+      "END": 18,
+      "AGI": 27,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Ice": "Weak",
+      "Fire": "Resist",
+      "Dark": "Resist",
+      "Wind": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [
+      "Eerie Sound",
+      "Stagnant Air"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 3728,
+    "MaccaYield": 3022,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_dakini",
+    "PersonaId": "dakini",
+    "Name": "Dakini",
+    "Level": 38,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 36,
+      "MAG": 22,
+      "END": 16,
+      "AGI": 29,
+      "LUK": 18
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Strike": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Herculean Strike",
+      "Counterstrike"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 6775,
+    "MaccaYield": 4370,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kurama-tengu",
+    "PersonaId": "kurama-tengu",
+    "Name": "Kurama Tengu",
+    "Level": 46,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 26,
+      "MAG": 32,
+      "END": 25,
+      "AGI": 37,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Resist",
+      "Wind": "Absorb"
+    },
+    "BaseSkills": [
+      "Magarula",
+      "Masukunda",
+      "Dodge Pierce"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 11909,
+    "MaccaYield": 6210,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_nebiros",
+    "PersonaId": "nebiros",
+    "Name": "Nebiros",
+    "Level": 52,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 28,
+      "MAG": 42,
+      "END": 31,
+      "AGI": 31,
+      "LUK": 37
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Null",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [
+      "Evil Touch",
+      "Eigaon",
+      "Ghastly Wail"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 17135,
+    "MaccaYield": 7800,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kumbhanda",
+    "PersonaId": "kumbhanda",
+    "Name": "Kumbhanda",
+    "Level": 61,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 48,
+      "MAG": 44,
+      "END": 39,
+      "AGI": 45,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Resist",
+      "Wind": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Garudyne",
+      "Poison Arrow",
+      "Poison Boost"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 27546,
+    "MaccaYield": 10522,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_arahabaki",
+    "PersonaId": "arahabaki",
+    "Name": "Arahabaki",
+    "Level": 68,
+    "Arcana": "Hermit",
+    "Stats": {
+      "STR": 47,
+      "MAG": 52,
+      "END": 53,
+      "AGI": 32,
+      "LUK": 36
+    },
+    "Affinities": {
+      "Strike": "Weak",
+      "Ice": "Weak",
+      "Dark": "Weak",
+      "Light": "Resist",
+      "Slash": "Reflect",
+      "Pierce": "Reflect"
+    },
+    "BaseSkills": [
+      "Herculean Strike",
+      "Makarakarn",
+      "Null Charm"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 38069,
+    "MaccaYield": 12920,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_fortuna",
+    "PersonaId": "fortuna",
+    "Name": "Fortuna",
+    "Level": 15,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 7,
+      "MAG": 17,
+      "END": 10,
+      "AGI": 13,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Fire": "Null",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Garu",
+      "Bufu",
+      "Patra"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 480,
+    "MaccaYield": 862,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_sandman",
+    "PersonaId": "sandman",
+    "Name": "Sandman",
+    "Level": 20,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 13,
+      "MAG": 13,
+      "END": 15,
+      "AGI": 15,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Weak",
+      "Fire": "Null",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Garula",
+      "Tentarafoo"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 1060,
+    "MaccaYield": 1400,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kushi-mitama",
+    "PersonaId": "kushi-mitama",
+    "Name": "Kushi Mitama",
+    "Level": 28,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 16,
+      "MAG": 22,
+      "END": 18,
+      "AGI": 13,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Electric": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Recarm",
+      "Garula",
+      "Magaru"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 2774,
+    "MaccaYield": 2520,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_clotho",
+    "PersonaId": "clotho",
+    "Name": "Clotho",
+    "Level": 37,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 20,
+      "MAG": 29,
+      "END": 22,
+      "AGI": 24,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Garula",
+      "Wind Break",
+      "Rakunda"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 6263,
+    "MaccaYield": 4162,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_lachesis",
+    "PersonaId": "lachesis",
+    "Name": "Lachesis",
+    "Level": 44,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 22,
+      "MAG": 37,
+      "END": 23,
+      "AGI": 30,
+      "LUK": 29
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Magarula",
+      "Masukukaja",
+      "Makarakarn"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 10444,
+    "MaccaYield": 5720,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_atropos",
+    "PersonaId": "atropos",
+    "Name": "Atropos",
+    "Level": 56,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 26,
+      "MAG": 45,
+      "END": 32,
+      "AGI": 36,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Resist",
+      "Dark": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Magarula",
+      "Marakunda",
+      "Dekunda"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 21345,
+    "MaccaYield": 8960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_hypnos",
+    "PersonaId": "hypnos",
+    "Name": "Hypnos",
+    "Level": 56,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 50,
+      "MAG": 55,
+      "END": 45,
+      "AGI": 40,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Dark": "Absorb",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [],
+    "NegotiationType": "Formal",
+    "ExpYield": 21345,
+    "MaccaYield": 8960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_moros",
+    "PersonaId": "moros",
+    "Name": "Moros",
+    "Level": 56,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 46,
+      "MAG": 50,
+      "END": 42,
+      "AGI": 45,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Fire": "Reflect",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [],
+    "NegotiationType": "Formal",
+    "ExpYield": 21345,
+    "MaccaYield": 8960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_norn",
+    "PersonaId": "norn",
+    "Name": "Norn",
+    "Level": 65,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 37,
+      "MAG": 60,
+      "END": 40,
+      "AGI": 37,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Fire": "Null",
+      "Wind": "Absorb",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [
+      "Magarudyne",
+      "Panta Rhei",
+      "Wind Amp"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 33280,
+    "MaccaYield": 11862,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_lakshmi",
+    "PersonaId": "lakshmi",
+    "Name": "Lakshmi",
+    "Level": 73,
+    "Arcana": "Fortune",
+    "Stats": {
+      "STR": 39,
+      "MAG": 61,
+      "END": 38,
+      "AGI": 45,
+      "LUK": 52
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Diarahan",
+      "Amrita Shower",
+      "Bufudyne"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 47041,
+    "MaccaYield": 14782,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_valkyrie",
+    "PersonaId": "valkyrie",
+    "Name": "Valkyrie",
+    "Level": 11,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 9,
+      "MAG": 7,
+      "END": 10,
+      "AGI": 8,
+      "LUK": 8
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Slash": "Resist",
+      "Ice": "Resist"
+    },
+    "BaseSkills": [
+      "Cleave",
+      "Bufu",
+      "Rakukaja"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 214,
+    "MaccaYield": 522,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_rakshasa",
+    "PersonaId": "rakshasa",
+    "Name": "Rakshasa",
+    "Level": 15,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 14,
+      "MAG": 6,
+      "END": 13,
+      "AGI": 10,
+      "LUK": 9
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Gale Slash",
+      "Counter",
+      "Tarukaja"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 480,
+    "MaccaYield": 862,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_matador",
+    "PersonaId": "matador",
+    "Name": "Matador",
+    "Level": 22,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 14,
+      "MAG": 11,
+      "END": 13,
+      "AGI": 21,
+      "LUK": 16
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Sonic Punch",
+      "Magaru",
+      "Sukukaja"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 1387,
+    "MaccaYield": 1650,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_jikokuten",
+    "PersonaId": "jikokuten",
+    "Name": "Jikokuten",
+    "Level": 28,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 21,
+      "MAG": 15,
+      "END": 20,
+      "AGI": 19,
+      "LUK": 16
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist"
+    },
+    "BaseSkills": [
+      "Fatal End",
+      "Zionga",
+      "Matarukaja"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 2774,
+    "MaccaYield": 2520,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_hanuman",
+    "PersonaId": "hanuman",
+    "Name": "Hanuman",
+    "Level": 35,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 27,
+      "MAG": 18,
+      "END": 24,
+      "AGI": 24,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Strike": "Resist",
+      "Wind": "Resist"
+    },
+    "BaseSkills": [
+      "Mighty Swing",
+      "Revolution",
+      "Wind Break"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 5317,
+    "MaccaYield": 3762,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_white-rider",
+    "PersonaId": "white-rider",
+    "Name": "White Rider",
+    "Level": 46,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 28,
+      "MAG": 33,
+      "END": 27,
+      "AGI": 31,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Electric": "Resist",
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Agilao",
+      "Hamaon",
+      "Maeiga"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 11909,
+    "MaccaYield": 6210,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kali",
+    "PersonaId": "kali",
+    "Name": "Kali",
+    "Level": 57,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 44,
+      "MAG": 31,
+      "END": 38,
+      "AGI": 39,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Slash": "Null",
+      "Fire": "Resist"
+    },
+    "BaseSkills": [
+      "Deathbound",
+      "Revolution",
+      "High Counter"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 22511,
+    "MaccaYield": 9262,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_siegfried",
+    "PersonaId": "siegfried",
+    "Name": "Siegfried",
+    "Level": 60,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 51,
+      "MAG": 30,
+      "END": 41,
+      "AGI": 36,
+      "LUK": 34
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Slash": "Null",
+      "Strike": "Resist"
+    },
+    "BaseSkills": [
+      "Deathbound",
+      "Charge",
+      "High Counter"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 26220,
+    "MaccaYield": 10200,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_cerberus",
+    "PersonaId": "cerberus",
+    "Name": "Cerberus",
+    "Level": 64,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 50,
+      "MAG": 35,
+      "END": 45,
+      "AGI": 43,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Agidyne",
+      "High Counter",
+      "Megidola"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 31765,
+    "MaccaYield": 11520,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_atavaka",
+    "PersonaId": "atavaka",
+    "Name": "Atavaka",
+    "Level": 72,
+    "Arcana": "Strength",
+    "Stats": {
+      "STR": 58,
+      "MAG": 40,
+      "END": 52,
+      "AGI": 42,
+      "LUK": 43
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Strike": "Resist",
+      "Fire": "Null",
+      "Slash": "Reflect"
+    },
+    "BaseSkills": [
+      "Brave Blade",
+      "Maragidyne",
+      "High Counter"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 45183,
+    "MaccaYield": 14400,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_inugami",
+    "PersonaId": "inugami",
+    "Name": "Inugami",
+    "Level": 10,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 4,
+      "MAG": 8,
+      "END": 7,
+      "AGI": 7,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Dark": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [
+      "Poisma",
+      "Foul Breath"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 170,
+    "MaccaYield": 450,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_take-minakata",
+    "PersonaId": "take-minakata",
+    "Name": "Take-Minakata",
+    "Level": 20,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 14,
+      "MAG": 14,
+      "END": 21,
+      "AGI": 10,
+      "LUK": 10
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Weak",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Electric": "Resist"
+    },
+    "BaseSkills": [
+      "Zio",
+      "Auto Rakukaja",
+      "Dekaja"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 1060,
+    "MaccaYield": 1400,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_orthrus",
+    "PersonaId": "orthrus",
+    "Name": "Orthrus",
+    "Level": 27,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 22,
+      "MAG": 14,
+      "END": 20,
+      "AGI": 18,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Dark": "Resist",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Fatal End",
+      "Agilao",
+      "Raging Tiger"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 2496,
+    "MaccaYield": 2362,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_vasuki",
+    "PersonaId": "vasuki",
+    "Name": "Vasuki",
+    "Level": 38,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 27,
+      "MAG": 27,
+      "END": 35,
+      "AGI": 15,
+      "LUK": 17
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Mahama",
+      "Neuro Slash",
+      "Poison Mist"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 6775,
+    "MaccaYield": 4370,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_hecatoncheires",
+    "PersonaId": "hecatoncheires",
+    "Name": "Hecatoncheires",
+    "Level": 47,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 37,
+      "MAG": 24,
+      "END": 48,
+      "AGI": 20,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [
+      "Vile Assault",
+      "Evade Strike",
+      "Regenerate 2"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 12693,
+    "MaccaYield": 6462,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mada",
+    "PersonaId": "mada",
+    "Name": "Mada",
+    "Level": 57,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 42,
+      "MAG": 48,
+      "END": 45,
+      "AGI": 33,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Strike": "Resist",
+      "Electric": "Resist",
+      "Dark": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Gigantic Fist",
+      "Agidyne",
+      "Endure"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 22511,
+    "MaccaYield": 9262,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_medea",
+    "PersonaId": "medea",
+    "Name": "Medea",
+    "Level": 63,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 53,
+      "MAG": 65,
+      "END": 42,
+      "AGI": 46,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 30313,
+    "MaccaYield": 11182,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_hell-biker",
+    "PersonaId": "hell-biker",
+    "Name": "Hell Biker",
+    "Level": 65,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 48,
+      "MAG": 51,
+      "END": 50,
+      "AGI": 40,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Fire": "Reflect",
+      "Wind": "Reflect"
+    },
+    "BaseSkills": [
+      "Maragidyne",
+      "Eigaon",
+      "Life Aid"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 33280,
+    "MaccaYield": 11862,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_attis",
+    "PersonaId": "attis",
+    "Name": "Attis",
+    "Level": 73,
+    "Arcana": "Hanged",
+    "Stats": {
+      "STR": 45,
+      "MAG": 53,
+      "END": 51,
+      "AGI": 57,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Null",
+      "Wind": "Reflect"
+    },
+    "BaseSkills": [
+      "Mahamaon",
+      "Recarmdra",
+      "Samarecarm"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 47041,
+    "MaccaYield": 14782,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_pisaca",
+    "PersonaId": "pisaca",
+    "Name": "Pisaca",
+    "Level": 15,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 10,
+      "MAG": 13,
+      "END": 16,
+      "AGI": 9,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Strike": "Resist",
+      "Electric": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Mudo",
+      "Eiha"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 480,
+    "MaccaYield": 862,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_pale-rider",
+    "PersonaId": "pale-rider",
+    "Name": "Pale Rider",
+    "Level": 23,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 20,
+      "MAG": 18,
+      "END": 13,
+      "AGI": 17,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Wind": "Resist",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Maeiha",
+      "Fatal End",
+      "Resist Fear"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 1575,
+    "MaccaYield": 1782,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_loa",
+    "PersonaId": "loa",
+    "Name": "Loa",
+    "Level": 33,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 21,
+      "MAG": 26,
+      "END": 24,
+      "AGI": 19,
+      "LUK": 18
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Electric": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [
+      "Mamudo",
+      "Life Drain",
+      "Maeiha"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 4476,
+    "MaccaYield": 3382,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_samael",
+    "PersonaId": "samael",
+    "Name": "Samael",
+    "Level": 41,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 26,
+      "MAG": 31,
+      "END": 27,
+      "AGI": 21,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Ice": "Resist",
+      "Electric": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Maeiga",
+      "Masukunda",
+      "Poison Mist"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 8474,
+    "MaccaYield": 5022,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mot",
+    "PersonaId": "mot",
+    "Name": "Mot",
+    "Level": 58,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 37,
+      "MAG": 42,
+      "END": 44,
+      "AGI": 29,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Null",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Mamudoon",
+      "Evil Smile",
+      "Null Fear"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 23707,
+    "MaccaYield": 9570,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_alice",
+    "PersonaId": "alice",
+    "Name": "Alice",
+    "Level": 68,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 35,
+      "MAG": 62,
+      "END": 31,
+      "AGI": 51,
+      "LUK": 44
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Mudoon",
+      "Maeigaon",
+      "Spirit Drain"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 38069,
+    "MaccaYield": 12920,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_thanatos",
+    "PersonaId": "thanatos",
+    "Name": "Thanatos",
+    "Level": 78,
+    "Arcana": "Death",
+    "Stats": {
+      "STR": 52,
+      "MAG": 66,
+      "END": 53,
+      "AGI": 45,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Maeigaon",
+      "Mamudoon",
+      "Ghastly Wail"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 57335,
+    "MaccaYield": 16770,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_nigi-mitama",
+    "PersonaId": "nigi-mitama",
+    "Name": "Nigi Mitama",
+    "Level": 12,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 6,
+      "MAG": 10,
+      "END": 9,
+      "AGI": 10,
+      "LUK": 8
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Resist",
+      "Dark": "Resist",
+      "Wind": "Null"
+    },
+    "BaseSkills": [
+      "Media",
+      "Garu",
+      "Baisudi"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 267,
+    "MaccaYield": 600,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mitra",
+    "PersonaId": "mitra",
+    "Name": "Mitra",
+    "Level": 22,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 13,
+      "MAG": 19,
+      "END": 16,
+      "AGI": 10,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Bufu",
+      "Makouha"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 1387,
+    "MaccaYield": 1650,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_genbu",
+    "PersonaId": "genbu",
+    "Name": "Genbu",
+    "Level": 30,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 18,
+      "MAG": 17,
+      "END": 30,
+      "AGI": 12,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Dekunda",
+      "Auto Rakukaja",
+      "Null Confuse"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 3390,
+    "MaccaYield": 2850,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_seiryu",
+    "PersonaId": "seiryu",
+    "Name": "Seiryu",
+    "Level": 38,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 24,
+      "MAG": 31,
+      "END": 27,
+      "AGI": 21,
+      "LUK": 18
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Ice": "Null"
+    },
+    "BaseSkills": [
+      "Mabufula",
+      "Mediarama"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 6775,
+    "MaccaYield": 4370,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_okuninushi",
+    "PersonaId": "okuninushi",
+    "Name": "Okuninushi",
+    "Level": 44,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 35,
+      "MAG": 32,
+      "END": 29,
+      "AGI": 24,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Resist",
+      "Fire": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [
+      "Getsu-ei",
+      "Deathbound",
+      "Maragion"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 10444,
+    "MaccaYield": 5720,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_suzaku",
+    "PersonaId": "suzaku",
+    "Name": "Suzaku",
+    "Level": 55,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 31,
+      "MAG": 40,
+      "END": 32,
+      "AGI": 42,
+      "LUK": 31
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Resist",
+      "Fire": "Reflect"
+    },
+    "BaseSkills": [
+      "Maragion",
+      "Diarahan",
+      "Samarecarm"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 20230,
+    "MaccaYield": 8662,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_byakko",
+    "PersonaId": "byakko",
+    "Name": "Byakko",
+    "Level": 63,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 45,
+      "MAG": 44,
+      "END": 50,
+      "AGI": 39,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [
+      "Mabufula",
+      "Freeze Boost",
+      "Heat Wave"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 30313,
+    "MaccaYield": 11182,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_yurlungur",
+    "PersonaId": "yurlungur",
+    "Name": "Yurlungur",
+    "Level": 71,
+    "Arcana": "Temperance",
+    "Stats": {
+      "STR": 41,
+      "MAG": 45,
+      "END": 63,
+      "AGI": 42,
+      "LUK": 38
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Fire": "Resist",
+      "Electric": "Resist",
+      "Light": "Resist"
+    },
+    "BaseSkills": [
+      "Kougaon",
+      "Evade Elec",
+      "Evade Fire"
+    ],
+    "NegotiationType": "Formal",
+    "ExpYield": 43336,
+    "MaccaYield": 14022,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_lilim",
+    "PersonaId": "lilim",
+    "Name": "Lilim",
+    "Level": 8,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 4,
+      "MAG": 10,
+      "END": 4,
+      "AGI": 6,
+      "LUK": 7
+    },
+    "Affinities": {
+      "Light": "Weak",
+      "Electric": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [
+      "Agi",
+      "Zio"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 101,
+    "MaccaYield": 320,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mokoi",
+    "PersonaId": "mokoi",
+    "Name": "Mokoi",
+    "Level": 18,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 7,
+      "MAG": 7,
+      "END": 12,
+      "AGI": 16,
+      "LUK": 22
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Evil Touch",
+      "Marin Karin",
+      "Sonic Punch"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 789,
+    "MaccaYield": 1170,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_baphomet",
+    "PersonaId": "baphomet",
+    "Name": "Baphomet",
+    "Level": 30,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 20,
+      "MAG": 25,
+      "END": 22,
+      "AGI": 16,
+      "LUK": 19
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Fire": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Maragi",
+      "Eiga",
+      "Dodge Fire"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 3390,
+    "MaccaYield": 2850,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_incubus",
+    "PersonaId": "incubus",
+    "Name": "Incubus",
+    "Level": 37,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 22,
+      "MAG": 30,
+      "END": 20,
+      "AGI": 21,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Light": "Weak",
+      "Fire": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Life Drain",
+      "Evil Touch",
+      "Eiga"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 6263,
+    "MaccaYield": 4162,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_succubus",
+    "PersonaId": "succubus",
+    "Name": "Succubus",
+    "Level": 47,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 26,
+      "MAG": 41,
+      "END": 28,
+      "AGI": 33,
+      "LUK": 27
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Light": "Weak",
+      "Dark": "Absorb",
+      "Fire": "Reflect"
+    },
+    "BaseSkills": [
+      "Maeiga",
+      "Sexy Dance",
+      "Spirit Drain"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 12693,
+    "MaccaYield": 6462,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_pazuzu",
+    "PersonaId": "pazuzu",
+    "Name": "Pazuzu",
+    "Level": 56,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 34,
+      "MAG": 42,
+      "END": 35,
+      "AGI": 32,
+      "LUK": 34
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Light": "Weak",
+      "Dark": "Resist",
+      "Wind": "Null",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [
+      "Eigaon",
+      "Poison Arrow",
+      "Poison Mist"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 21345,
+    "MaccaYield": 8960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_lilith",
+    "PersonaId": "lilith",
+    "Name": "Lilith",
+    "Level": 65,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 35,
+      "MAG": 56,
+      "END": 38,
+      "AGI": 44,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Ice": "Resist",
+      "Dark": "Null",
+      "Electric": "Absorb"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Maziodyne",
+      "Sexy Dance"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 33280,
+    "MaccaYield": 11862,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_abaddon",
+    "PersonaId": "abaddon",
+    "Name": "Abaddon",
+    "Level": 76,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 53,
+      "MAG": 61,
+      "END": 48,
+      "AGI": 33,
+      "LUK": 46
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Weak",
+      "Fire": "Null",
+      "Slash": "Absorb",
+      "Strike": "Absorb",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [
+      "Virus Breath",
+      "Evil Smile",
+      "Deathbound"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 53063,
+    "MaccaYield": 15960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_beelzebub",
+    "PersonaId": "beelzebub",
+    "Name": "Beelzebub",
+    "Level": 81,
+    "Arcana": "Devil",
+    "Stats": {
+      "STR": 50,
+      "MAG": 62,
+      "END": 50,
+      "AGI": 60,
+      "LUK": 52
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Strike": "Null",
+      "Electric": "Null",
+      "Wind": "Null",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Mamudoon",
+      "Maeigaon",
+      "Evil Smile"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 64183,
+    "MaccaYield": 18020,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_eligor",
+    "PersonaId": "eligor",
+    "Name": "Eligor",
+    "Level": 31,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 26,
+      "MAG": 21,
+      "END": 24,
+      "AGI": 20,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Fire": "Null"
+    },
+    "BaseSkills": [
+      "Revolution",
+      "Torrent Shot"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 3728,
+    "MaccaYield": 3022,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_cu-chulainn",
+    "PersonaId": "cu-chulainn",
+    "Name": "Cu Chulainn",
+    "Level": 40,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 33,
+      "MAG": 29,
+      "END": 24,
+      "AGI": 26,
+      "LUK": 21
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Pierce": "Resist",
+      "Electric": "Resist",
+      "Wind": "Reflect"
+    },
+    "BaseSkills": [
+      "Torrent Shot",
+      "Matarukaja",
+      "Dekaja"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 7880,
+    "MaccaYield": 4800,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_magatsu-izanagi",
+    "PersonaId": "magatsu-izanagi",
+    "Name": "Magatsu-Izanagi",
+    "Level": 50,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 42,
+      "MAG": 39,
+      "END": 36,
+      "AGI": 28,
+      "LUK": 17
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Pierce": "Resist",
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Magatsu Mandala",
+      "Auto Tarukaja",
+      "Ghastly Wail"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 15250,
+    "MaccaYield": 7250,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_bishamonten",
+    "PersonaId": "bishamonten",
+    "Name": "Bishamonten",
+    "Level": 60,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 50,
+      "MAG": 38,
+      "END": 45,
+      "AGI": 36,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Resist",
+      "Strike": "Null",
+      "Fire": "Null"
+    },
+    "BaseSkills": [
+      "Maragidyne",
+      "Vile Assault",
+      "Pierce Boost"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 26220,
+    "MaccaYield": 10200,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_qitian-dasheng",
+    "PersonaId": "qitian-dasheng",
+    "Name": "Qitian Dasheng",
+    "Level": 67,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 52,
+      "MAG": 38,
+      "END": 39,
+      "AGI": 50,
+      "LUK": 41
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Pierce": "Null"
+    },
+    "BaseSkills": [
+      "Myriad Arrows",
+      "Apt Pupil",
+      "Regenerate 3"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 36427,
+    "MaccaYield": 12562,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_mara",
+    "PersonaId": "mara",
+    "Name": "Mara",
+    "Level": 75,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 60,
+      "MAG": 50,
+      "END": 50,
+      "AGI": 48,
+      "LUK": 39
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Weak",
+      "Strike": "Absorb",
+      "Fire": "Absorb",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [
+      "Maralagidyne",
+      "Myriad Arrows",
+      "Spirit Drain"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 51000,
+    "MaccaYield": 15562,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_masakado",
+    "PersonaId": "masakado",
+    "Name": "Masakado",
+    "Level": 79,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 67,
+      "MAG": 46,
+      "END": 55,
+      "AGI": 43,
+      "LUK": 48
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Tempest Slash",
+      "Myriad Arrows",
+      "Magarudyne"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 59556,
+    "MaccaYield": 17180,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_shiva",
+    "PersonaId": "shiva",
+    "Name": "Shiva",
+    "Level": 82,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 63,
+      "MAG": 57,
+      "END": 48,
+      "AGI": 57,
+      "LUK": 55
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Pierce": "Null",
+      "Light": "Null",
+      "Electric": "Absorb"
+    },
+    "BaseSkills": [
+      "Maziodyne",
+      "Enduring Soul",
+      "Invigorate 3"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 66567,
+    "MaccaYield": 18450,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_chi-you",
+    "PersonaId": "chi-you",
+    "Name": "Chi You",
+    "Level": 86,
+    "Arcana": "Tower",
+    "Stats": {
+      "STR": 69,
+      "MAG": 50,
+      "END": 63,
+      "AGI": 53,
+      "LUK": 60
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Slash": "Resist",
+      "Pierce": "Resist"
+    },
+    "BaseSkills": [
+      "Primal Force",
+      "Vorpal Blade",
+      "Shift Amp"
+    ],
+    "NegotiationType": "Hot-blooded",
+    "ExpYield": 76717,
+    "MaccaYield": 20210,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_neko-shogun",
+    "PersonaId": "neko-shogun",
+    "Name": "Neko Shogun",
+    "Level": 17,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 15,
+      "MAG": 12,
+      "END": 10,
+      "AGI": 14,
+      "LUK": 8
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Electric": "Resist",
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Regenerate 1",
+      "Assault Dive",
+      "Rebellion"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 674,
+    "MaccaYield": 1062,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_setanta",
+    "PersonaId": "setanta",
+    "Name": "Setanta",
+    "Level": 29,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 26,
+      "MAG": 19,
+      "END": 17,
+      "AGI": 21,
+      "LUK": 15
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Dark": "Weak",
+      "Pierce": "Resist",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Torrent Shot",
+      "Auto Tarukaja",
+      "Sharp Student"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 3071,
+    "MaccaYield": 2682,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_cendrillon",
+    "PersonaId": "cendrillon",
+    "Name": "Cendrillon",
+    "Level": 36,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 25,
+      "MAG": 22,
+      "END": 20,
+      "AGI": 28,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Light": "Resist"
+    },
+    "BaseSkills": [
+      "Neuro Slash",
+      "Makouga",
+      "Slash Driver"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 5779,
+    "MaccaYield": 3960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kaiwan",
+    "PersonaId": "kaiwan",
+    "Name": "Kaiwan",
+    "Level": 42,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 23,
+      "MAG": 28,
+      "END": 25,
+      "AGI": 25,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Dark": "Resist"
+    },
+    "BaseSkills": [
+      "Virus Breath",
+      "Eerie Sound",
+      "Spirit Drain"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 9100,
+    "MaccaYield": 5250,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_ganesha",
+    "PersonaId": "ganesha",
+    "Name": "Ganesha",
+    "Level": 51,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 39,
+      "MAG": 31,
+      "END": 34,
+      "AGI": 20,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Pierce": "Null",
+      "Wind": "Absorb"
+    },
+    "BaseSkills": [
+      "Deathbound",
+      "Garudyne",
+      "Revolution"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 16174,
+    "MaccaYield": 7522,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_vanadis",
+    "PersonaId": "vanadis",
+    "Name": "Vanadis",
+    "Level": 58,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 43,
+      "MAG": 38,
+      "END": 30,
+      "AGI": 42,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Masquerade",
+      "Kougaon",
+      "Revolution"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 23707,
+    "MaccaYield": 9570,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_garuda",
+    "PersonaId": "garuda",
+    "Name": "Garuda",
+    "Level": 64,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 45,
+      "MAG": 41,
+      "END": 35,
+      "AGI": 51,
+      "LUK": 36
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Fire": "Resist",
+      "Wind": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Garudyne",
+      "Tentarafoo",
+      "Masukukaja"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 31765,
+    "MaccaYield": 11520,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_houou",
+    "PersonaId": "houou",
+    "Name": "Houou",
+    "Level": 70,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 35,
+      "MAG": 57,
+      "END": 39,
+      "AGI": 54,
+      "LUK": 41
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Electric": "Weak",
+      "Ice": "Resist",
+      "Wind": "Null",
+      "Fire": "Absorb",
+      "Light": "Absorb"
+    },
+    "BaseSkills": [
+      "Maragidyne",
+      "Samarecarm",
+      "Mediarama"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 41510,
+    "MaccaYield": 13650,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_saturnus",
+    "PersonaId": "saturnus",
+    "Name": "Saturnus",
+    "Level": 76,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 43,
+      "MAG": 70,
+      "END": 45,
+      "AGI": 51,
+      "LUK": 41
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Wind": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Inferno",
+      "Maragidyne",
+      "Concentrate"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 53063,
+    "MaccaYield": 15960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_helel",
+    "PersonaId": "helel",
+    "Name": "Helel",
+    "Level": 88,
+    "Arcana": "Star",
+    "Stats": {
+      "STR": 63,
+      "MAG": 63,
+      "END": 62,
+      "AGI": 58,
+      "LUK": 58
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Slash": "Resist",
+      "Strike": "Resist",
+      "Pierce": "Resist",
+      "Light": "Absorb",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [
+      "Makougaon",
+      "Heat Riser",
+      "Salvation"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 82216,
+    "MaccaYield": 21120,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_gurulu",
+    "PersonaId": "gurulu",
+    "Name": "Gurulu",
+    "Level": 14,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 13,
+      "MAG": 8,
+      "END": 10,
+      "AGI": 12,
+      "LUK": 6
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Wind": "Resist",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Eiha",
+      "Power Slash",
+      "Growth 1"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 399,
+    "MaccaYield": 770,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_yamata-no-orochi",
+    "PersonaId": "yamata-no-orochi",
+    "Name": "Yamata-no-Orochi",
+    "Level": 25,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 19,
+      "MAG": 19,
+      "END": 17,
+      "AGI": 13,
+      "LUK": 14
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Ice": "Null",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Bufula",
+      "Zio",
+      "Single Shot"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 2000,
+    "MaccaYield": 2062,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_kaguya",
+    "PersonaId": "kaguya",
+    "Name": "Kaguya",
+    "Level": 34,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 19,
+      "MAG": 32,
+      "END": 28,
+      "AGI": 19,
+      "LUK": 11
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Shining Arrows",
+      "Mediarama",
+      "Divine Grace"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 4885,
+    "MaccaYield": 3570,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_girimekhala",
+    "PersonaId": "girimekhala",
+    "Name": "Girimekhala",
+    "Level": 39,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 36,
+      "MAG": 26,
+      "END": 28,
+      "AGI": 20,
+      "LUK": 20
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Slash": "Reflect",
+      "Pierce": "Reflect"
+    },
+    "BaseSkills": [
+      "Cruel Attack",
+      "Mudoon",
+      "Marakunda"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 7313,
+    "MaccaYield": 4582,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_dionysus",
+    "PersonaId": "dionysus",
+    "Name": "Dionysus",
+    "Level": 49,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 30,
+      "MAG": 38,
+      "END": 26,
+      "AGI": 30,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Resist",
+      "Electric": "Reflect"
+    },
+    "BaseSkills": [
+      "Ziodyne",
+      "Marakukaja",
+      "Makarakarn"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 14361,
+    "MaccaYield": 6982,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_chernobog",
+    "PersonaId": "chernobog",
+    "Name": "Chernobog",
+    "Level": 56,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 48,
+      "MAG": 41,
+      "END": 31,
+      "AGI": 35,
+      "LUK": 32
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Pierce": "Resist",
+      "Slash": "Null",
+      "Dark": "Absorb"
+    },
+    "BaseSkills": [
+      "Tempest Slash",
+      "Maeiga",
+      "Apt Pupil"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 21345,
+    "MaccaYield": 8960,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_seth",
+    "PersonaId": "seth",
+    "Name": "Seth",
+    "Level": 62,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 47,
+      "MAG": 49,
+      "END": 42,
+      "AGI": 29,
+      "LUK": 35
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Light": "Weak",
+      "Dark": "Resist",
+      "Fire": "Reflect"
+    },
+    "BaseSkills": [
+      "Agidyne",
+      "Garudyne",
+      "Tetrakarn"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 28913,
+    "MaccaYield": 10850,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_baal-zebul",
+    "PersonaId": "baal-zebul",
+    "Name": "Baal Zebul",
+    "Level": 72,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 51,
+      "MAG": 56,
+      "END": 45,
+      "AGI": 42,
+      "LUK": 41
+    },
+    "Affinities": {
+      "Fire": "Weak",
+      "Light": "Weak",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Magarudyne",
+      "Eigaon",
+      "Megidola"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 45183,
+    "MaccaYield": 14400,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_sandalphon",
+    "PersonaId": "sandalphon",
+    "Name": "Sandalphon",
+    "Level": 80,
+    "Arcana": "Moon",
+    "Stats": {
+      "STR": 53,
+      "MAG": 53,
+      "END": 67,
+      "AGI": 46,
+      "LUK": 49
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Electric": "Resist",
+      "Slash": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Divine Judgment",
+      "Mediarahan",
+      "Akasha Arts"
+    ],
+    "NegotiationType": "Gloomy",
+    "ExpYield": 61840,
+    "MaccaYield": 17600,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_yatagarasu",
+    "PersonaId": "yatagarasu",
+    "Name": "Yatagarasu",
+    "Level": 24,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 16,
+      "MAG": 16,
+      "END": 14,
+      "AGI": 24,
+      "LUK": 13
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Wind": "Resist",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Growth 1",
+      "Sukunda",
+      "Zan-ei"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 1778,
+    "MaccaYield": 1920,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_thunderbird",
+    "PersonaId": "thunderbird",
+    "Name": "Thunderbird",
+    "Level": 35,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 18,
+      "MAG": 28,
+      "END": 18,
+      "AGI": 32,
+      "LUK": 21
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Light": "Null",
+      "Electric": "Absorb"
+    },
+    "BaseSkills": [
+      "Mazionga",
+      "Shock Boost"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 5317,
+    "MaccaYield": 3762,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_quetzalcoatl",
+    "PersonaId": "quetzalcoatl",
+    "Name": "Quetzalcoatl",
+    "Level": 45,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 25,
+      "MAG": 35,
+      "END": 33,
+      "AGI": 30,
+      "LUK": 25
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Wind": "Resist",
+      "Ice": "Null",
+      "Light": "Null"
+    },
+    "BaseSkills": [
+      "Bufula",
+      "Garudyne",
+      "Growth 3"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 11162,
+    "MaccaYield": 5962,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_jatayu",
+    "PersonaId": "jatayu",
+    "Name": "Jatayu",
+    "Level": 55,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 33,
+      "MAG": 40,
+      "END": 30,
+      "AGI": 50,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Pierce": "Weak",
+      "Electric": "Weak",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Light": "Resist",
+      "Wind": "Absorb"
+    },
+    "BaseSkills": [
+      "Garudyne",
+      "Magarula",
+      "Growth 3"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 20230,
+    "MaccaYield": 8662,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_horus",
+    "PersonaId": "horus",
+    "Name": "Horus",
+    "Level": 67,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 42,
+      "MAG": 53,
+      "END": 34,
+      "AGI": 48,
+      "LUK": 40
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Ice": "Resist",
+      "Electric": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Mahamaon",
+      "Growth 3",
+      "Auto Masuku"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 36427,
+    "MaccaYield": 12562,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_vishnu",
+    "PersonaId": "vishnu",
+    "Name": "Vishnu",
+    "Level": 78,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 65,
+      "MAG": 55,
+      "END": 50,
+      "AGI": 53,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Dark": "Weak",
+      "Ice": "Null",
+      "Electric": "Null",
+      "Light": "Absorb"
+    },
+    "BaseSkills": [
+      "Akasha Arts",
+      "Bufudyne",
+      "Ziodyne"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 57335,
+    "MaccaYield": 16770,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_asura",
+    "PersonaId": "asura",
+    "Name": "Asura",
+    "Level": 85,
+    "Arcana": "Sun",
+    "Stats": {
+      "STR": 75,
+      "MAG": 55,
+      "END": 58,
+      "AGI": 50,
+      "LUK": 54
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Strike": "Null",
+      "Light": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Agidyne",
+      "Akasha Arts",
+      "Unshaken Will"
+    ],
+    "NegotiationType": "Upbeat",
+    "ExpYield": 74115,
+    "MaccaYield": 19762,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_anubis",
+    "PersonaId": "anubis",
+    "Name": "Anubis",
+    "Level": 40,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 27,
+      "MAG": 35,
+      "END": 30,
+      "AGI": 21,
+      "LUK": 26
+    },
+    "Affinities": {
+      "Light": "Null",
+      "Dark": "Null"
+    },
+    "BaseSkills": [
+      "Hamaon",
+      "Mudoon",
+      "Maeiga"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 7880,
+    "MaccaYield": 4800,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_trumpeter",
+    "PersonaId": "trumpeter",
+    "Name": "Trumpeter",
+    "Level": 59,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 44,
+      "MAG": 44,
+      "END": 37,
+      "AGI": 35,
+      "LUK": 33
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Ice": "Null",
+      "Dark": "Null",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Hamaon",
+      "Mudoon",
+      "High Counter"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 24940,
+    "MaccaYield": 9882,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_michael",
+    "PersonaId": "michael",
+    "Name": "Michael",
+    "Level": 70,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 56,
+      "MAG": 48,
+      "END": 46,
+      "AGI": 37,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Heaven's Blade",
+      "Divine Judgment",
+      "Angelic Grace"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 41510,
+    "MaccaYield": 13650,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_satan",
+    "PersonaId": "satan",
+    "Name": "Satan",
+    "Level": 82,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 55,
+      "MAG": 68,
+      "END": 52,
+      "AGI": 43,
+      "LUK": 53
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Fire": "Resist",
+      "Dark": "Absorb",
+      "Ice": "Reflect"
+    },
+    "BaseSkills": [
+      "Diamond Dust",
+      "Maeigaon",
+      "Resist Ailments"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 66567,
+    "MaccaYield": 18450,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_lucifer",
+    "PersonaId": "lucifer",
+    "Name": "Lucifer",
+    "Level": 89,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 70,
+      "MAG": 70,
+      "END": 61,
+      "AGI": 51,
+      "LUK": 55
+    },
+    "Affinities": {
+      "Fire": "Absorb",
+      "Electric": "Absorb",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Megidolaon",
+      "Debilitate",
+      "Brave Blade"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 85040,
+    "MaccaYield": 21582,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_messiah",
+    "PersonaId": "messiah",
+    "Name": "Messiah",
+    "Level": 91,
+    "Arcana": "Judgement",
+    "Stats": {
+      "STR": 65,
+      "MAG": 70,
+      "END": 62,
+      "AGI": 59,
+      "LUK": 59
+    },
+    "Affinities": {
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Electric": "Resist",
+      "Wind": "Resist",
+      "Light": "Reflect",
+      "Dark": "Reflect"
+    },
+    "BaseSkills": [
+      "Megidolaon",
+      "God's Hand",
+      "Salvation"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 90883,
+    "MaccaYield": 22522,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_nidhoggr",
+    "PersonaId": "nidhoggr",
+    "Name": "Nidhoggr",
+    "Level": 47,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 36,
+      "MAG": 29,
+      "END": 43,
+      "AGI": 21,
+      "LUK": 28
+    },
+    "Affinities": {
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Pierce": "Resist",
+      "Dark": "Resist",
+      "Ice": "Null",
+      "Electric": "Null"
+    },
+    "BaseSkills": [
+      "Matarunda",
+      "Mudoon",
+      "Heat Wave"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 12693,
+    "MaccaYield": 6462,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_uriel",
+    "PersonaId": "uriel",
+    "Name": "Uriel",
+    "Level": 57,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 47,
+      "MAG": 42,
+      "END": 35,
+      "AGI": 36,
+      "LUK": 30
+    },
+    "Affinities": {
+      "Ice": "Weak",
+      "Dark": "Weak",
+      "Slash": "Resist",
+      "Electric": "Null",
+      "Light": "Null",
+      "Fire": "Absorb"
+    },
+    "BaseSkills": [
+      "Vorpal Blade",
+      "Kougaon",
+      "Sharp Student"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 22511,
+    "MaccaYield": 9262,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_ananta",
+    "PersonaId": "ananta",
+    "Name": "Ananta",
+    "Level": 73,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 51,
+      "MAG": 51,
+      "END": 68,
+      "AGI": 35,
+      "LUK": 42
+    },
+    "Affinities": {
+      "Slash": "Weak",
+      "Electric": "Weak",
+      "Pierce": "Resist",
+      "Light": "Null",
+      "Ice": "Absorb"
+    },
+    "BaseSkills": [
+      "Vile Assault",
+      "Dekunda",
+      "Auto Maraku"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 47041,
+    "MaccaYield": 14782,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  },
+  {
+    "Id": "E_metatron",
+    "PersonaId": "metatron",
+    "Name": "Metatron",
+    "Level": 87,
+    "Arcana": "Aeon",
+    "Stats": {
+      "STR": 60,
+      "MAG": 65,
+      "END": 65,
+      "AGI": 55,
+      "LUK": 53
+    },
+    "Affinities": {
+      "Electric": "Weak",
+      "Dark": "Weak",
+      "Ice": "Resist",
+      "Fire": "Reflect",
+      "Wind": "Reflect",
+      "Light": "Reflect"
+    },
+    "BaseSkills": [
+      "Makougaon",
+      "Divine Judgment",
+      "God's Hand"
+    ],
+    "NegotiationType": "Stoic",
+    "ExpYield": 79435,
+    "MaccaYield": 20662,
+    "Drops": [
+      {
+        "ItemId": "101",
+        "Chance": 0.15
+      }
+    ]
+  }
+]

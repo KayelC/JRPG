@@ -104,7 +104,7 @@
               "RelativeDocumentMoniker": "JRPG\\FieldManager.cs",
               "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\FieldManager.cs",
               "RelativeToolTip": "JRPG\\FieldManager.cs",
-              "ViewState": "AgIAAJcAAAAAAAAAAIA2wK4AAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAALMAAAAAAAAAAAAWwK4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-31T18:14:58.015Z",
               "EditorCaption": ""
@@ -131,8 +131,7 @@
               "RelativeToolTip": "JRPG\\BattleManager.cs",
               "ViewState": "AgIAADsCAAAAAAAAAAAAwFsCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T07:52:52.809Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-31T07:52:52.809Z"
             },
             {
               "$type": "Document",
@@ -144,8 +143,7 @@
               "RelativeToolTip": "JRPG\\Program.cs",
               "ViewState": "AgIAAFQAAAAAAAAAAAAAwHEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T08:58:40.26Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-29T08:58:40.26Z"
             },
             {
               "$type": "Document",
@@ -157,8 +155,7 @@
               "RelativeToolTip": "JRPG\\InventoryManager.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAAYwEsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T14:36:59.492Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-31T14:36:59.492Z"
             },
             {
               "$type": "Document",
@@ -170,8 +167,7 @@
               "RelativeToolTip": "JRPG\\ShopData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T14:48:53.684Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-01T14:48:53.684Z"
             },
             {
               "$type": "Document",
@@ -183,8 +179,7 @@
               "RelativeToolTip": "JRPG\\Database.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAAAAwHYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T08:03:19.686Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-31T08:03:19.686Z"
             },
             {
               "$type": "Document",
@@ -196,8 +191,7 @@
               "RelativeToolTip": "JRPG\\Combatant.cs",
               "ViewState": "AgIAAPsAAAAAAAAAAAAAwBsBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T08:57:16.357Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-29T08:57:16.357Z"
             },
             {
               "$type": "Document",
@@ -209,8 +203,7 @@
               "RelativeToolTip": "JRPG\\ShopManager.cs",
               "ViewState": "AgIAABYBAAAAAAAAAAAYwDcBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T14:49:52.341Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-01T14:49:52.341Z"
             },
             {
               "$type": "Document",
@@ -222,8 +215,7 @@
               "RelativeToolTip": "JRPG\\EquipmentData.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAA9wBMAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T17:55:08.131Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-01T17:55:08.131Z"
             },
             {
               "$type": "Document",

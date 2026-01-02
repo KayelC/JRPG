@@ -263,3 +263,10 @@ Third Eye,"Increases information displayed on the target (shows whether an attac
 Healing Wave,Party recovers 15% HP when ascending to the next floor.,,,,,Navigator Skills
 Oracle,"Causes one of the following effects in P3/FES: 1. HP restored. 2. SP restored. 3. HP and SP restored. 4. All status ailments cured. 5. HP reduced to 1. Causes one of the following effects in Portable: - Party's average HP is >=50%: 1. Mind Charge AND Power Charge. 2. All -Kaja on the Party. 3. Revolution. - Party's average HP is <50%: 1. HP Restored. (Guaranteed if there are 2 or less party members alive, random if there are 3) 2. Makarakarn AND Tetrakarn on the party. (Guaranteed if there are 4 party members alive, random if there are 3)",,,,,Navigator Skills
 Escape Route,Return to the entrance of Tartarus or the Desert of Doors.,,,,,Navigator Skills
+Kouha,Deals light Light Damage to one foe.,60,95%,,4 SP,Light Skills
+Makouha,Deals light Light Damage to all foes.,60,90%,,10 SP,Light Skills
+Kouga,Deals medium Light Damage to one foe.,140,95%,,8 SP,Light Skills
+Makouga,Deals medium Light Damage to all foes.,140,90%,,16 SP,Light Skills
+Kougaon,Deals heavy Light Damage to one foe.,350,95%,,15 SP,Light Skills
+Makougaon,Deals heavy Light Damage to all foes.,350,90%,,25 SP,Light Skills
+Divine Judgment,Reduces 1 foe's HP by 50%.,-,90%,,38 SP,Light Skills

@@ -724,6 +724,69 @@
       "Critical": NaN,
       "Cost": "40 SP",
       "Category": "Light Skills"
+    },
+    {
+      "Skill": "Kouha",
+      "Effect": "Deals light Light Damage to one foe.",
+      "Power": "60",
+      "Accuracy": "95%",
+      "Critical": NaN,
+      "Cost": "4 SP",
+      "Category": "Light Skills"
+    },
+    {
+      "Skill": "Makouha",
+      "Effect": "Deals light Light Damage to all foes.",
+      "Power": "60",
+      "Accuracy": "90%",
+      "Critical": NaN,
+      "Cost": "10 SP",
+      "Category": "Light Skills"
+    },
+    {
+      "Skill": "Kouga",
+      "Effect": "Deals medium Light Damage to one foe.",
+      "Power": "140",
+      "Accuracy": "95%",
+      "Critical": NaN,
+      "Cost": "8 SP",
+      "Category": "Light Skills"
+    },
+    {
+      "Skill": "Makouga",
+      "Effect": "Deals medium Light Damage to all foes.",
+      "Power": "140",
+      "Accuracy": "90%",
+      "Critical": NaN,
+      "Cost": "16 SP",
+      "Category": "Light Skills"
+    },
+    {
+      "Skill": "Kougaon",
+      "Effect": "Deals heavy Light Damage to one foe.",
+      "Power": "350",
+      "Accuracy": "95%",
+      "Critical": NaN,
+      "Cost": "15 SP",
+      "Category": "Light Skills"
+    },
+    {
+      "Skill": "Makougaon",
+      "Effect": "Deals heavy Light Damage to all foes.",
+      "Power": "350",
+      "Accuracy": "90%",
+      "Critical": NaN,
+      "Cost": "25 SP",
+      "Category": "Light Skills"
+    },
+    {
+      "Skill": "Divine Judgment",
+      "Effect": "Reduces 1 foe's HP by 50%.",
+      "Power": NaN,
+      "Accuracy": "90%",
+      "Critical": NaN,
+      "Cost": "38 SP",
+      "Category": "Light Skills"
     }
   ],
   "Navigator Skills": [

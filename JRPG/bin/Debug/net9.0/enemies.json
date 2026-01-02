@@ -17,8 +17,11 @@
       "Dark": "Weak",
       "Fire": "Resist"
     },
-    "BaseSkills": [
-      "Agi"
+    "Skills": [
+      "Agi",
+      "Dia",
+      "Bash",
+      "Tarunda"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 5,
@@ -50,10 +53,13 @@
       "Strike": "Resist",
       "Dark": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bash",
       "Evil Touch",
-      "Raging Tiger"
+      "Raging Tiger",
+      "Mudo",
+      "Fire Break",
+      "Survive Light"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 267,
@@ -82,10 +88,14 @@
       "Light": "Weak",
       "Dark": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Eiga",
       "Fatal End",
-      "Dark Driver"
+      "Dark Driver",
+      "Evil Smile",
+      "Vacuum Slash",
+      "Maeiga",
+      "Survival Trick"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 1575,
@@ -117,10 +127,14 @@
       "Strike": "Resist",
       "Fire": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Assault Dive",
       "Pulinpa",
-      "Rebellion"
+      "Rebellion",
+      "Null Distress",
+      "Sexy Dance",
+      "Confuse Boost",
+      "Resist Pierce"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 2238,
@@ -151,10 +165,15 @@
       "Ice": "Absorb",
       "Dark": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maeiga",
       "Bufula",
-      "Matarukaja"
+      "Matarukaja",
+      "Agidyne",
+      "Dark Boost",
+      "Bufudyne",
+      "Fast Heal",
+      "Resist Light"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 6263,
@@ -183,10 +202,14 @@
       "Light": "Weak",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Blade of Fury",
       "Matarunda",
-      "Multi-Target Boost"
+      "Multi-Target Boost",
+      "Deathbound",
+      "Null Rage",
+      "Life Aid",
+      "Tempest Slash"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 8474,
@@ -216,10 +239,14 @@
       "Electric": "Resist",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Cross Slash",
       "Ziodyne",
-      "Marakukaja"
+      "Marakukaja",
+      "Matarukaja",
+      "Blade of Fury",
+      "Evade Slash",
+      "Soul Shift"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 11909,
@@ -247,10 +274,14 @@
     "Affinities": {
       "Slash": "Weak"
     },
-    "BaseSkills": [
+    "Skills": [
       "Megido",
       "Tetrakarn",
-      "Invigorate 2"
+      "Invigorate 2",
+      "Agidyne",
+      "Fast Heal",
+      "Megidola",
+      "Null Slash"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 19163,
@@ -281,11 +312,15 @@
       "Ice": "Null",
       "Wind": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agidyne",
       "Bufudyne",
       "Ziodyne",
-      "Garudyne"
+      "Garudyne",
+      "Megidola",
+      "Single-Target Boost",
+      "Soul Shift",
+      "Spell Master"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 39755,
@@ -316,10 +351,14 @@
       "Wind": "Null",
       "Pierce": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Brave Blade",
       "Vorpal Blade",
-      "Charge"
+      "Charge",
+      "Auto Mataru",
+      "High Counter",
+      "Slash Amp",
+      "Repel Light"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 55172,
@@ -352,10 +391,14 @@
       "Light": "Null",
       "Dark": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Sinful Shell",
       "Maeigaon",
-      "Survival Trick"
+      "Survival Trick",
+      "Primal Force",
+      "Life Aid",
+      "Heat Riser",
+      "Almighty Boost"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 85040,
@@ -391,7 +434,7 @@
       "Light": "Resist",
       "Dark": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Victory Cry"
     ],
     "NegotiationType": "Stoic",
@@ -421,37 +464,31 @@
       "Wind": "Weak",
       "Fire": "Resist"
     },
-    "BaseSkills": [
-      "Power Slash"
+    "Skills": [
+      "Power Slash",
+      "Agi",
+      "Bash",
+      "Rakukaja",
+      "Vacuum Slash",
+      "Counter",
+      "Assault Dive",
+      "Maragi",
+      "Torrent Shot",
+      "Agilao",
+      "Counterstrike",
+      "Fire Break",
+      "Blade of Fury",
+      "Shift Boost",
+      "Gigantic Fist",
+      "Marakukaja",
+      "Deathbound",
+      "High Counter",
+      "Vile Assault",
+      "Agidyne",
+      "Regenerate 3",
+      "Brave Blade",
+      "Vorpal Blade"
     ],
-    "NegotiationType": "Upbeat",
-    "ExpYield": 5,
-    "MaccaYield": 22,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_trismegistus",
-    "PersonaId": "trismegistus",
-    "Name": "Trismegistus",
-    "Level": 1,
-    "Arcana": "Magician",
-    "Stats": {
-      "STR": 3,
-      "MAG": 1,
-      "END": 2,
-      "AGI": 3,
-      "LUK": 1
-    },
-    "Affinities": {
-      "Wind": "Weak",
-      "Fire": "Null"
-    },
-    "BaseSkills": [],
     "NegotiationType": "Upbeat",
     "ExpYield": 5,
     "MaccaYield": 22,
@@ -479,9 +516,13 @@
       "Electric": "Weak",
       "Wind": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agi",
-      "Rakunda"
+      "Rakunda",
+      "Power Slash",
+      "Resist Distress",
+      "Marin Karin",
+      "Maragi"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 18,
@@ -510,9 +551,13 @@
       "Fire": "Weak",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufu",
-      "Pulinpa"
+      "Pulinpa",
+      "Mabufu",
+      "Sonic Punch",
+      "Freeze Boost",
+      "Ice Boost"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 101,
@@ -541,10 +586,13 @@
       "Ice": "Weak",
       "Fire": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agi",
       "Maragi",
-      "Provoke"
+      "Provoke",
+      "Rage Boost",
+      "Dodge Ice",
+      "Agilao"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 480,
@@ -574,10 +622,13 @@
       "Fire": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maragi",
       "Baisudi",
-      "Rakunda"
+      "Rakunda",
+      "Agilao",
+      "Resist Freeze",
+      "Fire Boost"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 917,
@@ -606,10 +657,13 @@
       "Electric": "Weak",
       "Wind": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garula",
       "Magarula",
-      "Miracle Punch"
+      "Miracle Punch",
+      "Dormina",
+      "Wind Boost",
+      "Survival Trick"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 1387,
@@ -638,10 +692,14 @@
       "Ice": "Weak",
       "Fire": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agilao",
       "Recarm",
-      "Rakukaja"
+      "Rakukaja",
+      "Maragilao",
+      "Spirit Drain",
+      "Fire Boost",
+      "Dodge Ice"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 3071,
@@ -671,10 +729,13 @@
       "Dark": "Resist",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agilao",
       "Dekaja",
-      "Auto-Sukukaja"
+      "Auto-Sukukaja",
+      "Maragilao",
+      "Fire Break",
+      "Makarakarn"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 7313,
@@ -704,10 +765,13 @@
       "Light": "Resist",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garudyne",
       "Magarudyne",
-      "Wind Boost"
+      "Wind Boost",
+      "Recarmdra",
+      "Evade Electric",
+      "Wind Amp"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 9758,
@@ -738,10 +802,14 @@
       "Fire": "Resist",
       "Strike": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Eigaon",
       "Mudoon",
-      "Bloody Glee"
+      "Bloody Glee",
+      "Agidyne",
+      "Poison Mist",
+      "Maeigaon",
+      "Repel Strike"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 15250,
@@ -770,10 +838,13 @@
       "Ice": "Weak",
       "Fire": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agidyne",
       "Maragidyne",
-      "Fire Amp"
+      "Fire Amp",
+      "Ragnarok",
+      "Deathbound",
+      "Tetrakarn"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 26220,
@@ -804,10 +875,14 @@
       "Electric": "Resist",
       "Slash": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Myriad Arrows",
       "Matarukaja",
-      "Apt Pupil"
+      "Apt Pupil",
+      "Ali Dance",
+      "Slash Amp",
+      "Power Charge",
+      "Brave Blade"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 48991,
@@ -836,9 +911,12 @@
       "Fire": "Weak",
       "Ice": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufu",
-      "Patra"
+      "Patra",
+      "Sukukaja",
+      "Me Patra",
+      "Baisudi"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 10,
@@ -869,10 +947,13 @@
       "Ice": "Null",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Zio",
       "Dia",
-      "Me Patra"
+      "Me Patra",
+      "Media",
+      "Hama",
+      "Traesto"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 214,
@@ -898,36 +979,30 @@
       "LUK": 12
     },
     "Affinities": {},
-    "BaseSkills": [
+    "Skills": [
       "Full Analysis",
       "Analysis Plus",
-      "Analysis Mastery"
+      "Analysis Mastery",
+      "Jamming",
+      "Analyze",
+      "Healing Wave",
+      "Support Scan",
+      "Medical Scan",
+      "Full Analysis",
+      "Support Mastery",
+      "Third Eye",
+      "Oracle",
+      "Tactical Mastery",
+      "Oracle Mastery",
+      "Analysis Plus",
+      "Tartarus Search",
+      "Full Support",
+      "Analysis Mastery",
+      "High Healing Wave",
+      "Tartarus Mastery",
+      "Analysis Perfection",
+      "Complete Support"
     ],
-    "NegotiationType": "Formal",
-    "ExpYield": 789,
-    "MaccaYield": 1170,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_juno",
-    "PersonaId": "juno",
-    "Name": "Juno",
-    "Level": 18,
-    "Arcana": "Priestess",
-    "Stats": {
-      "STR": 9,
-      "MAG": 15,
-      "END": 12,
-      "AGI": 13,
-      "LUK": 12
-    },
-    "Affinities": {},
-    "BaseSkills": [],
     "NegotiationType": "Formal",
     "ExpYield": 789,
     "MaccaYield": 1170,
@@ -955,10 +1030,14 @@
       "Wind": "Weak",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Media",
       "Zio",
-      "Pulinpa"
+      "Pulinpa",
+      "Mazio",
+      "Dodge Wind",
+      "Me Patra",
+      "Recarm"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 1060,
@@ -987,10 +1066,14 @@
       "Electric": "Weak",
       "Strike": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Freila",
       "Vajra Blast",
-      "Mafreila"
+      "Mafreila",
+      "Energy Shower",
+      "Nuclear Boost",
+      "Flash Bomb",
+      "Dodge Electric"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 2774,
@@ -1020,10 +1103,13 @@
       "Light": "Resist",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufula",
       "Media",
-      "Tentarafoo"
+      "Tentarafoo",
+      "Mabufula",
+      "Invigorate 2",
+      "Evade Electric"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 4092,
@@ -1055,10 +1141,13 @@
       "Ice": "Resist",
       "Light": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufula",
       "Diara",
-      "Confuse Boost"
+      "Confuse Boost",
+      "Mediarama",
+      "Bufudyne",
+      "Amrita Drop"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 8474,
@@ -1087,10 +1176,13 @@
       "Fire": "Weak",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mediarama",
       "Hamaon",
-      "Dodge Fire"
+      "Dodge Fire",
+      "Bufudyne",
+      "Elec Wall",
+      "Mabufudyne"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 13507,
@@ -1120,10 +1212,13 @@
       "Ice": "Resist",
       "Strike": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Freidyne",
       "Mafreidyne",
-      "Nuclear Boost"
+      "Nuclear Boost",
+      "Mediarahan",
+      "Evade Electric",
+      "Nuclear Amp"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 18130,
@@ -1154,10 +1249,13 @@
       "Light": "Resist",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mediarahan",
       "Tetrakarn",
-      "Ali Dance"
+      "Ali Dance",
+      "Samarecarm",
+      "Invigorate 3",
+      "Bufudyne"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 27546,
@@ -1189,10 +1287,13 @@
       "Pierce": "Null",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufudyne",
       "Magarudyne",
-      "Ice Amp"
+      "Ice Amp",
+      "Amrita Shower",
+      "Power Charge",
+      "Wind Amp"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 51000,
@@ -1221,40 +1322,28 @@
       "Fire": "Weak",
       "Ice": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufu",
       "Mabufu",
       "Rakunda",
-      "Marin Karin"
+      "Marin Karin",
+      "Bufula",
+      "Eerie Sound",
+      "Fatal End",
+      "Spirit Drain",
+      "Ice Break",
+      "Tentarafoo",
+      "Mabufula",
+      "Ice Boost",
+      "Neuro Slash",
+      "Freeze Boost",
+      "Bufudyne",
+      "Concentrate",
+      "Marakunda",
+      "Ailment Boost",
+      "Mabufudyne",
+      "Diamond Dust"
     ],
-    "NegotiationType": "Formal",
-    "ExpYield": 1060,
-    "MaccaYield": 1400,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_artemisia",
-    "PersonaId": "artemisia",
-    "Name": "Artemisia",
-    "Level": 20,
-    "Arcana": "Empress",
-    "Stats": {
-      "STR": 13,
-      "MAG": 17,
-      "END": 11,
-      "AGI": 15,
-      "LUK": 11
-    },
-    "Affinities": {
-      "Fire": "Weak",
-      "Ice": "Null"
-    },
-    "BaseSkills": [],
     "NegotiationType": "Formal",
     "ExpYield": 1060,
     "MaccaYield": 1400,
@@ -1282,10 +1371,14 @@
       "Fire": "Weak",
       "Wind": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Media",
       "Diarama",
-      "Patra"
+      "Patra",
+      "Spirit Drain",
+      "Me Patra",
+      "Marin Karin",
+      "Null Charm"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 1216,
@@ -1315,9 +1408,13 @@
       "Pierce": "Resist",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Sexy Dance",
-      "Fatal End"
+      "Fatal End",
+      "Blade of Fury",
+      "Charm Boost",
+      "Multi-Target Boost",
+      "Deathbound"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 4092,
@@ -1346,10 +1443,14 @@
       "Fire": "Weak",
       "Pierce": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Torrent Shot",
       "Amrita Drop",
-      "Pierce Driver"
+      "Pierce Driver",
+      "Fast Heal",
+      "Tentarafoo",
+      "Tetrakarn",
+      "Makarakarn"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 5779,
@@ -1379,10 +1480,13 @@
       "Ice": "Absorb",
       "Light": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mediarama",
       "Samarecarm",
-      "Me Patra"
+      "Me Patra",
+      "Diarahan",
+      "Amrita Shower",
+      "Invigorate 3"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 13507,
@@ -1412,10 +1516,14 @@
       "Dark": "Resist",
       "Pierce": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "One-shot Kill",
       "Tetrakarn",
-      "Makarakarn"
+      "Makarakarn",
+      "Insta-Heal",
+      "Amrita Shower",
+      "Single-Target Boost",
+      "Myriad Arrows"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 19163,
@@ -1446,10 +1554,14 @@
       "Light": "Null",
       "Ice": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufudyne",
       "Ziodyne",
-      "Diarahan"
+      "Diarahan",
+      "Divine Judgment",
+      "Evade Wind",
+      "Ice Amp",
+      "Diamond Dust"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 28913,
@@ -1479,10 +1591,14 @@
       "Wind": "Resist",
       "Ice": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufudyne",
       "Tetrakarn",
-      "Vorpal Blade"
+      "Vorpal Blade",
+      "Diamond Dust",
+      "Maeigaon",
+      "Ice Amp",
+      "Drain Fire"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 38069,
@@ -1514,10 +1630,14 @@
       "Dark": "Null",
       "Electric": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mamudoon",
       "Ziodyne",
-      "Sexy Dance"
+      "Sexy Dance",
+      "Mudo Boost",
+      "Maziodyne",
+      "Debilitate",
+      "Diamond Dust"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 55172,
@@ -1550,10 +1670,14 @@
       "Slash": "Reflect",
       "Strike": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufudyne",
       "Maziodyne",
-      "Makarakarn"
+      "Makarakarn",
+      "Repel Fire",
+      "Diamond Dust",
+      "Inferno",
+      "Repel Pierce"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 71542,
@@ -1582,10 +1706,13 @@
       "Electric": "Weak",
       "Ice": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufu",
       "Bash",
-      "Tarukaja"
+      "Tarukaja",
+      "Single Shot",
+      "Sharp Student",
+      "Dodge Ice"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 76,
@@ -1614,40 +1741,29 @@
       "Ice": "Weak",
       "Electric": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Zio",
       "Dia",
       "Sonic Punch",
-      "Mazio"
+      "Mazio",
+      "Tarunda",
+      "Shock Boost",
+      "Sukukaja",
+      "Diarama",
+      "Zionga",
+      "Elec Boost",
+      "Elec Break",
+      "Gigantic Fist",
+      "Mazionga",
+      "Matarunda",
+      "Masukukaja",
+      "Ziodyne",
+      "Diarahan",
+      "Evade Ice",
+      "Maziodyne",
+      "God's Hand",
+      "Elec Amp"
     ],
-    "NegotiationType": "Formal",
-    "ExpYield": 399,
-    "MaccaYield": 770,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_caesar",
-    "PersonaId": "caesar",
-    "Name": "Caesar",
-    "Level": 14,
-    "Arcana": "Emperor",
-    "Stats": {
-      "STR": 12,
-      "MAG": 10,
-      "END": 9,
-      "AGI": 11,
-      "LUK": 7
-    },
-    "Affinities": {
-      "Ice": "Weak",
-      "Electric": "Null"
-    },
-    "BaseSkills": [],
     "NegotiationType": "Formal",
     "ExpYield": 399,
     "MaccaYield": 770,
@@ -1677,9 +1793,13 @@
       "Dark": "Resist",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Zio",
-      "Media"
+      "Media",
+      "Mazio",
+      "Zan-ei",
+      "Survive Dark",
+      "Zionga"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 571,
@@ -1709,10 +1829,14 @@
       "Slash": "Resist",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mazio",
       "Fatal End",
-      "Elec Break"
+      "Elec Break",
+      "Zionga",
+      "Auto Tarukaja",
+      "Getsu-ei",
+      "Mazionga"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 1575,
@@ -1741,10 +1865,14 @@
       "Fire": "Weak",
       "Ice": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufula",
       "Getsu-ei",
-      "Ice Driver"
+      "Ice Driver",
+      "Shift Boost",
+      "Counterstrike",
+      "Blade of Fury",
+      "Mabufula"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 2496,
@@ -1773,10 +1901,14 @@
       "Fire": "Weak",
       "Ice": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufula",
       "Freeze Boost",
-      "Rakukaja"
+      "Rakukaja",
+      "Mabufula",
+      "Ice Break",
+      "Marakukaja",
+      "Null Ice"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 4885,
@@ -1806,10 +1938,14 @@
       "Pierce": "Resist",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mazionga",
       "Cruel Attack",
-      "Tentarafoo"
+      "Tentarafoo",
+      "Revolution",
+      "Elec Break",
+      "Confuse Boost",
+      "Null Pierce"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 9758,
@@ -1839,10 +1975,14 @@
       "Wind": "Resist",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Ice Age",
       "Tempest Slash",
-      "Masukukaja"
+      "Masukukaja",
+      "Bufudyne",
+      "High Counter",
+      "Shift Amp",
+      "Vorpal Blade"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 12693,
@@ -1874,10 +2014,14 @@
       "Electric": "Resist",
       "Dark": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufula",
       "Maeiga",
-      "Dodge Light"
+      "Dodge Light",
+      "Mudoon",
+      "Stagnant Air",
+      "Endure Light",
+      "Maeigaon"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 18130,
@@ -1907,10 +2051,14 @@
       "Electric": "Null",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Ziodyne",
       "Elec Boost",
-      "Elec Break"
+      "Elec Break",
+      "Maziodyne",
+      "Eerie Sound",
+      "Auto Masuku",
+      "Drain Elec"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 30313,
@@ -1939,10 +2087,14 @@
       "Wind": "Weak",
       "Electric": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maziodyne",
       "Primal Force",
-      "Marakunda"
+      "Marakunda",
+      "Thunder Reign",
+      "Elec Amp",
+      "Concentrate",
+      "Spell Master"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 48991,
@@ -1971,9 +2123,12 @@
       "Dark": "Weak",
       "Electric": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Zio",
-      "Dia"
+      "Dia",
+      "Rebellion",
+      "Resist Shock",
+      "Auto Rakukaja"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 76,
@@ -2003,10 +2158,13 @@
       "Fire": "Resist",
       "Wind": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Single Shot",
       "Agi",
-      "Rakukaja"
+      "Rakukaja",
+      "Power Slash",
+      "Dodge Fire",
+      "Assault Dive"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 328,
@@ -2037,9 +2195,13 @@
       "Light": "Resist",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufu",
-      "Assault Dive"
+      "Assault Dive",
+      "Rakukaja",
+      "Ice Boost",
+      "Dodge Fire",
+      "Herculean Strike"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 1575,
@@ -2069,10 +2231,14 @@
       "Wind": "Resist",
       "Fire": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agilao",
       "Swift Strike",
-      "Auto Sukukaja"
+      "Auto Sukukaja",
+      "Crit Rate Boost",
+      "Apt Pupil",
+      "Herculean Strike",
+      "Evade Wind"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 4476,
@@ -2098,12 +2264,21 @@
       "LUK": 17
     },
     "Affinities": {},
-    "BaseSkills": [
+    "Skills": [
       "Fatal End",
       "Blade of Fury",
       "Heat Wave",
       "Bloody Charge",
-      "Endure"
+      "Endure",
+      "Counterstrike",
+      "Regenerate 3",
+      "Deathbound",
+      "High Counter",
+      "Brave Blade",
+      "Debilitate",
+      "God's Hand",
+      "Akasha Arts",
+      "Firm Stance"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 7313,
@@ -2134,10 +2309,14 @@
       "Electric": "Null",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Zionga",
       "Mahama",
-      "Diarama"
+      "Diarama",
+      "Mazionga",
+      "Soul Shift",
+      "Megido",
+      "Concentrate"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 7880,
@@ -2167,10 +2346,14 @@
       "Electric": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mazionga",
       "Deathbound",
-      "Marin Karin"
+      "Marin Karin",
+      "Ziodyne",
+      "Matarukaja",
+      "Vile Assault",
+      "Null Strike"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 13507,
@@ -2199,10 +2382,14 @@
       "Dark": "Weak",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Hamaon",
       "Diarahan",
-      "Growth 3"
+      "Growth 3",
+      "Samsara",
+      "Invigorate 3",
+      "Hama Boost",
+      "Null Dark"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 24940,
@@ -2231,10 +2418,14 @@
       "Light": "Null",
       "Electric": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Makougaon",
       "Mediarahan",
-      "Invigorate 3"
+      "Invigorate 3",
+      "Concentrate",
+      "Makarakarn",
+      "Tetrakarn",
+      "Spell Master"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 43336,
@@ -2263,38 +2454,32 @@
       "Electric": "Weak",
       "Wind": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garu",
-      "Dia"
+      "Dia",
+      "Patra",
+      "Pulinpa",
+      "Media",
+      "Magaru",
+      "Sukunda",
+      "Diarama",
+      "Garula",
+      "Recarm",
+      "Wind Break",
+      "Me Patra",
+      "Magarula",
+      "Mediarama",
+      "Poison Mist",
+      "Amrita Drop",
+      "Garudyne",
+      "Diarahan",
+      "Samarecarm",
+      "Masukunda",
+      "Amrita Shower",
+      "Magarudyne",
+      "Mediarahan",
+      "Wind Amp"
     ],
-    "NegotiationType": "Upbeat",
-    "ExpYield": 5,
-    "MaccaYield": 22,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_isis",
-    "PersonaId": "isis",
-    "Name": "Isis",
-    "Level": 1,
-    "Arcana": "Lovers",
-    "Stats": {
-      "STR": 2,
-      "MAG": 3,
-      "END": 1,
-      "AGI": 2,
-      "LUK": 2
-    },
-    "Affinities": {
-      "Electric": "Weak",
-      "Wind": "Null"
-    },
-    "BaseSkills": [],
     "NegotiationType": "Upbeat",
     "ExpYield": 5,
     "MaccaYield": 22,
@@ -2322,9 +2507,12 @@
       "Ice": "Weak",
       "Electric": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Dia",
-      "Pulinpa"
+      "Pulinpa",
+      "Zio",
+      "Tarukaja",
+      "Resist Confuse"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 10,
@@ -2354,9 +2542,12 @@
       "Electric": "Weak",
       "Ice": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bewilder",
-      "Bufu"
+      "Bufu",
+      "Dia",
+      "Baisudi",
+      "Sharp Student"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 40,
@@ -2387,10 +2578,13 @@
       "Light": "Resist",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Power Slash",
       "Zio",
-      "Sukukaja"
+      "Sukukaja",
+      "Fatal End",
+      "Mazio",
+      "Survive Dark"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 328,
@@ -2419,10 +2613,14 @@
       "Ice": "Weak",
       "Fire": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agilao",
       "Tarunda",
-      "Fire Driver"
+      "Fire Driver",
+      "Sexy Dance",
+      "Diarama",
+      "Charm Boost",
+      "Maragion"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 917,
@@ -2453,10 +2651,14 @@
       "Electric": "Resist",
       "Wind": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Marin Karin",
       "Charm Boost",
-      "Magaru"
+      "Magaru",
+      "Sexy Dance",
+      "Sharp Student",
+      "Growth 1",
+      "Dodge Slash"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 1575,
@@ -2486,10 +2688,14 @@
       "Fire": "Resist",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Me Patra",
       "Mazio",
-      "Maragi"
+      "Maragi",
+      "Multi-Target Boost",
+      "Dodge Strike",
+      "Dodge Pierce",
+      "Matarunda"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 2774,
@@ -2521,10 +2727,14 @@
       "Electric": "Resist",
       "Wind": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Diarama",
       "Mabufu",
-      "Ice Break"
+      "Ice Break",
+      "Mediarama",
+      "Dekunda",
+      "Null Shock",
+      "Divine Grace"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 5779,
@@ -2554,10 +2764,14 @@
       "Electric": "Resist",
       "Fire": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Blazing Hell",
       "Sexy Dance",
-      "Matarunda"
+      "Matarunda",
+      "Stagnant Air",
+      "Agidyne",
+      "Concentrate",
+      "Drain Fire"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 9100,
@@ -2587,9 +2801,13 @@
       "Light": "Resist",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufudyne",
-      "Mabufula"
+      "Mabufula",
+      "Magarula",
+      "Freeze Boost",
+      "Concentrate",
+      "Mabufudyne"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 14361,
@@ -2621,10 +2839,14 @@
       "Wind": "Null",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Tempest Slash",
       "Mediarama",
-      "Dekaja"
+      "Dekaja",
+      "Auto Maraku",
+      "Magarudyne",
+      "Angelic Grace",
+      "Heat Riser"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 26220,
@@ -2655,10 +2877,14 @@
       "Light": "Resist",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Makougaon",
       "Garudyne",
-      "Diarahan"
+      "Diarahan",
+      "Mediarahan",
+      "Auto Maraku",
+      "Light Amp",
+      "Spell Master"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 36427,
@@ -2688,10 +2914,13 @@
       "Strike": "Resist",
       "Fire": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bash",
       "Rakukaja",
-      "Provoke"
+      "Provoke",
+      "Agi",
+      "Rakunda",
+      "Rage Boost"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 55,
@@ -2721,9 +2950,13 @@
       "Strike": "Resist",
       "Fire": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Power Slash",
-      "Bewilder"
+      "Bewilder",
+      "Agi",
+      "Sonic Punch",
+      "Sukunda",
+      "Auto Tarukaja"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 132,
@@ -2752,10 +2985,14 @@
       "Wind": "Weak",
       "Strike": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bash",
       "Zio",
-      "Crit Rate Boost"
+      "Crit Rate Boost",
+      "Auto Tarukaja",
+      "Assault Dive",
+      "Rebellion",
+      "Swift Strike"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 399,
@@ -2784,10 +3021,14 @@
       "Wind": "Weak",
       "Electric": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mazio",
       "Assault Dive",
-      "Elec Driver"
+      "Elec Driver",
+      "Tarukaja",
+      "Shock Boost",
+      "Zionga",
+      "Swift Strike"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 789,
@@ -2817,10 +3058,14 @@
       "Slash": "Resist",
       "Fire": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Makouha",
       "Zan-ei",
-      "Rakunda"
+      "Rakunda",
+      "Agilao",
+      "Hama",
+      "Tentarafoo",
+      "Swift Strike"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 1778,
@@ -2849,41 +3094,27 @@
       "Electric": "Weak",
       "Pierce": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Arrow Rain",
       "Swift Strike",
       "Tarukaja",
       "Rakukaja",
-      "Dekunda"
+      "Dekunda",
+      "Cruel Attack",
+      "Diarama",
+      "Fast Heal",
+      "Marakukaja",
+      "Myriad Arrows",
+      "Null Dizzy",
+      "Matarukaja",
+      "Heat Wave",
+      "Diarahan",
+      "Insta-Heal",
+      "Primal Force",
+      "Enduring Soul",
+      "Akasha Arts",
+      "Resist Phys"
     ],
-    "NegotiationType": "Hot-blooded",
-    "ExpYield": 2496,
-    "MaccaYield": 2362,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_athena",
-    "PersonaId": "athena",
-    "Name": "Athena",
-    "Level": 27,
-    "Arcana": "Chariot",
-    "Stats": {
-      "STR": 21,
-      "MAG": 15,
-      "END": 24,
-      "AGI": 15,
-      "LUK": 13
-    },
-    "Affinities": {
-      "Electric": "Weak",
-      "Pierce": "Null"
-    },
-    "BaseSkills": [],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 2496,
     "MaccaYield": 2362,
@@ -2910,10 +3141,14 @@
     "Affinities": {
       "Strike": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bash",
       "Counter",
-      "Regenerate 1"
+      "Regenerate 1",
+      "Swift Strike",
+      "Anti-Electric Master",
+      "Counterstrike",
+      "Dizzy Boost"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 3728,
@@ -2943,10 +3178,14 @@
       "Fire": "Resist",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Wild Thunder",
       "Deathbound",
-      "Auto Tarukaja"
+      "Auto Tarukaja",
+      "Auto Rebellion",
+      "Charge",
+      "Gigantic Fist",
+      "Auto Mataru"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 7880,
@@ -2979,10 +3218,14 @@
       "Pierce": "Null",
       "Strike": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Torrent Shot",
       "Dekaja",
-      "Kouga"
+      "Kouga",
+      "Tetrakarn",
+      "Matarukaja",
+      "Evade Wind",
+      "Null Fire"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 11162,
@@ -3013,10 +3256,14 @@
       "Pierce": "Resist",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Herculean Strike",
       "Magarula",
-      "Masukukaja"
+      "Masukukaja",
+      "Gigantic Fist",
+      "Auto Tarukaja",
+      "Vile Assault",
+      "Enduring Soul"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 17135,
@@ -3046,10 +3293,13 @@
       "Strike": "Null",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Ziodyne",
       "Maziodyne",
-      "Gigantic Fist"
+      "Gigantic Fist",
+      "High Counter",
+      "Elec Amp",
+      "God's Hand"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 31765,
@@ -3079,9 +3329,12 @@
       "Electric": "Resist",
       "Light": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garu",
-      "Sukukaja"
+      "Sukukaja",
+      "Single Shot",
+      "Patra",
+      "Resist Charm"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 27,
@@ -3112,10 +3365,13 @@
       "Slash": "Resist",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Kouha",
       "Single Shot",
-      "Baisudi"
+      "Baisudi",
+      "Sukukaja",
+      "Holy Arrow",
+      "Apt Pupil"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 170,
@@ -3145,10 +3401,13 @@
       "Fire": "Resist",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Hama",
       "Kouha",
-      "Holy Arrow"
+      "Holy Arrow",
+      "Recarm",
+      "Dodge Elec",
+      "Mahama"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 571,
@@ -3179,10 +3438,14 @@
       "Wind": "Resist",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Hama",
       "Magaru",
-      "Arrow Rain"
+      "Arrow Rain",
+      "Mahama",
+      "Torrent Shot",
+      "Dodge Dark",
+      "Revolution"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 2000,
@@ -3212,9 +3475,13 @@
       "Wind": "Resist",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Magaru",
-      "Kouga"
+      "Kouga",
+      "Null Poison",
+      "Mahama",
+      "Light Boost",
+      "Makouga"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 4092,
@@ -3243,10 +3510,14 @@
       "Dark": "Weak",
       "Light": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Kouga",
       "Eiga",
-      "Light Driver"
+      "Light Driver",
+      "Megido",
+      "Resist Ailments",
+      "Kougaon",
+      "Eigaon"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 6263,
@@ -3275,41 +3546,23 @@
       "Dark": "Weak",
       "Light": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Zionga",
       "Kougaon",
       "Mediarama",
       "Makarakarn",
-      "Dekaja"
+      "Dekaja",
+      "Makouga",
+      "Tetrakarn",
+      "Samarecarm",
+      "Vile Assault",
+      "Ziodyne",
+      "Mahamaon",
+      "Mediarahan",
+      "Makougaon",
+      "Light Amp",
+      "Heat Riser"
     ],
-    "NegotiationType": "Formal",
-    "ExpYield": 6263,
-    "MaccaYield": 4162,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_kala-nemi",
-    "PersonaId": "kala-nemi",
-    "Name": "Kala-Nemi",
-    "Level": 37,
-    "Arcana": "Justice",
-    "Stats": {
-      "STR": 19,
-      "MAG": 28,
-      "END": 23,
-      "AGI": 25,
-      "LUK": 23
-    },
-    "Affinities": {
-      "Dark": "Weak",
-      "Light": "Null"
-    },
-    "BaseSkills": [],
     "NegotiationType": "Formal",
     "ExpYield": 6263,
     "MaccaYield": 4162,
@@ -3339,10 +3592,14 @@
       "Wind": "Resist",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Makouga",
       "Hamaon",
-      "Infuriate"
+      "Infuriate",
+      "Hama Boost",
+      "Samarecarm",
+      "Light Boost",
+      "Kougaon"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 9100,
@@ -3373,10 +3630,14 @@
       "Fire": "Null",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mahama",
       "Maragion",
-      "Recarmdra"
+      "Recarmdra",
+      "Samarecarm",
+      "Kougaon",
+      "Hama Boost",
+      "Mahamaon"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 17135,
@@ -3407,10 +3668,14 @@
       "Ice": "Resist",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Rebellion Blade",
       "Eigaon",
-      "Resist Ailments"
+      "Resist Ailments",
+      "Debilitate",
+      "Evade Light",
+      "Akasha Arts",
+      "Megidolaon"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 26220,
@@ -3440,10 +3705,14 @@
       "Strike": "Reflect",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Gigantic Fist",
       "Hamaon",
-      "Revolution"
+      "Revolution",
+      "Mahamaon",
+      "Hama Boost",
+      "God's Hand",
+      "Akasha Arts"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 34822,
@@ -3474,10 +3743,13 @@
       "Fire": "Resist",
       "Wind": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Evil Touch",
       "Tarunda",
-      "Garu"
+      "Garu",
+      "Eiha",
+      "Growth 1",
+      "Magaru"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 101,
@@ -3507,9 +3779,13 @@
       "Electric": "Resist",
       "Dark": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bewilder",
-      "Single Shot"
+      "Single Shot",
+      "Distress Boost",
+      "Torrent Shot",
+      "Eerie Sound",
+      "Invigorate 1"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 674,
@@ -3540,10 +3816,13 @@
       "Dark": "Resist",
       "Fire": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agilao",
       "Poisma",
-      "Resist Charm"
+      "Resist Charm",
+      "Poison Boost",
+      "Poison Mist",
+      "Stagnant Air"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 2000,
@@ -3576,9 +3855,13 @@
       "Wind": "Null",
       "Electric": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Eerie Sound",
-      "Stagnant Air"
+      "Stagnant Air",
+      "Zionga",
+      "Distress Boost",
+      "Elec Boost",
+      "Megido"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 3728,
@@ -3608,9 +3891,13 @@
       "Strike": "Resist",
       "Fire": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Herculean Strike",
-      "Counterstrike"
+      "Counterstrike",
+      "Auto Tarukaja",
+      "Getsu-ei",
+      "Strike Boost",
+      "High Counter"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 6775,
@@ -3640,10 +3927,13 @@
       "Dark": "Resist",
       "Wind": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Magarula",
       "Masukunda",
-      "Dodge Pierce"
+      "Dodge Pierce",
+      "Tentarafoo",
+      "Garudyne",
+      "Null Dizzy"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 11909,
@@ -3673,10 +3963,14 @@
       "Dark": "Null",
       "Ice": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Evil Touch",
       "Eigaon",
-      "Ghastly Wail"
+      "Ghastly Wail",
+      "Resist Ailments",
+      "Evil Smile",
+      "Fear Boost",
+      "Mamudoon"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 17135,
@@ -3707,10 +4001,14 @@
       "Wind": "Null",
       "Fire": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garudyne",
       "Poison Arrow",
-      "Poison Boost"
+      "Poison Boost",
+      "Dekunda",
+      "Myriad Arrows",
+      "Magarudyne",
+      "Insta-Heal"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 27546,
@@ -3743,10 +4041,14 @@
       "Slash": "Reflect",
       "Pierce": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Herculean Strike",
       "Makarakarn",
-      "Null Charm"
+      "Null Charm",
+      "Repel Dark",
+      "Auto Maraku",
+      "Virus Breath",
+      "Repel Strike"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 38069,
@@ -3776,10 +4078,14 @@
       "Fire": "Null",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garu",
       "Bufu",
-      "Patra"
+      "Patra",
+      "Magaru",
+      "Dodge Wind",
+      "Rakukaja",
+      "Wind Boost"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 480,
@@ -3810,9 +4116,13 @@
       "Fire": "Null",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garula",
-      "Tentarafoo"
+      "Tentarafoo",
+      "Null Confuse",
+      "Agilao",
+      "Confuse Boost",
+      "Resist Elec"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 1060,
@@ -3842,10 +4152,14 @@
       "Electric": "Resist",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Recarm",
       "Garula",
-      "Magaru"
+      "Magaru",
+      "Wind Break",
+      "Regenerate 2",
+      "Magarula",
+      "Marakunda"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 2774,
@@ -3874,10 +4188,14 @@
       "Fire": "Weak",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garula",
       "Wind Break",
-      "Rakunda"
+      "Rakunda",
+      "Masukunda",
+      "Me Patra",
+      "Soul Chain",
+      "Samarecarm"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 6263,
@@ -3907,10 +4225,14 @@
       "Ice": "Resist",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Magarula",
       "Masukukaja",
-      "Makarakarn"
+      "Makarakarn",
+      "Soul Chain",
+      "Mediarama",
+      "Marakunda",
+      "Evade Elec"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 10444,
@@ -3941,67 +4263,15 @@
       "Dark": "Resist",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Magarula",
       "Marakunda",
-      "Dekunda"
+      "Dekunda",
+      "Ziodyne",
+      "Garudyne",
+      "Wind Amp",
+      "Soul Link"
     ],
-    "NegotiationType": "Formal",
-    "ExpYield": 21345,
-    "MaccaYield": 8960,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_hypnos",
-    "PersonaId": "hypnos",
-    "Name": "Hypnos",
-    "Level": 56,
-    "Arcana": "Fortune",
-    "Stats": {
-      "STR": 50,
-      "MAG": 55,
-      "END": 45,
-      "AGI": 40,
-      "LUK": 30
-    },
-    "Affinities": {
-      "Dark": "Absorb",
-      "Light": "Reflect"
-    },
-    "BaseSkills": [],
-    "NegotiationType": "Formal",
-    "ExpYield": 21345,
-    "MaccaYield": 8960,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_moros",
-    "PersonaId": "moros",
-    "Name": "Moros",
-    "Level": 56,
-    "Arcana": "Fortune",
-    "Stats": {
-      "STR": 46,
-      "MAG": 50,
-      "END": 42,
-      "AGI": 45,
-      "LUK": 35
-    },
-    "Affinities": {
-      "Fire": "Reflect",
-      "Dark": "Reflect"
-    },
-    "BaseSkills": [],
     "NegotiationType": "Formal",
     "ExpYield": 21345,
     "MaccaYield": 8960,
@@ -4031,10 +4301,14 @@
       "Wind": "Absorb",
       "Ice": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Magarudyne",
       "Panta Rhei",
-      "Wind Amp"
+      "Wind Amp",
+      "Invigorate 3",
+      "Mediarahan",
+      "Soul Link",
+      "Salvation"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 33280,
@@ -4064,10 +4338,14 @@
       "Ice": "Null",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Diarahan",
       "Amrita Shower",
-      "Bufudyne"
+      "Bufudyne",
+      "Soul Link",
+      "Sexy Dance",
+      "Mabufudyne",
+      "Salvation"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 47041,
@@ -4097,10 +4375,13 @@
       "Slash": "Resist",
       "Ice": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Cleave",
       "Bufu",
-      "Rakukaja"
+      "Rakukaja",
+      "Mabufu",
+      "Media",
+      "Slash Boost"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 214,
@@ -4131,10 +4412,13 @@
       "Strike": "Resist",
       "Fire": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Gale Slash",
       "Counter",
-      "Tarukaja"
+      "Tarukaja",
+      "Auto-Tarukaja",
+      "Fatal End",
+      "Regenerate 1"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 480,
@@ -4164,10 +4448,14 @@
       "Fire": "Resist",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Sonic Punch",
       "Magaru",
-      "Sukukaja"
+      "Sukukaja",
+      "Mazionga",
+      "Garula",
+      "Confuse Boost",
+      "Trigger Happy"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 1387,
@@ -4197,10 +4485,13 @@
       "Slash": "Resist",
       "Strike": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Fatal End",
       "Zionga",
-      "Matarukaja"
+      "Matarukaja",
+      "Cruel Attack",
+      "Auto-Matarukaja",
+      "Power Slash"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 2774,
@@ -4230,10 +4521,13 @@
       "Strike": "Resist",
       "Wind": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mighty Swing",
       "Revolution",
-      "Wind Break"
+      "Wind Break",
+      "Getsu-ei",
+      "Auto-Sukukaja",
+      "Regenerate 2"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 5317,
@@ -4264,10 +4558,13 @@
       "Light": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agilao",
       "Hamaon",
-      "Maeiga"
+      "Maeiga",
+      "Mahamaon",
+      "Fire Amp",
+      "Agidyne"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 11909,
@@ -4297,10 +4594,13 @@
       "Slash": "Null",
       "Fire": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Deathbound",
       "Revolution",
-      "High Counter"
+      "High Counter",
+      "Brave Blade",
+      "Charge",
+      "Slash Amp"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 22511,
@@ -4330,10 +4630,14 @@
       "Slash": "Null",
       "Strike": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Deathbound",
       "Charge",
-      "High Counter"
+      "High Counter",
+      "Tempest Slash",
+      "Slash Boost",
+      "Brave Blade",
+      "Slash Amp"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 26220,
@@ -4362,10 +4666,13 @@
       "Ice": "Weak",
       "Fire": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agidyne",
       "High Counter",
-      "Megidola"
+      "Megidola",
+      "Enduring Soul",
+      "Fire Amp",
+      "Maragidyne"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 31765,
@@ -4396,10 +4703,13 @@
       "Fire": "Null",
       "Slash": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Brave Blade",
       "Maragidyne",
-      "High Counter"
+      "High Counter",
+      "Auto-Matarukaja",
+      "Akasha Arts",
+      "Firm Stance"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 45183,
@@ -4429,9 +4739,12 @@
       "Dark": "Resist",
       "Fire": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Poisma",
-      "Foul Breath"
+      "Foul Breath",
+      "Poison Boost",
+      "Maragi",
+      "Media"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 170,
@@ -4463,10 +4776,14 @@
       "Fire": "Resist",
       "Electric": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Zio",
       "Auto Rakukaja",
-      "Dekaja"
+      "Dekaja",
+      "Survive Dark",
+      "Zionga",
+      "Dodge Strike",
+      "Elec Boost"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 1060,
@@ -4496,10 +4813,14 @@
       "Dark": "Resist",
       "Fire": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Fatal End",
       "Agilao",
-      "Raging Tiger"
+      "Raging Tiger",
+      "Counter",
+      "Resist Poison",
+      "Eerie Sound",
+      "Matarukaja"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 2496,
@@ -4530,10 +4851,14 @@
       "Electric": "Resist",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mahama",
       "Neuro Slash",
-      "Poison Mist"
+      "Poison Mist",
+      "Recarmdra",
+      "Hama Boost",
+      "Counterstrike",
+      "Mahamaon"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 6775,
@@ -4566,10 +4891,14 @@
       "Electric": "Resist",
       "Dark": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Vile Assault",
       "Evade Strike",
-      "Regenerate 2"
+      "Regenerate 2",
+      "Endure",
+      "Recarmdra",
+      "Heat Wave",
+      "Auto Maraku"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 12693,
@@ -4603,41 +4932,19 @@
       "Dark": "Null",
       "Fire": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Gigantic Fist",
       "Agidyne",
-      "Endure"
+      "Endure",
+      "Maragidyne",
+      "Vile Assault",
+      "Null Wind",
+      "Amrita Shower",
+      "Strike Amp"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 22511,
     "MaccaYield": 9262,
-    "Drops": [
-      {
-        "ItemId": "101",
-        "Chance": 0.15
-      }
-    ]
-  },
-  {
-    "Id": "E_medea",
-    "PersonaId": "medea",
-    "Name": "Medea",
-    "Level": 63,
-    "Arcana": "Hanged",
-    "Stats": {
-      "STR": 53,
-      "MAG": 65,
-      "END": 42,
-      "AGI": 46,
-      "LUK": 30
-    },
-    "Affinities": {
-      "Fire": "Absorb"
-    },
-    "BaseSkills": [],
-    "NegotiationType": "Gloomy",
-    "ExpYield": 30313,
-    "MaccaYield": 11182,
     "Drops": [
       {
         "ItemId": "101",
@@ -4663,10 +4970,14 @@
       "Fire": "Reflect",
       "Wind": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maragidyne",
       "Eigaon",
-      "Life Aid"
+      "Life Aid",
+      "Bloody Charge",
+      "Maeigaon",
+      "Evade Light",
+      "Enduring Soul"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 33280,
@@ -4700,10 +5011,14 @@
       "Fire": "Null",
       "Wind": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mahamaon",
       "Recarmdra",
-      "Samarecarm"
+      "Samarecarm",
+      "Survival Trick",
+      "Endure",
+      "Megidolaon",
+      "Enduring Soul"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 47041,
@@ -4736,9 +5051,13 @@
       "Electric": "Resist",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mudo",
-      "Eiha"
+      "Eiha",
+      "Dekaja",
+      "Foul Breath",
+      "Maeiha",
+      "Mamudo"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 480,
@@ -4768,10 +5087,14 @@
       "Wind": "Resist",
       "Dark": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maeiha",
       "Fatal End",
-      "Resist Fear"
+      "Resist Fear",
+      "Mamudo",
+      "Eiga",
+      "Survive Light",
+      "Null Fear"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 1575,
@@ -4801,10 +5124,14 @@
       "Electric": "Resist",
       "Dark": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mamudo",
       "Life Drain",
-      "Maeiha"
+      "Maeiha",
+      "Survive Light",
+      "Zionga",
+      "Marakunda",
+      "Mudo Boost"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 4476,
@@ -4835,10 +5162,14 @@
       "Electric": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maeiga",
       "Masukunda",
-      "Poison Mist"
+      "Poison Mist",
+      "Dekunda",
+      "Mudoon",
+      "Megido",
+      "Ghastly Wail"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 8474,
@@ -4868,10 +5199,14 @@
       "Electric": "Null",
       "Dark": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mamudoon",
       "Evil Smile",
-      "Null Fear"
+      "Null Fear",
+      "Ghastly Wail",
+      "Mazionga",
+      "Mudo Boost",
+      "Megidola"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 23707,
@@ -4900,10 +5235,14 @@
       "Light": "Weak",
       "Dark": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mudoon",
       "Maeigaon",
-      "Spirit Drain"
+      "Spirit Drain",
+      "Die For Me!",
+      "Mudo Boost",
+      "Endure Light",
+      "Megidolaon"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 38069,
@@ -4936,10 +5275,14 @@
       "Wind": "Resist",
       "Dark": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maeigaon",
       "Mamudoon",
-      "Ghastly Wail"
+      "Ghastly Wail",
+      "Dark Amp",
+      "Enduring Soul",
+      "Brave Blade",
+      "Megidolaon"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 57335,
@@ -4970,10 +5313,13 @@
       "Dark": "Resist",
       "Wind": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Media",
       "Garu",
-      "Baisudi"
+      "Baisudi",
+      "Magaru",
+      "Sharp Student",
+      "Recarm"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 267,
@@ -5003,9 +5349,13 @@
       "Ice": "Null",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufu",
-      "Makouha"
+      "Makouha",
+      "Counter",
+      "Diarama",
+      "Kouga",
+      "Dodge Elec"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 1387,
@@ -5034,10 +5384,14 @@
       "Electric": "Weak",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Dekunda",
       "Auto Rakukaja",
-      "Null Confuse"
+      "Null Confuse",
+      "Resist Strike",
+      "Null Rage",
+      "Anti-Ice Master",
+      "Resist Wind"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 3390,
@@ -5066,9 +5420,13 @@
       "Electric": "Weak",
       "Ice": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufula",
-      "Mediarama"
+      "Mediarama",
+      "Matarunda",
+      "Tetrakarn",
+      "Amrita Drop",
+      "Bufudyne"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 6775,
@@ -5099,10 +5457,14 @@
       "Fire": "Null",
       "Electric": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Getsu-ei",
       "Deathbound",
-      "Maragion"
+      "Maragion",
+      "Marakukaja",
+      "Fire Break",
+      "Agidyne",
+      "Evade Fire"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 10444,
@@ -5132,10 +5494,14 @@
       "Light": "Resist",
       "Fire": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maragion",
       "Diarahan",
-      "Samarecarm"
+      "Samarecarm",
+      "Regenerate 3",
+      "Agidyne",
+      "Fast Heal",
+      "Fire Amp"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 20230,
@@ -5165,10 +5531,14 @@
       "Ice": "Null",
       "Electric": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufula",
       "Freeze Boost",
-      "Heat Wave"
+      "Heat Wave",
+      "Soul Shift",
+      "Evade Fire",
+      "Mabufudyne",
+      "Enduring Soul"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 30313,
@@ -5199,10 +5569,14 @@
       "Electric": "Resist",
       "Light": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Kougaon",
       "Evade Elec",
-      "Evade Fire"
+      "Evade Fire",
+      "Maziodyne",
+      "Revolution",
+      "Makougaon",
+      "Evade Dark"
     ],
     "NegotiationType": "Formal",
     "ExpYield": 43336,
@@ -5232,9 +5606,12 @@
       "Electric": "Resist",
       "Dark": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agi",
-      "Zio"
+      "Zio",
+      "Marin Karin",
+      "Life Drain",
+      "Mazio"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 101,
@@ -5264,10 +5641,13 @@
       "Ice": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Evil Touch",
       "Marin Karin",
-      "Sonic Punch"
+      "Sonic Punch",
+      "Fear Boost",
+      "Charm Boost",
+      "Evil Smile"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 789,
@@ -5298,10 +5678,14 @@
       "Fire": "Resist",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maragi",
       "Eiga",
-      "Dodge Fire"
+      "Dodge Fire",
+      "Fire Boost",
+      "Maeiga",
+      "Dark Boost",
+      "Endure Light"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 3390,
@@ -5332,10 +5716,14 @@
       "Fire": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Life Drain",
       "Evil Touch",
-      "Eiga"
+      "Eiga",
+      "Stagnant Air",
+      "Spirit Drain",
+      "Maragion",
+      "Drain Ability"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 6263,
@@ -5366,10 +5754,14 @@
       "Dark": "Absorb",
       "Fire": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maeiga",
       "Sexy Dance",
-      "Spirit Drain"
+      "Spirit Drain",
+      "Drain Ability",
+      "Maragion",
+      "Eigaon",
+      "Evade Light"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 12693,
@@ -5401,10 +5793,14 @@
       "Wind": "Null",
       "Ice": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Eigaon",
       "Poison Arrow",
-      "Poison Mist"
+      "Poison Mist",
+      "Infuriate",
+      "Neuro Slash",
+      "Masukunda",
+      "Ailment Boost"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 21345,
@@ -5435,10 +5831,14 @@
       "Dark": "Null",
       "Electric": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mabufudyne",
       "Maziodyne",
-      "Sexy Dance"
+      "Sexy Dance",
+      "Megidola",
+      "Makarakarn",
+      "Demonic Decree",
+      "Drain Wind"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 33280,
@@ -5471,10 +5871,14 @@
       "Strike": "Absorb",
       "Dark": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Virus Breath",
       "Evil Smile",
-      "Deathbound"
+      "Deathbound",
+      "Ailment Boost",
+      "Vile Assault",
+      "Maragidyne",
+      "Drain Ice"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 53063,
@@ -5507,10 +5911,14 @@
       "Wind": "Null",
       "Dark": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mamudoon",
       "Maeigaon",
-      "Evil Smile"
+      "Evil Smile",
+      "Demonic Decree",
+      "Megidolaon",
+      "Concentrate",
+      "Dark Amp"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 64183,
@@ -5541,9 +5949,13 @@
       "Dark": "Resist",
       "Fire": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Revolution",
-      "Torrent Shot"
+      "Torrent Shot",
+      "Cruel Attack",
+      "Pierce Boost",
+      "Maragion",
+      "Life Aid"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 3728,
@@ -5574,10 +5986,15 @@
       "Electric": "Resist",
       "Wind": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Torrent Shot",
       "Matarukaja",
-      "Dekaja"
+      "Dekaja",
+      "Charge",
+      "Fast Heal",
+      "Magarula",
+      "Myriad Arrows",
+      "Shift Amp"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 7880,
@@ -5608,10 +6025,14 @@
       "Light": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Magatsu Mandala",
       "Auto Tarukaja",
-      "Ghastly Wail"
+      "Ghastly Wail",
+      "Megidola",
+      "Ailment Boost",
+      "Maziodyne",
+      "Heat Riser"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 15250,
@@ -5642,10 +6063,14 @@
       "Strike": "Null",
       "Fire": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maragidyne",
       "Vile Assault",
-      "Pierce Boost"
+      "Pierce Boost",
+      "Myriad Arrows",
+      "Crit Rate Amp",
+      "Primal Force",
+      "Pierce Amp"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 26220,
@@ -5675,10 +6100,14 @@
       "Wind": "Resist",
       "Pierce": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Myriad Arrows",
       "Apt Pupil",
-      "Regenerate 3"
+      "Regenerate 3",
+      "Primal Force",
+      "Revolution",
+      "Akasha Arts",
+      "Evade Strike"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 36427,
@@ -5710,10 +6139,14 @@
       "Fire": "Absorb",
       "Dark": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maralagidyne",
       "Myriad Arrows",
-      "Spirit Drain"
+      "Spirit Drain",
+      "Primal Force",
+      "Charge",
+      "Pierce Amp",
+      "Drain Light"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 51000,
@@ -5746,10 +6179,14 @@
       "Dark": "Resist",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Tempest Slash",
       "Myriad Arrows",
-      "Magarudyne"
+      "Magarudyne",
+      "Debilitate",
+      "Crit Rate Amp",
+      "Arms Master",
+      "Unshaken Will"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 59556,
@@ -5780,10 +6217,14 @@
       "Light": "Null",
       "Electric": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maziodyne",
       "Enduring Soul",
-      "Invigorate 3"
+      "Invigorate 3",
+      "Pralaya",
+      "Life Aid",
+      "God's Hand",
+      "Ali Dance"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 66567,
@@ -5813,10 +6254,14 @@
       "Slash": "Resist",
       "Pierce": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Primal Force",
       "Vorpal Blade",
-      "Shift Amp"
+      "Shift Amp",
+      "Akasha Arts",
+      "Charge",
+      "Arms Master",
+      "Drain Strike"
     ],
     "NegotiationType": "Hot-blooded",
     "ExpYield": 76717,
@@ -5847,10 +6292,13 @@
       "Light": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Regenerate 1",
       "Assault Dive",
-      "Rebellion"
+      "Rebellion",
+      "Sharp Student",
+      "Swift Strike",
+      "Resist Dizzy"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 674,
@@ -5881,10 +6329,14 @@
       "Pierce": "Resist",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Torrent Shot",
       "Auto Tarukaja",
-      "Sharp Student"
+      "Sharp Student",
+      "Zionga",
+      "Charge",
+      "Shift Boost",
+      "Resist Fire"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 3071,
@@ -5913,10 +6365,14 @@
       "Dark": "Weak",
       "Light": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Neuro Slash",
       "Makouga",
-      "Slash Driver"
+      "Slash Driver",
+      "Revolution",
+      "Null Dizzy",
+      "Vidyaraja's Blessing",
+      "Tempest Slash"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 5779,
@@ -5947,10 +6403,14 @@
       "Ice": "Resist",
       "Dark": "Resist"
     },
-    "BaseSkills": [
+    "Skills": [
       "Virus Breath",
       "Eerie Sound",
-      "Spirit Drain"
+      "Spirit Drain",
+      "Vile Assault",
+      "Evil Smile",
+      "Invigorate 2",
+      "Evade Pierce"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 9100,
@@ -5980,10 +6440,14 @@
       "Pierce": "Null",
       "Wind": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Deathbound",
       "Garudyne",
-      "Revolution"
+      "Revolution",
+      "Gigantic Fist",
+      "Charge",
+      "Endure",
+      "Repel Pierce"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 16174,
@@ -6013,10 +6477,14 @@
       "Slash": "Resist",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Masquerade",
       "Kougaon",
-      "Revolution"
+      "Revolution",
+      "Soul Chain",
+      "Makougaon",
+      "Brave Blade",
+      "Ali Dance"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 23707,
@@ -6051,10 +6519,13 @@
       "Wind": "Resist",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garudyne",
       "Tentarafoo",
-      "Masukukaja"
+      "Masukukaja",
+      "Amrita Shower",
+      "Magarudyne",
+      "Panta Rhei"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 31765,
@@ -6087,10 +6558,14 @@
       "Fire": "Absorb",
       "Light": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Maragidyne",
       "Samarecarm",
-      "Mediarama"
+      "Mediarama",
+      "Divine Grace",
+      "Regenerate 3",
+      "Null Pierce",
+      "Salvation"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 41510,
@@ -6120,10 +6595,14 @@
       "Wind": "Null",
       "Fire": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Inferno",
       "Maragidyne",
-      "Concentrate"
+      "Concentrate",
+      "Fire Amp",
+      "Primal Force",
+      "Heat Riser",
+      "Repel Ice"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 53063,
@@ -6156,10 +6635,14 @@
       "Light": "Absorb",
       "Dark": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Makougaon",
       "Heat Riser",
-      "Salvation"
+      "Salvation",
+      "Morning Star",
+      "Life Aid",
+      "Spell Master",
+      "Almighty Boost"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 82216,
@@ -6190,10 +6673,14 @@
       "Wind": "Resist",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Eiha",
       "Power Slash",
-      "Growth 1"
+      "Growth 1",
+      "Raging Tiger",
+      "Auto Sukukaja",
+      "Poison Mist",
+      "Poison Boost"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 399,
@@ -6223,10 +6710,14 @@
       "Ice": "Null",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufula",
       "Zio",
-      "Single Shot"
+      "Single Shot",
+      "Single-Target Boost",
+      "Null Freeze",
+      "Marakukaja",
+      "Cruel Attack"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 2000,
@@ -6257,10 +6748,14 @@
       "Light": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Shining Arrows",
       "Mediarama",
-      "Divine Grace"
+      "Divine Grace",
+      "Multi-Target Boost",
+      "High Counter",
+      "Amrita Shower",
+      "Diarahan"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 4885,
@@ -6291,10 +6786,14 @@
       "Slash": "Reflect",
       "Pierce": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Cruel Attack",
       "Mudoon",
-      "Marakunda"
+      "Marakunda",
+      "Virus Breath",
+      "Heat Wave",
+      "Mamudoon",
+      "Repel Slash"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 7313,
@@ -6324,10 +6823,14 @@
       "Strike": "Resist",
       "Electric": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Ziodyne",
       "Marakukaja",
-      "Makarakarn"
+      "Makarakarn",
+      "Resist Slash",
+      "Mazionga",
+      "Heat Wave",
+      "Regenerate 3"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 14361,
@@ -6358,10 +6861,14 @@
       "Slash": "Null",
       "Dark": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Tempest Slash",
       "Maeiga",
-      "Apt Pupil"
+      "Apt Pupil",
+      "Eigaon",
+      "Poison Mist",
+      "Shift Amp",
+      "Brave Blade"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 21345,
@@ -6392,10 +6899,14 @@
       "Dark": "Resist",
       "Fire": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agidyne",
       "Garudyne",
-      "Tetrakarn"
+      "Tetrakarn",
+      "Makarakarn",
+      "Fire Break",
+      "Maragidyne",
+      "Repel Ice"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 28913,
@@ -6428,10 +6939,14 @@
       "Wind": "Resist",
       "Dark": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Magarudyne",
       "Eigaon",
-      "Megidola"
+      "Megidola",
+      "Matarukaja",
+      "Ziodyne",
+      "Maeigaon",
+      "Panta Rhei"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 45183,
@@ -6462,10 +6977,14 @@
       "Slash": "Null",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Divine Judgment",
       "Mediarahan",
-      "Akasha Arts"
+      "Akasha Arts",
+      "Angelic Grace",
+      "Makougaon",
+      "Salvation",
+      "Drain Dark"
     ],
     "NegotiationType": "Gloomy",
     "ExpYield": 61840,
@@ -6495,10 +7014,14 @@
       "Wind": "Resist",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Growth 1",
       "Sukunda",
-      "Zan-ei"
+      "Zan-ei",
+      "Sukukaja",
+      "Diarama",
+      "Infuriate",
+      "Masukunda"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 1778,
@@ -6528,9 +7051,13 @@
       "Light": "Null",
       "Electric": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mazionga",
-      "Shock Boost"
+      "Shock Boost",
+      "Counterstrike",
+      "Rebellion",
+      "Ziodyne",
+      "Null Elec"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 5317,
@@ -6561,10 +7088,14 @@
       "Ice": "Null",
       "Light": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Bufula",
       "Garudyne",
-      "Growth 3"
+      "Growth 3",
+      "Single-Target Boost",
+      "Bufudyne",
+      "Resist Ailments",
+      "Ice Amp"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 11162,
@@ -6597,10 +7128,14 @@
       "Light": "Resist",
       "Wind": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Garudyne",
       "Magarula",
-      "Growth 3"
+      "Growth 3",
+      "Masukunda",
+      "Evade Pierce",
+      "Amrita Shower",
+      "Magarudyne"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 20230,
@@ -6631,10 +7166,14 @@
       "Electric": "Null",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Mahamaon",
       "Growth 3",
-      "Auto Masuku"
+      "Auto Masuku",
+      "Samarecarm",
+      "Kougaon",
+      "Amrita Shower",
+      "Evade Dark"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 36427,
@@ -6665,10 +7204,14 @@
       "Electric": "Null",
       "Light": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Akasha Arts",
       "Bufudyne",
-      "Ziodyne"
+      "Ziodyne",
+      "Panta Rhei",
+      "Concentrate",
+      "Ali Dance",
+      "Salvation"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 57335,
@@ -6699,10 +7242,14 @@
       "Light": "Null",
       "Fire": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Agidyne",
       "Akasha Arts",
-      "Unshaken Will"
+      "Unshaken Will",
+      "Heat Riser",
+      "Strike Amp",
+      "God's Hand",
+      "Firm Stance"
     ],
     "NegotiationType": "Upbeat",
     "ExpYield": 74115,
@@ -6731,10 +7278,14 @@
       "Light": "Null",
       "Dark": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Hamaon",
       "Mudoon",
-      "Maeiga"
+      "Maeiga",
+      "Makouga",
+      "Makarakarn",
+      "Growth 2",
+      "Resist Dark"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 7880,
@@ -6765,10 +7316,14 @@
       "Dark": "Null",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Hamaon",
       "Mudoon",
-      "High Counter"
+      "High Counter",
+      "Makougaon",
+      "Resist Ailments",
+      "Mediarahan",
+      "Debilitate"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 24940,
@@ -6800,10 +7355,14 @@
       "Dark": "Resist",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Heaven's Blade",
       "Divine Judgment",
-      "Angelic Grace"
+      "Angelic Grace",
+      "Makougaon",
+      "Maziodyne",
+      "Heat Riser",
+      "Drain Pierce"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 41510,
@@ -6834,10 +7393,15 @@
       "Dark": "Absorb",
       "Ice": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Diamond Dust",
       "Maeigaon",
-      "Resist Ailments"
+      "Resist Ailments",
+      "Megidolaon",
+      "Concentrate",
+      "Debilitate",
+      "Repel Wind",
+      "Black Viper"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 66567,
@@ -6867,10 +7431,14 @@
       "Electric": "Absorb",
       "Dark": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Megidolaon",
       "Debilitate",
-      "Brave Blade"
+      "Brave Blade",
+      "Inferno",
+      "Panta Rhei",
+      "Diamond Dust",
+      "Resist Phys"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 85040,
@@ -6903,10 +7471,15 @@
       "Light": "Reflect",
       "Dark": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Megidolaon",
       "God's Hand",
-      "Salvation"
+      "Salvation",
+      "Enduring Soul",
+      "Regenerate 3",
+      "Invigorate 3",
+      "Null Phys",
+      "Magic Ability"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 90883,
@@ -6939,10 +7512,14 @@
       "Ice": "Null",
       "Electric": "Null"
     },
-    "BaseSkills": [
+    "Skills": [
       "Matarunda",
       "Mudoon",
-      "Heat Wave"
+      "Heat Wave",
+      "Virus Breath",
+      "Stagnant Air",
+      "Ailment Boost",
+      "Null Light"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 12693,
@@ -6975,10 +7552,14 @@
       "Light": "Null",
       "Fire": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Vorpal Blade",
       "Kougaon",
-      "Sharp Student"
+      "Sharp Student",
+      "Agidyne",
+      "Angelic Grace",
+      "Mahamaon",
+      "Heaven's Blade"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 22511,
@@ -7010,10 +7591,14 @@
       "Light": "Null",
       "Ice": "Absorb"
     },
-    "BaseSkills": [
+    "Skills": [
       "Vile Assault",
       "Dekunda",
-      "Auto Maraku"
+      "Auto Maraku",
+      "Evade Slash",
+      "Resist Ailments",
+      "Growth 3",
+      "Drain Slash"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 47041,
@@ -7046,10 +7631,14 @@
       "Wind": "Reflect",
       "Light": "Reflect"
     },
-    "BaseSkills": [
+    "Skills": [
       "Makougaon",
       "Divine Judgment",
-      "God's Hand"
+      "God's Hand",
+      "Megidolaon",
+      "Salvation",
+      "Light Amp",
+      "Repel Elec"
     ],
     "NegotiationType": "Stoic",
     "ExpYield": 79435,

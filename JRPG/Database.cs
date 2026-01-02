@@ -11,6 +11,7 @@ namespace JRPGPrototype
         public static Dictionary<string, PersonaData> Personas = new Dictionary<string, PersonaData>();
         public static Dictionary<string, AilmentData> Ailments = new Dictionary<string, AilmentData>();
         public static Dictionary<string, ItemData> Items = new Dictionary<string, ItemData>();
+        public static Dictionary<string, EnemyData> Enemies = new Dictionary<string, EnemyData>();
 
         // Equipment Dictionaries
         public static Dictionary<string, WeaponData> Weapons = new Dictionary<string, WeaponData>();
@@ -18,7 +19,6 @@ namespace JRPGPrototype
         public static Dictionary<string, BootData> Boots = new Dictionary<string, BootData>();
         public static Dictionary<string, AccessoryData> Accessories = new Dictionary<string, AccessoryData>();
 
-        // Unified Shop List
         public static List<ShopEntry> ShopInventory = new List<ShopEntry>();
 
         public static void LoadData()
@@ -38,7 +38,14 @@ namespace JRPGPrototype
                 Console.WriteLine($"[System] Loaded {Personas.Count} personas.");
             });
 
-            // 3. Ailments
+            // 3. Enemies (NEW)
+            LoadFile("enemies.json", (json) => {
+                var eList = JsonConvert.DeserializeObject<List<EnemyData>>(json);
+                foreach (var e in eList) if (!Enemies.ContainsKey(e.Id)) Enemies.Add(e.Id, e);
+                Console.WriteLine($"[System] Loaded {Enemies.Count} enemies.");
+            });
+
+            // 4. Ailments
             LoadFile("status_ailments.json", (json) => {
                 var root = JsonConvert.DeserializeObject<Dictionary<string, List<AilmentData>>>(json);
                 if (root != null && root.ContainsKey("ailments"))
@@ -46,7 +53,7 @@ namespace JRPGPrototype
                 Console.WriteLine($"[System] Loaded {Ailments.Count} ailments.");
             });
 
-            // 4. Items
+            // 5. Items
             LoadFile("items.json", (json) => {
                 var root = JsonConvert.DeserializeObject<Dictionary<string, List<ItemData>>>(json);
                 if (root != null && root.ContainsKey("items"))
@@ -54,50 +61,44 @@ namespace JRPGPrototype
                 Console.WriteLine($"[System] Loaded {Items.Count} items.");
             });
 
-            // 5. Weapons
-            LoadFile("weapons.json", (json) => {
-                var root = JsonConvert.DeserializeObject<Dictionary<string, List<WeaponData>>>(json);
-                if (root != null && root.ContainsKey("weapons"))
-                    foreach (var w in root["weapons"]) if (!Weapons.ContainsKey(w.Id)) Weapons.Add(w.Id, w);
-                Console.WriteLine($"[System] Loaded {Weapons.Count} weapons.");
-            });
+            // 6. Equipment (Weapons, Armor, Boots, Accessories)
+            LoadEquipment("weapons.json", "weapons", Weapons);
+            LoadEquipment("armor.json", "armor", Armors);
+            LoadEquipment("boots.json", "boots", Boots);
+            LoadEquipment("accessories.json", "accessories", Accessories);
 
-            // 6. Armor
-            LoadFile("armor.json", (json) => {
-                var root = JsonConvert.DeserializeObject<Dictionary<string, List<ArmorData>>>(json);
-                if (root != null && root.ContainsKey("armor"))
-                    foreach (var a in root["armor"]) if (!Armors.ContainsKey(a.Id)) Armors.Add(a.Id, a);
-                Console.WriteLine($"[System] Loaded {Armors.Count} armor.");
-            });
-
-            // 7. Boots
-            LoadFile("boots.json", (json) => {
-                var root = JsonConvert.DeserializeObject<Dictionary<string, List<BootData>>>(json);
-                if (root != null && root.ContainsKey("boots"))
-                    foreach (var b in root["boots"]) if (!Boots.ContainsKey(b.Id)) Boots.Add(b.Id, b);
-                Console.WriteLine($"[System] Loaded {Boots.Count} boots.");
-            });
-
-            // 8. Accessories
-            LoadFile("accessories.json", (json) => {
-                var root = JsonConvert.DeserializeObject<Dictionary<string, List<AccessoryData>>>(json);
-                if (root != null && root.ContainsKey("accessories"))
-                    foreach (var acc in root["accessories"]) if (!Accessories.ContainsKey(acc.Id)) Accessories.Add(acc.Id, acc);
-                Console.WriteLine($"[System] Loaded {Accessories.Count} accessories.");
-            });
-
-            // 9. Shop Inventory
+            // 7. Shop
             LoadFile("shop_inventory.json", (json) => {
                 var root = JsonConvert.DeserializeObject<ShopJsonRoot>(json);
                 ShopInventory.Clear();
-
                 AddShopEntries(root.Items, ShopCategory.Item);
                 AddShopEntries(root.Weapons, ShopCategory.Weapon);
                 AddShopEntries(root.Armor, ShopCategory.Armor);
                 AddShopEntries(root.Boots, ShopCategory.Boots);
                 AddShopEntries(root.Accessories, ShopCategory.Accessory);
-
                 Console.WriteLine($"[System] Loaded {ShopInventory.Count} shop entries.");
+            });
+        }
+
+        // Generic Helper for Equipment Loading to reduce boilerplate
+        private static void LoadEquipment<T>(string filename, string jsonKey, Dictionary<string, T> targetDict) where T : class
+        {
+            LoadFile(filename, (json) => {
+                // Using dynamic to access the 'Id' property generically without an interface for now
+                var root = JsonConvert.DeserializeObject<Dictionary<string, List<T>>>(json);
+                if (root != null && root.ContainsKey(jsonKey))
+                {
+                    foreach (var item in root[jsonKey])
+                    {
+                        var prop = item.GetType().GetProperty("Id");
+                        if (prop != null)
+                        {
+                            string id = (string)prop.GetValue(item);
+                            if (!targetDict.ContainsKey(id)) targetDict.Add(id, item);
+                        }
+                    }
+                    Console.WriteLine($"[System] Loaded {targetDict.Count} {jsonKey}.");
+                }
             });
         }
 
@@ -105,14 +106,14 @@ namespace JRPGPrototype
         {
             if (items == null) return;
             foreach (var i in items)
-            {
                 ShopInventory.Add(new ShopEntry { Id = i.Id, Name = i.Name, BasePrice = i.Price, Category = cat });
-            }
         }
 
         private static void LoadFile(string filename, Action<string> onSuccess)
         {
-            if (File.Exists(filename)) onSuccess(File.ReadAllText(filename));
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+            if (File.Exists(path)) onSuccess(File.ReadAllText(path));
+            else if (File.Exists(filename)) onSuccess(File.ReadAllText(filename)); // Try local relative
             else Console.WriteLine($"[Error] {filename} not found!");
         }
     }

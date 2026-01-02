@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using JRPGPrototype.Services;
 
 namespace JRPGPrototype
 {
-    // Enum used by FieldManager to tell the shop which section to open
     public enum ShopType { Weapon, Item, Armor, Boots, Accessory }
 
     public class ShopManager
     {
         private InventoryManager _inventory;
         private EconomyManager _economy;
+        private IGameIO _io;
 
-        public ShopManager(InventoryManager inventory, EconomyManager economy)
+        public ShopManager(InventoryManager inventory, EconomyManager economy, IGameIO io)
         {
             _inventory = inventory;
             _economy = economy;
+            _io = io;
         }
 
         public void OpenShop(Combatant player, ShopType shopType)
@@ -29,7 +31,7 @@ namespace JRPGPrototype
                 string header = $"--- {title} ---\nMacca: {_economy.Macca}";
                 List<string> options = new List<string> { "Buy", "Sell", "Exit" };
 
-                int choice = MenuUI.RenderMenu(header, options, shopIndex);
+                int choice = _io.RenderMenu(header, options, shopIndex);
 
                 if (choice == -1) return;
                 shopIndex = choice;
@@ -43,19 +45,16 @@ namespace JRPGPrototype
         private void BuyMenu(Combatant player, ShopType shopType)
         {
             int listIndex = 0;
-
-            // Map the FieldManager's ShopType to the Database's ShopCategory
             ShopCategory targetCategory = MapTypeToCategory(shopType);
 
-            // Filter the unified list based on the new Category property
             var filteredInventory = Database.ShopInventory
                 .Where(e => e.Category == targetCategory)
                 .ToList();
 
             if (filteredInventory.Count == 0)
             {
-                Console.WriteLine("This shop has no stock.");
-                Thread.Sleep(800);
+                _io.WriteLine("This shop has no stock.");
+                _io.Wait(800);
                 return;
             }
 
@@ -69,7 +68,7 @@ namespace JRPGPrototype
 
                 string header = $"--- BUY ({shopType}) ---\nMacca: {_economy.Macca}";
 
-                int idx = MenuUI.RenderMenu(header, options, listIndex, null, (index) =>
+                int idx = _io.RenderMenu(header, options, listIndex, null, (index) =>
                 {
                     var entry = filteredInventory[index];
                     InspectItem(entry, player, true);
@@ -85,7 +84,6 @@ namespace JRPGPrototype
                 {
                     if (_economy.SpendMacca(finalPrice))
                     {
-                        // Add to specific inventory list based on category
                         switch (selected.Category)
                         {
                             case ShopCategory.Weapon: _inventory.AddEquipment(selected.Id, ShopCategory.Weapon); break;
@@ -94,14 +92,13 @@ namespace JRPGPrototype
                             case ShopCategory.Accessory: _inventory.AddEquipment(selected.Id, ShopCategory.Accessory); break;
                             case ShopCategory.Item: _inventory.AddItem(selected.Id, 1); break;
                         }
-
-                        Console.WriteLine("\nBought!");
-                        Thread.Sleep(500);
+                        _io.WriteLine("\nBought!");
+                        _io.Wait(500);
                     }
                     else
                     {
-                        Console.WriteLine("\nNot enough Macca!");
-                        Thread.Sleep(800);
+                        _io.WriteLine("\nNot enough Macca!");
+                        _io.Wait(800);
                     }
                 }
             }
@@ -187,8 +184,8 @@ namespace JRPGPrototype
 
                 if (sellables.Count == 0)
                 {
-                    Console.WriteLine("Nothing to sell in this category.");
-                    Thread.Sleep(1000);
+                    _io.WriteLine("Nothing to sell in this category.");
+                    _io.Wait(1000);
                     return;
                 }
 
@@ -196,9 +193,9 @@ namespace JRPGPrototype
 
                 string header = $"--- SELL ({shopType}) ---\nMacca: {_economy.Macca}";
 
-                int idx = MenuUI.RenderMenu(header, options, listIndex, disabled, (index) =>
+                int idx = _io.RenderMenu(header, options, listIndex, disabled, (index) =>
                 {
-                    Console.WriteLine("Selling gives 50% value + Luck Bonus.");
+                    _io.WriteLine("Selling gives 50% value + Luck Bonus.");
                 });
 
                 if (idx == -1) return;
@@ -224,13 +221,10 @@ namespace JRPGPrototype
                 }
 
                 _economy.AddMacca(GetSellPrice(sellId, targetCategory, player));
-
-                Console.WriteLine("\nSold!");
-                Thread.Sleep(500);
+                _io.WriteLine("\nSold!");
+                _io.Wait(500);
             }
         }
-
-        // --- HELPERS ---
 
         private ShopCategory MapTypeToCategory(ShopType type)
         {
@@ -247,8 +241,8 @@ namespace JRPGPrototype
 
         private bool ConfirmPurchase(string name, int price)
         {
-            Console.WriteLine($"\nBuy {name} for {price} M?");
-            int choice = MenuUI.RenderMenu("Confirm?", new List<string> { "Yes", "No" });
+            _io.WriteLine($"\nBuy {name} for {price} M?");
+            int choice = _io.RenderMenu("Confirm?", new List<string> { "Yes", "No" }, 0);
             return choice == 0;
         }
 
@@ -304,9 +298,9 @@ namespace JRPGPrototype
             }
 
             int price = isBuying ? GetBuyPrice(entry, player) : 0;
-            Console.WriteLine($"Info: {desc}");
-            Console.WriteLine($"Stats: {stats}");
-            if (isBuying) Console.WriteLine($"Price: {price} M (Base: {entry.BasePrice})");
+            _io.WriteLine($"Info: {desc}");
+            _io.WriteLine($"Stats: {stats}");
+            if (isBuying) _io.WriteLine($"Price: {price} M (Base: {entry.BasePrice})");
         }
     }
 }

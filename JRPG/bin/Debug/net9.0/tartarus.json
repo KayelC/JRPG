@@ -1,0 +1,308 @@
+{
+  "dungeons": [
+    {
+      "id": "tartarus",
+      "name": "Tartarus",
+      "blocks": [
+        {
+          "block_id": "thebel",
+          "name": "Block 1: Thebel",
+          "floor_range": [2, 20],
+          "enemy_pool": [
+            "E_orpheus",
+            "E_hermes",
+            "E_io",
+            "E_pixie",
+            "E_apsaras",
+            "E_nekomata",
+            "E_angel",
+            "E_silky",
+            "E_ara-mitama",
+            "E_forneus",
+            "E_omoikane",
+            "E_onmoraki"
+          ],
+          "fixed_floors": [
+            {
+              "floor": 5,
+              "type": "Boss",
+              "id": "E_chimera",
+              "description": "Gatekeeper: A beast blocking the path."
+            },
+            {
+              "floor": 10,
+              "type": "SafeRoom",
+              "has_terminal": true,
+              "description": "A quiet floor with a glowing terminal. You can return to the lobby from here."
+            },
+            {
+              "floor": 14,
+              "type": "Boss",
+              "id": "E_archangel",
+              "description": "Gatekeeper: A divine trial blocks the stairs."
+            },
+            {
+              "floor": 20,
+              "type": "BlockEnd",
+              "has_terminal": true,
+              "description": "The border of the first block."
+            }
+          ]
+        },
+        {
+          "block_id": "arqa",
+          "name": "Block 2: Arqa",
+          "floor_range": [21, 60],
+          "enemy_pool": [
+            "E_unicorn",
+            "E_valkyrie",
+            "E_slime",
+            "E_tam-lin",
+            "E_berith",
+            "E_polydeuces",
+            "E_jack-o-lantern",
+            "E_naga",
+            "E_captain-kidd",
+            "E_high-pixie",
+            "E_take-minakata",
+            "E_mitra"
+          ],
+          "fixed_floors": [
+            {
+              "floor": 25,
+              "type": "Boss",
+              "id": "E_take-mikazuchi",
+              "description": "Gatekeeper: The air crackles with electricity."
+            },
+            {
+              "floor": 36,
+              "type": "SafeRoom",
+              "has_terminal": true,
+              "description": "Rest area."
+            },
+            {
+              "floor": 47,
+              "type": "Boss",
+              "id": "E_lamia",
+              "description": "Gatekeeper: A seductive shadow awaits."
+            },
+            {
+              "floor": 60,
+              "type": "BlockEnd",
+              "has_terminal": true,
+              "description": "End of the Arqa block."
+            }
+          ]
+        },
+        {
+          "block_id": "yabbashah",
+          "name": "Block 3: Yabbashah",
+          "floor_range": [61, 110],
+          "enemy_pool": [
+            "E_legion",
+            "E_goemon",
+            "E_johanna",
+            "E_queen-medb",
+            "E_baphomet",
+            "E_oni",
+            "E_eligor",
+            "E_king-frost",
+            "E_black-frost",
+            "E_robin-hood",
+            "E_dakini",
+            "E_thoth"
+          ],
+          "fixed_floors": [
+            {
+              "floor": 72,
+              "type": "SafeRoom",
+              "has_terminal": true,
+              "description": "Rest area."
+            },
+            {
+              "floor": 85,
+              "type": "Boss",
+              "id": "E_flauros",
+              "description": "Gatekeeper: Three faces stare you down."
+            },
+            {
+              "floor": 98,
+              "type": "Boss",
+              "id": "E_cu-chulainn",
+              "description": "Gatekeeper: A warrior of light blocks the path."
+            },
+            {
+              "floor": 110,
+              "type": "BlockEnd",
+              "has_terminal": true,
+              "description": "End of the Yabbashah block."
+            }
+          ]
+        },
+        {
+          "block_id": "tziah",
+          "name": "Block 4: Tziah",
+          "floor_range": [111, 160],
+          "enemy_pool": [
+            "E_ose",
+            "E_ganga",
+            "E_hecate",
+            "E_mercurius",
+            "E_lachesis",
+            "E_shiki-ouji",
+            "E_izanagi",
+            "E_kurama-tengu",
+            "E_hecatoncheires",
+            "E_titania",
+            "E_rangda",
+            "E_magatsu-izanagi",
+            "E_koumokuten",
+            "E_decarabia"
+          ],
+          "fixed_floors": [
+            {
+              "floor": 122,
+              "type": "SafeRoom",
+              "has_terminal": true,
+              "description": "Rest area."
+            },
+            {
+              "floor": 135,
+              "type": "Boss",
+              "id": "E_mishaguji",
+              "description": "Gatekeeper: A cursed presence looms."
+            },
+            {
+              "floor": 146,
+              "type": "Boss",
+              "id": "E_belphegor",
+              "description": "Gatekeeper: A towering demon sits on a throne."
+            },
+            {
+              "floor": 160,
+              "type": "BlockEnd",
+              "has_terminal": true,
+              "description": "End of the Tziah block."
+            }
+          ]
+        },
+        {
+          "block_id": "harabah",
+          "name": "Block 5: Harabah",
+          "floor_range": [161, 210],
+          "enemy_pool": [
+            "E_atropos",
+            "E_chernobog",
+            "E_kali",
+            "E_mot",
+            "E_daisoujou",
+            "E_trumpeter",
+            "E_surt",
+            "E_raphael",
+            "E_bishamonten",
+            "E_gabriel",
+            "E_thor",
+            "E_cerberus",
+            "E_norn",
+            "E_hell-biker",
+            "E_melchizedek",
+            "E_skadi",
+            "E_loki",
+            "E_michael"
+          ],
+          "fixed_floors": [
+            {
+              "floor": 171,
+              "type": "SafeRoom",
+              "has_terminal": true,
+              "description": "Rest area."
+            },
+            {
+              "floor": 180,
+              "type": "Boss",
+              "id": "E_siegfried",
+              "description": "Gatekeeper: The dragon slayer challenges you."
+            },
+            {
+              "floor": 190,
+              "type": "SafeRoom",
+              "has_terminal": true,
+              "description": "Rest area."
+            },
+            {
+              "floor": 201,
+              "type": "Boss",
+              "id": "E_alice",
+              "description": "Gatekeeper: She asks if you want to die for her."
+            },
+            {
+              "floor": 210,
+              "type": "BlockEnd",
+              "has_terminal": true,
+              "description": "End of the Harabah block."
+            }
+          ]
+        },
+        {
+          "block_id": "adamah",
+          "name": "Block 6: Adamah",
+          "floor_range": [211, 264],
+          "enemy_pool": [
+            "E_kohryu",
+            "E_atavaka",
+            "E_baal-zebul",
+            "E_lakshmi",
+            "E_attis",
+            "E_futsunushi",
+            "E_odin",
+            "E_scathach",
+            "E_mara",
+            "E_abaddon",
+            "E_saturnus",
+            "E_susano-o",
+            "E_mother-harlot",
+            "E_thanatos",
+            "E_vishnu",
+            "E_masakado",
+            "E_sandalphon",
+            "E_beelzebub",
+            "E_shiva",
+            "E_satan"
+          ],
+          "fixed_floors": [
+            {
+              "floor": 220,
+              "type": "SafeRoom",
+              "has_terminal": true,
+              "description": "Rest area."
+            },
+            {
+              "floor": 236,
+              "type": "Boss",
+              "id": "E_metatron",
+              "description": "Gatekeeper: The voice of god forbids passage."
+            },
+            {
+              "floor": 244,
+              "type": "SafeRoom",
+              "has_terminal": true,
+              "description": "The final rest area before the summit."
+            },
+            {
+              "floor": 255,
+              "type": "Boss",
+              "id": "E_lucifer",
+              "description": "Gatekeeper: The morning star shines brightly."
+            },
+            {
+              "floor": 264,
+              "type": "BlockEnd",
+              "has_terminal": true,
+              "description": "The Summit of Tartarus."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

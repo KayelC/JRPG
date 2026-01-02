@@ -6,6 +6,9 @@ namespace JRPGPrototype
 {
     public class Combatant
     {
+        // Link back to JSON Data
+        public string SourceId { get; set; }
+
         public string Name { get; set; } = string.Empty;
 
         // Progression
@@ -45,13 +48,8 @@ namespace JRPGPrototype
         public Element WeaponElement => EquippedWeapon != null ? ElementHelper.FromCategory(EquippedWeapon.Type) : Element.Strike;
         public bool IsLongRange => EquippedWeapon != null && EquippedWeapon.IsLongRange;
 
-        // Derived Stats (From Gear)
-        public int GetDefense()
-        {
-            int def = EquippedArmor != null ? EquippedArmor.Defense : 0;
-            return def;
-        }
-
+        // Derived Stats
+        public int GetDefense() => EquippedArmor?.Defense ?? 0;
         public int GetEvasion()
         {
             int eva = 0;
@@ -74,6 +72,49 @@ namespace JRPGPrototype
             BaseSP = 40;
         }
 
+        // Factory Constructor from EnemyData
+        public static Combatant CreateFromData(EnemyData data)
+        {
+            Combatant c = new Combatant(data.Name);
+            c.SourceId = data.Id;
+            c.Level = data.Level;
+
+            // Map JSON stats (String keys) to Enum keys
+            foreach (var kvp in data.Stats)
+            {
+                if (Enum.TryParse(kvp.Key, true, out StatType stat))
+                {
+                    c.CharacterStats[stat] = kvp.Value;
+                }
+            }
+
+            // Create Enemy Persona (Shell) if referenced
+            // Note: Enemy pool JSON usually defines persona properties directly on the enemy in simpler games,
+            // but here we align with the PersonaData architecture.
+            if (!string.IsNullOrEmpty(data.PersonaId) && Database.Personas.TryGetValue(data.PersonaId, out var pData))
+            {
+                c.ActivePersona = pData.ToPersona();
+                // Override Persona level with Enemy level
+                c.ActivePersona.Level = c.Level;
+                // Add enemy specific skills if any
+                if (data.Skills != null)
+                {
+                    foreach (var s in data.Skills)
+                    {
+                        if (!c.ActivePersona.SkillSet.Contains(s))
+                            c.ActivePersona.SkillSet.Add(s);
+                    }
+                }
+            }
+
+            // Set Resources based on new stats
+            c.RecalculateResources();
+            c.CurrentHP = c.MaxHP;
+            c.CurrentSP = c.MaxSP;
+
+            return c;
+        }
+
         public int GetStat(StatType type)
         {
             int charVal = CharacterStats.ContainsKey(type) ? CharacterStats[type] : 0;
@@ -94,6 +135,8 @@ namespace JRPGPrototype
                 return charVal;
 
             int personaVal = ActivePersona.StatModifiers[type];
+
+            // Standard stat formula merging Base + Persona
             double finalValue = type switch
             {
                 StatType.STR => charVal + (personaVal * 0.4),
@@ -130,17 +173,20 @@ namespace JRPGPrototype
             else Buffs[buffType] = turns;
         }
 
-        public void TickBuffs()
+        // Returns a list of log messages instead of printing directly
+        public List<string> TickBuffs()
         {
+            var messages = new List<string>();
             var keys = Buffs.Keys.ToList();
             foreach (var k in keys)
             {
                 if (Buffs[k] > 0)
                 {
                     Buffs[k]--;
-                    if (Buffs[k] == 0) Console.WriteLine($"{Name}'s {k} effect wore off.");
+                    if (Buffs[k] == 0) messages.Add($"{Name}'s {k} effect wore off.");
                 }
             }
+            return messages;
         }
 
         public void RecalculateResources()
@@ -178,9 +224,6 @@ namespace JRPGPrototype
             int spGain = rnd.Next(3, 8);
             BaseHP += hpGain;
             BaseSP += spGain;
-            Console.WriteLine($"\n[LEVEL UP] {Name} reached Lv.{Level}!");
-            Console.WriteLine($"-> HP +{hpGain}, SP +{spGain}");
-            Console.WriteLine($"-> Gained 3 Stat Points!");
             RecalculateResources();
             CurrentHP = MaxHP;
             CurrentSP = MaxSP;

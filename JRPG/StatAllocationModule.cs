@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using JRPGPrototype.Services;
 
 namespace JRPGPrototype
 {
     public static class StatAllocationModule
     {
-        public static void OpenMenu(Combatant player)
+        public static void OpenMenu(Combatant player, IGameIO io)
         {
             int currentIndex = 0;
 
@@ -19,7 +19,7 @@ namespace JRPGPrototype
                     options.Add($"{s}: {val}");
                 }
 
-                int idx = MenuUI.RenderMenu($"=== STAT ALLOCATION (Pts: {player.StatPoints}) ===", options, currentIndex, null, (index) =>
+                int idx = io.RenderMenu($"=== STAT ALLOCATION (Pts: {player.StatPoints}) ===", options, currentIndex, null, (index) =>
                 {
                     StatType s = (StatType)index;
                     string bonus = "";
@@ -29,17 +29,17 @@ namespace JRPGPrototype
                     else if (s == StatType.MAG) bonus = "Magic Dmg";
                     else if (s == StatType.CHA) bonus = "Negotiation/Shop";
 
-                    Console.WriteLine($"Highlight: {s}");
-                    Console.WriteLine($"Current: {player.CharacterStats[s]}");
-                    Console.WriteLine($"Bonus: {bonus}");
+                    io.WriteLine($"Highlight: {s}");
+                    io.WriteLine($"Current: {player.CharacterStats[s]}");
+                    io.WriteLine($"Bonus: {bonus}");
                 });
 
                 if (idx != -1)
                 {
                     player.AllocateStat((StatType)idx);
                     currentIndex = idx; // Keep selection
-                    Console.WriteLine("Stat Increased!");
-                    Thread.Sleep(200);
+                    io.WriteLine("Stat Increased!");
+                    io.Wait(200);
                 }
                 else return;
             }

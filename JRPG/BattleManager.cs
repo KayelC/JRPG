@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
+using JRPGPrototype.Services;
 
 namespace JRPGPrototype
 {
@@ -12,6 +12,7 @@ namespace JRPGPrototype
         private Combatant _e;
         private InventoryManager _inv;
         private EconomyManager _eco;
+        private IGameIO _io;
         private Random _rnd = new Random();
 
         // Used to store the selected skill during menu navigation
@@ -29,12 +30,13 @@ namespace JRPGPrototype
             { "Freezes", "Freeze" }
         };
 
-        public BattleManager(Combatant player, Combatant enemy, InventoryManager inventory, EconomyManager economy)
+        public BattleManager(Combatant player, Combatant enemy, InventoryManager inventory, EconomyManager economy, IGameIO io)
         {
             _p = player;
             _e = enemy;
             _inv = inventory;
             _eco = economy;
+            _io = io;
         }
 
         // --- HUD & UI HELPERS ---
@@ -51,7 +53,7 @@ namespace JRPGPrototype
             else if (_e.IsImmuneToDown) eStatus += " [GUARD]";
             foreach (var b in _e.Buffs) if (b.Value > 0) eStatus += $" [{b.Key}]";
 
-            sb.AppendLine($"ENEMY: {_e.Name.ToUpper()} (Lv.{_e.ActivePersona?.Level}){eStatus}");
+            sb.AppendLine($"ENEMY: {_e.Name.ToUpper()} (Lv.{_e.Level}) {eStatus}");
             sb.AppendLine($"HP: {_e.CurrentHP}/{_e.MaxHP}");
             sb.AppendLine("\n vs\n");
 
@@ -62,7 +64,7 @@ namespace JRPGPrototype
             else if (_p.IsImmuneToDown) pStatus += " [GUARD]";
             foreach (var b in _p.Buffs) if (b.Value > 0) pStatus += $" [{b.Key}]";
 
-            sb.AppendLine($"PLAYER: {_p.Name} [Persona: {_p.ActivePersona?.Name}]{pStatus}");
+            sb.AppendLine($"PLAYER: {_p.Name} [Persona: {_p.ActivePersona?.Name}] {pStatus}");
             sb.AppendLine($"HP: {_p.CurrentHP}/{_p.MaxHP} | SP: {_p.CurrentSP}/{_p.MaxSP}");
             sb.AppendLine("=================================================");
 
@@ -71,16 +73,16 @@ namespace JRPGPrototype
 
         private void DrawUI()
         {
-            Console.Clear();
-            Console.WriteLine(GetBattleStatusString());
+            _io.Clear();
+            _io.WriteLine(GetBattleStatusString());
         }
 
         // --- MAIN BATTLE LOOP ---
 
         public void StartBattle()
         {
-            Console.Clear();
-            Console.WriteLine("=== BATTLE COMMENCE ===");
+            _io.Clear();
+            _io.WriteLine("=== BATTLE COMMENCE ===");
 
             bool playerTurn = _p.GetStat(StatType.AGI) >= _e.GetStat(StatType.AGI);
 
@@ -95,21 +97,19 @@ namespace JRPGPrototype
 
                 if (active.IsDizzy)
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"\n[RECOVERY] {active.Name} is dizzy! They spend the turn standing up...");
-                    Console.ResetColor();
+                    _io.WriteLine($"\n[RECOVERY] {active.Name} is dizzy! They spend the turn standing up...", ConsoleColor.Yellow);
                     active.IsDizzy = false;
                     active.IsDown = false;
                     active.IsImmuneToDown = true;
-                    Thread.Sleep(2000);
+                    _io.Wait(2000);
                 }
                 else if (canAct)
                 {
                     if (active.IsDown)
                     {
-                        Console.WriteLine($"\n{active.Name} gets back on their feet.");
+                        _io.WriteLine($"\n{active.Name} gets back on their feet.");
                         active.IsDown = false;
-                        Thread.Sleep(1000);
+                        _io.Wait(1000);
                     }
 
                     if (active.IsImmuneToDown) active.IsImmuneToDown = false;
@@ -117,16 +117,14 @@ namespace JRPGPrototype
                     // Check for Rage
                     if (active.CurrentAilment?.ActionRestriction == "ForceAttack")
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"\n{active.Name} is Enraged! Attacking automatically!");
-                        Console.ResetColor();
+                        _io.WriteLine($"\n{active.Name} is Enraged! Attacking automatically!", ConsoleColor.Red);
 
                         int attacks = 1 + active.CurrentAilment.ExtraTurns;
                         for (int i = 0; i < attacks; i++)
                         {
                             if (target.CurrentHP <= 0) break;
                             PerformMove(active, target, "Attack", 30, active.WeaponElement);
-                            Thread.Sleep(800);
+                            _io.Wait(800);
                         }
                     }
                     else
@@ -135,10 +133,8 @@ namespace JRPGPrototype
 
                         if (getOneMore && target.CurrentHP > 0)
                         {
-                            Console.BackgroundColor = ConsoleColor.DarkBlue;
-                            Console.WriteLine("\n >>> ONE MORE! <<< ");
-                            Console.ResetColor();
-                            Thread.Sleep(1000);
+                            _io.WriteLine("\n >>> ONE MORE! <<< ", ConsoleColor.Cyan);
+                            _io.Wait(1000);
                             DrawUI();
                             if (playerTurn) ExecutePlayerTurn(); else ExecuteEnemyTurn();
                         }
@@ -147,15 +143,35 @@ namespace JRPGPrototype
 
                 ProcessTurnEnd(active);
                 playerTurn = !playerTurn;
-                Thread.Sleep(1200);
+                _io.Wait(1200);
             }
 
             // --- END OF BATTLE ---
             if (_p.CurrentHP > 0)
             {
-                Console.WriteLine("\n[VICTORY] Shadow Dissipated.");
+                _io.WriteLine("\n[VICTORY] Shadow Dissipated.", ConsoleColor.Green);
 
-                // EXP Logic
+                // --- FIXED MATH: DATA-DRIVEN EXP ---
+                int baseExp = 0;
+                int maccaGain = 0;
+
+                // Fix: Initialize enemyData explicitly to null to satisfy compiler (CS0165)
+                EnemyData enemyData = null;
+
+                // Attempt to load from JSON data to ensure curve compliance
+                if (!string.IsNullOrEmpty(_e.SourceId) && Database.Enemies.TryGetValue(_e.SourceId, out var data))
+                {
+                    enemyData = data;
+                    baseExp = enemyData.ExpYield;
+                    maccaGain = enemyData.MaccaYield;
+                }
+                else
+                {
+                    // Fallback to linear formula only if no JSON data exists
+                    baseExp = _e.Level * 10;
+                    maccaGain = _e.Level * 40;
+                }
+
                 int levelDiff = _e.Level - _p.Level;
                 double multiplier = 0.10;
                 if (levelDiff >= 10) multiplier = 1.75;
@@ -163,25 +179,39 @@ namespace JRPGPrototype
                 else if (levelDiff >= -4) multiplier = 1.00;
                 else if (levelDiff >= -9) multiplier = 0.50;
 
-                int baseExp = _e.Level * 10;
                 int totalExp = (int)(baseExp * multiplier);
-                int expPerMember = (int)(totalExp);
+                int expPerMember = totalExp; // For single player
 
-                Console.WriteLine($"EXP Gained: {expPerMember} (Mult: x{multiplier})");
+                _io.WriteLine($"EXP Gained: {expPerMember} (Mult: x{multiplier})");
 
                 _p.GainExp(expPerMember);
                 if (_p.ActivePersona != null) _p.ActivePersona.GainExp(expPerMember);
 
                 // Macca Logic
                 double maccaMod = Math.Clamp(1 + (_e.Level - _p.Level) * 0.04, 0.9, 1.5);
-                int maccaGain = (int)((_e.Level * 40) * maccaMod);
+                int totalMacca = (int)(maccaGain * maccaMod);
 
-                _eco.AddMacca(maccaGain);
+                _eco.AddMacca(totalMacca);
+
+                // Drop Logic (Safe to access enemyData now because we initialized it to null)
+                if (enemyData?.Drops != null)
+                {
+                    foreach (var drop in enemyData.Drops)
+                    {
+                        if (_rnd.NextDouble() < drop.Chance)
+                        {
+                            _inv.AddItem(drop.ItemId, 1);
+                            var dropName = Database.Items.ContainsKey(drop.ItemId) ? Database.Items[drop.ItemId].Name : drop.ItemId;
+                            _io.WriteLine($"Found Drop: {dropName}", ConsoleColor.Yellow);
+                        }
+                    }
+                }
             }
             else
             {
-                Console.WriteLine("\n[GAMEOVER] The journey ends here...");
+                _io.WriteLine("\n[GAMEOVER] The journey ends here...", ConsoleColor.Red);
             }
+            _io.ReadKey();
         }
 
         // --- TURN LOGIC & AILMENTS ---
@@ -190,61 +220,60 @@ namespace JRPGPrototype
         {
             if (c.CurrentAilment == null) return true;
 
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            _io.WriteLine($"\n{c.Name} is {c.CurrentAilment.Name}...", ConsoleColor.Magenta);
             bool act = true;
 
             switch (c.CurrentAilment.ActionRestriction)
             {
                 case "SkipTurn":
-                    Console.WriteLine($"\n{c.Name} is {c.CurrentAilment.Name} and cannot move!");
+                    _io.WriteLine($"{c.Name} cannot move!");
                     act = false;
                     break;
                 case "ChanceSkipOrFlee":
-                    if (_rnd.Next(100) < 30) { Console.WriteLine($"\n{c.Name} is paralyzed by Fear!"); act = false; }
+                    if (_rnd.Next(100) < 30) { _io.WriteLine($"{c.Name} is paralyzed by Fear!"); act = false; }
                     break;
                 case "ChanceSkip":
-                    if (_rnd.Next(100) < 40) { Console.WriteLine($"\n{c.Name} is Panicking and does nothing!"); act = false; }
+                    if (_rnd.Next(100) < 40) { _io.WriteLine($"{c.Name} is Panicking and does nothing!"); act = false; }
                     break;
                 case "ConfusedAction":
-                    Console.WriteLine($"\n{c.Name} is Charmed!");
+                    _io.WriteLine($"{c.Name} is Charmed!");
                     if (_rnd.Next(100) < 50)
                     {
-                        Console.WriteLine("...and heals the enemy!");
+                        _io.WriteLine("...and heals the enemy!");
                         Combatant foe = (c == _p) ? _e : _p;
                         foe.CurrentHP = Math.Min(foe.MaxHP, foe.CurrentHP + 50);
                         act = false;
                     }
                     else
                     {
-                        Console.WriteLine("...and attacks themselves!");
+                        _io.WriteLine("...and attacks themselves!");
                         PerformMove(c, c, "Attack", 20, c.WeaponElement);
                         act = false;
                     }
                     break;
             }
 
-            Console.ResetColor();
             return act;
         }
 
         private void ProcessTurnEnd(Combatant c)
         {
-            c.TickBuffs();
+            var msgs = c.TickBuffs();
+            foreach (var m in msgs) _io.WriteLine(m);
+
             if (c.CurrentAilment == null) return;
 
             if (c.CurrentAilment.DotPercent > 0)
             {
                 int dmg = (int)(c.MaxHP * c.CurrentAilment.DotPercent);
                 c.CurrentHP = Math.Max(1, c.CurrentHP - dmg);
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine($"\n{c.Name} takes {dmg} damage from {c.CurrentAilment.Name}.");
-                Console.ResetColor();
+                _io.WriteLine($"\n{c.Name} takes {dmg} damage from {c.CurrentAilment.Name}.", ConsoleColor.DarkMagenta);
             }
 
             c.AilmentDuration--;
             if (c.AilmentDuration <= 0)
             {
-                Console.WriteLine($"\n{c.Name} recovered from {c.CurrentAilment.Name}!");
+                _io.WriteLine($"\n{c.Name} recovered from {c.CurrentAilment.Name}!");
                 c.RemoveAilment();
             }
         }
@@ -265,7 +294,7 @@ namespace JRPGPrototype
 
                 string header = GetBattleStatusString() + "\n=== PLAYER TURN ===";
 
-                int choice = MenuUI.RenderMenu(header, options, menuIndex, disabled);
+                int choice = _io.RenderMenu(header, options, menuIndex, disabled);
                 if (choice != -1) menuIndex = choice;
 
                 if (choice == 0) // Attack
@@ -312,11 +341,11 @@ namespace JRPGPrototype
             }
 
             string header = GetBattleStatusString() + "\n=== SKILLS ===";
-            int idx = MenuUI.RenderMenu(header, options, 0, disabled, (index) =>
+            int idx = _io.RenderMenu(header, options, 0, disabled, (index) =>
             {
                 string sName = skills[index];
                 if (Database.Skills.TryGetValue(sName, out var d))
-                    Console.WriteLine($"Effect: {d.Effect}\nPower: {d.Power} | Acc: {d.Accuracy}");
+                    _io.WriteLine($"Effect: {d.Effect}\nPower: {d.Power} | Acc: {d.Accuracy}");
             });
 
             if (idx != -1)
@@ -349,8 +378,8 @@ namespace JRPGPrototype
             var usableItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
             if (usableItems.Count == 0)
             {
-                Console.WriteLine("Inventory is empty!");
-                Thread.Sleep(800);
+                _io.WriteLine("Inventory is empty!");
+                _io.Wait(800);
                 return false;
             }
 
@@ -361,9 +390,9 @@ namespace JRPGPrototype
             }
 
             string header = GetBattleStatusString() + "\n=== ITEMS ===";
-            int idx = MenuUI.RenderMenu(header, options, 0, null, (index) =>
+            int idx = _io.RenderMenu(header, options, 0, null, (index) =>
             {
-                Console.WriteLine($"Description: {usableItems[index].Description}");
+                _io.WriteLine($"Description: {usableItems[index].Description}");
             });
 
             if (idx != -1)
@@ -374,7 +403,7 @@ namespace JRPGPrototype
                     _inv.RemoveItem(selectedItem.Id, 1);
                     return true;
                 }
-                else Thread.Sleep(1000);
+                else _io.Wait(1000);
             }
             return false;
         }
@@ -383,7 +412,7 @@ namespace JRPGPrototype
 
         private bool PerformItem(ItemData item, Combatant target)
         {
-            Console.WriteLine($"\n[ITEM] {_p.Name} uses {item.Name}...");
+            _io.WriteLine($"\n[ITEM] {_p.Name} uses {item.Name}...");
             bool used = false;
             switch (item.Type)
             {
@@ -392,20 +421,20 @@ namespace JRPGPrototype
                     int heal = item.EffectValue;
                     int oldHp = target.CurrentHP;
                     target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
-                    Console.WriteLine($"-> Restored {target.CurrentHP - oldHp} HP.");
+                    _io.WriteLine($"-> Restored {target.CurrentHP - oldHp} HP.");
                     used = true;
                     break;
                 case "Spirit":
                     int spHeal = item.EffectValue;
                     int oldSp = target.CurrentSP;
                     target.CurrentSP = Math.Min(target.MaxSP, target.CurrentSP + spHeal);
-                    Console.WriteLine($"-> Restored {target.CurrentSP - oldSp} SP.");
+                    _io.WriteLine($"-> Restored {target.CurrentSP - oldSp} SP.");
                     used = true;
                     break;
                 case "Revive":
                     if (target.CurrentHP > 0)
                     {
-                        Console.WriteLine("-> No effect! Target is alive.");
+                        _io.WriteLine("-> No effect! Target is alive.");
                     }
                     else
                     {
@@ -413,14 +442,14 @@ namespace JRPGPrototype
                         target.CurrentHP = Math.Max(1, reviveHp);
                         target.IsDown = false;
                         target.IsDizzy = false;
-                        Console.WriteLine($"-> {target.Name} revived with {target.CurrentHP} HP!");
+                        _io.WriteLine($"-> {target.Name} revived with {target.CurrentHP} HP!");
                         used = true;
                     }
                     break;
                 case "Cure":
                     if (target.CurrentAilment == null)
                     {
-                        Console.WriteLine("-> No effect! Target healthy.");
+                        _io.WriteLine("-> No effect! Target healthy.");
                     }
                     else
                     {
@@ -434,17 +463,18 @@ namespace JRPGPrototype
                         {
                             if (target.CheckCure("Cure All")) cured = true;
                         }
-                        if (cured) { Console.WriteLine($"-> Cured!"); used = true; }
-                        else { Console.WriteLine("-> No effect on this ailment."); }
+
+                        if (cured) { _io.WriteLine($"-> Cured!"); used = true; }
+                        else { _io.WriteLine("-> No effect on this ailment."); }
                     }
                     break;
                 case "Barrier":
                 case "Utility":
-                    Console.WriteLine($"-> {item.Name} used! (Placeholder effect)");
+                    _io.WriteLine($"-> {item.Name} used! (Placeholder effect)");
                     used = true;
                     break;
                 default:
-                    Console.WriteLine("-> Effect not implemented.");
+                    _io.WriteLine("-> Effect not implemented.");
                     break;
             }
             return used;
@@ -468,7 +498,7 @@ namespace JRPGPrototype
 
         private bool PerformMove(Combatant user, Combatant target, string name, int power, Element elem)
         {
-            Console.WriteLine($"\n{user.Name} invokes {name}!");
+            _io.WriteLine($"\n{user.Name} invokes {name}!");
 
             string category = "Physical";
             if (Database.Skills.TryGetValue(name, out var skillDataVal)) category = skillDataVal.Category;
@@ -479,7 +509,7 @@ namespace JRPGPrototype
                 int heal = power == 0 ? 50 : power;
                 int oldHp = user.CurrentHP;
                 user.CurrentHP = Math.Min(user.MaxHP, user.CurrentHP + heal);
-                Console.WriteLine($"-> {user.Name} restored {user.CurrentHP - oldHp} HP to themselves!");
+                _io.WriteLine($"-> {user.Name} restored {user.CurrentHP - oldHp} HP to themselves!");
                 return false;
             }
 
@@ -489,7 +519,7 @@ namespace JRPGPrototype
                 if (name.Contains("Taru")) { if (name.Contains("nda")) target.AddBuff("AttackDown", 3); else user.AddBuff("Attack", 3); }
                 else if (name.Contains("Raku")) { if (name.Contains("nda")) target.AddBuff("DefenseDown", 3); else user.AddBuff("Defense", 3); }
                 else if (name.Contains("Suku")) { if (name.Contains("nda")) target.AddBuff("AgilityDown", 3); else user.AddBuff("Agility", 3); }
-                Console.WriteLine("-> Effect applied.");
+                _io.WriteLine("-> Effect applied.");
                 return false;
             }
 
@@ -505,23 +535,18 @@ namespace JRPGPrototype
             if (target.IsDown || target.IsDizzy || target.IsRigidBody) tEvasionMult = 0.0;
 
             int uAgi = user.GetStat(StatType.AGI);
-
-            // NEW: Incorporate Equipment Evasion into Accuracy formula
             int tAgi = (int)(target.GetStat(StatType.AGI) * tEvasionMult);
             int equipEva = target.GetEvasion();
 
             int finalHit = Math.Clamp(baseAcc + (uAgi - tAgi) - equipEva, 5, 99);
-
             if (tEvasionMult == 0.0) finalHit = 100;
 
             if (_rnd.Next(1, 101) > finalHit)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"-> MISS! {target.Name} evaded the attack.");
-                Console.ResetColor();
+                _io.WriteLine($"-> MISS! {target.Name} evaded the attack.", ConsoleColor.Yellow);
                 if (!user.IsLongRange && (elem == Element.Slash || elem == Element.Strike || elem == Element.Pierce))
                 {
-                    Console.WriteLine($"-> {user.Name} overextended and fell! [DOWN]");
+                    _io.WriteLine($"-> {user.Name} overextended and fell! [DOWN]");
                     user.IsDown = true;
                 }
                 return false;
@@ -540,7 +565,6 @@ namespace JRPGPrototype
             }
 
             int atk = isPhysical ? user.GetStat(StatType.STR) : user.GetStat(StatType.MAG);
-            // NEW: Add Equipment Defense to END stat calculation
             int def = target.GetStat(StatType.END) + target.GetDefense();
 
             if (user.CurrentAilment != null) atk = (int)(atk * user.CurrentAilment.DamageDealMult);
@@ -554,7 +578,7 @@ namespace JRPGPrototype
             bool wasAlreadyDown = target.IsDown;
             var res = target.ReceiveDamage(damage, elem, isCritical);
 
-            Console.WriteLine($"{target.Name} takes {res.DamageDealt} {elem} dmg. {res.Message}");
+            _io.WriteLine($"{target.Name} takes {res.DamageDealt} {elem} dmg. {res.Message}");
 
             // Infliction
             if (Database.Skills.TryGetValue(name, out var skillData))
@@ -573,9 +597,7 @@ namespace JRPGPrototype
                             {
                                 if (target.InflictAilment(ailmentData, 3))
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Magenta;
-                                    Console.WriteLine($"-> {target.Name} is afflicted with {ailmentData.Name}!");
-                                    Console.ResetColor();
+                                    _io.WriteLine($"-> {target.Name} is afflicted with {ailmentData.Name}!", ConsoleColor.Magenta);
                                 }
                             }
                         }
@@ -592,7 +614,7 @@ namespace JRPGPrototype
             {
                 if (userAfflictedBlock)
                 {
-                    Console.WriteLine($"-> {user.Name} hit a vulnerable spot, but {user.CurrentAilment.Name} prevented a One More!");
+                    _io.WriteLine($"-> {user.Name} hit a vulnerable spot, but {user.CurrentAilment.Name} prevented a One More!");
                     return false;
                 }
                 return true;

@@ -1,4 +1,5 @@
 ﻿using System;
+using JRPGPrototype.Services;
 
 namespace JRPGPrototype
 {
@@ -6,31 +7,22 @@ namespace JRPGPrototype
     {
         static void Main(string[] args)
         {
-            // 1. Initialize Data
-            Database.LoadData();
-            Console.WriteLine("=== JRPG PROTOTYPE INITIALIZING ===");
+            // 1. Initialize Infrastructure
+            IGameIO io = new ConsoleIO();
 
-            // 2. Setup Managers
+            io.WriteLine("=== JRPG PROTOTYPE INITIALIZING ===");
+
+            // 2. Initialize Data
+            Database.LoadData();
+
+            // 3. Setup Managers
             InventoryManager inventory = new InventoryManager();
             EconomyManager economy = new EconomyManager();
 
-            // 3. Seed Items
-            inventory.AddItem("101", 5);
-            inventory.AddItem("112", 2);
-
-            // Seed Weapons
-            inventory.AddEquipment("1", ShopCategory.Weapon); // Shortsword
-            inventory.AddEquipment("8", ShopCategory.Weapon); // Short Bow
-
-            // Seed Armor/Boots/Accessories for testing
-            inventory.AddEquipment("201", ShopCategory.Armor); // School Uniform
-            inventory.AddEquipment("301", ShopCategory.Boots); // Rubber Soles
-            inventory.AddEquipment("403", ShopCategory.Accessory); // Lucky Coin
-
-            economy.AddMacca(5000); // More money for shopping test
-
-            // 4. Create Player
+            // 4. Create Player (Hardcoded starter for now, but fully constructable)
             Combatant player = new Combatant("Hero");
+
+            // Basic starter stats
             player.CharacterStats[StatType.STR] = 8;
             player.CharacterStats[StatType.MAG] = 8;
             player.CharacterStats[StatType.END] = 8;
@@ -40,75 +32,73 @@ namespace JRPGPrototype
             player.CharacterStats[StatType.CHA] = 10;
             player.StatPoints = 5;
 
+            // Load Starter Persona
             if (Database.Personas.TryGetValue("orpheus", out var pData))
                 player.ActivePersona = pData.ToPersona();
 
+            // Finalize Resource Calculation
             player.RecalculateResources();
             player.CurrentHP = player.MaxHP;
             player.CurrentSP = player.MaxSP;
 
-            // Default Equips
-            if (Database.Weapons.TryGetValue("1", out var defWep)) player.EquippedWeapon = defWep;
-            if (Database.Armors.TryGetValue("201", out var defArm)) player.EquippedArmor = defArm;
+            // Seed items for testing
+            inventory.AddItem("101", 5); // Medicine
+            inventory.AddEquipment("1", ShopCategory.Weapon); // Shortsword
+            inventory.AddEquipment("201", ShopCategory.Armor); // School Uniform
 
-            // 5. Game Loop
+            // Equip Default Gear
+            if (Database.Weapons.TryGetValue("1", out var w)) player.EquippedWeapon = w;
+            if (Database.Armors.TryGetValue("201", out var a)) player.EquippedArmor = a;
+
+            // Give some starting money
+            economy.AddMacca(5000);
+
             bool gameRunning = true;
-            int encounterCount = 1;
+            int encounterCount = 0;
 
             while (gameRunning)
             {
-                FieldManager field = new FieldManager(player, inventory, economy);
+                // Field Phase
+                FieldManager field = new FieldManager(player, inventory, economy, io);
                 field.NavigateMenus();
 
-                Combatant enemy = GenerateEnemy(encounterCount);
+                // Battle Phase
+                // Simulate traversing to next encounter (since DungeonManager isn't fully active yet)
+                encounterCount++;
+                io.Clear();
+                io.WriteLine($"\n!!! ENCOUNTER {encounterCount} STARTED !!!", ConsoleColor.Red);
+                io.Wait(1000);
 
-                Console.Clear();
-                Console.WriteLine($"\n!!! ENCOUNTER {encounterCount} STARTED !!!");
-                System.Threading.Thread.Sleep(1000);
+                // --- NEW ENEMY GENERATION USING DATABASE ---
+                string enemyId = (encounterCount % 2 != 0) ? "E_slime" : "E_high-pixie";
+                Combatant enemy;
 
-                BattleManager battle = new BattleManager(player, enemy, inventory, economy);
+                if (Database.Enemies.TryGetValue(enemyId, out var eData))
+                {
+                    enemy = Combatant.CreateFromData(eData);
+                }
+                else
+                {
+                    // Fallback to avoid crash if JSON is missing IDs
+                    io.WriteLine("[Error] Enemy data not found, spawning generic.");
+                    enemy = new Combatant("Glitch");
+                }
+
+                // Inject IO into BattleManager
+                BattleManager battle = new BattleManager(player, enemy, inventory, economy, io);
                 battle.StartBattle();
 
                 if (player.CurrentHP <= 0)
                 {
-                    Console.WriteLine("\n[GAME OVER]");
+                    io.WriteLine("\n[GAME OVER]");
                     gameRunning = false;
                 }
                 else
                 {
-                    encounterCount++;
-                    Console.WriteLine("Press Enter to continue...");
-                    Console.ReadLine();
+                    io.WriteLine("Press any key to continue...");
+                    io.ReadKey();
                 }
             }
-        }
-
-        static Combatant GenerateEnemy(int encounterNum)
-        {
-            string personaId = (encounterNum % 2 != 0) ? "slime" : "high-pixie";
-            string name = (encounterNum % 2 != 0) ? "Slime" : "High Pixie";
-
-            Combatant enemy = new Combatant(name);
-            if (Database.Personas.TryGetValue(personaId, out var eData))
-            {
-                enemy.ActivePersona = eData.ToPersona();
-                enemy.Level = eData.Level;
-            }
-
-            int baseStat = 5 + (enemy.Level / 2);
-            foreach (StatType s in Enum.GetValues(typeof(StatType)))
-                enemy.CharacterStats[s] = baseStat;
-
-            if (Database.Weapons.TryGetValue("1", out var wData)) enemy.EquippedWeapon = wData;
-
-            // Give enemy some armor too
-            if (Database.Armors.TryGetValue("201", out var aData)) enemy.EquippedArmor = aData;
-
-            enemy.RecalculateResources();
-            enemy.CurrentHP = enemy.MaxHP;
-            enemy.CurrentSP = enemy.MaxSP;
-
-            return enemy;
         }
     }
 }

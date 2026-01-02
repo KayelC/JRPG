@@ -7,11 +7,13 @@ namespace JRPGPrototype
 {
     public static class Database
     {
+        // Core Data
         public static Dictionary<string, SkillData> Skills = new Dictionary<string, SkillData>();
         public static Dictionary<string, PersonaData> Personas = new Dictionary<string, PersonaData>();
         public static Dictionary<string, AilmentData> Ailments = new Dictionary<string, AilmentData>();
         public static Dictionary<string, ItemData> Items = new Dictionary<string, ItemData>();
         public static Dictionary<string, EnemyData> Enemies = new Dictionary<string, EnemyData>();
+        public static Dictionary<string, DungeonData> Dungeons = new Dictionary<string, DungeonData>();
 
         // Equipment Dictionaries
         public static Dictionary<string, WeaponData> Weapons = new Dictionary<string, WeaponData>();
@@ -19,6 +21,7 @@ namespace JRPGPrototype
         public static Dictionary<string, BootData> Boots = new Dictionary<string, BootData>();
         public static Dictionary<string, AccessoryData> Accessories = new Dictionary<string, AccessoryData>();
 
+        // Shop Data
         public static List<ShopEntry> ShopInventory = new List<ShopEntry>();
 
         public static void LoadData()
@@ -38,7 +41,7 @@ namespace JRPGPrototype
                 Console.WriteLine($"[System] Loaded {Personas.Count} personas.");
             });
 
-            // 3. Enemies (NEW)
+            // 3. Enemies
             LoadFile("enemies.json", (json) => {
                 var eList = JsonConvert.DeserializeObject<List<EnemyData>>(json);
                 foreach (var e in eList) if (!Enemies.ContainsKey(e.Id)) Enemies.Add(e.Id, e);
@@ -77,6 +80,22 @@ namespace JRPGPrototype
                 AddShopEntries(root.Boots, ShopCategory.Boots);
                 AddShopEntries(root.Accessories, ShopCategory.Accessory);
                 Console.WriteLine($"[System] Loaded {ShopInventory.Count} shop entries.");
+            });
+
+            // 8. Dungeons (NEW)
+            LoadFile("tartarus.json", (json) => {
+                var root = JsonConvert.DeserializeObject<DungeonRoot>(json);
+                if (root != null && root.Dungeons != null)
+                {
+                    foreach (var d in root.Dungeons)
+                    {
+                        if (!Dungeons.ContainsKey(d.Id))
+                        {
+                            Dungeons.Add(d.Id, d);
+                            Console.WriteLine($"[System] Loaded Dungeon: {d.Name} with {d.Blocks.Count} blocks.");
+                        }
+                    }
+                }
             });
         }
 

@@ -9,7 +9,6 @@ namespace JRPGPrototype
         {
             // 1. Initialize Infrastructure
             IGameIO io = new ConsoleIO();
-
             io.WriteLine("=== JRPG PROTOTYPE INITIALIZING ===");
 
             // 2. Initialize Data
@@ -18,8 +17,9 @@ namespace JRPGPrototype
             // 3. Setup Managers
             InventoryManager inventory = new InventoryManager();
             EconomyManager economy = new EconomyManager();
+            DungeonState dungeonState = new DungeonState();
 
-            // 4. Create Player (Hardcoded starter for now, but fully constructable)
+            // 4. Create Player
             Combatant player = new Combatant("Hero");
 
             // Basic starter stats
@@ -41,8 +41,11 @@ namespace JRPGPrototype
             player.CurrentHP = player.MaxHP;
             player.CurrentSP = player.MaxSP;
 
-            // Seed items for testing
+            // Seed items
             inventory.AddItem("101", 5); // Medicine
+            inventory.AddItem("108", 2); // Soul Drop
+            inventory.AddItem("114", 3); // Goho-M
+            inventory.AddItem("113", 3); // Traesto Gem (Battle Escape)
             inventory.AddEquipment("1", ShopCategory.Weapon); // Shortsword
             inventory.AddEquipment("201", ShopCategory.Armor); // School Uniform
 
@@ -53,52 +56,47 @@ namespace JRPGPrototype
             // Give some starting money
             economy.AddMacca(5000);
 
-            bool gameRunning = true;
-            int encounterCount = 0;
+            // 5. Game Loop
+            FieldManager field = new FieldManager(player, inventory, economy, dungeonState, io);
 
-            while (gameRunning)
+            bool appRunning = true;
+            while (appRunning)
             {
-                // Field Phase
-                FieldManager field = new FieldManager(player, inventory, economy, io);
+                // Run the main game loop logic
                 field.NavigateMenus();
 
-                // Battle Phase
-                // Simulate traversing to next encounter (since DungeonManager isn't fully active yet)
-                encounterCount++;
-                io.Clear();
-                io.WriteLine($"\n!!! ENCOUNTER {encounterCount} STARTED !!!", ConsoleColor.Red);
-                io.Wait(1000);
-
-                // --- NEW ENEMY GENERATION USING DATABASE ---
-                string enemyId = (encounterCount % 2 != 0) ? "E_slime" : "E_high-pixie";
-                Combatant enemy;
-
-                if (Database.Enemies.TryGetValue(enemyId, out var eData))
-                {
-                    enemy = Combatant.CreateFromData(eData);
-                }
-                else
-                {
-                    // Fallback to avoid crash if JSON is missing IDs
-                    io.WriteLine("[Error] Enemy data not found, spawning generic.");
-                    enemy = new Combatant("Glitch");
-                }
-
-                // Inject IO into BattleManager
-                BattleManager battle = new BattleManager(player, enemy, inventory, economy, io);
-                battle.StartBattle();
-
+                // If NavigateMenus returns, it means we either quit or died.
                 if (player.CurrentHP <= 0)
                 {
-                    io.WriteLine("\n[GAME OVER]");
-                    gameRunning = false;
+                    io.Clear();
+                    io.WriteLine("\n[GAME OVER] You have collapsed...", ConsoleColor.Red);
+                    io.Wait(2000);
+                    io.WriteLine("You are dragged back to the entrance by a mysterious force.");
+                    io.Wait(2000);
+
+                    // Revive at Lobby with penalty
+                    player.CurrentHP = 1;
+                    player.IsDown = false;
+                    player.IsDizzy = false;
+                    player.RemoveAilment();
+
+                    // Reset Dungeon State
+                    dungeonState.ResetToEntry();
+
+                    // Loop continues (Respawn)
                 }
                 else
                 {
-                    io.WriteLine("Press any key to continue...");
-                    io.ReadKey();
+                    // Clean exit from menu
+                    appRunning = false;
                 }
             }
+
+            // End State
+            io.Clear();
+            io.WriteLine("\n[GAME SESSION ENDED]", ConsoleColor.Red);
+            io.WriteLine("Press any key to exit...");
+            io.ReadKey();
         }
     }
 }

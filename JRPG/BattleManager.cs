@@ -15,8 +15,10 @@ namespace JRPGPrototype
         private IGameIO _io;
         private Random _rnd = new Random();
 
-        // Used to store the selected skill during menu navigation
         private string? _selectedSkillName;
+
+        // NEW: Flag to signal dungeon escape to FieldManager
+        public bool TraestoUsed { get; private set; } = false;
 
         private readonly Dictionary<string, string> _effectToAilmentMap = new Dictionary<string, string>
         {
@@ -40,13 +42,11 @@ namespace JRPGPrototype
         }
 
         // --- HUD & UI HELPERS ---
-
         private string GetBattleStatusString()
         {
             var sb = new System.Text.StringBuilder();
             sb.AppendLine("=================================================");
 
-            // Enemy Info
             string eStatus = _e.CurrentAilment != null ? $" [{_e.CurrentAilment.Name}]" : "";
             if (_e.IsDizzy) eStatus += " [DIZZY]";
             else if (_e.IsDown) eStatus += " [DOWN]";
@@ -57,7 +57,6 @@ namespace JRPGPrototype
             sb.AppendLine($"HP: {_e.CurrentHP}/{_e.MaxHP}");
             sb.AppendLine("\n vs\n");
 
-            // Player Info
             string pStatus = _p.CurrentAilment != null ? $" [{_p.CurrentAilment.Name}]" : "";
             if (_p.IsDizzy) pStatus += " [DIZZY]";
             else if (_p.IsDown) pStatus += " [DOWN]";
@@ -78,7 +77,6 @@ namespace JRPGPrototype
         }
 
         // --- MAIN BATTLE LOOP ---
-
         public void StartBattle()
         {
             _io.Clear();
@@ -88,6 +86,9 @@ namespace JRPGPrototype
 
             while (_p.CurrentHP > 0 && _e.CurrentHP > 0)
             {
+                // NEW: check if we escaped via item
+                if (TraestoUsed) break;
+
                 Combatant active = playerTurn ? _p : _e;
                 Combatant target = playerTurn ? _e : _p;
 
@@ -114,11 +115,9 @@ namespace JRPGPrototype
 
                     if (active.IsImmuneToDown) active.IsImmuneToDown = false;
 
-                    // Check for Rage
                     if (active.CurrentAilment?.ActionRestriction == "ForceAttack")
                     {
                         _io.WriteLine($"\n{active.Name} is Enraged! Attacking automatically!", ConsoleColor.Red);
-
                         int attacks = 1 + active.CurrentAilment.ExtraTurns;
                         for (int i = 0; i < attacks; i++)
                         {
@@ -131,6 +130,9 @@ namespace JRPGPrototype
                     {
                         bool getOneMore = playerTurn ? ExecutePlayerTurn() : ExecuteEnemyTurn();
 
+                        // Check escape again after turn execution
+                        if (TraestoUsed) break;
+
                         if (getOneMore && target.CurrentHP > 0)
                         {
                             _io.WriteLine("\n >>> ONE MORE! <<< ", ConsoleColor.Cyan);
@@ -141,24 +143,27 @@ namespace JRPGPrototype
                     }
                 }
 
+                if (TraestoUsed) break;
+
                 ProcessTurnEnd(active);
                 playerTurn = !playerTurn;
                 _io.Wait(1200);
             }
 
-            // --- END OF BATTLE ---
+            if (TraestoUsed)
+            {
+                // Battle ends immediately, no loot, no game over check needed here
+                return;
+            }
+
             if (_p.CurrentHP > 0)
             {
                 _io.WriteLine("\n[VICTORY] Shadow Dissipated.", ConsoleColor.Green);
 
-                // --- FIXED MATH: DATA-DRIVEN EXP ---
                 int baseExp = 0;
                 int maccaGain = 0;
-
-                // Fix: Initialize enemyData explicitly to null to satisfy compiler (CS0165)
                 EnemyData enemyData = null;
 
-                // Attempt to load from JSON data to ensure curve compliance
                 if (!string.IsNullOrEmpty(_e.SourceId) && Database.Enemies.TryGetValue(_e.SourceId, out var data))
                 {
                     enemyData = data;
@@ -167,7 +172,6 @@ namespace JRPGPrototype
                 }
                 else
                 {
-                    // Fallback to linear formula only if no JSON data exists
                     baseExp = _e.Level * 10;
                     maccaGain = _e.Level * 40;
                 }
@@ -180,20 +184,18 @@ namespace JRPGPrototype
                 else if (levelDiff >= -9) multiplier = 0.50;
 
                 int totalExp = (int)(baseExp * multiplier);
-                int expPerMember = totalExp; // For single player
+                int expPerMember = totalExp;
 
-                _io.WriteLine($"EXP Gained: {expPerMember} (Mult: x{multiplier})");
+                _io.WriteLine($"EXP Gained: {expPerMember} (Mult: x{multiplier:F2})");
 
                 _p.GainExp(expPerMember);
                 if (_p.ActivePersona != null) _p.ActivePersona.GainExp(expPerMember);
 
-                // Macca Logic
                 double maccaMod = Math.Clamp(1 + (_e.Level - _p.Level) * 0.04, 0.9, 1.5);
                 int totalMacca = (int)(maccaGain * maccaMod);
 
                 _eco.AddMacca(totalMacca);
 
-                // Drop Logic (Safe to access enemyData now because we initialized it to null)
                 if (enemyData?.Drops != null)
                 {
                     foreach (var drop in enemyData.Drops)
@@ -209,13 +211,12 @@ namespace JRPGPrototype
             }
             else
             {
-                _io.WriteLine("\n[GAMEOVER] The journey ends here...", ConsoleColor.Red);
+                _io.WriteLine("\n[DEFEAT] You have fallen in battle...", ConsoleColor.Red);
             }
             _io.ReadKey();
         }
 
         // --- TURN LOGIC & AILMENTS ---
-
         private bool ProcessTurnStart(Combatant c)
         {
             if (c.CurrentAilment == null) return true;
@@ -279,7 +280,6 @@ namespace JRPGPrototype
         }
 
         // --- PLAYER MENU SYSTEM ---
-
         private bool ExecutePlayerTurn()
         {
             bool isPanicked = _p.CurrentAilment?.Name == "Panic";
@@ -311,6 +311,9 @@ namespace JRPGPrototype
                 {
                     if (ExecuteItemMenu()) return false;
                 }
+
+                // If Traesto was used, break loop immediately
+                if (TraestoUsed) return true;
             }
         }
 
@@ -384,13 +387,22 @@ namespace JRPGPrototype
             }
 
             List<string> options = new List<string>();
+            List<bool> disabled = new List<bool>();
+
             foreach (var item in usableItems)
             {
-                options.Add($"{item.Name} x{_inv.GetQuantity(item.Id)}");
+                // UPDATE: Goho-M is disabled in battle. Traesto Gem is enabled.
+                bool isFieldOnly = (item.Name == "Goho-M");
+
+                string label = $"{item.Name} x{_inv.GetQuantity(item.Id)}";
+                if (isFieldOnly) label += " (Field Only)";
+
+                options.Add(label);
+                disabled.Add(isFieldOnly);
             }
 
             string header = GetBattleStatusString() + "\n=== ITEMS ===";
-            int idx = _io.RenderMenu(header, options, 0, null, (index) =>
+            int idx = _io.RenderMenu(header, options, 0, disabled, (index) =>
             {
                 _io.WriteLine($"Description: {usableItems[index].Description}");
             });
@@ -414,6 +426,15 @@ namespace JRPGPrototype
         {
             _io.WriteLine($"\n[ITEM] {_p.Name} uses {item.Name}...");
             bool used = false;
+
+            // UPDATE: Check for Traesto Gem (Battle Escape)
+            if (item.Name == "Traesto Gem")
+            {
+                _io.WriteLine("The gem shatters, enveloping the party in light...");
+                TraestoUsed = true;
+                return true; // Item consumed
+            }
+
             switch (item.Type)
             {
                 case "Healing":
@@ -530,7 +551,6 @@ namespace JRPGPrototype
 
             if (user.IsLongRange) baseAcc -= 20;
 
-            // Target Evasion Logic
             double tEvasionMult = target.CurrentAilment?.EvasionMult ?? 1.0;
             if (target.IsDown || target.IsDizzy || target.IsRigidBody) tEvasionMult = 0.0;
 
@@ -570,7 +590,10 @@ namespace JRPGPrototype
             if (user.CurrentAilment != null) atk = (int)(atk * user.CurrentAilment.DamageDealMult);
             if (target.IsDown || target.IsDizzy) def = (int)(def * 0.5);
 
-            double dmgBase = Math.Sqrt(power) * ((double)atk / Math.Max(1, def)) * 7;
+            double ratio = (double)atk / Math.Max(1, def);
+            double dampeningFactor = Math.Sqrt(ratio);
+            double dmgBase = Math.Sqrt(power) * dampeningFactor * 12;
+
             if (target.CurrentAilment != null) dmgBase *= target.CurrentAilment.DamageTakenMult;
 
             int damage = (int)(dmgBase * (0.95 + _rnd.NextDouble() * 0.1));
@@ -580,7 +603,6 @@ namespace JRPGPrototype
 
             _io.WriteLine($"{target.Name} takes {res.DamageDealt} {elem} dmg. {res.Message}");
 
-            // Infliction
             if (Database.Skills.TryGetValue(name, out var skillData))
             {
                 foreach (var kvp in _effectToAilmentMap)

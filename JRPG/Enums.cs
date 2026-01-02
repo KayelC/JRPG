@@ -34,4 +34,14 @@ namespace JRPGPrototype
         Absorb,
         Null
     }
+
+    // --- NEW: Dungeon Event Classification ---
+    public enum DungeonEventType
+    {
+        Empty,      // Nothing special (Standard traversal)
+        Battle,     // Random Encounter
+        Boss,       // Fixed Guardian
+        SafeRoom,   // Save/Heal/Terminal
+        BlockEnd    // Barrier/Story Stop
+    }
 }

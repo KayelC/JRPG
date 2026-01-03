@@ -11,4 +11,13 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 
+      
+  <ItemGroup>
+    <None Remove="Data\Jsons\**" />
+    <Content Include="Data\Jsons\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  
 </Project>

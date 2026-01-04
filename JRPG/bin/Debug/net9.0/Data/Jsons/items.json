@@ -1,6 +1,6 @@
 {
   "items": [
-    { "id": "101", "name": "Medicine", "type": "Healing", "effect_value": 50, "description": "Restores 50 HP to one ally." },
+    { "id": "101", "name": "Medicine", "type": "Healing", "effect_value": 500, "description": "Restores 50 HP to one ally." },
     { "id": "102", "name": "Ointment", "type": "Healing", "effect_value": 100, "description": "Restores 100 HP to one ally." },
     { "id": "103", "name": "Bead", "type": "Healing", "effect_value": 9999, "description": "Fully restores HP to one ally." },
     { "id": "104", "name": "Medical Powder", "type": "Healing_All", "effect_value": 100, "description": "Restores 100 HP to the whole party." },

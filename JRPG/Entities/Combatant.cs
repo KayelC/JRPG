@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
+using JRPGPrototype.Logic;
 
 namespace JRPGPrototype.Entities
 {
@@ -21,9 +22,11 @@ namespace JRPGPrototype.Entities
         public int MaxSP { get; private set; }
         public int CurrentSP { get; set; }
 
+        // --- BATTLE STATES ---
         public bool IsDown { get; set; }
         public bool IsDizzy { get; set; }
         public bool IsImmuneToDown { get; set; }
+        public bool IsGuarding { get; set; }
 
         public AilmentData CurrentAilment { get; private set; }
         public int AilmentDuration { get; set; }
@@ -176,11 +179,32 @@ namespace JRPGPrototype.Entities
             Level++;
             StatPoints += 3;
             Random rnd = new Random();
+
+            // Capture old max values
+            int oldMaxHP = MaxHP;
+            int oldMaxSP = MaxSP;
+
             BaseHP += rnd.Next(6, 11);
             BaseSP += rnd.Next(3, 8);
+
             RecalculateResources();
-            CurrentHP = MaxHP;
-            CurrentSP = MaxSP;
+
+            // FIX: Add the difference (growth) to current, rather than full heal
+            int hpGain = MaxHP - oldMaxHP;
+            int spGain = MaxSP - oldMaxSP;
+            CurrentHP += hpGain;
+            CurrentSP += spGain;
+        }
+
+        // NEW: Called after battle ends to remove temporary states
+        public void CleanupBattleState()
+        {
+            IsDown = false;
+            IsDizzy = false;
+            IsGuarding = false;
+            IsImmuneToDown = false;
+            Buffs.Clear();
+            // Note: Ailments persist in SMT/Persona logic, so we don't clear CurrentAilment here.
         }
 
         public void AllocateStat(StatType type)
@@ -193,6 +217,7 @@ namespace JRPGPrototype.Entities
 
         public bool InflictAilment(AilmentData ailment, int duration = 3)
         {
+            if (IsGuarding) return false;
             if (CurrentAilment != null) return false;
             CurrentAilment = ailment;
             AilmentDuration = duration;
@@ -228,6 +253,13 @@ namespace JRPGPrototype.Entities
             Affinity aff = ActivePersona?.GetAffinity(element) ?? Affinity.Normal;
             var result = new CombatResult { IsCritical = isCritical };
 
+            if (IsGuarding)
+            {
+                damage = (int)(damage * 0.5);
+                isCritical = false;
+                if (aff == Affinity.Weak) aff = Affinity.Normal;
+            }
+
             if (isCritical) damage = (int)(damage * 1.5);
 
             switch (aff)
@@ -235,10 +267,16 @@ namespace JRPGPrototype.Entities
                 case Affinity.Weak:
                     result.Type = HitType.Weakness;
                     result.DamageDealt = (int)(damage * 1.5f);
-                    if (IsDown) { IsDizzy = true; result.Message = "!!! DIZZY !!!"; }
+                    if (IsDown)
+                    {
+                        result.Message = "WEAKNESS STRUCK (DOWN)!";
+                    }
                     else if (IsImmuneToDown) result.Message = "Stood Firm!";
                     else if (IsRigidBody) result.Message = "CRITICAL (Rigid)!";
-                    else { IsDown = true; result.Message = "WEAKNESS STRUCK!"; }
+                    else
+                    {
+                        result.Message = "WEAKNESS STRUCK!";
+                    }
                     break;
                 case Affinity.Resist:
                     result.Type = HitType.Normal;
@@ -264,12 +302,7 @@ namespace JRPGPrototype.Entities
                 default:
                     result.Type = HitType.Normal;
                     result.DamageDealt = damage;
-                    if (isCritical)
-                    {
-                        if (IsDown) { IsDizzy = true; result.Message = "!!! DIZZY (CRIT) !!!"; }
-                        else if (!IsImmuneToDown && !IsRigidBody) { IsDown = true; result.Message = "CRITICAL HIT! [DOWN]"; }
-                        else result.Message = "CRITICAL HIT!";
-                    }
+                    if (isCritical) result.Message = "CRITICAL HIT!";
                     break;
             }
             CurrentHP = Math.Max(0, CurrentHP - result.DamageDealt);

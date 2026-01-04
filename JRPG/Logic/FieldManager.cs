@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using JRPGPrototype.Services;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Data;
@@ -18,6 +19,7 @@ namespace JRPGPrototype.Logic
         private DungeonState _dungeonState;
         private IGameIO _io;
 
+        // Persistent Cursors
         private int _mainMenuIndex = 0;
         private int _statusMenuIndex = 0;
         private int _inventoryMenuIndex = 0;
@@ -77,10 +79,12 @@ namespace JRPGPrototype.Logic
             }
         }
 
+        // --- DUNGEON ENTRY LOGIC ---
         private void PrepareDungeonEntry()
         {
             List<int> terminals = _dungeon.GetUnlockedTerminals();
 
+            // If only Lobby is unlocked, just go to first floor
             if (terminals.Count <= 1)
             {
                 _dungeon.WarpToFloor(1); // Warp to Lobby (Floor 1)
@@ -100,12 +104,12 @@ namespace JRPGPrototype.Logic
             if (choice == -1 || choice == options.Count - 1) return;
 
             int selectedFloor = terminals[choice];
-            // No need to map 1->2 anymore, we have a real lobby at Floor 1 now.
 
             _dungeon.WarpToFloor(selectedFloor);
             ExploreDungeon();
         }
 
+        // --- DUNGEON CRAWLER LOOP ---
         private void ExploreDungeon()
         {
             HandleNewFloor(_dungeon.ProcessCurrentFloor());
@@ -169,11 +173,7 @@ namespace JRPGPrototype.Logic
                 else if (floorInfo.HasTerminal)
                 {
                     options.Add("Access Terminal (Return)");
-                    actions.Add(() => {
-                        _io.WriteLine("Teleporting to Lobby...");
-                        _io.Wait(1000);
-                        _dungeon.WarpToFloor(1);
-                    });
+                    actions.Add(() => OpenTerminalMenu());
                 }
 
                 // 3. Menus
@@ -267,7 +267,6 @@ namespace JRPGPrototype.Logic
                     enemy = new Combatant("Glitch Slime");
             }
 
-            // PASS ISBOSS FLAG HERE
             BattleManager battle = new BattleManager(_player, enemy, _inventory, _economy, _io, isBoss);
             battle.StartBattle();
 
@@ -574,7 +573,7 @@ namespace JRPGPrototype.Logic
                 else
                 {
                     int healAmount = 50;
-                    var match = System.Text.RegularExpressions.Regex.Match(skill.Effect, @"\((\d+)\)");
+                    var match = Regex.Match(skill.Effect, @"\((\d+)\)");
                     if (match.Success) int.TryParse(match.Groups[1].Value, out healAmount);
 
                     target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + healAmount);

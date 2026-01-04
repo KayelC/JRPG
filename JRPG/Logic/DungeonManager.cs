@@ -12,7 +12,7 @@ namespace JRPGPrototype.Logic
         public string BlockName { get; set; }
         public DungeonEventType Type { get; set; }
         public string Description { get; set; }
-        public string EnemyId { get; set; }
+        public List<string> EnemyIds { get; set; } = new List<string>(); // Changed from string to List
         public bool HasTerminal { get; set; }
     }
 
@@ -25,16 +25,31 @@ namespace JRPGPrototype.Logic
         public DungeonManager(DungeonState state)
         {
             _state = state;
-            if (Database.Dungeons.TryGetValue(_state.CurrentDungeonId, out var dungeonData)) _data = dungeonData;
-            else _data = new DungeonData { Name = "Unknown Void", Blocks = new List<BlockData>() };
+
+            if (Database.Dungeons.TryGetValue(_state.CurrentDungeonId, out var dungeonData))
+            {
+                _data = dungeonData;
+            }
+            else
+            {
+                _data = new DungeonData
+                {
+                    Name = "Unknown Void",
+                    Blocks = new List<BlockData>()
+                };
+            }
         }
 
         public int CurrentFloor => _state.CurrentFloor;
 
+        // --- NAVIGATION ---
         public void Ascend()
         {
             _state.CurrentFloor++;
-            if (_state.CurrentFloor > _state.MaxFloorReached) _state.MaxFloorReached = _state.CurrentFloor;
+            if (_state.CurrentFloor > _state.MaxFloorReached)
+            {
+                _state.MaxFloorReached = _state.CurrentFloor;
+            }
         }
 
         public void Descend()
@@ -42,52 +57,136 @@ namespace JRPGPrototype.Logic
             if (_state.CurrentFloor > 1) _state.CurrentFloor--;
         }
 
-        public void WarpToFloor(int floor) => _state.CurrentFloor = floor;
+        public void WarpToFloor(int floor)
+        {
+            _state.CurrentFloor = floor;
+        }
 
+        // --- CORE LOGIC ---
         public DungeonFloorResult ProcessCurrentFloor()
         {
+            // 0. Handle Lobby (Floor 1)
             if (_state.CurrentFloor == 1)
-                return new DungeonFloorResult { FloorNumber = 1, BlockName = "Entrance", Type = DungeonEventType.SafeRoom, Description = "The Lobby.", HasTerminal = true };
+            {
+                return new DungeonFloorResult
+                {
+                    FloorNumber = 1,
+                    BlockName = "Entrance",
+                    Type = DungeonEventType.SafeRoom,
+                    Description = "The Lobby. A large clock ticks quietly.",
+                    HasTerminal = true
+                };
+            }
 
-            var result = new DungeonFloorResult { FloorNumber = _state.CurrentFloor, BlockName = "Unknown Block", Type = DungeonEventType.Empty, Description = "A quiet corridor." };
+            var result = new DungeonFloorResult
+            {
+                FloorNumber = _state.CurrentFloor,
+                BlockName = "Unknown Block",
+                Type = DungeonEventType.Empty,
+                Description = "A quiet corridor in the tower."
+            };
+
+            // 1. Identify Current Block
             var block = GetCurrentBlock();
-            if (block == null) { result.Description = "You are outside the map."; return result; }
+            if (block == null)
+            {
+                result.Description = "You are outside the known map.";
+                return result;
+            }
 
             result.BlockName = block.Name;
+
+            // 2. Check for Fixed Floors WITHIN this Block
             var fixedData = block.FixedFloors?.FirstOrDefault(f => f.Floor == _state.CurrentFloor);
 
             if (fixedData != null)
             {
                 result.Description = fixedData.Description;
                 result.HasTerminal = fixedData.HasTerminal;
-                if (fixedData.HasTerminal) _state.UnlockTerminal(_state.CurrentFloor);
+
+                if (fixedData.HasTerminal)
+                {
+                    _state.UnlockTerminal(_state.CurrentFloor);
+                }
 
                 switch (fixedData.Type)
                 {
                     case "Boss":
-                        if (_state.IsBossDefeated(fixedData.Id)) { result.Type = DungeonEventType.Empty; result.Description = "The guardian is defeated."; }
-                        else { result.Type = DungeonEventType.Boss; result.EnemyId = fixedData.Id; }
+                        if (_state.IsBossDefeated(fixedData.Id))
+                        {
+                            result.Type = DungeonEventType.Empty;
+                            result.Description = "The area is quiet. The guardian has been defeated.";
+                        }
+                        else
+                        {
+                            result.Type = DungeonEventType.Boss;
+                            result.EnemyIds.Add(fixedData.Id); // Add single boss ID
+                        }
                         break;
-                    case "SafeRoom": result.Type = DungeonEventType.SafeRoom; break;
-                    case "BlockEnd": result.Type = DungeonEventType.BlockEnd; break;
-                    default: result.Type = DungeonEventType.Empty; break;
+                    case "SafeRoom":
+                        result.Type = DungeonEventType.SafeRoom;
+                        break;
+                    case "BlockEnd":
+                        result.Type = DungeonEventType.BlockEnd;
+                        break;
+                    default:
+                        result.Type = DungeonEventType.Empty;
+                        break;
                 }
                 return result;
             }
 
+            // 3. Random Encounters (Mixed Groups)
             result.Type = DungeonEventType.Battle;
-            result.Description = "Shadows lurk...";
-            result.EnemyId = GetRandomEnemyFromBlock(block);
+            result.Description = "Shadows lurk in the darkness...";
+            result.EnemyIds = GenerateRandomEncounter(block);
+
             return result;
         }
 
-        public List<int> GetUnlockedTerminals() => _state.UnlockedTerminals.OrderBy(x => x).ToList();
-        public void RegisterBossDefeat(string bossId) { if (!string.IsNullOrEmpty(bossId)) _state.MarkBossDefeated(bossId); }
-        private BlockData GetCurrentBlock() => _data.Blocks.FirstOrDefault(b => b.FloorRange != null && b.FloorRange.Length >= 2 && _state.CurrentFloor >= b.FloorRange[0] && _state.CurrentFloor <= b.FloorRange[1]);
-        private string GetRandomEnemyFromBlock(BlockData block)
+        public List<int> GetUnlockedTerminals()
         {
-            if (block.EnemyPool == null || block.EnemyPool.Count == 0) return "E_slime";
-            return block.EnemyPool[_rnd.Next(block.EnemyPool.Count)];
+            return _state.UnlockedTerminals.OrderBy(x => x).ToList();
+        }
+
+        public void RegisterBossDefeat(string bossId)
+        {
+            if (!string.IsNullOrEmpty(bossId))
+            {
+                _state.MarkBossDefeated(bossId);
+            }
+        }
+
+        private BlockData GetCurrentBlock()
+        {
+            return _data.Blocks.FirstOrDefault(b =>
+                b.FloorRange != null &&
+                b.FloorRange.Length >= 2 &&
+                _state.CurrentFloor >= b.FloorRange[0] &&
+                _state.CurrentFloor <= b.FloorRange[1]);
+        }
+
+        private List<string> GenerateRandomEncounter(BlockData block)
+        {
+            List<string> encounter = new List<string>();
+
+            if (block.EnemyPool == null || block.EnemyPool.Count == 0)
+            {
+                encounter.Add("E_slime");
+                return encounter;
+            }
+
+            // Determine party size (1 to 3 enemies)
+            // Future: Adjust max count based on floor/difficulty
+            int count = _rnd.Next(1, 4);
+
+            for (int i = 0; i < count; i++)
+            {
+                int index = _rnd.Next(block.EnemyPool.Count);
+                encounter.Add(block.EnemyPool[index]);
+            }
+
+            return encounter;
         }
     }
 }

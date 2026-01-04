@@ -2165,6 +2165,15 @@
   ],
   "Recovery Skills": [
     {
+      "Skill": "Baisudi",
+      "Effect": "Cures Poison, Freeze, and Shock for 1 ally.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "4 SP",
+      "Category": "Recovery Skills"
+    },
+    {
       "Skill": "Dia",
       "Effect": "Slightly (50) restores 1 ally's HP.",
       "Power": NaN,

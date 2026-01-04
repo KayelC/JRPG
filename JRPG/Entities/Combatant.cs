@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Logic;
@@ -11,6 +10,11 @@ namespace JRPGPrototype.Entities
     {
         public string SourceId { get; set; }
         public string Name { get; set; } = string.Empty;
+
+        public ClassType Class { get; set; } = ClassType.Human;
+        public ControllerType Controller { get; set; } = ControllerType.AI;
+        public int PartySlot { get; set; } = -1;
+
         public int Level { get; set; } = 1;
         public int Exp { get; set; }
         public int StatPoints { get; set; }
@@ -23,10 +27,12 @@ namespace JRPGPrototype.Entities
         public int CurrentSP { get; set; }
 
         // --- BATTLE STATES ---
-        public bool IsDown { get; set; }
-        public bool IsDizzy { get; set; }
-        public bool IsImmuneToDown { get; set; }
+        // Renamed from IsDefending to match BattleManager logic
         public bool IsGuarding { get; set; }
+        public bool IsDead => CurrentHP <= 0;
+
+        // Freeze/Shock makes body rigid (Criticals guaranteed)
+        public bool IsRigidBody => CurrentAilment != null && (CurrentAilment.Name == "Freeze" || CurrentAilment.Name == "Shock");
 
         public AilmentData CurrentAilment { get; private set; }
         public int AilmentDuration { get; set; }
@@ -52,20 +58,22 @@ namespace JRPGPrototype.Entities
         public Dictionary<StatType, int> CharacterStats { get; set; } = new Dictionary<StatType, int>();
         public Persona ActivePersona { get; set; }
 
-        public Combatant(string name)
+        public Combatant(string name, ClassType type = ClassType.Human)
         {
             Name = name;
-            foreach (StatType type in Enum.GetValues(typeof(StatType)))
-                CharacterStats[type] = 10;
+            Class = type;
+            foreach (StatType t in Enum.GetValues(typeof(StatType)))
+                CharacterStats[t] = 10;
             BaseHP = 100;
             BaseSP = 40;
         }
 
         public static Combatant CreateFromData(EnemyData data)
         {
-            Combatant c = new Combatant(data.Name);
+            Combatant c = new Combatant(data.Name, ClassType.Demon);
             c.SourceId = data.Id;
             c.Level = data.Level;
+            c.Controller = ControllerType.AI;
 
             foreach (var kvp in data.Stats)
             {
@@ -97,6 +105,9 @@ namespace JRPGPrototype.Entities
                 if (Enum.TryParse(EquippedAccessory.ModifierStat, true, out StatType accStat))
                     if (accStat == type) charVal += EquippedAccessory.ModifierValue;
             }
+
+            if (Class == ClassType.Operator) return charVal;
+
             if (type == StatType.CHA || type == StatType.INT) return charVal;
             if (ActivePersona == null || !ActivePersona.StatModifiers.ContainsKey(type)) return charVal;
 
@@ -179,8 +190,6 @@ namespace JRPGPrototype.Entities
             Level++;
             StatPoints += 3;
             Random rnd = new Random();
-
-            // Capture old max values
             int oldMaxHP = MaxHP;
             int oldMaxSP = MaxSP;
 
@@ -189,22 +198,16 @@ namespace JRPGPrototype.Entities
 
             RecalculateResources();
 
-            // FIX: Add the difference (growth) to current, rather than full heal
             int hpGain = MaxHP - oldMaxHP;
             int spGain = MaxSP - oldMaxSP;
             CurrentHP += hpGain;
             CurrentSP += spGain;
         }
 
-        // NEW: Called after battle ends to remove temporary states
         public void CleanupBattleState()
         {
-            IsDown = false;
-            IsDizzy = false;
             IsGuarding = false;
-            IsImmuneToDown = false;
             Buffs.Clear();
-            // Note: Ailments persist in SMT/Persona logic, so we don't clear CurrentAilment here.
         }
 
         public void AllocateStat(StatType type)
@@ -246,13 +249,12 @@ namespace JRPGPrototype.Entities
             return false;
         }
 
-        public bool IsRigidBody => CurrentAilment != null && (CurrentAilment.Name == "Freeze" || CurrentAilment.Name == "Shock");
-
         public CombatResult ReceiveDamage(int damage, Element element, bool isCritical)
         {
             Affinity aff = ActivePersona?.GetAffinity(element) ?? Affinity.Normal;
-            var result = new CombatResult { IsCritical = isCritical };
+            var result = new CombatResult();
 
+            // Guard Logic
             if (IsGuarding)
             {
                 damage = (int)(damage * 0.5);
@@ -260,6 +262,13 @@ namespace JRPGPrototype.Entities
                 if (aff == Affinity.Weak) aff = Affinity.Normal;
             }
 
+            // Rigid Body Logic
+            if (IsRigidBody && (element == Element.Slash || element == Element.Strike || element == Element.Pierce))
+            {
+                isCritical = true;
+            }
+
+            result.IsCritical = isCritical;
             if (isCritical) damage = (int)(damage * 1.5);
 
             switch (aff)
@@ -267,16 +276,7 @@ namespace JRPGPrototype.Entities
                 case Affinity.Weak:
                     result.Type = HitType.Weakness;
                     result.DamageDealt = (int)(damage * 1.5f);
-                    if (IsDown)
-                    {
-                        result.Message = "WEAKNESS STRUCK (DOWN)!";
-                    }
-                    else if (IsImmuneToDown) result.Message = "Stood Firm!";
-                    else if (IsRigidBody) result.Message = "CRITICAL (Rigid)!";
-                    else
-                    {
-                        result.Message = "WEAKNESS STRUCK!";
-                    }
+                    result.Message = "WEAKNESS STRUCK!";
                     break;
                 case Affinity.Resist:
                     result.Type = HitType.Normal;

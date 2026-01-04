@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using JRPGPrototype.Services;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Data;
@@ -84,7 +83,6 @@ namespace JRPGPrototype.Logic
         {
             List<int> terminals = _dungeon.GetUnlockedTerminals();
 
-            // If only Lobby is unlocked, just go to first floor
             if (terminals.Count <= 1)
             {
                 _dungeon.WarpToFloor(1); // Warp to Lobby (Floor 1)
@@ -227,16 +225,19 @@ namespace JRPGPrototype.Logic
             switch (info.Type)
             {
                 case DungeonEventType.Battle:
-                    if (TriggerEncounter(info.EnemyId, false)) { }
+                    if (TriggerEncounter(info.EnemyIds, false)) { }
                     break;
 
                 case DungeonEventType.Boss:
                     _io.WriteLine("!!! POWERFUL SHADOW DETECTED !!!", ConsoleColor.Red);
                     _io.Wait(1000);
-                    if (TriggerEncounter(info.EnemyId, true))
+                    // Pass the list of IDs (usually just 1 for boss)
+                    // We grab the first ID for the register defeat logic, assuming boss floor has 1 main boss
+                    string bossId = info.EnemyIds.FirstOrDefault();
+                    if (TriggerEncounter(info.EnemyIds, true))
                     {
                         _io.WriteLine("The Guardian has been defeated!", ConsoleColor.Cyan);
-                        _dungeon.RegisterBossDefeat(info.EnemyId);
+                        _dungeon.RegisterBossDefeat(bossId);
                         _io.Wait(1500);
                     }
                     break;
@@ -251,23 +252,45 @@ namespace JRPGPrototype.Logic
             }
         }
 
-        private bool TriggerEncounter(string enemyId, bool isBoss)
+        private bool TriggerEncounter(List<string> enemyIds, bool isBoss)
         {
-            Combatant enemy;
-            if (Database.Enemies.TryGetValue(enemyId, out var eData))
+            List<Combatant> enemies = new List<Combatant>();
+
+            foreach (string id in enemyIds)
             {
-                enemy = Combatant.CreateFromData(eData);
-            }
-            else
-            {
-                _io.WriteLine($"[Error] Could not load enemy: {enemyId}. Spawning Slime.");
-                if (Database.Enemies.TryGetValue("E_slime", out var fallback))
-                    enemy = Combatant.CreateFromData(fallback);
+                if (Database.Enemies.TryGetValue(id, out var eData))
+                {
+                    enemies.Add(Combatant.CreateFromData(eData));
+                }
                 else
-                    enemy = new Combatant("Glitch Slime");
+                {
+                    _io.WriteLine($"[Error] Could not load enemy: {id}. Spawning Slime.");
+                    if (Database.Enemies.TryGetValue("E_slime", out var fallback))
+                        enemies.Add(Combatant.CreateFromData(fallback));
+                    else
+                        enemies.Add(new Combatant("Glitch Slime"));
+                }
             }
 
-            BattleManager battle = new BattleManager(_player, enemy, _inventory, _economy, _io, isBoss);
+            // Suffix Logic: Check for duplicates and append A, B, C...
+            var groups = enemies.GroupBy(e => e.Name);
+            foreach (var group in groups)
+            {
+                if (group.Count() > 1)
+                {
+                    int counter = 0;
+                    foreach (var enemy in group)
+                    {
+                        enemy.Name += $" {(char)('A' + counter)}";
+                        counter++;
+                    }
+                }
+            }
+
+            // Create Party Manager for the battle context
+            PartyManager party = new PartyManager(_player);
+
+            BattleManager battle = new BattleManager(party, enemies, _inventory, _economy, _io, isBoss);
             battle.StartBattle();
 
             if (battle.TraestoUsed)
@@ -573,7 +596,7 @@ namespace JRPGPrototype.Logic
                 else
                 {
                     int healAmount = 50;
-                    var match = Regex.Match(skill.Effect, @"\((\d+)\)");
+                    var match = System.Text.RegularExpressions.Regex.Match(skill.Effect, @"\((\d+)\)");
                     if (match.Success) int.TryParse(match.Groups[1].Value, out healAmount);
 
                     target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + healAmount);

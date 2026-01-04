@@ -1,9 +1,9 @@
 ﻿using System;
+using JRPGPrototype.Services;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Logic;
-using JRPGPrototype.Services;
 
 namespace JRPGPrototype
 {
@@ -21,6 +21,8 @@ namespace JRPGPrototype
             DungeonState dungeonState = new DungeonState();
 
             Combatant player = new Combatant("Hero");
+
+            // Basic starter stats
             player.CharacterStats[StatType.STR] = 8;
             player.CharacterStats[StatType.MAG] = 8;
             player.CharacterStats[StatType.END] = 8;
@@ -37,10 +39,10 @@ namespace JRPGPrototype
             player.CurrentHP = player.MaxHP;
             player.CurrentSP = player.MaxSP;
 
-            inventory.AddItem("101", 5); // Medicine
-            inventory.AddItem("108", 2); // Soul Drop
-            inventory.AddItem("114", 3); // Goho-M
-            inventory.AddItem("113", 3); // Traesto Gem
+            inventory.AddItem("101", 5);
+            inventory.AddItem("108", 2);
+            inventory.AddItem("114", 3);
+            inventory.AddItem("113", 3);
             inventory.AddEquipment("1", ShopCategory.Weapon);
             inventory.AddEquipment("201", ShopCategory.Armor);
 
@@ -65,9 +67,9 @@ namespace JRPGPrototype
                     io.Wait(2000);
 
                     player.CurrentHP = 1;
-                    player.IsDown = false;
-                    player.IsDizzy = false;
                     player.RemoveAilment();
+                    player.CleanupBattleState();
+
                     dungeonState.ResetToEntry();
                 }
                 else

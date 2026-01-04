@@ -1812,6 +1812,46 @@
       "27": "Dodge Fire",
       "29": "Herculean Strike"
     }
+  },{
+    "Id": "psyche",
+    "Name": "Psyche",
+    "Level": 25,
+    "Arcana": "Hierophant",
+    "Stats": {
+      "STR": 19,
+      "MAG": 17,
+      "END": 18,
+      "AGI": 15,
+      "LUK": 13
+    },
+    "Affinities": {},
+    "BaseSkills": [
+      "Assault Dive",
+      "Fatal End",
+      "Bufula",
+      "Tarukaja",
+      "Dekaja"
+    ],
+    "LearnedSkills": {
+      "28": "Marin Karin",
+      "31": "Fast Heal",
+      "34": "Garula",
+      "38": "Herculean Strike",
+      "42": "Power Charge",
+      "45": "Deathbound",
+      "49": "Null Dizzy",
+      "52": "Gigantic Fist",
+      "56": "Matarukaja",
+      "59": "Bufudyne",
+      "63": "Insta-Heal",
+      "66": "Garudyne",
+      "69": "Sexy Dance",
+      "72": "Akasha Arts",
+      "76": "Enduring Soul",
+      "79": "Brave Blade",
+      "83": "Resist Phys"
+      
+    }
   },
   {
     "Id": "flauros",

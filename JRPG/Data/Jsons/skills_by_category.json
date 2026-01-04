@@ -396,6 +396,24 @@
   ],
   "Enhance Skills": [
     {
+      "Skill": "Bloody Charge",
+      "Effect": "Consumes HP to increase critical rate and next physical attack damage by 1.5x",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "40% HP",
+      "Category": "Enhance Skills"
+    },
+    {
+      "Skill": "Heat Riser",
+      "Effect": "Increases 1 ally's Attack, Defense and Agility by 25%",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "6 SP",
+      "Category": "Enhance Skills"
+    },
+    {
       "Skill": "Tarukaja",
       "Effect": "Increases 1 ally's Attack by 25%*.",
       "Power": NaN,
@@ -684,6 +702,15 @@
       "Critical": NaN,
       "Cost": "32 SP",
       "Category": "Fire Skills"
+    },
+    {
+      "Skill": "Inferno",
+      "Effect": "Deals severe Fire damage to one foes.",
+      "Power": "600",
+      "Accuracy": "98%",
+      "Critical": NaN,
+      "Cost": "40 SP",
+      "Category": "Fire Skills"
     }
   ],
   "Ice Skills": [
@@ -928,6 +955,33 @@
   ],
   "Passive Skills": [
     {
+      "Skill": "Insta-Heal",
+      "Effect": "Recovers from ailments in 1 turn.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Fast Heal",
+      "Effect": "Halves the time needed to recover from ailments.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Life Aid",
+      "Effect": "Recover 8% of max HP and SP after winning a battle.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
       "Skill": "Dodge Slash",
       "Effect": "Hit-Rate 0.85x vs Slash attacks.",
       "Power": NaN,
@@ -939,6 +993,15 @@
     {
       "Skill": "Evade Slash",
       "Effect": "Hit-Rate 0.60x vs Slash attacks.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Resist Phys",
+      "Effect": "Reduces damage from Slash, Strike and Pierce attacks.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -1551,6 +1614,15 @@
     {
       "Skill": "Null Fear",
       "Effect": "Protects user from Fear.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Null Dizzy",
+      "Effect": "Protects user from Dizzy.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,

@@ -255,6 +255,78 @@
       "Critical": NaN,
       "Cost": "40 SP",
       "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Eiha",
+      "Effect": "Deals light Dark damage to one foe.",
+      "Power": 60,
+      "Accuracy": 99,
+      "Critical": NaN,
+      "Cost": "4 SP",
+      "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Eiga",
+      "Effect": "Deals medium Dark damage to one foe.",
+      "Power": 140,
+      "Accuracy": 99,
+      "Critical": NaN,
+      "Cost": "8 SP",
+      "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Eigaon",
+      "Effect": "Deals heavy Dark damage to one foe.",
+      "Power": 350,
+      "Accuracy": 99,
+      "Critical": NaN,
+      "Cost": "15 SP",
+      "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Maeiha",
+      "Effect": "Deals light Dark damage to all foes.",
+      "Power": 60,
+      "Accuracy": 95,
+      "Critical": NaN,
+      "Cost": "10 SP",
+      "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Maeiga",
+      "Effect": "Deals medium Dark damage to all foes.",
+      "Power": 140,
+      "Accuracy": 95,
+      "Critical": NaN,
+      "Cost": "16 SP",
+      "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Maeigaon",
+      "Effect": "Deals heavy Dark damage to all foes.",
+      "Power": 350,
+      "Accuracy": 95,
+      "Critical": NaN,
+      "Cost": "25 SP",
+      "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Demonic Decree",
+      "Effect": "Reduces 1 foe's HP by 50%.",
+      "Power": NaN,
+      "Accuracy": "90%",
+      "Critical": NaN,
+      "Cost": "38 SP",
+      "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Magatsu Mandala",
+      "Effect": "Deals Dark damage to all enemies (30% chance of inflicting Fear on hit).",
+      "Power": 300,
+      "Accuracy": 95,
+      "Critical": NaN,
+      "Cost": "38 SP",
+      "Category": "Darkness Skills"
     }
   ],
   "Electricity Skills": [
@@ -670,12 +742,21 @@
       "Category": "Ice Skills"
     },
     {
-      "Skill": "Niflheim",
-      "Effect": "Deals severe Ice damage / Freezes one foe. (100% chance) Skadi exclusive.",
-      "Power": "650",
-      "Accuracy": "99%",
+      "Skill": "Diamond Dust",
+      "Effect": "Deals severe Ice damage / Freezes one foe. (60% chance).",
+      "Power": "600",
+      "Accuracy": "98%",
       "Critical": NaN,
-      "Cost": "32 SP",
+      "Cost": "46 SP",
+      "Category": "Ice Skills"
+    },
+    {
+      "Skill": "Ice Age",
+      "Effect": "Deals severe Ice damage / Freezes one foe. (35% chance).",
+      "Power": "450",
+      "Accuracy": "95%",
+      "Critical": NaN,
+      "Cost": "48 SP",
       "Category": "Ice Skills"
     }
   ],

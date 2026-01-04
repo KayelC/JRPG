@@ -1,0 +1,42 @@
+{
+  "items": [
+    { "id": "101", "_name": "Medicine",       "price": 150 },
+    { "id": "102", "_name": "Ointment",       "price": 450 },
+    { "id": "108", "_name": "Soul Drop",      "price": 600 },
+    { "id": "106", "_name": "Snuff Soul",     "price": 1800 },
+    { "id": "109", "_name": "Revival Bead",   "price": 2500 },
+    { "id": "111", "_name": "Patra Card",     "price": 400 },
+    { "id": "112", "_name": "Dis-Poison",     "price": 300 },
+    { "id": "114", "_name": "Goho-M",         "price": 3000 }
+  ],
+  "weapons": [
+    { "id": "1",  "_name": "Shortsword",      "price": 1200 },
+    { "id": "11", "_name": "Dagger",          "price": 1000 },
+    { "id": "18", "_name": "Brass Knuckles",  "price": 1100 },
+    { "id": "9",  "_name": "Short Bow",       "price": 1400 },
+    { "id": "2",  "_name": "Steel Sword",     "price": 2800 },
+    { "id": "12", "_name": "Stiletto",        "price": 2600 },
+    { "id": "19", "_name": "Iron Fists",      "price": 3000 },
+    { "id": "5",  "_name": "Two-handed Sword","price": 4200 },
+    { "id": "14", "_name": "Spear",           "price": 4500 },
+    { "id": "22", "_name": "Heavy Axe",       "price": 5000 },
+    { "id": "10", "_name": "Long Bow",        "price": 5200 },
+    { "id": "15", "_name": "Lance",           "price": 6800 },
+    { "id": "23", "_name": "Battle Axe",      "price": 8500 }
+  ],
+  "armor": [
+    { "id": "201", "_name": "School Uniform", "price": 500 },
+    { "id": "202", "_name": "Leather Jacket", "price": 2200 },
+    { "id": "203", "_name": "Liquid Armor", "price": 7500 }
+  ],
+  "boots": [
+    { "id": "301", "_name": "Rubber Soles", "price": 800 },
+    { "id": "302", "_name": "Combat Boots", "price": 2500 },
+    { "id": "303", "_name": "Hermes Sandals", "price": 6000 }
+  ],
+  "accessories": [
+    { "id": "401", "_name": "Strength Wristband", "price": 3000 },
+    { "id": "402", "_name": "Crystal Ring", "price": 3000 },
+    { "id": "403", "_name": "Lucky Coin", "price": 1500 }
+  ]
+}

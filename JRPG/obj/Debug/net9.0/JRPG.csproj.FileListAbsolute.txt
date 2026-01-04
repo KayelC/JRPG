@@ -16,3 +16,14 @@ C:\Users\Kayel\Documents\GitHub\JRPG\JRPG\obj\Debug\net9.0\refint\JRPG.dll
 C:\Users\Kayel\Documents\GitHub\JRPG\JRPG\obj\Debug\net9.0\JRPG.pdb
 C:\Users\Kayel\Documents\GitHub\JRPG\JRPG\obj\Debug\net9.0\JRPG.genruntimeconfig.cache
 C:\Users\Kayel\Documents\GitHub\JRPG\JRPG\obj\Debug\net9.0\ref\JRPG.dll
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\accessories.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\armor.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\boots.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\enemies.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\items.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\persona_data.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\shop_inventory.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\skills_by_category.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\status_ailments.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\tartarus.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\weapons.json

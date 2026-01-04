@@ -18,10 +18,13 @@ namespace JRPGPrototype.Logic
         private IGameIO _io;
         private Random _rnd = new Random();
 
+        // Battle Context
+        private bool _isBossBattle;
         private string? _selectedSkillName;
 
-        // NEW: Flag to signal dungeon escape to FieldManager
+        // Flags to signal dungeon escape
         public bool TraestoUsed { get; private set; } = false;
+        private bool _escaped = false; // Track manual escape via Tactics
 
         private readonly Dictionary<string, string> _effectToAilmentMap = new Dictionary<string, string>
         {
@@ -35,21 +38,24 @@ namespace JRPGPrototype.Logic
             { "Freezes", "Freeze" }
         };
 
-        public BattleManager(Combatant player, Combatant enemy, InventoryManager inventory, EconomyManager economy, IGameIO io)
+        public BattleManager(Combatant player, Combatant enemy, InventoryManager inventory, EconomyManager economy, IGameIO io, bool isBossBattle = false)
         {
             _p = player;
             _e = enemy;
             _inv = inventory;
             _eco = economy;
             _io = io;
+            _isBossBattle = isBossBattle;
         }
 
         // --- HUD & UI HELPERS ---
+
         private string GetBattleStatusString()
         {
             var sb = new System.Text.StringBuilder();
             sb.AppendLine("=================================================");
 
+            // Enemy Info
             string eStatus = _e.CurrentAilment != null ? $" [{_e.CurrentAilment.Name}]" : "";
             if (_e.IsDizzy) eStatus += " [DIZZY]";
             else if (_e.IsDown) eStatus += " [DOWN]";
@@ -60,6 +66,7 @@ namespace JRPGPrototype.Logic
             sb.AppendLine($"HP: {_e.CurrentHP}/{_e.MaxHP}");
             sb.AppendLine("\n vs\n");
 
+            // Player Info
             string pStatus = _p.CurrentAilment != null ? $" [{_p.CurrentAilment.Name}]" : "";
             if (_p.IsDizzy) pStatus += " [DIZZY]";
             else if (_p.IsDown) pStatus += " [DOWN]";
@@ -80,6 +87,7 @@ namespace JRPGPrototype.Logic
         }
 
         // --- MAIN BATTLE LOOP ---
+
         public void StartBattle()
         {
             _io.Clear();
@@ -89,8 +97,8 @@ namespace JRPGPrototype.Logic
 
             while (_p.CurrentHP > 0 && _e.CurrentHP > 0)
             {
-                // NEW: check if we escaped via item
-                if (TraestoUsed) break;
+                // Check escape conditions
+                if (TraestoUsed || _escaped) break;
 
                 Combatant active = playerTurn ? _p : _e;
                 Combatant target = playerTurn ? _e : _p;
@@ -118,9 +126,11 @@ namespace JRPGPrototype.Logic
 
                     if (active.IsImmuneToDown) active.IsImmuneToDown = false;
 
+                    // Check for Rage
                     if (active.CurrentAilment?.ActionRestriction == "ForceAttack")
                     {
                         _io.WriteLine($"\n{active.Name} is Enraged! Attacking automatically!", ConsoleColor.Red);
+
                         int attacks = 1 + active.CurrentAilment.ExtraTurns;
                         for (int i = 0; i < attacks; i++)
                         {
@@ -133,8 +143,8 @@ namespace JRPGPrototype.Logic
                     {
                         bool getOneMore = playerTurn ? ExecutePlayerTurn() : ExecuteEnemyTurn();
 
-                        // Check escape again after turn execution
-                        if (TraestoUsed) break;
+                        // Check escape again after turn execution (Player might have escaped)
+                        if (TraestoUsed || _escaped) break;
 
                         if (getOneMore && target.CurrentHP > 0)
                         {
@@ -146,7 +156,7 @@ namespace JRPGPrototype.Logic
                     }
                 }
 
-                if (TraestoUsed) break;
+                if (TraestoUsed || _escaped) break;
 
                 ProcessTurnEnd(active);
                 playerTurn = !playerTurn;
@@ -155,10 +165,17 @@ namespace JRPGPrototype.Logic
 
             if (TraestoUsed)
             {
-                // Battle ends immediately, no loot, no game over check needed here
+                return; // Instant exit
+            }
+
+            if (_escaped)
+            {
+                _io.WriteLine("\n[ESCAPE] You retreated from the battle.", ConsoleColor.Cyan);
+                _io.Wait(1000);
                 return;
             }
 
+            // --- END OF BATTLE (Victory/Defeat) ---
             if (_p.CurrentHP > 0)
             {
                 _io.WriteLine("\n[VICTORY] Shadow Dissipated.", ConsoleColor.Green);
@@ -220,6 +237,7 @@ namespace JRPGPrototype.Logic
         }
 
         // --- TURN LOGIC & AILMENTS ---
+
         private bool ProcessTurnStart(Combatant c)
         {
             if (c.CurrentAilment == null) return true;
@@ -283,6 +301,7 @@ namespace JRPGPrototype.Logic
         }
 
         // --- PLAYER MENU SYSTEM ---
+
         private bool ExecutePlayerTurn()
         {
             bool isPanicked = _p.CurrentAilment?.Name == "Panic";
@@ -290,8 +309,9 @@ namespace JRPGPrototype.Logic
 
             while (true)
             {
-                List<string> options = new List<string> { "Attack", "Skill", "Item" };
-                List<bool> disabled = new List<bool> { false, isPanicked, false };
+                // Option 3: Tactics
+                List<string> options = new List<string> { "Attack", "Skill", "Item", "Tactics" };
+                List<bool> disabled = new List<bool> { false, isPanicked, false, false };
 
                 if (isPanicked) options[1] = "Skill (Blocked)";
 
@@ -314,9 +334,97 @@ namespace JRPGPrototype.Logic
                 {
                     if (ExecuteItemMenu()) return false;
                 }
+                else if (choice == 3) // Tactics
+                {
+                    // If true, turn ends (escape attempted/succeeded). If false, back out.
+                    if (ExecuteTacticsMenu()) return true;
+                }
 
-                // If Traesto was used, break loop immediately
-                if (TraestoUsed) return true;
+                // If Traesto was used or Escaped manually, break loop immediately
+                if (TraestoUsed || _escaped) return true;
+            }
+        }
+
+        private bool ExecuteTacticsMenu()
+        {
+            string header = GetBattleStatusString() + "\n=== TACTICS ===";
+            List<string> options = new List<string> { "Escape" };
+            List<bool> disabled = new List<bool>();
+
+            // UX: Gray out if Boss Battle
+            if (_isBossBattle)
+            {
+                options[0] = "Escape (Blocked)";
+                disabled.Add(true);
+            }
+            else
+            {
+                disabled.Add(false);
+            }
+
+            int choice = _io.RenderMenu(header, options, 0, disabled);
+
+            if (choice == 0) // Escape
+            {
+                // Double check logic safety
+                if (!_isBossBattle)
+                {
+                    return AttemptEscape();
+                }
+            }
+
+            return false; // Cancelled
+        }
+
+        private bool AttemptEscape()
+        {
+            _io.WriteLine("Attempting to escape...");
+            _io.Wait(500);
+
+            // 1. Gather Stats
+            int pAgi = _p.GetStat(StatType.AGI);
+            int eAgi = Math.Max(1, _e.GetStat(StatType.AGI)); // Prevent div by zero
+            int pLuk = _p.GetStat(StatType.LUK);
+            int eLuk = _e.GetStat(StatType.LUK);
+            int pLvl = _p.Level;
+            int eLvl = _e.Level;
+
+            // 2. Ratio-Based Formula
+            // Base Chance: 10%
+            double chance = 10.0;
+
+            // Agility Ratio: 40% * (Player / Enemy)
+            // Equal speed = +40%. Double speed = +80%. Half speed = +20%.
+            chance += 40.0 * ((double)pAgi / eAgi);
+
+            // Luck Nudge: +0.5% per point difference
+            chance += (pLuk - eLuk) * 0.5;
+
+            // Level Penalty: +/- 3% per level difference
+            chance += (pLvl - eLvl) * 3.0;
+
+            // 3. Hard Clamp (5% - 95%)
+            // Prevents 100% certainty (trip chance) and 0% hope (miracle chance)
+            chance = Math.Clamp(chance, 5.0, 95.0);
+
+            _io.WriteLine($"Escape Chance: {chance:F1}%"); // Optional: Debug info or UX choice
+            _io.Wait(500);
+
+            // 4. Roll
+            int roll = _rnd.Next(0, 100);
+
+            if (roll < chance)
+            {
+                _io.WriteLine("Escaped successfully!", ConsoleColor.Cyan);
+                _io.Wait(1000);
+                _escaped = true;
+                return true; // Ends turn, loop breaks on _escaped check
+            }
+            else
+            {
+                _io.WriteLine("Failed to escape!", ConsoleColor.Red);
+                _io.Wait(1000);
+                return true; // Ends turn, enemy acts
             }
         }
 
@@ -394,7 +502,7 @@ namespace JRPGPrototype.Logic
 
             foreach (var item in usableItems)
             {
-                // UPDATE: Goho-M is disabled in battle. Traesto Gem is enabled.
+                // Goho-M is disabled in battle. Traesto Gem is enabled.
                 bool isFieldOnly = (item.Name == "Goho-M");
 
                 string label = $"{item.Name} x{_inv.GetQuantity(item.Id)}";
@@ -413,6 +521,9 @@ namespace JRPGPrototype.Logic
             if (idx != -1)
             {
                 ItemData selectedItem = usableItems[idx];
+                // Redundant safety check
+                if (selectedItem.Name == "Goho-M") return false;
+
                 if (PerformItem(selectedItem, _p))
                 {
                     _inv.RemoveItem(selectedItem.Id, 1);
@@ -430,7 +541,7 @@ namespace JRPGPrototype.Logic
             _io.WriteLine($"\n[ITEM] {_p.Name} uses {item.Name}...");
             bool used = false;
 
-            // UPDATE: Check for Traesto Gem (Battle Escape)
+            // Check for Traesto Gem (Battle Escape)
             if (item.Name == "Traesto Gem")
             {
                 _io.WriteLine("The gem shatters, enveloping the party in light...");
@@ -606,6 +717,7 @@ namespace JRPGPrototype.Logic
 
             _io.WriteLine($"{target.Name} takes {res.DamageDealt} {elem} dmg. {res.Message}");
 
+            // Infliction
             if (Database.Skills.TryGetValue(name, out var skillData))
             {
                 foreach (var kvp in _effectToAilmentMap)

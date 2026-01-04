@@ -18,7 +18,6 @@ namespace JRPGPrototype.Logic
         private DungeonState _dungeonState;
         private IGameIO _io;
 
-        // Persistent Cursors
         private int _mainMenuIndex = 0;
         private int _statusMenuIndex = 0;
         private int _inventoryMenuIndex = 0;
@@ -43,7 +42,6 @@ namespace JRPGPrototype.Logic
         {
             while (true)
             {
-                // Main Hub Header
                 string header = $"=== FIELD MENU ===\n" +
                                 $"Macca: {_economy.Macca}\n" +
                                 $"HP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
@@ -79,12 +77,10 @@ namespace JRPGPrototype.Logic
             }
         }
 
-        // --- DUNGEON ENTRY LOGIC ---
         private void PrepareDungeonEntry()
         {
             List<int> terminals = _dungeon.GetUnlockedTerminals();
 
-            // If only Lobby is unlocked, just go to first floor
             if (terminals.Count <= 1)
             {
                 _dungeon.WarpToFloor(1); // Warp to Lobby (Floor 1)
@@ -110,7 +106,6 @@ namespace JRPGPrototype.Logic
             ExploreDungeon();
         }
 
-        // --- DUNGEON CRAWLER LOOP ---
         private void ExploreDungeon()
         {
             HandleNewFloor(_dungeon.ProcessCurrentFloor());
@@ -272,7 +267,8 @@ namespace JRPGPrototype.Logic
                     enemy = new Combatant("Glitch Slime");
             }
 
-            BattleManager battle = new BattleManager(_player, enemy, _inventory, _economy, _io);
+            // PASS ISBOSS FLAG HERE
+            BattleManager battle = new BattleManager(_player, enemy, _inventory, _economy, _io, isBoss);
             battle.StartBattle();
 
             if (battle.TraestoUsed)
@@ -415,8 +411,6 @@ namespace JRPGPrototype.Logic
                 {
                     string label = $"{item.Name} x{_inventory.GetQuantity(item.Id)}";
                     bool isDisabled = false;
-
-                    // --- UX UPDATE: Gray out unusable items ---
 
                     // Traesto Gem: Battle Only
                     if (item.Name == "Traesto Gem")

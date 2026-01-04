@@ -1,0 +1,18 @@
+{
+  "items": [
+    { "id": "101", "name": "Medicine", "type": "Healing", "effect_value": 50, "description": "Restores 50 HP to one ally." },
+    { "id": "102", "name": "Ointment", "type": "Healing", "effect_value": 100, "description": "Restores 100 HP to one ally." },
+    { "id": "103", "name": "Bead", "type": "Healing", "effect_value": 9999, "description": "Fully restores HP to one ally." },
+    { "id": "104", "name": "Medical Powder", "type": "Healing_All", "effect_value": 100, "description": "Restores 100 HP to the whole party." },
+    { "id": "105", "name": "Bead Chain", "type": "Healing_All", "effect_value": 9999, "description": "Fully restores HP to the whole party." },
+    { "id": "106", "name": "Snuff Soul", "type": "Spirit", "effect_value": 50, "description": "Restores 50 SP to one ally." },
+    { "id": "107", "name": "Chewing Soul", "type": "Spirit", "effect_value": 100, "description": "Restores 100 SP to one ally." },
+    { "id": "108", "name": "Soul Drop", "type": "Spirit", "effect_value": 10, "description": "A small snack that restores 10 SP." },
+    { "id": "109", "name": "Revival Bead", "type": "Revive", "effect_value": 50, "description": "Revives an ally with 50% HP." },
+    { "id": "110", "name": "Balm of Life", "type": "Revive", "effect_value": 100, "description": "Revives an ally with 100% HP." },
+    { "id": "111", "name": "Patra Card", "type": "Cure", "effect_value": 0, "description": "Cures Fear, Confusion, and Distress." },
+    { "id": "112", "name": "Dis-Poison", "type": "Cure", "effect_value": 0, "description": "Cures Poison." },
+    { "id": "113", "name": "Traesto Gem", "type": "Utility", "effect_value": 0, "description": "Instantly escape from the dungeon." },
+    { "id": "114", "name": "Goho-M", "type": "Utility", "effect_value": 0, "description": "Returns the party to the entrance." }
+  ]
+}

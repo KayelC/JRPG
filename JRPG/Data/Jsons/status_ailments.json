@@ -9,7 +9,7 @@
       "dot_percent": 0.20,
       "removal_triggers": ["NaturalRoll", "CureSkill"],
       "cure_keyword": "Poison",
-      "description": "20% Max HP damage per turn (min 1HP)."
+      "description": "13% Max HP damage per turn (min 1HP)."
     },
     {
       "name": "Freeze",

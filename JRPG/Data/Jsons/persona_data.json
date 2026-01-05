@@ -1839,7 +1839,7 @@
       "38": "Herculean Strike",
       "42": "Power Charge",
       "45": "Deathbound",
-      "49": "Null Dizzy",
+      "49": "Null Distress",
       "52": "Gigantic Fist",
       "56": "Matarukaja",
       "59": "Bufudyne",
@@ -2581,7 +2581,7 @@
       "37": "Fast Heal",
       "40": "Marakukaja",
       "43": "Myriad Arrows",
-      "46": "Null Dizzy",
+      "46": "Null Distress",
       "49": "Matarukaja",
       "53": "Heat Wave",
       "56": "Diarahan",
@@ -3271,7 +3271,7 @@
     "LearnedSkills": {
       "47": "Tentarafoo",
       "49": "Garudyne",
-      "51": "Null Dizzy"
+      "51": "Null Distress"
     }
   },
   {
@@ -5244,7 +5244,7 @@
     ],
     "LearnedSkills": {
       "37": "Revolution",
-      "38": "Null Dizzy",
+      "38": "Null Distress",
       "40": "Vidyaraja's Blessing",
       "42": "Tempest Slash"
     }

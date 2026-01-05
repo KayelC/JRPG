@@ -1621,8 +1621,8 @@
       "Category": "Passive Skills"
     },
     {
-      "Skill": "Null Dizzy",
-      "Effect": "Protects user from Dizzy.",
+      "Skill": "Resist Fear",
+      "Effect": "If struck by Fear, user has 50% chance to not be affected.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -1639,8 +1639,26 @@
       "Category": "Passive Skills"
     },
     {
+      "Skill": "Resist Panic",
+      "Effect": "If struck by Panic, user has 50% chance to not be affected.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
       "Skill": "Null Distress",
       "Effect": "Protects user from Distress.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Resist Distress",
+      "Effect": "If struck by Distress, user has 50% chance to not be affected.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -1657,8 +1675,26 @@
       "Category": "Passive Skills"
     },
     {
+      "Skill": "Resist Poison",
+      "Effect": "If struck by Poison, user has 50% chance to not be affected.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
       "Skill": "Null Charm",
       "Effect": "Protects user from being Charmed.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Resist Charm",
+      "Effect": "If struck by Charm, user has 50% chance to not be affected.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -1675,6 +1711,15 @@
       "Category": "Passive Skills"
     },
     {
+      "Skill": "Resist Rage",
+      "Effect": "If struck by Rage, user has 50% chance to not be affected.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
       "Skill": "Null Shock",
       "Effect": "Protects user from being Shocked.",
       "Power": NaN,
@@ -1684,8 +1729,26 @@
       "Category": "Passive Skills"
     },
     {
+      "Skill": "Resist Shock",
+      "Effect": "If struck by Shock, user has 50% chance to not be affected.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
       "Skill": "Null Freeze",
       "Effect": "Protects user from being Frozen.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Resist Freeze",
+      "Effect": "If struck by Freeze, user has 50% chance to not be affected.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -2164,6 +2227,15 @@
     }
   ],
   "Recovery Skills": [
+    {
+      "Skill": "Baisudi",
+      "Effect": "Cures Poison, Freeze, and Shock for 1 ally.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "4 SP",
+      "Category": "Recovery Skills"
+    },
     {
       "Skill": "Dia",
       "Effect": "Slightly (50) restores 1 ally's HP.",

@@ -20,6 +20,7 @@ namespace JRPGPrototype.Logic
 
         // Battle State
         private bool _isBossBattle;
+        private int _turnIcons; // 1 Icon = 2 Ticks
         private bool _isPlayerTurn;
 
         // Knowledge Bases
@@ -144,6 +145,7 @@ namespace JRPGPrototype.Logic
                 }
                 else
                 {
+                    // Smart AI for both Allies and Enemies
                     var knowledge = isPlayerPhase ? _playerKnowledge : _enemyKnowledge;
                     cost = ProcessSmartAI(actor, actors, opponents, knowledge);
                 }
@@ -266,10 +268,11 @@ namespace JRPGPrototype.Logic
                 }
             }
 
-            // 4. Offensive Logic: Discovery
+            // 4. Offensive Logic: Discovery / Strongest Attack
             if (actor.ActivePersona.SkillSet.Count > 0 && _rnd.Next(100) < 85)
             {
                 var offensiveSkills = actor.ActivePersona.SkillSet
+                    .Where(s => Database.Skills.ContainsKey(s))
                     .Select(s => Database.Skills[s])
                     .Where(s => !s.Category.Contains("Recovery") && !s.Category.Contains("Enhance"))
                     .ToList();
@@ -297,6 +300,8 @@ namespace JRPGPrototype.Logic
         {
             foreach (var s in actor.ActivePersona.SkillSet)
             {
+                if (!Database.Skills.ContainsKey(s)) continue;
+
                 foreach (var k in keywords)
                 {
                     if (s.Contains(k)) return Database.Skills[s];
@@ -318,6 +323,7 @@ namespace JRPGPrototype.Logic
             }
             else
             {
+                // Dynamic scaling for unarmed/demons
                 power = actor.Level + (actor.GetStat(StatType.STR) * 2);
             }
 
@@ -333,6 +339,7 @@ namespace JRPGPrototype.Logic
 
             int damage = (int)(dmgBase * (0.95 + _rnd.NextDouble() * 0.1));
 
+            // Critical Check
             bool isCritical = false;
             if (target.IsRigidBody)
             {
@@ -347,6 +354,7 @@ namespace JRPGPrototype.Logic
             var res = target.ReceiveDamage(damage, actor.WeaponElement, isCritical);
             _io.WriteLine($"{target.Name} takes {res.DamageDealt} dmg. {res.Message}");
 
+            // Explicit learning logic
             if (res.Type == HitType.Weakness) knowledge.Learn(target.SourceId, actor.WeaponElement, Affinity.Weak);
             if (res.Type == HitType.Repel) knowledge.Learn(target.SourceId, actor.WeaponElement, Affinity.Repel);
             if (res.Type == HitType.Absorb) knowledge.Learn(target.SourceId, actor.WeaponElement, Affinity.Absorb);
@@ -368,9 +376,11 @@ namespace JRPGPrototype.Logic
 
             foreach (var target in targets)
             {
+                // Recovery/Support Logic
                 if (skillData.Category.Contains("Recovery")) { PerformHealingLogic(skillData, target); continue; }
                 if (skillData.Category.Contains("Enhance")) { PerformBuffLogic(skillData.Name, actor, target); continue; }
 
+                // Offensive Logic
                 int power = skillData.GetPowerVal();
                 Element elem = ElementHelper.FromCategory(skillData.Category);
 
@@ -394,6 +404,7 @@ namespace JRPGPrototype.Logic
                 var res = target.ReceiveDamage(damage, elem, isCrit);
                 _io.WriteLine($"{target.Name} takes {res.DamageDealt} dmg. {res.Message}");
 
+                // Explicit Learning Logic
                 if (res.Type == HitType.Weakness) knowledge.Learn(target.SourceId, elem, Affinity.Weak);
                 else if (res.Type == HitType.Repel) knowledge.Learn(target.SourceId, elem, Affinity.Repel);
                 else if (res.Type == HitType.Absorb) knowledge.Learn(target.SourceId, elem, Affinity.Absorb);
@@ -565,26 +576,49 @@ namespace JRPGPrototype.Logic
         {
             var usableItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
             if (usableItems.Count == 0) { _io.WriteLine("Empty."); return (false, 0); }
-            List<string> options = usableItems.Select(i => $"{i.Name} x{_inv.GetQuantity(i.Id)}").ToList();
+
+            List<string> options = new List<string>();
+            List<bool> disabled = new List<bool>();
+
+            foreach (var item in usableItems)
+            {
+                string label = $"{item.Name} x{_inv.GetQuantity(item.Id)}";
+                bool isDisabled = false;
+
+                // Goho-M disabled in battle. Traesto Gem enabled.
+                if (item.Name == "Goho-M")
+                {
+                    label += " (Field Only)";
+                    isDisabled = true;
+                }
+
+                options.Add(label);
+                disabled.Add(isDisabled);
+            }
+
             options.Add("Cancel");
-            int idx = _io.RenderMenu("Items", options, 0);
+            disabled.Add(false);
+
+            int idx = _io.RenderMenu("Items", options, 0, disabled, (i) => { if (i < usableItems.Count) _io.WriteLine(usableItems[i].Description); });
+
             if (idx == -1 || idx == options.Count - 1) return (false, 0);
 
-            ItemData item = usableItems[idx];
-            if (item.Name == "Goho-M") { _io.WriteLine("Cannot use."); return (false, 0); }
-            if (item.Name == "Traesto Gem") { _io.WriteLine("Escaping..."); TraestoUsed = true; _inv.RemoveItem(item.Id, 1); return (true, 0); }
+            ItemData selectedItem = usableItems[idx];
+            if (selectedItem.Name == "Goho-M") return (false, 0); // Safety check
+            if (selectedItem.Name == "Traesto Gem") { _io.WriteLine("Escaping..."); TraestoUsed = true; _inv.RemoveItem(selectedItem.Id, 1); return (true, 0); }
 
-            Combatant target = SelectAllyTarget(item.Type == "Revive");
+            Combatant target = SelectAllyTarget(selectedItem.Type == "Revive");
             if (target == null) return (false, 0);
 
-            if (PerformItem(item, target)) { _inv.RemoveItem(item.Id, 1); return (true, 2); }
+            if (PerformItem(selectedItem, target)) { _inv.RemoveItem(selectedItem.Id, 1); return (true, 2); }
             return (false, 0);
         }
 
         private bool PerformItem(ItemData item, Combatant target)
         {
             _io.WriteLine($"\n[ITEM] Used {item.Name}!");
-            if (item.Name == "Traesto Gem") { _io.WriteLine("Escaping..."); TraestoUsed = true; return true; }
+            if (item.Name == "Traesto Gem") { TraestoUsed = true; return true; }
+
             bool used = false;
             switch (item.Type)
             {
@@ -629,6 +663,8 @@ namespace JRPGPrototype.Logic
             if (_rnd.Next(0, 100) < chance) { _io.WriteLine("Escaped!", ConsoleColor.Cyan); Escaped = true; return true; }
             else { _io.WriteLine("Blocked!", ConsoleColor.Red); _io.Wait(1000); return true; }
         }
+
+        // --- END STATES ---
 
         private bool ProcessTurnStart(Combatant c)
         {

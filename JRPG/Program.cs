@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using JRPGPrototype.Services;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
@@ -20,9 +21,17 @@ namespace JRPGPrototype
             EconomyManager economy = new EconomyManager();
             DungeonState dungeonState = new DungeonState();
 
+            // --- SCENARIO SELECTOR ---
+            io.WriteLine("Select Test Scenario:");
+            io.WriteLine("1. Human (Basic)");
+            io.WriteLine("2. Persona User (Orpheus)");
+            io.WriteLine("3. Wild Card (Orpheus + Stock)");
+            io.WriteLine("4. Operator (Demons + COMP)");
+
+            var key = io.ReadKey();
             Combatant player = new Combatant("Hero");
 
-            // Basic starter stats
+            // Common Setup
             player.CharacterStats[StatType.STR] = 8;
             player.CharacterStats[StatType.MAG] = 8;
             player.CharacterStats[StatType.END] = 8;
@@ -32,8 +41,27 @@ namespace JRPGPrototype
             player.CharacterStats[StatType.CHA] = 10;
             player.StatPoints = 5;
 
-            if (Database.Personas.TryGetValue("orpheus", out var pData))
-                player.ActivePersona = pData.ToPersona();
+            // Scenario Logic
+            switch (key.KeyChar)
+            {
+                case '1':
+                    player.Class = ClassType.Human;
+                    break;
+                case '2':
+                    player.Class = ClassType.PersonaUser;
+                    if (Database.Personas.TryGetValue("orpheus", out var p1)) player.ActivePersona = p1.ToPersona();
+                    break;
+                case '3':
+                    player.Class = ClassType.WildCard;
+                    if (Database.Personas.TryGetValue("orpheus", out var p2)) player.ActivePersona = p2.ToPersona();
+                    if (Database.Personas.TryGetValue("pixie", out var p3)) player.PersonaStock.Add(p3.ToPersona());
+                    break;
+                case '4':
+                    player.Class = ClassType.Operator;
+                    if (Database.Enemies.TryGetValue("E_pixie", out var e1)) player.DemonStock.Add(Combatant.CreateFromData(e1));
+                    if (Database.Enemies.TryGetValue("E_slime", out var e2)) player.DemonStock.Add(Combatant.CreateFromData(e2));
+                    break;
+            }
 
             player.RecalculateResources();
             player.CurrentHP = player.MaxHP;
@@ -51,6 +79,7 @@ namespace JRPGPrototype
 
             economy.AddMacca(5000);
 
+            // 5. Game Loop
             FieldManager field = new FieldManager(player, inventory, economy, dungeonState, io);
 
             bool appRunning = true;

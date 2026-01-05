@@ -10,7 +10,7 @@ namespace JRPGPrototype.Logic
         // The 4 active combatants on the field
         public List<Combatant> ActiveParty { get; private set; } = new List<Combatant>();
 
-        // The reserve stock
+        // The reserve stock (Humans/Guests/Demons not currently fighting)
         public List<Combatant> ReserveMembers { get; private set; } = new List<Combatant>();
 
         private const int MAX_PARTY_SIZE = 4;
@@ -47,11 +47,37 @@ namespace JRPGPrototype.Logic
             Combatant active = ActiveParty[activeIndex];
             Combatant reserve = ReserveMembers[reserveIndex];
 
+            // Perform Swap
             ActiveParty[activeIndex] = reserve;
             ReserveMembers[reserveIndex] = active;
 
+            // Update Indices
             reserve.PartySlot = activeIndex;
             active.PartySlot = -1;
+        }
+
+        public bool SummonDemon(Combatant demon)
+        {
+            if (ActiveParty.Count < MAX_PARTY_SIZE)
+            {
+                demon.PartySlot = ActiveParty.Count;
+                // Default summoned demons to AI control for now (Operator Command logic will handle overrides later)
+                demon.BattleControl = ControlState.ActFreely;
+                ActiveParty.Add(demon);
+                return true;
+            }
+            return false; // Party full
+        }
+
+        public bool ReturnDemon(Combatant demon)
+        {
+            if (ActiveParty.Contains(demon))
+            {
+                demon.PartySlot = -1;
+                ActiveParty.Remove(demon);
+                return true;
+            }
+            return false;
         }
 
         public bool IsPartyWiped()

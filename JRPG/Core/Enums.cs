@@ -62,4 +62,11 @@ namespace JRPGPrototype.Core
         AI,             // Controlled by script (Enemy or Auto-Battle Ally)
         NetworkPlayer   // Controlled by remote client (Future proofing)
     }
+
+    // NEW: Defines tactical autonomy
+    public enum ControlState
+    {
+        DirectControl,  // Player chooses actions manually
+        ActFreely       // Entity acts based on AI logic
+    }
 }

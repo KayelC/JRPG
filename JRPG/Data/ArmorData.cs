@@ -7,7 +7,7 @@ namespace JRPGPrototype.Data
         [JsonProperty("id")]
         public string Id { get; set; }
 
-        [JsonProperty("_name")]
+        [JsonProperty("name")] // FIXED: Was "_name", caused null names
         public string Name { get; set; }
 
         [JsonProperty("description")]

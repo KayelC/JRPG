@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Logic;
@@ -11,38 +12,48 @@ namespace JRPGPrototype.Entities
         public string SourceId { get; set; }
         public string Name { get; set; } = string.Empty;
 
+        // Identity & Control
         public ClassType Class { get; set; } = ClassType.Human;
         public ControllerType Controller { get; set; } = ControllerType.AI;
-        public int PartySlot { get; set; } = -1;
+        public ControlState BattleControl { get; set; } = ControlState.ActFreely; // Default AI behavior
+        public int PartySlot { get; set; } = -1; // -1 = Reserve, 0-3 = Active
+        public string OwnerId { get; set; } // For Demons, links back to the Operator
 
+        // Progression
         public int Level { get; set; } = 1;
         public int Exp { get; set; }
         public int StatPoints { get; set; }
         public int BaseHP { get; set; }
         public int BaseSP { get; set; }
 
+        // Resource Pools
         public int MaxHP { get; private set; }
         public int CurrentHP { get; set; }
         public int MaxSP { get; private set; }
         public int CurrentSP { get; set; }
 
-        // --- BATTLE STATES ---
-        // Renamed from IsDefending to match BattleManager logic
+        // Battle States
         public bool IsGuarding { get; set; }
         public bool IsDead => CurrentHP <= 0;
 
-        // Freeze/Shock makes body rigid (Criticals guaranteed)
+        // Rigid Body Logic (Freeze/Shock guarantee crits)
         public bool IsRigidBody => CurrentAilment != null && (CurrentAilment.Name == "Freeze" || CurrentAilment.Name == "Shock");
 
         public AilmentData CurrentAilment { get; private set; }
         public int AilmentDuration { get; set; }
         public Dictionary<string, int> Buffs { get; set; } = new Dictionary<string, int>();
 
+        // --- STOCKS (Class Specific) ---
+        public List<Persona> PersonaStock { get; set; } = new List<Persona>(); // For Wild Cards
+        public List<Combatant> DemonStock { get; set; } = new List<Combatant>(); // For Operators
+
+        // --- EQUIPMENT SLOTS ---
         public WeaponData EquippedWeapon { get; set; }
         public ArmorData EquippedArmor { get; set; }
         public BootData EquippedBoots { get; set; }
         public AccessoryData EquippedAccessory { get; set; }
 
+        // Computed Properties
         public Element WeaponElement => EquippedWeapon != null ? ElementHelper.FromCategory(EquippedWeapon.Type) : Element.Strike;
         public bool IsLongRange => EquippedWeapon != null && EquippedWeapon.IsLongRange;
 
@@ -55,6 +66,7 @@ namespace JRPGPrototype.Entities
             return eva;
         }
 
+        // Stats
         public Dictionary<StatType, int> CharacterStats { get; set; } = new Dictionary<StatType, int>();
         public Persona ActivePersona { get; set; }
 
@@ -254,7 +266,6 @@ namespace JRPGPrototype.Entities
             Affinity aff = ActivePersona?.GetAffinity(element) ?? Affinity.Normal;
             var result = new CombatResult();
 
-            // Guard Logic
             if (IsGuarding)
             {
                 damage = (int)(damage * 0.5);
@@ -262,7 +273,6 @@ namespace JRPGPrototype.Entities
                 if (aff == Affinity.Weak) aff = Affinity.Normal;
             }
 
-            // Rigid Body Logic
             if (IsRigidBody && (element == Element.Slash || element == Element.Strike || element == Element.Pierce))
             {
                 isCritical = true;

@@ -201,6 +201,24 @@
       "Category": "Almighty Skills"
     },
     {
+      "Skill": "Cosmic Flare",
+      "Effect": "Deals severe Almighty damage to all foe. Anat exclusive.",
+      "Power": "550",
+      "Accuracy": "95%",
+      "Critical": NaN,
+      "Cost": "40 SP",
+      "Category": "Almighty Skills"
+    },
+    {
+      "Skill": "Sinful Shell",
+      "Effect": "Deals massive Almighty damage and 50% chance of Dark instakill to all foes.",
+      "Power": "700",
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "66 SP",
+      "Category": "Almighty Skills"
+    },
+    {
       "Skill": "Morning Star",
       "Effect": "Deals massive Almighty damage to all foes. Helel exclusive.",
       "Power": "800",
@@ -528,6 +546,15 @@
       "Accuracy": NaN,
       "Critical": NaN,
       "Cost": "15 SP",
+      "Category": "Enhance Skills"
+    },
+    {
+      "Skill": "Debilitate",
+      "Effect": "Decreases 1 foe's Attack, Defense, and Hit/Evasion by 25%. ",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "36 SP",
       "Category": "Enhance Skills"
     },
     {
@@ -888,6 +915,15 @@
       "Category": "Light Skills"
     },
     {
+      "Skill": "Shining Arrows",
+      "Effect": "Deals weak Light damage to all foes (4-8 hits).",
+      "Power": 15,
+      "Accuracy": 90,
+      "Critical": NaN,
+      "Cost": "24 SP",
+      "Category": "Light Skills"
+    },
+    {
       "Skill": "Divine Judgment",
       "Effect": "Reduces 1 foe's HP by 50%.",
       "Power": NaN,
@@ -954,6 +990,177 @@
     }
   ],
   "Passive Skills": [
+    {
+      "Skill": "Vidyaraja's Blessing",
+      "Effect": "Increases Evasion against Slash, Strike, and Pierce skills by 1.15x.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Strike Amp",
+      "Effect": "Greatly Strengthens Strike attacks by 50%. Stacks with Strike Boost for 87.5%.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Strike Boost",
+      "Effect": "Strengthens Strike attacks by 25%. Stacks with Strike Amp for 87.5%.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Pierce Amp",
+      "Effect": "Greatly Strengthens Pierce attacks by 50%. Stacks with Pierce Boost for 87.5%.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Pierce Boost",
+      "Effect": "Strengthens Pierce attacks by 25%. Stacks with Pierce Amp for 87.5%.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Slash Amp",
+      "Effect": "Greatly Strengthens Slash attacks by 505%. Stacks with Slash Boost for 87.5%.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Slash Boost",
+      "Effect": "Strengthens Slash attacks by 25%. Stacks with Slash Amp for 87.5%.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Multi-Target Boost",
+      "Effect": "Increases power of attacks that target all foes by 15%.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Single-Target Boost",
+      "Effect": "Increases power of attacks that target one foe by 15%.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Magic Ability",
+      "Effect": "Automatically strengthen non-Almighty magic skills by 25%. Can stack.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Strike Driver",
+      "Effect": "Strike damage dealt x1.75.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Slash Driver",
+      "Effect": "Slash damage dealt x1.75.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Pierce Driver",
+      "Effect": "Pierce damage dealt x1.75.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Fire Driver",
+      "Effect": "Fire damage dealt x1.75.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Ice Driver",
+      "Effect": "Ice damage dealt x1.75.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Elec Driver",
+      "Effect": "Electric damage dealt x1.75.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Wind Driver",
+      "Effect": "Wind damage dealt x1.75.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Light Driver",
+      "Effect": "Light damage dealt x1.75.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Dark Driver",
+      "Effect": "Dark damage dealt x1.75.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
     {
       "Skill": "Insta-Heal",
       "Effect": "Recovers from ailments in 1 turn.",
@@ -1452,6 +1659,24 @@
     {
       "Skill": "Repel Dark",
       "Effect": "Reflects Darkness attacks.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Almighty Boost",
+      "Effect": "Strengthens Almighty attacks by 25%. Stacks with Almighty Amp for 87.5%.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Almighty Amp",
+      "Effect": "Greatly strengthens Almighty attacks by 50%. Stacks with Almighty Boost for 87.5%.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -2383,6 +2608,15 @@
   ],
   "Slash Skills": [
     {
+      "Skill": "Masquerade",
+      "Effect": "Deals medium Slash damage to all foes (2 hits). 30% chance of critical. ",
+      "Power": "200",
+      "Accuracy": "90%",
+      "Critical": "30%",
+      "Cost": "24% HP",
+      "Category": "Slash Skills"
+    },
+    {
       "Skill": "Cleave",
       "Effect": "Deals light Slash damage to one foe.",
       "Power": "30",
@@ -2488,6 +2722,15 @@
       "Accuracy": "99%",
       "Critical": "5%",
       "Cost": "20% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Neuro Slash",
+      "Effect": "Deals medium Slash damage to all foes. 50% chance of Confuse.",
+      "Power": "180",
+      "Accuracy": "95%",
+      "Critical": "3%",
+      "Cost": "16% HP",
       "Category": "Slash Skills"
     },
     {

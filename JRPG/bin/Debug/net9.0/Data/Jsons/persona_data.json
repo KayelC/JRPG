@@ -382,7 +382,7 @@
       "33": "Counterstrike",
       "36": "Fire Break",
       "40": "Blade of Fury",
-      "44": "Shift Boost",
+      "44": "Slash Boost",
       "47": "Gigantic Fist",
       "51": "Marakukaja",
       "54": "Deathbound",
@@ -539,14 +539,15 @@
       "Wind": "Resist"
     },
     "BaseSkills": [
-      "Garula",
-      "Magarula",
-      "Miracle Punch"
+      "Magaru",
+      "Media",
+      "Wind Driver"
     ],
     "LearnedSkills": {
-      "24": "Dormina",
-      "26": "Wind Boost",
-      "28": "Survival Trick"
+      "23": "Garula",
+      "24": "Recarm",
+      "25": "Divine Grace",
+      "27": "Magarula"
     }
   },
   {
@@ -876,15 +877,15 @@
       "Strike": "Resist"
     },
     "BaseSkills": [
-      "Freila",
-      "Vajra Blast",
-      "Mafreila"
+      "Herculean Strike",
+      "Diarama",
+      "Strike Driver"
     ],
     "LearnedSkills": {
-      "30": "Energy Shower",
-      "32": "Nuclear Boost",
-      "34": "Flash Bomb",
-      "36": "Dodge Electric"
+      "29": "Marakukaja",
+      "30": "Dekunda",
+      "32": "Megido",
+      "33": "Gigantic Fist"
     }
   },
   {
@@ -990,14 +991,15 @@
       "Strike": "Null"
     },
     "BaseSkills": [
-      "Freidyne",
-      "Mafreidyne",
-      "Nuclear Boost"
+      "Cosmic Flare",
+      "Neuro Slash",
+      "Diarahan"
     ],
     "LearnedSkills": {
-      "55": "Mediarahan",
-      "57": "Evade Electric",
-      "59": "Nuclear Amp"
+      "54": "Auto Maraku",
+      "55": "Samarecarm",
+      "57": "Mediarahan",
+      "59": "Enduring Soul"
     }
   },
   {
@@ -1550,7 +1552,7 @@
       "Ice Driver"
     ],
     "LearnedSkills": {
-      "28": "Shift Boost",
+      "28": "Ice Boost",
       "29": "Counterstrike",
       "31": "Blade of Fury",
       "32": "Mabufula"
@@ -1638,7 +1640,7 @@
     "LearnedSkills": {
       "48": "Bufudyne",
       "49": "High Counter",
-      "51": "Shift Amp",
+      "51": "Ice Amp",
       "53": "Vorpal Blade"
     }
   },
@@ -4948,7 +4950,7 @@
       "42": "Fast Heal",
       "44": "Magarula",
       "45": "Myriad Arrows",
-      "46": "Shift Amp"
+      "46": "Wind Amp"
     }
   },
   {
@@ -5217,7 +5219,7 @@
     "LearnedSkills": {
       "30": "Zionga",
       "31": "Charge",
-      "33": "Shift Boost",
+      "33": "Pierce Boost",
       "34": "Resist Fire"
     }
   },
@@ -5637,7 +5639,7 @@
     "LearnedSkills": {
       "57": "Eigaon",
       "58": "Poison Mist",
-      "60": "Shift Amp",
+      "60": "Dark Amp",
       "61": "Brave Blade"
     }
   },

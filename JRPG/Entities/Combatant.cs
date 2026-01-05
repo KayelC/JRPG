@@ -15,9 +15,9 @@ namespace JRPGPrototype.Entities
         // Identity & Control
         public ClassType Class { get; set; } = ClassType.Human;
         public ControllerType Controller { get; set; } = ControllerType.AI;
-        public ControlState BattleControl { get; set; } = ControlState.ActFreely; // Default AI behavior
-        public int PartySlot { get; set; } = -1; // -1 = Reserve, 0-3 = Active
-        public string OwnerId { get; set; } // For Demons, links back to the Operator
+        public ControlState BattleControl { get; set; } = ControlState.ActFreely;
+        public int PartySlot { get; set; } = -1;
+        public string OwnerId { get; set; }
 
         // Progression
         public int Level { get; set; } = 1;
@@ -35,17 +35,19 @@ namespace JRPGPrototype.Entities
         // Battle States
         public bool IsGuarding { get; set; }
         public bool IsDead => CurrentHP <= 0;
-
-        // Rigid Body Logic (Freeze/Shock guarantee crits)
         public bool IsRigidBody => CurrentAilment != null && (CurrentAilment.Name == "Freeze" || CurrentAilment.Name == "Shock");
 
         public AilmentData CurrentAilment { get; private set; }
         public int AilmentDuration { get; set; }
         public Dictionary<string, int> Buffs { get; set; } = new Dictionary<string, int>();
 
-        // --- STOCKS (Class Specific) ---
-        public List<Persona> PersonaStock { get; set; } = new List<Persona>(); // For Wild Cards
-        public List<Combatant> DemonStock { get; set; } = new List<Combatant>(); // For Operators
+        // --- STOCKS ---
+        public List<Persona> PersonaStock { get; set; } = new List<Persona>();
+        public List<Combatant> DemonStock { get; set; } = new List<Combatant>();
+
+        // --- SKILLS ---
+        // Skills learned naturally by the entity (Operator skills) or granted by items (Fire Wand)
+        public List<string> ExtraSkills { get; set; } = new List<string>();
 
         // --- EQUIPMENT SLOTS ---
         public WeaponData EquippedWeapon { get; set; }
@@ -103,10 +105,29 @@ namespace JRPGPrototype.Entities
                         if (!c.ActivePersona.SkillSet.Contains(s)) c.ActivePersona.SkillSet.Add(s);
                 }
             }
+            // Load intrinsic enemy skills into ExtraSkills if they don't have a Persona
+            if (c.ActivePersona == null && data.Skills != null)
+            {
+                c.ExtraSkills.AddRange(data.Skills);
+            }
+
             c.RecalculateResources();
             c.CurrentHP = c.MaxHP;
             c.CurrentSP = c.MaxSP;
             return c;
+        }
+
+        // Helper to get all usable skills from Persona + Extra + Gear
+        public List<string> GetConsolidatedSkills()
+        {
+            List<string> skills = new List<string>();
+            if (ActivePersona != null) skills.AddRange(ActivePersona.SkillSet);
+            skills.AddRange(ExtraSkills);
+
+            // Logic for Accessory granting skills could be added here
+            // e.g. if (EquippedAccessory.Name == "Fire Wand") skills.Add("Agi");
+
+            return skills.Distinct().ToList();
         }
 
         public int GetStat(StatType type)

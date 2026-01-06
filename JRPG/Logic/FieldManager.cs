@@ -1,10 +1,11 @@
-﻿using System;
+﻿using JRPGPrototype.Core;
+using JRPGPrototype.Data;
+using JRPGPrototype.Entities;
+using JRPGPrototype.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using JRPGPrototype.Services;
-using JRPGPrototype.Entities;
-using JRPGPrototype.Data;
-using JRPGPrototype.Core;
+using System.Text.RegularExpressions;
 
 namespace JRPGPrototype.Logic
 {
@@ -82,7 +83,7 @@ namespace JRPGPrototype.Logic
             }
         }
 
-        // --- 1. HUMAN STATUS RENDERER (Updated UX) ---
+        // --- 1. HUMAN STATUS RENDERER ---
         private void RenderHumanStatus(Combatant entity)
         {
             _io.WriteLine("=== STATUS & PARAMETERS ===");
@@ -91,21 +92,18 @@ namespace JRPGPrototype.Logic
             _io.WriteLine($"EXP: {entity.Exp}/{entity.ExpRequired}  Next: {entity.ExpRequired - entity.Exp}");
             _io.WriteLine("-----------------------------");
 
-            // UX UPDATE: Conditional Math Display
             var stats = Enum.GetValues(typeof(StatType)).Cast<StatType>();
             foreach (var stat in stats)
             {
                 int total = entity.GetStat(stat);
                 int baseVal = entity.CharacterStats[stat];
 
-                // INT and CHA never show math, just the value
                 if (stat == StatType.INT || stat == StatType.CHA)
                 {
                     _io.WriteLine($"{stat,-4}: {total,3}");
                     continue;
                 }
 
-                // If Persona User or Wild Card, show the calculation: Base + Mod = Total
                 if (entity.Class == ClassType.PersonaUser || entity.Class == ClassType.WildCard)
                 {
                     int mod = total - baseVal;
@@ -113,14 +111,12 @@ namespace JRPGPrototype.Logic
                 }
                 else
                 {
-                    // Operator / Human: Standard format "Total (Base+)"
                     string color = total > baseVal ? "+" : "";
                     _io.WriteLine($"{stat,-4}: {total,3} ({baseVal,3}{color})");
                 }
             }
             _io.WriteLine("-----------------------------");
 
-            // Context: Persona Info (Summary)
             if (entity.Class == ClassType.PersonaUser || entity.Class == ClassType.WildCard)
             {
                 if (entity.ActivePersona != null)
@@ -135,7 +131,6 @@ namespace JRPGPrototype.Logic
                     _io.WriteLine("[ACTIVE PERSONA]: None");
                 }
             }
-            // Context: Operator Info (Summary)
             else if (entity.Class == ClassType.Operator)
             {
                 if (entity.ExtraSkills.Count > 0)
@@ -150,7 +145,7 @@ namespace JRPGPrototype.Logic
             }
         }
 
-        // --- 2. PERSONA STOCK DETAIL RENDERER (Updated UX) ---
+        // --- 2. PERSONA STOCK DETAIL RENDERER ---
         private void RenderPersonaStockDetail(Persona p, bool isEquipped)
         {
             _io.WriteLine($"=== PERSONA DETAILS {(isEquipped ? "[EQUIPPED]" : "")} ===");
@@ -158,7 +153,7 @@ namespace JRPGPrototype.Logic
             _io.WriteLine($"EXP: {p.Exp}/{p.ExpRequired}");
             _io.WriteLine("-----------------------------");
 
-            // UX UPDATE: Removed "Raw Stats:" header, just showing stats directly
+            _io.WriteLine("Raw Stats:");
             var displayStats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
             foreach (var stat in displayStats)
             {
@@ -180,7 +175,7 @@ namespace JRPGPrototype.Logic
             else { _io.WriteLine(" (Mastered)"); }
         }
 
-        // --- 3. DEMON DETAIL RENDERER ---
+        // --- 3. DEMON DETAIL RENDERER (Updated) ---
         private void RenderDemonDetail(Combatant demon)
         {
             _io.WriteLine("=== DEMON DETAILS ===");
@@ -191,8 +186,9 @@ namespace JRPGPrototype.Logic
             var stats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
             foreach (var stat in stats)
             {
-                int rawVal = demon.CharacterStats.ContainsKey(stat) ? demon.CharacterStats[stat] : 0;
-                _io.WriteLine($"{stat,-4}: {rawVal,3}");
+                // CORRECTED: Use GetStat() to retrieve info from the Persona shell
+                int total = demon.GetStat(stat);
+                _io.WriteLine($"{stat,-4}: {total,3}");
             }
             _io.WriteLine("-----------------------------");
 
@@ -443,7 +439,7 @@ namespace JRPGPrototype.Logic
                     int idx = _io.RenderMenu("RETURN DEMON", activeOpts, 0);
                     if (idx == -1 || idx == activeOpts.Count - 1) continue;
 
-                    int realIndex = idx + 1; // +1 because we skipped player
+                    int realIndex = idx + 1;
                     Combatant demon = _partyManager.ActiveParty[realIndex];
 
                     _partyManager.ReturnDemon(demon);
@@ -967,7 +963,7 @@ namespace JRPGPrototype.Logic
                 else
                 {
                     int healAmount = 50;
-                    var match = System.Text.RegularExpressions.Regex.Match(skill.Effect, @"\((\d+)\)");
+                    var match = Regex.Match(skill.Effect, @"\((\d+)\)");
                     if (match.Success) int.TryParse(match.Groups[1].Value, out healAmount);
 
                     target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + healAmount);

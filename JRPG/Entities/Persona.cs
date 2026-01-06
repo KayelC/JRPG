@@ -28,7 +28,6 @@ namespace JRPGPrototype.Entities
             return AffinityMap.ContainsKey(elem) ? AffinityMap[elem] : Affinity.Normal;
         }
 
-        // Updated: Accepts IGameIO to decouple from Console
         public void GainExp(int amount, IGameIO io = null)
         {
             Exp += amount;
@@ -52,6 +51,7 @@ namespace JRPGPrototype.Entities
             Random rnd = new Random();
             var validStats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
 
+            // Gain 3 points randomly
             for (int i = 0; i < 3; i++)
             {
                 StatType stat = validStats[rnd.Next(validStats.Length)];
@@ -70,6 +70,38 @@ namespace JRPGPrototype.Entities
                 {
                     SkillSet.Add(newSkill);
                     if (io != null) io.WriteLine($"-> {Name} learned a new skill: {newSkill}!", ConsoleColor.Cyan);
+                }
+            }
+        }
+
+        // --- NEW: Force Sync for Instantiation ---
+
+        // Called when creating a Demon/Persona at a specific level to ensure it has correct stats/skills
+        public void ScaleToLevel(int targetLevel)
+        {
+            if (targetLevel <= Level)
+            {
+                RecalculateSkills();
+                return;
+            }
+
+            // Simulate Level Ups without IO logs
+            while (Level < targetLevel)
+            {
+                LevelUp(null);
+            }
+        }
+
+        public void RecalculateSkills()
+        {
+            foreach (var kvp in SkillsToLearn)
+            {
+                if (kvp.Key <= Level)
+                {
+                    if (!SkillSet.Contains(kvp.Value))
+                    {
+                        SkillSet.Add(kvp.Value);
+                    }
                 }
             }
         }

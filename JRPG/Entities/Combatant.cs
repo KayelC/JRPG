@@ -46,7 +46,6 @@ namespace JRPGPrototype.Entities
         public List<Combatant> DemonStock { get; set; } = new List<Combatant>();
 
         // --- SKILLS ---
-        // Skills learned naturally by the entity (Operator skills) or granted by items (Fire Wand)
         public List<string> ExtraSkills { get; set; } = new List<string>();
 
         // --- EQUIPMENT SLOTS ---
@@ -105,7 +104,6 @@ namespace JRPGPrototype.Entities
                         if (!c.ActivePersona.SkillSet.Contains(s)) c.ActivePersona.SkillSet.Add(s);
                 }
             }
-            // Load intrinsic enemy skills into ExtraSkills if they don't have a Persona
             if (c.ActivePersona == null && data.Skills != null)
             {
                 c.ExtraSkills.AddRange(data.Skills);
@@ -117,21 +115,60 @@ namespace JRPGPrototype.Entities
             return c;
         }
 
-        // Helper to get all usable skills from Persona + Extra + Gear
+        public static Combatant CreateDemon(string personaId, int level)
+        {
+            if (!Database.Personas.TryGetValue(personaId, out var pData))
+                return new Combatant("Glitch", ClassType.Demon);
+
+            Combatant c = new Combatant(pData.Name, ClassType.Demon);
+            c.SourceId = personaId;
+            c.Level = level;
+            c.Controller = ControllerType.AI;
+            c.BattleControl = ControlState.ActFreely;
+
+            foreach (StatType t in Enum.GetValues(typeof(StatType)))
+                c.CharacterStats[t] = 0;
+
+            c.ActivePersona = pData.ToPersona();
+
+            // Scale persona to target level to get correct stats
+            c.ActivePersona.ScaleToLevel(level);
+
+            // CORRECTED: Calculate Base HP/SP from the scaled Persona stats
+            // SMT Logic: HP ~= (Lvl + END) * Multiplier
+            int end = c.GetStat(StatType.END);
+            int mag = c.GetStat(StatType.MAG);
+
+            c.BaseHP = (int)((level * 5) + (end * 4));
+            c.BaseSP = (int)((level * 2) + (mag * 2));
+
+            c.RecalculateResources();
+            c.CurrentHP = c.MaxHP;
+            c.CurrentSP = c.MaxSP;
+
+            return c;
+        }
+
         public List<string> GetConsolidatedSkills()
         {
             List<string> skills = new List<string>();
             if (ActivePersona != null) skills.AddRange(ActivePersona.SkillSet);
             skills.AddRange(ExtraSkills);
-
-            // Logic for Accessory granting skills could be added here
-            // e.g. if (EquippedAccessory.Name == "Fire Wand") skills.Add("Agi");
-
             return skills.Distinct().ToList();
         }
 
         public int GetStat(StatType type)
         {
+            // --- DEMON LOGIC ---
+            // Demons are physical manifestations of Personas.
+            // They do not have "Base Stats" + "Modifiers". The Persona stats ARE their stats.
+            if (Class == ClassType.Demon)
+            {
+                if (ActivePersona == null) return 0;
+                return ActivePersona.StatModifiers.ContainsKey(type) ? ActivePersona.StatModifiers[type] : 0;
+            }
+
+            // --- HUMAN/OPERATOR LOGIC ---
             int charVal = CharacterStats.ContainsKey(type) ? CharacterStats[type] : 0;
             if (EquippedAccessory != null)
             {
@@ -199,6 +236,10 @@ namespace JRPGPrototype.Entities
         {
             int totalEnd = GetStat(StatType.END);
             int totalInt = GetStat(StatType.INT);
+
+            // Demons rely on MAG for SP calculation if INT is missing/zero
+            if (Class == ClassType.Demon) totalInt = GetStat(StatType.MAG);
+
             MaxHP = BaseHP + (totalEnd * 5);
             MaxSP = BaseSP + (totalInt * 3);
             CurrentHP = Math.Min(CurrentHP, MaxHP);
@@ -226,8 +267,18 @@ namespace JRPGPrototype.Entities
             int oldMaxHP = MaxHP;
             int oldMaxSP = MaxSP;
 
-            BaseHP += rnd.Next(6, 11);
-            BaseSP += rnd.Next(3, 8);
+            if (Class != ClassType.Demon)
+            {
+                BaseHP += rnd.Next(6, 11);
+                BaseSP += rnd.Next(3, 8);
+            }
+            else
+            {
+                // Demons get HP/SP boost from stats increasing via Persona scaling
+                // BaseHP here acts as the "Race Bonus"
+                BaseHP += rnd.Next(3, 6);
+                BaseSP += rnd.Next(2, 4);
+            }
 
             RecalculateResources();
 

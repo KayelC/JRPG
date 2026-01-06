@@ -21,17 +21,8 @@ namespace JRPGPrototype
             EconomyManager economy = new EconomyManager();
             DungeonState dungeonState = new DungeonState();
 
-            // --- SCENARIO SELECTOR ---
-            io.WriteLine("Select Test Scenario:");
-            io.WriteLine("1. Human (Basic)");
-            io.WriteLine("2. Persona User (Orpheus)");
-            io.WriteLine("3. Wild Card (Orpheus + Stock)");
-            io.WriteLine("4. Operator (Demons + COMP)");
-
-            var key = io.ReadKey();
             Combatant player = new Combatant("Hero");
 
-            // Common Setup
             player.CharacterStats[StatType.STR] = 8;
             player.CharacterStats[StatType.MAG] = 8;
             player.CharacterStats[StatType.END] = 8;
@@ -42,6 +33,13 @@ namespace JRPGPrototype
             player.StatPoints = 5;
 
             // Scenario Logic
+            io.WriteLine("Select Test Scenario:");
+            io.WriteLine("1. Human (Basic)");
+            io.WriteLine("2. Persona User (Orpheus)");
+            io.WriteLine("3. Wild Card (Orpheus + Stock)");
+            io.WriteLine("4. Operator (Demons + COMP)");
+
+            var key = io.ReadKey();
             switch (key.KeyChar)
             {
                 case '1':
@@ -58,8 +56,10 @@ namespace JRPGPrototype
                     break;
                 case '4':
                     player.Class = ClassType.Operator;
-                    if (Database.Enemies.TryGetValue("E_pixie", out var e1)) player.DemonStock.Add(Combatant.CreateFromData(e1));
-                    if (Database.Enemies.TryGetValue("E_slime", out var e2)) player.DemonStock.Add(Combatant.CreateFromData(e2));
+                    // UPDATED: Use CreateDemon to ensure proper skill progression
+                    // Adding a Lv 12 Pixie and Lv 15 Slime
+                    player.DemonStock.Add(Combatant.CreateDemon("pixie", 12));
+                    player.DemonStock.Add(Combatant.CreateDemon("slime", 15));
                     break;
             }
 
@@ -79,7 +79,6 @@ namespace JRPGPrototype
 
             economy.AddMacca(5000);
 
-            // 5. Game Loop
             FieldManager field = new FieldManager(player, inventory, economy, dungeonState, io);
 
             bool appRunning = true;

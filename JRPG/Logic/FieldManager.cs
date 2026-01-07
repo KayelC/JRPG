@@ -250,7 +250,7 @@ namespace JRPGPrototype.Logic
 
         #endregion
 
-        #region Helper Renderers (Restoring "Next to Learn" / "Mastered" Logic)
+        #region Helper Renderers
 
         private string RenderHumanStatusToString(Combatant entity)
         {
@@ -291,7 +291,7 @@ namespace JRPGPrototype.Logic
         {
             string output = $"=== PERSONA DETAILS {(isEquipped ? "[EQUIPPED]" : "")} ===\n";
             output += $"Name: {p.Name} (Lv.{p.Level}) | Arcana: {p.Arcana}\n";
-            output += $"EXP: {p.Exp}/{p.ExpRequired}\n";
+            output += $"EXP: {p.Exp}/{p.ExpRequired} Next: {p.ExpRequired - p.Exp}\n"; // Updated to include Next
             output += "-----------------------------\nRaw Stats:\n";
 
             var displayStats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
@@ -303,7 +303,6 @@ namespace JRPGPrototype.Logic
             output += "-----------------------------\nSkills:\n";
             foreach (var s in p.SkillSet) output += $" - {s}\n";
 
-            // Restore Next to Learn Logic
             var nextSkills = p.SkillsToLearn.Where(k => k.Key > p.Level).OrderBy(k => k.Key).Take(3).ToList();
             if (nextSkills.Any())
             {
@@ -323,6 +322,7 @@ namespace JRPGPrototype.Logic
             string output = "=== DEMON DETAILS ===\n";
             output += $"Name: {demon.Name} (Lv.{demon.Level})\n";
             output += $"HP: {demon.CurrentHP}/{demon.MaxHP} SP: {demon.CurrentSP}/{demon.MaxSP}\n";
+            output += $"EXP: {demon.Exp}/{demon.ExpRequired} Next: {demon.ExpRequired - demon.Exp}\n"; // Added missing EXP details
             output += "-----------------------------\n";
 
             var stats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
@@ -334,7 +334,6 @@ namespace JRPGPrototype.Logic
             output += "-----------------------------\nSkills:\n";
             foreach (var s in demon.GetConsolidatedSkills()) output += $" - {s}\n";
 
-            // Restore Next to Learn Logic for Active Persona
             if (demon.ActivePersona != null)
             {
                 var nextSkills = demon.ActivePersona.SkillsToLearn.Where(k => k.Key > demon.Level).OrderBy(k => k.Key).Take(3).ToList();

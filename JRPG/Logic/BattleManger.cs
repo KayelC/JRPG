@@ -93,8 +93,6 @@ namespace JRPGPrototype.Logic
             ResolveBattleEnd();
         }
 
-        // --- UNIFIED PHASE LOGIC ---
-
         private void ExecutePhase(List<Combatant> actors, List<Combatant> opponents, bool isPlayerPhase)
         {
             int turnIcons = actors.Count;
@@ -162,8 +160,6 @@ namespace JRPGPrototype.Logic
             }
         }
 
-        // --- HUMAN INPUT ---
-
         private int ProcessHumanAction(Combatant actor, List<Combatant> opponents)
         {
             if (actor.IsGuarding)
@@ -185,9 +181,9 @@ namespace JRPGPrototype.Logic
                 else if (actor.Class == ClassType.Operator)
                 {
                     options.Add("Command"); // Operator Skills
-                    options.Add("COMP");    // Summon/Return/Analyze
+                    options.Add("COMP"); // Summon/Return/Analyze
                 }
-                else // Human or Demon under direct control
+                else
                 {
                     options.Add("Skill");
                 }
@@ -199,7 +195,6 @@ namespace JRPGPrototype.Logic
                 bool isPanicked = actor.CurrentAilment?.Name == "Panic";
                 List<bool> disabled = new List<bool>();
 
-                // Build disabled list
                 foreach (var opt in options)
                 {
                     if ((opt == "Persona" || opt == "Skill" || opt == "Command" || opt == "COMP") && isPanicked)
@@ -213,6 +208,10 @@ namespace JRPGPrototype.Logic
                 }
 
                 int choice = _io.RenderMenu($"Command: {actor.Name}", options, 0, disabled);
+
+                // FIX: Safety check for -1 (Esc) input
+                if (choice == -1) continue;
+
                 string selectedOption = options[choice];
 
                 if (selectedOption == "Attack")
@@ -234,7 +233,8 @@ namespace JRPGPrototype.Logic
                     if (selectedOption == "Persona") skillsToShow = actor.ActivePersona?.SkillSet ?? new List<string>();
                     else skillsToShow = actor.ExtraSkills;
 
-                    if (actor.Class == ClassType.Human || actor.Class == ClassType.Demon) skillsToShow = actor.GetConsolidatedSkills();
+                    if (actor.Class == ClassType.Human || actor.Class == ClassType.Demon)
+                        skillsToShow = actor.GetConsolidatedSkills();
 
                     var result = ExecuteSkillMenu(actor, skillsToShow, opponents);
                     if (result.executed) return result.cost;
@@ -270,12 +270,9 @@ namespace JRPGPrototype.Logic
             }
         }
 
-        // --- COMP LOGIC (OPERATOR) ---
         private (bool executed, int cost) ExecuteCompMenu(Combatant actor)
         {
-            List<string> options = new List<string> { "Summon", "Return", "Analyze" };
-            options.Add("Cancel");
-
+            List<string> options = new List<string> { "Summon", "Return", "Analyze", "Cancel" };
             int idx = _io.RenderMenu("COMP SYSTEM", options, 0);
             if (idx == -1 || idx == options.Count - 1) return (false, 0);
 
@@ -321,9 +318,7 @@ namespace JRPGPrototype.Logic
 
         private (bool executed, int cost) ExecuteReturnMenu(Combatant actor)
         {
-            // Filter active party for demons owned by this operator
             var activeDemons = _party.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
-
             if (activeDemons.Count == 0)
             {
                 _io.WriteLine("No demons currently summoned.");
@@ -331,7 +326,7 @@ namespace JRPGPrototype.Logic
                 return (false, 0);
             }
 
-            List<string> demonOpts = activeDemons.Select(d => $"{d.Name} (HP:{d.CurrentHP})").ToList();
+            List<string> demonOpts = activeDemons.Select(d => $"{d.Name} (HP: {d.CurrentHP})").ToList();
             demonOpts.Add("Cancel");
 
             int idx = _io.RenderMenu("RETURN DEMON", demonOpts, 0);
@@ -346,7 +341,6 @@ namespace JRPGPrototype.Logic
                 _io.Wait(1000);
                 return (true, 2);
             }
-
             return (false, 0);
         }
 
@@ -358,7 +352,7 @@ namespace JRPGPrototype.Logic
             _io.Clear();
             _io.WriteLine($"=== ANALYSIS: {target.Name} ===");
             _io.WriteLine($"Level: {target.Level}");
-            _io.WriteLine($"HP: {target.CurrentHP}/{target.MaxHP}  SP: {target.CurrentSP}/{target.MaxSP}");
+            _io.WriteLine($"HP: {target.CurrentHP}/{target.MaxHP} SP: {target.CurrentSP}/{target.MaxSP}");
 
             _io.WriteLine("\nAffinities:");
             foreach (Element elem in Enum.GetValues(typeof(Element)))
@@ -371,11 +365,8 @@ namespace JRPGPrototype.Logic
 
             _io.WriteLine("\n[Press Any Key]");
             _io.ReadKey();
-
             return (true, 2);
         }
-
-        // --- SMART AI SYSTEM ---
 
         private int ProcessSmartAI(Combatant actor, List<Combatant> allies, List<Combatant> opponents, BattleKnowledge knowledge)
         {
@@ -393,8 +384,7 @@ namespace JRPGPrototype.Logic
                 var healSkill = FindSkillByKeyword(actor, "Salvation", "Mediarahan", "Diarahan", "Mediarama", "Diarama", "Media", "Dia");
                 if (healSkill != null)
                 {
-                    var res = ExecuteSkillLogic(actor, healSkill, new List<Combatant> { criticalAlly }, knowledge);
-                    return res;
+                    return ExecuteSkillLogic(actor, healSkill, new List<Combatant> { criticalAlly }, knowledge);
                 }
             }
 
@@ -404,8 +394,7 @@ namespace JRPGPrototype.Logic
                 var cureSkill = FindSkillByKeyword(actor, "Patra", "Cure", "Amrita");
                 if (cureSkill != null)
                 {
-                    var res = ExecuteSkillLogic(actor, cureSkill, new List<Combatant> { ailedAlly }, knowledge);
-                    return res;
+                    return ExecuteSkillLogic(actor, cureSkill, new List<Combatant> { ailedAlly }, knowledge);
                 }
             }
 
@@ -417,11 +406,9 @@ namespace JRPGPrototype.Logic
                     {
                         if (skillData.Category.Contains("Recovery") || skillData.Category.Contains("Enhance")) continue;
                         Element skillElement = ElementHelper.FromCategory(skillData.Category);
-
                         if (knowledge.IsWeaknessKnown(target.SourceId, skillElement))
                         {
-                            var res = ExecuteSkillLogic(actor, skillData, new List<Combatant> { target }, knowledge);
-                            return res;
+                            return ExecuteSkillLogic(actor, skillData, new List<Combatant> { target }, knowledge);
                         }
                     }
                 }
@@ -439,12 +426,10 @@ namespace JRPGPrototype.Logic
                 {
                     var skill = offensiveSkills[_rnd.Next(offensiveSkills.Count)];
                     var target = opponents[_rnd.Next(opponents.Count)];
-
                     Element elem = ElementHelper.FromCategory(skill.Category);
                     if (!knowledge.IsResistanceKnown(target.SourceId, elem))
                     {
-                        var res = ExecuteSkillLogic(actor, skill, new List<Combatant> { target }, knowledge);
-                        return res;
+                        return ExecuteSkillLogic(actor, skill, new List<Combatant> { target }, knowledge);
                     }
                 }
             }
@@ -456,11 +441,9 @@ namespace JRPGPrototype.Logic
         private SkillData FindSkillByKeyword(Combatant actor, params string[] keywords)
         {
             if (actor.ActivePersona == null) return null;
-
             foreach (var s in actor.ActivePersona.SkillSet)
             {
                 if (!Database.Skills.ContainsKey(s)) continue;
-
                 foreach (var k in keywords)
                 {
                     if (s.Contains(k)) return Database.Skills[s];
@@ -468,8 +451,6 @@ namespace JRPGPrototype.Logic
             }
             return null;
         }
-
-        // --- EXECUTION LOGIC ---
 
         private int ExecutePhysicalAttack(Combatant actor, Combatant target, BattleKnowledge knowledge)
         {
@@ -528,23 +509,16 @@ namespace JRPGPrototype.Logic
 
                 int power = skillData.GetPowerVal();
                 Element elem = ElementHelper.FromCategory(skillData.Category);
-
                 bool isPhys = (elem == Element.Slash || elem == Element.Strike || elem == Element.Pierce);
                 int atk = isPhys ? actor.GetStat(StatType.STR) : actor.GetStat(StatType.MAG);
                 int def = target.GetStat(StatType.END) + target.GetDefense();
 
                 double dmgBase = 5.0 * Math.Sqrt((double)power * atk / Math.Max(1, def));
-
-                if (skillData.Effect.Contains("50%") && skillData.Effect.Contains("HP"))
-                {
-                    dmgBase = target.CurrentHP * 0.5;
-                }
-
+                if (skillData.Effect.Contains("50%") && skillData.Effect.Contains("HP")) dmgBase = target.CurrentHP * 0.5;
                 if (target.CurrentAilment != null) dmgBase *= target.CurrentAilment.DamageTakenMult;
-                int damage = (int)(dmgBase * (0.95 + _rnd.NextDouble() * 0.1));
 
-                bool isCrit = false;
-                if (isPhys && target.IsRigidBody) isCrit = true;
+                int damage = (int)(dmgBase * (0.95 + _rnd.NextDouble() * 0.1));
+                bool isCrit = isPhys && target.IsRigidBody;
 
                 var res = target.ReceiveDamage(damage, elem, isCrit);
                 _io.WriteLine($"{target.Name} takes {res.DamageDealt} dmg. {res.Message}");
@@ -583,8 +557,6 @@ namespace JRPGPrototype.Logic
             }
         }
 
-        // --- SUPPORT METHODS ---
-
         private void PerformHealingLogic(SkillData skill, Combatant target)
         {
             int heal = skill.GetPowerVal();
@@ -598,8 +570,7 @@ namespace JRPGPrototype.Logic
             if (skill.Effect.Contains("Cure") && target.CheckCure(skill.Effect)) _io.WriteLine($"{target.Name} was cured.");
             if (target.IsDead && skill.Effect.Contains("Revive"))
             {
-                int reviveHP = target.MaxHP / 2;
-                target.CurrentHP = reviveHP;
+                target.CurrentHP = target.MaxHP / 2;
                 _io.WriteLine($"{target.Name} revived!");
                 return;
             }
@@ -640,10 +611,7 @@ namespace JRPGPrototype.Logic
 
         private Combatant SelectAllyTarget(bool selectDead)
         {
-            var targets = selectDead ?
-                _party.ActiveParty.Where(m => m.IsDead).ToList() :
-                _party.ActiveParty.Where(m => !m.IsDead).ToList();
-
+            var targets = selectDead ? _party.ActiveParty.Where(m => m.IsDead).ToList() : _party.ActiveParty.Where(m => !m.IsDead).ToList();
             if (targets.Count == 0) { _io.WriteLine("No valid targets."); _io.Wait(500); return null; }
             List<string> names = targets.Select(e => $"{e.Name} (HP: {e.CurrentHP}/{e.MaxHP})").ToList();
             names.Add("Cancel");
@@ -655,7 +623,6 @@ namespace JRPGPrototype.Logic
         private (bool executed, int cost) ExecuteSkillMenu(Combatant actor, List<string> skills, List<Combatant> opponents)
         {
             if (skills.Count == 0) { _io.WriteLine("No skills."); return (false, 0); }
-
             List<string> options = new List<string>();
             List<bool> disabled = new List<bool>();
             foreach (var s in skills)
@@ -676,7 +643,8 @@ namespace JRPGPrototype.Logic
 
             int idx = _io.RenderMenu("Select Skill:", options, 0, disabled, (i) =>
             {
-                if (i < skills.Count && Database.Skills.TryGetValue(skills[i], out var d)) _io.WriteLine($"Effect: {d.Effect}\nPower: {d.Power}");
+                if (i >= 0 && i < skills.Count && Database.Skills.TryGetValue(skills[i], out var d))
+                    _io.WriteLine($"Effect: {d.Effect}\nPower: {d.Power}");
             });
 
             if (idx == -1 || idx == options.Count - 1) return (false, 0);
@@ -694,7 +662,7 @@ namespace JRPGPrototype.Logic
                     if (isAll) targets = _party.GetAliveMembers();
                     else
                     {
-                        var t = SelectAllyTarget(false);
+                        var t = SelectAllyTarget(skillData.Effect.Contains("Revive"));
                         if (t != null) targets.Add(t); else return (false, 0);
                     }
                 }
@@ -720,42 +688,44 @@ namespace JRPGPrototype.Logic
             var usableItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
             if (usableItems.Count == 0) { _io.WriteLine("Empty."); return (false, 0); }
 
-            // Fix: Build List and Disabled simultaneously
             List<string> options = new List<string>();
             List<bool> disabled = new List<bool>();
-
             foreach (var item in usableItems)
             {
                 string label = $"{item.Name} x{_inv.GetQuantity(item.Id)}";
-                bool isDisabled = false;
-
-                if (item.Name == "Goho-M") { label += " (Field Only)"; isDisabled = true; }
-
-                options.Add(label);
+                bool isDisabled = item.Name == "Goho-M"; // Field only
+                options.Add(label + (isDisabled ? " (Field Only)" : ""));
                 disabled.Add(isDisabled);
             }
             options.Add("Cancel");
             disabled.Add(false);
 
-            int idx = _io.RenderMenu("Items", options, 0, disabled, (i) => { if (i < usableItems.Count) _io.WriteLine(usableItems[i].Description); });
+            int idx = _io.RenderMenu("Items", options, 0, disabled, (i) => { if (i >= 0 && i < usableItems.Count) _io.WriteLine(usableItems[i].Description); });
             if (idx == -1 || idx == options.Count - 1) return (false, 0);
 
             ItemData selectedItem = usableItems[idx];
-            if (selectedItem.Name == "Goho-M") return (false, 0);
-            if (selectedItem.Name == "Traesto Gem") { _io.WriteLine("Escaping..."); TraestoUsed = true; _inv.RemoveItem(selectedItem.Id, 1); return (true, 0); }
+            if (selectedItem.Name == "Traesto Gem")
+            {
+                _io.WriteLine("Escaping...");
+                TraestoUsed = true;
+                _inv.RemoveItem(selectedItem.Id, 1);
+                return (true, 0);
+            }
 
             Combatant target = SelectAllyTarget(selectedItem.Type == "Revive");
             if (target == null) return (false, 0);
 
-            if (PerformItem(selectedItem, target)) { _inv.RemoveItem(selectedItem.Id, 1); return (true, 2); }
+            if (PerformItem(selectedItem, target))
+            {
+                _inv.RemoveItem(selectedItem.Id, 1);
+                return (true, 2);
+            }
             return (false, 0);
         }
 
         private bool PerformItem(ItemData item, Combatant target)
         {
             _io.WriteLine($"\n[ITEM] Used {item.Name}!");
-            if (item.Name == "Traesto Gem") { TraestoUsed = true; return true; }
-
             bool used = false;
             switch (item.Type)
             {
@@ -776,17 +746,19 @@ namespace JRPGPrototype.Logic
                     if (target.CurrentAilment == null) _io.WriteLine("Healthy.");
                     else { target.RemoveAilment(); _io.WriteLine("Cured!"); used = true; }
                     break;
-                default: _io.WriteLine("Used."); used = true; break;
             }
             return used;
         }
 
         private bool ExecuteTacticsMenu(Combatant actor)
         {
-            List<string> opts = new List<string> { "Escape", "Strategy" };
-            List<bool> dis = new List<bool> { _isBossBattle, actor.Class != ClassType.Operator };
+            List<string> opts = new List<string> { "Escape", "Strategy", "Cancel" };
+            List<bool> dis = new List<bool> { _isBossBattle, actor.Class != ClassType.Operator, false };
 
             int c = _io.RenderMenu("Tactics", opts, 0, dis);
+
+            // FIX: Safety check for -1 (Esc) input
+            if (c == -1 || c == opts.Count - 1) return false;
 
             if (c == 0 && !_isBossBattle) return AttemptEscape(actor);
             if (c == 1 && actor.Class == ClassType.Operator) return ExecuteStrategyMenu(actor);
@@ -811,9 +783,7 @@ namespace JRPGPrototype.Logic
             if (idx == -1 || idx == demonOpts.Count - 1) return false;
 
             Combatant selectedDemon = ownedDemons[idx];
-
-            if (selectedDemon.BattleControl == ControlState.ActFreely) selectedDemon.BattleControl = ControlState.DirectControl;
-            else selectedDemon.BattleControl = ControlState.ActFreely;
+            selectedDemon.BattleControl = selectedDemon.BattleControl == ControlState.ActFreely ? ControlState.DirectControl : ControlState.ActFreely;
 
             _io.WriteLine($"{selectedDemon.Name} set to {selectedDemon.BattleControl}.");
             _io.Wait(500);
@@ -831,8 +801,6 @@ namespace JRPGPrototype.Logic
             else { _io.WriteLine("Blocked!", ConsoleColor.Red); _io.Wait(1000); return true; }
         }
 
-        // --- END STATES ---
-
         private bool ProcessTurnStart(Combatant c)
         {
             if (c.IsGuarding) { c.IsGuarding = false; _io.WriteLine($"{c.Name} drops guard."); }
@@ -848,6 +816,7 @@ namespace JRPGPrototype.Logic
         {
             var msgs = c.TickBuffs();
             foreach (var m in msgs) _io.WriteLine(m);
+
             if (c.CurrentAilment != null && c.CurrentAilment.DotPercent > 0)
             {
                 int dmg = (int)(c.MaxHP * c.CurrentAilment.DotPercent);
@@ -861,15 +830,8 @@ namespace JRPGPrototype.Logic
             }
         }
 
-        private bool CheckEnemiesWiped()
-        {
-            return _enemies.All(e => e.IsDead);
-        }
-
-        private bool CheckPartyWiped()
-        {
-            return _party.IsPartyWiped();
-        }
+        private bool CheckEnemiesWiped() => _enemies.All(e => e.IsDead);
+        private bool CheckPartyWiped() => _party.IsPartyWiped();
 
         private bool CheckBattleEndCondition()
         {
@@ -905,7 +867,7 @@ namespace JRPGPrototype.Logic
                 }
                 _eco.AddMacca(totalMacca);
             }
-            else
+            else if (!Escaped && !TraestoUsed)
             {
                 _io.WriteLine("\nDEFEAT...", ConsoleColor.Red);
             }

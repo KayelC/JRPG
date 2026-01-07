@@ -364,67 +364,83 @@ namespace JRPGPrototype.Logic
 
         private void OpenPersonaStockMenu()
         {
-            var allPersonas = new List<Persona>();
-            if (_player.ActivePersona != null) allPersonas.Add(_player.ActivePersona);
-            allPersonas.AddRange(_player.PersonaStock);
-
-            if (allPersonas.Count == 0)
-            {
-                _io.WriteLine("No Personas available.");
-                _io.Wait(800);
-                return;
-            }
-
+            int personaListIndex = 0;
             while (true)
             {
-                List<string> options = new List<string>();
-                foreach (var p in allPersonas)
+                var allPersonas = new List<Persona>();
+                if (_player.ActivePersona != null) allPersonas.Add(_player.ActivePersona);
+                allPersonas.AddRange(_player.PersonaStock);
+
+                if (allPersonas.Count == 0)
                 {
-                    string label = $"{p.Name} (Lv.{p.Level}) {p.Arcana}";
-                    if (p == _player.ActivePersona) label += " [E]";
-                    options.Add(label);
+                    _io.WriteLine("No Personas available.");
+                    _io.Wait(800);
+                    return;
                 }
-                options.Add("Back");
 
-                int idx = _io.RenderMenu("=== PERSONA STOCK ===", options, 0);
+                while (true)
+                {
+                    List<string> options = new List<string>();
+                    foreach (var p in allPersonas)
+                    {
+                        string label = $"{p.Name} (Lv.{p.Level}) {p.Arcana}";
+                        if (p == _player.ActivePersona) label += " [E]";
+                        options.Add(label);
+                    }
+                    options.Add("Back");
 
-                if (idx == -1 || idx == options.Count - 1) return;
+                    // Ensure index is within bounds after potential list changes
+                    if (personaListIndex >= options.Count) personaListIndex = options.Count - 1;
 
-                ViewPersonaDetails(allPersonas[idx]);
+                    int idx = _io.RenderMenu("=== PERSONA STOCK ===", options, personaListIndex);
+
+                    if (idx == -1 || idx == options.Count - 1) return;
+
+                    personaListIndex = idx; // Persist index selection
+                    ViewPersonaDetails(allPersonas[idx]);
+                }
             }
         }
 
         private void OpenDemonStockMenu()
         {
-            var allDemons = new List<Combatant>();
-            foreach (var member in _partyManager.ActiveParty)
-            {
-                if (member.Class == ClassType.Demon) allDemons.Add(member);
-            }
-            allDemons.AddRange(_player.DemonStock);
-
-            if (allDemons.Count == 0)
-            {
-                _io.WriteLine("No demons found.");
-                _io.Wait(800);
-                return;
-            }
-
+            int demonListIndex = 0;
             while (true)
             {
-                List<string> options = new List<string>();
-                foreach (var d in allDemons)
+                var allDemons = new List<Combatant>();
+                foreach (var member in _partyManager.ActiveParty)
                 {
-                    string status = _partyManager.ActiveParty.Contains(d) ? "[PARTY]" : "[STOCK]";
-                    options.Add($"{d.Name} (Lv.{d.Level}) {status}");
+                    if (member.Class == ClassType.Demon) allDemons.Add(member);
                 }
-                options.Add("Back");
+                allDemons.AddRange(_player.DemonStock);
 
-                int idx = _io.RenderMenu("=== DEMON OVERVIEW ===", options, 0);
+                if (allDemons.Count == 0)
+                {
+                    _io.WriteLine("No demons found.");
+                    _io.Wait(800);
+                    return;
+                }
 
-                if (idx == -1 || idx == options.Count - 1) return;
+                while (true)
+                {
+                    List<string> options = new List<string>();
+                    foreach (var d in allDemons)
+                    {
+                        string status = _partyManager.ActiveParty.Contains(d) ? "[PARTY]" : "[STOCK]";
+                        options.Add($"{d.Name} (Lv.{d.Level}) {status}");
+                    }
+                    options.Add("Back");
 
-                ViewDemonDetails(allDemons[idx]);
+                    // Ensure index is within bounds after potential list changes
+                    if (demonListIndex >= options.Count) demonListIndex = options.Count - 1;
+
+                    int idx = _io.RenderMenu("=== DEMON OVERVIEW ===", options, demonListIndex);
+
+                    if (idx == -1 || idx == options.Count - 1) return;
+
+                    demonListIndex = idx; // Persist index selection
+                    ViewDemonDetails(allDemons[idx]);
+                }
             }
         }
 
@@ -474,7 +490,8 @@ namespace JRPGPrototype.Logic
                 if (floorInfo.Type != DungeonEventType.BlockEnd)
                 {
                     options.Add("Ascend Stairs");
-                    actions.Add(() => {
+                    actions.Add(() =>
+                    {
                         _io.WriteLine("Ascending...");
                         _io.Wait(500);
                         _dungeon.Ascend();
@@ -484,7 +501,8 @@ namespace JRPGPrototype.Logic
                 else
                 {
                     options.Add("Barrier (Cannot Pass)");
-                    actions.Add(() => {
+                    actions.Add(() =>
+                    {
                         _io.WriteLine("The path is sealed.");
                         _io.Wait(1000);
                     });
@@ -493,7 +511,8 @@ namespace JRPGPrototype.Logic
                 if (floorInfo.FloorNumber > 1)
                 {
                     options.Add("Descend Stairs");
-                    actions.Add(() => {
+                    actions.Add(() =>
+                    {
                         _io.WriteLine("Descending...");
                         _io.Wait(500);
                         _dungeon.Descend();

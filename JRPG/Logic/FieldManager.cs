@@ -60,6 +60,7 @@ namespace JRPGPrototype.Logic
                 };
 
                 if (_player.Class == ClassType.Operator) options.Add("Organize Party");
+                options.Add("Exit Game");
 
                 int choice = _io.RenderMenu(header, options, _mainMenuIndex);
 
@@ -78,19 +79,186 @@ namespace JRPGPrototype.Logic
                     _io.WriteLine("The nose is long... but this feature isn't ready yet.");
                     _io.Wait(1000);
                 }
+                else if (selectedOption == "Exit Game") return;
 
                 if (_player.CurrentHP <= 0) return;
             }
         }
 
-        // --- 1. HUMAN STATUS RENDERER ---
-        private void RenderHumanStatus(Combatant entity)
+        #region Status Screens (Menu-Driven)
+
+        private void OpenSeamlessStatusMenu()
         {
-            _io.WriteLine("=== STATUS & PARAMETERS ===");
-            _io.WriteLine($"Name: {entity.Name} (Lv.{entity.Level}) | Class: {entity.Class}");
-            _io.WriteLine($"HP: {entity.CurrentHP}/{entity.MaxHP}  SP: {entity.CurrentSP}/{entity.MaxSP}");
-            _io.WriteLine($"EXP: {entity.Exp}/{entity.ExpRequired}  Next: {entity.ExpRequired - entity.Exp}");
-            _io.WriteLine("-----------------------------");
+            int statusHubIndex = 0;
+            while (true)
+            {
+                string header = RenderHumanStatusToString(_player) + $"\nPoints Available: {_player.StatPoints}";
+
+                List<string> options = new List<string>
+                {
+                    "Allocate Stats",
+                    "Change Equipment"
+                };
+
+                if (_player.Class == ClassType.WildCard || _player.Class == ClassType.PersonaUser)
+                    options.Add("Persona Stock");
+
+                if (_player.Class == ClassType.Operator)
+                    options.Add("Demon Stock");
+
+                options.Add("Back");
+
+                int choice = _io.RenderMenu(header, options, statusHubIndex);
+                if (choice == -1 || choice == options.Count - 1) return;
+
+                statusHubIndex = choice;
+                string selected = options[choice];
+
+                if (selected == "Allocate Stats") OpenStatAllocation();
+                else if (selected == "Change Equipment") ShowEquipSlotMenu();
+                else if (selected == "Persona Stock") OpenPersonaStockMenu();
+                else if (selected == "Demon Stock") OpenDemonStockMenu();
+            }
+        }
+
+        private void ViewPersonaDetails(Persona p)
+        {
+            int menuIndex = 0;
+            while (true)
+            {
+                bool isEquipped = (p == _player.ActivePersona);
+                string header = GetPersonaDetailString(p, isEquipped);
+
+                List<string> options = new List<string>();
+                if (!isEquipped) options.Add("Equip Persona");
+                options.Add("Back");
+
+                int choice = _io.RenderMenu(header, options, menuIndex);
+                if (choice == -1 || selectedIsBack(choice, options)) return;
+
+                if (options[choice] == "Equip Persona")
+                {
+                    int stockIndex = _player.PersonaStock.IndexOf(p);
+                    if (stockIndex != -1)
+                    {
+                        Persona oldActive = _player.ActivePersona;
+                        _player.ActivePersona = p;
+                        _player.PersonaStock[stockIndex] = oldActive;
+
+                        _io.WriteLine($"Equipped {p.Name}!");
+                        _player.RecalculateResources();
+                        _io.Wait(800);
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void ViewDemonDetails(Combatant demon)
+        {
+            while (true)
+            {
+                string header = GetDemonDetailString(demon);
+                List<string> options = new List<string> { "Back" };
+
+                int choice = _io.RenderMenu(header, options, 0);
+                if (choice == -1 || choice == 0) return;
+            }
+        }
+
+        private void OpenOrganizeMenu()
+        {
+            int orgIndex = 0;
+            while (true)
+            {
+                string header = "=== ORGANIZE PARTY ===\nSelect a slot to manage:";
+                List<string> options = new List<string>();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i < _partyManager.ActiveParty.Count)
+                    {
+                        var member = _partyManager.ActiveParty[i];
+                        options.Add($"Slot {i + 1}: {member.Name} (Lv.{member.Level})");
+                    }
+                    else
+                    {
+                        options.Add($"Slot {i + 1}: [EMPTY]");
+                    }
+                }
+                options.Add("Back");
+
+                int choice = _io.RenderMenu(header, options, orgIndex);
+                if (choice == -1 || choice == options.Count - 1) return;
+                orgIndex = choice;
+
+                if (choice < _partyManager.ActiveParty.Count)
+                {
+                    ManagePartyMember(choice);
+                }
+                else if (choice == _partyManager.ActiveParty.Count && _partyManager.ActiveParty.Count < 4)
+                {
+                    OpenSummonFromOrg();
+                }
+            }
+        }
+
+        private void ManagePartyMember(int index)
+        {
+            Combatant member = _partyManager.ActiveParty[index];
+            if (member == _player)
+            {
+                _io.WriteLine("The protagonist cannot be removed from the party.");
+                _io.Wait(800);
+                return;
+            }
+
+            List<string> options = new List<string> { "Return to COMP", "Back" };
+            int choice = _io.RenderMenu($"Manage {member.Name}", options, 0);
+
+            if (choice == 0)
+            {
+                _partyManager.ReturnDemon(member);
+                _player.DemonStock.Add(member);
+                _io.WriteLine($"{member.Name} returned to stock.");
+                _io.Wait(600);
+            }
+        }
+
+        private void OpenSummonFromOrg()
+        {
+            if (_player.DemonStock.Count == 0)
+            {
+                _io.WriteLine("No demons in stock to summon.");
+                _io.Wait(800);
+                return;
+            }
+
+            List<string> demonOpts = _player.DemonStock.Select(d => $"{d.Name} (Lv.{d.Level})").ToList();
+            demonOpts.Add("Cancel");
+
+            int idx = _io.RenderMenu("SUMMON DEMON", demonOpts, 0);
+            if (idx == -1 || idx == demonOpts.Count - 1) return;
+
+            if (_partyManager.SummonDemon(_player.DemonStock[idx]))
+            {
+                _io.WriteLine($"{_player.DemonStock[idx].Name} joined the active party!");
+                _player.DemonStock.RemoveAt(idx);
+                _io.Wait(800);
+            }
+        }
+
+        #endregion
+
+        #region Helper Renderers (Restoring "Next to Learn" / "Mastered" Logic)
+
+        private string RenderHumanStatusToString(Combatant entity)
+        {
+            string output = "=== STATUS & PARAMETERS ===\n";
+            output += $"Name: {entity.Name} (Lv.{entity.Level}) | Class: {entity.Class}\n";
+            output += $"HP: {entity.CurrentHP}/{entity.MaxHP} SP: {entity.CurrentSP}/{entity.MaxSP}\n";
+            output += $"EXP: {entity.Exp}/{entity.ExpRequired} Next: {entity.ExpRequired - entity.Exp}\n";
+            output += "-----------------------------\n";
 
             var stats = Enum.GetValues(typeof(StatType)).Cast<StatType>();
             foreach (var stat in stats)
@@ -100,169 +268,101 @@ namespace JRPGPrototype.Logic
 
                 if (stat == StatType.INT || stat == StatType.CHA)
                 {
-                    _io.WriteLine($"{stat,-4}: {total,3}");
+                    output += $"{stat,-4}: {total,3}\n";
                     continue;
                 }
 
                 if (entity.Class == ClassType.PersonaUser || entity.Class == ClassType.WildCard)
                 {
                     int mod = total - baseVal;
-                    _io.WriteLine($"{stat,-4}: {baseVal,3} + {mod,3} = {total,3}");
+                    output += $"{stat,-4}: {baseVal,3} + {mod,3} = {total,3}\n";
                 }
                 else
                 {
-                    string color = total > baseVal ? "+" : "";
-                    _io.WriteLine($"{stat,-4}: {total,3} ({baseVal,3}{color})");
+                    string colorSign = total > baseVal ? "+" : "";
+                    output += $"{stat,-4}: {total,3} ({baseVal,3}{colorSign})\n";
                 }
             }
-            _io.WriteLine("-----------------------------");
-
-            if (entity.Class == ClassType.PersonaUser || entity.Class == ClassType.WildCard)
-            {
-                if (entity.ActivePersona != null)
-                {
-                    Persona p = entity.ActivePersona;
-                    _io.WriteLine($"[ACTIVE PERSONA]: {p.Name} (Lv.{p.Level}) Arcana: {p.Arcana}");
-                    _io.WriteLine("Skills:");
-                    foreach (var s in p.SkillSet) _io.WriteLine($" - {s}");
-                }
-                else
-                {
-                    _io.WriteLine("[ACTIVE PERSONA]: None");
-                }
-            }
-            else if (entity.Class == ClassType.Operator)
-            {
-                if (entity.ExtraSkills.Count > 0)
-                {
-                    _io.WriteLine("Commander Skills:");
-                    foreach (var s in entity.ExtraSkills) _io.WriteLine($" - {s}");
-                }
-                else
-                {
-                    _io.WriteLine("No Commander Skills.");
-                }
-            }
+            output += "-----------------------------";
+            return output;
         }
 
-        // --- 2. PERSONA STOCK DETAIL RENDERER ---
-        private void RenderPersonaStockDetail(Persona p, bool isEquipped)
+        private string GetPersonaDetailString(Persona p, bool isEquipped)
         {
-            _io.WriteLine($"=== PERSONA DETAILS {(isEquipped ? "[EQUIPPED]" : "")} ===");
-            _io.WriteLine($"Name: {p.Name} (Lv.{p.Level}) | Arcana: {p.Arcana}");
-            _io.WriteLine($"EXP: {p.Exp}/{p.ExpRequired}");
-            _io.WriteLine("-----------------------------");
+            string output = $"=== PERSONA DETAILS {(isEquipped ? "[EQUIPPED]" : "")} ===\n";
+            output += $"Name: {p.Name} (Lv.{p.Level}) | Arcana: {p.Arcana}\n";
+            output += $"EXP: {p.Exp}/{p.ExpRequired}\n";
+            output += "-----------------------------\nRaw Stats:\n";
 
-            _io.WriteLine("Raw Stats:");
             var displayStats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
             foreach (var stat in displayStats)
             {
                 int val = p.StatModifiers.ContainsKey(stat) ? p.StatModifiers[stat] : 0;
-                _io.WriteLine($" {stat}: {val,3}");
+                output += $"  {stat}: {val,3}\n";
             }
-            _io.WriteLine("-----------------------------");
+            output += "-----------------------------\nSkills:\n";
+            foreach (var s in p.SkillSet) output += $" - {s}\n";
 
-            _io.WriteLine("Equipped Skills:");
-            if (p.SkillSet.Count == 0) _io.WriteLine(" (None)");
-            foreach (var s in p.SkillSet) _io.WriteLine($" - {s}");
-
-            var nextSkills = p.SkillsToLearn.Where(k => k.Key > p.Level).OrderBy(k => k.Key).Take(3);
+            // Restore Next to Learn Logic
+            var nextSkills = p.SkillsToLearn.Where(k => k.Key > p.Level).OrderBy(k => k.Key).Take(3).ToList();
             if (nextSkills.Any())
             {
-                _io.WriteLine("Next to Learn:");
-                foreach (var ns in nextSkills) _io.WriteLine($" [Lv.{ns.Key}] {ns.Value}");
+                output += "\nNext to Learn:\n";
+                foreach (var ns in nextSkills) output += $" [Lv.{ns.Key}] {ns.Value}\n";
             }
-            else { _io.WriteLine(" (Mastered)"); }
+            else if (p.SkillsToLearn.Any())
+            {
+                output += "\n(Mastered)\n";
+            }
+
+            return output;
         }
 
-        // --- 3. DEMON DETAIL RENDERER (Updated) ---
-        private void RenderDemonDetail(Combatant demon)
+        private string GetDemonDetailString(Combatant demon)
         {
-            _io.WriteLine("=== DEMON DETAILS ===");
-            _io.WriteLine($"Name: {demon.Name} (Lv.{demon.Level})");
-            _io.WriteLine($"HP: {demon.CurrentHP}/{demon.MaxHP}  SP: {demon.CurrentSP}/{demon.MaxSP}");
-            _io.WriteLine("-----------------------------");
+            string output = "=== DEMON DETAILS ===\n";
+            output += $"Name: {demon.Name} (Lv.{demon.Level})\n";
+            output += $"HP: {demon.CurrentHP}/{demon.MaxHP} SP: {demon.CurrentSP}/{demon.MaxSP}\n";
+            output += "-----------------------------\n";
 
             var stats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
             foreach (var stat in stats)
             {
-                // CORRECTED: Use GetStat() to retrieve info from the Persona shell
                 int total = demon.GetStat(stat);
-                _io.WriteLine($"{stat,-4}: {total,3}");
+                output += $"{stat,-4}: {total,3}\n";
             }
-            _io.WriteLine("-----------------------------");
+            output += "-----------------------------\nSkills:\n";
+            foreach (var s in demon.GetConsolidatedSkills()) output += $" - {s}\n";
 
-            _io.WriteLine("Skills:");
-
-            List<string> skills = demon.GetConsolidatedSkills();
-
-            if (skills.Count > 0)
-            {
-                foreach (var s in skills) _io.WriteLine($" - {s}");
-            }
-            else
-            {
-                _io.WriteLine(" (None)");
-            }
-
+            // Restore Next to Learn Logic for Active Persona
             if (demon.ActivePersona != null)
             {
-                var nextSkills = demon.ActivePersona.SkillsToLearn.Where(k => k.Key > demon.Level).OrderBy(k => k.Key).Take(3);
+                var nextSkills = demon.ActivePersona.SkillsToLearn.Where(k => k.Key > demon.Level).OrderBy(k => k.Key).Take(3).ToList();
                 if (nextSkills.Any())
                 {
-                    _io.WriteLine("Next to Learn:");
-                    foreach (var ns in nextSkills) _io.WriteLine($" [Lv.{ns.Key}] {ns.Value}");
+                    output += "\nNext to Learn:\n";
+                    foreach (var ns in nextSkills) output += $" [Lv.{ns.Key}] {ns.Value}\n";
                 }
-                else if (skills.Count > 0)
+                else if (demon.ActivePersona.SkillsToLearn.Any())
                 {
-                    _io.WriteLine(" (Mastered)");
+                    output += "\n(Mastered)\n";
                 }
             }
+
+            return output;
         }
 
-        // --- SEAMLESS STATUS SCREEN MENU ---
-        private void OpenSeamlessStatusMenu()
-        {
-            while (true)
-            {
-                _io.Clear();
-                RenderHumanStatus(_player);
+        private bool selectedIsBack(int index, List<string> options) => index == options.Count - 1;
 
-                _io.WriteLine($"\nPoints Available: {_player.StatPoints}");
-                _io.WriteLine("\n[A]llocate Stats  [E]quip  " +
-                             (_player.Class == ClassType.WildCard ? "[P]ersona Stock" : "") +
-                             (_player.Class == ClassType.Operator ? "[D]emon Stock" : "") +
-                             "  [ESC] Back");
+        #endregion
 
-                var key = _io.ReadKey();
-                if (key.Key == ConsoleKey.Escape) return;
-
-                if (key.Key == ConsoleKey.A)
-                {
-                    if (_player.StatPoints > 0) OpenStatAllocation();
-                    else { _io.WriteLine("No points available."); _io.Wait(500); }
-                }
-                else if (key.Key == ConsoleKey.E)
-                {
-                    ShowEquipSlotMenu();
-                }
-                else if (key.Key == ConsoleKey.P && _player.Class == ClassType.WildCard)
-                {
-                    OpenPersonaStockMenu();
-                }
-                else if (key.Key == ConsoleKey.D && _player.Class == ClassType.Operator)
-                {
-                    OpenDemonStockMenu();
-                }
-            }
-        }
+        #region Original Logic Support
 
         private void OpenStatAllocation()
         {
             StatAllocationModule.OpenMenu(_player, _io);
         }
 
-        // --- PERSONA STOCK MENU (Wild Card) ---
         private void OpenPersonaStockMenu()
         {
             var allPersonas = new List<Persona>();
@@ -292,52 +392,9 @@ namespace JRPGPrototype.Logic
                 if (idx == -1 || idx == options.Count - 1) return;
 
                 ViewPersonaDetails(allPersonas[idx]);
-
-                allPersonas.Clear();
-                if (_player.ActivePersona != null) allPersonas.Add(_player.ActivePersona);
-                allPersonas.AddRange(_player.PersonaStock);
             }
         }
 
-        private void ViewPersonaDetails(Persona p)
-        {
-            bool isEquipped = (p == _player.ActivePersona);
-            while (true)
-            {
-                _io.Clear();
-                RenderPersonaStockDetail(p, isEquipped);
-                _io.WriteLine("\n[E]quip  [ESC] Back");
-
-                var key = _io.ReadKey();
-                if (key.Key == ConsoleKey.Escape) return;
-
-                if (key.Key == ConsoleKey.E)
-                {
-                    if (isEquipped)
-                    {
-                        _io.WriteLine("Already equipped.");
-                        _io.Wait(500);
-                    }
-                    else
-                    {
-                        int stockIndex = _player.PersonaStock.IndexOf(p);
-                        if (stockIndex != -1)
-                        {
-                            Persona oldActive = _player.ActivePersona;
-                            _player.ActivePersona = p;
-                            _player.PersonaStock[stockIndex] = oldActive;
-
-                            _io.WriteLine($"Equipped {p.Name}!");
-                            _player.RecalculateResources();
-                            _io.Wait(800);
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-
-        // --- DEMON STOCK MENU (Operator) ---
         private void OpenDemonStockMenu()
         {
             var allDemons = new List<Combatant>();
@@ -372,85 +429,6 @@ namespace JRPGPrototype.Logic
             }
         }
 
-        private void ViewDemonDetails(Combatant demon)
-        {
-            while (true)
-            {
-                _io.Clear();
-                RenderDemonDetail(demon);
-                _io.WriteLine("\n[ESC] Back");
-
-                var key = _io.ReadKey();
-                if (key.Key == ConsoleKey.Escape) return;
-            }
-        }
-
-        // --- PARTY ORGANIZATION (Operator) ---
-        private void OpenOrganizeMenu()
-        {
-            while (true)
-            {
-                _io.Clear();
-                _io.WriteLine("=== ORGANIZE PARTY ===");
-                _io.WriteLine("Active Party:");
-                for (int i = 0; i < _partyManager.ActiveParty.Count; i++)
-                {
-                    _io.WriteLine($" {i + 1}. {_partyManager.ActiveParty[i].Name} (Lv.{_partyManager.ActiveParty[i].Level})");
-                }
-
-                _io.WriteLine("\n[S]ummon Demon  [R]eturn Demon  [ESC] Back");
-
-                var key = _io.ReadKey();
-                if (key.Key == ConsoleKey.Escape) return;
-
-                if (key.Key == ConsoleKey.S)
-                {
-                    if (_player.DemonStock.Count == 0) { _io.WriteLine("No demons in stock."); _io.Wait(500); continue; }
-
-                    List<string> demonOpts = _player.DemonStock.Select(d => $"{d.Name} (Lv.{d.Level})").ToList();
-                    demonOpts.Add("Cancel");
-
-                    int idx = _io.RenderMenu("SUMMON DEMON", demonOpts, 0);
-                    if (idx == -1 || idx == demonOpts.Count - 1) continue;
-
-                    if (_partyManager.SummonDemon(_player.DemonStock[idx]))
-                    {
-                        _io.WriteLine($"{_player.DemonStock[idx].Name} added to party.");
-                        _player.DemonStock.RemoveAt(idx);
-                        _io.Wait(500);
-                    }
-                    else
-                    {
-                        _io.WriteLine("Party is full.");
-                        _io.Wait(500);
-                    }
-                }
-                else if (key.Key == ConsoleKey.R)
-                {
-                    if (_partyManager.ActiveParty.Count <= 1) { _io.WriteLine("No demons to return."); _io.Wait(500); continue; }
-
-                    List<string> activeOpts = new List<string>();
-                    for (int i = 1; i < _partyManager.ActiveParty.Count; i++)
-                    {
-                        activeOpts.Add(_partyManager.ActiveParty[i].Name);
-                    }
-                    activeOpts.Add("Cancel");
-
-                    int idx = _io.RenderMenu("RETURN DEMON", activeOpts, 0);
-                    if (idx == -1 || idx == activeOpts.Count - 1) continue;
-
-                    int realIndex = idx + 1;
-                    Combatant demon = _partyManager.ActiveParty[realIndex];
-
-                    _partyManager.ReturnDemon(demon);
-                    _player.DemonStock.Add(demon);
-                    _io.WriteLine($"{demon.Name} returned to stock.");
-                    _io.Wait(500);
-                }
-            }
-        }
-
-        // --- DUNGEON ENTRY LOGIC ---
         private void PrepareDungeonEntry()
         {
             List<int> terminals = _dungeon.GetUnlockedTerminals();
@@ -478,7 +456,6 @@ namespace JRPGPrototype.Logic
             ExploreDungeon();
         }
 
-        // --- DUNGEON CRAWLER LOOP ---
         private void ExploreDungeon()
         {
             HandleNewFloor(_dungeon.ProcessCurrentFloor());
@@ -821,15 +798,18 @@ namespace JRPGPrototype.Logic
                     options.Add(label);
                     disabled.Add(isDisabled);
                 }
+                options.Add("Cancel");
+                disabled.Add(false);
 
                 if (_itemMenuIndex >= options.Count) _itemMenuIndex = 0;
 
                 int idx = _io.RenderMenu("=== USE ITEM ===", options, _itemMenuIndex, disabled, (index) =>
                 {
-                    _io.WriteLine($"Effect: {items[index].Description}");
+                    if (index >= 0 && index < items.Count)
+                        _io.WriteLine($"Effect: {items[index].Description}");
                 });
 
-                if (idx == -1) return;
+                if (idx == -1 || idx == options.Count - 1) return;
                 _itemMenuIndex = idx;
 
                 UseItemField(items[idx].Id, _player, inDungeon);
@@ -928,24 +908,29 @@ namespace JRPGPrototype.Logic
                 return;
             }
 
-            List<string> options = new List<string>();
-            foreach (var skillName in usableSkills)
+            while (true)
             {
-                var d = Database.Skills[skillName];
-                options.Add($"{skillName} ({d.Cost})");
+                List<string> options = new List<string>();
+                foreach (var skillName in usableSkills)
+                {
+                    var d = Database.Skills[skillName];
+                    options.Add($"{skillName} ({d.Cost})");
+                }
+                options.Add("Back");
+
+                if (_skillMenuIndex >= options.Count) _skillMenuIndex = 0;
+
+                int idx = _io.RenderMenu("=== FIELD SKILLS ===", options, _skillMenuIndex, null, (index) =>
+                {
+                    if (index >= 0 && index < usableSkills.Count)
+                        _io.WriteLine($"Effect: {Database.Skills[usableSkills[index]].Effect}");
+                });
+
+                if (idx == -1 || idx == options.Count - 1) return;
+                _skillMenuIndex = idx;
+
+                UseSkillField(Database.Skills[usableSkills[idx]], _player, _player);
             }
-
-            if (_skillMenuIndex >= options.Count) _skillMenuIndex = 0;
-
-            int idx = _io.RenderMenu("=== FIELD SKILLS ===", options, _skillMenuIndex, null, (index) =>
-            {
-                _io.WriteLine($"Effect: {Database.Skills[usableSkills[index]].Effect}");
-            });
-
-            if (idx == -1) return;
-            _skillMenuIndex = idx;
-
-            UseSkillField(Database.Skills[usableSkills[idx]], _player, _player);
         }
 
         private void UseSkillField(SkillData skill, Combatant user, Combatant target)
@@ -994,11 +979,12 @@ namespace JRPGPrototype.Logic
                     $"Weapon: {_player.EquippedWeapon?.Name ?? "None"}",
                     $"Armor: {_player.EquippedArmor?.Name ?? "None"}",
                     $"Boots: {_player.EquippedBoots?.Name ?? "None"}",
-                    $"Accessory:{_player.EquippedAccessory?.Name ?? "None"}"
+                    $"Accessory:{_player.EquippedAccessory?.Name ?? "None"}",
+                    "Back"
                 };
 
                 int slotChoice = _io.RenderMenu(header, options, _equipSlotIndex);
-                if (slotChoice == -1) return;
+                if (slotChoice == -1 || slotChoice == options.Count - 1) return;
                 _equipSlotIndex = slotChoice;
 
                 if (slotChoice == 0) ShowEquipSelectionList(ShopCategory.Weapon);
@@ -1045,19 +1031,24 @@ namespace JRPGPrototype.Logic
                     names.Add($"{name}{(isEquipped ? " [E]" : "")}");
                     disabled.Add(isEquipped);
                 }
+                names.Add("Back");
+                disabled.Add(false);
 
                 if (listIndex >= names.Count) listIndex = 0;
 
                 int choice = _io.RenderMenu($"=== EQUIP {category.ToString().ToUpper()} ===", names, listIndex, disabled, (index) =>
                 {
-                    string id = ids[index];
-                    if (category == ShopCategory.Weapon) _io.WriteLine($"Pow: {Database.Weapons[id].Power} Acc: {Database.Weapons[id].Accuracy}");
-                    if (category == ShopCategory.Armor) _io.WriteLine($"Def: {Database.Armors[id].Defense} Eva: {Database.Armors[id].Evasion}");
-                    if (category == ShopCategory.Boots) _io.WriteLine($"Eva: {Database.Boots[id].Evasion}");
-                    if (category == ShopCategory.Accessory) _io.WriteLine($"Effect: {Database.Accessories[id].ModifierStat} +{Database.Accessories[id].ModifierValue}");
+                    if (index >= 0 && index < ids.Count)
+                    {
+                        string id = ids[index];
+                        if (category == ShopCategory.Weapon) _io.WriteLine($"Pow: {Database.Weapons[id].Power} Acc: {Database.Weapons[id].Accuracy}");
+                        if (category == ShopCategory.Armor) _io.WriteLine($"Def: {Database.Armors[id].Defense} Eva: {Database.Armors[id].Evasion}");
+                        if (category == ShopCategory.Boots) _io.WriteLine($"Eva: {Database.Boots[id].Evasion}");
+                        if (category == ShopCategory.Accessory) _io.WriteLine($"Effect: {Database.Accessories[id].ModifierStat} +{Database.Accessories[id].ModifierValue}");
+                    }
                 });
 
-                if (choice == -1) return;
+                if (choice == -1 || choice == names.Count - 1) return;
                 listIndex = choice;
 
                 string selectedId = ids[choice];
@@ -1070,5 +1061,20 @@ namespace JRPGPrototype.Logic
                 _io.Wait(500);
             }
         }
+
+        private ShopCategory MapTypeToCategory(ShopType type)
+        {
+            return type switch
+            {
+                ShopType.Weapon => ShopCategory.Weapon,
+                ShopType.Item => ShopCategory.Item,
+                ShopType.Armor => ShopCategory.Armor,
+                ShopType.Boots => ShopCategory.Boots,
+                ShopType.Accessory => ShopCategory.Accessory,
+                _ => ShopCategory.Item
+            };
+        }
+
+        #endregion
     }
 }

@@ -35,7 +35,6 @@ namespace JRPGPrototype.Logic
             { "Shocks", "Shock" }, { "Freezes", "Freeze" }
         };
 
-        // 99 Ticks effectively wipes the remaining turn budget (Press Turn Penalty)
         private const int TERMINAL_ICON_COST = 99;
 
         public BattleManager(PartyManager party, List<Combatant> enemies, InventoryManager inventory, EconomyManager economy, IGameIO io, bool isBossBattle = false)
@@ -66,8 +65,9 @@ namespace JRPGPrototype.Logic
             while (!BattleEnded)
             {
                 if (TraestoUsed || Escaped) break;
-                if (_isPlayerTurn) ExecutePhase(_party.GetAliveMembers(), _enemies.Where(e => !e.IsDead).ToList(), true);
-                else ExecutePhase(_enemies.Where(e => !e.IsDead).ToList(), _party.GetAliveMembers(), false);
+
+                // We no longer pass the list here, only the phase type
+                ExecutePhase(_isPlayerTurn);
 
                 CheckBattleEnd();
                 if (!BattleEnded) _isPlayerTurn = !_isPlayerTurn;
@@ -75,20 +75,28 @@ namespace JRPGPrototype.Logic
             ResolveBattleEnd();
         }
 
-        private void ExecutePhase(List<Combatant> actors, List<Combatant> opponents, bool isPlayerPhase)
+        private void ExecutePhase(bool isPlayerPhase)
         {
-            int turnIcons = actors.Count;
+            // Nocturne Logic: Initial turn count is set by the members present at start of phase.
+            var initialActors = isPlayerPhase ? _party.GetAliveMembers() : _enemies.Where(e => !e.IsDead).ToList();
+            int turnIcons = initialActors.Count;
             int ticks = turnIcons * 2;
             int actorIndex = 0;
 
             _io.WriteLine($"\n--- {(isPlayerPhase ? "PLAYER" : "ENEMY")} TURN (Icons: {turnIcons}) ---", isPlayerPhase ? ConsoleColor.Cyan : ConsoleColor.Red);
 
-            while (ticks > 0 && actors.Count > 0 && opponents.Count > 0)
+            // Loop continues as long as we have ticks and at least one side remains
+            while (ticks > 0 && _enemies.Any(e => !e.IsDead) && _party.GetAliveMembers().Any())
             {
                 if (TraestoUsed || Escaped || CheckBattleEndCondition()) return;
-                if (actorIndex >= actors.Count) actorIndex = 0;
 
-                Combatant actor = actors[actorIndex];
+                // Re-fetch the LIVE list of actors every cycle to handle Summons/Returns
+                var currentActors = isPlayerPhase ? _party.GetAliveMembers() : _enemies.Where(e => !e.IsDead).ToList();
+
+                if (actorIndex >= currentActors.Count) actorIndex = 0;
+                Combatant actor = currentActors[actorIndex];
+
+                // Safety: If an actor died or was returned during another's sub-turn, skip them
                 if (actor.IsDead) { actorIndex++; continue; }
 
                 if (!ProcessTurnStart(actor)) { ticks -= 2; actorIndex++; ProcessTurnEnd(actor); continue; }
@@ -97,16 +105,18 @@ namespace JRPGPrototype.Logic
 
                 int cost = 0;
                 if (actor.Controller == ControllerType.LocalPlayer || (actor.Class == ClassType.Demon && actor.BattleControl == ControlState.DirectControl))
-                    cost = ProcessHumanAction(actor, opponents);
+                    cost = ProcessHumanAction(actor, isPlayerPhase ? _enemies.Where(e => !e.IsDead).ToList() : _party.GetAliveMembers());
                 else
-                    cost = ProcessSmartAI(actor, actors, opponents, isPlayerPhase ? _playerKnowledge : _enemyKnowledge);
+                    cost = ProcessSmartAI(actor, currentActors, isPlayerPhase ? _enemies.Where(e => !e.IsDead).ToList() : _party.GetAliveMembers(), isPlayerPhase ? _playerKnowledge : _enemyKnowledge);
 
                 // Apply turn consumption
                 if (cost >= TERMINAL_ICON_COST) ticks = 0;
                 else ticks -= cost;
 
                 ProcessTurnEnd(actor);
-                opponents = isPlayerPhase ? _enemies.Where(e => !e.IsDead).ToList() : _party.GetAliveMembers();
+
+                // If a demon was returned, currentActors count drops. 
+                // We advance the index, but modulo it against the potentially new size.
                 actorIndex++;
             }
         }
@@ -132,7 +142,7 @@ namespace JRPGPrototype.Logic
                 List<bool> disabled = options.Select(opt => (opt == "Persona" || opt == "Skill" || opt == "Command" || opt == "COMP") && isPanicked).ToList();
 
                 int choice = _io.RenderMenu($"Command: {actor.Name}", options, 0, disabled);
-                if (choice == -1) continue; // Safety fix for ESC key
+                if (choice == -1) continue;
 
                 string selected = options[choice];
 

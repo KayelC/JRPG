@@ -6,6 +6,7 @@ using JRPGPrototype.Services;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Data;
 using JRPGPrototype.Core;
+using JRPG.Logic.Battle;
 
 namespace JRPGPrototype.Logic
 {

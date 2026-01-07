@@ -2,6 +2,7 @@
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Services;
+using JRPGPrototype.Logic.Battle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -622,6 +623,7 @@ namespace JRPGPrototype.Logic
         {
             List<Combatant> enemies = new List<Combatant>();
 
+            // 1. Convert IDs from the Dungeon Floor into Combatant instances
             foreach (string id in enemyIds)
             {
                 if (Database.Enemies.TryGetValue(id, out var eData))
@@ -630,14 +632,20 @@ namespace JRPGPrototype.Logic
                 }
                 else
                 {
+                    // Safety fallback for data entry errors in JSON
                     _io.WriteLine($"[Error] Could not load enemy: {id}. Spawning Slime.");
                     if (Database.Enemies.TryGetValue("E_slime", out var fallback))
+                    {
                         enemies.Add(Combatant.CreateFromData(fallback));
+                    }
                     else
+                    {
                         enemies.Add(new Combatant("Glitch Slime"));
+                    }
                 }
             }
 
+            // 2. Handle Duplicate Naming (e.g., "Pixie A", "Pixie B")
             var groups = enemies.GroupBy(e => e.Name);
             foreach (var group in groups)
             {
@@ -652,15 +660,20 @@ namespace JRPGPrototype.Logic
                 }
             }
 
-            BattleManager battle = new BattleManager(_partyManager, enemies, _inventory, _economy, _io, isBoss);
+            // 3. Initialize and Start the new Modular Battle Sub-System
+            // Arguments: PartyManager, List<Enemies>, InventoryManager, EconomyManager, IGameIO
+            BattleCore battle = new BattleCore(_partyManager, enemies, _inventory, _economy, _io);
             battle.StartBattle();
 
+            // 4. Post-Battle Navigation Logic
             if (battle.TraestoUsed)
             {
+                // If the player used an escape item that teleports them out
                 _dungeon.WarpToFloor(1);
                 return true;
             }
 
+            // Return true if the player is alive to continue, false triggers Game Over in calling logic
             return _player.CurrentHP > 0;
         }
 

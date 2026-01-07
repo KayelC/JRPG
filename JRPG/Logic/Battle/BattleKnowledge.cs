@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using JRPGPrototype.Core;
 
-namespace JRPGPrototype.Logic
+namespace JRPGPrototype.Logic.Battle
 {
     public class BattleKnowledge
     {

@@ -59,7 +59,7 @@ namespace JRPGPrototype.Logic.Battle
             _statusRegistry = new StatusRegistry();
             _processor = new ActionProcessor(_io, _statusRegistry, _playerKnowledge);
             _ai = new BehaviorEngine(_statusRegistry);
-            _ui = new InteractionBridge(_io, _party, _enemies, _turnEngine, _playerKnowledge);
+            _ui = new InteractionBridge(_io, _party, _inv, _enemies, _turnEngine, _playerKnowledge);
         }
 
         /// <summary>
@@ -167,7 +167,6 @@ namespace JRPGPrototype.Logic.Battle
         {
             SkillData skill = null;
             List<Combatant> targets = null;
-            bool isPass = false;
 
             // A. Forced Behaviors (Ailments)
             if (turnState == TurnStartResult.ForcedPhysical || turnState == TurnStartResult.ForcedConfusion)

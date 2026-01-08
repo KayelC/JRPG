@@ -22,8 +22,10 @@ namespace JRPGPrototype.Logic
 
         private PartyManager _partyManager;
 
+        // Persistent Knowledge Bank for the player
+        private BattleKnowledge _playerKnowledge = new BattleKnowledge();
+
         private int _mainMenuIndex = 0;
-        private int _statusMenuIndex = 0;
         private int _inventoryMenuIndex = 0;
         private int _itemMenuIndex = 0;
         private int _skillMenuIndex = 0;
@@ -662,7 +664,7 @@ namespace JRPGPrototype.Logic
 
             // 3. Initialize and Start the new Modular Battle Sub-System
             // Arguments: PartyManager, List<Enemies>, InventoryManager, EconomyManager, IGameIO
-            BattleConductor battle = new BattleConductor(_partyManager, enemies, _inventory, _economy, _io);
+            BattleConductor battle = new BattleConductor(_partyManager, enemies, _inventory, _economy, _io, _playerKnowledge, isBoss);
             battle.StartBattle();
 
             // 4. Post-Battle Navigation Logic

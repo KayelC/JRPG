@@ -17,6 +17,7 @@ namespace JRPGPrototype.Logic.Battle
     {
         private readonly IGameIO _io;
         private readonly PartyManager _party;
+        private readonly InventoryManager _inv; // Corrected dependency
         private readonly List<Combatant> _enemies;
         private readonly PressTurnEngine _turnEngine;
         private readonly BattleKnowledge _knowledge;
@@ -29,12 +30,14 @@ namespace JRPGPrototype.Logic.Battle
         public InteractionBridge(
             IGameIO io,
             PartyManager party,
+            InventoryManager inventory,
             List<Combatant> enemies,
             PressTurnEngine turnEngine,
             BattleKnowledge knowledge)
         {
             _io = io;
             _party = party;
+            _inv = inventory;
             _enemies = enemies;
             _turnEngine = turnEngine;
             _knowledge = knowledge;
@@ -181,7 +184,7 @@ namespace JRPGPrototype.Logic.Battle
 
         public ItemData SelectItem(Combatant actor)
         {
-            var ownedItems = Database.Items.Values.Where(i => _party.Inventory.GetQuantity(i.Id) > 0).ToList();
+            var ownedItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
             if (ownedItems.Count == 0)
             {
                 _io.WriteLine("Inventory is empty.");
@@ -189,7 +192,7 @@ namespace JRPGPrototype.Logic.Battle
                 return null;
             }
 
-            var labels = ownedItems.Select(i => $"{i.Name} x{_party.Inventory.GetQuantity(i.Id)}").ToList();
+            var labels = ownedItems.Select(i => $"{i.Name} x{_inv.GetQuantity(i.Id)}").ToList();
             labels.Add("Back");
 
             int choice = _io.RenderMenu($"{GetBattleContext(actor)}\nItems:", labels, _itemMenuIndex, null, (idx) =>

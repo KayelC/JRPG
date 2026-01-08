@@ -14,7 +14,6 @@ namespace JRPGPrototype.Logic.Battle
         private readonly InventoryManager _inv;
         private readonly PartyManager _party;
 
-        // Persist indices to maintain cursor position across menu cancels.
         private int _mainMenuIndex = 0;
         private int _skillMenuIndex = 0;
         private int _itemMenuIndex = 0;
@@ -26,14 +25,10 @@ namespace JRPGPrototype.Logic.Battle
             _party = party;
         }
 
-        /// <summary>
-        /// Renders the primary action menu for the active combatant.
-        /// </summary>
         public string GetActionChoice(Combatant actor, string uiContext)
         {
             List<string> options = new List<string> { "Attack", "Guard" };
 
-            // Logic for class-specific menu structures.
             if (actor.Class == ClassType.PersonaUser || actor.Class == ClassType.WildCard)
             {
                 options.Add("Persona");
@@ -52,7 +47,6 @@ namespace JRPGPrototype.Logic.Battle
             options.Add("Tactics");
             options.Add("Pass");
 
-            // Handle the Panic status restriction.
             bool isPanicked = actor.CurrentAilment != null && actor.CurrentAilment.Name == "Panic";
             List<bool> disabledStates = new List<bool>();
             foreach (var opt in options)
@@ -66,18 +60,12 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             int choice = _io.RenderMenu($"{uiContext}\nCommand: {actor.Name}", options, _mainMenuIndex, disabledStates);
-            if (choice == -1)
-            {
-                return "Cancel";
-            }
+            if (choice == -1) return "Cancel";
 
             _mainMenuIndex = choice;
             return options[choice];
         }
 
-        /// <summary>
-        /// Renders the Tactics menu (Escape and Strategy).
-        /// </summary>
         public string GetTacticsChoice(string uiContext, bool isBossBattle, bool canChangeStrategy)
         {
             List<string> options = new List<string> { "Escape", "Strategy", "Back" };
@@ -89,9 +77,6 @@ namespace JRPGPrototype.Logic.Battle
             return options[choice];
         }
 
-        /// <summary>
-        /// Allows the Operator to toggle Demon control states.
-        /// </summary>
         public Combatant SelectStrategyTarget(string uiContext, List<Combatant> party)
         {
             var targets = party.Where(c => c.Class == ClassType.Demon).ToList();
@@ -111,16 +96,10 @@ namespace JRPGPrototype.Logic.Battle
             return targets[choice];
         }
 
-        /// <summary>
-        /// Provides a skill selection menu.
-        /// </summary>
         public SkillData SelectSkill(Combatant actor, string uiContext)
         {
             var skillNames = actor.GetConsolidatedSkills();
-            if (skillNames.Count == 0)
-            {
-                return null;
-            }
+            if (skillNames.Count == 0) return null;
 
             List<string> labels = new List<string>();
             List<bool> disabled = new List<bool>();
@@ -131,7 +110,6 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     var cost = data.ParseCost();
                     bool canAfford = cost.isHP ? actor.CurrentHP > cost.value : actor.CurrentSP >= cost.value;
-
                     labels.Add($"{sName} ({data.Cost})");
                     disabled.Add(!canAfford);
                 }
@@ -149,97 +127,47 @@ namespace JRPGPrototype.Logic.Battle
                 }
             });
 
-            if (choice == -1 || choice == labels.Count - 1)
-            {
-                return null;
-            }
+            if (choice == -1 || choice == labels.Count - 1) return null;
 
             _skillMenuIndex = choice;
             return Database.Skills[skillNames[choice]];
         }
 
-        /// <summary>
-        /// Provides an item selection menu.
-        /// </summary>
         public ItemData SelectItem(string uiContext)
         {
             var ownedItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
-            if (ownedItems.Count == 0)
+
+            // Filter: Only show items usable in battle (Traesto, Healing, etc.)
+            // Exclude items like Goho-M which are Field Only.
+            var battleUsable = ownedItems.Where(i => i.Type != "Utility" || i.Name == "Traesto Gem").ToList();
+
+            if (battleUsable.Count == 0)
             {
+                _io.WriteLine("No battle-usable items found.");
+                _io.Wait(800);
                 return null;
             }
 
-            var labels = ownedItems.Select(i => $"{i.Name} x{_inv.GetQuantity(i.Id)}").ToList();
+            var labels = battleUsable.Select(i => $"{i.Name} x{_inv.GetQuantity(i.Id)}").ToList();
             labels.Add("Back");
 
             int choice = _io.RenderMenu($"{uiContext}\nItems", labels, _itemMenuIndex, null, (idx) =>
             {
-                if (idx >= 0 && idx < ownedItems.Count)
+                if (idx >= 0 && idx < battleUsable.Count)
                 {
-                    _io.WriteLine(ownedItems[idx].Description);
+                    _io.WriteLine(battleUsable[idx].Description);
                 }
             });
 
-            if (choice == -1 || choice == labels.Count - 1)
-            {
-                return null;
-            }
+            if (choice == -1 || choice == labels.Count - 1) return null;
 
             _itemMenuIndex = choice;
-            return ownedItems[choice];
+            return battleUsable[choice];
         }
 
-        /// <summary>
-        /// Handles the UI for targeting combatants. 
-        /// Uses specific whole-phrase matching to determine if a skill targets "all".
-        /// </summary>
-        public List<Combatant> AcquireTargets(Combatant actor, SkillData skill, List<Combatant> enemies, string uiContext)
-        {
-            string effectText = skill?.Effect.ToLower() ?? "";
-
-            // FIXED: Use specific phrases to avoid catching "ally" as "all"
-            bool targetsAll = effectText.Contains("all foes") ||
-                              effectText.Contains("all enemies") ||
-                              effectText.Contains("all allies") ||
-                              effectText.Contains("party");
-
-            bool targetsAllySide = false;
-            if (skill != null)
-            {
-                if (effectText.Contains("ally") ||
-                    effectText.Contains("party") ||
-                    skill.Category.Contains("Recovery") ||
-                    skill.Category.Contains("Enhance"))
-                {
-                    targetsAllySide = true;
-                }
-            }
-
-            var selectionPool = targetsAllySide ? _party.ActiveParty : enemies.Where(e => !e.IsDead).ToList();
-
-            if (targetsAll)
-            {
-                return selectionPool;
-            }
-
-            // Handle Single-Target UI.
-            var targetLabels = selectionPool.Select(t => $"{t.Name} (HP: {t.CurrentHP}/{t.MaxHP})").ToList();
-            targetLabels.Add("Back");
-
-            int choice = _io.RenderMenu($"{uiContext}\nSelect Target:", targetLabels, 0);
-            if (choice == -1 || choice == targetLabels.Count - 1)
-            {
-                return null;
-            }
-
-            return new List<Combatant> { selectionPool[choice] };
-        }
-
-        /// <summary>
-        /// Specialized targeting for items.
-        /// </summary>
         public List<Combatant> AcquireTargetsForItem(ItemData item, List<Combatant> enemies, string uiContext)
         {
+            // SMT Rule: Most items target Allies. Offensive items (future) target Enemies.
             bool targetsAllySide = item.Type != "Offensive";
             bool targetsAll = item.Type.EndsWith("_All");
 
@@ -256,15 +184,39 @@ namespace JRPGPrototype.Logic.Battle
             return new List<Combatant> { selectionPool[choice] };
         }
 
-        /// <summary>
-        /// Renders the COMP menu for Operator-type combatants.
-        /// </summary>
+        public List<Combatant> AcquireTargets(Combatant actor, SkillData skill, List<Combatant> enemies, string uiContext)
+        {
+            bool targetsAll = skill != null && skill.Effect.Contains("all", StringComparison.OrdinalIgnoreCase);
+
+            bool targetsAllySide = false;
+            if (skill != null)
+            {
+                if (skill.Effect.Contains("ally", StringComparison.OrdinalIgnoreCase) ||
+                    skill.Category.Contains("Recovery") ||
+                    skill.Category.Contains("Enhance"))
+                {
+                    targetsAllySide = true;
+                }
+            }
+
+            var selectionPool = targetsAllySide ? _party.ActiveParty : enemies.Where(e => !e.IsDead).ToList();
+            if (targetsAll) return selectionPool;
+
+            var targetLabels = selectionPool.Select(t => $"{t.Name} (HP: {t.CurrentHP}/{t.MaxHP})").ToList();
+            targetLabels.Add("Back");
+
+            int choice = _io.RenderMenu($"{uiContext}\nSelect Target:", targetLabels, 0);
+            if (choice == -1 || choice == targetLabels.Count - 1) return null;
+
+            return new List<Combatant> { selectionPool[choice] };
+        }
+
         public (string action, Combatant demon) GetCompAction(Combatant actor, string uiContext)
         {
             List<string> menu = new List<string> { "Summon", "Return", "Back" };
             int choice = _io.RenderMenu($"{uiContext}\nCOMP SYSTEM", menu, 0);
 
-            if (choice == 0) // Summon Command
+            if (choice == 0) // Summon
             {
                 if (actor.DemonStock.Count == 0)
                 {
@@ -277,14 +229,11 @@ namespace JRPGPrototype.Logic.Battle
                 names.Add("Back");
                 int subChoice = _io.RenderMenu($"{uiContext}\nSummon Demon:", names, 0);
 
-                if (subChoice == -1 || subChoice == names.Count - 1)
-                {
-                    return ("None", null);
-                }
+                if (subChoice == -1 || subChoice == names.Count - 1) return ("None", null);
                 return ("Summon", actor.DemonStock[subChoice]);
             }
 
-            if (choice == 1) // Return Command
+            if (choice == 1) // Return
             {
                 var activeDemons = _party.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
                 if (activeDemons.Count == 0)
@@ -298,10 +247,7 @@ namespace JRPGPrototype.Logic.Battle
                 names.Add("Back");
                 int subChoice = _io.RenderMenu($"{uiContext}\nReturn Demon:", names, 0);
 
-                if (subChoice == -1 || subChoice == names.Count - 1)
-                {
-                    return ("None", null);
-                }
+                if (subChoice == -1 || subChoice == names.Count - 1) return ("None", null);
                 return ("Return", activeDemons[subChoice]);
             }
 

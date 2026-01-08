@@ -74,24 +74,7 @@ namespace JRPGPrototype.Logic.Battle
                 return (HitType.Normal, false);
             }
 
-            // 3. FIXED: Handle Pure Ailment Skills (e.g. Marin Karin)
-            // These skills deal NO damage and only attempt to inflict status.
-            if (skill.Category.Contains("Ailment"))
-            {
-                bool hitAny = false;
-                foreach (var target in targets)
-                {
-                    // Check Accuracy roll for the status to even "connect"
-                    if (CombatMath.CheckHit(attacker, target, Element.None, skill.Accuracy))
-                    {
-                        _status.TryInflictAilment(attacker, target, skill.Effect);
-                        hitAny = true;
-                    }
-                }
-                return hitAny ? (HitType.Normal, false) : (HitType.Miss, false);
-            }
-
-            // 4. Handle Offensive Damaging Skills (Magic/Phys)
+            // 3. Handle Offensive Skills
             Element element = ElementHelper.FromCategory(skill.Category);
             List<CombatResult> results = new List<CombatResult>();
 
@@ -108,7 +91,6 @@ namespace JRPGPrototype.Logic.Battle
 
                 var res = target.ReceiveDamage(damage, element, isCritical);
 
-                // Damaging skills can also carry side-effects (e.g. Blight)
                 if (res.Type != HitType.Null && res.Type != HitType.Repel && res.Type != HitType.Absorb)
                 {
                     if (!string.IsNullOrEmpty(skill.Effect))
@@ -125,7 +107,8 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// Executes an item on one or more targets.
+        /// Executes an item on one or more targets. 
+        /// Returns a tuple indicating the battle result and whether the item was actually usable (effective).
         /// </summary>
         public (HitType worstHit, bool advantageTriggered, bool wasEffective) ExecuteItem(List<Combatant> targets, ItemData item, BattleKnowledge knowledge)
         {
@@ -195,7 +178,7 @@ namespace JRPGPrototype.Logic.Battle
                             res = target.ReceiveDamage(gemDmg, gemElem, gemCrit);
                             UpdateKnowledgeBank(target, gemElem, res, knowledge);
                         }
-                        effectiveOnThisTarget = true;
+                        effectiveOnThisTarget = true; // Offensive items are always "used" even if they miss
                         break;
 
                     default:

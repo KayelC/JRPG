@@ -103,7 +103,6 @@ namespace JRPGPrototype.Logic.Battle
 
                 string uiContext = GetUIContext(isPlayerSide);
 
-                // --- Turn Start Ailment Logic ---
                 if (currentActor.CurrentAilment != null)
                 {
                     _io.Clear();
@@ -164,10 +163,6 @@ namespace JRPGPrototype.Logic.Battle
             }
         }
 
-        /// <summary>
-        /// SMT III UI Logic: Returns a detailed string of the battle state.
-        /// Iterates through buffs to provide visual arrows.
-        /// </summary>
         private string GetUIContext(bool isPlayerSide)
         {
             string phaseHeader = $"--- {(isPlayerSide ? "PLAYER" : "ENEMY")} PHASE ---\n";
@@ -178,8 +173,7 @@ namespace JRPGPrototype.Logic.Battle
             foreach (var e in _enemies)
             {
                 string status = e.IsDead ? "[DEAD]" : $"HP: {e.CurrentHP}";
-                string buffs = GetBuffDisplay(e);
-                enemiesPart += $"  {e.Name,-15} {status} {buffs}\n";
+                enemiesPart += $"  {e.Name,-15} {status}\n";
             }
 
             string partyPart = "--------------------------------------------------\nPARTY:\n";
@@ -187,26 +181,10 @@ namespace JRPGPrototype.Logic.Battle
             {
                 string guard = p.IsGuarding ? " (G)" : "";
                 string ailment = p.CurrentAilment != null ? $" [{p.CurrentAilment.Name}]" : "";
-                string buffs = GetBuffDisplay(p);
-                partyPart += $"  {p.Name,-15} HP: {p.CurrentHP,4}/{p.MaxHP,4} SP: {p.CurrentSP,4}/{p.MaxSP,4}{guard}{ailment} {buffs}\n";
+                partyPart += $"  {p.Name,-15} HP: {p.CurrentHP,4}/{p.MaxHP,4} SP: {p.CurrentSP,4}/{p.MaxSP,4}{guard}{ailment}\n";
             }
 
             return phaseHeader + iconLine + separator + enemiesPart + partyPart + separator;
-        }
-
-        /// <summary>
-        /// Helper to generate the [ATK +] style strings for the UI.
-        /// </summary>
-        private string GetBuffDisplay(Combatant c)
-        {
-            string display = "";
-            if (c.Buffs.ContainsKey("Attack") && c.Buffs["Attack"] > 0) display += "[ATK+]";
-            if (c.Buffs.ContainsKey("AttackDown") && c.Buffs["AttackDown"] > 0) display += "[ATK-]";
-            if (c.Buffs.ContainsKey("Defense") && c.Buffs["Defense"] > 0) display += "[DEF+]";
-            if (c.Buffs.ContainsKey("DefenseDown") && c.Buffs["DefenseDown"] > 0) display += "[DEF-]";
-            if (c.Buffs.ContainsKey("Agility") && c.Buffs["Agility"] > 0) display += "[AGI+]";
-            if (c.Buffs.ContainsKey("AgilityDown") && c.Buffs["AgilityDown"] > 0) display += "[AGI-]";
-            return display;
         }
 
         private bool HandlePlayerTurn(Combatant actor, string uiContext)
@@ -217,9 +195,9 @@ namespace JRPGPrototype.Logic.Battle
             switch (menuChoice)
             {
                 case "Attack":
-                    var targets = _menus.AcquireTargets(actor, null, _enemies, uiContext);
-                    if (targets == null) return false;
-                    var target = targets.FirstOrDefault();
+                    var attackTargets = _menus.AcquireTargets(actor, null, _enemies, uiContext);
+                    if (attackTargets == null) return false;
+                    var target = attackTargets.FirstOrDefault();
                     var res = _executor.ExecuteBasicAttack(actor, target, _playerKnowledge);
                     _io.WriteLine($"{actor.Name} attacks {target.Name}! {res.Message}");
                     _turns.HandleActionResults(res.Type, res.IsCritical);
@@ -239,9 +217,9 @@ namespace JRPGPrototype.Logic.Battle
                     var skillTargets = _menus.AcquireTargets(actor, skill, _enemies, uiContext);
                     if (skillTargets == null) return false;
 
-                    var outcome = _executor.ExecuteSkill(actor, skillTargets, skill, _playerKnowledge);
+                    var skillOutcome = _executor.ExecuteSkill(actor, skillTargets, skill, _playerKnowledge);
                     _io.WriteLine($"{actor.Name} used {skill.Name}!");
-                    _turns.HandleActionResults(outcome.worstHit, outcome.advantageTriggered);
+                    _turns.HandleActionResults(skillOutcome.worstHit, skillOutcome.advantageTriggered);
                     return true;
 
                 case "COMP":
@@ -317,11 +295,13 @@ namespace JRPGPrototype.Logic.Battle
                     var itemTargets = _menus.AcquireTargetsForItem(item, _enemies, uiContext);
                     if (itemTargets == null) return false;
 
+                    // Execute item and check for efficacy
                     var itemOutcome = _executor.ExecuteItem(itemTargets, item, _playerKnowledge);
 
                     if (itemOutcome.wasEffective)
                     {
                         _io.WriteLine($"{actor.Name} used {item.Name}!");
+                        // HandleActionResults handles the Turn Icon logic
                         _turns.HandleActionResults(itemOutcome.worstHit, itemOutcome.advantageTriggered);
                         _inv.RemoveItem(item.Id, 1);
                         return true;
@@ -330,7 +310,7 @@ namespace JRPGPrototype.Logic.Battle
                     {
                         _io.WriteLine("The item would have no effect!");
                         _io.Wait(800);
-                        return false;
+                        return false; // Return false so the turn doesn't end and player can choose again
                     }
             }
 

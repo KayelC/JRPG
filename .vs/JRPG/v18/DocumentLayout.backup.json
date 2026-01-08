@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\battlecore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\battlecore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\menuhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\menuhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\actionexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\actionexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\fieldmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\fieldmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\menuhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\menuhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\battlecore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\battlecore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\statussystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\statussystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\fieldmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\fieldmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\turnsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\combatmath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\combatmath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\statussystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\statussystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,50 +50,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "FieldManager.cs",
-              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\FieldManager.cs",
-              "RelativeDocumentMoniker": "JRPG\\Logic\\FieldManager.cs",
-              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\FieldManager.cs",
-              "RelativeToolTip": "JRPG\\Logic\\FieldManager.cs",
-              "ViewState": "AgIAACwEAAAAAAAAAAAAwD8EAABnAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
+              "RelativeDocumentMoniker": "JRPG\\Program.cs",
+              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
+              "RelativeToolTip": "JRPG\\Program.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAQwD0AAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T07:30:58.576Z",
+              "WhenOpened": "2026-01-08T09:21:50.21Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "BattleCore.cs",
               "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\BattleCore.cs",
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\BattleCore.cs",
               "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\BattleCore.cs",
               "RelativeToolTip": "JRPG\\Logic\\Battle\\BattleCore.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAYwI8AAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAL8AAAAAAAAAAAAvwMkAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-07T18:31:27.432Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "MenuHandler.cs",
               "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\MenuHandler.cs",
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\MenuHandler.cs",
               "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\MenuHandler.cs",
               "RelativeToolTip": "JRPG\\Logic\\Battle\\MenuHandler.cs",
-              "ViewState": "AgIAAOgAAAAAAAAAAAAcwP4AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAABMBAAAAAAAAAAAIwB4BAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-07T18:20:25.424Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "AILogic.cs",
               "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\AILogic.cs",
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\AILogic.cs",
@@ -101,7 +105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "CombatMath.cs",
               "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\CombatMath.cs",
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\CombatMath.cs",
@@ -113,15 +117,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "StatusSystem.cs",
               "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\StatusSystem.cs",
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\StatusSystem.cs",
               "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\StatusSystem.cs",
               "RelativeToolTip": "JRPG\\Logic\\Battle\\StatusSystem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIoAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAcwJ4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T18:05:43.32Z"
+              "WhenOpened": "2026-01-07T18:05:43.32Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -131,7 +136,7 @@
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\ActionExecutor.cs",
               "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\ActionExecutor.cs",
               "RelativeToolTip": "JRPG\\Logic\\Battle\\ActionExecutor.cs",
-              "ViewState": "AgIAAMAAAAAAAAAAAAAiwNEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAuwIYAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-07T18:20:19.946Z",
               "EditorCaption": ""
@@ -139,6 +144,18 @@
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "FieldManager.cs",
+              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\FieldManager.cs",
+              "RelativeDocumentMoniker": "JRPG\\Logic\\FieldManager.cs",
+              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\FieldManager.cs",
+              "RelativeToolTip": "JRPG\\Logic\\FieldManager.cs",
+              "ViewState": "AgIAACwEAAAAAAAAAAAAwD8EAABnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-08T07:30:58.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "BattleKnowledge.cs",
               "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\BattleKnowledge.cs",
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\BattleKnowledge.cs",
@@ -150,7 +167,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "TurnSystem.cs",
               "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\TurnSystem.cs",
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\TurnSystem.cs",

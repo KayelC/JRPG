@@ -92,7 +92,7 @@
     },
     {
       "Skill": "Marin Karin",
-      "Effect": "Charms 1 foe. (40% chance)",
+      "Effect": "Charms 1 foe. (100% chance)",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,

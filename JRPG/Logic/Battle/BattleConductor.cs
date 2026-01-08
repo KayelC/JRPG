@@ -206,7 +206,7 @@ namespace JRPGPrototype.Logic.Battle
                     item = _ui.SelectItem(actor);
                     if (item == null) { ExecuteAction(actor, isPlayerSide, turnState); return; }
                     targets = _ui.SelectTarget(actor, null, item);
-                    if (targets == null) { ExecuteAction(actor, isPlayerSide, turnState); return; }
+                    if (targets == null && item.Name != "Traesto Gem") { ExecuteAction(actor, isPlayerSide, turnState); return; }
                 }
                 else if (choice == "Tactics")
                 {
@@ -261,30 +261,17 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             // --- B. EXECUTION ---
-            if (targets != null && targets.Any())
+            if ((targets != null && targets.Any()) || (item != null && item.Name == "Traesto Gem"))
             {
                 if (item != null)
                 {
-                    // Defensive check: Only consume and use icon if the item actually worked
                     if (_processor.ExecuteItem(actor, targets, item))
                     {
                         _inv.RemoveItem(item.Id, 1);
-
-                        // Handle Traesto/Goho-M Warp Trigger
-                        if (item.Name == "Traesto Gem" || item.Name == "Goho-M")
-                        {
-                            TraestoUsed = true;
-                            BattleEnded = true;
-                            return;
-                        }
-
+                        if (item.Name == "Traesto Gem") { Escaped = true; BattleEnded = true; return; }
                         _turnEngine.ConsumeAction(HitType.Normal, false);
                     }
-                    else
-                    {
-                        // Reprompt if the item had no effect (e.g. healing full HP)
-                        ExecuteAction(actor, isPlayerSide, turnState);
-                    }
+                    else { ExecuteAction(actor, isPlayerSide, turnState); }
                 }
                 else if (skill == null)
                 {

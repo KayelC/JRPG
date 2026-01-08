@@ -120,11 +120,19 @@ namespace JRPGPrototype.Logic.Battle
             bool anyEffect = false;
             _io.WriteLine($"{user.Name} used {item.Name}!");
 
-            // Handle Dungeon Escape Items (Traesto Gem / Goho-M)
-            if (item.Type == "Utility" && (item.Name == "Traesto Gem" || item.Name == "Goho-M"))
+            // TRAESTO GEM: Battle Escape (Player remains on floor)
+            if (item.Name == "Traesto Gem")
             {
-                _io.WriteLine("A mysterious light envelops the party...");
-                return true; // These always work if they reach execution
+                _io.WriteLine($"{user.Name} used {item.Name}!");
+                _io.WriteLine("A blinding light creates a path to safety!");
+                return true;
+            }
+
+            // GOHO-M: Field Utility (Invalid in Battle)
+            if (item.Name == "Goho-M")
+            {
+                _io.WriteLine($"{item.Name} cannot be used in the heat of battle!");
+                return false;
             }
 
             foreach (var target in targets)

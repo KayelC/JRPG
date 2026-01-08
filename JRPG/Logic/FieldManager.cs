@@ -624,61 +624,30 @@ namespace JRPGPrototype.Logic
         private bool TriggerEncounter(List<string> enemyIds, bool isBoss)
         {
             List<Combatant> enemies = new List<Combatant>();
-
-            // 1. Convert IDs from the Dungeon Floor into Combatant instances
             foreach (string id in enemyIds)
             {
                 if (Database.Enemies.TryGetValue(id, out var eData))
-                {
                     enemies.Add(Combatant.CreateFromData(eData));
-                }
-                else
-                {
-                    // Safety fallback for data entry errors in JSON
-                    _io.WriteLine($"[Error] Could not load enemy: {id}. Spawning Slime.");
-                    if (Database.Enemies.TryGetValue("E_slime", out var fallback))
-                    {
-                        enemies.Add(Combatant.CreateFromData(fallback));
-                    }
-                    else
-                    {
-                        enemies.Add(new Combatant("Glitch Slime"));
-                    }
-                }
             }
 
-            // 2. Handle Duplicate Naming (e.g., "Pixie A", "Pixie B")
             var groups = enemies.GroupBy(e => e.Name);
             foreach (var group in groups)
             {
                 if (group.Count() > 1)
                 {
                     int counter = 0;
-                    foreach (var enemy in group)
-                    {
-                        enemy.Name += $" {(char)('A' + counter)}";
-                        counter++;
-                    }
+                    foreach (var enemy in group) { enemy.Name += $" {(char)('A' + counter)}"; counter++; }
                 }
             }
 
-            // 3. Initialize and Start the new Modular Battle Sub-System
-            // Arguments: PartyManager, List<Enemies>, InventoryManager, EconomyManager, IGameIO
             BattleConductor battle = new BattleConductor(_partyManager, enemies, _inventory, _economy, _io, _playerKnowledge, isBoss);
             battle.StartBattle();
 
-            // 4. Post-Battle Navigation Logic
-            if (battle.TraestoUsed)
-            {
-                // If the player used an escape item that teleports them out
-                _dungeon.WarpToFloor(1);
-                return true;
-            }
-
-            // Return true if the player is alive to continue, false triggers Game Over in calling logic
+            // SMT III Logic: 
+            // If Escaped (via Traesto Gem or Tactics), we simply return to floor exploration.
+            // Warp logic is handled ONLY by Goho-M in FieldManager.UseItemField.
             return _player.CurrentHP > 0;
         }
-
         private void OpenCityMenu()
         {
             while (true)

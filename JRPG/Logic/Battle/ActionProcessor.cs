@@ -9,15 +9,15 @@ using JRPGPrototype.Services;
 namespace JRPGPrototype.Logic.Battle
 {
     /// <summary>
-    /// The Definitive Action Executor for the Battle Sub-System.
-    /// Handles Ma-/Me- targeting, Reactive Iteration, and Forced Ailment Behaviors.
+    /// The authoritative executor of battle actions.
+    /// Manages the live-reactive interaction between combatants, handling damage,
+    /// reflection, and data analysis with SMT III fidelity.
     /// </summary>
     public class ActionProcessor
     {
         private readonly IGameIO _io;
         private readonly StatusRegistry _status;
         private readonly BattleKnowledge _knowledge;
-        private readonly Random _rnd = new Random();
 
         public ActionProcessor(IGameIO io, StatusRegistry status, BattleKnowledge knowledge)
         {
@@ -89,10 +89,8 @@ namespace JRPGPrototype.Logic.Battle
                 attacker.CurrentSP -= cost.value;
             }
 
-            // Reactive Iteration Loop
             foreach (var target in targets)
             {
-                // Reactive check: Ensure target didn't die or flee from a previous hit in this same action
                 if (target.IsDead && !skill.Effect.Contains("Revive")) continue;
 
                 CombatResult res;
@@ -107,7 +105,6 @@ namespace JRPGPrototype.Logic.Battle
 
                 results.Add(res);
 
-                // SMT III Rule: If any hit is repelled, stop the multi-target sequence immediately
                 if (res.Type == HitType.Repel) break;
             }
 
@@ -115,63 +112,76 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// Executes an item on one or more targets.
-        /// Maps the item type to recovery, cure, or revival logic.
+        /// Executes an item and returns true if at least one target was affected.
+        /// Prevents consuming items that have no effect.
         /// </summary>
-        public void ExecuteItem(Combatant user, List<Combatant> targets, ItemData item)
+        public bool ExecuteItem(Combatant user, List<Combatant> targets, ItemData item)
         {
+            bool anyEffect = false;
             _io.WriteLine($"{user.Name} used {item.Name}!");
+
+            // Handle Dungeon Escape Items (Traesto Gem / Goho-M)
+            if (item.Type == "Utility" && (item.Name == "Traesto Gem" || item.Name == "Goho-M"))
+            {
+                _io.WriteLine("A mysterious light envelops the party...");
+                return true; // These always work if they reach execution
+            }
 
             foreach (var target in targets)
             {
-                // Reactive check: skip if dead unless it's a revive item
                 if (target.IsDead && item.Type != "Revive") continue;
 
                 switch (item.Type)
                 {
                     case "Healing":
                     case "Healing_All":
-                        int heal = item.EffectValue;
-                        if (item.EffectValue >= 9999) heal = target.MaxHP;
-                        int oldHP = target.CurrentHP;
-                        target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
-                        _io.WriteLine($"{target.Name} recovered {target.CurrentHP - oldHP} HP.");
+                        if (target.CurrentHP < target.MaxHP)
+                        {
+                            int heal = item.EffectValue >= 9999 ? target.MaxHP : item.EffectValue;
+                            int oldHP = target.CurrentHP;
+                            target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
+                            _io.WriteLine($"{target.Name} recovered {target.CurrentHP - oldHP} HP.");
+                            anyEffect = true;
+                        }
                         break;
 
                     case "Spirit":
-                        int oldSP = target.CurrentSP;
-                        target.CurrentSP = Math.Min(target.MaxSP, target.CurrentSP + item.EffectValue);
-                        _io.WriteLine($"{target.Name} recovered {target.CurrentSP - oldSP} SP.");
+                        if (target.CurrentSP < target.MaxSP)
+                        {
+                            int oldSP = target.CurrentSP;
+                            target.CurrentSP = Math.Min(target.MaxSP, target.CurrentSP + item.EffectValue);
+                            _io.WriteLine($"{target.Name} recovered {target.CurrentSP - oldSP} SP.");
+                            anyEffect = true;
+                        }
                         break;
 
                     case "Revive":
                         if (target.IsDead)
                         {
-                            // Items like Balm of Life restore 100% (9999), Revival Beads restore 50%
                             int revVal = item.EffectValue >= 100 ? target.MaxHP : target.MaxHP / 2;
                             target.CurrentHP = revVal;
                             _io.WriteLine($"{target.Name} was revived!");
+                            anyEffect = true;
                         }
                         break;
 
                     case "Cure":
                         if (_status.CheckAndExecuteCure(target, item.Name))
                         {
-                            _io.WriteLine($"{target.Name} was cured of ailments.");
-                        }
-                        else
-                        {
-                            _io.WriteLine("No effect.");
+                            _io.WriteLine($"{target.Name} was cured.");
+                            anyEffect = true;
                         }
                         break;
                 }
             }
+
+            if (!anyEffect)
+            {
+                _io.WriteLine("It had no effect...");
+            }
+            return anyEffect;
         }
 
-
-        /// <summary>
-        /// Re-implemented Analyze: Fully populates the knowledge bank and reveals UI data.
-        /// </summary>
         public void ExecuteAnalyze(Combatant target)
         {
             _io.Clear();
@@ -225,33 +235,29 @@ namespace JRPGPrototype.Logic.Battle
 
         private CombatResult ProcessUtilitySkill(Combatant attacker, Combatant target, SkillData skill)
         {
-            // 1. Curing Logic
-            if (skill.Category.Contains("Recovery") && skill.Effect.Contains("Cure"))
+            if (skill.Category.Contains("Recovery"))
             {
-                if (_status.CheckAndExecuteCure(target, skill.Effect))
-                    _io.WriteLine($"{target.Name} was cured!");
+                if (skill.Effect.Contains("Cure"))
+                {
+                    _status.CheckAndExecuteCure(target, skill.Effect);
+                }
+
+                if (target.IsDead && skill.Effect.Contains("Revive"))
+                {
+                    target.CurrentHP = target.MaxHP / 2;
+                    _io.WriteLine($"{target.Name} was revived!");
+                }
+                else if (!target.IsDead)
+                {
+                    int heal = skill.GetPowerVal();
+                    if (skill.Effect.Contains("50%")) heal = target.MaxHP / 2;
+                    if (skill.Effect.Contains("full")) heal = target.MaxHP;
+
+                    target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
+                    _io.WriteLine($"{target.Name} recovered health.");
+                }
             }
 
-            // 2. Revival Logic
-            if (target.IsDead && skill.Effect.Contains("Revive"))
-            {
-                // Recarm (50%) vs Samarecarm (Full)
-                int heal = skill.Effect.Contains("fully") ? target.MaxHP : target.MaxHP / 2;
-                target.CurrentHP = heal;
-                _io.WriteLine($"{target.Name} was revived!");
-            }
-            // 3. Standard Healing
-            else if (!target.IsDead && skill.Category.Contains("Recovery"))
-            {
-                int heal = skill.GetPowerVal();
-                if (skill.Effect.Contains("50%")) heal = target.MaxHP / 2;
-                if (skill.Effect.Contains("Fully")) heal = target.MaxHP;
-
-                target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
-                _io.WriteLine($"{target.Name} recovered health.");
-            }
-
-            // 4. Buffs/Debuffs
             if (skill.Category.Contains("Enhance"))
             {
                 _status.ApplyStatChange(skill.Name, target);

@@ -8,32 +8,20 @@ using JRPGPrototype.Services;
 
 namespace JRPGPrototype.Logic.Battle
 {
-    /// <summary>
-    /// The UI Flow Orchestrator for the Battle Sub-System.
-    /// Manages menu navigation, target selection, and renders battle context to IGameIO.
-    /// Decoupled from execution logic to facilitate future GUI porting.
-    /// </summary>
     public class InteractionBridge
     {
         private readonly IGameIO _io;
         private readonly PartyManager _party;
-        private readonly InventoryManager _inv; // Corrected dependency
+        private readonly InventoryManager _inv;
         private readonly List<Combatant> _enemies;
         private readonly PressTurnEngine _turnEngine;
         private readonly BattleKnowledge _knowledge;
 
-        // Static indices to maintain "Muscle Memory" between turns, as seen in SMT III.
         private static int _mainMenuIndex = 0;
         private static int _skillMenuIndex = 0;
         private static int _itemMenuIndex = 0;
 
-        public InteractionBridge(
-            IGameIO io,
-            PartyManager party,
-            InventoryManager inventory,
-            List<Combatant> enemies,
-            PressTurnEngine turnEngine,
-            BattleKnowledge knowledge)
+        public InteractionBridge(IGameIO io, PartyManager party, InventoryManager inventory, List<Combatant> enemies, PressTurnEngine turnEngine, BattleKnowledge knowledge)
         {
             _io = io;
             _party = party;
@@ -43,69 +31,43 @@ namespace JRPGPrototype.Logic.Battle
             _knowledge = knowledge;
         }
 
-        /// <summary>
-        /// Dynamically constructs the SMT III command menu based on the actor's class.
-        /// Handles ailment-based menu disabling (Panic/Silence/etc).
-        /// </summary>
         public string ShowMainMenu(Combatant actor)
         {
             string context = GetBattleContext(actor);
             List<string> options = new List<string> { "Attack", "Guard" };
 
-            // Class-Based Menu Augmentation
-            if (actor.Class == ClassType.PersonaUser || actor.Class == ClassType.WildCard)
-            {
-                options.Add("Persona");
-            }
+            if (actor.Class == ClassType.PersonaUser || actor.Class == ClassType.WildCard) options.Add("Persona");
             else if (actor.Class == ClassType.Operator)
             {
                 options.Add("Command");
                 options.Add("COMP");
             }
-            else // Regular Demon
-            {
-                options.Add("Skill");
-            }
+            else options.Add("Skill");
 
             options.Add("Item");
             options.Add("Tactics");
             options.Add("Pass");
 
-            // Ailment-Based Restriction Logic
             bool isPanicked = actor.CurrentAilment != null && actor.CurrentAilment.Name == "Panic";
             List<bool> disabledStates = new List<bool>();
 
             foreach (var opt in options)
             {
                 bool isDisabled = false;
-                // In SMT III, Panic restricts complex actions (Skills/COMP/Items).
-                if (isPanicked && (opt == "Persona" || opt == "Skill" || opt == "Command" || opt == "COMP" || opt == "Item"))
-                {
-                    isDisabled = true;
-                }
+                if (isPanicked && (opt == "Persona" || opt == "Skill" || opt == "Command" || opt == "COMP" || opt == "Item")) isDisabled = true;
                 disabledStates.Add(isDisabled);
             }
 
             int choice = _io.RenderMenu($"{context}\nCommand: {actor.Name}", options, _mainMenuIndex, disabledStates);
-
             if (choice == -1) return "Cancel";
 
             _mainMenuIndex = choice;
             return options[choice];
         }
 
-        /// <summary>
-        /// High-Fidelity Targeting System. 
-        /// Provides visual feedback of known affinities during the selection process.
-        /// </summary>
-        /// <summary>
-        /// High-Fidelity Targeting System. 
-        /// Supports SkillData or ItemData sources to resolve side and scope.
-        /// </summary>
         public List<Combatant> SelectTarget(Combatant actor, SkillData skill = null, ItemData item = null)
         {
             string context = GetBattleContext(actor);
-
             bool targetsAllies = false;
             bool targetsAll = false;
             Element element = Element.None;
@@ -119,12 +81,13 @@ namespace JRPGPrototype.Logic.Battle
             }
             else if (item != null)
             {
-                // SMT Rule: Battle items are almost exclusively for allies.
                 targetsAllies = true;
                 targetsAll = item.Type == "Healing_All" || item.Name == "Amrita";
             }
 
-            var selectionPool = targetsAllies ? (item?.Type == "Revive" ? _party.ActiveParty : _party.GetAliveMembers()) : _enemies.Where(e => !e.IsDead).ToList();
+            var selectionPool = targetsAllies
+                ? (item?.Type == "Revive" || (skill != null && skill.Effect.Contains("Revive")) ? _party.ActiveParty : _party.GetAliveMembers())
+                : _enemies.Where(e => !e.IsDead).ToList();
 
             if (targetsAll) return selectionPool;
 
@@ -145,6 +108,31 @@ namespace JRPGPrototype.Logic.Battle
             if (choice == -1 || choice == targetLabels.Count - 1) return null;
 
             return new List<Combatant> { selectionPool[choice] };
+        }
+
+        public string GetTacticsChoice(bool isBossBattle, bool isOperator)
+        {
+            List<string> options = new List<string> { "Escape", "Strategy", "Back" };
+            List<bool> disabled = new List<bool> { isBossBattle, !isOperator, false };
+            int choice = _io.RenderMenu($"{GetBattleContext(null)}\nTACTICS", options, 0, disabled);
+            if (choice == -1 || choice == 2) return "Back";
+            return options[choice];
+        }
+
+        public Combatant SelectStrategyTarget()
+        {
+            var targets = _party.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
+            if (!targets.Any())
+            {
+                _io.WriteLine("No demons in party to command.");
+                _io.Wait(800);
+                return null;
+            }
+            var names = targets.Select(t => $"{t.Name} [{t.BattleControl}]").ToList();
+            names.Add("Back");
+            int choice = _io.RenderMenu($"{GetBattleContext(null)}\nSELECT DEMON TO COMMAND", names, 0);
+            if (choice == -1 || choice == names.Count - 1) return null;
+            return targets[choice];
         }
 
         public SkillData SelectSkill(Combatant actor, string uiContext)
@@ -185,12 +173,7 @@ namespace JRPGPrototype.Logic.Battle
         public ItemData SelectItem(Combatant actor)
         {
             var ownedItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
-            if (ownedItems.Count == 0)
-            {
-                _io.WriteLine("Inventory is empty.");
-                _io.Wait(800);
-                return null;
-            }
+            if (!ownedItems.Any()) { _io.WriteLine("Inventory is empty."); _io.Wait(800); return null; }
 
             var labels = ownedItems.Select(i => $"{i.Name} x{_inv.GetQuantity(i.Id)}").ToList();
             labels.Add("Back");
@@ -205,87 +188,54 @@ namespace JRPGPrototype.Logic.Battle
             return ownedItems[choice];
         }
 
-        /// <summary>
-        /// Manages the Operator-exclusive COMP sub-menu.
-        /// </summary>
         public (string action, Combatant target) OpenCOMPMenu(Combatant actor)
         {
-            string context = GetBattleContext(actor);
             List<string> options = new List<string> { "Summon", "Return", "Analyze", "Back" };
+            int choice = _io.RenderMenu($"{GetBattleContext(actor)}\nCOMP SYSTEM", options, 0);
 
-            int choice = _io.RenderMenu($"{context}\nCOMP SYSTEM", options, 0);
-
-            if (choice == 0) // Summon: Move from Stock to Active
+            if (choice == 0)
             {
-                if (actor.DemonStock.Count == 0)
-                {
-                    _io.WriteLine("COMP Error: No demons in stock.");
-                    _io.Wait(800);
-                    return ("None", null);
-                }
-
+                if (!actor.DemonStock.Any()) { _io.WriteLine("No demons in stock."); _io.Wait(800); return ("None", null); }
                 var names = actor.DemonStock.Select(d => $"{d.Name} (Lv.{d.Level})").ToList();
                 names.Add("Back");
-                int sub = _io.RenderMenu($"{context}\nSelect Demon to Summon:", names, 0);
+                int sub = _io.RenderMenu("Summon Demon:", names, 0);
                 if (sub == -1 || sub == names.Count - 1) return ("None", null);
-
                 return ("Summon", actor.DemonStock[sub]);
             }
 
-            if (choice == 1) // Return: Move from Active to Stock
+            if (choice == 1)
             {
                 var activeDemons = _party.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
-                if (activeDemons.Count == 0)
-                {
-                    _io.WriteLine("COMP Error: No active demons to return.");
-                    _io.Wait(800);
-                    return ("None", null);
-                }
-
+                if (!activeDemons.Any()) { _io.WriteLine("No active demons to return."); _io.Wait(800); return ("None", null); }
                 var names = activeDemons.Select(d => d.Name).ToList();
                 names.Add("Back");
-                int sub = _io.RenderMenu($"{context}\nSelect Demon to Return:", names, 0);
+                int sub = _io.RenderMenu("Return Demon:", names, 0);
                 if (sub == -1 || sub == names.Count - 1) return ("None", null);
-
                 return ("Return", activeDemons[sub]);
             }
 
-            if (choice == 2) // Analyze: Tactical scan
+            if (choice == 2)
             {
-                var targetList = SelectTarget(actor); // Prompt for an enemy to scan
+                var targetList = SelectTarget(actor);
                 if (targetList == null) return ("None", null);
                 return ("Analyze", targetList[0]);
             }
-
             return ("None", null);
         }
 
-        /// <summary>
-        /// Internal helper to generate the standardized SMT III Battle HUD string.
-        /// Includes the Turn Icons and the Status of all combatants.
-        /// </summary>
         private string GetBattleContext(Combatant actor)
         {
-            string header = $"--- BATTLE STATUS ---\n";
             string icons = $"Turns: {_turnEngine.GetIconsDisplay()}\n";
             string separator = "==================================================\n";
-
             string enemyGroup = "ENEMIES:\n";
-            foreach (var e in _enemies)
-            {
-                string status = e.IsDead ? "[DEAD]" : $"HP: {e.CurrentHP}";
-                enemyGroup += $" {e.Name,-15} {status}\n";
-            }
-
+            foreach (var e in _enemies) enemyGroup += $" {e.Name,-15} {(e.IsDead ? "[DEAD]" : $"HP: {e.CurrentHP}")}\n";
             string partyGroup = "--------------------------------------------------\nPARTY:\n";
             foreach (var p in _party.ActiveParty)
             {
-                string guard = p.IsGuarding ? " (G)" : "";
-                string ailment = p.CurrentAilment != null ? $" [{p.CurrentAilment.Name}]" : "";
-                partyGroup += $" {p.Name,-15} HP: {p.CurrentHP,4}/{p.MaxHP,4} SP: {p.CurrentSP,4}/{p.MaxSP,4}{guard}{ailment}\n";
+                string status = p.CurrentAilment != null ? $" [{p.CurrentAilment.Name}]" : "";
+                partyGroup += $" {p.Name,-15} HP: {p.CurrentHP,4}/{p.MaxHP,4} SP: {p.CurrentSP,4}/{p.MaxSP,4}{(p.IsGuarding ? " (G)" : "")}{status}\n";
             }
-
-            return header + icons + separator + enemyGroup + partyGroup + separator;
+            return icons + separator + enemyGroup + partyGroup + separator;
         }
     }
 }

@@ -8,11 +8,6 @@ using JRPGPrototype.Services;
 
 namespace JRPGPrototype.Logic.Battle
 {
-    /// <summary>
-    /// The Root Orchestrator of the Battle Sub-System.
-    /// Manages the high-level flow of the SMT III Press Turn battle loop.
-    /// Delegates specific logic to the Math, Turn, Status, AI, and UI sub-modules.
-    /// </summary>
     public class BattleConductor
     {
         private readonly IGameIO _io;
@@ -21,7 +16,6 @@ namespace JRPGPrototype.Logic.Battle
         private readonly InventoryManager _inv;
         private readonly EconomyManager _eco;
 
-        // Sub-System Engines
         private readonly PressTurnEngine _turnEngine;
         private readonly StatusRegistry _statusRegistry;
         private readonly ActionProcessor _processor;
@@ -31,7 +25,6 @@ namespace JRPGPrototype.Logic.Battle
 
         private readonly bool _isBossBattle;
 
-        // Battle State Flags
         public bool BattleEnded { get; private set; }
         public bool PlayerWon { get; private set; }
         public bool Escaped { get; private set; }
@@ -54,7 +47,6 @@ namespace JRPGPrototype.Logic.Battle
             _playerKnowledge = playerKnowledge;
             _isBossBattle = isBoss;
 
-            // Initialize Sub-Systems
             _turnEngine = new PressTurnEngine();
             _statusRegistry = new StatusRegistry();
             _processor = new ActionProcessor(_io, _statusRegistry, _playerKnowledge);
@@ -62,20 +54,16 @@ namespace JRPGPrototype.Logic.Battle
             _ui = new InteractionBridge(_io, _party, _inv, _enemies, _turnEngine, _playerKnowledge);
         }
 
-        /// <summary>
-        /// Entry point for the encounter. Handles initiative and the phase loop.
-        /// </summary>
         public void StartBattle()
         {
             _io.Clear();
-            _io.WriteLine("=== ENEMY ENCOUNTER ===", ConsoleColor.Yellow);
+            _io.WriteLine("=== ENEMY ENCOUNTER ===");
             foreach (var e in _enemies)
             {
                 _io.WriteLine($"Appeared: {e.Name} (Lv.{e.Level})");
             }
             _io.Wait(1200);
 
-            // 1. Initiative Roll (Weighted Agility)
             double pAvgAgi = _party.ActiveParty.Average(c => c.GetStat(StatType.AGI));
             double eAvgAgi = _enemies.Average(c => c.GetStat(StatType.AGI));
             bool isPlayerTurn = CombatMath.RollInitiative(pAvgAgi, eAvgAgi);
@@ -84,55 +72,42 @@ namespace JRPGPrototype.Logic.Battle
                 isPlayerTurn ? ConsoleColor.Cyan : ConsoleColor.Red);
             _io.Wait(1000);
 
-            // 2. Main Phase Loop
             while (!BattleEnded)
             {
                 ExecutePhase(isPlayerTurn);
-
                 if (CheckEncounterCompletion()) break;
-
-                // Flip the turn for the next cycle
                 isPlayerTurn = !isPlayerTurn;
             }
 
-            // 3. Post-Battle Resolution
             ResolveBattleEnd();
         }
 
-        /// <summary>
-        /// Orchestrates a single side's phase (Player or Enemy).
-        /// </summary>
         private void ExecutePhase(bool isPlayerSide)
         {
             var activeSide = isPlayerSide ? _party.GetAliveMembers() : _enemies.Where(e => !e.IsDead).ToList();
             if (activeSide.Count == 0) return;
 
-            // Initialize Icons for the phase
             _turnEngine.StartPhase(activeSide.Count);
             int actorIndex = 0;
 
             while (_turnEngine.HasTurnsRemaining() && !BattleEnded)
             {
-                // Refresh live members list (Live-Reactive Iteration)
                 var currentLiveActors = isPlayerSide ? _party.GetAliveMembers() : _enemies.Where(e => !e.IsDead).ToList();
                 if (currentLiveActors.Count == 0) break;
 
-                // Loop back to start if index is out of bounds (standard SMT rotation)
                 if (actorIndex >= currentLiveActors.Count) actorIndex = 0;
                 Combatant actor = currentLiveActors[actorIndex];
 
-                // --- 1. TURN START (Ailments & Restrictions) ---
                 TurnStartResult turnState = _statusRegistry.ProcessTurnStart(actor);
 
                 if (turnState == TurnStartResult.Skip)
                 {
                     _io.WriteLine($"{actor.Name} is unable to move!", ConsoleColor.Magenta);
-                    _turnEngine.ConsumeAction(HitType.Normal, false); // Losing turn skips 1 icon
+                    _turnEngine.ConsumeAction(HitType.Normal, false);
                     _io.Wait(800);
                 }
                 else if (turnState == TurnStartResult.FleeBattle)
                 {
-                    _io.WriteLine($"{actor.Name} fled in fear!", ConsoleColor.Red);
                     Escaped = true;
                     BattleEnded = true;
                     return;
@@ -145,37 +120,30 @@ namespace JRPGPrototype.Logic.Battle
                 }
                 else
                 {
-                    // Actor is able to perform an action
                     ExecuteAction(actor, isPlayerSide, turnState);
                 }
 
-                // --- 2. TURN END (Recovery & Decay) ---
                 var endLogs = _statusRegistry.ProcessTurnEnd(actor);
                 foreach (var log in endLogs) _io.WriteLine(log, ConsoleColor.Gray);
 
                 if (CheckEncounterCompletion()) return;
-
                 actorIndex++;
             }
         }
 
-        /// <summary>
-        /// Orchestrates the selection and execution of a specific action.
-        /// Handles the fork between Manual Control, AI, and Forced Ailment actions.
-        /// </summary>
         private void ExecuteAction(Combatant actor, bool isPlayerSide, TurnStartResult turnState)
         {
             SkillData skill = null;
+            ItemData item = null;
             List<Combatant> targets = null;
 
-            // A. Forced Behaviors (Ailments)
+            // --- A. ACTION SELECTION ---
             if (turnState == TurnStartResult.ForcedPhysical || turnState == TurnStartResult.ForcedConfusion)
             {
                 var forced = _ai.DetermineBestAction(actor, _party.ActiveParty, _enemies, _playerKnowledge);
                 skill = forced.skill;
                 targets = forced.targets;
             }
-            // B. Manual Control
             else if (isPlayerSide && (actor.Controller == ControllerType.LocalPlayer || actor.BattleControl == ControlState.DirectControl))
             {
                 string choice = _ui.ShowMainMenu(actor);
@@ -194,7 +162,7 @@ namespace JRPGPrototype.Logic.Battle
                 }
                 else if (choice == "Persona" || choice == "Skill" || choice == "Command")
                 {
-                    skill = _ui.SelectSkill(actor, ""); // Bridge handles context
+                    skill = _ui.SelectSkill(actor, "");
                     if (skill == null) { ExecuteAction(actor, isPlayerSide, turnState); return; }
                     targets = _ui.SelectTarget(actor, skill);
                     if (targets == null) { ExecuteAction(actor, isPlayerSide, turnState); return; }
@@ -211,23 +179,21 @@ namespace JRPGPrototype.Logic.Battle
                             _io.WriteLine($"{actor.Name} summoned {comp.target.Name}!");
                             _turnEngine.ConsumeAction(HitType.Normal, false);
                         }
-                        return;
                     }
-                    if (comp.action == "Return")
+                    else if (comp.action == "Return")
                     {
                         if (_party.ReturnDemon(comp.target))
                         {
                             _io.WriteLine($"{actor.Name} returned {comp.target.Name} to stock.");
                             _turnEngine.ConsumeAction(HitType.Normal, false);
                         }
-                        return;
                     }
-                    if (comp.action == "Analyze")
+                    else if (comp.action == "Analyze")
                     {
                         _processor.ExecuteAnalyze(comp.target);
                         _turnEngine.ConsumeAction(HitType.Normal, false);
-                        return;
                     }
+                    return;
                 }
                 else if (choice == "Pass")
                 {
@@ -237,16 +203,54 @@ namespace JRPGPrototype.Logic.Battle
                 }
                 else if (choice == "Item")
                 {
-                    var item = _ui.SelectItem(actor);
+                    item = _ui.SelectItem(actor);
                     if (item == null) { ExecuteAction(actor, isPlayerSide, turnState); return; }
                     targets = _ui.SelectTarget(actor, null, item);
                     if (targets == null) { ExecuteAction(actor, isPlayerSide, turnState); return; }
                 }
+                else if (choice == "Tactics")
+                {
+                    string tactic = _ui.GetTacticsChoice(_isBossBattle, actor.Class == ClassType.Operator);
+                    if (tactic == "Back") { ExecuteAction(actor, isPlayerSide, turnState); return; }
+
+                    if (tactic == "Escape")
+                    {
+                        int pAgi = actor.GetStat(StatType.AGI);
+                        double eAvgAgi = _enemies.Any() ? _enemies.Average(e => e.GetStat(StatType.AGI)) : 1;
+                        if (new Random().Next(0, 100) < Math.Clamp(10.0 + 40.0 * (pAgi / eAvgAgi), 5.0, 95.0))
+                        {
+                            Escaped = true;
+                            BattleEnded = true;
+                            _io.WriteLine("Escaped safely!");
+                            return;
+                        }
+                        _io.WriteLine("Failed to escape!");
+                        _turnEngine.ConsumeAction(HitType.Normal, false);
+                        return;
+                    }
+
+                    if (tactic == "Strategy")
+                    {
+                        var stratTarget = _ui.SelectStrategyTarget();
+                        if (stratTarget != null)
+                        {
+                            stratTarget.BattleControl = (stratTarget.BattleControl == ControlState.ActFreely) ? ControlState.DirectControl : ControlState.ActFreely;
+                            _io.WriteLine($"{stratTarget.Name} is now set to {stratTarget.BattleControl}.");
+                        }
+                        ExecuteAction(actor, isPlayerSide, turnState);
+                        return;
+                    }
+                }
+                else
+                {
+                    // If choice is unhandled (Cancel/Back), re-prompt
+                    ExecuteAction(actor, isPlayerSide, turnState);
+                    return;
+                }
             }
-            // C. Heuristic AI
             else
             {
-                var sideKnowledge = isPlayerSide ? _playerKnowledge : new BattleKnowledge(); // Enemies don't cheat
+                var sideKnowledge = isPlayerSide ? _playerKnowledge : new BattleKnowledge();
                 var decision = _ai.DetermineBestAction(actor,
                     isPlayerSide ? _party.ActiveParty : _enemies,
                     isPlayerSide ? _enemies : _party.ActiveParty,
@@ -256,21 +260,51 @@ namespace JRPGPrototype.Logic.Battle
                 targets = decision.targets;
             }
 
-            // --- EXECUTION ---
+            // --- B. EXECUTION ---
             if (targets != null && targets.Any())
             {
-                if (skill == null) // Basic Attack
+                if (item != null)
+                {
+                    // Defensive check: Only consume and use icon if the item actually worked
+                    if (_processor.ExecuteItem(actor, targets, item))
+                    {
+                        _inv.RemoveItem(item.Id, 1);
+
+                        // Handle Traesto/Goho-M Warp Trigger
+                        if (item.Name == "Traesto Gem" || item.Name == "Goho-M")
+                        {
+                            TraestoUsed = true;
+                            BattleEnded = true;
+                            return;
+                        }
+
+                        _turnEngine.ConsumeAction(HitType.Normal, false);
+                    }
+                    else
+                    {
+                        // Reprompt if the item had no effect (e.g. healing full HP)
+                        ExecuteAction(actor, isPlayerSide, turnState);
+                    }
+                }
+                else if (skill == null)
                 {
                     var res = _processor.ExecuteAttack(actor, targets[0]);
                     _turnEngine.ConsumeAction(res.Type, res.IsCritical);
                 }
-                else // Skill Use
+                else
                 {
                     var results = _processor.ExecuteSkill(actor, targets, skill);
-                    // SMT III: We evaluate the "Worst" hit from a multi-target pool to determine icon cost
-                    HitType worst = results.Max(r => r.Type);
-                    bool anyCrit = results.Any(r => r.IsCritical);
-                    _turnEngine.ConsumeAction(worst, anyCrit);
+                    if (results.Any())
+                    {
+                        HitType worst = results.Max(r => r.Type);
+                        bool anyCrit = results.Any(r => r.IsCritical);
+                        _turnEngine.ConsumeAction(worst, anyCrit);
+                    }
+                    else
+                    {
+                        // Skill failed to hit anyone (all dead) - consume normal icon
+                        _turnEngine.ConsumeAction(HitType.Normal, false);
+                    }
                 }
                 _io.Wait(1000);
             }
@@ -305,7 +339,6 @@ namespace JRPGPrototype.Logic.Battle
                 _io.WriteLine("\nDEFEAT...", ConsoleColor.Red);
             }
 
-            // Reset transient battle states
             foreach (var member in _party.ActiveParty)
             {
                 member.IsGuarding = false;

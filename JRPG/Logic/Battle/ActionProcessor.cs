@@ -115,6 +115,61 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
+        /// Executes an item on one or more targets.
+        /// Maps the item type to recovery, cure, or revival logic.
+        /// </summary>
+        public void ExecuteItem(Combatant user, List<Combatant> targets, ItemData item)
+        {
+            _io.WriteLine($"{user.Name} used {item.Name}!");
+
+            foreach (var target in targets)
+            {
+                // Reactive check: skip if dead unless it's a revive item
+                if (target.IsDead && item.Type != "Revive") continue;
+
+                switch (item.Type)
+                {
+                    case "Healing":
+                    case "Healing_All":
+                        int heal = item.EffectValue;
+                        if (item.EffectValue >= 9999) heal = target.MaxHP;
+                        int oldHP = target.CurrentHP;
+                        target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
+                        _io.WriteLine($"{target.Name} recovered {target.CurrentHP - oldHP} HP.");
+                        break;
+
+                    case "Spirit":
+                        int oldSP = target.CurrentSP;
+                        target.CurrentSP = Math.Min(target.MaxSP, target.CurrentSP + item.EffectValue);
+                        _io.WriteLine($"{target.Name} recovered {target.CurrentSP - oldSP} SP.");
+                        break;
+
+                    case "Revive":
+                        if (target.IsDead)
+                        {
+                            // Items like Balm of Life restore 100% (9999), Revival Beads restore 50%
+                            int revVal = item.EffectValue >= 100 ? target.MaxHP : target.MaxHP / 2;
+                            target.CurrentHP = revVal;
+                            _io.WriteLine($"{target.Name} was revived!");
+                        }
+                        break;
+
+                    case "Cure":
+                        if (_status.CheckAndExecuteCure(target, item.Name))
+                        {
+                            _io.WriteLine($"{target.Name} was cured of ailments.");
+                        }
+                        else
+                        {
+                            _io.WriteLine("No effect.");
+                        }
+                        break;
+                }
+            }
+        }
+
+
+        /// <summary>
         /// Re-implemented Analyze: Fully populates the knowledge bank and reveals UI data.
         /// </summary>
         public void ExecuteAnalyze(Combatant target)

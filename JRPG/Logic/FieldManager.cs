@@ -662,7 +662,7 @@ namespace JRPGPrototype.Logic
 
             // 3. Initialize and Start the new Modular Battle Sub-System
             // Arguments: PartyManager, List<Enemies>, InventoryManager, EconomyManager, IGameIO
-            BattleCore battle = new BattleCore(_partyManager, enemies, _inventory, _economy, _io);
+            BattleConductor battle = new BattleConductor(_partyManager, enemies, _inventory, _economy, _io);
             battle.StartBattle();
 
             // 4. Post-Battle Navigation Logic

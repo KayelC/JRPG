@@ -103,7 +103,6 @@ namespace JRPGPrototype.Logic.Battle
 
                 string uiContext = GetUIContext(isPlayerSide);
 
-                // --- Turn Start Ailment Logic ---
                 if (currentActor.CurrentAilment != null)
                 {
                     _io.Clear();
@@ -135,8 +134,6 @@ namespace JRPGPrototype.Logic.Battle
                 }
 
                 bool actionTaken = false;
-
-                // BUG FIX: Added check for DirectControl state to allow manual demon management
                 bool isManuallyControlled = (currentActor.Controller == ControllerType.LocalPlayer) ||
                                             (currentActor.BattleControl == ControlState.DirectControl);
 
@@ -198,9 +195,9 @@ namespace JRPGPrototype.Logic.Battle
             switch (menuChoice)
             {
                 case "Attack":
-                    var targets = _menus.AcquireTargets(actor, null, _enemies, uiContext);
-                    if (targets == null) return false;
-                    var target = targets.FirstOrDefault();
+                    var attackTargets = _menus.AcquireTargets(actor, null, _enemies, uiContext);
+                    if (attackTargets == null) return false;
+                    var target = attackTargets.FirstOrDefault();
                     var res = _executor.ExecuteBasicAttack(actor, target, _playerKnowledge);
                     _io.WriteLine($"{actor.Name} attacks {target.Name}! {res.Message}");
                     _turns.HandleActionResults(res.Type, res.IsCritical);
@@ -220,9 +217,9 @@ namespace JRPGPrototype.Logic.Battle
                     var skillTargets = _menus.AcquireTargets(actor, skill, _enemies, uiContext);
                     if (skillTargets == null) return false;
 
-                    var outcome = _executor.ExecuteSkill(actor, skillTargets, skill, _playerKnowledge);
+                    var skillOutcome = _executor.ExecuteSkill(actor, skillTargets, skill, _playerKnowledge);
                     _io.WriteLine($"{actor.Name} used {skill.Name}!");
-                    _turns.HandleActionResults(outcome.worstHit, outcome.advantageTriggered);
+                    _turns.HandleActionResults(skillOutcome.worstHit, skillOutcome.advantageTriggered);
                     return true;
 
                 case "COMP":
@@ -287,9 +284,34 @@ namespace JRPGPrototype.Logic.Battle
                 case "Item":
                     var item = _menus.SelectItem(uiContext);
                     if (item == null) return false;
-                    _io.WriteLine($"{actor.Name} used {item.Name}.");
-                    _turns.HandleActionResults(HitType.Normal, false);
-                    return true;
+
+                    if (item.Name == "Traesto Gem")
+                    {
+                        _io.WriteLine("Escaping to lobby...");
+                        TraestoUsed = true;
+                        return true;
+                    }
+
+                    var itemTargets = _menus.AcquireTargetsForItem(item, _enemies, uiContext);
+                    if (itemTargets == null) return false;
+
+                    // Execute item and check for efficacy
+                    var itemOutcome = _executor.ExecuteItem(itemTargets, item, _playerKnowledge);
+
+                    if (itemOutcome.wasEffective)
+                    {
+                        _io.WriteLine($"{actor.Name} used {item.Name}!");
+                        // HandleActionResults handles the Turn Icon logic
+                        _turns.HandleActionResults(itemOutcome.worstHit, itemOutcome.advantageTriggered);
+                        _inv.RemoveItem(item.Id, 1);
+                        return true;
+                    }
+                    else
+                    {
+                        _io.WriteLine("The item would have no effect!");
+                        _io.Wait(800);
+                        return false; // Return false so the turn doesn't end and player can choose again
+                    }
             }
 
             return false;
@@ -305,8 +327,9 @@ namespace JRPGPrototype.Logic.Battle
 
             if (choice.skill == null)
             {
-                var res = _executor.ExecuteBasicAttack(actor, choice.targets[0], knowledge);
-                _io.WriteLine($"{actor.Name} attacks! {res.Message}");
+                var target = choice.targets.FirstOrDefault();
+                var res = _executor.ExecuteBasicAttack(actor, target, knowledge);
+                _io.WriteLine($"{actor.Name} attacks {target.Name}! {res.Message}");
                 _turns.HandleActionResults(res.Type, res.IsCritical);
             }
             else

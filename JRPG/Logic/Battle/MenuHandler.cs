@@ -59,12 +59,8 @@ namespace JRPGPrototype.Logic.Battle
                 disabledStates.Add(isDisabled);
             }
 
-            // We prepend the uiContext (the table) to the specific command prompt
             int choice = _io.RenderMenu($"{uiContext}\nCommand: {actor.Name}", options, _mainMenuIndex, disabledStates);
-            if (choice == -1)
-            {
-                return "Cancel";
-            }
+            if (choice == -1) return "Cancel";
 
             _mainMenuIndex = choice;
             return options[choice];
@@ -103,10 +99,7 @@ namespace JRPGPrototype.Logic.Battle
         public SkillData SelectSkill(Combatant actor, string uiContext)
         {
             var skillNames = actor.GetConsolidatedSkills();
-            if (skillNames.Count == 0)
-            {
-                return null;
-            }
+            if (skillNames.Count == 0) return null;
 
             List<string> labels = new List<string>();
             List<bool> disabled = new List<bool>();
@@ -117,7 +110,6 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     var cost = data.ParseCost();
                     bool canAfford = cost.isHP ? actor.CurrentHP > cost.value : actor.CurrentSP >= cost.value;
-
                     labels.Add($"{sName} ({data.Cost})");
                     disabled.Add(!canAfford);
                 }
@@ -135,10 +127,7 @@ namespace JRPGPrototype.Logic.Battle
                 }
             });
 
-            if (choice == -1 || choice == labels.Count - 1)
-            {
-                return null;
-            }
+            if (choice == -1 || choice == labels.Count - 1) return null;
 
             _skillMenuIndex = choice;
             return Database.Skills[skillNames[choice]];
@@ -147,29 +136,52 @@ namespace JRPGPrototype.Logic.Battle
         public ItemData SelectItem(string uiContext)
         {
             var ownedItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
-            if (ownedItems.Count == 0)
+
+            // Filter: Only show items usable in battle (Traesto, Healing, etc.)
+            // Exclude items like Goho-M which are Field Only.
+            var battleUsable = ownedItems.Where(i => i.Type != "Utility" || i.Name == "Traesto Gem").ToList();
+
+            if (battleUsable.Count == 0)
             {
+                _io.WriteLine("No battle-usable items found.");
+                _io.Wait(800);
                 return null;
             }
 
-            var labels = ownedItems.Select(i => $"{i.Name} x{_inv.GetQuantity(i.Id)}").ToList();
+            var labels = battleUsable.Select(i => $"{i.Name} x{_inv.GetQuantity(i.Id)}").ToList();
             labels.Add("Back");
 
             int choice = _io.RenderMenu($"{uiContext}\nItems", labels, _itemMenuIndex, null, (idx) =>
             {
-                if (idx >= 0 && idx < ownedItems.Count)
+                if (idx >= 0 && idx < battleUsable.Count)
                 {
-                    _io.WriteLine(ownedItems[idx].Description);
+                    _io.WriteLine(battleUsable[idx].Description);
                 }
             });
 
-            if (choice == -1 || choice == labels.Count - 1)
-            {
-                return null;
-            }
+            if (choice == -1 || choice == labels.Count - 1) return null;
 
             _itemMenuIndex = choice;
-            return ownedItems[choice];
+            return battleUsable[choice];
+        }
+
+        public List<Combatant> AcquireTargetsForItem(ItemData item, List<Combatant> enemies, string uiContext)
+        {
+            // SMT Rule: Most items target Allies. Offensive items (future) target Enemies.
+            bool targetsAllySide = item.Type != "Offensive";
+            bool targetsAll = item.Type.EndsWith("_All");
+
+            var selectionPool = targetsAllySide ? _party.ActiveParty : enemies.Where(e => !e.IsDead).ToList();
+
+            if (targetsAll) return selectionPool;
+
+            var targetLabels = selectionPool.Select(t => $"{t.Name} (HP: {t.CurrentHP}/{t.MaxHP})").ToList();
+            targetLabels.Add("Back");
+
+            int choice = _io.RenderMenu($"{uiContext}\nTarget for {item.Name}:", targetLabels, 0);
+            if (choice == -1 || choice == targetLabels.Count - 1) return null;
+
+            return new List<Combatant> { selectionPool[choice] };
         }
 
         public List<Combatant> AcquireTargets(Combatant actor, SkillData skill, List<Combatant> enemies, string uiContext)
@@ -188,20 +200,13 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             var selectionPool = targetsAllySide ? _party.ActiveParty : enemies.Where(e => !e.IsDead).ToList();
-
-            if (targetsAll)
-            {
-                return selectionPool;
-            }
+            if (targetsAll) return selectionPool;
 
             var targetLabels = selectionPool.Select(t => $"{t.Name} (HP: {t.CurrentHP}/{t.MaxHP})").ToList();
             targetLabels.Add("Back");
 
             int choice = _io.RenderMenu($"{uiContext}\nSelect Target:", targetLabels, 0);
-            if (choice == -1 || choice == targetLabels.Count - 1)
-            {
-                return null;
-            }
+            if (choice == -1 || choice == targetLabels.Count - 1) return null;
 
             return new List<Combatant> { selectionPool[choice] };
         }
@@ -224,10 +229,7 @@ namespace JRPGPrototype.Logic.Battle
                 names.Add("Back");
                 int subChoice = _io.RenderMenu($"{uiContext}\nSummon Demon:", names, 0);
 
-                if (subChoice == -1 || subChoice == names.Count - 1)
-                {
-                    return ("None", null);
-                }
+                if (subChoice == -1 || subChoice == names.Count - 1) return ("None", null);
                 return ("Summon", actor.DemonStock[subChoice]);
             }
 
@@ -245,10 +247,7 @@ namespace JRPGPrototype.Logic.Battle
                 names.Add("Back");
                 int subChoice = _io.RenderMenu($"{uiContext}\nReturn Demon:", names, 0);
 
-                if (subChoice == -1 || subChoice == names.Count - 1)
-                {
-                    return ("None", null);
-                }
+                if (subChoice == -1 || subChoice == names.Count - 1) return ("None", null);
                 return ("Return", activeDemons[subChoice]);
             }
 

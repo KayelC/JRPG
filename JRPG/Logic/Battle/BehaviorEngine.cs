@@ -170,11 +170,19 @@ namespace JRPGPrototype.Logic.Battle
                            effectLower.Contains("all allies") ||
                            effectLower.Contains("party");
 
+            // --- REFINED SIDE IDENTIFICATION ---
+            // SMT Rule: Buffs (kaja/Heat Riser) -> Allies. Debuffs (nda/Debilitate) -> Opponents.
+            bool isBuff = nameLower.EndsWith("kaja") || nameLower == "heat riser";
+            bool isDebuff = nameLower.EndsWith("nda") || nameLower == "debilitate";
+
             // Identify which side the skill is intended for
             bool targetsAllies = skill.Category.Contains("Recovery") ||
-                                 skill.Category.Contains("Enhance") ||
+                                 isBuff ||
                                  effectLower.Contains("ally") ||
                                  effectLower.Contains("party");
+
+            // If it's explicitly a debuff, ensure it targets opponents regardless of category.
+            if (isDebuff) targetsAllies = false;
 
             var side = targetsAllies ? allies : opponents;
 

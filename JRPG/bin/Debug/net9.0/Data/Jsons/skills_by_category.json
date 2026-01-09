@@ -2,7 +2,7 @@
   "Ailment Skills": [
     {
       "Skill": "Evil Touch",
-      "Effect": "Instills Fear in 1 foe. (100% chance)",
+      "Effect": "Instills Fear in 1 foe. (40% chance)",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,

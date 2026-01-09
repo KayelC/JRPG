@@ -36,8 +36,9 @@ namespace JRPGPrototype.Logic.Battle
 
             return name.StartsWith("ma") ||
                    name.StartsWith("me") ||
+                   effect.Contains("all foes") ||
+                   effect.Contains("all allies") ||
                    effect.Contains("party") ||
-                   effect.Contains("all enemies") ||
                    name == "amrita" ||
                    name == "salvation";
         }
@@ -104,7 +105,6 @@ namespace JRPGPrototype.Logic.Battle
                 }
 
                 results.Add(res);
-
                 if (res.Type == HitType.Repel) break;
             }
 
@@ -123,7 +123,6 @@ namespace JRPGPrototype.Logic.Battle
             // TRAESTO GEM: Battle Escape (Player remains on floor)
             if (item.Name == "Traesto Gem")
             {
-                _io.WriteLine($"{user.Name} used {item.Name}!");
                 _io.WriteLine("A blinding light creates a path to safety!");
                 return true;
             }
@@ -183,10 +182,7 @@ namespace JRPGPrototype.Logic.Battle
                 }
             }
 
-            if (!anyEffect)
-            {
-                _io.WriteLine("It had no effect...");
-            }
+            if (!anyEffect) _io.WriteLine("It had no effect...");
             return anyEffect;
         }
 
@@ -216,6 +212,36 @@ namespace JRPGPrototype.Logic.Battle
             Element element = ElementHelper.FromCategory(skill.Category);
             int power = skill.GetPowerVal();
 
+            // 1. Check for Instant Kill (IK) Type (Light/Dark in SMT)
+            if (element == Element.Light || element == Element.Dark)
+            {
+                Affinity ikAff = CombatMath.GetEffectiveAffinity(target, element);
+
+                // IK Rule: Null/Repel/Absorb function as normal blocks
+                if (ikAff == Affinity.Null || ikAff == Affinity.Repel || ikAff == Affinity.Absorb)
+                {
+                    _knowledge.Learn(target.SourceId, element, ikAff);
+                    return new CombatResult { Type = HitType.Null, Message = "Blocked!" };
+                }
+
+                // IK Rule: Check success against math kernel
+                if (CombatMath.CalculateInstantKill(attacker, target, skill.Accuracy))
+                {
+                    int hpBefore = target.CurrentHP;
+                    target.CurrentHP = 0; // Death
+                    _knowledge.Learn(target.SourceId, element, ikAff);
+                    return new CombatResult { Type = HitType.Weakness, DamageDealt = hpBefore, Message = "INSTANT KILL!" };
+                }
+                else
+                {
+                    // FIX (Bug #10): IK Miss only costs 1 Icon.
+                    // Returning HitType.Normal in our current Conductor logic uses 2 ticks (1 icon).
+                    _knowledge.Learn(target.SourceId, element, Affinity.Normal);
+                    return new CombatResult { Type = HitType.Normal, Message = "MISS!" };
+                }
+            }
+
+            // 2. Standard Offensive Processing
             if (!CombatMath.CheckHit(attacker, target, element, skill.Accuracy))
             {
                 _knowledge.Learn(target.SourceId, element, Affinity.Normal);
@@ -223,11 +249,7 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             Affinity aff = CombatMath.GetEffectiveAffinity(target, element);
-
-            if (aff == Affinity.Repel)
-            {
-                return ProcessRepelEvent(attacker, element, power);
-            }
+            if (aff == Affinity.Repel) return ProcessRepelEvent(attacker, element, power);
 
             int damage = CombatMath.CalculateDamage(attacker, target, power, element, out bool isCritical);
             CombatResult result = target.ReceiveDamage(damage, element, isCritical);
@@ -245,6 +267,7 @@ namespace JRPGPrototype.Logic.Battle
         {
             if (skill.Category.Contains("Recovery"))
             {
+                // FIX (Bug #7): Curing logic was missing live application
                 if (skill.Effect.Contains("Cure"))
                 {
                     _status.CheckAndExecuteCure(target, skill.Effect);
@@ -252,7 +275,8 @@ namespace JRPGPrototype.Logic.Battle
 
                 if (target.IsDead && skill.Effect.Contains("Revive"))
                 {
-                    target.CurrentHP = target.MaxHP / 2;
+                    int revVal = skill.Effect.Contains("fully") ? target.MaxHP : target.MaxHP / 2;
+                    target.CurrentHP = revVal;
                     _io.WriteLine($"{target.Name} was revived!");
                 }
                 else if (!target.IsDead)
@@ -261,14 +285,17 @@ namespace JRPGPrototype.Logic.Battle
                     if (skill.Effect.Contains("50%")) heal = target.MaxHP / 2;
                     if (skill.Effect.Contains("full")) heal = target.MaxHP;
 
+                    int oldHP = target.CurrentHP;
                     target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
-                    _io.WriteLine($"{target.Name} recovered health.");
+                    _io.WriteLine($"{target.Name} recovered {target.CurrentHP - oldHP} HP.");
                 }
             }
 
+            // FIX (Bug #7): Enhancement (Buffs) now apply live
             if (skill.Category.Contains("Enhance"))
             {
                 _status.ApplyStatChange(skill.Name, target);
+                _io.WriteLine($"{target.Name}'s stats were modified!");
             }
 
             return new CombatResult { Type = HitType.Normal, Message = "Success" };

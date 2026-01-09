@@ -27,6 +27,11 @@ namespace JRPGPrototype.Logic.Battle
         /// Zero: Attack was Nulled or Repelled (Caller must check affinity to trigger reflection).
         /// Negative Value: Amount the target is healed (Absorb).
         /// </returns>
+
+        /// <summary>
+        /// SMT Square-root Damage Formula: 5.0 * sqrt(Power * (Atk/Def))
+        /// Also handles Critical multipliers and status-based modifiers.
+        /// </summary>
         public static int CalculateDamage(Combatant attacker, Combatant target, int skillPower, Element element, out bool isCritical)
         {
             isCritical = false;
@@ -63,7 +68,6 @@ namespace JRPGPrototype.Logic.Battle
             if (isPhysical && !target.IsGuarding)
             {
                 int critChance = CalculateCritChance(attacker, target);
-
                 // Rule: Rigid Body (Frozen/Shocked) results in 100% Critical rate
                 if (target.IsRigidBody || _rnd.Next(0, 100) < critChance)
                 {
@@ -84,9 +88,9 @@ namespace JRPGPrototype.Logic.Battle
                     break;
                 case Affinity.Null:
                 case Affinity.Repel:
-                    // Return 0. The ActionProcessor will see the 'Repel' affinity 
-                    // and then call CalculateReflectedDamage.
                     return 0;
+                // Return 0. The ActionProcessor will see the 'Repel' affinity 
+                // and then call CalculateReflectedDamage.
                 case Affinity.Absorb:
                     return (int)Math.Floor(dmgBase) * -1;
             }
@@ -95,13 +99,30 @@ namespace JRPGPrototype.Logic.Battle
             double variance = 0.95 + (_rnd.NextDouble() * 0.1);
             int finalDamage = (int)Math.Floor(dmgBase * variance);
 
-            return Math.Max(1, finalDamage);
+            // FIX (Bug #11): Removed Math.Max(1, finalDamage). 
+            // If damage is 0, it stays 0 to help debug logic errors.
+            return finalDamage;
         }
 
         /// <summary>
-        /// SMT III Rule: When an attack is repelled, the attacker takes the damage instead.
-        /// The damage is calculated using the Attacker's own stats against themselves.
+        /// SMT III High-Fidelity Instant Kill Logic (Hama/Mudo).
+        /// Formula: SkillAccuracy + (AttackerLUK - TargetLUK)
         /// </summary>
+        public static bool CalculateInstantKill(Combatant attacker, Combatant target, string skillAccuracy)
+        {
+            int baseAccuracy = 40; // Standard base for IK skills
+            if (!string.IsNullOrEmpty(skillAccuracy) && int.TryParse(skillAccuracy.Replace("%", ""), out int parsed))
+            {
+                baseAccuracy = parsed;
+            }
+
+            int lukDiff = attacker.GetStat(StatType.LUK) - target.GetStat(StatType.LUK);
+            int finalChance = baseAccuracy + lukDiff;
+
+            // Roll against Luck-weighted accuracy
+            return _rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 95);
+        }
+
         public static int CalculateReflectedDamage(Combatant originalAttacker, int skillPower, Element element)
         {
             // In SMT III, reflected damage is calculated against the original attacker's 
@@ -117,9 +138,7 @@ namespace JRPGPrototype.Logic.Battle
         {
             int attackerLuck = attacker.GetStat(StatType.LUK);
             int targetLuck = target.GetStat(StatType.LUK);
-
             int chance = ((attackerLuck - targetLuck) / 2) + 5;
-
             return Math.Clamp(chance, 2, 40);
         }
 
@@ -128,17 +147,11 @@ namespace JRPGPrototype.Logic.Battle
         /// </summary>
         public static Affinity GetEffectiveAffinity(Combatant target, Element element)
         {
-            if (element == Element.Almighty || element == Element.None)
-            {
-                return Affinity.Normal;
-            }
+            if (element == Element.Almighty || element == Element.None) return Affinity.Normal;
 
             Affinity baseAff = target.ActivePersona?.GetAffinity(element) ?? Affinity.Normal;
 
-            if (target.IsGuarding && baseAff == Affinity.Weak)
-            {
-                return Affinity.Normal;
-            }
+            if (target.IsGuarding && baseAff == Affinity.Weak) return Affinity.Normal;
 
             bool isPhysical = (element == Element.Slash || element == Element.Strike || element == Element.Pierce);
             if (target.IsRigidBody && isPhysical)
@@ -160,7 +173,6 @@ namespace JRPGPrototype.Logic.Battle
         {
             double pRoll = playerAvgAgi * (0.9 + _rnd.NextDouble() * 0.2);
             double eRoll = enemyAvgAgi * (0.9 + _rnd.NextDouble() * 0.2);
-
             return pRoll >= eRoll;
         }
 
@@ -170,10 +182,7 @@ namespace JRPGPrototype.Logic.Battle
         /// </summary>
         public static bool CheckHit(Combatant attacker, Combatant target, Element element, string skillAccuracy)
         {
-            if (target.IsRigidBody)
-            {
-                return true;
-            }
+            if (target.IsRigidBody) return true;
 
             // 1. Data-Driven Accuracy: Use value from JSON.
             // MODIFIED: Basic attacks (where skillAccuracy is empty) now use 90%.

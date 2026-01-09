@@ -9,8 +9,8 @@ namespace JRPGPrototype.Logic.Battle
 {
     /// <summary>
     /// The Cognitive Layer of the Battle Sub-System.
-    /// Determines the optimal action for an AI combatant by analyzing affinities,
-    /// battle knowledge, and current ailment restrictions.
+    /// Determines the optimal action for an AI combatant using a Unified Tactical Model.
+    /// Prioritizes Press Turn maximization and lethal efficiency over defensive spam.
     /// </summary>
     public class BehaviorEngine
     {
@@ -24,15 +24,17 @@ namespace JRPGPrototype.Logic.Battle
 
         /// <summary>
         /// The primary entry point for AI decision making.
-        /// Adheres to SMT III priority: Ailment Override > Recovery > Weakness Exploitation > Risk Aversion.
+        /// Implements the Tiered Priority Ladder: Kill > Weakness > Crisis > Rigid > Pass > Pressure.
         /// </summary>
         public (SkillData skill, List<Combatant> targets) DetermineBestAction(
             Combatant actor,
             List<Combatant> allies,
             List<Combatant> opponents,
-            BattleKnowledge knowledge)
+            BattleKnowledge knowledge,
+            int fullIcons,
+            int blinkingIcons)
         {
-            // Ailment Hijack Logic (Highest Priority)
+            // --- Step 1: Ailment Hijack Logic (Highest Priority) ---
             // We check the registry to see if the actor's turn is being dictated by an ailment.
             TurnStartResult turnState = _statusRegistry.ProcessTurnStart(actor);
 
@@ -48,89 +50,106 @@ namespace JRPGPrototype.Logic.Battle
                 return DetermineConfusedAction(actor, allies, opponents);
             }
 
-            // Gather Usable Skills
-            // Only consider skills the actor has the HP/SP to cast.
-            var usableSkills = actor.GetConsolidatedSkills()
+            // --- STEP 2: GATHER AND FILTER VALID ACTIONS (Effectiveness Gate) ---
+            // We get all skills + Basic Attack (null)
+            var actionPool = actor.GetConsolidatedSkills()
                 .Select(s => Database.Skills.TryGetValue(s, out var data) ? data : null)
-                .Where(d => d != null && CanAfford(actor, d))
+                .Where(d => d != null && d.Category != "Passive Skills" && CanAfford(actor, d))
                 .ToList();
 
-            // 1. Emergency Recovery (Filter for LIVE allies only)
-            var dyingAlly = allies.FirstOrDefault(a => !a.IsDead && (double)a.CurrentHP / a.MaxHP < 0.35);
-            if (dyingAlly != null)
-            {
-                var healSkill = usableSkills.FirstOrDefault(s => s.Category.Contains("Recovery") && !s.Effect.Contains("Revive"));
-                if (healSkill != null)
-                {
-                    return (healSkill, DetermineTargetList(actor, dyingAlly, allies, opponents, healSkill));
-                }
-            }
+            // Perform the "Effectiveness Gate" check to prune useless moves
+            var validSkills = actionPool.Where(s => IsActionEffective(actor, s, allies, opponents, knowledge)).ToList();
 
-            // 2. Smart Curing (Check if skill actually cures the active ailment)
-            var ailedAlly = allies.FirstOrDefault(a => !a.IsDead && a.CurrentAilment != null);
-            if (ailedAlly != null)
-            {
-                var cureSkill = usableSkills.FirstOrDefault(s => s.Effect.Contains("Cure") || s.Effect.Contains(ailedAlly.CurrentAilment.Name));
-                if (cureSkill != null)
-                {
-                    return (cureSkill, new List<Combatant> { ailedAlly });
-                }
-            }
+            // --- STEP 3: THE PRIORITY LADDER ---
 
-            // Tactical Filtering
-            // Filter out skills that target elements the AI KNOWS will result in a -4 Icon penalty or Phase Termination.
-            var safeSkills = usableSkills.Where(s => !IsKnownRisk(s, opponents, knowledge)).ToList();
-
-            // Weakness Hunting
-            // Look for a skill that hits a known weakness of at least one enemy.
-            foreach (var skill in safeSkills)
+            // TIER 1: THE KILL-SHOT
+            // If any valid attack can reduce an opponent to 0 HP, take it.
+            foreach (var skill in validSkills)
             {
                 if (IsOffensive(skill))
                 {
-                    Element element = ElementHelper.FromCategory(skill.Category);
-                    foreach (var target in opponents.Where(o => !o.IsDead))
+                    var targets = DetermineTargetList(actor, null, allies, opponents, skill);
+                    foreach (var target in targets)
                     {
-                        if (knowledge.IsWeaknessKnown(target.SourceId, element))
+                        int estDmg = CombatMath.CalculateDamage(actor, target, skill.GetPowerVal(), ElementHelper.FromCategory(skill.Category), out _);
+                        if (estDmg >= target.CurrentHP)
                         {
-                            return (skill, DetermineTargetList(actor, target, allies, opponents, skill));
+                            return (skill, targets);
                         }
                     }
                 }
             }
 
-            // Rigid Body Exploitation
+            // TIER 2: PRESS TURN EXPLOITATION
+            // Hunt for known weaknesses to gain extra actions.
+            foreach (var skill in validSkills)
+            {
+                if (IsOffensive(skill))
+                {
+                    Element element = ElementHelper.FromCategory(skill.Category);
+                    var targets = DetermineTargetList(actor, null, allies, opponents, skill);
+                    if (targets.Any(t => knowledge.IsWeaknessKnown(t.SourceId, element)))
+                    {
+                        // SMT Rule: Only use if NO target in the list is known to Null/Repel/Absorb
+                        if (!targets.Any(t => knowledge.IsResistanceKnown(t.SourceId, element)))
+                        {
+                            return (skill, targets);
+                        }
+                    }
+                }
+            }
+
+            // TIER 3: CRISIS RECOVERY
+            // Heal allies who are below 35% HP.
+            var criticalAlly = allies.FirstOrDefault(a => !a.IsDead && (double)a.CurrentHP / a.MaxHP < 0.35);
+            if (criticalAlly != null)
+            {
+                var healSkill = validSkills.FirstOrDefault(s => s.Category.Contains("Recovery") && !s.Effect.Contains("Revive"));
+                if (healSkill != null)
+                {
+                    return (healSkill, DetermineTargetList(actor, criticalAlly, allies, opponents, healSkill));
+                }
+            }
+
+            // TIER 4: CRITICAL FISHING (RIGID TARGETS)
+            // If an enemy is Frozen or Shocked, Physical attacks are 100% Critical.
             var rigidTarget = opponents.FirstOrDefault(o => !o.IsDead && o.IsRigidBody);
             if (rigidTarget != null)
             {
-                var physSkill = safeSkills.FirstOrDefault(s => IsPhysical(s));
+                var physSkill = validSkills.FirstOrDefault(s => IsPhysical(s));
                 if (physSkill != null) return (physSkill, DetermineTargetList(actor, rigidTarget, allies, opponents, physSkill));
-                
-                // Fallback to basic attack if it's physical.
+                // Basic Attack (Physical)
                 return (null, new List<Combatant> { rigidTarget });
             }
 
-            // Support & Buffing
-            var supportSkill = safeSkills.FirstOrDefault(s => s.Category.Contains("Enhance"));
-            if (supportSkill != null && _rnd.Next(0, 100) < 40)
+            // TIER 5: INFORMED PASS (Strategic Rotation)
+            // Condition: Lead is Solid [O], total icons > 1, and an ally behind has a weakness to exploit.
+            if (fullIcons > 0 && (fullIcons + blinkingIcons) > 1)
             {
-                return (supportSkill, DetermineTargetList(actor, null, allies, opponents, supportSkill));
+                bool allyHasAdvantage = allies.Any(a => a != actor && !a.IsDead && HasKnownAdvantage(a, opponents, knowledge));
+                if (allyHasAdvantage)
+                {
+                    // Return a "Pass" signal. Our conductor interprets (null, empty list) as Pass.
+                    return (null, new List<Combatant>());
+                }
             }
 
-            // Default Action
-            // Choose a random safe skill or perform a basic attack.
-            if (safeSkills.Count > 0 && _rnd.Next(0, 100) < 70)
+            // TIER 6: STANDARD PRESSURE
+            // Use highest power offensive skill that isn't a known risk.
+            var offensiveOptions = validSkills.Where(s => IsOffensive(s)).OrderByDescending(s => s.GetPowerVal()).ToList();
+            if (offensiveOptions.Any())
             {
-                var randomSkill = safeSkills[_rnd.Next(safeSkills.Count)];
-                return (randomSkill, DetermineTargetList(actor, null, allies, opponents, randomSkill));
+                var bestSkill = offensiveOptions.First();
+                return (bestSkill, DetermineTargetList(actor, null, allies, opponents, bestSkill));
             }
 
-            // Fallback: Attack random enemy.
+            // TIER 7: DESPERATION
+            // Default to basic attack on random enemy.
             return (null, new List<Combatant> { opponents[_rnd.Next(opponents.Count)] });
         }
 
         /// <summary>
-        /// SMT III High Fidelity: Determines action when Charmed.
-        /// Sabotages the team by healing opponents or striking allies.
+        /// SMT III High Fidelity: Sabotages the team when Charmed.
         /// </summary>
         private (SkillData, List<Combatant>) DetermineConfusedAction(Combatant actor, List<Combatant> allies, List<Combatant> opponents)
         {
@@ -152,12 +171,64 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// Precision Target Identification.
-        /// Handles Ma-/Me- prefixes and specific keyword boundaries (Party/All Allies) to avoid greedy string matches.
+        /// The Effectiveness Gate: Prevents the AI from taking turns that do nothing.
         /// </summary>
+        private bool IsActionEffective(Combatant actor, SkillData skill, List<Combatant> allies, List<Combatant> opponents, BattleKnowledge knowledge)
+        {
+            // Basic attacks are always "effective" as a baseline.
+            if (skill == null) return true;
+
+            string name = skill.Name.ToLower();
+
+            // 1. Healing check: Don't heal if targets are > 70% HP
+            if (skill.Category.Contains("Recovery") && !skill.Effect.Contains("Revive"))
+            {
+                return allies.Any(a => !a.IsDead && (double)a.CurrentHP / a.MaxHP < 0.70);
+            }
+
+            // 2. Buff/Debuff check: Don't buff if at +3, don't debuff if at -3.
+            bool isBuff = name.EndsWith("kaja") || name == "heat riser";
+            bool isDebuff = name.EndsWith("nda") || name == "debilitate";
+
+            if (isBuff) return allies.Any(a => !a.IsDead && a.Buffs.Values.Any(v => v < 3));
+            if (isDebuff) return opponents.Any(o => !o.IsDead && o.Buffs.Values.Any(v => v > -3));
+
+            // 3. Risk check: Don't use elements known to be Null/Repel/Absorb
+            if (IsOffensive(skill))
+            {
+                Element element = ElementHelper.FromCategory(skill.Category);
+                if (opponents.Any(o => !o.IsDead && knowledge.IsResistanceKnown(o.SourceId, element)))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool HasKnownAdvantage(Combatant ally, List<Combatant> opponents, BattleKnowledge knowledge)
+        {
+            var skills = ally.GetConsolidatedSkills()
+                .Select(s => Database.Skills.TryGetValue(s, out var data) ? data : null)
+                .Where(d => d != null && d.Category != "Passive Skills");
+
+            foreach (var skill in skills)
+            {
+                Element e = ElementHelper.FromCategory(skill.Category);
+                if (opponents.Any(o => !o.IsDead && knowledge.IsWeaknessKnown(o.SourceId, e))) return true;
+            }
+            return false;
+        }
+
         private List<Combatant> DetermineTargetList(Combatant actor, Combatant primaryTarget, List<Combatant> allies, List<Combatant> opponents, SkillData skill)
         {
             List<Combatant> targets = new List<Combatant>();
+            if (skill == null) // Basic Attack
+            {
+                targets.Add(primaryTarget ?? opponents[_rnd.Next(opponents.Count)]);
+                return targets;
+            }
+
             string nameLower = skill.Name.ToLower();
             string effectLower = skill.Effect.ToLower();
 
@@ -205,13 +276,14 @@ namespace JRPGPrototype.Logic.Battle
         /// </summary>
         private bool IsKnownRisk(SkillData skill, List<Combatant> opponents, BattleKnowledge knowledge)
         {
-            if (!IsOffensive(skill)) return false;
+            if (skill == null || !IsOffensive(skill)) return false;
             Element element = ElementHelper.FromCategory(skill.Category);
             return opponents.Any(target => !target.IsDead && knowledge.IsResistanceKnown(target.SourceId, element));
         }
 
         private bool CanAfford(Combatant actor, SkillData skill)
         {
+            if (skill == null) return true;
             var cost = skill.ParseCost();
             if (cost.isHP)
             {
@@ -223,12 +295,14 @@ namespace JRPGPrototype.Logic.Battle
 
         private bool IsOffensive(SkillData skill)
         {
+            if (skill == null) return true;
             string cat = skill.Category.ToLower();
             return !cat.Contains("recovery") && !cat.Contains("enhance");
         }
 
         private bool IsPhysical(SkillData skill)
         {
+            if (skill == null) return true;
             Element element = ElementHelper.FromCategory(skill.Category);
             return element == Element.Slash || element == Element.Strike || element == Element.Pierce;
         }

@@ -199,7 +199,7 @@ namespace JRPGPrototype.Logic.Battle
                 // 1. Forced Behaviors (Ailments)
                 if (turnState == TurnStartResult.ForcedPhysical || turnState == TurnStartResult.ForcedConfusion)
                 {
-                    var forced = _ai.DetermineBestAction(actor, _party.ActiveParty, _enemies, _playerKnowledge);
+                    var forced = _ai.DetermineBestAction(actor, _party.ActiveParty, _enemies, _playerKnowledge, _turnEngine.FullIcons, _turnEngine.BlinkingIcons);
                     skill = forced.skill;
                     targets = forced.targets;
                     actionCommitted = true;
@@ -332,7 +332,9 @@ namespace JRPGPrototype.Logic.Battle
                     var decision = _ai.DetermineBestAction(actor,
                         isPlayerSide ? _party.ActiveParty : _enemies,
                         isPlayerSide ? _enemies : _party.ActiveParty,
-                        sideKnowledge);
+                        sideKnowledge,
+                        _turnEngine.FullIcons,
+                        _turnEngine.BlinkingIcons);
 
                     skill = decision.skill;
                     targets = decision.targets;

@@ -301,7 +301,6 @@ namespace JRPGPrototype.Logic.Battle
                 _status.ApplyStatChange(skill.Name, target);
                 _io.WriteLine($"{target.Name}'s stats were modified!");
             }
-            if (skill.Category.Contains("Enhance")) _status.ApplyStatChange(skill.Name, target);
             return new CombatResult { Type = HitType.Normal, Message = "Success" };
         }
 

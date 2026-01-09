@@ -74,8 +74,8 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             // SMT III RULE 3: Weakness or Critical results in Turn Chaining.
-            // If a Full icon is available, it is converted to Blinking (pushed to back).
-            // If only Blinking icons remain, one is consumed.
+            // Chaining: If a Full icon is available ANYWHERE on the bar, it is converted 
+            // to Blinking. This happens even if a Blinking icon is currently lead.
             if (hitType == HitType.Weakness || isCritical)
             {
                 if (_fullIcons > 0)
@@ -92,8 +92,7 @@ namespace JRPGPrototype.Logic.Battle
 
             // SMT III RULE 4: Normal Action.
             // Consumes the current active icon. 
-            // Priority: Blinking icons are used first if they are at the front of the queue, 
-            // but in the Nocturne logic model, any icon used normally is simply gone.
+            // Priority: Blinking icons are used first if they are at the front of the queue.
             if (_blinkingIcons > 0)
             {
                 _blinkingIcons--;
@@ -110,21 +109,25 @@ namespace JRPGPrototype.Logic.Battle
 
         /// <summary>
         /// SMT III Rule: Passing a turn.
-        /// Passing on a Solid icon converts it to Blinking (effectively moving to back).
-        /// Passing on a Blinking icon consumes it entirely.
+        /// Passing on a Solid icon [O] converts it to Blinking [X].
+        /// Passing on a Blinking icon [X] consumes it entirely.
+        /// Chaining is NOT available for Passing.
         /// </summary>
         public void Pass()
         {
             if (!HasTurnsRemaining()) return;
 
-            if (_fullIcons > 0)
+            // In Nocturne, Passing always targets the current active icon.
+            // If the current lead icon is blinking, it is destroyed.
+            if (_blinkingIcons > 0)
+            {
+                _blinkingIcons--;
+            }
+            // If the lead icon is solid, it becomes blinking (moves to back).
+            else if (_fullIcons > 0)
             {
                 _fullIcons--;
                 _blinkingIcons++;
-            }
-            else
-            {
-                _blinkingIcons--;
             }
         }
 

@@ -15,7 +15,7 @@ namespace JRPGPrototype.Logic.Battle
 
         /// <summary>
         /// SMT Square-root Damage Formula: 5.0 * sqrt(Power * (Atk/Def))
-        /// Also handles Critical multipliers and status-based modifiers.
+        /// Implements Linear Stacking Multipliers: +4 = 2.0x, -4 = 0.5x.
         /// </summary>
         /// <param name="attacker">The entity performing the action.</param>
         /// <param name="target">The entity receiving the action.</param>
@@ -36,35 +36,40 @@ namespace JRPGPrototype.Logic.Battle
         {
             isCritical = false;
 
-            // 1. Determine if the attack is Physical or Magical
+            // Determine if the attack is Physical or Magical
             bool isPhysical = (element == Element.Slash || element == Element.Strike || element == Element.Pierce);
 
-            // 2. Select the correct Attack Stat (SMT Standard: Phys = STR, Magic = MAG)
+            // Select the correct Attack Stat (SMT Standard: Phys = STR, Magic = MAG)
             StatType atkStat = isPhysical ? StatType.STR : StatType.MAG;
             double atkPower = attacker.GetStat(atkStat);
 
-            // 3. Determine the Defensive Stat (Endurance + Armor Defense)
+            // Determine the Defensive Stat (Endurance + Armor Defense)
             double defPower = target.GetStat(StatType.END) + target.GetDefense();
 
-            // 4. Apply Attacker Ailment Penalties
+            // Apply Stacking Multipliers (Kaja/Nda)
+            // Linear 25% logic: +4 = 200%, 0 = 100%, -4 = 50%
+            atkPower *= GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Attack", 0));
+            defPower *= GetStatMultiplier(target.Buffs.GetValueOrDefault("Defense", 0));
+
+            // Apply Ailment Penalties
             if (attacker.CurrentAilment != null)
             {
                 atkPower *= attacker.CurrentAilment.DamageDealMult;
             }
 
-            // 5. Calculate Base Ratio
+            // Calculate Base Ratio and Execute Formula
             double ratio = atkPower / Math.Max(1.0, defPower);
 
-            // 6. Execute SMT Square-root Formula
+            // Execute SMT Square-root Formula
             double dmgBase = 5.0 * Math.Sqrt(skillPower * ratio);
 
-            // 7. Apply Target Ailment Vulnerabilities
+            // Apply Target Ailment Vulnerabilities
             if (target.CurrentAilment != null)
             {
                 dmgBase *= target.CurrentAilment.DamageTakenMult;
             }
 
-            // 8. Critical Logic (SMT III Rule: Only Physical attacks can Critical)
+            // Critical Logic (Physical Only)
             if (isPhysical && !target.IsGuarding)
             {
                 int critChance = CalculateCritChance(attacker, target);
@@ -76,7 +81,7 @@ namespace JRPGPrototype.Logic.Battle
                 }
             }
 
-            // 9. Elemental Affinity Multipliers
+            // Elemental Affinity Multipliers
             Affinity effectiveAff = GetEffectiveAffinity(target, element);
             switch (effectiveAff)
             {
@@ -95,29 +100,39 @@ namespace JRPGPrototype.Logic.Battle
                     return (int)Math.Floor(dmgBase) * -1;
             }
 
-            // 10. Damage Variance (95% to 105%)
+            // Damage Variance (95% to 105%)
             double variance = 0.95 + (_rnd.NextDouble() * 0.1);
             int finalDamage = (int)Math.Floor(dmgBase * variance);
 
-            // FIX (Bug #11): Removed Math.Max(1, finalDamage). 
-            // If damage is 0, it stays 0 to help debug logic errors.
             return finalDamage;
         }
 
         /// <summary>
-        /// SMT III High-Fidelity Instant Kill Logic (Hama/Mudo).
-        /// Formula: SkillAccuracy + (AttackerLUK - TargetLUK)
+        /// Calculates the linear multiplier for a stat based on its stack count.
+        /// Scaling: +4 = 2.0x (25% per stack), -4 = 0.5x (12.5% per stack reduction)
+        /// to ensure -4 is exactly half.
         /// </summary>
+        private static double GetStatMultiplier(int stacks)
+        {
+            if (stacks == 0) return 1.0;
+            if (stacks > 0) return 1.0 + (stacks * 0.25);
+
+            // For negative stacks, we use 0.125 to reach 0.5 at -4 linearly
+            return 1.0 + (stacks * 0.125);
+        }
+
         public static bool CalculateInstantKill(Combatant attacker, Combatant target, string skillAccuracy)
         {
-            int baseAccuracy = 40; // Standard base for IK skills
+            int baseAccuracy = 40;
             if (!string.IsNullOrEmpty(skillAccuracy) && int.TryParse(skillAccuracy.Replace("%", ""), out int parsed))
             {
                 baseAccuracy = parsed;
             }
 
             int lukDiff = attacker.GetStat(StatType.LUK) - target.GetStat(StatType.LUK);
-            int finalChance = baseAccuracy + lukDiff;
+            double multi = GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0));
+
+            double finalChance = (baseAccuracy + lukDiff) * multi;
 
             // Roll against Luck-weighted accuracy
             return _rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 95);
@@ -139,7 +154,10 @@ namespace JRPGPrototype.Logic.Battle
             int attackerLuck = attacker.GetStat(StatType.LUK);
             int targetLuck = target.GetStat(StatType.LUK);
             int chance = ((attackerLuck - targetLuck) / 2) + 5;
-            return Math.Clamp(chance, 2, 40);
+
+            // Apply Agility/Luck buff influence on crit
+            double multi = GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0));
+            return (int)Math.Clamp(chance * multi, 2, 40);
         }
 
         /// <summary>
@@ -184,7 +202,7 @@ namespace JRPGPrototype.Logic.Battle
         {
             if (target.IsRigidBody) return true;
 
-            // 1. Data-Driven Accuracy: Use value from JSON.
+            // Data-Driven Accuracy: Use value from JSON.
             // MODIFIED: Basic attacks (where skillAccuracy is empty) now use 90%.
             int baseAccuracy = 90;
             if (!string.IsNullOrEmpty(skillAccuracy) && int.TryParse(skillAccuracy.Replace("%", ""), out int parsed))
@@ -192,18 +210,19 @@ namespace JRPGPrototype.Logic.Battle
                 baseAccuracy = parsed;
             }
 
-            // 2. Agility Influence: (AGI Diff * 2) 
+            // Agility Influence: (AGI Diff * 2) 
             int attackerAgi = attacker.GetStat(StatType.AGI);
             int targetAgi = target.GetStat(StatType.AGI);
-            int agiContribution = (attackerAgi - targetAgi) * 2;
-
-            // 3. Luck Influence: (LUK Diff)
+            
+            // Luck Influence: (LUK Diff) 
             int attackerLuk = attacker.GetStat(StatType.LUK);
             int targetLuk = target.GetStat(StatType.LUK);
-            int lukContribution = (attackerLuk - targetLuk);
 
-            // 4. Final Calculation
-            double finalChance = baseAccuracy + agiContribution + lukContribution;
+            // Apply Agility Buffs to the hit/evasion math
+            double atkMulti = GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0));
+            double defMulti = GetStatMultiplier(target.Buffs.GetValueOrDefault("Agility", 0));
+
+            double finalChance = baseAccuracy + (((attackerAgi * atkMulti) - (targetAgi * defMulti)) * 2) + (attackerLuk - targetLuk);
 
             return _rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 99);
         }

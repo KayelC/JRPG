@@ -32,7 +32,7 @@ namespace JRPGPrototype.Logic.Battle
             List<Combatant> opponents,
             BattleKnowledge knowledge)
         {
-            // 1. Ailment Hijack Logic (Highest Priority)
+            // Ailment Hijack Logic (Highest Priority)
             // We check the registry to see if the actor's turn is being dictated by an ailment.
             TurnStartResult turnState = _statusRegistry.ProcessTurnStart(actor);
 
@@ -48,30 +48,40 @@ namespace JRPGPrototype.Logic.Battle
                 return DetermineConfusedAction(actor, allies, opponents);
             }
 
-            // 2. Gather Usable Skills
+            // Gather Usable Skills
             // Only consider skills the actor has the HP/SP to cast.
             var usableSkills = actor.GetConsolidatedSkills()
                 .Select(s => Database.Skills.TryGetValue(s, out var data) ? data : null)
                 .Where(d => d != null && CanAfford(actor, d))
                 .ToList();
 
-            // 3. Emergency Recovery (HP < 35%)
-            // AI prioritizes healing itself or allies if they are in the 'danger' zone.
-            var dyingAlly = allies.FirstOrDefault(a => (double)a.CurrentHP / a.MaxHP < 0.35);
+            // 1. Emergency Recovery (Filter for LIVE allies only)
+            var dyingAlly = allies.FirstOrDefault(a => !a.IsDead && (double)a.CurrentHP / a.MaxHP < 0.35);
             if (dyingAlly != null)
             {
-                var healSkill = usableSkills.FirstOrDefault(s => s.Category.Contains("Recovery"));
+                var healSkill = usableSkills.FirstOrDefault(s => s.Category.Contains("Recovery") && !s.Effect.Contains("Revive"));
                 if (healSkill != null)
                 {
                     return (healSkill, DetermineTargetList(actor, dyingAlly, allies, opponents, healSkill));
                 }
             }
 
-            // 4. Tactical Filtering (Risk Aversion)
+            // 2. Smart Curing (Check if skill actually cures the active ailment)
+            var ailedAlly = allies.FirstOrDefault(a => !a.IsDead && a.CurrentAilment != null);
+            if (ailedAlly != null)
+            {
+                var cureSkill = usableSkills.FirstOrDefault(s => s.Effect.Contains("Cure") || s.Effect.Contains(ailedAlly.CurrentAilment.Name));
+                if (cureSkill != null)
+                {
+                    return (cureSkill, new List<Combatant> { ailedAlly });
+                }
+            }
+
+            // Tactical Filtering
             // Filter out skills that target elements the AI KNOWS will result in a -4 Icon penalty or Phase Termination.
             var safeSkills = usableSkills.Where(s => !IsKnownRisk(s, opponents, knowledge)).ToList();
 
-            // 5. Weakness Hunting (Press Turn Maximization)
+            // Weakness Hunting
             // Look for a skill that hits a known weakness of at least one enemy.
             foreach (var skill in safeSkills)
             {
@@ -88,28 +98,25 @@ namespace JRPGPrototype.Logic.Battle
                 }
             }
 
-            // 6. Rigid Body Exploitation (Crit Fishing)
-            // If an enemy is Frozen or Shocked, Physical attacks are 100% Critical in SMT III.
-            var rigidTarget = opponents.FirstOrDefault(o => o.IsRigidBody);
+            // Rigid Body Exploitation
+            var rigidTarget = opponents.FirstOrDefault(o => !o.IsDead && o.IsRigidBody);
             if (rigidTarget != null)
             {
                 var physSkill = safeSkills.FirstOrDefault(s => IsPhysical(s));
-                if (physSkill != null)
-                {
-                    return (physSkill, DetermineTargetList(actor, rigidTarget, allies, opponents, physSkill));
-                }
+                if (physSkill != null) return (physSkill, DetermineTargetList(actor, rigidTarget, allies, opponents, physSkill));
+                
                 // Fallback to basic attack if it's physical.
                 return (null, new List<Combatant> { rigidTarget });
             }
 
-            // 7. Support & Buffing
+            // Support & Buffing
             var supportSkill = safeSkills.FirstOrDefault(s => s.Category.Contains("Enhance"));
             if (supportSkill != null && _rnd.Next(0, 100) < 40)
             {
                 return (supportSkill, DetermineTargetList(actor, null, allies, opponents, supportSkill));
             }
 
-            // 8. Default Action
+            // Default Action
             // Choose a random safe skill or perform a basic attack.
             if (safeSkills.Count > 0 && _rnd.Next(0, 100) < 70)
             {
@@ -135,12 +142,8 @@ namespace JRPGPrototype.Logic.Battle
             // 50% Chance: Aid the enemies
             if (_rnd.Next(0, 100) < 50)
             {
-                var healSkill = skills.FirstOrDefault(s => s.Category.Contains("Recovery"));
-                if (healSkill != null)
-                {
-                    // Target a random opponent with the heal
-                    return (healSkill, new List<Combatant> { opponents[_rnd.Next(opponents.Count)] });
-                }
+                var healSkill = skills.FirstOrDefault(s => s.Category.Contains("Recovery") && !s.Effect.Contains("Revive"));
+                if (healSkill != null) return (healSkill, new List<Combatant> { opponents[_rnd.Next(opponents.Count)] });
             }
 
             // 50% Chance (or fallback): Attack a random ally
@@ -177,8 +180,8 @@ namespace JRPGPrototype.Logic.Battle
 
             if (isMulti)
             {
-                // Multi-target skills target all living members of that side
-                targets.AddRange(side.Where(s => !s.IsDead));
+                // Multi-target skills only target living members unless it's a Revive skill
+                targets.AddRange(side.Where(s => skill.Effect.Contains("Revive") ? s.IsDead : !s.IsDead));
             }
             else
             {
@@ -195,16 +198,8 @@ namespace JRPGPrototype.Logic.Battle
         private bool IsKnownRisk(SkillData skill, List<Combatant> opponents, BattleKnowledge knowledge)
         {
             if (!IsOffensive(skill)) return false;
-
             Element element = ElementHelper.FromCategory(skill.Category);
-            foreach (var target in opponents.Where(o => !o.IsDead))
-            {
-                if (knowledge.IsResistanceKnown(target.SourceId, element))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return opponents.Any(target => !target.IsDead && knowledge.IsResistanceKnown(target.SourceId, element));
         }
 
         private bool CanAfford(Combatant actor, SkillData skill)

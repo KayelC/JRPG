@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
-using System.Text.RegularExpressions;
+
 
 namespace JRPGPrototype.Logic.Battle
 {
@@ -48,14 +52,9 @@ namespace JRPGPrototype.Logic.Battle
 
             int baseChance = 100;
             Match match = Regex.Match(skillEffect, @"(\d+)%");
-            if (match.Success)
-            {
-                baseChance = int.Parse(match.Groups[1].Value);
-            }
+            if (match.Success) baseChance = int.Parse(match.Groups[1].Value);
 
-            int attackerLuck = attacker.GetStat(StatType.LUK);
-            int targetLuck = target.GetStat(StatType.LUK);
-            int finalChance = baseChance + (attackerLuck - targetLuck);
+            int finalChance = baseChance + (attacker.GetStat(StatType.LUK) - target.GetStat(StatType.LUK));
 
             if (_rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 95))
             {
@@ -73,10 +72,10 @@ namespace JRPGPrototype.Logic.Battle
         {
             if (target.CurrentAilment == null) return false;
 
-            bool curesAll = skillEffect.Contains("Cure all", StringComparison.OrdinalIgnoreCase) ||
-                            skillEffect.Contains("Cures all", StringComparison.OrdinalIgnoreCase);
-
-            if (curesAll || skillEffect.Contains(target.CurrentAilment.Name, StringComparison.OrdinalIgnoreCase))
+            // Strict Curing Rule: Patra logic.
+            // Description must include the ailment name to be effective.
+            if (skillEffect.Contains("Cure all", StringComparison.OrdinalIgnoreCase) ||
+                skillEffect.Contains(target.CurrentAilment.Name, StringComparison.OrdinalIgnoreCase))
             {
                 target.RemoveAilment();
                 return true;
@@ -116,7 +115,7 @@ namespace JRPGPrototype.Logic.Battle
                             return TurnStartResult.FleeBattle;
 
                         if (actor.Class == ClassType.Demon)
-                            return TurnStartResult.ReturnToCOMP;
+                        return TurnStartResult.ReturnToCOMP;
                     }
                     return fearRoll < 55 ? TurnStartResult.Skip : TurnStartResult.CanAct; // 40% skip turn
 
@@ -167,9 +166,7 @@ namespace JRPGPrototype.Logic.Battle
                 logs.Add($"{actor.Name} is no longer {ailment.Name}.");
                 return logs;
             }
-
-            // 3. Natural Recovery
-            if (ailment.RemovalTriggers.Contains("NaturalRoll"))
+            else if (ailment.RemovalTriggers.Contains("NaturalRoll"))
             {
                 int recoveryChance = 20 + (actor.GetStat(StatType.LUK) / 2);
                 if (_rnd.Next(0, 100) < recoveryChance)
@@ -182,7 +179,7 @@ namespace JRPGPrototype.Logic.Battle
 
             // 4. Turn Decay
             actor.AilmentDuration--;
-            if (actor.AilmentDuration <= 0)
+            if (actor.AilmentDuration <= 0 && actor.CurrentAilment != null)
             {
                 actor.RemoveAilment();
                 logs.Add($"{actor.Name}'s {ailment.Name} wore off.");
@@ -201,22 +198,21 @@ namespace JRPGPrototype.Logic.Battle
             bool isBuff = skill.EndsWith("kaja") || skill == "heat riser";
             bool isDebuff = skill.EndsWith("nda") || skill == "debilitate";
 
+            int delta = isBuff ? 1 : -1;
             // Omni-Modifiers
             if (skill == "heat riser") { ChangeBuff(target, "Attack", 1); ChangeBuff(target, "Defense", 1); ChangeBuff(target, "Agility", 1); return; }
             if (skill == "debilitate") { ChangeBuff(target, "Attack", -1); ChangeBuff(target, "Defense", -1); ChangeBuff(target, "Agility", -1); return; }
 
             // Root Parsing
-            if (skill.Contains("taru")) ChangeBuff(target, "Attack", isBuff ? 1 : -1);
-            if (skill.Contains("raku")) ChangeBuff(target, "Defense", isBuff ? 1 : -1);
-            if (skill.Contains("suku")) ChangeBuff(target, "Agility", isBuff ? 1 : -1);
+            if (skill.Contains("taru")) ChangeBuff(target, "Attack", delta);
+            if (skill.Contains("raku")) ChangeBuff(target, "Defense", delta);
+            if (skill.Contains("suku")) ChangeBuff(target, "Agility", delta);
         }
 
         private void ChangeBuff(Combatant target, string stat, int delta)
         {
             int current = target.Buffs.GetValueOrDefault(stat, 0);
-            int newVal = Math.Clamp(current + delta, -4, 4);
-            target.Buffs[stat] = newVal;
+            target.Buffs[stat] = Math.Clamp(current + delta, -4, 4);
         }
-
     }
 }

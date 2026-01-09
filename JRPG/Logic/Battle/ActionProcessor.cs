@@ -93,18 +93,12 @@ namespace JRPGPrototype.Logic.Battle
 
             foreach (var target in targets)
             {
-                if (target.IsDead && !skill.Effect.Contains("Revive")) continue;
+                // Strict check: Only allow Revive skills to target dead allies.
+                bool isRevive = skill.Effect.Contains("Revive");
+                if (target.IsDead && !isRevive) continue;
+                if (!target.IsDead && isRevive) continue;
 
-                CombatResult res;
-                if (IsOffensive(skill))
-                {
-                    res = ProcessOffensiveSkill(attacker, target, skill);
-                }
-                else
-                {
-                    res = ProcessUtilitySkill(attacker, target, skill);
-                }
-
+                CombatResult res = IsOffensive(skill) ? ProcessOffensiveSkill(attacker, target, skill) : ProcessUtilitySkill(attacker, target, skill);
                 results.Add(res);
 
                 if (res.Type == HitType.Repel) break;
@@ -167,8 +161,7 @@ namespace JRPGPrototype.Logic.Battle
                     case "Revive":
                         if (target.IsDead)
                         {
-                            int revVal = item.EffectValue >= 100 ? target.MaxHP : target.MaxHP / 2;
-                            target.CurrentHP = revVal;
+                            target.CurrentHP = item.EffectValue >= 100 ? target.MaxHP : target.MaxHP / 2;
                             _io.WriteLine($"{target.Name} was revived!");
                             anyEffect = true;
                         }
@@ -242,8 +235,8 @@ namespace JRPGPrototype.Logic.Battle
                     // FIX (Bug #10): IK Miss only costs 1 Icon.
                     // Returning HitType.Normal in our current Conductor logic uses 2 ticks (1 icon).
                     _knowledge.Learn(target.SourceId, element, Affinity.Normal);
-                    return new CombatResult { Type = HitType.Normal, Message = "MISS!" };
-                }
+                return new CombatResult { Type = HitType.Normal, Message = "MISS!" };
+            }
             }
 
             // Standard Offensive Processing
@@ -272,15 +265,13 @@ namespace JRPGPrototype.Logic.Battle
         {
             if (skill.Category.Contains("Recovery"))
             {
-                if (skill.Effect.Contains("Cure"))
-                {
-                    _status.CheckAndExecuteCure(target, skill.Effect);
-                }
+                // Strict Cure logic: Do not display success if the cure type doesn't match the ailment
+                bool cured = false;
+                if (skill.Effect.Contains("Cure")) cured = _status.CheckAndExecuteCure(target, skill.Effect);
 
                 if (target.IsDead && skill.Effect.Contains("Revive"))
                 {
-                    int revVal = skill.Effect.Contains("fully") ? target.MaxHP : target.MaxHP / 2;
-                    target.CurrentHP = revVal;
+                    target.CurrentHP = skill.Effect.Contains("fully") ? target.MaxHP : target.MaxHP / 2;
                     _io.WriteLine($"{target.Name} was revived!");
                 }
                 else if (!target.IsDead)
@@ -289,8 +280,8 @@ namespace JRPGPrototype.Logic.Battle
                     int heal = skill.GetPowerVal();
                     if (heal == 0)
                     {
-                        Match match = Regex.Match(skill.Effect, @"\((\d+)\)");
-                        if (match.Success) heal = int.Parse(match.Groups[1].Value);
+                    Match match = Regex.Match(skill.Effect, @"\((\d+)\)");
+                    if (match.Success) heal = int.Parse(match.Groups[1].Value);
                     }
 
                     if (skill.Effect.Contains("50%")) heal = target.MaxHP / 2;
@@ -301,15 +292,16 @@ namespace JRPGPrototype.Logic.Battle
 
                     int actualHealed = target.CurrentHP - oldHP;
                     _io.WriteLine($"{target.Name} recovered {actualHealed} HP.");
+                    }
+                    else if (cured) _io.WriteLine($"{target.Name} was cured!");
                 }
-            }
 
             if (skill.Category.Contains("Enhance"))
             {
                 _status.ApplyStatChange(skill.Name, target);
                 _io.WriteLine($"{target.Name}'s stats were modified!");
             }
-
+            if (skill.Category.Contains("Enhance")) _status.ApplyStatChange(skill.Name, target);
             return new CombatResult { Type = HitType.Normal, Message = "Success" };
         }
 

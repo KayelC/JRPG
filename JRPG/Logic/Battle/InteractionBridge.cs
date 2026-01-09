@@ -8,6 +8,11 @@ using JRPGPrototype.Services;
 
 namespace JRPGPrototype.Logic.Battle
 {
+    /// <summary>
+    /// The UI Flow Orchestrator for the Battle Sub-System.
+    /// Manages menu navigation, target selection, and renders battle context to IGameIO.
+    /// Decoupled from execution logic to facilitate future GUI porting.
+    /// </summary>
     public class InteractionBridge
     {
         private readonly IGameIO _io;
@@ -165,7 +170,7 @@ namespace JRPGPrototype.Logic.Battle
             {
                 if (Database.Skills.TryGetValue(sName, out var data))
                 {
-                    // FIX (Bug 9): Exclude Passive Skills from selection
+                    // Exclude Passive Skills from selection
                     if (data.Category == "Passive Skills") continue;
 
                     var cost = data.ParseCost();
@@ -206,7 +211,7 @@ namespace JRPGPrototype.Logic.Battle
             {
                 labels.Add($"{item.Name} x{_inv.GetQuantity(item.Id)}");
 
-                // FIX (Bug 5): Disable Goho-M during battle
+                // Disable Goho-M during battle
                 bool battleForbidden = item.Name == "Goho-M";
                 disabled.Add(battleForbidden);
             }

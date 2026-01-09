@@ -147,6 +147,9 @@ namespace JRPGPrototype.Logic.Battle
             {
                 if (Database.Skills.TryGetValue(sName, out var data))
                 {
+                    // FIX (Bug 9): Exclude Passive Skills from selection
+                    if (data.Category == "Passive Skills") continue;
+
                     var cost = data.ParseCost();
                     bool canAfford = cost.isHP ? actor.CurrentHP > (int)(actor.MaxHP * (cost.value / 100.0)) : actor.CurrentSP >= cost.value;
                     labels.Add($"{sName} ({data.Cost})");
@@ -158,16 +161,19 @@ namespace JRPGPrototype.Logic.Battle
 
             int choice = _io.RenderMenu($"{GetBattleContext(actor)}\nSelect Skill:", labels, _skillMenuIndex, disabled, (idx) =>
             {
-                if (idx >= 0 && idx < skillNames.Count)
+                if (idx >= 0 && idx < labels.Count - 1) // Adjusted for Passive removal
                 {
-                    var d = Database.Skills[skillNames[idx]];
-                    _io.WriteLine($"Effect: {d.Effect}\nPower: {d.Power}");
+                    string targetName = labels[idx].Split('(')[0].Trim();
+                    if (Database.Skills.TryGetValue(targetName, out var d))
+                        _io.WriteLine($"Effect: {d.Effect}\nPower: {d.Power}");
                 }
             });
 
             if (choice == -1 || choice == labels.Count - 1) return null;
             _skillMenuIndex = choice;
-            return Database.Skills[skillNames[choice]];
+
+            string selectedName = labels[choice].Split('(')[0].Trim();
+            return Database.Skills[selectedName];
         }
 
         public ItemData SelectItem(Combatant actor)
@@ -223,19 +229,58 @@ namespace JRPGPrototype.Logic.Battle
             return ("None", null);
         }
 
+        /// <summary>
+        /// FIX (Bug 8): High-Fidelity HUD.
+        /// Renders ailments and buff/debuff stacks in the battle view.
+        /// </summary>
         private string GetBattleContext(Combatant actor)
         {
             string icons = $"Turns: {_turnEngine.GetIconsDisplay()}\n";
             string separator = "==================================================\n";
+
             string enemyGroup = "ENEMIES:\n";
-            foreach (var e in _enemies) enemyGroup += $" {e.Name,-15} {(e.IsDead ? "[DEAD]" : $"HP: {e.CurrentHP}")}\n";
+            foreach (var e in _enemies)
+            {
+                string status = GetStatusIcons(e);
+                enemyGroup += $" {e.Name,-15} {(e.IsDead ? "[DEAD]" : $"HP: {e.CurrentHP}")} {status}\n";
+            }
+
             string partyGroup = "--------------------------------------------------\nPARTY:\n";
             foreach (var p in _party.ActiveParty)
             {
-                string status = p.CurrentAilment != null ? $" [{p.CurrentAilment.Name}]" : "";
-                partyGroup += $" {p.Name,-15} HP: {p.CurrentHP,4}/{p.MaxHP,4} SP: {p.CurrentSP,4}/{p.MaxSP,4}{(p.IsGuarding ? " (G)" : "")}{status}\n";
+                string status = GetStatusIcons(p);
+                partyGroup += $" {p.Name,-15} HP: {p.CurrentHP,4}/{p.MaxHP,4} SP: {p.CurrentSP,4}/{p.MaxSP,4} {status}\n";
             }
             return icons + separator + enemyGroup + partyGroup + separator;
+        }
+
+        private string GetStatusIcons(Combatant c)
+        {
+            string statusStr = "";
+
+            // Render Buffs/Debuffs
+            foreach (var buff in c.Buffs)
+            {
+                if (buff.Value == 0) continue;
+
+                string key = buff.Key == "Attack" ? "ATK" : buff.Key == "Defense" ? "DEF" : "EVA";
+                string sign = buff.Value > 0 ? "+" : "-";
+                // Formatting like [ATK+2] or [DEF-1]
+                statusStr += $"[{key}{sign}{Math.Abs(buff.Value)}]";
+            }
+
+            // Render Ailments
+            if (c.CurrentAilment != null)
+            {
+                statusStr += $"[{c.CurrentAilment.Name}]";
+            }
+
+            if (c.IsGuarding)
+            {
+                statusStr += "[G]";
+            }
+
+            return statusStr;
         }
     }
 }

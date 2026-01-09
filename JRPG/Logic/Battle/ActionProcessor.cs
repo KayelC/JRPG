@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using JRPGPrototype.Core;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Data;
@@ -105,6 +106,7 @@ namespace JRPGPrototype.Logic.Battle
                 }
 
                 results.Add(res);
+
                 if (res.Type == HitType.Repel) break;
             }
 
@@ -212,8 +214,11 @@ namespace JRPGPrototype.Logic.Battle
             Element element = ElementHelper.FromCategory(skill.Category);
             int power = skill.GetPowerVal();
 
-            // 1. Check for Instant Kill (IK) Type (Light/Dark in SMT)
-            if (element == Element.Light || element == Element.Dark)
+            // FIX (Bug 10): Only parse Instant Kill if description explicitly contains the term.
+            bool isInstantKill = (element == Element.Light || element == Element.Dark) &&
+                                 skill.Effect.ToLower().Contains("instant kill");
+
+            if (isInstantKill)
             {
                 Affinity ikAff = CombatMath.GetEffectiveAffinity(target, element);
 
@@ -241,7 +246,7 @@ namespace JRPGPrototype.Logic.Battle
                 }
             }
 
-            // 2. Standard Offensive Processing
+            // Standard Offensive Processing
             if (!CombatMath.CheckHit(attacker, target, element, skill.Accuracy))
             {
                 _knowledge.Learn(target.SourceId, element, Affinity.Normal);
@@ -267,7 +272,6 @@ namespace JRPGPrototype.Logic.Battle
         {
             if (skill.Category.Contains("Recovery"))
             {
-                // FIX (Bug #7): Curing logic was missing live application
                 if (skill.Effect.Contains("Cure"))
                 {
                     _status.CheckAndExecuteCure(target, skill.Effect);
@@ -281,17 +285,25 @@ namespace JRPGPrototype.Logic.Battle
                 }
                 else if (!target.IsDead)
                 {
+                    // FIX (Bug 7): Handle "NaN" power by parsing the number inside parentheses in the Effect string
                     int heal = skill.GetPowerVal();
+                    if (heal == 0)
+                    {
+                        Match match = Regex.Match(skill.Effect, @"\((\d+)\)");
+                        if (match.Success) heal = int.Parse(match.Groups[1].Value);
+                    }
+
                     if (skill.Effect.Contains("50%")) heal = target.MaxHP / 2;
                     if (skill.Effect.Contains("full")) heal = target.MaxHP;
 
                     int oldHP = target.CurrentHP;
                     target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
-                    _io.WriteLine($"{target.Name} recovered {target.CurrentHP - oldHP} HP.");
+
+                    int actualHealed = target.CurrentHP - oldHP;
+                    _io.WriteLine($"{target.Name} recovered {actualHealed} HP.");
                 }
             }
 
-            // FIX (Bug #7): Enhancement (Buffs) now apply live
             if (skill.Category.Contains("Enhance"))
             {
                 _status.ApplyStatChange(skill.Name, target);

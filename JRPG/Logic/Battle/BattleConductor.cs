@@ -123,6 +123,7 @@ namespace JRPGPrototype.Logic.Battle
 
                 // --- 1. TURN START (Ailments & Restrictions) ---
                 TurnStartResult turnState = _statusRegistry.ProcessTurnStart(actor);
+                bool actorRemoved = false; // FIX: Prevent index shifting bug
 
                 if (turnState == TurnStartResult.Skip)
                 {
@@ -148,7 +149,8 @@ namespace JRPGPrototype.Logic.Battle
                     else
                     {
                         _io.WriteLine($"{actor.Name} has fled!", ConsoleColor.Yellow);
-                        _enemies.Remove(actor); // Remove from enemy list to stop the loop
+                        _enemies.Remove(actor);
+                        actorRemoved = true;
                     }
                     _turnEngine.ConsumeAction(HitType.Normal, false);
                 }
@@ -158,13 +160,19 @@ namespace JRPGPrototype.Logic.Battle
                     ExecuteAction(actor, isPlayerSide, turnState);
                 }
 
+                // FIX: Real-time HUD refresh after every action or skip
+                _ui.ForceRefreshHUD();
+
                 // --- 2. TURN END (Recovery & Decay) ---
                 var endLogs = _statusRegistry.ProcessTurnEnd(actor);
                 foreach (var log in endLogs) _io.WriteLine(log, ConsoleColor.Gray);
 
                 if (CheckEncounterCompletion()) return;
 
-                actorIndex++;
+                if (!actorRemoved)
+                {
+                    actorIndex++;
+                }
             }
         }
 
@@ -373,6 +381,7 @@ namespace JRPGPrototype.Logic.Battle
                     }
                     else
                     {
+                        // Skill failed to hit anyone (all dead) - consume normal icon
                         _turnEngine.ConsumeAction(HitType.Normal, false);
                     }
                 }

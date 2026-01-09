@@ -31,6 +31,15 @@ namespace JRPGPrototype.Logic.Battle
             _knowledge = knowledge;
         }
 
+        /// <summary>
+        /// Public access for the Conductor to force a HUD update during AI/DOT sequences.
+        /// </summary>
+        public void ForceRefreshHUD()
+        {
+            _io.Clear();
+            _io.WriteLine(GetBattleContext(null));
+        }
+
         public string ShowMainMenu(Combatant actor)
         {
             string context = GetBattleContext(actor);
@@ -44,8 +53,17 @@ namespace JRPGPrototype.Logic.Battle
             }
             else options.Add("Skill");
 
-            if (actor.Class == ClassType.Human || actor.Class == ClassType.PersonaUser || actor.Class == ClassType.WildCard || actor.Class == ClassType.Operator || actor.Class == ClassType.Avatar) options.Add("Item");
-            if (actor.Class == ClassType.Human || actor.Class == ClassType.PersonaUser || actor.Class == ClassType.WildCard || actor.Class == ClassType.Operator || actor.Class == ClassType.Avatar) options.Add("Tactics");
+            // REFINEMENT: PC Permissions check applied via previous discussion
+            bool isHumanoid = actor.Class == ClassType.Human || actor.Class == ClassType.PersonaUser ||
+                              actor.Class == ClassType.WildCard || actor.Class == ClassType.Operator ||
+                              actor.Class == ClassType.Avatar;
+
+            if (isHumanoid)
+            {
+                options.Add("Item");
+                options.Add("Tactics");
+            }
+
             options.Add("Pass");
 
             bool isPanicked = actor.CurrentAilment != null && actor.CurrentAilment.Name == "Panic";
@@ -181,10 +199,21 @@ namespace JRPGPrototype.Logic.Battle
             var ownedItems = Database.Items.Values.Where(i => _inv.GetQuantity(i.Id) > 0).ToList();
             if (!ownedItems.Any()) { _io.WriteLine("Inventory is empty."); _io.Wait(800); return null; }
 
-            var labels = ownedItems.Select(i => $"{i.Name} x{_inv.GetQuantity(i.Id)}").ToList();
-            labels.Add("Back");
+            List<string> labels = new List<string>();
+            List<bool> disabled = new List<bool>();
 
-            int choice = _io.RenderMenu($"{GetBattleContext(actor)}\nItems:", labels, _itemMenuIndex, null, (idx) =>
+            foreach (var item in ownedItems)
+            {
+                labels.Add($"{item.Name} x{_inv.GetQuantity(item.Id)}");
+
+                // FIX (Bug 5): Disable Goho-M during battle
+                bool battleForbidden = item.Name == "Goho-M";
+                disabled.Add(battleForbidden);
+            }
+            labels.Add("Back");
+            disabled.Add(false);
+
+            int choice = _io.RenderMenu($"{GetBattleContext(actor)}\nItems:", labels, _itemMenuIndex, disabled, (idx) =>
             {
                 if (idx >= 0 && idx < ownedItems.Count) _io.WriteLine(ownedItems[idx].Description);
             });
@@ -229,11 +258,7 @@ namespace JRPGPrototype.Logic.Battle
             return ("None", null);
         }
 
-        /// <summary>
-        /// FIX (Bug 8): High-Fidelity HUD.
-        /// Renders ailments and buff/debuff stacks in the battle view.
-        /// </summary>
-        private string GetBattleContext(Combatant actor)
+        public string GetBattleContext(Combatant actor)
         {
             string icons = $"Turns: {_turnEngine.GetIconsDisplay()}\n";
             string separator = "==================================================\n";
@@ -262,24 +287,14 @@ namespace JRPGPrototype.Logic.Battle
             foreach (var buff in c.Buffs)
             {
                 if (buff.Value == 0) continue;
-
                 string key = buff.Key == "Attack" ? "ATK" : buff.Key == "Defense" ? "DEF" : "EVA";
                 string sign = buff.Value > 0 ? "+" : "-";
-                // Formatting like [ATK+2] or [DEF-1]
+                // Formatting: [ATK+2], [DEF-1], [EVA+3]
                 statusStr += $"[{key}{sign}{Math.Abs(buff.Value)}]";
             }
-
-            // Render Ailments
-            if (c.CurrentAilment != null)
-            {
-                statusStr += $"[{c.CurrentAilment.Name}]";
-            }
-
-            if (c.IsGuarding)
-            {
-                statusStr += "[G]";
-            }
-
+            // Render Ailments/Guard
+            if (c.CurrentAilment != null) statusStr += $"[{c.CurrentAilment.Name}]";
+            if (c.IsGuarding) statusStr += "[G]";
             return statusStr;
         }
     }

@@ -44,8 +44,8 @@ namespace JRPGPrototype.Logic.Battle
             }
             else options.Add("Skill");
 
-            options.Add("Item");
-            options.Add("Tactics");
+            if (actor.Class == ClassType.Human || actor.Class == ClassType.PersonaUser || actor.Class == ClassType.WildCard || actor.Class == ClassType.Operator || actor.Class == ClassType.Avatar) options.Add("Item");
+            if (actor.Class == ClassType.Human || actor.Class == ClassType.PersonaUser || actor.Class == ClassType.WildCard || actor.Class == ClassType.Operator || actor.Class == ClassType.Avatar) options.Add("Tactics");
             options.Add("Pass");
 
             bool isPanicked = actor.CurrentAilment != null && actor.CurrentAilment.Name == "Panic";
@@ -124,7 +124,7 @@ namespace JRPGPrototype.Logic.Battle
             var targets = _party.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
             if (!targets.Any())
             {
-                _io.WriteLine("No demons in party to command.");
+                _io.WriteLine("No party members to command.");
                 _io.Wait(800);
                 return null;
             }

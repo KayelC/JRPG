@@ -6,7 +6,6 @@ using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 
-
 namespace JRPGPrototype.Logic.Battle
 {
     /// <summary>
@@ -25,6 +24,7 @@ namespace JRPGPrototype.Logic.Battle
     /// <summary>
     /// The authoritative logic engine for status ailments and stat modifications.
     /// Manages application, turn-start restrictions, and turn-end recovery/damage.
+    /// Handles the lifecycle of Passive Skills including Auto-Kaja and Regenerates.
     /// </summary>
     public class StatusRegistry
     {
@@ -37,6 +37,14 @@ namespace JRPGPrototype.Logic.Battle
         public bool TryInflict(Combatant attacker, Combatant target, string skillEffect)
         {
             if (string.IsNullOrEmpty(skillEffect) || target.IsDead) return false;
+
+            // --- PASSIVE TRIGGER: Ailment Protection ---
+            // Unshaken Will prevents all mental ailments from succeeding.
+            var targetPassives = target.GetConsolidatedSkills();
+            if (targetPassives.Contains("Unshaken Will"))
+            {
+                return false;
+            }
 
             AilmentData ailmentToApply = null;
             foreach (var ailment in Database.Ailments.Values)
@@ -72,16 +80,31 @@ namespace JRPGPrototype.Logic.Battle
         {
             if (target.CurrentAilment == null) return false;
 
-            // Strict Curing Rule: Patra logic.
-            // Description must include the ailment name to be effective.
-            if (skillEffect.Contains("Cure all", StringComparison.OrdinalIgnoreCase) ||
-                skillEffect.Contains(target.CurrentAilment.Name, StringComparison.OrdinalIgnoreCase))
+            bool curesAll = skillEffect.Contains("Cure all", StringComparison.OrdinalIgnoreCase) ||
+                            skillEffect.Contains("Cures all", StringComparison.OrdinalIgnoreCase);
+
+            if (curesAll || skillEffect.Contains(target.CurrentAilment.Name, StringComparison.OrdinalIgnoreCase))
             {
                 target.RemoveAilment();
                 return true;
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Executes Auto-Kaja passives. Should be called by the Conductor on Turn 1 of battle.
+        /// </summary>
+        public void ProcessInitialPassives(Combatant actor)
+        {
+            var skills = actor.GetConsolidatedSkills();
+
+            if (skills.Contains("Auto-Tarukaja")) ApplyStatChange("Tarukaja", actor);
+            if (skills.Contains("Auto-Rakukaja")) ApplyStatChange("Rakukaja", actor);
+            if (skills.Contains("Auto-Sukukaja")) ApplyStatChange("Sukukaja", actor);
+            if (skills.Contains("Auto-Mataru")) ApplyStatChange("Matarukaja", actor);
+            if (skills.Contains("Auto-Maraku")) ApplyStatChange("Marakukaja", actor);
+            if (skills.Contains("Auto-Masuku")) ApplyStatChange("Masukukaja", actor);
         }
 
         /// <summary>
@@ -115,7 +138,7 @@ namespace JRPGPrototype.Logic.Battle
                             return TurnStartResult.FleeBattle;
 
                         if (actor.Class == ClassType.Demon)
-                        return TurnStartResult.ReturnToCOMP;
+                            return TurnStartResult.ReturnToCOMP;
                     }
                     return fearRoll < 55 ? TurnStartResult.Skip : TurnStartResult.CanAct; // 40% skip turn
 
@@ -131,41 +154,69 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// Handles turn-end logic including Poison damage and recovery.
+        /// Handles turn-end logic including Poison damage, Recovery rolls, and Passive Restoration.
         /// Distressed, Weak, etc., are handled by CombatMath, but this manages their duration.
         /// </summary>
         public List<string> ProcessTurnEnd(Combatant actor)
         {
             List<string> logs = new List<string>();
+
+            // --- PASSIVE TRIGGER: Turn-End Restoration ---
+            var skills = actor.GetConsolidatedSkills();
+
+            // 1. HP Restoration (Regenerate / Spring of Life)
+            int hpRecovery = 0;
+            if (skills.Contains("Spring of Life")) hpRecovery += (int)(actor.MaxHP * 0.08);
+
+            if (skills.Contains("Regenerate 3")) hpRecovery += (int)(actor.MaxHP * 0.06);
+            else if (skills.Contains("Regenerate 2")) hpRecovery += (int)(actor.MaxHP * 0.04);
+            else if (skills.Contains("Regenerate 1")) hpRecovery += (int)(actor.MaxHP * 0.02);
+
+            if (hpRecovery > 0 && actor.CurrentHP < actor.MaxHP)
+            {
+                actor.CurrentHP = Math.Min(actor.MaxHP, actor.CurrentHP + hpRecovery);
+                logs.Add($"{actor.Name} restored {hpRecovery} HP via passives.");
+            }
+
+            // 2. SP Restoration (Invigorate)
+            int spRecovery = 0;
+            if (skills.Contains("Invigorate 3")) spRecovery += 7;
+            else if (skills.Contains("Invigorate 2")) spRecovery += 5;
+            else if (skills.Contains("Invigorate 1")) spRecovery += 3;
+
+            if (spRecovery > 0 && actor.CurrentSP < actor.MaxSP)
+            {
+                actor.CurrentSP = Math.Min(actor.MaxSP, actor.CurrentSP + spRecovery);
+                logs.Add($"{actor.Name} restored {spRecovery} SP via passives.");
+            }
+
             if (actor.CurrentAilment == null) return logs;
 
             AilmentData ailment = actor.CurrentAilment;
 
-            // 1. Handle Poison DOT (Legacy formula restored)
+            // Handle Poison DOT
             if (ailment.DotPercent > 0)
             {
                 int damage = (int)(actor.MaxHP * 0.13); // Fixed 13% per legacy requirement
                 if (damage < 1) damage = 1;
 
                 actor.CurrentHP -= damage;
-
-                // Rule: Poison cannot kill a combatant; it leaves them at 1 HP.
-                // Replaced "Shadow" name check with a universal non-lethal check.
-                if (actor.CurrentHP < 1)
-                {
-                    actor.CurrentHP = 1;
-                }
+                // Poison cannot kill a combatant, it leaves them at 1 HP.
+                // if (actor.CurrentHP < 1) actor.CurrentHP = 1; 
+                // I decided to make Poison Lethal by commenting it out, I can always add it back by Uncommenting if needed.
 
                 logs.Add($"{actor.Name} is hurt by {ailment.Name}! ({damage} DMG)");
             }
 
-            // 2. Immediate Removal Triggers
+            // Immediate Removal Triggers
             if (ailment.RemovalTriggers.Contains("OneTurn"))
             {
                 actor.RemoveAilment();
                 logs.Add($"{actor.Name} is no longer {ailment.Name}.");
                 return logs;
             }
+
+            // Natural Recovery (Luck Roll)
             else if (ailment.RemovalTriggers.Contains("NaturalRoll"))
             {
                 int recoveryChance = 20 + (actor.GetStat(StatType.LUK) / 2);
@@ -177,7 +228,7 @@ namespace JRPGPrototype.Logic.Battle
                 }
             }
 
-            // 4. Turn Decay
+            // Turn Decay
             actor.AilmentDuration--;
             if (actor.AilmentDuration <= 0 && actor.CurrentAilment != null)
             {
@@ -198,7 +249,10 @@ namespace JRPGPrototype.Logic.Battle
             bool isBuff = skill.EndsWith("kaja") || skill == "heat riser";
             bool isDebuff = skill.EndsWith("nda") || skill == "debilitate";
 
+            if (!isBuff && !isDebuff) return;
+
             int delta = isBuff ? 1 : -1;
+
             // Omni-Modifiers
             if (skill == "heat riser") { ChangeBuff(target, "Attack", 1); ChangeBuff(target, "Defense", 1); ChangeBuff(target, "Agility", 1); return; }
             if (skill == "debilitate") { ChangeBuff(target, "Attack", -1); ChangeBuff(target, "Defense", -1); ChangeBuff(target, "Agility", -1); return; }

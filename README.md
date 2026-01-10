@@ -3,15 +3,21 @@ JRPG Game Inspired by the SMT Series, and Metaphor: Refantazio games by ATLUS.
 
 Full development and design notes are available in the [Doc.ipynb](/Documentation/Doc.ipynb) Jupyter Notebook.
 
-All Rights Reserved License
+IMPORTANT: Copyright and License
 
-Copyright © 2025 Kayel Calleja
+This project is a fan-made Engine + Games created as a homage to the Shin Megami Tensei series. Some things to note include:
 
-All rights reserved.
+    Not for Sale: The Engine and Games do not, and will never, go up for sale. It’s just fans making something for fellow fans out of pure love for the Series, and its developers. Nothing monetary is being sought from it.
 
-This work, including but not limited to the source code, assets, images, sounds, and design, is protected under copyright law. Unauthorized copying, reproduction, modification, distribution, public display, or use of this work in any form is strictly prohibited without the express written permission of the copyright holder.
+    License: This project and all contents thereof are licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (BY-NC-SA 4.0). This means:
 
-This repository is made available solely for viewing purposes (e.g., portfolio, demonstration, or educational review). No license is granted to use, copy, modify, or distribute any part of this project.
+    Attribution (BY): You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
-For licensing inquiries or permissions, please contact: kayelcalleja64@gmail.com
+    NonCommercial (NC): You may not utilize this material for commercial purposes.
+
+    ShareAlike (SA): If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original ones.
+
+    Respect for Original Copyright Holders: Any rights involving characters such as logos or trademarks associated with Atlus' franchise known as Shin Megami Tensei remain their property or that of other respective copyright holders whether they are Sega or Atlus themselves.
+
+This work is a labor of love. Created to celebrate the Shin Megami Tensei series and share our collective creativity within the fan community, not to infringe on the rights of the original creators.
 

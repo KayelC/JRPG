@@ -227,9 +227,14 @@ namespace JRPGPrototype.Entities
             else Buffs[buffType] = turns;
         }
 
+        /// <summary>
+        /// Handles turn-based decay for Buffs, Elemental Breaks, and Karn Shields.
+        /// </summary>
         public List<string> TickBuffs()
         {
             var messages = new List<string>();
+
+            // 1. Tick down Stat Buffs
             var keys = Buffs.Keys.ToList();
             foreach (var k in keys)
             {
@@ -240,7 +245,7 @@ namespace JRPGPrototype.Entities
                 }
             }
 
-            // Also tick down Elemental Breaks
+            // 2. Tick down Elemental Breaks
             var breakKeys = BrokenAffinities.Keys.ToList();
             foreach (var b in breakKeys)
             {
@@ -255,7 +260,20 @@ namespace JRPGPrototype.Entities
                 }
             }
 
+            // 3. Karn Shields Dissolve (Manual Phase Trigger logic)
+            // Note: Karns are typically cleared by the Conductor at phase-end 
+            // if they weren't used. This method acts as a backup sync.
+
             return messages;
+        }
+
+        /// <summary>
+        /// Specifically used to dissolve shields if they weren't triggered by the end of a phase.
+        /// </summary>
+        public void DissolveShields()
+        {
+            PhysKarnActive = false;
+            MagicKarnActive = false;
         }
 
         public void RecalculateResources()

@@ -93,18 +93,33 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// Executes Auto-Kaja passives. Should be called by the Conductor on Turn 1 of battle.
+        /// Executes Auto-Kaja passives at the start of battle.
+        /// High Fidelity: Correctly distinguishes between Single-Target and Party-Wide (Ma) variants.
         /// </summary>
-        public void ProcessInitialPassives(Combatant actor)
+        /// <param name="actor">The owner of the passive skill.</param>
+        /// <param name="allies">The list of all living allies on the actor's side.</param>
+        public void ProcessInitialPassives(Combatant actor, List<Combatant> allies)
         {
             var skills = actor.GetConsolidatedSkills();
 
+            // 1. Single-Target Auto-Skills (User Only)
             if (skills.Contains("Auto-Tarukaja")) ApplyStatChange("Tarukaja", actor);
             if (skills.Contains("Auto-Rakukaja")) ApplyStatChange("Rakukaja", actor);
             if (skills.Contains("Auto-Sukukaja")) ApplyStatChange("Sukukaja", actor);
-            if (skills.Contains("Auto-Mataru")) ApplyStatChange("Matarukaja", actor);
-            if (skills.Contains("Auto-Maraku")) ApplyStatChange("Marakukaja", actor);
-            if (skills.Contains("Auto-Masuku")) ApplyStatChange("Masukukaja", actor);
+
+            // 2. Party-Wide Auto-Skills (Maha Variants)
+            // We iterate through the provided ally list to apply the buff to everyone.
+            if (skills.Contains("Auto-Mataru") || skills.Contains("Auto-Maraku") || skills.Contains("Auto-Masuku"))
+            {
+                foreach (var ally in allies)
+                {
+                    if (ally.IsDead) continue;
+
+                    if (skills.Contains("Auto-Mataru")) ApplyStatChange("Matarukaja", ally);
+                    if (skills.Contains("Auto-Maraku")) ApplyStatChange("Marakukaja", ally);
+                    if (skills.Contains("Auto-Masuku")) ApplyStatChange("Masukukaja", ally);
+                }
+            }
         }
 
         /// <summary>

@@ -37,6 +37,15 @@ namespace JRPGPrototype.Entities
         public bool IsDead => CurrentHP <= 0;
         public bool IsRigidBody => CurrentAilment != null && (CurrentAilment.Name == "Freeze" || CurrentAilment.Name == "Shock");
 
+        // Advanced Battle States (SMT III Fidelity)
+        public bool IsCharged { get; set; } // Physical 1.9x
+        public bool IsMindCharged { get; set; } // Magic 1.9x
+        public bool PhysKarnActive { get; set; } // Tetrakarn
+        public bool MagicKarnActive { get; set; } // Makarakarn
+
+        // Tracks active "Breaks" (Elemental resistance removal) and their turn durations
+        public Dictionary<Element, int> BrokenAffinities { get; set; } = new Dictionary<Element, int>();
+
         public AilmentData CurrentAilment { get; private set; }
         public int AilmentDuration { get; set; }
         public Dictionary<string, int> Buffs { get; set; } = new Dictionary<string, int>();
@@ -101,7 +110,8 @@ namespace JRPGPrototype.Entities
                 if (data.Skills != null)
                 {
                     foreach (var s in data.Skills)
-                        if (!c.ActivePersona.SkillSet.Contains(s)) c.ActivePersona.SkillSet.Add(s);
+                        if (!c.ActivePersona.SkillSet.Contains(s))
+                            c.ActivePersona.SkillSet.Add(s);
                 }
             }
             if (c.ActivePersona == null && data.Skills != null)
@@ -229,6 +239,22 @@ namespace JRPGPrototype.Entities
                     if (Buffs[k] == 0) messages.Add($"{Name}'s {k} effect wore off.");
                 }
             }
+
+            // Also tick down Elemental Breaks
+            var breakKeys = BrokenAffinities.Keys.ToList();
+            foreach (var b in breakKeys)
+            {
+                if (BrokenAffinities[b] > 0)
+                {
+                    BrokenAffinities[b]--;
+                    if (BrokenAffinities[b] == 0)
+                    {
+                        BrokenAffinities.Remove(b);
+                        messages.Add($"{Name}'s {b} resistance returned.");
+                    }
+                }
+            }
+
             return messages;
         }
 
@@ -244,7 +270,6 @@ namespace JRPGPrototype.Entities
             MaxSP = BaseSP + (totalInt * 3);
             CurrentHP = Math.Min(CurrentHP, MaxHP);
             CurrentSP = Math.Min(CurrentSP, MaxSP);
-            if (CurrentHP <= 0 && !Name.Contains("Shadow")) CurrentHP = 1;
         }
 
         public int ExpRequired => (int)(1.5 * Math.Pow(Level, 3));
@@ -278,7 +303,7 @@ namespace JRPGPrototype.Entities
                 // BaseHP here acts as the "Race Bonus"
                 BaseHP += rnd.Next(3, 6);
                 BaseSP += rnd.Next(2, 4);
-            }
+        }
 
             RecalculateResources();
 
@@ -291,6 +316,11 @@ namespace JRPGPrototype.Entities
         public void CleanupBattleState()
         {
             IsGuarding = false;
+            IsCharged = false;
+            IsMindCharged = false;
+            PhysKarnActive = false;
+            MagicKarnActive = false;
+            BrokenAffinities.Clear();
             Buffs.Clear();
         }
 

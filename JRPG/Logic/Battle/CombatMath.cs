@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Data;
@@ -51,6 +52,19 @@ namespace JRPGPrototype.Logic.Battle
             atkPower *= GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Attack", 0));
             defPower *= GetStatMultiplier(target.Buffs.GetValueOrDefault("Defense", 0));
 
+            // Apply Passive Skills (Amps/Boosts/Drivers)
+            atkPower *= GetPassiveDamageMultiplier(attacker, element);
+
+            // Apply Charges (Power Charge / Mind Charge)
+            if (isPhysical && attacker.IsCharged)
+            {
+                atkPower *= 1.9;
+            }
+            else if (!isPhysical && attacker.IsMindCharged)
+            {
+                atkPower *= 1.9;
+            }
+
             // Apply Ailment Penalties
             if (attacker.CurrentAilment != null)
             {
@@ -60,7 +74,7 @@ namespace JRPGPrototype.Logic.Battle
             // Calculate Base Ratio and Execute Formula
             double ratio = atkPower / Math.Max(1.0, defPower);
 
-            // Execute SMT Square-root Formula
+            // Execute Square-root Formula
             double dmgBase = 5.0 * Math.Sqrt(skillPower * ratio);
 
             // Apply Target Ailment Vulnerabilities
@@ -102,9 +116,7 @@ namespace JRPGPrototype.Logic.Battle
 
             // Damage Variance (95% to 105%)
             double variance = 0.95 + (_rnd.NextDouble() * 0.1);
-            int finalDamage = (int)Math.Floor(dmgBase * variance);
-
-            return finalDamage;
+            return (int)Math.Floor(dmgBase * variance);
         }
 
         /// <summary>
@@ -121,26 +133,43 @@ namespace JRPGPrototype.Logic.Battle
             return 1.0 + (stacks * 0.125);
         }
 
+        /// <summary>
+        /// Scans attacker skills for Boost (1.25x), Amp (1.5x), and Driver (1.75x).
+        /// Multipliers stack multiplicatively.
+        /// </summary>
+        private static double GetPassiveDamageMultiplier(Combatant attacker, Element element)
+        {
+            double multiplier = 1.0;
+            var skills = attacker.GetConsolidatedSkills();
+            string elName = element.ToString();
+
+            if (skills.Any(s => s.Contains(elName) && s.Contains("Boost"))) multiplier *= 1.25;
+            if (skills.Any(s => s.Contains(elName) && s.Contains("Amp"))) multiplier *= 1.5;
+            if (skills.Any(s => s.Contains(elName) && s.Contains("Driver"))) multiplier *= 1.75;
+
+            // Magic Ability check
+            bool isMagic = (element != Element.Slash && element != Element.Strike && element != Element.Pierce && element != Element.Almighty);
+            if (isMagic && skills.Contains("Magic Ability")) multiplier *= 1.25;
+
+            return multiplier;
+        }
+
         public static bool CalculateInstantKill(Combatant attacker, Combatant target, string skillAccuracy)
         {
             int baseAccuracy = 40;
             if (!string.IsNullOrEmpty(skillAccuracy) && int.TryParse(skillAccuracy.Replace("%", ""), out int parsed))
-            {
+            
                 baseAccuracy = parsed;
-            }
 
             int lukDiff = attacker.GetStat(StatType.LUK) - target.GetStat(StatType.LUK);
             double multi = GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0));
 
-            double finalChance = (baseAccuracy + lukDiff) * multi;
-
-            // Roll against Luck-weighted accuracy
-            return _rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 95);
+            return _rnd.Next(0, 100) < Math.Clamp((baseAccuracy + lukDiff) * multi, 5, 95);
         }
 
         public static int CalculateReflectedDamage(Combatant originalAttacker, int skillPower, Element element)
         {
-            // In SMT III, reflected damage is calculated against the original attacker's 
+            // Reflected damage is calculated against the original attacker's 
             // stats and affinities. 
             // We pass false for isCritical because reflected hits cannot crit the attacker.
             return CalculateDamage(originalAttacker, originalAttacker, skillPower, element, out _);
@@ -157,6 +186,12 @@ namespace JRPGPrototype.Logic.Battle
 
             // Apply Agility/Luck buff influence on crit
             double multi = GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0));
+
+            // Passive Boosts
+            var skills = attacker.GetConsolidatedSkills();
+            if (skills.Contains("Apt Pupil")) multi *= 2.0;
+            if (skills.Contains("Rebellion")) multi *= 1.2;
+
             return (int)Math.Clamp(chance * multi, 2, 40);
         }
 
@@ -165,20 +200,25 @@ namespace JRPGPrototype.Logic.Battle
         /// </summary>
         public static Affinity GetEffectiveAffinity(Combatant target, Element element)
         {
+            // Check for Active Shields (Karns)
+            bool isPhysical = (element == Element.Slash || element == Element.Strike || element == Element.Pierce);
+            if (isPhysical && target.PhysKarnActive) return Affinity.Repel;
+            if (!isPhysical && target.MagicKarnActive && element != Element.Almighty) return Affinity.Repel;
+
+            // Check for Elemental Breaks
+            if (target.BrokenAffinities.ContainsKey(element)) return Affinity.Normal;
+
             if (element == Element.Almighty || element == Element.None) return Affinity.Normal;
 
             Affinity baseAff = target.ActivePersona?.GetAffinity(element) ?? Affinity.Normal;
 
             if (target.IsGuarding && baseAff == Affinity.Weak) return Affinity.Normal;
 
-            bool isPhysical = (element == Element.Slash || element == Element.Strike || element == Element.Pierce);
             if (target.IsRigidBody && isPhysical)
             {
                 // Rigid Body (Freeze/Shock) negates physical resistances but keeps weaknesses.
                 if (baseAff == Affinity.Resist || baseAff == Affinity.Null || baseAff == Affinity.Repel)
-                {
                     return Affinity.Normal;
-                }
             }
 
             return baseAff;
@@ -206,23 +246,27 @@ namespace JRPGPrototype.Logic.Battle
             // MODIFIED: Basic attacks (where skillAccuracy is empty) now use 90%.
             int baseAccuracy = 90;
             if (!string.IsNullOrEmpty(skillAccuracy) && int.TryParse(skillAccuracy.Replace("%", ""), out int parsed))
-            {
                 baseAccuracy = parsed;
-            }
+
+            // Passive Accuracy/Evasion skills
+            double hitMult = 1.0;
+            var attackerSkills = attacker.GetConsolidatedSkills();
+            if (attackerSkills.Contains("Vidyaraja's Blessing")) hitMult *= 1.15;
+
+            double evadeMult = 1.0;
+            var targetSkills = target.GetConsolidatedSkills();
+            string elName = element.ToString();
+            if (targetSkills.Any(s => s.Contains(elName) && s.Contains("Dodge"))) evadeMult *= 0.85;
+            if (targetSkills.Any(s => s.Contains(elName) && s.Contains("Evade"))) evadeMult *= 0.60;
 
             // Agility Influence: (AGI Diff * 2) 
             int attackerAgi = attacker.GetStat(StatType.AGI);
             int targetAgi = target.GetStat(StatType.AGI);
-            
-            // Luck Influence: (LUK Diff) 
-            int attackerLuk = attacker.GetStat(StatType.LUK);
-            int targetLuk = target.GetStat(StatType.LUK);
 
-            // Apply Agility Buffs to the hit/evasion math
-            double atkMulti = GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0));
-            double defMulti = GetStatMultiplier(target.Buffs.GetValueOrDefault("Agility", 0));
+            double atkValue = (attackerAgi * GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0))) * hitMult;
+            double defValue = (targetAgi * GetStatMultiplier(target.Buffs.GetValueOrDefault("Agility", 0))) * evadeMult;
 
-            double finalChance = baseAccuracy + (((attackerAgi * atkMulti) - (targetAgi * defMulti)) * 2) + (attackerLuk - targetLuk);
+            double finalChance = baseAccuracy + ((atkValue - defValue) * 2) + (attacker.GetStat(StatType.LUK) - target.GetStat(StatType.LUK));
 
             return _rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 99);
         }

@@ -196,16 +196,17 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// SMT III Rule: Calculates the Affinity taking into account Guarding state and Status Ailments.
+        /// SMT III High Fidelity Affinity Resolution.
+        /// Prioritizes Shields > Breaks > Base Persona Affinities.
         /// </summary>
         public static Affinity GetEffectiveAffinity(Combatant target, Element element)
         {
-            // Check for Active Shields (Karns)
+            // 1. Check for Active Shields (Karns take absolute priority)
             bool isPhysical = (element == Element.Slash || element == Element.Strike || element == Element.Pierce);
             if (isPhysical && target.PhysKarnActive) return Affinity.Repel;
             if (!isPhysical && target.MagicKarnActive && element != Element.Almighty) return Affinity.Repel;
 
-            // Check for Elemental Breaks
+            // 2. Check for Elemental Breaks (Reduces immunity to Normal)
             if (target.BrokenAffinities.ContainsKey(element)) return Affinity.Normal;
 
             if (element == Element.Almighty || element == Element.None) return Affinity.Normal;

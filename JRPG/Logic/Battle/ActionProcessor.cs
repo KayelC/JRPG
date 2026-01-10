@@ -56,6 +56,10 @@ namespace JRPGPrototype.Logic.Battle
             if (!CombatMath.CheckHit(attacker, target, element, "90%"))
             {
                 _knowledge.Learn(target.SourceId, element, Affinity.Normal);
+
+                // SMT Rule: Missing consumes charge
+                attacker.IsCharged = false;
+
                 return new CombatResult { Type = HitType.Miss, Message = "MISS!", DamageDealt = 0 };
             }
 
@@ -64,6 +68,7 @@ namespace JRPGPrototype.Logic.Battle
             if (aff == Affinity.Repel)
             {
                 _io.WriteLine($"{target.Name} repelled the attack!", ConsoleColor.Red);
+                attacker.IsCharged = false;
                 return ProcessRepelEvent(attacker, element, power);
             }
 
@@ -71,6 +76,10 @@ namespace JRPGPrototype.Logic.Battle
             CombatResult result = target.ReceiveDamage(damage, element, isCritical);
 
             _knowledge.Learn(target.SourceId, element, aff);
+
+            // Consume physical charge
+            attacker.IsCharged = false;
+
             return result;
         }
 
@@ -79,30 +88,57 @@ namespace JRPGPrototype.Logic.Battle
             List<CombatResult> results = new List<CombatResult>();
             _io.WriteLine($"{attacker.Name} uses {skill.Name}!");
 
-            // Cost Deduction
+            // 1. Calculate Cost with Passive Deductions (Spell/Arms Master)
             var cost = skill.ParseCost();
+            int costValue = cost.value;
+            var passives = attacker.GetConsolidatedSkills();
+
+            bool isPhysical = IsPhysicalElement(ElementHelper.FromCategory(skill.Category));
+
+            if (isPhysical && passives.Contains("Arms Master"))
+            {
+                costValue /= 2;
+            }
+            else if (!isPhysical && passives.Contains("Spell Master"))
+            {
+                costValue /= 2;
+            }
+
+            // 2. Deduct Cost
             if (cost.isHP)
             {
-                int hpCost = (int)(attacker.MaxHP * (cost.value / 100.0));
+                // In SMT, percentage HP costs are calculated based on MaxHP
+                int hpCost = (int)(attacker.MaxHP * (costValue / 100.0));
                 attacker.CurrentHP = Math.Max(1, attacker.CurrentHP - hpCost);
             }
             else
             {
-                attacker.CurrentSP -= cost.value;
+                attacker.CurrentSP -= costValue;
             }
 
+            // 3. Execution Loop
             foreach (var target in targets)
             {
-                // Strict check: Only allow Revive skills to target dead allies.
-                bool isRevive = skill.Effect.Contains("Revive");
-                if (target.IsDead && !isRevive) continue;
-                if (!target.IsDead && isRevive) continue;
+                if (target.IsDead && !skill.Effect.Contains("Revive")) continue;
 
-                CombatResult res = IsOffensive(skill) ? ProcessOffensiveSkill(attacker, target, skill) : ProcessUtilitySkill(attacker, target, skill);
+                CombatResult res;
+                if (IsOffensive(skill))
+                {
+                    res = ProcessOffensiveSkill(attacker, target, skill);
+                }
+                else
+                {
+                    res = ProcessUtilitySkill(attacker, target, skill);
+                }
+
                 results.Add(res);
 
                 if (res.Type == HitType.Repel) break;
             }
+
+            // 4. Consume Charges
+            if (isPhysical) attacker.IsCharged = false;
+            else attacker.IsMindCharged = false;
 
             return results;
         }
@@ -123,7 +159,6 @@ namespace JRPGPrototype.Logic.Battle
                 return true;
             }
 
-            // GOHO-M: Field Utility (Invalid in Battle)
             if (item.Name == "Goho-M")
             {
                 _io.WriteLine($"{item.Name} cannot be used in the heat of battle!");
@@ -161,7 +196,8 @@ namespace JRPGPrototype.Logic.Battle
                     case "Revive":
                         if (target.IsDead)
                         {
-                            target.CurrentHP = item.EffectValue >= 100 ? target.MaxHP : target.MaxHP / 2;
+                            int revVal = item.EffectValue >= 100 ? target.MaxHP : target.MaxHP / 2;
+                            target.CurrentHP = revVal;
                             _io.WriteLine($"{target.Name} was revived!");
                             anyEffect = true;
                         }
@@ -207,9 +243,7 @@ namespace JRPGPrototype.Logic.Battle
             Element element = ElementHelper.FromCategory(skill.Category);
             int power = skill.GetPowerVal();
 
-            // FIX (Bug 10): Only parse Instant Kill if description explicitly contains the term.
-            bool isInstantKill = (element == Element.Light || element == Element.Dark) &&
-                                 skill.Effect.ToLower().Contains("instant kill");
+            bool isInstantKill = skill.Effect.ToLower().Contains("instant kill");
 
             if (isInstantKill)
             {
@@ -232,11 +266,10 @@ namespace JRPGPrototype.Logic.Battle
                 }
                 else
                 {
-                    // FIX (Bug #10): IK Miss only costs 1 Icon.
-                    // Returning HitType.Normal in our current Conductor logic uses 2 ticks (1 icon).
+                    // IK Rule: Miss only costs 1 Icon.
                     _knowledge.Learn(target.SourceId, element, Affinity.Normal);
-                return new CombatResult { Type = HitType.Normal, Message = "MISS!" };
-            }
+                    return new CombatResult { Type = HitType.Normal, Message = "MISS!" };
+                }
             }
 
             // Standard Offensive Processing
@@ -263,6 +296,51 @@ namespace JRPGPrototype.Logic.Battle
 
         private CombatResult ProcessUtilitySkill(Combatant attacker, Combatant target, SkillData skill)
         {
+            string skillName = skill.Name;
+            string effect = skill.Effect;
+
+            // 1. DEKAJA: Remove positive buffs from enemies
+            if (skillName == "Dekaja")
+            {
+                var keys = target.Buffs.Keys.ToList();
+                foreach (var k in keys)
+                {
+                    if (target.Buffs[k] > 0) target.Buffs[k] = 0;
+                }
+                _io.WriteLine($"{target.Name}'s stat bonuses were nullified!");
+            }
+
+            // 2. DEKUNDA: Remove negative debuffs from allies
+            if (skillName == "Dekunda")
+            {
+                var keys = target.Buffs.Keys.ToList();
+                foreach (var k in keys)
+                {
+                    if (target.Buffs[k] < 0) target.Buffs[k] = 0;
+                }
+                _io.WriteLine($"{target.Name}'s stat penalties were nullified!");
+            }
+
+            // 3. KARNS: Reflect Shields
+            if (skillName == "Tetrakarn") target.PhysKarnActive = true;
+            if (skillName == "Makarakarn") target.MagicKarnActive = true;
+
+            // 4. CHARGES: Power / Mind Charge
+            if (skillName == "Power Charge") target.IsCharged = true;
+            if (skillName == "Mind Charge") target.IsMindCharged = true;
+
+            // 5. BREAKS: Elemental Resistance Removal
+            if (skillName.Contains("Break"))
+            {
+                Element el = ElementHelper.FromCategory(skillName);
+                if (el != Element.Almighty)
+                {
+                    if (target.BrokenAffinities.ContainsKey(el)) target.BrokenAffinities[el] = 3;
+                    else target.BrokenAffinities.Add(el, 3);
+                }
+            }
+
+            // 6. Healing / Recovery
             if (skill.Category.Contains("Recovery"))
             {
                 // Strict Cure logic: Do not display success if the cure type doesn't match the ailment
@@ -276,7 +354,7 @@ namespace JRPGPrototype.Logic.Battle
                 }
                 else if (!target.IsDead)
                 {
-                    // FIX (Bug 7): Handle "NaN" power by parsing the number inside parentheses in the Effect string
+                    // Handle "NaN" power by parsing the number inside parentheses in the Effect string
                     int heal = skill.GetPowerVal();
                     if (heal == 0)
                     {
@@ -288,19 +366,21 @@ namespace JRPGPrototype.Logic.Battle
                     if (skill.Effect.Contains("full")) heal = target.MaxHP;
 
                     int oldHP = target.CurrentHP;
-                    target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
+                        target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
 
                     int actualHealed = target.CurrentHP - oldHP;
                     _io.WriteLine($"{target.Name} recovered {actualHealed} HP.");
-                    }
-                    else if (cured) _io.WriteLine($"{target.Name} was cured!");
                 }
+                    else if (cured) _io.WriteLine($"{target.Name} was cured!");
+            }
 
+            // Standard Buffs/Debuffs (Kaja/Nda)
             if (skill.Category.Contains("Enhance"))
             {
                 _status.ApplyStatChange(skill.Name, target);
                 _io.WriteLine($"{target.Name}'s stats were modified!");
             }
+
             return new CombatResult { Type = HitType.Normal, Message = "Success" };
         }
 
@@ -323,6 +403,11 @@ namespace JRPGPrototype.Logic.Battle
         {
             string cat = skill.Category.ToLower();
             return !cat.Contains("recovery") && !cat.Contains("enhance");
+        }
+
+        private bool IsPhysicalElement(Element e)
+        {
+            return e == Element.Slash || e == Element.Strike || e == Element.Pierce;
         }
     }
 }

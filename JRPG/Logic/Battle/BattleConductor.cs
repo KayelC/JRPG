@@ -84,6 +84,28 @@ namespace JRPGPrototype.Logic.Battle
                 isPlayerTurn ? ConsoleColor.Cyan : ConsoleColor.Red);
             _io.Wait(1000);
 
+            // Auto-Kaja Passives on Turn 1
+            if (isPlayerTurn)
+            {
+                var allies = _party.GetAliveMembers();
+                foreach (var actor in allies)
+                {
+                    _statusRegistry.ProcessInitialPassives(actor, allies);
+                }
+            }
+            else
+            {
+                var enemies = _enemies.Where(e => !e.IsDead).ToList();
+                foreach (var actor in enemies)
+                {
+                    // For Enemy Passives, allies = entire enemy side
+                    _statusRegistry.ProcessInitialPassives(actor, enemies);
+                }
+            }
+            // Show HUD update for turn 1 buffs
+            _ui.ForceRefreshHUD();
+            _io.Wait(800);
+
             // 2. Main Phase Loop
             while (!BattleEnded)
             {
@@ -117,13 +139,13 @@ namespace JRPGPrototype.Logic.Battle
                 var currentLiveActors = isPlayerSide ? _party.GetAliveMembers() : _enemies.Where(e => !e.IsDead).ToList();
                 if (currentLiveActors.Count == 0) break;
 
-                // Loop back to start if index is out of bounds (standard SMT rotation)
+                // Loop back to start if index is out of bounds
                 if (actorIndex >= currentLiveActors.Count) actorIndex = 0;
                 Combatant actor = currentLiveActors[actorIndex];
 
                 // --- 1. TURN START (Ailments & Restrictions) ---
                 TurnStartResult turnState = _statusRegistry.ProcessTurnStart(actor);
-                bool actorRemoved = false; // FIX: Prevent index shifting bug
+                bool actorRemoved = false; // Prevent index shifting bug
 
                 if (turnState == TurnStartResult.Skip)
                 {
@@ -140,7 +162,7 @@ namespace JRPGPrototype.Logic.Battle
                 }
                 else if (turnState == TurnStartResult.ReturnToCOMP)
                 {
-                    // FIX: Differentiate between Player Demon and Enemy Demon fleeing
+                    // Differentiate between Player Demon and Enemy Demon fleeing
                     if (isPlayerSide)
                     {
                         _io.WriteLine($"{actor.Name} returned to COMP in terror!", ConsoleColor.Red);
@@ -160,7 +182,7 @@ namespace JRPGPrototype.Logic.Battle
                     ExecuteAction(actor, isPlayerSide, turnState);
                 }
 
-                // FIX: Real-time HUD refresh after every action or skip
+                // Real-time HUD refresh after every action or skip
                 _ui.ForceRefreshHUD();
 
                 // --- 2. TURN END (Recovery & Decay) ---
@@ -209,12 +231,12 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     string choice = _ui.ShowMainMenu(actor);
 
-                    if (choice == "Cancel") continue; // Re-render main menu
+                    if (choice == "Cancel") continue; // Back to Menu
 
                     if (choice == "Attack")
                     {
                         targets = _ui.SelectTarget(actor);
-                        if (targets == null) continue; // Back to menu
+                        if (targets == null) continue; // Back to Menu
                         actionCommitted = true;
                     }
                     else if (choice == "Guard")
@@ -228,16 +250,16 @@ namespace JRPGPrototype.Logic.Battle
                     else if (choice == "Persona" || choice == "Skill" || choice == "Command")
                     {
                         skill = _ui.SelectSkill(actor, "");
-                        if (skill == null) continue; // Back to menu
+                        if (skill == null) continue; // Back to Menu
 
                         targets = _ui.SelectTarget(actor, skill);
-                        if (targets == null) continue; // Back to menu
+                        if (targets == null) continue; // Back to Menu
                         actionCommitted = true;
                     }
                     else if (choice == "COMP")
                     {
                         var comp = _ui.OpenCOMPMenu(actor);
-                        if (comp.action == "None") continue; // Back to menu
+                        if (comp.action == "None") continue; // Back to Menu
 
                         if (comp.action == "Summon")
                         {
@@ -277,9 +299,9 @@ namespace JRPGPrototype.Logic.Battle
                     else if (choice == "Item")
                     {
                         item = _ui.SelectItem(actor);
-                        if (item == null) continue; // Back to menu
+                        if (item == null) continue; // Back to Menu
 
-                        // FIX: Traesto Gem should not prompt for targets
+                        // Traesto Gem should not prompt for targets
                         if (item.Name == "Traesto Gem")
                         {
                             actionCommitted = true;
@@ -287,14 +309,14 @@ namespace JRPGPrototype.Logic.Battle
                         else
                         {
                             targets = _ui.SelectTarget(actor, null, item);
-                            if (targets == null) continue; // Back to menu
+                            if (targets == null) continue; // Back to Menu
                             actionCommitted = true;
                         }
                     }
                     else if (choice == "Tactics")
                     {
                         string tactic = _ui.GetTacticsChoice(_isBossBattle, actor.Class == ClassType.Operator);
-                        if (tactic == "Back") continue; // Back to menu
+                        if (tactic == "Back") continue; // Back to Menu
 
                         if (tactic == "Escape")
                         {
@@ -329,6 +351,7 @@ namespace JRPGPrototype.Logic.Battle
                 else
                 {
                     var sideKnowledge = isPlayerSide ? _playerKnowledge : new BattleKnowledge();
+                    // Passing current turn engine state to AI
                     var decision = _ai.DetermineBestAction(actor,
                         isPlayerSide ? _party.ActiveParty : _enemies,
                         isPlayerSide ? _enemies : _party.ActiveParty,
@@ -345,6 +368,14 @@ namespace JRPGPrototype.Logic.Battle
             // --- B. EXECUTION ---
             if (actionCommitted && !BattleEnded)
             {
+                // If AI chose to Pass (represented by null skill and empty targets)
+                if (targets != null && targets.Count == 0 && skill == null)
+                {
+                    _turnEngine.Pass();
+                    _io.WriteLine($"{actor.Name} passes.");
+                    return;
+                }
+
                 if (item != null)
                 {
                     // Defensive check: Only consume and use icon if the item actually worked

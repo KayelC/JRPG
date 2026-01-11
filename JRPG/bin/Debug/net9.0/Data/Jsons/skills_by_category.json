@@ -2242,62 +2242,8 @@
       "Category": "Passive Skills"
     },
     {
-      "Skill": "1hSwd Master*",
-      "Effect": "1.25x damage dealt by a 1-handed sword. (P3/ FES only)",
-      "Power": NaN,
-      "Accuracy": NaN,
-      "Critical": NaN,
-      "Cost": NaN,
-      "Category": "Passive Skills"
-    },
-    {
-      "Skill": "2hSwd Master*",
-      "Effect": "1.25x damage dealt by a 2-handed sword. (P3/ FES only)",
-      "Power": NaN,
-      "Accuracy": NaN,
-      "Critical": NaN,
-      "Cost": NaN,
-      "Category": "Passive Skills"
-    },
-    {
-      "Skill": "Fist Master*",
-      "Effect": "1.25x damage dealt by a fist weapon.",
-      "Power": NaN,
-      "Accuracy": NaN,
-      "Critical": NaN,
-      "Cost": NaN,
-      "Category": "Passive Skills"
-    },
-    {
-      "Skill": "Heavy Master*",
-      "Effect": "1.25x damage dealt by a bludgeon. (P3/ FES only)",
-      "Power": NaN,
-      "Accuracy": NaN,
-      "Critical": NaN,
-      "Cost": NaN,
-      "Category": "Passive Skills"
-    },
-    {
-      "Skill": "Spear Master*",
-      "Effect": "1.25x damage dealt by a spear.",
-      "Power": NaN,
-      "Accuracy": NaN,
-      "Critical": NaN,
-      "Cost": NaN,
-      "Category": "Passive Skills"
-    },
-    {
-      "Skill": "Bow Master*",
-      "Effect": "1.25x damage dealt by a bow. (P3/ FES only)",
-      "Power": NaN,
-      "Accuracy": NaN,
-      "Critical": NaN,
-      "Cost": NaN,
-      "Category": "Passive Skills"
-    },
-    {
       "Skill": "Weapons Master",
-      "Effect": "1.25x damage dealt with weapons. (Portable only)",
+      "Effect": "1.25x damage dealt with weapons. (Basic Attack)",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,

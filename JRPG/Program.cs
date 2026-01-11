@@ -60,6 +60,7 @@ namespace JRPGPrototype
                     // Adding a Lv 12 Pixie and Lv 15 Slime
                     player.DemonStock.Add(Combatant.CreateDemon("pixie", 12));
                     player.DemonStock.Add(Combatant.CreateDemon("slime", 15));
+                    player.DemonStock.Add(Combatant.CreateDemon("susano-o", 84));
                     break;
             }
 

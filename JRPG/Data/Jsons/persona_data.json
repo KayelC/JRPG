@@ -281,10 +281,10 @@
     "BaseSkills": [
       "Brave Blade",
       "Vorpal Blade",
-      "Charge"
+      "Power Charge"
     ],
     "LearnedSkills": {
-      "78": "Auto Mataru",
+      "78": "Auto-Mataru",
       "79": "High Counter",
       "81": "Slash Amp",
       "84": "Repel Light"
@@ -996,7 +996,7 @@
       "Diarahan"
     ],
     "LearnedSkills": {
-      "54": "Auto Maraku",
+      "54": "Auto-Maraku",
       "55": "Samarecarm",
       "57": "Mediarahan",
       "59": "Enduring Soul"
@@ -1700,7 +1700,7 @@
     "LearnedSkills": {
       "64": "Maziodyne",
       "65": "Eerie Sound",
-      "67": "Auto Masuku",
+      "67": "Auto-Masuku",
       "69": "Drain Elec"
     }
   },
@@ -2377,7 +2377,7 @@
       "Dekaja"
     ],
     "LearnedSkills": {
-      "61": "Auto Maraku",
+      "61": "Auto-Maraku",
       "62": "Magarudyne",
       "64": "Angelic Grace",
       "66": "Heat Riser"
@@ -2408,7 +2408,7 @@
     ],
     "LearnedSkills": {
       "68": "Mediarahan",
-      "69": "Auto Maraku",
+      "69": "Auto-Maraku",
       "71": "Light Amp",
       "73": "Spell Master"
     }
@@ -2664,9 +2664,9 @@
     ],
     "LearnedSkills": {
       "41": "Auto Rebellion",
-      "43": "Charge",
+      "43": "Power Charge",
       "44": "Gigantic Fist",
-      "46": "Auto Mataru"
+      "46": "Auto-Mataru"
     }
   },
   {
@@ -3362,7 +3362,7 @@
     ],
     "LearnedSkills": {
       "70": "Repel Dark",
-      "71": "Auto Maraku",
+      "71": "Auto-Maraku",
       "72": "Virus Breath",
       "76": "Repel Strike"
     }
@@ -3833,7 +3833,7 @@
     ],
     "LearnedSkills": {
       "59": "Brave Blade",
-      "61": "Charge",
+      "61": "Power Charge",
       "63": "Slash Amp"
     }
   },
@@ -3856,7 +3856,7 @@
     },
     "BaseSkills": [
       "Deathbound",
-      "Charge",
+      "Power Charge",
       "High Counter"
     ],
     "LearnedSkills": {
@@ -4068,7 +4068,7 @@
       "48": "Endure",
       "49": "Recarmdra",
       "51": "Heat Wave",
-      "53": "Auto Maraku"
+      "53": "Auto-Maraku"
     }
   },
   {
@@ -4946,7 +4946,7 @@
       "Dekaja"
     ],
     "LearnedSkills": {
-      "41": "Charge",
+      "41": "Power Charge",
       "42": "Fast Heal",
       "44": "Magarula",
       "45": "Myriad Arrows",
@@ -5068,7 +5068,7 @@
     ],
     "LearnedSkills": {
       "76": "Primal Force",
-      "78": "Charge",
+      "78": "Mind Charge",
       "80": "Pierce Amp",
       "82": "Drain Light"
     }
@@ -5159,7 +5159,7 @@
     ],
     "LearnedSkills": {
       "88": "Akasha Arts",
-      "89": "Charge",
+      "89": "Power Charge",
       "91": "Arms Master",
       "93": "Drain Strike"
     }
@@ -5218,7 +5218,7 @@
     ],
     "LearnedSkills": {
       "30": "Zionga",
-      "31": "Charge",
+      "31": "Power Charge",
       "33": "Pierce Boost",
       "34": "Resist Fire"
     }
@@ -5305,7 +5305,7 @@
     ],
     "LearnedSkills": {
       "52": "Gigantic Fist",
-      "54": "Charge",
+      "54": "Power Charge",
       "55": "Endure",
       "57": "Repel Pierce"
     }
@@ -5875,7 +5875,7 @@
     "BaseSkills": [
       "Mahamaon",
       "Growth 3",
-      "Auto Masuku"
+      "Auto-Masuku"
     ],
     "LearnedSkills": {
       "68": "Samarecarm",
@@ -6212,7 +6212,7 @@
     "BaseSkills": [
       "Vile Assault",
       "Dekunda",
-      "Auto Maraku"
+      "Auto-Maraku"
     ],
     "LearnedSkills": {
       "74": "Evade Slash",

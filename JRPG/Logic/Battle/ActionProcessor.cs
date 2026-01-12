@@ -94,12 +94,15 @@ namespace JRPGPrototype.Logic.Battle
             var passives = attacker.GetConsolidatedSkills();
 
             bool isPhysical = IsPhysicalElement(ElementHelper.FromCategory(skill.Category));
+            bool isMagic = !isPhysical;
 
-            if (isPhysical && passives.Contains("Arms Master"))
+            // Apply Arms Master (Physical HP cost reduction)
+            if (cost.isHP && isPhysical && passives.Contains("Arms Master"))
             {
                 costValue /= 2;
             }
-            else if (!isPhysical && passives.Contains("Spell Master"))
+            // Apply Spell Master (Magic SP cost reduction)
+            else if (!cost.isHP && isMagic && passives.Contains("Spell Master"))
             {
                 costValue /= 2;
             }
@@ -136,7 +139,7 @@ namespace JRPGPrototype.Logic.Battle
                 if (res.Type == HitType.Repel) break;
             }
 
-            // 4. Consume Charges
+            // 4. Consume Charges: Only consume the relevant charge
             if (isPhysical) attacker.IsCharged = false;
             else attacker.IsMindCharged = false;
 
@@ -337,6 +340,7 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     if (target.BrokenAffinities.ContainsKey(el)) target.BrokenAffinities[el] = 3;
                     else target.BrokenAffinities.Add(el, 3);
+                    _io.WriteLine($"{target.Name}'s {el} resistance was broken!");
                 }
             }
 
@@ -365,7 +369,7 @@ namespace JRPGPrototype.Logic.Battle
                     if (skill.Effect.Contains("50%")) heal = target.MaxHP / 2;
                     if (skill.Effect.Contains("full")) heal = target.MaxHP;
 
-                    int oldHP = target.CurrentHP;
+                        int oldHP = target.CurrentHP;
                         target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
 
                     int actualHealed = target.CurrentHP - oldHP;

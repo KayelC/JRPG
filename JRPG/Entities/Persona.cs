@@ -51,16 +51,25 @@ namespace JRPGPrototype.Entities
             Random rnd = new Random();
             var validStats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
 
-            // Gain 3 points randomly
-            for (int i = 0; i < 3; i++)
+            // Gain 1 point randomly, capped at 40
+            for (int i = 0; i < 1; i++)
             {
                 StatType stat = validStats[rnd.Next(validStats.Length)];
-                if (StatModifiers.ContainsKey(stat)) StatModifiers[stat]++;
-                else StatModifiers[stat] = 1;
-
-                if (io != null) io.WriteLine($"-> {stat} increased!");
+                if (StatModifiers.ContainsKey(stat))
+                {
+                    if (StatModifiers[stat] < 40)
+                    {
+                        StatModifiers[stat]++;
+                        if (io != null) io.WriteLine($"-> {stat} increased!");
+                    }
+                }
+                else
+                {
+                    StatModifiers[stat] = 1;
+                    if (io != null) io.WriteLine($"-> {stat} increased!");
+                }
             }
-
+            
             // 2. Skill Learning Check
             if (SkillsToLearn.ContainsKey(Level))
             {
@@ -84,7 +93,7 @@ namespace JRPGPrototype.Entities
                 RecalculateSkills();
                 return;
             }
-
+            
             // Simulate Level Ups without IO logs
             while (Level < targetLevel)
             {

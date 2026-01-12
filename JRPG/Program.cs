@@ -28,9 +28,8 @@ namespace JRPGPrototype
             player.CharacterStats[StatType.END] = 8;
             player.CharacterStats[StatType.AGI] = 8;
             player.CharacterStats[StatType.LUK] = 5;
-            player.CharacterStats[StatType.INT] = 10;
-            player.CharacterStats[StatType.CHA] = 10;
-            player.StatPoints = 5;
+
+            player.StatPoints = 1;
 
             // Scenario Logic
             io.WriteLine("Select Test Scenario:");

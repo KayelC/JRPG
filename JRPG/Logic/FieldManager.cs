@@ -855,14 +855,8 @@ namespace JRPGPrototype.Logic
             {
                 int total = entity.GetStat(stat);
                 int baseVal = entity.CharacterStats[stat];
-
-                if (stat == StatType.INT || stat == StatType.CHA)
-                {
-                    output += $"{stat,-4}: {total,3}\n";
-                    continue;
-                }
-
                 int mod = total - baseVal;
+
                 if (mod > 0)
                 {
                     output += $"{stat,-4}: {total,3} (+{mod})\n";

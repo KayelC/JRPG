@@ -25,13 +25,13 @@ namespace JRPGPrototype.Logic
                 {
                     StatType s = (StatType)index;
                     string bonus = "";
-                    if (s == StatType.END) bonus = "+5 MaxHP";
-                    else if (s == StatType.INT) bonus = "+3 MaxSP";
-                    else if (s == StatType.STR) bonus = "Phys Dmg";
-                    else if (s == StatType.MAG) bonus = "Magic Dmg";
-                    else if (s == StatType.CHA) bonus = "Negotiation/Shop";
+                    if (s == StatType.END) bonus = "Increases Max HP by 5";
+                    else if (s == StatType.STR) bonus = "Increases Physical Damage";
+                    else if (s == StatType.MAG) bonus = "Increases Magic Damage and +3 Max SP";
+                    else if (s == StatType.AGI) bonus = "Increases Hit/Accuracy and Evasion Chance";
+                    else if (s == StatType.LUK) bonus = "General Purpose Stat affecting Chances and Shop Prices";
 
-                    io.WriteLine($"Highlight: {s}");
+                        io.WriteLine($"Highlight: {s}");
                     io.WriteLine($"Current: {player.CharacterStats[s]}");
                     io.WriteLine($"Bonus: {bonus}");
                 });

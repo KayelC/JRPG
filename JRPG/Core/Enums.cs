@@ -21,7 +21,6 @@ namespace JRPGPrototype.Core
     public enum StatType
     {
         STR, MAG, AGI, END, LUK, // Common
-        INT, CHA // Player Exclusive
     }
 
     public enum HitType

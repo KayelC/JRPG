@@ -1,9 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Logic;
+using JRPGPrototype.Logic.Battle;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace JRPGPrototype.Entities
 {
@@ -188,7 +189,6 @@ namespace JRPGPrototype.Entities
 
             if (Class == ClassType.Operator) return charVal;
 
-            if (type == StatType.CHA || type == StatType.INT) return charVal;
             if (ActivePersona == null || !ActivePersona.StatModifiers.ContainsKey(type)) return charVal;
 
             int personaVal = ActivePersona.StatModifiers[type];
@@ -279,13 +279,11 @@ namespace JRPGPrototype.Entities
         public void RecalculateResources()
         {
             int totalEnd = GetStat(StatType.END);
-            int totalInt = GetStat(StatType.INT);
+            int totalMag = GetStat(StatType.MAG);
+           
 
-            // Demons rely on MAG for SP calculation if INT is missing/zero
-            if (Class == ClassType.Demon) totalInt = GetStat(StatType.MAG);
-
-            MaxHP = BaseHP + (totalEnd * 5);
-            MaxSP = BaseSP + (totalInt * 3);
+            MaxHP = Math.Min(999, BaseHP + (totalEnd * 5)); // Max 999
+            MaxSP = Math.Min(999, BaseSP + (totalMag * 3)); // Max 999
             CurrentHP = Math.Min(CurrentHP, MaxHP);
             CurrentSP = Math.Min(CurrentSP, MaxSP);
         }
@@ -305,23 +303,12 @@ namespace JRPGPrototype.Entities
         private void LevelUp()
         {
             Level++;
-            StatPoints += 3;
+            StatPoints += 1;
             Random rnd = new Random();
             int oldMaxHP = MaxHP;
             int oldMaxSP = MaxSP;
-
-            if (Class != ClassType.Demon)
-            {
-                BaseHP += rnd.Next(6, 11);
-                BaseSP += rnd.Next(3, 8);
-            }
-            else
-            {
-                // Demons get HP/SP boost from stats increasing via Persona scaling
-                // BaseHP here acts as the "Race Bonus"
-                BaseHP += rnd.Next(3, 6);
-                BaseSP += rnd.Next(2, 4);
-        }
+            BaseHP += rnd.Next(6, 11);
+            BaseSP += rnd.Next(3, 8);
 
             RecalculateResources();
 
@@ -345,6 +332,7 @@ namespace JRPGPrototype.Entities
         public void AllocateStat(StatType type)
         {
             if (StatPoints <= 0) return;
+            if (CharacterStats[type] >= 40) return;
             CharacterStats[type]++;
             StatPoints--;
             RecalculateResources();

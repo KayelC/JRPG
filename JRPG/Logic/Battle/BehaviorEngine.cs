@@ -239,7 +239,8 @@ namespace JRPGPrototype.Logic.Battle
                            nameLower.StartsWith("me") ||
                            effectLower.Contains("all foes") ||
                            effectLower.Contains("all allies") ||
-                           effectLower.Contains("party");
+                           effectLower.Contains("party") ||
+                           nameLower == "debilitate"; // Debilitate is always Multi-Target
 
             // --- REFINED SIDE IDENTIFICATION ---
             // SMT Rule: Buffs (kaja/Heat Riser) -> Allies. Debuffs (nda/Debilitate) -> Opponents.

@@ -58,10 +58,7 @@ namespace JRPGPrototype.Logic.Battle
             }
             else options.Add("Skill");
 
-            // REFINEMENT: PC Permissions check applied via previous discussion
-            bool isHumanoid = actor.Class == ClassType.Human || actor.Class == ClassType.PersonaUser ||
-                              actor.Class == ClassType.WildCard || actor.Class == ClassType.Operator ||
-                              actor.Class == ClassType.Avatar;
+            bool isHumanoid = actor.Class != ClassType.Demon;
 
             if (isHumanoid)
             {
@@ -97,9 +94,28 @@ namespace JRPGPrototype.Logic.Battle
 
             if (skill != null)
             {
+                string nameLower = skill.Name.ToLower();
                 string effect = skill.Effect.ToLower();
-                targetsAllies = skill.Category.Contains("Recovery") || skill.Category.Contains("Enhance") || effect.Contains("ally") || effect.Contains("party");
-                targetsAll = skill.Name.ToLower().StartsWith("ma") || skill.Name.ToLower().StartsWith("me") || effect.Contains("all foes") || effect.Contains("all allies") || effect.Contains("party");
+
+                // FIX: Debuff Check for correct targeting side (Nda/Debilitate)
+                bool isDebuff = nameLower.EndsWith("nda") || nameLower == "debilitate";
+                bool isBuff = nameLower.EndsWith("kaja") || nameLower == "heat riser";
+
+                targetsAllies = skill.Category.Contains("Recovery") ||
+                                isBuff ||
+                                effect.Contains("ally") ||
+                                effect.Contains("allies") ||
+                                effect.Contains("party");
+
+                // Debuff logic overrides all: always target opponents
+                if (isDebuff) targetsAllies = false;
+
+                targetsAll = nameLower.StartsWith("ma") ||
+                            nameLower.StartsWith("me") ||
+                            effect.Contains("all foes") ||
+                            effect.Contains("all allies") ||
+                            effect.Contains("party") ||
+                            nameLower == "debilitate"; // FIX: Debilitate is explicitly multi-target
                 element = ElementHelper.FromCategory(skill.Category);
             }
             else if (item != null)

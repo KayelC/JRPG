@@ -61,6 +61,7 @@ namespace JRPGPrototype
                     player.DemonStock.Add(Combatant.CreateDemon("pixie", 12));
                     player.DemonStock.Add(Combatant.CreateDemon("slime", 15));
                     player.DemonStock.Add(Combatant.CreateDemon("susano-o", 84));
+                    player.DemonStock.Add(Combatant.CreateDemon("mother-harlot", 90));
                     break;
             }
 

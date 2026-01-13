@@ -27,3 +27,4 @@ C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\skills_by_
 C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\status_ailments.json
 C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\tartarus.json
 C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\weapons.json
+C:\Users\Kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\questions.json

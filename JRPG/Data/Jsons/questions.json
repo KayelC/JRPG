@@ -1,0 +1,141 @@
+{
+  "questions": {
+    "Childlike": [
+      {
+        "text": "Hee-ho! You wanna be my friend?",
+        "answers": [
+          { "text": "Of course! Let's be best friends.", "value": 2 },
+          { "text": "I don't have time for games.", "value": -1 },
+          { "text": "Only if you're strong enough.", "value": 0 }
+        ]
+      },
+      {
+        "text": "If I join you, will you give me lots of candy?",
+        "answers": [
+          { "text": "All the candy you can eat.", "value": 2 },
+          { "text": "Candy is bad for your teeth.", "value": -2 },
+          { "text": "You'll have to earn it.", "value": 1 }
+        ]
+      }
+    ],
+    "Arrogant": [
+      {
+        "text": "Hmph. Do you truly believe you are worthy of my power?",
+        "answers": [
+          { "text": "Your power is magnificent. I am not worthy, but I ask for it anyway.", "value": 2 },
+          { "text": "My power is far greater than yours.", "value": -2 },
+          { "text": "Let's find out together.", "value": 1 }
+        ]
+      },
+      {
+        "text": "The weak exist only to serve the strong. Do you not agree?",
+        "answers": [
+          { "text": "That is the law of the universe.", "value": 2 },
+          { "text": "The strong should protect the weak.", "value": -1 }
+        ]
+      }
+    ],
+    "Timid": [
+      {
+        "text": "U-umm... you won't... hurt me, will you?",
+        "answers": [
+          { "text": "I promise I'll keep you safe.", "value": 2 },
+          { "text": "Only if you step out of line.", "value": -2 },
+          { "text": "The world is a dangerous place.", "value": 0 }
+        ]
+      },
+      {
+        "text": "It's so scary out here... I don't know what to do...",
+        "answers": [
+          { "text": "Stay with me. We can be brave together.", "value": 2 },
+          { "text": "Then you should just run away.", "value": -1 }
+        ]
+      }
+    ],
+    "Sultry": [
+      {
+        "text": "Well now... aren't you a handsome devil? What is it you want from me?",
+        "answers": [
+          { "text": "I'm captivated by you. I want your power.", "value": 2 },
+          { "text": "Just another demon in my way.", "value": -2 },
+          { "text": "I'm looking for allies.", "value": 1 }
+        ]
+      },
+      {
+        "text": "Don't you think this fighting is so... pointless? There are better ways to spend our time.",
+        "answers": [
+          { "text": "Perhaps you could show me?", "value": 2 },
+          { "text": "This is a matter of life and death.", "value": -1 }
+        ]
+      }
+    ],
+    "Honorable": [
+      {
+        "text": "State your purpose. Why do you seek my strength?",
+        "answers": [
+          { "text": "I seek justice, and your strength is righteous.", "value": 2 },
+          { "text": "For my own personal gain.", "value": -2 },
+          { "text": "To survive this cursed world.", "value": 1 }
+        ]
+      },
+      {
+        "text": "Would you sacrifice one of your own comrades to achieve your goal?",
+        "answers": [
+          { "text": "Never. My bonds are my strength.", "value": 2 },
+          { "text": "The mission comes first. Sacrifices are necessary.", "value": -1 }
+        ]
+      }
+    ],
+    "Gloomy": [
+      {
+        "text": "It's all so meaningless... Why do you even bother fighting?",
+        "answers": [
+          { "text": "Because even in darkness, there's a reason to hope.", "value": 2 },
+          { "text": "You're right. It's pointless.", "value": -2 },
+          { "text": "To find my own meaning.", "value": 1 }
+        ]
+      },
+      {
+        "text": "We're all just going to die anyway. Join me... and we can fade into nothingness together.",
+        "answers": [
+          { "text": "I'm not ready to give up yet.", "value": 2 },
+          { "text": "Fine by me.", "value": -1 }
+        ]
+      }
+    ],
+    "Upbeat": [
+      {
+        "text": "Hey! Hey! You look like you're going somewhere fun! Can I come?",
+        "answers": [
+          { "text": "The more the merrier! Let's go!", "value": 2 },
+          { "text": "This is a serious journey, not a party.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Wow, you're super strong! We'd be an unstoppable team, don't you think?",
+        "answers": [
+          { "text": "Totally! Together, we can take on the world!", "value": 2 },
+          { "text": "Don't get ahead of yourself.", "value": -1 },
+          { "text": "I suppose your power could be useful.", "value": 1 }
+        ]
+      }
+    ],
+    "Formal": [
+      {
+        "text": "It is my assessment that an alliance would be mutually beneficial. Do you concur?",
+        "answers": [
+          { "text": "I concur. Let us form a pact.", "value": 2 },
+          { "text": "I don't make deals with demons.", "value": -2 }
+        ]
+      },
+      {
+        "text": "Please state the terms of our potential contract. What is it that you offer in exchange for my services?",
+        "answers": [
+          { "text": "A chance to witness a new world's creation.", "value": 2 },
+          { "text": "Macca. Lots of it.", "value": 1 },
+          { "text": "Your life. Join me or perish.", "value": -1 }
+        ]
+      }
+    ]
+  }
+}

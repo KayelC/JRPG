@@ -29,7 +29,7 @@ namespace JRPGPrototype
             player.CharacterStats[StatType.AGI] = 8;
             player.CharacterStats[StatType.LUK] = 5;
 
-            player.StatPoints = 1;
+            player.StatPoints = 0;
 
             // Scenario Logic
             io.WriteLine("Select Test Scenario:");
@@ -56,11 +56,7 @@ namespace JRPGPrototype
                 case '4':
                     player.Class = ClassType.Operator;
                     // UPDATED: Use CreateDemon to ensure proper skill progression
-                    // Adding a Lv 12 Pixie and Lv 15 Slime
-                    player.DemonStock.Add(Combatant.CreateDemon("pixie", 12));
-                    player.DemonStock.Add(Combatant.CreateDemon("slime", 15));
-                    player.DemonStock.Add(Combatant.CreateDemon("susano-o", 84));
-                    player.DemonStock.Add(Combatant.CreateDemon("mother-harlot", 90));
+                    //player.DemonStock.Add(Combatant.CreateDemon("pixie", 1));
                     break;
             }
 

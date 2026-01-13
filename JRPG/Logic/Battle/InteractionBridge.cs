@@ -50,11 +50,17 @@ namespace JRPGPrototype.Logic.Battle
             string context = GetBattleContext(actor);
             List<string> options = new List<string> { "Attack", "Guard" };
 
-            if (actor.Class == ClassType.PersonaUser || actor.Class == ClassType.WildCard) options.Add("Persona");
+            // Class-Based Menu Augmentation
+            if (actor.Class == ClassType.PersonaUser || actor.Class == ClassType.WildCard)
+            {
+                options.Add("Persona");
+                options.Add("Talk"); // WildCards can negotiate
+            }
             else if (actor.Class == ClassType.Operator)
             {
                 options.Add("Command");
                 options.Add("COMP");
+                options.Add("Talk"); // Operators can negotiate
             }
             else options.Add("Skill");
 
@@ -74,7 +80,10 @@ namespace JRPGPrototype.Logic.Battle
             foreach (var opt in options)
             {
                 bool isDisabled = false;
-                if (isPanicked && (opt == "Persona" || opt == "Skill" || opt == "Command" || opt == "COMP" || opt == "Item")) isDisabled = true;
+                if (isPanicked && (opt == "Persona" || opt == "Skill" || opt == "Command" || opt == "COMP" || opt == "Item" || opt == "Talk"))
+                {
+                    isDisabled = true;
+                }
                 disabledStates.Add(isDisabled);
             }
 
@@ -85,7 +94,7 @@ namespace JRPGPrototype.Logic.Battle
             return options[choice];
         }
 
-        public List<Combatant> SelectTarget(Combatant actor, SkillData skill = null, ItemData item = null)
+        public List<Combatant> SelectTarget(Combatant actor, SkillData skill = null, ItemData item = null, bool isTalk = false)
         {
             string context = GetBattleContext(actor);
             bool targetsAllies = false;
@@ -115,13 +124,18 @@ namespace JRPGPrototype.Logic.Battle
                             effect.Contains("all foes") ||
                             effect.Contains("all allies") ||
                             effect.Contains("party") ||
-                            nameLower == "debilitate"; // FIX: Debilitate is explicitly multi-target
+                            nameLower == "debilitate";
                 element = ElementHelper.FromCategory(skill.Category);
             }
             else if (item != null)
             {
                 targetsAllies = true;
                 targetsAll = item.Type == "Healing_All" || item.Name == "Amrita";
+            }
+            else if (isTalk)
+            {
+                targetsAllies = false;
+                targetsAll = false;
             }
 
             var selectionPool = targetsAllies

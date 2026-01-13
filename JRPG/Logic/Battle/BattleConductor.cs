@@ -27,6 +27,7 @@ namespace JRPGPrototype.Logic.Battle
         private readonly ActionProcessor _processor;
         private readonly BehaviorEngine _ai;
         private readonly InteractionBridge _ui;
+        private readonly NegotiationEngine _negotiationEngine;
         private readonly BattleKnowledge _playerKnowledge;
 
         private readonly bool _isBossBattle;
@@ -60,6 +61,7 @@ namespace JRPGPrototype.Logic.Battle
             _processor = new ActionProcessor(_io, _statusRegistry, _playerKnowledge);
             _ai = new BehaviorEngine(_statusRegistry);
             _ui = new InteractionBridge(_io, _party, _inv, _enemies, _turnEngine, _playerKnowledge);
+            _negotiationEngine = new NegotiationEngine(_io, _party, _inv, _eco);
         }
 
         /// <summary>
@@ -91,7 +93,7 @@ namespace JRPGPrototype.Logic.Battle
                 foreach (var actor in allies)
                 {
                     _statusRegistry.ProcessInitialPassives(actor, allies);
-                }
+            }
             }
             else
             {
@@ -100,7 +102,7 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     // For Enemy Passives, allies = entire enemy side
                     _statusRegistry.ProcessInitialPassives(actor, enemies);
-                }
+            }
             }
             // Show HUD update for turn 1 buffs
             _ui.ForceRefreshHUD();
@@ -286,8 +288,8 @@ namespace JRPGPrototype.Logic.Battle
                             _processor.ExecuteAnalyze(comp.target);
                             _turnEngine.ConsumeAction(HitType.Normal, false);
                             actionCommitted = true;
-                            return;
-                        }
+                        return;
+                    }
                     }
                     else if (choice == "Pass")
                     {
@@ -315,36 +317,17 @@ namespace JRPGPrototype.Logic.Battle
                     }
                     else if (choice == "Tactics")
                     {
-                        string tactic = _ui.GetTacticsChoice(_isBossBattle, actor.Class == ClassType.Operator);
-                        if (tactic == "Back") continue; // Back to Menu
-
-                        if (tactic == "Escape")
+                        HandleTactics(actor);
+                        return;
+                    }
+                    else if (choice == "Talk")
+                    {
+                        targets = _ui.SelectTarget(actor, null, null, true);
+                        if (targets != null)
                         {
-                            int pAgi = actor.GetStat(StatType.AGI);
-                            double eAvgAgi = _enemies.Any() ? _enemies.Average(e => e.GetStat(StatType.AGI)) : 1;
-                            if (new Random().Next(0, 100) < Math.Clamp(10.0 + 40.0 * (pAgi / eAvgAgi), 5.0, 95.0))
-                            {
-                                Escaped = true;
-                                BattleEnded = true;
-                                _io.WriteLine("Escaped safely!");
-                                return;
-                            }
-                            _io.WriteLine("Failed to escape!");
-                            _turnEngine.ConsumeAction(HitType.Normal, false);
-                            actionCommitted = true;
-                            return;
+                            HandleNegotiation(actor, targets[0]);
                         }
-
-                        if (tactic == "Strategy")
-                        {
-                            var stratTarget = _ui.SelectStrategyTarget();
-                            if (stratTarget != null)
-                            {
-                                stratTarget.BattleControl = (stratTarget.BattleControl == ControlState.ActFreely) ? ControlState.DirectControl : ControlState.ActFreely;
-                                _io.WriteLine($"{stratTarget.Name} is now set to {stratTarget.BattleControl}.");
-                            }
-                            continue; // Strategy toggle doesn't consume turn, return to menu
-                        }
+                        return;
                     }
                 }
                 // 3. Heuristic AI
@@ -396,7 +379,7 @@ namespace JRPGPrototype.Logic.Battle
                     {
                         // Reprompt if the item had no effect
                         ExecuteAction(actor, isPlayerSide, turnState);
-                    }
+                }
                 }
                 else if (skill == null)
                 {
@@ -406,21 +389,63 @@ namespace JRPGPrototype.Logic.Battle
                 else
                 {
                     var results = _processor.ExecuteSkill(actor, targets, skill);
-                    if (results.Any())
-                    {
-                        HitType worst = results.Max(r => r.Type);
-                        bool anyCrit = results.Any(r => r.IsCritical);
-                        _turnEngine.ConsumeAction(worst, anyCrit);
-                    }
-                    else
-                    {
-                        // Skill failed to hit anyone (all dead) - consume normal icon
-                        _turnEngine.ConsumeAction(HitType.Normal, false);
-                    }
+                    if (results.Any()) { HitType worst = results.Max(r => r.Type); _turnEngine.ConsumeAction(worst, results.Any(r => r.IsCritical)); }
+                    else _turnEngine.ConsumeAction(HitType.Normal, false);
                 }
                 _io.Wait(1000);
             }
         }
+
+        private void HandleNegotiation(Combatant actor, Combatant target)
+        {
+            NegotiationResult result = _negotiationEngine.StartNegotiation(actor, target, _enemies);
+            switch (result)
+            {
+                case NegotiationResult.Success:
+                    _io.WriteLine($"{target.Name} joined your party!");
+                    _enemies.Remove(target);
+                    actor.DemonStock.Add(target);
+                    _turnEngine.ConsumeAction(HitType.Normal, false);
+                    break;
+                case NegotiationResult.Failure:
+                    _io.WriteLine("Negotiation failed! Your turn ends.");
+                    _turnEngine.TerminatePhase();
+                    break;
+                case NegotiationResult.Trick:
+                case NegotiationResult.Flee:
+                    _io.WriteLine($"{target.Name} left the battle.");
+                    _enemies.Remove(target);
+                    _turnEngine.ConsumeAction(HitType.Miss, false);
+                    break;
+            }
+        }
+
+        private void HandleTactics(Combatant actor)
+        {
+            string tactic = _ui.GetTacticsChoice(_isBossBattle, actor.Class == ClassType.Operator);
+            if (tactic == "Escape")
+            {
+                int pAgi = actor.GetStat(StatType.AGI);
+                double eAvgAgi = _enemies.Any() ? _enemies.Average(e => e.GetStat(StatType.AGI)) : 1;
+                if (new Random().Next(0, 100) < Math.Clamp(10.0 + 40.0 * (pAgi / eAvgAgi), 5.0, 95.0))
+                {
+                    Escaped = true;
+                    BattleEnded = true;
+                    return;
+                }
+                _io.WriteLine("Failed to escape!");
+                _turnEngine.ConsumeAction(HitType.Normal, false);
+            }
+            if (tactic == "Strategy")
+            {
+                var stratTarget = _ui.SelectStrategyTarget();
+                if (stratTarget != null)
+                {
+                    stratTarget.BattleControl = (stratTarget.BattleControl == ControlState.ActFreely) ? ControlState.DirectControl : ControlState.ActFreely;
+                    _io.WriteLine($"{stratTarget.Name} is now set to {stratTarget.BattleControl}.");
+                }
+                }
+            }
 
         private bool CheckEncounterCompletion()
         {
@@ -451,10 +476,9 @@ namespace JRPGPrototype.Logic.Battle
                 _io.WriteLine("\nDEFEAT...", ConsoleColor.Red);
             }
 
-            foreach (var member in _party.ActiveParty)
+            foreach (var member in _party.ActiveParty.Concat(_party.ReserveMembers))
             {
-                member.IsGuarding = false;
-                member.Buffs.Clear();
+                member.CleanupBattleState();
             }
 
             _io.WriteLine("Press any key to exit battle...");

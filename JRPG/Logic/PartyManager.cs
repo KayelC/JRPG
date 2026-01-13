@@ -23,6 +23,36 @@ namespace JRPGPrototype.Logic
             ActiveParty.Add(protagonist);
         }
 
+        /// <summary>
+        /// Calculates max stock size based on character level.
+        /// Unlocks slots at specific level thresholds.
+        /// </summary>
+        private int CalculateMaxStock(int level)
+        {
+            if (level < 10) return 2;
+            if (level < 20) return 4;
+            if (level < 30) return 6;
+            return 8;
+        }
+
+        /// <summary>
+        /// Checks if a specific actor has an open slot in their Demon Stock.
+        /// </summary>
+        public bool HasOpenDemonStockSlot(Combatant actor)
+        {
+            int maxStock = CalculateMaxStock(actor.Level);
+            return actor.DemonStock.Count < maxStock;
+        }
+
+        /// <summary>
+        /// Checks if a specific actor has an open slot in their Persona Stock.
+        /// </summary>
+        public bool HasOpenPersonaStockSlot(Combatant actor)
+        {
+            int maxStock = CalculateMaxStock(actor.Level);
+            return actor.PersonaStock.Count < maxStock;
+        }
+
         public bool AddMember(Combatant member)
         {
             if (ActiveParty.Count < MAX_PARTY_SIZE)
@@ -61,8 +91,7 @@ namespace JRPGPrototype.Logic
             if (ActiveParty.Count < MAX_PARTY_SIZE)
             {
                 demon.PartySlot = ActiveParty.Count;
-                // Default summoned demons to AI control for now (Operator Command logic will handle overrides later)
-                demon.BattleControl = ControlState.ActFreely;
+                demon.BattleControl = ControlState.DirectControl;
                 ActiveParty.Add(demon);
                 return true;
             }

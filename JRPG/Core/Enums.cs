@@ -65,4 +65,17 @@ namespace JRPGPrototype.Core
         DirectControl,
         ActFreely
     }
+
+    // NEW: Defines the conversational archetypes linked to Arcanas
+    public enum PersonalityType
+    {
+        Timid,      // Priestess, Hermit
+        Arrogant,   // Magician, Emperor
+        Childlike,  // Fool, Chariot
+        Sultry,     // Empress, Lovers
+        Honorable,  // Justice, Hierophant
+        Gloomy,     // Hanged Man, Death
+        Upbeat,     // Sun, Star
+        Formal      // Temperance, Judgement
+    }
 }

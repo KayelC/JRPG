@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using JRPGPrototype.Core;
 
 namespace JRPGPrototype.Data
 {
@@ -13,11 +14,13 @@ namespace JRPGPrototype.Data
         public static Dictionary<string, ItemData> Items = new Dictionary<string, ItemData>();
         public static Dictionary<string, EnemyData> Enemies = new Dictionary<string, EnemyData>();
         public static Dictionary<string, DungeonData> Dungeons = new Dictionary<string, DungeonData>();
-
         public static Dictionary<string, WeaponData> Weapons = new Dictionary<string, WeaponData>();
         public static Dictionary<string, ArmorData> Armors = new Dictionary<string, ArmorData>();
         public static Dictionary<string, BootData> Boots = new Dictionary<string, BootData>();
         public static Dictionary<string, AccessoryData> Accessories = new Dictionary<string, AccessoryData>();
+
+        // FIX: Initialize the property to prevent null reference on failed load
+        public static NegotiationQuestionRoot NegotiationQuestions { get; private set; } = new NegotiationQuestionRoot();
 
         public static List<ShopEntry> ShopInventory = new List<ShopEntry>();
 
@@ -49,6 +52,20 @@ namespace JRPGPrototype.Data
                 Console.WriteLine($"[System] Loaded {Ailments.Count} ailments.");
             });
 
+            // FIX: Added the loading logic for the negotiation questions
+            LoadFile("questions.json", (json) => {
+                var root = JsonConvert.DeserializeObject<NegotiationQuestionRoot>(json);
+                if (root != null)
+                {
+                    NegotiationQuestions = root;
+                }
+                else
+                {
+                    NegotiationQuestions = new NegotiationQuestionRoot { Questions = new Dictionary<PersonalityType, List<NegotiationQuestion>>() };
+                }
+                Console.WriteLine($"[System] Loaded negotiation questions.");
+            });
+
             LoadFile("items.json", (json) => {
                 var root = JsonConvert.DeserializeObject<Dictionary<string, List<ItemData>>>(json);
                 if (root != null && root.ContainsKey("items"))
@@ -75,15 +92,15 @@ namespace JRPGPrototype.Data
             LoadFile("tartarus.json", (json) => {
                 var root = JsonConvert.DeserializeObject<DungeonRoot>(json);
                 if (root != null && root.Dungeons != null)
-                {
+        {
                     foreach (var d in root.Dungeons)
-                    {
+            {
                         if (!Dungeons.ContainsKey(d.Id))
-                        {
+            {
                             Dungeons.Add(d.Id, d);
                             Console.WriteLine($"[System] Loaded Dungeon: {d.Name} with {d.Blocks.Count} blocks.");
-                        }
-                    }
+            }
+        }
                 }
             });
         }
@@ -101,9 +118,9 @@ namespace JRPGPrototype.Data
                         {
                             string id = (string)prop.GetValue(item);
                             if (!targetDict.ContainsKey(id)) targetDict.Add(id, item);
-                        }
                     }
-                    Console.WriteLine($"[System] Loaded {targetDict.Count} {jsonKey}.");
+                }
+                Console.WriteLine($"[System] Loaded {targetDict.Count} {jsonKey}.");
                 }
             });
         }

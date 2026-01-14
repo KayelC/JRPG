@@ -48,7 +48,7 @@
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\BattleConductor.cs",
               "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\BattleConductor.cs",
               "RelativeToolTip": "JRPG\\Logic\\Battle\\BattleConductor.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAwwCoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAswHoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-14T10:09:02.969Z",
               "EditorCaption": ""
@@ -87,8 +87,7 @@
               "RelativeToolTip": "JRPG\\Logic\\PartyManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-14T09:15:06.669Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-14T09:15:06.669Z"
             },
             {
               "$type": "Document",

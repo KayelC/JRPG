@@ -212,7 +212,8 @@ namespace JRPGPrototype.Logic.Battle
                     actorIndex++;
                 }
             }
-            // Disolving shields at the end of a phase.
+
+            // At phase end, dissolve any unused Karn shields
             var sideToEnd = isPlayerSide ? _party.ActiveParty : _enemies;
             foreach (var combatant in sideToEnd)
             {
@@ -253,7 +254,7 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     string choice = _ui.ShowMainMenu(actor);
 
-                    if (choice == "Cancel") continue; // Back to Menu
+                    if (choice == "Cancel") continue; // Re-render main menu
 
                     if (choice == "Attack")
                     {
@@ -432,12 +433,16 @@ namespace JRPGPrototype.Logic.Battle
             {
                 case NegotiationResult.Success:
                     _io.WriteLine($"{target.Name} joined your party!");
-                    // Use CreateDemon to instantiate a clean demon, not the enemy clone
-                    var newDemon = Combatant.CreateDemon(target.SourceId, target.Level);
-                    actor.DemonStock.Add(newDemon);
+
+                    // Look up the EnemyData to find the correct PersonaId for instantiation.
+                    if (Database.Enemies.TryGetValue(target.SourceId, out var enemyData))
+                    {
+                        var newDemon = Combatant.CreateDemon(enemyData.PersonaId, target.Level);
+                        actor.DemonStock.Add(newDemon);
                     _sessionRecruitedIds.Add(target.SourceId); // Track for this battle
-                    _enemies.Remove(target);
-                    _turnEngine.ConsumeAction(HitType.Normal, false);
+                        _enemies.Remove(target);
+                        _turnEngine.ConsumeAction(HitType.Normal, false);
+                    }
                     break;
                 case NegotiationResult.Failure:
                     _io.WriteLine("Negotiation failed! Your turn ends.");

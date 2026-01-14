@@ -6,12 +6,15 @@ namespace JRPGPrototype.Data
 {
     /// <summary>
     /// Root object for deserializing the questions.json file.
-    /// Maps each PersonalityType to a list of possible questions.
+    /// Maps each PersonalityType to a list of possible questions and familiar dialogues.
     /// </summary>
     public class NegotiationQuestionRoot
     {
         [JsonProperty("questions")]
         public Dictionary<PersonalityType, List<NegotiationQuestion>> Questions { get; set; }
+
+        [JsonProperty("familiar_dialogue")]
+        public Dictionary<PersonalityType, List<string>> FamiliarDialogues { get; set; }
     }
 
     /// <summary>

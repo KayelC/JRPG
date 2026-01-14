@@ -93,7 +93,7 @@ namespace JRPGPrototype.Logic.Battle
                 foreach (var actor in allies)
                 {
                     _statusRegistry.ProcessInitialPassives(actor, allies);
-            }
+                }
             }
             else
             {
@@ -102,7 +102,7 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     // For Enemy Passives, allies = entire enemy side
                     _statusRegistry.ProcessInitialPassives(actor, enemies);
-            }
+                }
             }
             // Show HUD update for turn 1 buffs
             _ui.ForceRefreshHUD();
@@ -403,8 +403,9 @@ namespace JRPGPrototype.Logic.Battle
             {
                 case NegotiationResult.Success:
                     _io.WriteLine($"{target.Name} joined your party!");
+                    var newDemon = Combatant.CreateDemon(target.SourceId, target.Level);
+                    actor.DemonStock.Add(newDemon);
                     _enemies.Remove(target);
-                    actor.DemonStock.Add(target);
                     _turnEngine.ConsumeAction(HitType.Normal, false);
                     break;
                 case NegotiationResult.Failure:
@@ -413,6 +414,7 @@ namespace JRPGPrototype.Logic.Battle
                     break;
                 case NegotiationResult.Trick:
                 case NegotiationResult.Flee:
+                case NegotiationResult.FamiliarFlee:
                     _io.WriteLine($"{target.Name} left the battle.");
                     _enemies.Remove(target);
                     _turnEngine.ConsumeAction(HitType.Miss, false);
@@ -429,8 +431,8 @@ namespace JRPGPrototype.Logic.Battle
                 double eAvgAgi = _enemies.Any() ? _enemies.Average(e => e.GetStat(StatType.AGI)) : 1;
                 if (new Random().Next(0, 100) < Math.Clamp(10.0 + 40.0 * (pAgi / eAvgAgi), 5.0, 95.0))
                 {
-                    Escaped = true;
-                    BattleEnded = true;
+                    Escaped = true; BattleEnded = true;
+                    _io.WriteLine("Escaped safely!");
                     return;
                 }
                 _io.WriteLine("Failed to escape!");
@@ -444,8 +446,8 @@ namespace JRPGPrototype.Logic.Battle
                     stratTarget.BattleControl = (stratTarget.BattleControl == ControlState.ActFreely) ? ControlState.DirectControl : ControlState.ActFreely;
                     _io.WriteLine($"{stratTarget.Name} is now set to {stratTarget.BattleControl}.");
                 }
-                }
             }
+        }
 
         private bool CheckEncounterCompletion()
         {

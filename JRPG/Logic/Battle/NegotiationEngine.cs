@@ -69,12 +69,12 @@ namespace JRPGPrototype.Logic.Battle
             // Check against the specific actor initiating the talk
             if (_party.IsDemonOwned(actor, target.SourceId))
             {
-                return HandleFamiliarDemon(target);
+                return HandleFamiliarDemon(actor, target);
             }
 
             if (!_party.HasOpenDemonStockSlot(actor))
             {
-                _io.WriteLine("Your Demon Stock is full! You cannot recruit anyone else.", ConsoleColor.Yellow);
+                _io.WriteLine("Your Demon Stock is full!");
                 _io.Wait(1000);
                 return NegotiationResult.Failure;
             }
@@ -99,9 +99,8 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             int moodScore = 0;
-            List<NegotiationQuestion> sessionQuestions = new List<NegotiationQuestion>(questionPool);
-
-            for (int i = 0; i < 3; i++)
+            var sessionQuestions = new List<NegotiationQuestion>(questionPool);
+            for (int i = 0; i < 2; i++)
             {
                 if (!sessionQuestions.Any()) break;
                 var question = sessionQuestions[_rnd.Next(sessionQuestions.Count)];
@@ -113,7 +112,7 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             // The Demand & Resolution Phase
-            if (moodScore >= 4)
+            if (moodScore >= 3)
             {
                 _io.WriteLine($"{target.Name} seems pleased with your answers.");
                 return ProcessDemands(actor, target);
@@ -127,17 +126,28 @@ namespace JRPGPrototype.Logic.Battle
             {
                 _io.WriteLine($"{target.Name} grows angry!", ConsoleColor.Red);
                 _io.Wait(800);
-                return NegotiationResult.Failure;
+            return NegotiationResult.Failure;
             }
         }
 
-        private NegotiationResult HandleFamiliarDemon(Combatant target)
+        private NegotiationResult HandleFamiliarDemon(Combatant actor, Combatant target)
         {
             string dialogue = $"{target.Name} looks at you with a sense of familiarity...";
             if (Database.Personas.TryGetValue(target.SourceId, out var pData) && !string.IsNullOrEmpty(pData.FamiliarDialogue))
             {
                 dialogue = $"{target.Name}: \"{pData.FamiliarDialogue}\"";
             }
+            else
+            {
+                string arcana = target.ActivePersona?.Arcana ?? "Fool";
+                PersonalityType personality = ArcanaToPersonality.GetValueOrDefault(arcana, PersonalityType.Childlike);
+                var dialogues = Database.NegotiationQuestions.FamiliarDialogues.GetValueOrDefault(personality, new List<string>());
+                if (dialogues.Any())
+                {
+                    dialogue = $"{target.Name}: \"{dialogues[_rnd.Next(dialogues.Count)]}\"";
+                }
+            }
+
             _io.WriteLine(dialogue, ConsoleColor.Cyan);
 
             int roll = _rnd.Next(0, 100);

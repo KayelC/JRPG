@@ -137,5 +137,39 @@
         ]
       }
     ]
+  },
+  "familiar_dialogue": {
+    "Childlike": [
+      "Hey, I know you! My brother says hi!",
+      "Hee-ho! Another one of us! Fun!"
+    ],
+    "Arrogant": [
+      "Hmph. So you run with my kind. I suppose you have some taste.",
+      "Another of my clan follows you. You must have some merit."
+    ],
+    "Timid": [
+      "O-oh... you already have a friend like me... That's nice.",
+      "You seem kind... just like my sibling..."
+    ],
+    "Sultry": [
+      "Well now... you certainly have a type, don't you, darling?",
+      "I see you already have company. Pity."
+    ],
+    "Honorable": [
+      "I see the banner of my clan is already with you. A wise choice.",
+      "You keep good company. I will not interfere."
+    ],
+    "Gloomy": [
+      "Another soul bound to your fate... How tragic.",
+      "It doesn't matter... We all end up in the same place."
+    ],
+    "Upbeat": [
+      "Whoa! You know my pal! Awesome!",
+      "Hey, tell my buddy I said what's up!"
+    ],
+    "Formal": [
+      "It appears you already have a contract with one of my kind. I will not infringe.",
+      "A prior agreement is in place. I shall take my leave."
+    ]
   }
 }

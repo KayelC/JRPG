@@ -17,11 +17,12 @@ namespace JRPGPrototype.Logic.Battle
         Success,
         Failure,
         Trick,
-        Flee
+        Flee,
+        FamiliarFlee
     }
 
     /// <summary>
-    /// Manages the state and flow of the SMT III-style negotiation mini-game.
+    /// Manages the state and flow of the negotiation mini-game.
     /// Uses Arcana-driven personalities and a global question pool.
     /// </summary>
     public class NegotiationEngine
@@ -65,6 +66,12 @@ namespace JRPGPrototype.Logic.Battle
                 return NegotiationResult.Failure;
             }
 
+            // Check against the specific actor initiating the talk
+            if (_party.IsDemonOwned(actor, target.SourceId))
+            {
+                return HandleFamiliarDemon(target);
+            }
+
             if (!_party.HasOpenDemonStockSlot(actor))
             {
                 _io.WriteLine("Your Demon Stock is full! You cannot recruit anyone else.", ConsoleColor.Yellow);
@@ -79,7 +86,7 @@ namespace JRPGPrototype.Logic.Battle
                 return NegotiationResult.Failure;
             }
 
-            // 3. Determine Personality & Fetch Questions
+            // Determine Personality & Fetch Questions
             string arcana = target.ActivePersona?.Arcana ?? "Fool";
             PersonalityType personality = ArcanaToPersonality.GetValueOrDefault(arcana, PersonalityType.Childlike);
 
@@ -92,27 +99,21 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             int moodScore = 0;
-            int questionsToAsk = 2;
+            List<NegotiationQuestion> sessionQuestions = new List<NegotiationQuestion>(questionPool);
 
-            // 4. The Conversation Loop
-            for (int i = 0; i < questionsToAsk; i++)
+            for (int i = 0; i < 3; i++)
             {
-                var question = questionPool[_rnd.Next(questionPool.Count)];
-                var answerLabels = question.Answers.Select(a => a.Text).ToList();
+                if (!sessionQuestions.Any()) break;
+                var question = sessionQuestions[_rnd.Next(sessionQuestions.Count)];
+                sessionQuestions.Remove(question);
 
-                int choice = _io.RenderMenu($"{target.Name}: \"{question.Text}\"", answerLabels, 0);
-
-                if (choice == -1)
-                {
-                    _io.WriteLine($"{target.Name} seems disappointed...");
-                    return NegotiationResult.Failure;
-                }
-
+                int choice = _io.RenderMenu($"{target.Name}: \"{question.Text}\"", question.Answers.Select(a => a.Text).ToList(), 0);
+                if (choice == -1) { _io.WriteLine($"{target.Name} seems disappointed..."); return NegotiationResult.Failure; }
                 moodScore += question.Answers[choice].Value;
             }
 
-            // 5. The Demand & Resolution Phase
-            if (moodScore >= 3)
+            // The Demand & Resolution Phase
+            if (moodScore >= 4)
             {
                 _io.WriteLine($"{target.Name} seems pleased with your answers.");
                 return ProcessDemands(actor, target);
@@ -130,6 +131,38 @@ namespace JRPGPrototype.Logic.Battle
             }
         }
 
+        private NegotiationResult HandleFamiliarDemon(Combatant target)
+        {
+            string dialogue = $"{target.Name} looks at you with a sense of familiarity...";
+            if (Database.Personas.TryGetValue(target.SourceId, out var pData) && !string.IsNullOrEmpty(pData.FamiliarDialogue))
+            {
+                dialogue = $"{target.Name}: \"{pData.FamiliarDialogue}\"";
+            }
+            _io.WriteLine(dialogue, ConsoleColor.Cyan);
+
+            int roll = _rnd.Next(0, 100);
+            if (roll < 50)
+            {
+                _io.WriteLine($"{target.Name} gives you a Medicine and departs.");
+                _inventory.AddItem("101", 1);
+            }
+            else if (roll < 80)
+            {
+                int macca = target.Level * 20;
+                _io.WriteLine($"{target.Name} gives you {macca} Macca and departs.");
+                _economy.AddMacca(macca);
+            }
+            else
+            {
+                _io.WriteLine($"{target.Name} casts a gentle light upon your party before departing.");
+                foreach (var member in _party.GetAliveMembers())
+                {
+                    member.CurrentHP = (int)Math.Min(member.MaxHP, member.CurrentHP + (member.MaxHP * 0.15));
+                }
+            }
+            return NegotiationResult.FamiliarFlee;
+        }
+
         private bool CheckNegotiationChance(int livingEnemyCount)
         {
             if (livingEnemyCount <= 1) return true;
@@ -141,7 +174,13 @@ namespace JRPGPrototype.Logic.Battle
 
         private NegotiationResult ProcessDemands(Combatant actor, Combatant target)
         {
-            // FIX: High-Fidelity SMT V Macca Demand Formula
+            // Macca Demand Formula
+            if (target.Level > actor.Level)
+            {
+                _io.WriteLine($"{target.Name}: \"You have courage, but you are not yet worthy to command me. Perhaps we shall meet again.\"");
+                return NegotiationResult.Flee;
+            }
+
             double baseCost = Math.Pow(target.Level, 2) * 10;
             double luckDiscount = baseCost * ((double)actor.GetStat(StatType.LUK) / 100.0);
             int maccaDemand = (int)Math.Max(target.Level * 5, baseCost - luckDiscount);
@@ -166,8 +205,8 @@ namespace JRPGPrototype.Logic.Battle
             else
             {
                 if (itemDemand != null)
-                {
-                    string itemName = Database.Items[itemDemand].Name;
+            {
+                string itemName = Database.Items[itemDemand].Name;
                     var options = new List<string> { $"Give {itemName}", "Refuse" };
                     int choice = _io.RenderMenu($"{target.Name}: \"A {itemName} would be lovely.\"", options, 0);
                     if (choice == 0)

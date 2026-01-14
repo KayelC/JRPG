@@ -17,6 +17,9 @@ namespace JRPGPrototype.Data
         public List<string> BaseSkills { get; set; }
         public Dictionary<string, string> LearnedSkills { get; set; }
 
+        // New property for unique "Familiar Demon" dialogue
+        public string FamiliarDialogue { get; set; }
+
         public Persona ToPersona()
         {
             var p = new Persona

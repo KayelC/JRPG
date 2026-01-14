@@ -2,6 +2,7 @@
 using System.Linq;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Core;
+using JRPGPrototype.Data;
 
 namespace JRPGPrototype.Logic
 {
@@ -15,12 +16,12 @@ namespace JRPGPrototype.Logic
 
         private const int MAX_PARTY_SIZE = 4;
 
-        public PartyManager(Combatant protagonist)
+        public PartyManager(Combatant initialPlayer)
         {
-            // Protagonist always starts in Slot 0 and is controlled by Local Player
-            protagonist.PartySlot = 0;
-            protagonist.Controller = ControllerType.LocalPlayer;
-            ActiveParty.Add(protagonist);
+            // The first character added is designated as the initial local player
+            initialPlayer.PartySlot = 0;
+            initialPlayer.Controller = ControllerType.LocalPlayer;
+            ActiveParty.Add(initialPlayer);
         }
 
         /// <summary>
@@ -51,6 +52,31 @@ namespace JRPGPrototype.Logic
         {
             int maxStock = CalculateMaxStock(actor.Level);
             return actor.PersonaStock.Count < maxStock;
+        }
+
+        /// <summary>
+        /// Checks if a demon with a given SourceId is already owned by the actor,
+        /// either in their active party or in their stock.
+        /// </summary>
+        public bool IsDemonOwned(Combatant owner, string sourceId)
+        {
+            // Check the specific owner's demon stock
+            if (owner.DemonStock.Any(d => d.SourceId == sourceId)) return true;
+
+            // Check if the demon is in the active party under anyone's control
+            if (ActiveParty.Any(c => c.SourceId == sourceId && c.Class == ClassType.Demon)) return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if a persona with a given Id is already owned by the actor.
+        /// </summary>
+        public bool IsPersonaOwned(Combatant owner, string personaId)
+        {
+            if (owner.ActivePersona?.Name == personaId) return true;
+            if (owner.PersonaStock.Any(p => p.Name == personaId)) return true;
+            return false;
         }
 
         public bool AddMember(Combatant member)

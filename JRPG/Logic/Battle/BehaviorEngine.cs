@@ -232,7 +232,13 @@ namespace JRPGPrototype.Logic.Battle
             string nameLower = skill.Name.ToLower();
             string effectLower = skill.Effect.ToLower();
 
-            // Refined Multi-Target Detection
+            // Self-Targeting logic for Charge skills
+            if (nameLower.Contains("charge"))
+            {
+                return new List<Combatant> { actor };
+            }
+            
+            // --- REFINED MULTI-TARGET LOGIC ---
             // Checks for Maha (Ma-) or Media (Me-) prefixes, or explicit group keywords.
             // Avoids the "Heal 1 ally" greedy bug by checking for "all allies" or "party".
             bool isMulti = nameLower.StartsWith("ma") ||

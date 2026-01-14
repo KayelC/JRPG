@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\battleconductor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\battleconductor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\behaviorengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\behaviorengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\battleconductor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\battle\\battleconductor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\battle\\interactionbridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,30 +38,34 @@
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
-              "RelativeDocumentMoniker": "JRPG\\Program.cs",
-              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
-              "RelativeToolTip": "JRPG\\Program.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwDoAAABMAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "BehaviorEngine.cs",
+              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\BehaviorEngine.cs",
+              "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\BehaviorEngine.cs",
+              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\BehaviorEngine.cs",
+              "RelativeToolTip": "JRPG\\Logic\\Battle\\BehaviorEngine.cs",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAAADMBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-12T17:57:55.64Z",
+              "WhenOpened": "2026-01-14T07:44:47.261Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "BattleConductor.cs",
               "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\BattleConductor.cs",
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\BattleConductor.cs",
               "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\BattleConductor.cs",
               "RelativeToolTip": "JRPG\\Logic\\Battle\\BattleConductor.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAkwCgAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAALkBAAAAAAAAAAAswNoBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-12T17:43:13.563Z",
               "EditorCaption": ""
@@ -74,7 +78,7 @@
               "RelativeDocumentMoniker": "JRPG\\Logic\\Battle\\InteractionBridge.cs",
               "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Battle\\InteractionBridge.cs",
               "RelativeToolTip": "JRPG\\Logic\\Battle\\InteractionBridge.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAuwE8BAAABAAAAAAAAAA==",
+              "ViewState": "AgIAADwBAAAAAAAAAAAAAFABAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-12T17:37:42.965Z",
               "EditorCaption": ""
@@ -89,8 +93,7 @@
               "RelativeToolTip": "JRPG\\Data\\Database.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAJQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-12T13:54:54.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-12T13:54:54.119Z"
             },
             {
               "$type": "Document",
@@ -102,8 +105,7 @@
               "RelativeToolTip": "JRPG\\Logic\\PartyManager.cs",
               "ViewState": "AgIAADIAAAAAAAAAAAAAADwAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-12T13:47:39.031Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-12T13:47:39.031Z"
             },
             {
               "$type": "Document",
@@ -115,8 +117,7 @@
               "RelativeToolTip": "JRPG\\Logic\\Battle\\NegotiationEngine.cs",
               "ViewState": "AgIAAD0AAAAAAAAAAAAqwL0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-12T13:04:17.408Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-12T13:04:17.408Z"
             }
           ]
         }

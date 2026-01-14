@@ -62,7 +62,10 @@ namespace JRPGPrototype.Logic.Battle
                 options.Add("COMP");
                 options.Add("Talk"); // Operators can negotiate
             }
-            else options.Add("Skill");
+            else
+            {
+                options.Add("Skill");
+            }
 
             bool isHumanoid = actor.Class != ClassType.Demon;
 
@@ -105,6 +108,12 @@ namespace JRPGPrototype.Logic.Battle
             {
                 string nameLower = skill.Name.ToLower();
                 string effect = skill.Effect.ToLower();
+
+                // FIX: Self-Targeting logic for Charge skills
+                if (nameLower.Contains("charge"))
+                {
+                    return new List<Combatant> { actor };
+                }
 
                 // FIX: Debuff Check for correct targeting side (Nda/Debilitate)
                 bool isDebuff = nameLower.EndsWith("nda") || nameLower == "debilitate";
@@ -329,7 +338,10 @@ namespace JRPGPrototype.Logic.Battle
             }
             // Render Ailments/Guard
             if (c.CurrentAilment != null) statusStr += $"[{c.CurrentAilment.Name}]";
-            if (c.IsGuarding) statusStr += "[G]";
+            if (c.IsGuarding) statusStr += "[Guard]";
+            // Render Special States
+            if (c.IsCharged) statusStr += "[Phys Charged]";
+            if (c.IsMindCharged) statusStr += "[Mag Charged]";
             return statusStr;
         }
     }

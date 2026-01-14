@@ -30,6 +30,9 @@ namespace JRPGPrototype.Logic.Battle
         private readonly NegotiationEngine _negotiationEngine;
         private readonly BattleKnowledge _playerKnowledge;
 
+        // Added session-specific list to prevent re-recruiting in same battle
+        private readonly HashSet<string> _sessionRecruitedIds = new HashSet<string>();
+
         private readonly bool _isBossBattle;
 
         // Battle State Flags
@@ -78,8 +81,8 @@ namespace JRPGPrototype.Logic.Battle
             _io.Wait(1200);
 
             // 1. Initiative Roll (Weighted Agility)
-            double pAvgAgi = _party.ActiveParty.Average(c => c.GetStat(StatType.AGI));
-            double eAvgAgi = _enemies.Average(c => c.GetStat(StatType.AGI));
+            double pAvgAgi = _party.GetAliveMembers().Any() ? _party.GetAliveMembers().Average(c => c.GetStat(StatType.AGI)) : 0;
+            double eAvgAgi = _enemies.Any(e => !e.IsDead) ? _enemies.Where(e => !e.IsDead).Average(c => c.GetStat(StatType.AGI)) : 0;
             bool isPlayerTurn = CombatMath.RollInitiative(pAvgAgi, eAvgAgi);
 
             _io.WriteLine(isPlayerTurn ? "Player Party attacks first!" : "Enemy Party attacks first!",
@@ -191,12 +194,29 @@ namespace JRPGPrototype.Logic.Battle
                 var endLogs = _statusRegistry.ProcessTurnEnd(actor);
                 foreach (var log in endLogs) _io.WriteLine(log, ConsoleColor.Gray);
 
+                // Handle demons dying and returning to stock
+                foreach (var p in _party.ActiveParty.ToList())
+                {
+                    if (p.IsDead && p.Class == ClassType.Demon)
+                    {
+                        _io.WriteLine($"{p.Name} faded away and returned to stock...");
+                        _party.ReturnDemon(p);
+                        actor.DemonStock.Add(p); // Assuming the player is the owner of all demons
+                    }
+                }
+
                 if (CheckEncounterCompletion()) return;
 
                 if (!actorRemoved)
                 {
                     actorIndex++;
                 }
+            }
+            // Disolving shields at the end of a phase.
+            var sideToEnd = isPlayerSide ? _party.ActiveParty : _enemies;
+            foreach (var combatant in sideToEnd)
+            {
+                combatant.DissolveShields();
             }
         }
 
@@ -307,7 +327,7 @@ namespace JRPGPrototype.Logic.Battle
                         if (item.Name == "Traesto Gem")
                         {
                             actionCommitted = true;
-                        }
+                    }
                         else
                         {
                             targets = _ui.SelectTarget(actor, null, item);
@@ -398,13 +418,24 @@ namespace JRPGPrototype.Logic.Battle
 
         private void HandleNegotiation(Combatant actor, Combatant target)
         {
+            // Check session-recruited list before starting
+            if (_sessionRecruitedIds.Contains(target.SourceId))
+            {
+                // We treat this as a "Familiar" encounter but simplified
+                _io.WriteLine($"{target.Name} has already been spoken to.");
+                _io.Wait(800);
+                return; // Does not consume a turn
+            }
+
             NegotiationResult result = _negotiationEngine.StartNegotiation(actor, target, _enemies);
             switch (result)
             {
                 case NegotiationResult.Success:
                     _io.WriteLine($"{target.Name} joined your party!");
+                    // Use CreateDemon to instantiate a clean demon, not the enemy clone
                     var newDemon = Combatant.CreateDemon(target.SourceId, target.Level);
                     actor.DemonStock.Add(newDemon);
+                    _sessionRecruitedIds.Add(target.SourceId); // Track for this battle
                     _enemies.Remove(target);
                     _turnEngine.ConsumeAction(HitType.Normal, false);
                     break;
@@ -431,11 +462,14 @@ namespace JRPGPrototype.Logic.Battle
                 double eAvgAgi = _enemies.Any() ? _enemies.Average(e => e.GetStat(StatType.AGI)) : 1;
                 if (new Random().Next(0, 100) < Math.Clamp(10.0 + 40.0 * (pAgi / eAvgAgi), 5.0, 95.0))
                 {
-                    Escaped = true; BattleEnded = true;
+                    Escaped = true;
+                    BattleEnded = true;
                     _io.WriteLine("Escaped safely!");
+                    _io.Wait(1000); // Add wait for UX
                     return;
                 }
                 _io.WriteLine("Failed to escape!");
+                _io.Wait(1000); // Add wait for UX
                 _turnEngine.ConsumeAction(HitType.Normal, false);
             }
             if (tactic == "Strategy")

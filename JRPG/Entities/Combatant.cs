@@ -87,13 +87,11 @@ namespace JRPGPrototype.Entities
             Name = name;
             Class = type;
 
-            // NEW: Initialize with 2 in each stat as per new starter requirements
             foreach (StatType t in Enum.GetValues(typeof(StatType)))
-                CharacterStats[t] = 2;
+                CharacterStats[t] = 2; // Initial stats at 2
 
-            // NEW: Initialize with 30 HP and 12 SP bases
-            BaseHP = 20;
-            BaseSP = 6;
+            BaseHP = 20; // 20 + (2*5) = 30HP at start
+            BaseSP = 6;  // 6 + (2*3) = 12SP at start
         }
 
         public static Combatant CreateFromData(EnemyData data)
@@ -106,7 +104,8 @@ namespace JRPGPrototype.Entities
             foreach (var kvp in data.Stats)
             {
                 if (Enum.TryParse(kvp.Key, true, out StatType stat))
-                    c.CharacterStats[stat] = kvp.Value;
+                    // Clamping enemy stats at 40
+                    c.CharacterStats[stat] = Math.Min(40, kvp.Value);
             }
 
             if (!string.IsNullOrEmpty(data.PersonaId) && Database.Personas.TryGetValue(data.PersonaId, out var pData))
@@ -175,38 +174,46 @@ namespace JRPGPrototype.Entities
 
         public int GetStat(StatType type)
         {
+            int rawStat = 0;
             // --- DEMON LOGIC ---
             // Demons are physical manifestations of Personas.
             // They do not have "Base Stats" + "Modifiers". The Persona stats ARE their stats.
             if (Class == ClassType.Demon)
             {
-                if (ActivePersona == null) return 0;
-                return ActivePersona.StatModifiers.ContainsKey(type) ? ActivePersona.StatModifiers[type] : 0;
+                rawStat = (ActivePersona == null) ? 0 : (ActivePersona.StatModifiers.ContainsKey(type) ? ActivePersona.StatModifiers[type] : 0);
             }
 
             // --- HUMAN/OPERATOR LOGIC ---
-            int charVal = CharacterStats.ContainsKey(type) ? CharacterStats[type] : 0;
-            if (EquippedAccessory != null)
+            else
             {
-                if (Enum.TryParse(EquippedAccessory.ModifierStat, true, out StatType accStat))
-                    if (accStat == type) charVal += EquippedAccessory.ModifierValue;
+                int charVal = CharacterStats.ContainsKey(type) ? CharacterStats[type] : 0;
+                if (EquippedAccessory != null)
+                {
+                    if (Enum.TryParse(EquippedAccessory.ModifierStat, true, out StatType accStat))
+                        if (accStat == type) charVal += EquippedAccessory.ModifierValue;
+                }
+
+                if (Class == ClassType.Operator) rawStat = charVal;
+                else if (ActivePersona == null || !ActivePersona.StatModifiers.ContainsKey(type)) rawStat = charVal;
+                else
+                {
+                    int personaVal = ActivePersona.StatModifiers[type];
+                    rawStat = (int)Math.Floor(type switch
+                    {
+                        StatType.STR => charVal + (personaVal * 0.4),
+                        StatType.MAG => charVal + (personaVal * 0.4),
+                        StatType.END => charVal + (personaVal * 0.25),
+                        StatType.AGI => charVal + (personaVal * 0.25),
+                        StatType.LUK => charVal + (personaVal * 0.5),
+                        _ => charVal
+                    });
+                }
             }
 
-            if (Class == ClassType.Operator) return charVal;
+            // Apply Global Hard Cap of 40 to any returned stat
+            int cappedStat = Math.Min(40, rawStat);
 
-            if (ActivePersona == null || !ActivePersona.StatModifiers.ContainsKey(type)) return charVal;
-
-            int personaVal = ActivePersona.StatModifiers[type];
-            double finalValue = type switch
-            {
-                StatType.STR => charVal + (personaVal * 0.4),
-                StatType.MAG => charVal + (personaVal * 0.4),
-                StatType.END => charVal + (personaVal * 0.25),
-                StatType.AGI => charVal + (personaVal * 0.25),
-                StatType.LUK => charVal + (personaVal * 0.5),
-                _ => charVal
-            };
-
+            double finalValue = cappedStat;
             if (type == StatType.STR || type == StatType.MAG)
             {
                 if (Buffs.ContainsKey("Attack") && Buffs["Attack"] > 0) finalValue *= 1.4;
@@ -340,6 +347,7 @@ namespace JRPGPrototype.Entities
         public void AllocateStat(StatType type)
         {
             if (StatPoints <= 0) return;
+            // Clamped at 40
             if (CharacterStats[type] >= 40) return;
             CharacterStats[type]++;
             StatPoints--;

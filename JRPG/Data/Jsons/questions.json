@@ -5,16 +5,40 @@
         "text": "Hee-ho! You wanna be my friend?",
         "answers": [
           { "text": "Of course! Let's be best friends.", "value": 2 },
-          { "text": "I don't have time for games.", "value": -1 },
-          { "text": "Only if you're strong enough.", "value": 0 }
+          { "text": "Only if you're strong enough.", "value": 0 },
+          { "text": "I don't have time for games.", "value": -1 }
         ]
       },
       {
         "text": "If I join you, will you give me lots of candy?",
         "answers": [
           { "text": "All the candy you can eat.", "value": 2 },
-          { "text": "Candy is bad for your teeth.", "value": -2 },
-          { "text": "You'll have to earn it.", "value": 1 }
+          { "text": "You'll have to earn it.", "value": 1 },
+          { "text": "Candy is bad for your teeth.", "value": -2 }
+        ]
+      },
+      {
+        "text": "Hey, hey! What's your favorite thing to do in the whole world?",
+        "answers": [
+          { "text": "Exploring and finding secrets!", "value": 2 },
+          { "text": "Training to get stronger.", "value": 1 },
+          { "text": "I enjoy my privacy.", "value": -1 }
+        ]
+      },
+      {
+        "text": "I'm scared of the dark... will you hold my hand?",
+        "answers": [
+          { "text": "Don't worry, I'll protect you.", "value": 2 },
+          { "text": "Be brave, you're a warrior!", "value": 1 },
+          { "text": "Grow up already.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Are you a good guy or a bad guy? I can't tell!",
+        "answers": [
+          { "text": "I'm whatever you want me to be.", "value": 2 },
+          { "text": "I'm a hero of justice!", "value": 1 },
+          { "text": "I'm your worst nightmare.", "value": -1 }
         ]
       }
     ],
@@ -23,15 +47,40 @@
         "text": "Hmph. Do you truly believe you are worthy of my power?",
         "answers": [
           { "text": "Your power is magnificent. I am not worthy, but I ask for it anyway.", "value": 2 },
-          { "text": "My power is far greater than yours.", "value": -2 },
-          { "text": "Let's find out together.", "value": 1 }
+          { "text": "Let's find out together.", "value": 1 },
+          { "text": "My power is far greater than yours.", "value": -2 }
         ]
       },
       {
         "text": "The weak exist only to serve the strong. Do you not agree?",
         "answers": [
           { "text": "That is the law of the universe.", "value": 2 },
+          { "text": "Strength comes in many forms.", "value": 1 },
           { "text": "The strong should protect the weak.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Why do you struggle so? The end of this world is inevitable.",
+        "answers": [
+          { "text": "I struggle to create something new.", "value": 2 },
+          { "text": "It is my nature to fight.", "value": 1 },
+          { "text": "Quiet, you know nothing of hope.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Tell me, human... what do you value more? Knowledge or gold?",
+        "answers": [
+          { "text": "The wisdom to rule.", "value": 2 },
+          { "text": "Gold, to command the world.", "value": 1 },
+          { "text": "Love and companionship.", "value": -1 }
+        ]
+      },
+      {
+        "text": "If I join you, I expect to be treated with absolute reverence.",
+        "answers": [
+          { "text": "A king deserves no less.", "value": 2 },
+          { "text": "We will be equal partners.", "value": 1 },
+          { "text": "You'll do as you're told.", "value": -1 }
         ]
       }
     ],
@@ -40,15 +89,40 @@
         "text": "U-umm... you won't... hurt me, will you?",
         "answers": [
           { "text": "I promise I'll keep you safe.", "value": 2 },
-          { "text": "Only if you step out of line.", "value": -2 },
-          { "text": "The world is a dangerous place.", "value": 0 }
+          { "text": "The world is a dangerous place.", "value": 0 },
+          { "text": "Only if you step out of line.", "value": -2 }
         ]
       },
       {
         "text": "It's so scary out here... I don't know what to do...",
         "answers": [
           { "text": "Stay with me. We can be brave together.", "value": 2 },
-          { "text": "Then you should just run away.", "value": -1 }
+          { "text": "Then you should just run away.", "value": -1 },
+          { "text": "The darkness is where we belong.", "value": 1 }
+        ]
+      },
+      {
+        "text": "D-do you think... someone like me can really be useful?",
+        "answers": [
+          { "text": "You have a power no one else sees.", "value": 2 },
+          { "text": "Every soul has its purpose.", "value": 1 },
+          { "text": "Probably not, but I need meat-shields.", "value": -1 }
+        ]
+      },
+      {
+        "text": "I feel like everyone is watching me... why are they looking?",
+        "answers": [
+          { "text": "Because you radiate a unique light.", "value": 2 },
+          { "text": "They are just curious about you.", "value": 1 },
+          { "text": "They're waiting for you to fail.", "value": -1 }
+        ]
+      },
+      {
+        "text": "W-would you leave me behind if I got hurt?",
+        "answers": [
+          { "text": "Never. I don't abandon my allies.", "value": 2 },
+          { "text": "I'd do my best to bring you back.", "value": 1 },
+          { "text": "Only the strong survive in my party.", "value": -1 }
         ]
       }
     ],
@@ -57,15 +131,40 @@
         "text": "Well now... aren't you a handsome devil? What is it you want from me?",
         "answers": [
           { "text": "I'm captivated by you. I want your power.", "value": 2 },
-          { "text": "Just another demon in my way.", "value": -2 },
-          { "text": "I'm looking for allies.", "value": 1 }
+          { "text": "I'm looking for allies.", "value": 1 },
+          { "text": "Just another demon in my way.", "value": -2 }
         ]
       },
       {
         "text": "Don't you think this fighting is so... pointless? There are better ways to spend our time.",
         "answers": [
           { "text": "Perhaps you could show me?", "value": 2 },
-          { "text": "This is a matter of life and death.", "value": -1 }
+          { "text": "This is a matter of life and death.", "value": -1 },
+          { "text": "Battle is the ultimate passion.", "value": 1 }
+        ]
+      },
+      {
+        "text": "Love is a trap that leads to ruin. Wouldn't you agree?",
+        "answers": [
+          { "text": "Then let's be ruined together.", "value": 2 },
+          { "text": "It is a temporary distraction.", "value": 1 },
+          { "text": "Love is the only thing that matters.", "value": -1 }
+        ]
+      },
+      {
+        "text": "You have such intense eyes... what are you thinking about right now?",
+        "answers": [
+          { "text": "Our future victory.", "value": 2 },
+          { "text": "How to defeat the next enemy.", "value": 1 },
+          { "text": "None of your business.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Tell me a secret... something no one else knows.",
+        "answers": [
+          { "text": "I have the power to change this world.", "value": 2 },
+          { "text": "I'm actually quite nervous right now.", "value": 1 },
+          { "text": "I don't trust strangers with secrets.", "value": -1 }
         ]
       }
     ],
@@ -74,15 +173,40 @@
         "text": "State your purpose. Why do you seek my strength?",
         "answers": [
           { "text": "I seek justice, and your strength is righteous.", "value": 2 },
-          { "text": "For my own personal gain.", "value": -2 },
-          { "text": "To survive this cursed world.", "value": 1 }
+          { "text": "To survive this cursed world.", "value": 1 },
+          { "text": "For my own personal gain.", "value": -2 }
         ]
       },
       {
         "text": "Would you sacrifice one of your own comrades to achieve your goal?",
         "answers": [
           { "text": "Never. My bonds are my strength.", "value": 2 },
-          { "text": "The mission comes first. Sacrifices are necessary.", "value": -1 }
+          { "text": "The mission comes first. Sacrifices are necessary.", "value": -1 },
+          { "text": "It would depend on the goal.", "value": 1 }
+        ]
+      },
+      {
+        "text": "A warrior's greatest weapon is not their blade, but their spirit. Do you agree?",
+        "answers": [
+          { "text": "Indeed. A broken spirit leads to a broken blade.", "value": 2 },
+          { "text": "Discipline is what truly matters.", "value": 1 },
+          { "text": "Results are the only thing that matters.", "value": -1 }
+        ]
+      },
+      {
+        "text": "If we were to face a god, would you stand your ground or flee?",
+        "answers": [
+          { "text": "I would stand until my last breath.", "value": 2 },
+          { "text": "I would find a strategic advantage.", "value": 1 },
+          { "text": "I'm not suicidal.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Is there truly any honor left in this dying world?",
+        "answers": [
+          { "text": "Honor exists as long as we uphold it.", "value": 2 },
+          { "text": "It is a rare and precious thing.", "value": 1 },
+          { "text": "Honor is a lie for the foolish.", "value": -1 }
         ]
       }
     ],
@@ -91,15 +215,40 @@
         "text": "It's all so meaningless... Why do you even bother fighting?",
         "answers": [
           { "text": "Because even in darkness, there's a reason to hope.", "value": 2 },
-          { "text": "You're right. It's pointless.", "value": -2 },
-          { "text": "To find my own meaning.", "value": 1 }
+          { "text": "To find my own meaning.", "value": 1 },
+          { "text": "You're right. It's pointless.", "value": -2 }
         ]
       },
       {
         "text": "We're all just going to die anyway. Join me... and we can fade into nothingness together.",
         "answers": [
           { "text": "I'm not ready to give up yet.", "value": 2 },
-          { "text": "Fine by me.", "value": -1 }
+          { "text": "Fine by me.", "value": -1 },
+          { "text": "Perhaps death is the ultimate peace.", "value": 1 }
+        ]
+      },
+      {
+        "text": "Does it hurt? The burden of being alive?",
+        "answers": [
+          { "text": "The pain reminds me that I'm still here.", "value": 2 },
+          { "text": "It is a weight I've grown used to.", "value": 1 },
+          { "text": "I don't feel anything anymore.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Every beautiful thing eventually withers and rots. Why bother loving anything?",
+        "answers": [
+          { "text": "Because the brief moment of beauty is worth it.", "value": 2 },
+          { "text": "To leave something behind for others.", "value": 1 },
+          { "text": "You're right, love is a waste.", "value": -1 }
+        ]
+      },
+      {
+        "text": "I can hear the shadows whispering... can you hear them too?",
+        "answers": [
+          { "text": "I listen, and I do not fear them.", "value": 2 },
+          { "text": "I hear only the wind.", "value": 1 },
+          { "text": "Get away from me, freak.", "value": -1 }
         ]
       }
     ],
@@ -108,6 +257,7 @@
         "text": "Hey! Hey! You look like you're going somewhere fun! Can I come?",
         "answers": [
           { "text": "The more the merrier! Let's go!", "value": 2 },
+          { "text": "I suppose your power could be useful.", "value": 1 },
           { "text": "This is a serious journey, not a party.", "value": -1 }
         ]
       },
@@ -115,8 +265,32 @@
         "text": "Wow, you're super strong! We'd be an unstoppable team, don't you think?",
         "answers": [
           { "text": "Totally! Together, we can take on the world!", "value": 2 },
-          { "text": "Don't get ahead of yourself.", "value": -1 },
-          { "text": "I suppose your power could be useful.", "value": 1 }
+          { "text": "I'm looking for dependable allies.", "value": 1 },
+          { "text": "Don't get ahead of yourself.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Life is just one big adventure! What's the next destination?",
+        "answers": [
+          { "text": "To the top of the tower!", "value": 2 },
+          { "text": "Wherever the road takes us.", "value": 1 },
+          { "text": "To a place where I can finally rest.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Check out this cool rock I found! Isn't it awesome?",
+        "answers": [
+          { "text": "It's beautiful! You have a good eye.", "value": 2 },
+          { "text": "It's... just a rock.", "value": 1 },
+          { "text": "Don't show me trash.", "value": -1 }
+        ]
+      },
+      {
+        "text": "I love making new friends! You want to be my bestie?",
+        "answers": [
+          { "text": "I'd be honored!", "value": 2 },
+          { "text": "Let's see how you fight first.", "value": 1 },
+          { "text": "I'm not here to make friends.", "value": -1 }
         ]
       }
     ],
@@ -125,6 +299,7 @@
         "text": "It is my assessment that an alliance would be mutually beneficial. Do you concur?",
         "answers": [
           { "text": "I concur. Let us form a pact.", "value": 2 },
+          { "text": "Your logic is sound.", "value": 1 },
           { "text": "I don't make deals with demons.", "value": -2 }
         ]
       },
@@ -134,6 +309,30 @@
           { "text": "A chance to witness a new world's creation.", "value": 2 },
           { "text": "Macca. Lots of it.", "value": 1 },
           { "text": "Your life. Join me or perish.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Efficiency is the cornerstone of any successful operation. How do you manage your team?",
+        "answers": [
+          { "text": "With calculated precision and absolute trust.", "value": 2 },
+          { "text": "By following a strict hierarchy.", "value": 1 },
+          { "text": "We just wing it.", "value": -1 }
+        ]
+      },
+      {
+        "text": "I require an environment that respects the established protocols of engagement.",
+        "answers": [
+          { "text": "I maintain the highest standards of combat protocol.", "value": 2 },
+          { "text": "I will do my best to accommodate you.", "value": 1 },
+          { "text": "Rules are meant to be broken.", "value": -1 }
+        ]
+      },
+      {
+        "text": "Human behavior is often illogical. Why do you choose to fight against your own kind?",
+        "answers": [
+          { "text": "To ensure a future that is mathematically superior.", "value": 2 },
+          { "text": "It is a matter of necessity.", "value": 1 },
+          { "text": "Because I feel like it.", "value": -1 }
         ]
       }
     ]

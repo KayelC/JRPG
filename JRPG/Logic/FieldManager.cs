@@ -51,8 +51,8 @@ namespace JRPGPrototype.Logic
             while (true)
             {
                 string header = $"=== FIELD MENU ===\n" +
-                               $"Macca: {_economy.Macca}\n" +
-                               $"HP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
+                                $"Macca: {_economy.Macca}\n" +
+                                $"HP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
 
                 List<string> options = new List<string>
                 {
@@ -77,7 +77,6 @@ namespace JRPGPrototype.Logic
                 else if (selectedOption == "Inventory") OpenInventoryMenu(false);
                 else if (selectedOption == "Status") OpenSeamlessStatusMenu();
                 else if (selectedOption == "Organize Party") OpenOrganizeMenu();
-          
                 else if (selectedOption == "Exit Game") return;
 
                 if (_player.CurrentHP <= 0) return;
@@ -120,9 +119,9 @@ namespace JRPGPrototype.Logic
                 DungeonFloorResult floorInfo = _dungeon.ProcessCurrentFloor();
 
                 string header = $"=== TARTARUS: {floorInfo.BlockName.ToUpper()} ===\n" +
-                               $"Floor: {floorInfo.FloorNumber}\n" +
-                               $"Info: {floorInfo.Description}\n" +
-                               $"HP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
+                                $"Floor: {floorInfo.FloorNumber}\n" +
+                                $"Info: {floorInfo.Description}\n" +
+                                $"HP: {_player.CurrentHP}/{_player.MaxHP} | SP: {_player.CurrentSP}/{_player.MaxSP}";
 
                 List<string> options = new List<string>();
                 List<Action> actions = new List<Action>();
@@ -324,9 +323,9 @@ namespace JRPGPrototype.Logic
                 int totalCost = (hpMissing * 1) + (spMissing * 5);
 
                 string header = $"=== HOSPITAL / CLOCK ===\n" +
-                               $"Current Macca: {_economy.Macca}\n" +
-                               $"HP: {_player.CurrentHP}/{_player.MaxHP}\n" +
-                               $"SP: {_player.CurrentSP}/{_player.MaxSP}";
+                                $"Current Macca: {_economy.Macca}\n" +
+                                $"HP: {_player.CurrentHP}/{_player.MaxHP}\n" +
+                                $"SP: {_player.CurrentSP}/{_player.MaxSP}";
 
                 List<string> options = new List<string>();
                 List<bool> disabled = new List<bool>();
@@ -689,6 +688,7 @@ namespace JRPGPrototype.Logic
             {
                 bool isEquipped = (p == _player.ActivePersona);
                 string header = GetPersonaDetailString(p, isEquipped);
+
                 List<string> options = new List<string>();
                 if (!isEquipped) options.Add("Equip Persona");
                 options.Add("Back");
@@ -848,6 +848,7 @@ namespace JRPGPrototype.Logic
             string output = "=== STATUS & PARAMETERS ===\n";
             output += $"Name: {entity.Name} (Lv.{entity.Level}) | Class: {entity.Class}\n";
             output += $"HP: {entity.CurrentHP}/{entity.MaxHP} SP: {entity.CurrentSP}/{entity.MaxSP}\n";
+            output += $"EXP: {entity.Exp}/{entity.ExpRequired} Next: {entity.ExpRequired - entity.Exp}\n";
             output += "-----------------------------\n";
 
             var stats = Enum.GetValues(typeof(StatType)).Cast<StatType>();
@@ -874,14 +875,14 @@ namespace JRPGPrototype.Logic
         {
             string output = $"=== PERSONA DETAILS {(isEquipped ? "[EQUIPPED]" : "")} ===\n";
             output += $"Name: {p.Name} (Lv.{p.Level}) | Arcana: {p.Arcana}\n";
-            output += $"EXP: {p.Exp}/{p.ExpRequired} Next: {p.ExpRequired - p.Exp}\n"; // Updated to include Next
+            output += $"EXP: {p.Exp}/{p.ExpRequired} Next: {p.ExpRequired - p.Exp}\n";
             output += "-----------------------------\nRaw Stats:\n";
 
             var displayStats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
             foreach (var stat in displayStats)
             {
                 int val = p.StatModifiers.ContainsKey(stat) ? p.StatModifiers[stat] : 0;
-                output += $"  {stat}: {val,3}\n";
+                output += $" {stat}: {val,3}\n";
             }
             output += "-----------------------------\nSkills:\n";
             foreach (var s in p.SkillSet) output += $" - {s}\n";
@@ -905,7 +906,7 @@ namespace JRPGPrototype.Logic
             string output = "=== DEMON DETAILS ===\n";
             output += $"Name: {demon.Name} (Lv.{demon.Level})\n";
             output += $"HP: {demon.CurrentHP}/{demon.MaxHP} SP: {demon.CurrentSP}/{demon.MaxSP}\n";
-            output += $"EXP: {demon.Exp}/{demon.ExpRequired} Next: {demon.ExpRequired - demon.Exp}\n"; // Added missing EXP details
+            output += $"EXP: {demon.Exp}/{demon.ExpRequired} Next: {demon.ExpRequired - demon.Exp}\n";
             output += "-----------------------------\n";
 
             var stats = new[] { StatType.STR, StatType.MAG, StatType.END, StatType.AGI, StatType.LUK };
@@ -933,7 +934,6 @@ namespace JRPGPrototype.Logic
 
             return output;
         }
-
 
         private bool selectedIsBack(int index, List<string> options) { return index == options.Count - 1; }
 
@@ -974,25 +974,31 @@ namespace JRPGPrototype.Logic
             int choice = _io.RenderMenu($"Manage {member.Name}", options, 0);
             if (choice == 0)
             {
-                _partyManager.ReturnDemon(member);
-                _player.DemonStock.Add(member);
-                _io.WriteLine($"{member.Name} returned to stock.");
-                _io.Wait(600);
+                // ATOMIC TRANSACTION: PartyManager handles stock and active party state
+                if (_partyManager.ReturnDemon(_player, member))
+                {
+                    _io.WriteLine($"{member.Name} returned to stock.");
+                    _io.Wait(600);
+                }
             }
         }
 
         private void OpenSummonFromOrg()
         {
             if (!_player.DemonStock.Any()) { _io.WriteLine("No demons in stock."); _io.Wait(800); return; }
+
             var names = _player.DemonStock.Select(d => $"{d.Name} (Lv.{d.Level})").ToList();
             names.Add("Cancel");
+
             int idx = _io.RenderMenu("SUMMON DEMON", names, 0);
             if (idx == -1 || idx == names.Count - 1) return;
 
-            if (_partyManager.SummonDemon(_player.DemonStock[idx]))
+            Combatant target = _player.DemonStock[idx];
+
+            // ATOMIC TRANSACTION: PartyManager handles stock and active party state
+            if (_partyManager.SummonDemon(_player, target))
             {
-                _io.WriteLine($"{_player.DemonStock[idx].Name} joined the party!");
-                _player.DemonStock.RemoveAt(idx);
+                _io.WriteLine($"{target.Name} joined the party!");
                 _io.Wait(800);
             }
         }

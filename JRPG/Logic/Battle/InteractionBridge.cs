@@ -129,11 +129,11 @@ namespace JRPGPrototype.Logic.Battle
                 if (isDebuff) targetsAllies = false;
 
                 targetsAll = nameLower.StartsWith("ma") ||
-                            nameLower.StartsWith("me") ||
-                            effect.Contains("all foes") ||
-                            effect.Contains("all allies") ||
-                            effect.Contains("party") ||
-                            nameLower == "debilitate";
+                             nameLower.StartsWith("me") ||
+                             effect.Contains("all foes") ||
+                             effect.Contains("all allies") ||
+                             effect.Contains("party") ||
+                             nameLower == "debilitate";
                 element = ElementHelper.FromCategory(skill.Category);
             }
             else if (item != null)
@@ -259,7 +259,8 @@ namespace JRPGPrototype.Logic.Battle
 
             int choice = _io.RenderMenu($"{GetBattleContext(actor)}\nItems:", labels, _itemMenuIndex, disabled, (idx) =>
             {
-                if (idx >= 0 && idx < ownedItems.Count) _io.WriteLine(ownedItems[idx].Description);
+                if (idx >= 0 && idx < ownedItems.Count)
+                    _io.WriteLine(ownedItems[idx].Description);
             });
 
             if (choice == -1 || choice == labels.Count - 1) return null;
@@ -272,17 +273,26 @@ namespace JRPGPrototype.Logic.Battle
             List<string> options = new List<string> { "Summon", "Return", "Analyze", "Back" };
             int choice = _io.RenderMenu($"{GetBattleContext(actor)}\nCOMP SYSTEM", options, 0);
 
-            if (choice == 0)
+            if (choice == 0) // Summon
             {
-                if (!actor.DemonStock.Any()) { _io.WriteLine("No demons in stock."); _io.Wait(800); return ("None", null); }
-                var names = actor.DemonStock.Select(d => $"{d.Name} (Lv.{d.Level})").ToList();
+                // Filter out demons already on the field to prevent duplicates.
+                var summonableDemons = actor.DemonStock.Where(d => !_party.ActiveParty.Contains(d)).ToList();
+
+                if (!summonableDemons.Any()) { _io.WriteLine("No valid demons in stock to summon."); _io.Wait(800); return ("None", null); }
+
+                var names = summonableDemons.Select(d => $"{d.Name} (Lv.{d.Level})").ToList();
                 names.Add("Back");
-                int sub = _io.RenderMenu("Summon Demon:", names, 0);
+
+                // Disable dead demons in the selection list.
+                List<bool> disabledSummons = summonableDemons.Select(d => d.IsDead).ToList();
+                disabledSummons.Add(false); // Back button always enabled
+
+                int sub = _io.RenderMenu("Summon Demon:", names, 0, disabledSummons);
                 if (sub == -1 || sub == names.Count - 1) return ("None", null);
-                return ("Summon", actor.DemonStock[sub]);
+                return ("Summon", summonableDemons[sub]);
             }
 
-            if (choice == 1)
+            if (choice == 1) // Return
             {
                 var activeDemons = _party.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
                 if (!activeDemons.Any()) { _io.WriteLine("No active demons to return."); _io.Wait(800); return ("None", null); }
@@ -293,7 +303,7 @@ namespace JRPGPrototype.Logic.Battle
                 return ("Return", activeDemons[sub]);
             }
 
-            if (choice == 2)
+            if (choice == 2) // Analyze
             {
                 var targetList = SelectTarget(actor);
                 if (targetList == null) return ("None", null);

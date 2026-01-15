@@ -171,7 +171,7 @@ namespace JRPGPrototype.Logic.Battle
                     if (isPlayerSide)
                     {
                         _io.WriteLine($"{actor.Name} returned to COMP in terror!", ConsoleColor.Red);
-                        _party.ReturnDemon(actor);
+                        _party.ReturnDemon(actor, actor); // Self-return logic
                     }
                     else
                     {
@@ -200,8 +200,8 @@ namespace JRPGPrototype.Logic.Battle
                     if (p.IsDead && p.Class == ClassType.Demon)
                     {
                         _io.WriteLine($"{p.Name} faded away and returned to stock...");
-                        _party.ReturnDemon(p);
-                        actor.DemonStock.Add(p); // Assuming the player is the owner of all demons
+                        // Use actor as owner assuming player owns all party demons in current build
+                        _party.ReturnDemon(actor, p);
                     }
                 }
 
@@ -286,7 +286,8 @@ namespace JRPGPrototype.Logic.Battle
 
                         if (comp.action == "Summon")
                         {
-                            if (_party.SummonDemon(comp.target))
+                            // ATOMIC TRANSACTION: PartyManager handles stock and party state
+                            if (_party.SummonDemon(actor, comp.target))
                             {
                                 _io.WriteLine($"{actor.Name} summoned {comp.target.Name}!");
                                 _turnEngine.ConsumeAction(HitType.Normal, false);
@@ -296,7 +297,8 @@ namespace JRPGPrototype.Logic.Battle
                         }
                         else if (comp.action == "Return")
                         {
-                            if (_party.ReturnDemon(comp.target))
+                            // ATOMIC TRANSACTION: PartyManager handles stock and party state
+                            if (_party.ReturnDemon(actor, comp.target))
                             {
                                 _io.WriteLine($"{actor.Name} returned {comp.target.Name} to stock.");
                                 _turnEngine.ConsumeAction(HitType.Normal, false);
@@ -309,8 +311,8 @@ namespace JRPGPrototype.Logic.Battle
                             _processor.ExecuteAnalyze(comp.target);
                             _turnEngine.ConsumeAction(HitType.Normal, false);
                             actionCommitted = true;
-                        return;
-                    }
+                            return;
+                        }
                     }
                     else if (choice == "Pass")
                     {
@@ -328,7 +330,7 @@ namespace JRPGPrototype.Logic.Battle
                         if (item.Name == "Traesto Gem")
                         {
                             actionCommitted = true;
-                    }
+                        }
                         else
                         {
                             targets = _ui.SelectTarget(actor, null, item);
@@ -400,7 +402,7 @@ namespace JRPGPrototype.Logic.Battle
                     {
                         // Reprompt if the item had no effect
                         ExecuteAction(actor, isPlayerSide, turnState);
-                }
+                    }
                 }
                 else if (skill == null)
                 {
@@ -439,7 +441,7 @@ namespace JRPGPrototype.Logic.Battle
                     {
                         var newDemon = Combatant.CreateDemon(enemyData.PersonaId, target.Level);
                         actor.DemonStock.Add(newDemon);
-                    _sessionRecruitedIds.Add(target.SourceId); // Track for this battle
+                        _sessionRecruitedIds.Add(target.SourceId); // Track for this battle
                         _enemies.Remove(target);
                         _turnEngine.ConsumeAction(HitType.Normal, false);
                     }

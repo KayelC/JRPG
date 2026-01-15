@@ -112,10 +112,21 @@ namespace JRPGPrototype.Logic
             active.PartySlot = -1;
         }
 
-        public bool SummonDemon(Combatant demon)
+        /// <summary>
+        /// Robust Summoning Logic: Moves a demon from the owner's stock to the active party.
+        /// This is an atomic transaction to prevent duplication.
+        /// </summary>
+        public bool SummonDemon(Combatant owner, Combatant demon)
         {
             if (ActiveParty.Count < MAX_PARTY_SIZE)
             {
+                // 1. Remove from owner stock first to ensure atomicity
+                if (owner.DemonStock.Contains(demon))
+                {
+                    owner.DemonStock.Remove(demon);
+                }
+
+                // 2. Add to active battlefield
                 demon.PartySlot = ActiveParty.Count;
                 demon.BattleControl = ControlState.DirectControl;
                 ActiveParty.Add(demon);
@@ -124,12 +135,22 @@ namespace JRPGPrototype.Logic
             return false; // Party full
         }
 
-        public bool ReturnDemon(Combatant demon)
+        /// <summary>
+        /// Robust Return Logic: Moves a demon from the battlefield back to the owner's stock.
+        /// </summary>
+        public bool ReturnDemon(Combatant owner, Combatant demon)
         {
             if (ActiveParty.Contains(demon))
             {
+                // 1. Remove from battlefield
                 demon.PartySlot = -1;
                 ActiveParty.Remove(demon);
+
+                // 2. Return to owner's stock
+                if (!owner.DemonStock.Contains(demon))
+                {
+                    owner.DemonStock.Add(demon);
+                }
                 return true;
             }
             return false;

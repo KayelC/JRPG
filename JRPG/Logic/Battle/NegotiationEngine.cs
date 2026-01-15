@@ -99,20 +99,33 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             int moodScore = 0;
+            // Create a session-specific copy of the pool to prevent repeated questions.
             var sessionQuestions = new List<NegotiationQuestion>(questionPool);
-            for (int i = 0; i < 2; i++)
+
+            // Increased difficulty by requiring 3 successful rounds instead of 2.
+            for (int i = 0; i < 3; i++)
             {
                 if (!sessionQuestions.Any()) break;
-                var question = sessionQuestions[_rnd.Next(sessionQuestions.Count)];
-                sessionQuestions.Remove(question);
+
+                // Pick a question and remove it from the session pool immediately.
+                int qIdx = _rnd.Next(sessionQuestions.Count);
+                var question = sessionQuestions[qIdx];
+                sessionQuestions.RemoveAt(qIdx);
 
                 int choice = _io.RenderMenu($"{target.Name}: \"{question.Text}\"", question.Answers.Select(a => a.Text).ToList(), 0);
-                if (choice == -1) { _io.WriteLine($"{target.Name} seems disappointed..."); return NegotiationResult.Failure; }
+
+                if (choice == -1)
+                {
+                    _io.WriteLine($"{target.Name} seems disappointed...");
+                    return NegotiationResult.Failure;
+                }
+
                 moodScore += question.Answers[choice].Value;
             }
 
             // The Demand & Resolution Phase
-            if (moodScore >= 3)
+            // Note: moodScore requirements adjusted for 3 rounds (max 6, success threshold 4).
+            if (moodScore >= 4)
             {
                 _io.WriteLine($"{target.Name} seems pleased with your answers.");
                 return ProcessDemands(actor, target);
@@ -126,7 +139,7 @@ namespace JRPGPrototype.Logic.Battle
             {
                 _io.WriteLine($"{target.Name} grows angry!", ConsoleColor.Red);
                 _io.Wait(800);
-            return NegotiationResult.Failure;
+                return NegotiationResult.Failure;
             }
         }
 
@@ -215,8 +228,8 @@ namespace JRPGPrototype.Logic.Battle
             else
             {
                 if (itemDemand != null)
-            {
-                string itemName = Database.Items[itemDemand].Name;
+                {
+                    string itemName = Database.Items[itemDemand].Name;
                     var options = new List<string> { $"Give {itemName}", "Refuse" };
                     int choice = _io.RenderMenu($"{target.Name}: \"A {itemName} would be lovely.\"", options, 0);
                     if (choice == 0)

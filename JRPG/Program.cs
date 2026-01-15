@@ -57,6 +57,7 @@ namespace JRPGPrototype
                     player.Class = ClassType.Operator;
                     // UPDATED: Use CreateDemon to ensure proper skill progression
                     //player.DemonStock.Add(Combatant.CreateDemon("pixie", 1));
+                    player.DemonStock.Add(Combatant.CreateDemon("michael", 99));
                     break;
             }
 

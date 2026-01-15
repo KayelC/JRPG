@@ -23,11 +23,11 @@ namespace JRPGPrototype
 
             Combatant player = new Combatant("Hero");
 
-            player.CharacterStats[StatType.STR] = 8;
-            player.CharacterStats[StatType.MAG] = 8;
-            player.CharacterStats[StatType.END] = 8;
-            player.CharacterStats[StatType.AGI] = 8;
-            player.CharacterStats[StatType.LUK] = 5;
+            //player.CharacterStats[StatType.STR] = 8;
+            //player.CharacterStats[StatType.MAG] = 8;
+            //player.CharacterStats[StatType.END] = 8;
+            //player.CharacterStats[StatType.AGI] = 8;
+            //player.CharacterStats[StatType.LUK] = 5;
 
             player.StatPoints = 0;
 

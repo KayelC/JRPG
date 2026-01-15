@@ -41,6 +41,7 @@ namespace JRPGPrototype.Entities
         // Advanced Battle States (SMT III Fidelity)
         public bool IsCharged { get; set; } // Physical 1.9x
         public bool IsMindCharged { get; set; } // Magic 1.9x
+
         public bool PhysKarnActive { get; set; } // Tetrakarn
         public bool MagicKarnActive { get; set; } // Makarakarn
 
@@ -85,10 +86,14 @@ namespace JRPGPrototype.Entities
         {
             Name = name;
             Class = type;
+
+            // NEW: Initialize with 2 in each stat as per new starter requirements
             foreach (StatType t in Enum.GetValues(typeof(StatType)))
-                CharacterStats[t] = 10;
-            BaseHP = 100;
-            BaseSP = 40;
+                CharacterStats[t] = 2;
+
+            // NEW: Initialize with 30 HP and 12 SP bases
+            BaseHP = 20;
+            BaseSP = 6;
         }
 
         public static Combatant CreateFromData(EnemyData data)
@@ -137,6 +142,7 @@ namespace JRPGPrototype.Entities
             c.Controller = ControllerType.AI;
             c.BattleControl = ControlState.ActFreely;
 
+            // Reset base stats to 0 for demons so they rely solely on Persona scaling
             foreach (StatType t in Enum.GetValues(typeof(StatType)))
                 c.CharacterStats[t] = 0;
 
@@ -145,13 +151,12 @@ namespace JRPGPrototype.Entities
             // Scale persona to target level to get correct stats
             c.ActivePersona.ScaleToLevel(level);
 
-            // CORRECTED: Calculate Base HP/SP from the scaled Persona stats
-            // SMT Logic: HP ~= (Lvl + END) * Multiplier
+            // SMT Logic for Demon Base Pools: Floors are slightly lower than humans
             int end = c.GetStat(StatType.END);
             int mag = c.GetStat(StatType.MAG);
 
-            c.BaseHP = (int)((level * 5) + (end * 4));
-            c.BaseSP = (int)((level * 2) + (mag * 2));
+            c.BaseHP = (int)((level * 4) + (end * 2));
+            c.BaseSP = (int)((level * 1.5) + (mag * 1.5));
 
             c.RecalculateResources();
             c.CurrentHP = c.MaxHP;
@@ -280,10 +285,11 @@ namespace JRPGPrototype.Entities
         {
             int totalEnd = GetStat(StatType.END);
             int totalMag = GetStat(StatType.MAG);
-           
 
-            MaxHP = Math.Min(999, BaseHP + (totalEnd * 5)); // Max 999
-            MaxSP = Math.Min(999, BaseSP + (totalMag * 3)); // Max 999
+            // Implementation of 666 HP and 333 SP caps
+            MaxHP = Math.Min(666, BaseHP + (totalEnd * 5));
+            MaxSP = Math.Min(333, BaseSP + (totalMag * 3));
+
             CurrentHP = Math.Min(CurrentHP, MaxHP);
             CurrentSP = Math.Min(CurrentSP, MaxSP);
         }
@@ -307,6 +313,8 @@ namespace JRPGPrototype.Entities
             Random rnd = new Random();
             int oldMaxHP = MaxHP;
             int oldMaxSP = MaxSP;
+
+            // Base growth remains steady
             BaseHP += rnd.Next(6, 11);
             BaseSP += rnd.Next(3, 8);
 
@@ -423,6 +431,7 @@ namespace JRPGPrototype.Entities
                     if (isCritical) result.Message = "CRITICAL HIT!";
                     break;
             }
+
             CurrentHP = Math.Max(0, CurrentHP - result.DamageDealt);
             return result;
         }

@@ -314,53 +314,71 @@ namespace JRPGPrototype.Logic
             }
         }
 
+        /// <summary>
+        /// Refactored Hospital Logic: Displays a categorized list of all party members and stock demons.
+        /// Priority sorting: Injured patients appear at the top. Healthy patients are disabled.
+        /// </summary>
         private void OpenHospitalMenu()
         {
             while (true)
             {
-                int hpMissing = _player.MaxHP - _player.CurrentHP;
-                int spMissing = _player.MaxSP - _player.CurrentSP;
-                int totalCost = (hpMissing * 1) + (spMissing * 5);
+                // 1. Aggregate all potential patients
+                var patients = new List<Combatant> { _player };
+                patients.AddRange(_partyManager.ActiveParty.Where(p => p != _player));
+                patients.AddRange(_player.DemonStock);
+
+                // 2. Sort by Urgency: Injured (HP/SP < Max) first.
+                // We use OrderByDescending on a boolean so 'true' (injured) is index 0+.
+                var sortedPatients = patients
+                    .OrderByDescending(p => (p.CurrentHP < p.MaxHP || p.CurrentSP < p.MaxSP))
+                    .ToList();
 
                 string header = $"=== HOSPITAL / CLOCK ===\n" +
                                 $"Current Macca: {_economy.Macca}\n" +
-                                $"HP: {_player.CurrentHP}/{_player.MaxHP}\n" +
-                                $"SP: {_player.CurrentSP}/{_player.MaxSP}";
+                                $"Select a member to treat:";
 
-                List<string> options = new List<string>();
-                List<bool> disabled = new List<bool>();
+                List<string> labels = new List<string>();
+                List<bool> disabledList = new List<bool>();
 
-                if (totalCost > 0)
+                foreach (var p in sortedPatients)
                 {
-                    options.Add($"Treat Wounds ({totalCost} M)");
-                    disabled.Add(false);
+                    int hpMissing = p.MaxHP - p.CurrentHP;
+                    int spMissing = p.MaxSP - p.CurrentSP;
+                    int cost = (hpMissing * 1) + (spMissing * 5);
+
+                    bool isHealthy = cost == 0;
+                    string status = isHealthy ? "[HEALTHY]" : $"{cost} M";
+
+                    labels.Add($"{p.Name,-15} | HP: {p.CurrentHP}/{p.MaxHP} SP: {p.CurrentSP}/{p.MaxSP} | {status}");
+                    disabledList.Add(isHealthy);
+                }
+
+                labels.Add("Leave");
+                disabledList.Add(false);
+
+                int choice = _io.RenderMenu(header, labels, 0, disabledList);
+
+                // Exit logic
+                if (choice == -1 || choice == labels.Count - 1) return;
+
+                // 3. Process Treatment
+                Combatant patient = sortedPatients[choice];
+                int hpToRestore = patient.MaxHP - patient.CurrentHP;
+                int spToRestore = patient.MaxSP - patient.CurrentSP;
+                int finalCost = (hpToRestore * 1) + (spToRestore * 5);
+
+                if (_economy.Macca >= finalCost)
+                {
+                    _economy.SpendMacca(finalCost);
+                    patient.CurrentHP = patient.MaxHP;
+                    patient.CurrentSP = patient.MaxSP;
+                    _io.WriteLine($"{patient.Name} has been fully restored!", ConsoleColor.Green);
+                    _io.Wait(800);
                 }
                 else
                 {
-                    options.Add("You are perfectly healthy.");
-                    disabled.Add(true);
-                }
-                options.Add("Leave");
-                disabled.Add(false);
-
-                int choice = _io.RenderMenu(header, options, 0, disabled);
-
-                if (choice == -1 || choice == options.Count - 1) return;
-
-                if (choice == 0 && totalCost > 0)
-                {
-                    if (_economy.SpendMacca(totalCost))
-                    {
-                        _player.CurrentHP = _player.MaxHP;
-                        _player.CurrentSP = _player.MaxSP;
-                        _io.WriteLine("Treatment complete!", ConsoleColor.Green);
-                        _io.Wait(1000);
-                    }
-                    else
-                    {
-                        _io.WriteLine("Not enough money!", ConsoleColor.Red);
-                        _io.Wait(1000);
-                    }
+                    _io.WriteLine("You do not have enough Macca for this treatment.", ConsoleColor.Red);
+                    _io.Wait(1000);
                 }
             }
         }
@@ -624,9 +642,7 @@ namespace JRPGPrototype.Logic
                 _io.Wait(800);
             }
         }
-
         #region Status Screens (Menu-Driven)
-
         private void OpenSeamlessStatusMenu()
         {
             int statusHubIndex = 0;
@@ -842,7 +858,6 @@ namespace JRPGPrototype.Logic
         #endregion
 
         #region Helper Renderers
-
         private string RenderHumanStatusToString(Combatant entity)
         {
             string output = "=== STATUS & PARAMETERS ===\n";

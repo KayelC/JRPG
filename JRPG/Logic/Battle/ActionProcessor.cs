@@ -49,7 +49,8 @@ namespace JRPGPrototype.Logic.Battle
             if (target.IsDead) return new CombatResult { Type = HitType.Miss, DamageDealt = 0 };
 
             Element element = attacker.WeaponElement;
-            int power = GetActionPower(attacker);
+            // Logic Change: PWR for standard attack is considered 15 for the formula
+            int power = GetActionPower(attacker, 15);
 
             _io.WriteLine($"{attacker.Name} attacks {target.Name}!");
 
@@ -110,7 +111,7 @@ namespace JRPGPrototype.Logic.Battle
             // 2. Deduct Cost
             if (cost.isHP)
             {
-                // In SMT, percentage HP costs are calculated based on MaxHP
+                // percentage HP costs are calculated based on MaxHP
                 int hpCost = (int)(attacker.MaxHP * (costValue / 100.0));
                 attacker.CurrentHP = Math.Max(1, attacker.CurrentHP - hpCost);
             }
@@ -244,7 +245,8 @@ namespace JRPGPrototype.Logic.Battle
         private CombatResult ProcessOffensiveSkill(Combatant attacker, Combatant target, SkillData skill)
         {
             Element element = ElementHelper.FromCategory(skill.Category);
-            int power = skill.GetPowerVal();
+            // Logic Change: Power for skills is parsed from data
+            int power = GetActionPower(attacker, skill.GetPowerVal());
 
             bool isInstantKill = skill.Effect.ToLower().Contains("instant kill");
 
@@ -306,10 +308,7 @@ namespace JRPGPrototype.Logic.Battle
             if (skillName == "Dekaja")
             {
                 var keys = target.Buffs.Keys.ToList();
-                foreach (var k in keys)
-                {
-                    if (target.Buffs[k] > 0) target.Buffs[k] = 0;
-                }
+                foreach (var k in keys) if (target.Buffs[k] > 0) target.Buffs[k] = 0;
                 _io.WriteLine($"{target.Name}'s stat bonuses were nullified!");
             }
 
@@ -317,10 +316,7 @@ namespace JRPGPrototype.Logic.Battle
             if (skillName == "Dekunda")
             {
                 var keys = target.Buffs.Keys.ToList();
-                foreach (var k in keys)
-                {
-                    if (target.Buffs[k] < 0) target.Buffs[k] = 0;
-                }
+                foreach (var k in keys) if (target.Buffs[k] < 0) target.Buffs[k] = 0;
                 _io.WriteLine($"{target.Name}'s stat penalties were nullified!");
             }
 
@@ -362,20 +358,20 @@ namespace JRPGPrototype.Logic.Battle
                     int heal = skill.GetPowerVal();
                     if (heal == 0)
                     {
-                    Match match = Regex.Match(skill.Effect, @"\((\d+)\)");
-                    if (match.Success) heal = int.Parse(match.Groups[1].Value);
+                        Match match = Regex.Match(skill.Effect, @"\((\d+)\)");
+                        if (match.Success) heal = int.Parse(match.Groups[1].Value);
                     }
 
                     if (skill.Effect.Contains("50%")) heal = target.MaxHP / 2;
                     if (skill.Effect.Contains("full")) heal = target.MaxHP;
 
-                        int oldHP = target.CurrentHP;
-                        target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
+                    int oldHP = target.CurrentHP;
+                    target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
 
                     int actualHealed = target.CurrentHP - oldHP;
                     _io.WriteLine($"{target.Name} recovered {actualHealed} HP.");
                 }
-                    else if (cured) _io.WriteLine($"{target.Name} was cured!");
+                else if (cured) _io.WriteLine($"{target.Name} was cured!");
             }
 
             // Standard Buffs/Debuffs (Kaja/Nda)
@@ -397,9 +393,24 @@ namespace JRPGPrototype.Logic.Battle
             return result;
         }
 
-        private int GetActionPower(Combatant c)
+        /// <summary>
+        /// SMT III High-Fidelity Attack Power calculation.
+        /// Logic: Demons use dynamic scaling (Lv+STR)*PWR/15. Humans use Weapon Power or Lv+(STR*2).
+        /// </summary>
+        private int GetActionPower(Combatant c, int pwrValue)
         {
+            // Case 1: Demons (or Avatars) use the requested growth-based formula
+            if (c.Class == ClassType.Demon || c.Class == ClassType.Avatar)
+            {
+                // (Lv + STR) * PWR / 15
+                double demonPwr = (c.Level + c.GetStat(StatType.STR)) * pwrValue / 15.0;
+                return (int)Math.Max(1, Math.Floor(demonPwr));
+            }
+
+            // Case 2: Humans/Operators with weapons
             if (c.EquippedWeapon != null) return c.EquippedWeapon.Power;
+
+            // Case 3: Humans without weapons (Unarmed)
             return c.Level + (c.GetStat(StatType.STR) * 2);
         }
 

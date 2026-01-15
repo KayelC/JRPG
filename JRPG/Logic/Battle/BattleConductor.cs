@@ -74,10 +74,7 @@ namespace JRPGPrototype.Logic.Battle
         {
             _io.Clear();
             _io.WriteLine("=== ENEMY ENCOUNTER ===");
-            foreach (var e in _enemies)
-            {
-                _io.WriteLine($"Appeared: {e.Name} (Lv.{e.Level})");
-            }
+            foreach (var e in _enemies) _io.WriteLine($"Appeared: {e.Name} (Lv.{e.Level})");
             _io.Wait(1200);
 
             // 1. Initiative Roll (Weighted Agility)
@@ -96,7 +93,7 @@ namespace JRPGPrototype.Logic.Battle
                 foreach (var actor in allies)
                 {
                     _statusRegistry.ProcessInitialPassives(actor, allies);
-                }
+            }
             }
             else
             {
@@ -105,7 +102,7 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     // For Enemy Passives, allies = entire enemy side
                     _statusRegistry.ProcessInitialPassives(actor, enemies);
-                }
+            }
             }
             // Show HUD update for turn 1 buffs
             _ui.ForceRefreshHUD();
@@ -205,20 +202,15 @@ namespace JRPGPrototype.Logic.Battle
                     }
                 }
 
+                // Check for protagonist death immediately after action
                 if (CheckEncounterCompletion()) return;
 
-                if (!actorRemoved)
-                {
-                    actorIndex++;
-                }
+                if (!actorRemoved) actorIndex++;
             }
 
             // At phase end, dissolve any unused Karn shields
             var sideToEnd = isPlayerSide ? _party.ActiveParty : _enemies;
-            foreach (var combatant in sideToEnd)
-            {
-                combatant.DissolveShields();
-            }
+            foreach (var combatant in sideToEnd) combatant.DissolveShields();
         }
 
         /// <summary>
@@ -230,7 +222,6 @@ namespace JRPGPrototype.Logic.Battle
             SkillData skill = null;
             ItemData item = null;
             List<Combatant> targets = null;
-
             bool actionCommitted = false;
 
             // --- A. ACTION SELECTION LOOP (Replaces recursion to fix "Back" button crash) ---
@@ -346,10 +337,7 @@ namespace JRPGPrototype.Logic.Battle
                     else if (choice == "Talk")
                     {
                         targets = _ui.SelectTarget(actor, null, null, true);
-                        if (targets != null)
-                        {
-                            HandleNegotiation(actor, targets[0]);
-                        }
+                        if (targets != null) HandleNegotiation(actor, targets[0]);
                         return;
                     }
                 }
@@ -402,7 +390,7 @@ namespace JRPGPrototype.Logic.Battle
                     {
                         // Reprompt if the item had no effect
                         ExecuteAction(actor, isPlayerSide, turnState);
-                    }
+                }
                 }
                 else if (skill == null)
                 {
@@ -472,11 +460,11 @@ namespace JRPGPrototype.Logic.Battle
                     Escaped = true;
                     BattleEnded = true;
                     _io.WriteLine("Escaped safely!");
-                    _io.Wait(1000); // Add wait for UX
+                    _io.Wait(1000);
                     return;
                 }
                 _io.WriteLine("Failed to escape!");
-                _io.Wait(1000); // Add wait for UX
+                _io.Wait(1000);
                 _turnEngine.ConsumeAction(HitType.Normal, false);
             }
             if (tactic == "Strategy")
@@ -490,10 +478,26 @@ namespace JRPGPrototype.Logic.Battle
             }
         }
 
+        /// <summary>
+        /// If the local player (protagonist) dies, 
+        /// the battle ends immediately in defeat.
+        /// </summary>
         private bool CheckEncounterCompletion()
         {
+            // 1. High Priority: Protagonist Check
+            if (_party.ActiveParty.Any(p => p.Controller == ControllerType.LocalPlayer && p.IsDead))
+            {
+                PlayerWon = false;
+                BattleEnded = true;
+                return true;
+            }
+
+            // 2. Enemy Side Check
             if (_enemies.All(e => e.IsDead)) { PlayerWon = true; BattleEnded = true; return true; }
+
+            // 3. Full Party Wipe Check
             if (_party.IsPartyWiped()) { PlayerWon = false; BattleEnded = true; return true; }
+
             return false;
         }
 

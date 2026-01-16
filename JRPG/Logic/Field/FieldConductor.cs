@@ -148,6 +148,8 @@ namespace JRPGPrototype.Logic.Field
 
                 if (action == "Cancel") continue;
 
+                bool exitLoop = false;
+
                 switch (action)
                 {
                     case "Ascend Stairs":
@@ -172,7 +174,8 @@ namespace JRPGPrototype.Logic.Field
                         break;
 
                     case "Inventory":
-                        OpenInventoryMenu(inDungeon: true);
+                        // Check if inventory usage requested an exit (Goho-M)
+                        if (OpenInventoryMenu(inDungeon: true) == ItemUsageResult.RequestDungeonExit) exitLoop = true;
                         break;
 
                     case "Status":
@@ -185,22 +188,14 @@ namespace JRPGPrototype.Logic.Field
 
                     case "Return to City":
                         _dungeonState.ResetToEntry();
-                        return;
-
+                        exitLoop = true;
+                        break;
                     case "Barrier (Cannot Pass)":
                         _dungeonUI.ReportBarrierBlocked();
                         break;
                 }
 
-                // If a battle occurred and the player died, exit the loop
-                if (_player.CurrentHP <= 0) return;
-
-                // If an item usage (Goho-M) reset the dungeon state to 1, exit to city
-                if (_dungeonState.CurrentFloor == 1 && action != "Clock (Heal)" && action != "Terminal (Warp)")
-                {
-                    // If we are at floor 1 and not interacting with lobby objects, we've likely used a Goho-M
-                    if (floorInfo.FloorNumber != 1) return;
-                }
+                if (exitLoop || _player.CurrentHP <= 0) return;
             }
         }
 
@@ -249,7 +244,7 @@ namespace JRPGPrototype.Logic.Field
                 switch (choice)
                 {
                     case "Blacksmith (Weapons)":
-                        _logicEngine.OpenShop(_player, ShopType.Weapon); // Note: ShopManager logic preserved via engine
+                        _logicEngine.OpenShop(_player, ShopType.Weapon);
                         break;
 
                     case "Clothing Store (Armor/Boots)":
@@ -297,17 +292,19 @@ namespace JRPGPrototype.Logic.Field
 
         #region System Menus (Inventory/Status)
 
-        private void OpenInventoryMenu(bool inDungeon)
+        // Now returns ItemUsageResult to signal explicit dungeon exits to the Conductor.
+        private ItemUsageResult OpenInventoryMenu(bool inDungeon)
         {
             while (true)
             {
                 string choice = _inventoryUI.ShowInventorySubMenu(_player);
-                if (choice == "Back") return;
+                if (choice == "Back") return ItemUsageResult.None;
 
                 switch (choice)
                 {
                     case "Use Item":
-                        ShowItemMenu(inDungeon);
+                        var res = ShowItemMenu(inDungeon);
+                        if (res == ItemUsageResult.RequestDungeonExit) return res;
                         break;
                     case "Use Skill":
                         ShowSkillMenu();
@@ -322,16 +319,18 @@ namespace JRPGPrototype.Logic.Field
             }
         }
 
-        private void ShowItemMenu(bool inDungeon)
+        private ItemUsageResult ShowItemMenu(bool inDungeon)
         {
             ItemData selectedItem = _inventoryUI.SelectItem(_player, inDungeon);
-            if (selectedItem == null) return;
+            if (selectedItem == null) return ItemUsageResult.None;
 
             Combatant target = _inventoryUI.SelectFieldTarget(_player, selectedItem.Name);
-            if (target == null) return;
+            if (target == null) return ItemUsageResult.None;
 
-            _logicEngine.ExecuteItemUsage(selectedItem, _player, target);
+            return _logicEngine.ExecuteItemUsage(selectedItem, _player, target);
         }
+
+        #endregion
 
         private void ShowSkillMenu()
         {
@@ -377,7 +376,8 @@ namespace JRPGPrototype.Logic.Field
             // Stat allocation loop logic shifted to logic engine
             while (_player.StatPoints > 0)
             {
-                StatType? selected = _logicEngine.PromptStatAllocation(_player); // Logic engine uses RenderMenu internally for this specialized module
+                // Calling the bridge, not the engine, for the menu prompt.
+                StatType? selected = _statusUI.PromptStatAllocation(_player);
                 if (selected == null) break;
                 _logicEngine.AllocateStatPoint(_player, selected.Value);
             }
@@ -476,7 +476,5 @@ namespace JRPGPrototype.Logic.Field
                 }
             }
         }
-
-        #endregion
     }
 }

@@ -9,8 +9,8 @@ using JRPGPrototype.Services;
 namespace JRPGPrototype.Logic.Field.Bridges
 {
     /// <summary>
-    /// Specialized UI Bridge for Status screens, Persona management, 
-    /// and Party Organization (COMP).
+    /// Specialized UI Bridge for Status screens and Persona management.
+    /// Authority for stat allocation menu rendering.
     /// </summary>
     public class StatusUIBridge
     {
@@ -25,7 +25,7 @@ namespace JRPGPrototype.Logic.Field.Bridges
             _party = party;
         }
 
-        #region Status Hub and Stat Allocation
+        #region Status Hub
 
         /// <summary>
         /// Renders the primary Status Hub. 
@@ -81,12 +81,49 @@ namespace JRPGPrototype.Logic.Field.Bridges
 
         #endregion
 
-        #region Stocks and Details
+        #region Stat Allocation UI
 
         /// <summary>
-        /// Renders the list of Personas currently carried by the player.
-        /// Marks the equipped Persona with [E].
+        /// UI authority for stat allocation. Logic-less rendering.
+        /// Moved from FieldServiceEngine to resolve layer violations.
         /// </summary>
+        public StatType? PromptStatAllocation(Combatant player)
+        {
+            List<string> options = new List<string>();
+            var stats = Enum.GetValues(typeof(StatType)).Cast<StatType>().ToList();
+
+            foreach (StatType s in stats)
+            {
+                options.Add($"{s}: {player.CharacterStats[s]}");
+            }
+            options.Add("Back");
+
+            int idx = _io.RenderMenu($"=== STAT ALLOCATION (Pts: {player.StatPoints}) ===", options, 0, null, (index) =>
+            {
+                if (index >= 0 && index < stats.Count)
+                {
+                    StatType s = stats[index];
+                    string bonus = s switch
+                    {
+                        StatType.END => "Increases Max HP by 5",
+                        StatType.STR => "Increases Physical Damage",
+                        StatType.MAG => "Increases Magic Damage and +3 Max SP",
+                        StatType.AGI => "Increases Hit/Accuracy and Evasion Chance",
+                        StatType.LUK => "General Purpose Stat affecting Chances and Shop Prices",
+                        _ => ""
+                    };
+                    _io.WriteLine($"Highlight: {s} | Bonus: {bonus}");
+                }
+            });
+
+            if (idx == -1 || idx == options.Count - 1) return null;
+            return stats[idx];
+        }
+
+        #endregion
+
+        #region Persona Stock
+
         public Persona SelectPersonaFromStock(Combatant player)
         {
             var allPersonas = new List<Persona>();
@@ -129,7 +166,7 @@ namespace JRPGPrototype.Logic.Field.Bridges
 
         #endregion
 
-        #region Demon Stock and Organization (COMP)
+        #region Demon Stock and COMP
 
         /// <summary>
         /// Renders the list of Demons in the party and stock.
@@ -230,7 +267,7 @@ namespace JRPGPrototype.Logic.Field.Bridges
 
         #endregion
 
-        #region String Rendering Logic
+        #region Helper Renderers
 
         public string RenderHumanStatusToString(Combatant entity)
         {

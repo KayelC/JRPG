@@ -6,6 +6,7 @@ using JRPGPrototype.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 
 namespace JRPGPrototype.Logic.Field
@@ -106,7 +107,6 @@ namespace JRPGPrototype.Logic.Field
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -115,23 +115,23 @@ namespace JRPGPrototype.Logic.Field
         #region Item Usage Logic
 
         /// <summary>
-        /// Authoritative logic for using an item on the field.
-        /// Handles deduction from inventory and application of effects.
+        /// Executes item usage and returns an explicit result signal to the Conductor.
+        /// Fix: Replaces boolean return with ItemUsageResult enum.
         /// </summary>
-        public bool ExecuteItemUsage(ItemData item, Combatant user, Combatant target)
+        public ItemUsageResult ExecuteItemUsage(ItemData item, Combatant user, Combatant target)
         {
-            if (!_inventory.HasItem(item.Id)) return false;
+            if (!_inventory.HasItem(item.Id)) return ItemUsageResult.Failed;
 
             bool effectApplied = false;
 
-            // Specialized Item: Goho-M (Dungeon Escape)
+            // Specialized Item: Goho-M (Explicit Exit Request)
             if (item.Name == "Goho-M")
             {
                 _io.WriteLine("Using Goho-M... A mystical light surrounds the party.");
                 _io.Wait(1000);
                 _inventory.RemoveItem(item.Id, 1);
                 _dungeonState.ResetToEntry();
-                return true;
+                return ItemUsageResult.RequestDungeonExit;
             }
 
             // Standard Item Categories
@@ -181,8 +181,10 @@ namespace JRPGPrototype.Logic.Field
             {
                 _inventory.RemoveItem(item.Id, 1);
                 _io.Wait(800);
+                return ItemUsageResult.Applied;
             }
-            return effectApplied;
+
+            return ItemUsageResult.Failed;
         }
 
         #endregion
@@ -250,50 +252,13 @@ namespace JRPGPrototype.Logic.Field
 
         #region Stat Allocation logic
 
-        /// <summary>
-        /// Logic Port: Handles the menu loop and selection for stat allocation.
-        /// Feature: Preserves the flavor text/bonus descriptions from the monolith.
-        /// </summary>
-        public StatType? PromptStatAllocation(Combatant player)
-        {
-            List<string> options = new List<string>();
-            var stats = Enum.GetValues(typeof(StatType)).Cast<StatType>().ToList();
 
-            foreach (StatType s in stats)
-            {
-                options.Add($"{s}: {player.CharacterStats[s]}");
-            }
-            options.Add("Back");
-
-            int idx = _io.RenderMenu($"=== STAT ALLOCATION (Pts: {player.StatPoints}) ===", options, 0, null, (index) =>
-            {
-                if (index >= 0 && index < stats.Count)
-                {
-                    StatType s = stats[index];
-                    string bonus = s switch
-                    {
-                        StatType.STR => "Increases Physical Damage",
-                        StatType.MAG => "Increases Magic Damage and +3 Max SP",
-                        StatType.END => "Increases Max HP by 5",
-                        StatType.AGI => "Increases Hit/Accuracy and Evasion Chance",
-                        StatType.LUK => "General Purpose Stat affecting Chances and Shop Prices",
-                        _ => ""
-                    };
-                    _io.WriteLine($"Highlight: {s}");
-                    _io.WriteLine($"Current: {player.CharacterStats[s]}");
-                    _io.WriteLine($"Bonus: {bonus}"); ;
-                }
-            });
-
-            if (idx == -1 || idx == options.Count - 1) return null;
-            return stats[idx];
-        }
-
+        // Handles the menu loop and selection for stat allocation.
         public void AllocateStatPoint(Combatant player, StatType type)
         {
             if (player.StatPoints <= 0) return;
 
-            // Hard Cap Check (Global requirement established earlier)
+            // Hard Cap Check
             if (player.CharacterStats[type] >= 40)
             {
                 _io.WriteLine($"{type} has already reached the maximum cap of 40.", ConsoleColor.Yellow);

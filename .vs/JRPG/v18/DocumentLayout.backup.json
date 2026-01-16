@@ -66,8 +66,7 @@
               "RelativeToolTip": "JRPG\\Core\\Enums.cs",
               "ViewState": "AgIAAEUAAAAAAAAAAAAqwGQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-16T21:23:13.924Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-16T21:23:13.924Z"
             },
             {
               "$type": "Document",
@@ -91,8 +90,7 @@
               "RelativeToolTip": "JRPG\\Logic\\Field\\Bridges\\StatusUIBridge.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-16T20:46:35.943Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-16T20:46:35.943Z"
             },
             {
               "$type": "Document",
@@ -165,8 +163,7 @@
               "RelativeToolTip": "JRPG\\Logic\\Field\\FieldServiceEngine.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-16T19:02:07.121Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-16T19:02:07.121Z"
             }
           ]
         }

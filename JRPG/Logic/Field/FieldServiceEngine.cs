@@ -22,6 +22,7 @@ namespace JRPGPrototype.Logic.Field
         private readonly InventoryManager _inventory;
         private readonly PartyManager _party;
         private readonly DungeonState _dungeonState;
+        private readonly ShopManager _shopManager;
 
         public FieldServiceEngine(
             IGameIO io,
@@ -35,20 +36,54 @@ namespace JRPGPrototype.Logic.Field
             _inventory = inventory;
             _party = party;
             _dungeonState = dungeonState;
+
+            _shopManager = new ShopManager(_inventory, _economy, _io);
         }
 
-        #region Hospital and Restoration Logic
+        #region Shop and Equipment
+
+  
+        public void OpenShop(Combatant player, ShopType shopType)
+        {
+            _shopManager.OpenShop(player, shopType);
+        }
+
+        public void PerformEquip(Combatant player, string equipId, ShopCategory category)
+        {
+            switch (category)
+            {
+                case ShopCategory.Weapon:
+                    player.EquippedWeapon = Database.Weapons[equipId];
+                    break;
+                case ShopCategory.Armor:
+                    player.EquippedArmor = Database.Armors[equipId];
+                    break;
+                case ShopCategory.Boots:
+                    player.EquippedBoots = Database.Boots[equipId];
+                    break;
+                case ShopCategory.Accessory:
+                    player.EquippedAccessory = Database.Accessories[equipId];
+                    break;
+            }
+
+            player.RecalculateResources();
+            _io.WriteLine("Equipped successfully!");
+            _io.Wait(500);
+        }
+
+        #endregion
+
+        #region Restoration Logic
 
         /// <summary>
         /// Calculates the Macca cost to fully restore a combatant.
         /// Logic: 1 Macca per 1 HP, 5 Macca per 1 SP.
         /// </summary>
+
         public int CalculateRestorationCost(Combatant patient)
         {
             int hpMissing = patient.MaxHP - patient.CurrentHP;
             int spMissing = patient.MaxSP - patient.CurrentSP;
-
-            // SMT III Fidelity: SP is significantly more expensive to restore than HP
             return (hpMissing * 1) + (spMissing * 5);
         }
 
@@ -131,17 +166,14 @@ namespace JRPGPrototype.Logic.Field
                     break;
 
                 case "Cure":
-                    // We instantiate a transient StatusRegistry to handle the removal logic
+                    // Instantiate a transient StatusRegistry to handle the removal logic
                     StatusRegistry sr = new StatusRegistry();
                     if (sr.CheckAndExecuteCure(target, item.Name))
                     {
                         _io.WriteLine($"{target.Name} was cured of their ailment!");
                         effectApplied = true;
                     }
-                    else
-                    {
-                        _io.WriteLine("The item had no effect.");
-                    }
+                    else _io.WriteLine("The item had no effect.");
                     break;
             }
 
@@ -150,7 +182,6 @@ namespace JRPGPrototype.Logic.Field
                 _inventory.RemoveItem(item.Id, 1);
                 _io.Wait(800);
             }
-
             return effectApplied;
         }
 
@@ -203,10 +234,7 @@ namespace JRPGPrototype.Logic.Field
                         _io.WriteLine($"{target.Name} was healed.");
                         applied = true;
                     }
-                    else
-                    {
-                        _io.WriteLine($"{target.Name} is already at full health.");
-                    }
+                    else _io.WriteLine($"{target.Name} is already at full health.");
                 }
             }
 
@@ -215,45 +243,52 @@ namespace JRPGPrototype.Logic.Field
                 user.CurrentSP -= cost.value;
                 _io.Wait(800);
             }
-
             return applied;
         }
 
         #endregion
 
-        #region Equipment and Stats Logic
+        #region Stat Allocation logic
 
         /// <summary>
-        /// Logic for updating equipment. 
-        /// Ensures data integrity between character state and inventory.
+        /// Logic Port: Handles the menu loop and selection for stat allocation.
+        /// Feature: Preserves the flavor text/bonus descriptions from the monolith.
         /// </summary>
-        public void PerformEquip(Combatant player, string equipId, ShopCategory category)
+        public StatType? PromptStatAllocation(Combatant player)
         {
-            switch (category)
-            {
-                case ShopCategory.Weapon:
-                    player.EquippedWeapon = Database.Weapons[equipId];
-                    break;
-                case ShopCategory.Armor:
-                    player.EquippedArmor = Database.Armors[equipId];
-                    break;
-                case ShopCategory.Boots:
-                    player.EquippedBoots = Database.Boots[equipId];
-                    break;
-                case ShopCategory.Accessory:
-                    player.EquippedAccessory = Database.Accessories[equipId];
-                    break;
-            }
+            List<string> options = new List<string>();
+            var stats = Enum.GetValues(typeof(StatType)).Cast<StatType>().ToList();
 
-            // Recalculate resources in case endurance/maxHP modifiers changed
-            player.RecalculateResources();
-            _io.WriteLine("Equipped successfully!");
-            _io.Wait(500);
+            foreach (StatType s in stats)
+            {
+                options.Add($"{s}: {player.CharacterStats[s]}");
+            }
+            options.Add("Back");
+
+            int idx = _io.RenderMenu($"=== STAT ALLOCATION (Pts: {player.StatPoints}) ===", options, 0, null, (index) =>
+            {
+                if (index >= 0 && index < stats.Count)
+                {
+                    StatType s = stats[index];
+                    string bonus = s switch
+                    {
+                        StatType.STR => "Increases Physical Damage",
+                        StatType.MAG => "Increases Magic Damage and +3 Max SP",
+                        StatType.END => "Increases Max HP by 5",
+                        StatType.AGI => "Increases Hit/Accuracy and Evasion Chance",
+                        StatType.LUK => "General Purpose Stat affecting Chances and Shop Prices",
+                        _ => ""
+                    };
+                    _io.WriteLine($"Highlight: {s}");
+                    _io.WriteLine($"Current: {player.CharacterStats[s]}");
+                    _io.WriteLine($"Bonus: {bonus}"); ;
+                }
+            });
+
+            if (idx == -1 || idx == options.Count - 1) return null;
+            return stats[idx];
         }
 
-        /// <summary>
-        /// Logic for permanent stat point distribution.
-        /// </summary>
         public void AllocateStatPoint(Combatant player, StatType type)
         {
             if (player.StatPoints <= 0) return;
@@ -273,22 +308,34 @@ namespace JRPGPrototype.Logic.Field
 
         #endregion
 
-        #region Dungeon and Progression Logic
+        #region Persona Logic
 
-        /// <summary>
-        /// Registers the defeat of a floor boss.
-        /// </summary>
-        public void RegisterBossDefeat(string bossId)
+        public void PerformPersonaSwap(Combatant player, Persona newPersona)
         {
-            if (!string.IsNullOrEmpty(bossId))
+            int stockIndex = player.PersonaStock.IndexOf(newPersona);
+            if (stockIndex != -1)
             {
-                _dungeonState.MarkBossDefeated(bossId);
+                Persona oldActive = player.ActivePersona;
+                player.ActivePersona = newPersona;
+                player.PersonaStock[stockIndex] = oldActive;
+                _io.WriteLine($"Equipped {newPersona.Name}!");
+                player.RecalculateResources();
+                _io.Wait(800);
             }
         }
 
-        /// <summary>
+        #endregion
+
+        #region Dungeon and Progression Logic
+
+        // Registers the defeat of a floor boss.
+        public void RegisterBossDefeat(string bossId)
+        {
+            if (!string.IsNullOrEmpty(bossId)) _dungeonState.MarkBossDefeated(bossId);
+        }
+
+
         /// Persistently unlocks a terminal for future warping.
-        /// </summary>
         public void UnlockTerminal(int floor)
         {
             _dungeonState.UnlockTerminal(floor);

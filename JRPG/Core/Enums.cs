@@ -66,7 +66,7 @@ namespace JRPGPrototype.Core
         ActFreely
     }
 
-    // NEW: Defines the conversational archetypes linked to Arcanas
+    // Defines the conversational archetypes linked to Arcanas
     public enum PersonalityType
     {
         Timid,      // Priestess, Hermit
@@ -77,5 +77,25 @@ namespace JRPGPrototype.Core
         Gloomy,     // Hanged Man, Death
         Upbeat,     // Sun, Star
         Formal      // Temperance, Judgement
+    }
+
+    //Enum to communicate exploration results back to the FieldConductor.
+    public enum ExplorationEvent
+    {
+        None,
+        Encounter,
+        BossEncounter
+    }
+
+    /// <summary>
+    /// Explicit signals returned by the Service Engine to inform the Conductor 
+    /// of side-effects requiring state transitions.
+    /// </summary>
+    public enum ItemUsageResult
+    {
+        None,
+        Applied,
+        Failed,
+        RequestDungeonExit
     }
 }

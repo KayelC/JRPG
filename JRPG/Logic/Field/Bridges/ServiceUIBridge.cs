@@ -9,7 +9,8 @@ using JRPGPrototype.Services;
 namespace JRPGPrototype.Logic.Field.Bridges
 {
     /// <summary>
-    /// Handles all UI interactions for City Services (Hospital and Shop).
+    /// Handles all UI interactions for City Services (Hospital and Shop) 
+    /// and the primary Field Main Menu.
     /// </summary>
     public class ServiceUIBridge
     {
@@ -25,6 +26,37 @@ namespace JRPGPrototype.Logic.Field.Bridges
             _economy = economy;
             _party = party;
         }
+
+        #region Main Navigation
+
+        /// <summary>
+        /// Renders the primary Field Menu.
+        /// </summary>
+        public string ShowFieldMainMenu(Combatant player)
+        {
+            string header = $"=== FIELD MENU ===\n" +
+                            $"Macca: {_economy.Macca}\n" +
+                            $"HP: {player.CurrentHP}/{player.MaxHP} | SP: {player.CurrentSP}/{player.MaxSP}";
+
+            List<string> options = new List<string>
+            {
+                "Explore Tartarus",
+                "City Services",
+                "Inventory",
+                "Status"
+            };
+
+            if (player.Class == ClassType.Operator) options.Add("Organize Party");
+            options.Add("Exit Game");
+
+            int choice = _io.RenderMenu(header, options, _uiState.MainMenuIndex);
+            if (choice == -1) return "Cancel";
+
+            _uiState.MainMenuIndex = choice;
+            return options[choice];
+        }
+
+        #endregion
 
         #region Hospital UI
 

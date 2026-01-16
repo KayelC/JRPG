@@ -57,9 +57,31 @@ namespace JRPGPrototype.Logic.Field.Bridges
             return options[choice];
         }
 
+        /// <summary>
+        /// Renders the equipment slot selection menu.
+        /// </summary>
+        public string ShowEquipSlotMenu(Combatant player)
+        {
+            string header = "=== EQUIPMENT SLOTS ===";
+            List<string> options = new List<string>
+            {
+                $"Weapon: {player.EquippedWeapon?.Name ?? "None"}",
+                $"Armor: {player.EquippedArmor?.Name ?? "None"}",
+                $"Boots: {player.EquippedBoots?.Name ?? "None"}",
+                $"Accessory:{player.EquippedAccessory?.Name ?? "None"}",
+                "Back"
+            };
+
+            int choice = _io.RenderMenu(header, options, _uiState.EquipSlotIndex);
+            if (choice == -1 || choice == options.Count - 1) return "Back";
+
+            _uiState.EquipSlotIndex = choice;
+            return options[choice];
+        }
+
         #endregion
 
-        #region Persona Stock and Details
+        #region Stocks and Details
 
         /// <summary>
         /// Renders the list of Personas currently carried by the player.
@@ -208,7 +230,7 @@ namespace JRPGPrototype.Logic.Field.Bridges
 
         #endregion
 
-        #region String Rendering Logic (High Fidelity)
+        #region String Rendering Logic
 
         public string RenderHumanStatusToString(Combatant entity)
         {

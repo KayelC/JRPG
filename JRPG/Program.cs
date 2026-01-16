@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using JRPGPrototype.Services;
-using JRPGPrototype.Core;
+﻿using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Logic;
+using JRPGPrototype.Logic.Battle;
+using JRPGPrototype.Logic.Field;
+using JRPGPrototype.Services;
+using System;
+using System.Collections.Generic;
 
 namespace JRPGPrototype
 {
@@ -23,11 +25,9 @@ namespace JRPGPrototype
 
             Combatant player = new Combatant("Hero");
 
-            //player.CharacterStats[StatType.STR] = 8;
-            //player.CharacterStats[StatType.MAG] = 8;
-            //player.CharacterStats[StatType.END] = 8;
-            //player.CharacterStats[StatType.AGI] = 8;
-            //player.CharacterStats[StatType.LUK] = 5;
+            // Persistent Knowledge Bank: This allows the player to "remember" affinities 
+            // across different battles in the same session.
+            BattleKnowledge playerKnowledge = new BattleKnowledge();
 
             player.StatPoints = 0;
 
@@ -77,7 +77,14 @@ namespace JRPGPrototype
 
             economy.AddMacca(5000);
 
-            FieldManager field = new FieldManager(player, inventory, economy, dungeonState, io);
+            FieldConductor field = new FieldConductor(
+                player,
+                inventory,
+                economy,
+                dungeonState,
+                io,
+                playerKnowledge
+            );
 
             bool appRunning = true;
             while (appRunning)

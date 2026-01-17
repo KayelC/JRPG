@@ -109,10 +109,10 @@ namespace JRPGPrototype.Logic.Field.Bridges
 
         #endregion
 
-        #region Shop UI
+        #region Shop and Service UI
 
         /// <summary>
-        /// Renders the category selection within the City Services menu.
+        /// Renders the City Services portal menu.
         /// </summary>
         public string ShowCityServicesMenu()
         {
@@ -124,6 +124,7 @@ namespace JRPGPrototype.Logic.Field.Bridges
                 "Jeweler (Accessories)",
                 "Pharmacy (Items)",
                 "Hospital (Heal)",
+                "Cathedral of Shadows",
                 "Back"
             };
 

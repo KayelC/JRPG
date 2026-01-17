@@ -7,6 +7,7 @@ using JRPGPrototype.Entities;
 using JRPGPrototype.Services;
 using JRPGPrototype.Logic.Battle;
 using JRPGPrototype.Logic.Field.Bridges;
+using JRPGPrototype.Logic.Fusion;
 
 namespace JRPGPrototype.Logic.Field
 {
@@ -36,6 +37,9 @@ namespace JRPGPrototype.Logic.Field
         private readonly FieldServiceEngine _logicEngine;
         private readonly ExplorationProcessor _explorationProcessor;
 
+        // New Sub-System Integration: Fusion (Cathedral of Shadows)
+        private readonly FusionConductor _fusionConductor;
+
         public FieldConductor(
             Combatant player,
             InventoryManager inventory,
@@ -51,7 +55,7 @@ namespace JRPGPrototype.Logic.Field
             _io = io;
             _playerKnowledge = playerKnowledge;
 
-            // Initialize Shared State
+            // Initialize Shared UI State
             _uiState = new FieldUIState();
 
             // Initialize Core Logic Managers
@@ -69,6 +73,9 @@ namespace JRPGPrototype.Logic.Field
 
             // Initialize Exploration Processor
             _explorationProcessor = new ExplorationProcessor(_io, _dungeonManager, _dungeonState, _dungeonUI, _logicEngine);
+
+            // Initialize the Fusion Sub-System Conductor
+            _fusionConductor = new FusionConductor(_io, _player, _partyManager, _economy, _uiState);
         }
 
         /// <summary>
@@ -190,6 +197,7 @@ namespace JRPGPrototype.Logic.Field
                         _dungeonState.ResetToEntry();
                         exitLoop = true;
                         break;
+
                     case "Barrier (Cannot Pass)":
                         _dungeonUI.ReportBarrierBlocked();
                         break;
@@ -233,6 +241,10 @@ namespace JRPGPrototype.Logic.Field
 
         #region City Services Logic
 
+        /// <summary>
+        /// Manages interactions within the city.
+        /// Feature: Now acts as the bridge to the Cathedral of Shadows.
+        /// </summary>
         private void OpenCityMenu()
         {
             while (true)
@@ -263,6 +275,10 @@ namespace JRPGPrototype.Logic.Field
 
                     case "Hospital (Heal)":
                         OpenHospitalMenu();
+                        break;
+
+                    case "Cathedral of Shadows":
+                        _fusionConductor.EnterCathedral();
                         break;
                 }
             }

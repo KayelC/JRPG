@@ -11,200 +11,248 @@ using System.Linq;
 namespace JRPGPrototype.Logic.Fusion
 {
     /// <summary>
-    /// The Root Orchestrator for the Fusion Sub-System (Cathedral of Shadows).
-    /// Manages the lifecycle of demonic fusion, compendium registration, and recall.
+    /// The Root Orchestrator for the Fusion Sub-System.
+    /// Manages the sequences for Binary Fusion, Sacrificial Fusion, 
+    /// Compendium registration, and Recall.
     /// </summary>
     public class FusionConductor
     {
         private readonly IGameIO _io;
         private readonly Combatant _player;
-        private readonly PartyManager _party;
+        private readonly PartyManager _partyManager;
         private readonly EconomyManager _economy;
         private readonly FieldUIState _uiState;
 
-        // Sub-System Components
-        private readonly FusionEngine _engine;
-        private readonly CompendiumManager _compendium;
-        private readonly FusionUIBridge _ui;
+        // Internal Logic Components
+        private readonly FusionCalculator _calculator;
+        private readonly FusionMutator _mutator;
+        private readonly CompendiumRegistry _compendium;
+        private readonly CathedralUIBridge _uiBridge;
 
         public FusionConductor(
             IGameIO io,
             Combatant player,
-            PartyManager party,
+            PartyManager partyManager,
             EconomyManager economy,
             FieldUIState uiState)
         {
             _io = io;
             _player = player;
-            _party = party;
+            _partyManager = partyManager;
             _economy = economy;
             _uiState = uiState;
 
-            // Initialize internal sub-sub-system components
-            _engine = new FusionEngine(_io);
-            _compendium = new CompendiumManager(_economy, _io);
-            _ui = new FusionUIBridge(_io, _uiState, _compendium);
+            // Initializing the Sub-Sub-System components
+            _calculator = new FusionCalculator(_io);
+            _mutator = new FusionMutator(_partyManager, _economy, _io);
+            _compendium = new CompendiumRegistry(_io);
+            _uiBridge = new CathedralUIBridge(_io, _uiState, _compendium);
         }
 
         /// <summary>
-        /// Public entry point called by the FieldConductor.
-        /// Runs the main Cathedral loop.
+        /// The main entry point for the Fusion Sub-System.
+        /// Manages the primary loop of the Cathedral of Shadows.
         /// </summary>
         public void EnterCathedral()
         {
             while (true)
             {
-                string choice = _ui.ShowCathedralMainMenu();
+                // UI provides contextual options based on the current Moon Phase
+                string choice = _uiBridge.ShowCathedralMainMenu(MoonPhaseSystem.CurrentPhase);
 
                 if (choice == "Back") return;
 
                 switch (choice)
                 {
                     case "Binary Fusion":
-                        PerformBinaryFusion();
+                        PerformRitual(isSacrificial: false);
+                        break;
+
+                    case "Sacrificial Fusion":
+                        PerformRitual(isSacrificial: true);
                         break;
 
                     case "Browse Compendium":
-                        PerformCompendiumRecall();
+                        HandleCompendiumRecall();
                         break;
 
                     case "Register Demon":
-                        PerformRegistration();
+                        HandleRegistration();
                         break;
                 }
             }
         }
 
-        #region Fusion Workflow
+        #region Fusion Ritual Workflow
 
         /// <summary>
-        /// Manages the step-by-step process of fusing two demons.
-        /// Flow: Select Parents -> Predict -> Skill Selection -> Confirm -> Ritual.
+        /// Orchestrates the fusion ritual from participant selection to child creation.
+        /// Logic: Handles both 2-demon and 3-demon (sacrificial) fusions.
         /// </summary>
-        private void PerformBinaryFusion()
+        private void PerformRitual(bool isSacrificial)
         {
-            // 1. Parent Selection
-            var availableDemons = _party.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
-
-            Combatant parentA = _ui.SelectFirstParent(availableDemons);
-            if (parentA == null) return;
-
-            Combatant parentB = _ui.SelectSecondParent(availableDemons, parentA);
-            if (parentB == null) return;
-
-            // 2. Result Prediction
-            var (resultId, isAccident) = _engine.PredictResult(parentA, parentB, _player.Level);
-
-            if (resultId == null)
+            // 1. Establish the pool of participants based on Character Class
+            // Implements the class-based logic as requested to ensure safety.
+            List<object> participantPool = new List<object>();
+            switch (_player.Class)
             {
-                _io.WriteLine("These demons share no common lineage. Fusion is impossible.", ConsoleColor.Red);
+                case ClassType.Operator:
+                    // Operators fuse Demons from Party + Stock
+                    var demons = _partyManager.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
+                    demons.AddRange(_player.DemonStock);
+                    participantPool = demons.Distinct().Cast<object>().ToList();
+                    break;
+
+                case ClassType.PersonaUser:
+                case ClassType.WildCard:
+                    // Persona Users fuse Personas from their internal stock
+                    var personas = new List<Persona>();
+                    if (_player.ActivePersona != null) personas.Add(_player.ActivePersona);
+                    personas.AddRange(_player.PersonaStock);
+                    participantPool = personas.Distinct().Cast<object>().ToList();
+                    break;
+
+                default:
+                    _io.WriteLine("Your current class is incapable of performing fusions.", ConsoleColor.Red);
+                    _io.Wait(1000);
+                    return;
+            }
+
+            if (participantPool.Count < (isSacrificial ? 3 : 2))
+            {
+                string countNeeded = isSacrificial ? "three" : "two";
+                _io.WriteLine($"You need at least {countNeeded} participants for this ritual.", ConsoleColor.Red);
                 _io.Wait(1000);
                 return;
             }
 
-            if (!Database.Personas.TryGetValue(resultId, out var resultData))
+            // 2. Participant Selection
+            List<object> parents = new List<object>();
+
+            object p1 = _uiBridge.SelectRitualParticipant(participantPool, "SELECT FIRST PARENT:", parents);
+            if (p1 == null) return;
+            parents.Add(p1);
+
+            object p2 = _uiBridge.SelectRitualParticipant(participantPool, "SELECT SECOND PARENT:", parents);
+            if (p2 == null) return;
+            parents.Add(p2);
+
+            Combatant sacrifice = null;
+            if (isSacrificial)
             {
-                _io.WriteLine("Data Error: Resulting demon not found in database.", ConsoleColor.Red);
+                // Sacrifices are always Demons (Combatants) even for Persona Users in SMT fidelity
+                var demonPool = _player.DemonStock.Concat(_partyManager.ActiveParty.Where(c => c.Class == ClassType.Demon)).Distinct().ToList();
+                sacrifice = _uiBridge.SelectRitualParticipant(demonPool, "SELECT SACRIFICIAL OFFERING:", new List<Combatant>());
+                if (sacrifice == null) return;
+            }
+
+            // 3. Result Prediction
+            // We need parent objects to calculate the resulting Arcana and Level tier
+            Combatant parentA = (p1 is Combatant c1) ? c1 : CreateTransientCombatant((Persona)p1);
+            Combatant parentB = (p2 is Combatant c2) ? c2 : CreateTransientCombatant((Persona)p2);
+
+            var (resultId, isAccident) = _calculator.CalculateResult(parentA, parentB, MoonPhaseSystem.CurrentPhase);
+
+            if (string.IsNullOrEmpty(resultId) || !Database.Personas.TryGetValue(resultId, out var resultData))
+            {
+                _io.WriteLine("The chosen combination yields no result in this era.", ConsoleColor.Red);
+                _io.Wait(1000);
                 return;
             }
 
-            // 3. HD Skill Inheritance Selection
-            var inheritablePool = _engine.GetInheritableSkills(parentA, parentB);
-            int maxInheritSlots = _engine.GetInheritanceSlotCount(parentA, parentB);
+            // 4. HD Skill Selection
+            var parentList = new List<Combatant> { parentA, parentB };
+            if (sacrifice != null) parentList.Add(sacrifice);
 
-            List<string> selectedSkills = _ui.SelectInheritedSkills(inheritablePool, maxInheritSlots);
-            if (selectedSkills == null) return; // User cancelled during skill selection
+            var inheritablePool = _calculator.GetInheritableSkills(parentList.ToArray());
+            int maxSlots = _calculator.GetInheritanceSlotCount(parentList.ToArray());
 
-            // 4. Confirmation (Level Check handled within UI bridge)
-            if (!_ui.ConfirmFusion(resultData, selectedSkills, _player.Level)) return;
+            // If it's a sacrifice, Nocturne rules grant 1-2 additional slots
+            if (isSacrificial) maxSlots = Math.Min(8, maxSlots + 2);
 
-            // 5. The Ritual Sequence
-            _ui.DisplayRitualSequence(isAccident);
+            List<string> selectedSkills = _uiBridge.SelectInheritedSkills(inheritablePool, maxSlots);
+            if (selectedSkills == null) return; // Aborted
 
-            // 6. State Mutation: Consume Parents
-            // Note: We use ReturnDemon logic to clear them from party, then ensure they aren't in stock.
-            _party.ReturnDemon(_player, parentA);
-            _player.DemonStock.Remove(parentA);
+            // 5. Confirmation
+            if (!_uiBridge.ConfirmRitual(resultData, selectedSkills, _player.Level)) return;
 
-            _party.ReturnDemon(_player, parentB);
-            _player.DemonStock.Remove(parentB);
+            // 6. Ritual Execution
+            _uiBridge.DisplayRitualSequence(isAccident);
 
-            // 7. State Mutation: Create Child
-            // We use the CreateDemon factory to get base stats, then apply inherited skills.
-            Combatant child = Combatant.CreateDemon(resultData.Id, resultData.Level);
-
-            foreach (var skill in selectedSkills)
-            {
-                if (!child.GetConsolidatedSkills().Contains(skill))
-                {
-                    child.ExtraSkills.Add(skill);
-                }
-            }
-
-            // Finalize Child
-            child.RecalculateResources();
-            child.CurrentHP = child.MaxHP;
-            child.CurrentSP = child.MaxSP;
-
-            // 8. Add to Party
-            if (_party.SummonDemon(_player, child))
-            {
-                _io.WriteLine($"{child.Name} has been created and joined your party!", ConsoleColor.Green);
-            }
-            else
-            {
-                _io.WriteLine($"{child.Name} has been created and sent to stock.", ConsoleColor.Cyan);
-                _player.DemonStock.Add(child);
-            }
+            // 7. State Mutation (Atomic Transaction)
+            _mutator.ExecuteFusion(_player, parents, resultData.Id, selectedSkills, sacrifice);
 
             _io.Wait(1500);
         }
 
         #endregion
 
-        #region Compendium and Registration Workflow
+        #region Compendium and Registration Logic
 
-        /// <summary>
-        /// Handles the UI and Logic for recalling a demon from the compendium.
-        /// </summary>
-        private void PerformCompendiumRecall()
+        private void HandleCompendiumRecall()
         {
-            Combatant selectedEntry = _ui.ShowCompendiumRecallMenu();
-            if (selectedEntry == null) return;
+            Combatant entry = _uiBridge.ShowCompendiumRecallMenu();
+            if (entry == null) return;
 
-            // Check if player has room in stock or party
-            bool hasRoom = _party.ActiveParty.Count < 4 || _party.HasOpenDemonStockSlot(_player);
+            int cost = _compendium.CalculateRecallCost(entry.SourceId);
 
-            if (!hasRoom)
+            // Check slots and funds before proceeding to the mutation logic
+            bool hasSlot = (_player.Class == ClassType.Operator)
+                ? (_partyManager.ActiveParty.Count < 4 || _partyManager.HasOpenDemonStockSlot(_player))
+                : _partyManager.HasOpenDemonStockSlot(_player);
+
+            if (!hasSlot)
             {
-                _io.WriteLine("You have no room in your party or stock to recall this demon.", ConsoleColor.Red);
+                _io.WriteLine("You have no space to house this demon.", ConsoleColor.Red);
                 _io.Wait(1000);
                 return;
             }
 
-            Combatant recalledDemon = _compendium.RecallDemon(selectedEntry.SourceId);
+            if (_economy.Macca < cost)
+            {
+                _io.WriteLine("You lack the required Macca for this recall.", ConsoleColor.Red);
+                _io.Wait(1000);
+                return;
+            }
 
+            // Transaction execution
+            Combatant recalledDemon = _compendium.GetRecallEntry(entry.SourceId);
             if (recalledDemon != null)
             {
-                // Attempt to add to active party first for better UX
-                if (!_party.SummonDemon(_player, recalledDemon))
+                if (_mutator.FinalizeRecall(_player, recalledDemon, cost))
                 {
-                    _player.DemonStock.Add(recalledDemon);
-                    _io.WriteLine($"{recalledDemon.Name} has been placed in your stock.");
+                    _io.WriteLine($"{recalledDemon.Name} has returned from the void.", ConsoleColor.Cyan);
+                    _io.Wait(800);
                 }
-                _io.Wait(800);
             }
         }
 
-        /// <summary>
-        /// Handles the UI and Logic for registering an active demon's state.
-        /// </summary>
-        private void PerformRegistration()
+        private void HandleRegistration()
         {
-            Combatant toRegister = _ui.SelectDemonToRegister(_party.ActiveParty);
-            if (toRegister == null) return;
+            // Registration is only possible for Demons in the active party
+            Combatant selected = _uiBridge.SelectDemonToRegister(_partyManager.ActiveParty);
+            if (selected != null)
+            {
+                _compendium.RegisterDemon(selected);
+            }
+        }
 
-            _compendium.RegisterDemon(toRegister);
+        #endregion
+
+        #region Helper Utilities
+
+        /// <summary>
+        /// Creates a temporary Combatant from a Persona.
+        /// Used to pass Persona data into the FusionCalculator which expects Combatant inputs.
+        /// </summary>
+        private Combatant CreateTransientCombatant(Persona p)
+        {
+            Combatant c = new Combatant(p.Name, ClassType.Demon)
+            {
+                Level = p.Level,
+                ActivePersona = p
+            };
+            return c;
         }
 
         #endregion

@@ -1,0 +1,101 @@
+{
+  "recipes": [
+    { "parentA": "Fool", "parentB": "Fool", "result": "Element" },
+    { "parentA": "Fool", "parentB": "Magician", "result": "Death" },
+    { "parentA": "Fool", "parentB": "Priestess", "result": "Moon" },
+    { "parentA": "Fool", "parentB": "Empress", "result": "Hanged Man" },
+    { "parentA": "Fool", "parentB": "Emperor", "result": "Justice" },
+    { "parentA": "Fool", "parentB": "Hierophant", "result": "Hermit" },
+    { "parentA": "Fool", "parentB": "Lovers", "result": "Chariot" },
+    { "parentA": "Fool", "parentB": "Chariot", "result": "Strength" },
+    { "parentA": "Fool", "parentB": "Justice", "result": "Star" },
+
+    { "parentA": "Magician", "parentB": "Magician", "result": "Element" },
+    { "parentA": "Magician", "parentB": "Priestess", "result": "Temperance" },
+    { "parentA": "Magician", "parentB": "Empress", "result": "Justice" },
+    { "parentA": "Magician", "parentB": "Emperor", "result": "Hanged Man" },
+    { "parentA": "Magician", "parentB": "Hierophant", "result": "Death" },
+    { "parentA": "Magician", "parentB": "Lovers", "result": "Devil" },
+    { "parentA": "Magician", "parentB": "Chariot", "result": "Virtue" },
+    { "parentA": "Magician", "parentB": "Justice", "result": "Sun" },
+
+    { "parentA": "Priestess", "parentB": "Priestess", "result": "Element" },
+    { "parentA": "Priestess", "parentB": "Empress", "result": "Magician" },
+    { "parentA": "Priestess", "parentB": "Emperor", "result": "Fool" },
+    { "parentA": "Priestess", "parentB": "Hierophant", "result": "Magician" },
+    { "parentA": "Priestess", "parentB": "Lovers", "result": "Fortune" },
+    { "parentA": "Priestess", "parentB": "Chariot", "result": "Hierophant" },
+    { "parentA": "Priestess", "parentB": "Justice", "result": "Death" },
+
+    { "parentA": "Empress", "parentB": "Empress", "result": "Element" },
+    { "parentA": "Empress", "parentB": "Emperor", "result": "Tower" },
+    { "parentA": "Empress", "parentB": "Hierophant", "result": "Fool" },
+    { "parentA": "Empress", "parentB": "Lovers", "result": "Judgement" },
+    { "parentA": "Empress", "parentB": "Chariot", "result": "Star" },
+    { "parentA": "Empress", "parentB": "Justice", "result": "Lovers" },
+
+    { "parentA": "Emperor", "parentB": "Emperor", "result": "Element" },
+    { "parentA": "Emperor", "parentB": "Hierophant", "result": "Fortune" },
+    { "parentA": "Emperor", "parentB": "Lovers", "result": "Fool" },
+    { "parentA": "Emperor", "parentB": "Chariot", "result": "Faith" },
+    { "parentA": "Emperor", "parentB": "Justice", "result": "Hierophant" },
+
+    { "parentA": "Hierophant", "parentB": "Hierophant", "result": "Element" },
+    { "parentA": "Hierophant", "parentB": "Lovers", "result": "Strength" },
+    { "parentA": "Hierophant", "parentB": "Chariot", "result": "Fortune" },
+    { "parentA": "Hierophant", "parentB": "Justice", "result": "Hanged Man" },
+
+    { "parentA": "Lovers", "parentB": "Lovers", "result": "Element" },
+    { "parentA": "Lovers", "parentB": "Chariot", "result": "Sun" },
+    { "parentA": "Lovers", "parentB": "Justice", "result": "Emperor" },
+    { "parentA": "Lovers", "parentB": "Hermit", "result": "Chariot" },
+
+    { "parentA": "Chariot", "parentB": "Chariot", "result": "Element" },
+    { "parentA": "Chariot", "parentB": "Justice", "result": "Moon" },
+    { "parentA": "Chariot", "parentB": "Strength", "result": "Hermit" },
+
+    { "parentA": "Justice", "parentB": "Justice", "result": "Element" },
+    { "parentA": "Justice", "parentB": "Strength", "result": "Chariot" },
+    { "parentA": "Justice", "parentB": "Hermit", "result": "Strength" },
+
+    { "parentA": "Strength", "parentB": "Strength", "result": "Element" },
+    { "parentA": "Strength", "parentB": "Hermit", "result": "Justice" },
+    { "parentA": "Strength", "parentB": "Fortune", "result": "Hanged Man" },
+
+    { "parentA": "Hermit", "parentB": "Hermit", "result": "Element" },
+    { "parentA": "Hermit", "parentB": "Fortune", "result": "Star" },
+    { "parentA": "Hermit", "parentB": "Strength", "result": "Hierophant" },
+
+    { "parentA": "Fortune", "parentB": "Fortune", "result": "Element" },
+    { "parentA": "Fortune", "parentB": "Strength", "result": "Empress" },
+
+    { "parentA": "Hanged Man", "parentB": "Hanged Man", "result": "Element" },
+    { "parentA": "Hanged Man", "parentB": "Death", "result": "Moon" },
+
+    { "parentA": "Death", "parentB": "Death", "result": "Element" },
+    { "parentA": "Death", "parentB": "Devil", "result": "Tower" },
+
+    { "parentA": "Temperance", "parentB": "Temperance", "result": "Element" },
+    { "parentA": "Temperance", "parentB": "Devil", "result": "Death" },
+
+    { "parentA": "Devil", "parentB": "Devil", "result": "Element" },
+    { "parentA": "Devil", "parentB": "Tower", "result": "Death" },
+
+    { "parentA": "Tower", "parentB": "Tower", "result": "Element" },
+    { "parentA": "Tower", "parentB": "Star", "result": "Fortune" },
+
+    { "parentA": "Star", "parentB": "Star", "result": "Element" },
+    { "parentA": "Star", "parentB": "Moon", "result": "Temperance" },
+
+    { "parentA": "Moon", "parentB": "Moon", "result": "Element" },
+    { "parentA": "Moon", "parentB": "Sun", "result": "Empress" },
+
+    { "parentA": "Sun", "parentB": "Sun", "result": "Element" },
+    { "parentA": "Sun", "parentB": "Judgement", "result": "Aeon" },
+
+    { "parentA": "Judgement", "parentB": "Judgement", "result": "Element" },
+    { "parentA": "Judgement", "parentB": "Aeon", "result": "Sun" },
+
+    { "parentA": "Aeon", "parentB": "Aeon", "result": "Element" }
+  ]
+}

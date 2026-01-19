@@ -18,8 +18,9 @@ namespace JRPGPrototype.Data
         public static Dictionary<string, ArmorData> Armors = new Dictionary<string, ArmorData>();
         public static Dictionary<string, BootData> Boots = new Dictionary<string, BootData>();
         public static Dictionary<string, AccessoryData> Accessories = new Dictionary<string, AccessoryData>();
+        public static List<FusionRecipe> FusionRecipes = new List<FusionRecipe>();
 
-        // FIX: Initialize the property to prevent null reference on failed load
+        // Initialize the property to prevent null reference on failed load
         public static NegotiationQuestionRoot NegotiationQuestions { get; private set; } = new NegotiationQuestionRoot();
 
         public static List<ShopEntry> ShopInventory = new List<ShopEntry>();
@@ -29,27 +30,41 @@ namespace JRPGPrototype.Data
             LoadFile("skills_by_category.json", (json) => {
                 var skillCats = JsonConvert.DeserializeObject<Dictionary<string, List<SkillData>>>(json);
                 foreach (var cat in skillCats)
-                    foreach (var s in cat.Value) if (!Skills.ContainsKey(s.Name)) Skills.Add(s.Name, s);
+                    foreach (var s in cat.Value) if (!Skills.ContainsKey(s.Name))
+                            Skills.Add(s.Name, s);
                 Console.WriteLine($"[System] Loaded {Skills.Count} skills.");
             });
 
             LoadFile("persona_data.json", (json) => {
                 var pList = JsonConvert.DeserializeObject<List<PersonaData>>(json);
-                foreach (var p in pList) if (!Personas.ContainsKey(p.Id)) Personas.Add(p.Id, p);
+                foreach (var p in pList) if (!Personas.ContainsKey(p.Id))
+                        Personas.Add(p.Id, p);
                 Console.WriteLine($"[System] Loaded {Personas.Count} personas.");
             });
 
             LoadFile("enemies.json", (json) => {
                 var eList = JsonConvert.DeserializeObject<List<EnemyData>>(json);
-                foreach (var e in eList) if (!Enemies.ContainsKey(e.Id)) Enemies.Add(e.Id, e);
+                foreach (var e in eList) if (!Enemies.ContainsKey(e.Id))
+                        Enemies.Add(e.Id, e);
                 Console.WriteLine($"[System] Loaded {Enemies.Count} enemies.");
             });
 
             LoadFile("status_ailments.json", (json) => {
                 var root = JsonConvert.DeserializeObject<Dictionary<string, List<AilmentData>>>(json);
                 if (root != null && root.ContainsKey("ailments"))
-                    foreach (var a in root["ailments"]) if (!Ailments.ContainsKey(a.Name)) Ailments.Add(a.Name, a);
+                    foreach (var a in root["ailments"]) if (!Ailments.ContainsKey(a.Name))
+                            Ailments.Add(a.Name, a);
                 Console.WriteLine($"[System] Loaded {Ailments.Count} ailments.");
+            });
+
+            // Added the loading logic for the fusion recipes (Arcana-based)
+            LoadFile("fusion_table.json", (json) => {
+                var root = JsonConvert.DeserializeObject<FusionTableRoot>(json);
+                if (root != null && root.Recipes != null)
+                {
+                    FusionRecipes = root.Recipes;
+                }
+                Console.WriteLine($"[System] Loaded {FusionRecipes.Count} fusion recipes.");
             });
 
             // FIX: Added the loading logic for the negotiation questions
@@ -69,7 +84,8 @@ namespace JRPGPrototype.Data
             LoadFile("items.json", (json) => {
                 var root = JsonConvert.DeserializeObject<Dictionary<string, List<ItemData>>>(json);
                 if (root != null && root.ContainsKey("items"))
-                    foreach (var i in root["items"]) if (!Items.ContainsKey(i.Id)) Items.Add(i.Id, i);
+                    foreach (var i in root["items"]) if (!Items.ContainsKey(i.Id))
+                            Items.Add(i.Id, i);
                 Console.WriteLine($"[System] Loaded {Items.Count} items.");
             });
 
@@ -92,15 +108,15 @@ namespace JRPGPrototype.Data
             LoadFile("tartarus.json", (json) => {
                 var root = JsonConvert.DeserializeObject<DungeonRoot>(json);
                 if (root != null && root.Dungeons != null)
-        {
+                {
                     foreach (var d in root.Dungeons)
-            {
+                    {
                         if (!Dungeons.ContainsKey(d.Id))
-            {
+                        {
                             Dungeons.Add(d.Id, d);
                             Console.WriteLine($"[System] Loaded Dungeon: {d.Name} with {d.Blocks.Count} blocks.");
-            }
-        }
+                        }
+                    }
                 }
             });
         }
@@ -118,9 +134,9 @@ namespace JRPGPrototype.Data
                         {
                             string id = (string)prop.GetValue(item);
                             if (!targetDict.ContainsKey(id)) targetDict.Add(id, item);
+                        }
                     }
-                }
-                Console.WriteLine($"[System] Loaded {targetDict.Count} {jsonKey}.");
+                    Console.WriteLine($"[System] Loaded {targetDict.Count} {jsonKey}.");
                 }
             });
         }
@@ -146,4 +162,26 @@ namespace JRPGPrototype.Data
             }
         }
     }
+
+    #region Helper Fusion Classes
+
+    public class FusionTableRoot
+    {
+        [JsonProperty("recipes")]
+        public List<FusionRecipe> Recipes { get; set; }
+    }
+
+    public class FusionRecipe
+    {
+        [JsonProperty("parentA")]
+        public string ParentA { get; set; }
+
+        [JsonProperty("parentB")]
+        public string ParentB { get; set; }
+
+        [JsonProperty("result")]
+        public string Result { get; set; }
+    }
+
+    #endregion
 }

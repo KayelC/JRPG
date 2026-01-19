@@ -64,7 +64,7 @@
               "RelativeDocumentMoniker": "JRPG\\Data\\Database.cs",
               "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Database.cs",
               "RelativeToolTip": "JRPG\\Data\\Database.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAB4AAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAYwD4AAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-19T10:56:16.941Z",
               "EditorCaption": ""
@@ -79,8 +79,7 @@
               "RelativeToolTip": "JRPG\\Services\\MenuUI.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAwAkAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-19T10:45:40.678Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-19T10:45:40.678Z"
             },
             {
               "$type": "Document",
@@ -92,8 +91,7 @@
               "RelativeToolTip": "JRPG\\Logic\\Battle\\ActionProcessor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-19T10:42:54.653Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-19T10:42:54.653Z"
             },
             {
               "$type": "Document",
@@ -105,8 +103,7 @@
               "RelativeToolTip": "JRPG\\Services\\ConsoleIO.cs",
               "ViewState": "AgIAADwAAAAAAAAAAAApwEoAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-19T10:38:13.519Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-19T10:38:13.519Z"
             },
             {
               "$type": "Document",
@@ -118,8 +115,7 @@
               "RelativeToolTip": "JRPG\\Services\\IGameIO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-19T10:38:00.759Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-19T10:38:00.759Z"
             }
           ]
         }

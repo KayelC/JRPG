@@ -10,7 +10,7 @@ namespace JRPGPrototype.Logic.Field.Bridges
 {
     /// <summary>
     /// Specialized UI Bridge for Status screens and Persona management.
-    /// Authority for stat allocation menu rendering.
+    /// Authority for stat allocation menu rendering and confirmation dialogs.
     /// </summary>
     public class StatusUIBridge
     {
@@ -129,6 +129,15 @@ namespace JRPGPrototype.Logic.Field.Bridges
             // Save the current index so assignment doesn't jump the cursor
             _uiState.StatAllocationIndex = idx;
             return stats[idx];
+        }
+
+        // Confirmation Window For Stat Alloc
+        public bool ShowStatConfirmation()
+        {
+            _io.Clear();
+            List<string> options = new List<string> { "Yes, Apply Changes", "No, Revert Changes" };
+            int choice = _io.RenderMenu("Points have been allocated. Apply changes permanently?", options, 0);
+            return choice == 0;
         }
 
         #endregion

@@ -271,6 +271,21 @@ namespace JRPGPrototype.Logic.Field
             _io.Wait(300);
         }
 
+        /// <summary>
+        /// FIX: Rollback method to revert stats and points to a previous snapshot.
+        /// </summary>
+        public void RollbackStats(Combatant player, Dictionary<StatType, int> statBackup, int pointBackup)
+        {
+            foreach (var stat in statBackup)
+            {
+                player.CharacterStats[stat.Key] = stat.Value;
+            }
+            player.StatPoints = pointBackup;
+
+            // Crucial: Recalculate to fix HP/SP caps after stats are reverted
+            player.RecalculateResources();
+        }
+
         #endregion
 
         #region Persona Logic

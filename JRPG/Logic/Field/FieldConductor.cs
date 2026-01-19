@@ -387,15 +387,44 @@ namespace JRPGPrototype.Logic.Field
             }
         }
 
+        /// <summary>
+        /// FIX: Implemented Transactional Stat Allocation with Rollback support.
+        /// </summary>
         private void OpenStatAllocation()
         {
-            // Stat allocation loop logic shifted to logic engine
+            // 1. Take snapshot of initial state
+            int initialPoints = _player.StatPoints;
+            var initialStats = new Dictionary<StatType, int>();
+            foreach (StatType st in Enum.GetValues(typeof(StatType)))
+            {
+                initialStats[st] = _player.CharacterStats[st];
+            }
+
+            // 2. Allocation Loop
             while (_player.StatPoints > 0)
             {
-                // Calling the bridge, not the engine, for the menu prompt.
                 StatType? selected = _statusUI.PromptStatAllocation(_player);
-                if (selected == null) break;
+                if (selected == null) break; // User hit Back or Cancel
                 _logicEngine.AllocateStatPoint(_player, selected.Value);
+            }
+
+            // 3. Finalization logic
+            // Only prompt if points were actually spent
+            if (_player.StatPoints < initialPoints)
+            {
+                bool save = _statusUI.ShowStatConfirmation();
+                if (!save)
+                {
+                    // Perform Rollback
+                    _logicEngine.RollbackStats(_player, initialStats, initialPoints);
+                    _io.WriteLine("Changes discarded.", ConsoleColor.Yellow);
+                    _io.Wait(800);
+                }
+                else
+                {
+                    _io.WriteLine("Stats permanently increased.", ConsoleColor.Green);
+                    _io.Wait(800);
+                }
             }
         }
 

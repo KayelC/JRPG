@@ -135,35 +135,39 @@ namespace JRPGPrototype.Logic.Field.Bridges
         /// <summary>
         /// Confirmation Window For Stat Alloc
         /// Displays the differential between original and newly allocated stats.
-        /// Stats that have increased are highlighted in Yellow.
+        /// Implemented using the onHighlight callback to prevent text clearing.
+        /// Displays the new stats with altered stats in Yellow.
         /// </summary>
         public bool ShowStatConfirmation(Combatant player, Dictionary<StatType, int> initialStats)
         {
-            _io.Clear();
-            _io.WriteLine("=== STAT ALLOCATION REVIEW ===");
-            _io.WriteLine("Review your changes before committing spiritual energy:\n");
-
-            foreach (StatType st in Enum.GetValues(typeof(StatType)))
-            {
-                int current = player.CharacterStats[st];
-                int original = initialStats[st];
-
-                if (current > original)
-                {
-                    // Highlight altered stats in Yellow
-                    _io.Write($"{st,-5}: {current}", ConsoleColor.Yellow);
-                    _io.WriteLine($" (+{current - original})", ConsoleColor.Yellow);
-                }
-                else
-                {
-                    // Standard display for unchanged stats
-                    _io.WriteLine($"{st,-5}: {current}");
-                }
-            }
-
-            _io.WriteLine("\n------------------------------");
             List<string> options = new List<string> { "Yes, Apply Changes", "No, Revert Changes" };
-            int choice = _io.RenderMenu("Points have been allocated. Apply changes permanently?", options, 0);
+
+            // We use the onHighlight action to draw our comparison window below the menu prompt.
+            // This ensures it survives the screen clear.
+            int choice = _io.RenderMenu("STAT ALLOCATION COMPLETE", options, 0, null, (idx) =>
+            {
+                _io.WriteLine("\n=== REVIEW CHANGES ===");
+
+                foreach (StatType st in Enum.GetValues(typeof(StatType)))
+                {
+                    int current = player.CharacterStats[st];
+                    int original = initialStats[st];
+
+                    if (current > original)
+                    {
+                    // Highlight altered stats in Yellow
+                        _io.Write($"{st,-5}: {current}", ConsoleColor.Yellow);
+                        _io.WriteLine($" (+{current - original})", ConsoleColor.Yellow);
+                    }
+                    else
+                    {
+                        // Unaltered stats in default color
+                        _io.WriteLine($"{st,-5}: {current}");
+                    }
+                }
+                _io.WriteLine("=======================");
+            });
+
             return choice == 0;
         }
 

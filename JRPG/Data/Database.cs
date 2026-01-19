@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using JRPGPrototype.Core;
+using JRPGPrototype.Services;
 
 namespace JRPGPrototype.Data
 {
@@ -18,6 +19,8 @@ namespace JRPGPrototype.Data
         public static Dictionary<string, ArmorData> Armors = new Dictionary<string, ArmorData>();
         public static Dictionary<string, BootData> Boots = new Dictionary<string, BootData>();
         public static Dictionary<string, AccessoryData> Accessories = new Dictionary<string, AccessoryData>();
+
+        // Added support for the Fusion Recipe Table
         public static List<FusionRecipe> FusionRecipes = new List<FusionRecipe>();
 
         // Initialize the property to prevent null reference on failed load
@@ -25,50 +28,64 @@ namespace JRPGPrototype.Data
 
         public static List<ShopEntry> ShopInventory = new List<ShopEntry>();
 
-        public static void LoadData()
+        /// <summary>
+        /// Orchestrates the hydration of the static database.
+        /// </summary>
+        public static void LoadData(IGameIO io)
         {
-            LoadFile("skills_by_category.json", (json) => {
+            LoadFile(io, "skills_by_category.json", (json) => {
                 var skillCats = JsonConvert.DeserializeObject<Dictionary<string, List<SkillData>>>(json);
-                foreach (var cat in skillCats)
-                    foreach (var s in cat.Value) if (!Skills.ContainsKey(s.Name))
-                            Skills.Add(s.Name, s);
-                Console.WriteLine($"[System] Loaded {Skills.Count} skills.");
+                if (skillCats != null)
+                {
+                    foreach (var cat in skillCats)
+                        foreach (var s in cat.Value) if (!Skills.ContainsKey(s.Name))
+                                Skills.Add(s.Name, s);
+                    io.WriteLine($"[System] Loaded {Skills.Count} skills.", ConsoleColor.Green);
+                }
             });
 
-            LoadFile("persona_data.json", (json) => {
+            LoadFile(io, "persona_data.json", (json) => {
                 var pList = JsonConvert.DeserializeObject<List<PersonaData>>(json);
-                foreach (var p in pList) if (!Personas.ContainsKey(p.Id))
-                        Personas.Add(p.Id, p);
-                Console.WriteLine($"[System] Loaded {Personas.Count} personas.");
+                if (pList != null)
+                {
+                    foreach (var p in pList) if (!Personas.ContainsKey(p.Id))
+                            Personas.Add(p.Id, p);
+                    io.WriteLine($"[System] Loaded {Personas.Count} personas.", ConsoleColor.Green);
+                }
             });
 
-            LoadFile("enemies.json", (json) => {
+            LoadFile(io, "enemies.json", (json) => {
                 var eList = JsonConvert.DeserializeObject<List<EnemyData>>(json);
-                foreach (var e in eList) if (!Enemies.ContainsKey(e.Id))
-                        Enemies.Add(e.Id, e);
-                Console.WriteLine($"[System] Loaded {Enemies.Count} enemies.");
+                if (eList != null)
+                {
+                    foreach (var e in eList) if (!Enemies.ContainsKey(e.Id))
+                            Enemies.Add(e.Id, e);
+                    io.WriteLine($"[System] Loaded {Enemies.Count} enemies.", ConsoleColor.Green);
+                }
             });
 
-            LoadFile("status_ailments.json", (json) => {
+            LoadFile(io, "status_ailments.json", (json) => {
                 var root = JsonConvert.DeserializeObject<Dictionary<string, List<AilmentData>>>(json);
                 if (root != null && root.ContainsKey("ailments"))
+                {
                     foreach (var a in root["ailments"]) if (!Ailments.ContainsKey(a.Name))
                             Ailments.Add(a.Name, a);
-                Console.WriteLine($"[System] Loaded {Ailments.Count} ailments.");
+                    io.WriteLine($"[System] Loaded {Ailments.Count} ailments.", ConsoleColor.Green);
+                }
             });
 
-            // Added the loading logic for the fusion recipes (Arcana-based)
-            LoadFile("fusion_table.json", (json) => {
+            // Loading logic for the fusion recipes (Arcana-based)
+            LoadFile(io, "fusion_table.json", (json) => {
                 var root = JsonConvert.DeserializeObject<FusionTableRoot>(json);
                 if (root != null && root.Recipes != null)
                 {
                     FusionRecipes = root.Recipes;
                 }
-                Console.WriteLine($"[System] Loaded {FusionRecipes.Count} fusion recipes.");
+                io.WriteLine($"[System] Loaded {FusionRecipes.Count} fusion recipes.", ConsoleColor.Green);
             });
 
-            // FIX: Added the loading logic for the negotiation questions
-            LoadFile("questions.json", (json) => {
+            // Loading logic for the negotiation questions
+            LoadFile(io, "questions.json", (json) => {
                 var root = JsonConvert.DeserializeObject<NegotiationQuestionRoot>(json);
                 if (root != null)
                 {
@@ -78,34 +95,39 @@ namespace JRPGPrototype.Data
                 {
                     NegotiationQuestions = new NegotiationQuestionRoot { Questions = new Dictionary<PersonalityType, List<NegotiationQuestion>>() };
                 }
-                Console.WriteLine($"[System] Loaded negotiation questions.");
+                io.WriteLine($"[System] Loaded negotiation questions.", ConsoleColor.Green);
             });
 
-            LoadFile("items.json", (json) => {
+            LoadFile(io, "items.json", (json) => {
                 var root = JsonConvert.DeserializeObject<Dictionary<string, List<ItemData>>>(json);
                 if (root != null && root.ContainsKey("items"))
+                {
                     foreach (var i in root["items"]) if (!Items.ContainsKey(i.Id))
                             Items.Add(i.Id, i);
-                Console.WriteLine($"[System] Loaded {Items.Count} items.");
+                    io.WriteLine($"[System] Loaded {Items.Count} items.", ConsoleColor.Green);
+                }
             });
 
-            LoadEquipment("weapons.json", "weapons", Weapons);
-            LoadEquipment("armor.json", "armor", Armors);
-            LoadEquipment("boots.json", "boots", Boots);
-            LoadEquipment("accessories.json", "accessories", Accessories);
+            LoadEquipment(io, "weapons.json", "weapons", Weapons);
+            LoadEquipment(io, "armor.json", "armor", Armors);
+            LoadEquipment(io, "boots.json", "boots", Boots);
+            LoadEquipment(io, "accessories.json", "accessories", Accessories);
 
-            LoadFile("shop_inventory.json", (json) => {
+            LoadFile(io, "shop_inventory.json", (json) => {
                 var root = JsonConvert.DeserializeObject<ShopJsonRoot>(json);
-                ShopInventory.Clear();
-                AddShopEntries(root.Items, ShopCategory.Item);
-                AddShopEntries(root.Weapons, ShopCategory.Weapon);
-                AddShopEntries(root.Armor, ShopCategory.Armor);
-                AddShopEntries(root.Boots, ShopCategory.Boots);
-                AddShopEntries(root.Accessories, ShopCategory.Accessory);
-                Console.WriteLine($"[System] Loaded {ShopInventory.Count} shop entries.");
+                if (root != null)
+                {
+                    ShopInventory.Clear();
+                    AddShopEntries(root.Items, ShopCategory.Item);
+                    AddShopEntries(root.Weapons, ShopCategory.Weapon);
+                    AddShopEntries(root.Armor, ShopCategory.Armor);
+                    AddShopEntries(root.Boots, ShopCategory.Boots);
+                    AddShopEntries(root.Accessories, ShopCategory.Accessory);
+                    io.WriteLine($"[System] Loaded {ShopInventory.Count} shop entries.", ConsoleColor.Green);
+                }
             });
 
-            LoadFile("tartarus.json", (json) => {
+            LoadFile(io, "tartarus.json", (json) => {
                 var root = JsonConvert.DeserializeObject<DungeonRoot>(json);
                 if (root != null && root.Dungeons != null)
                 {
@@ -114,16 +136,16 @@ namespace JRPGPrototype.Data
                         if (!Dungeons.ContainsKey(d.Id))
                         {
                             Dungeons.Add(d.Id, d);
-                            Console.WriteLine($"[System] Loaded Dungeon: {d.Name} with {d.Blocks.Count} blocks.");
+                            io.WriteLine($"[System] Loaded Dungeon: {d.Name} with {d.Blocks.Count} blocks.", ConsoleColor.Green);
                         }
                     }
                 }
             });
         }
 
-        private static void LoadEquipment<T>(string filename, string jsonKey, Dictionary<string, T> targetDict) where T : class
+        private static void LoadEquipment<T>(IGameIO io, string filename, string jsonKey, Dictionary<string, T> targetDict) where T : class
         {
-            LoadFile(filename, (json) => {
+            LoadFile(io, filename, (json) => {
                 var root = JsonConvert.DeserializeObject<Dictionary<string, List<T>>>(json);
                 if (root != null && root.ContainsKey(jsonKey))
                 {
@@ -136,7 +158,7 @@ namespace JRPGPrototype.Data
                             if (!targetDict.ContainsKey(id)) targetDict.Add(id, item);
                         }
                     }
-                    Console.WriteLine($"[System] Loaded {targetDict.Count} {jsonKey}.");
+                    io.WriteLine($"[System] Loaded {targetDict.Count} {jsonKey}.", ConsoleColor.Green);
                 }
             });
         }
@@ -148,9 +170,8 @@ namespace JRPGPrototype.Data
                 ShopInventory.Add(new ShopEntry { Id = i.Id, Name = i.Name, BasePrice = i.Price, Category = cat });
         }
 
-        private static void LoadFile(string filename, Action<string> onSuccess)
+        private static void LoadFile(IGameIO io, string filename, Action<string> onSuccess)
         {
-            // UPDATE: Look into Data/Jsons subfolder
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Jsons", filename);
             if (File.Exists(path))
             {
@@ -158,7 +179,8 @@ namespace JRPGPrototype.Data
             }
             else
             {
-                Console.WriteLine($"[Error] {filename} not found at {path}!");
+                // Fix: Errors now reported via IGameIO with red highlight
+                io.WriteLine($"[Error] Data integrity failure: {filename} not found at {path}!", ConsoleColor.Red);
             }
         }
     }

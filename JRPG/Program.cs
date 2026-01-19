@@ -17,7 +17,7 @@ namespace JRPGPrototype
             IGameIO io = new ConsoleIO();
             io.WriteLine("=== JRPG PROTOTYPE INITIALIZING ===");
 
-            Database.LoadData();
+            Database.LoadData(io);
 
             InventoryManager inventory = new InventoryManager();
             EconomyManager economy = new EconomyManager();

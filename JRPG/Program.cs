@@ -58,10 +58,16 @@ namespace JRPGPrototype
                     // UPDATED: Use CreateDemon to ensure proper skill progression
                     //player.DemonStock.Add(Combatant.CreateDemon("pixie", 1));
                     player.DemonStock.Add(Combatant.CreateDemon("michael", 99));
+                    player.DemonStock.Add(Combatant.CreateDemon("pixie", 50));
+                    player.DemonStock.Add(Combatant.CreateDemon("orpheus", 50));
+                    player.DemonStock.Add(Combatant.CreateDemon("io", 50));
+                    player.DemonStock.Add(Combatant.CreateDemon("hermes", 50));
+                    player.DemonStock.Add(Combatant.CreateDemon("medea", 50));
                     break;
             }
 
             // stat debug :
+            player.Level = 80;
             player.StatPoints = 5;
 
             player.RecalculateResources();

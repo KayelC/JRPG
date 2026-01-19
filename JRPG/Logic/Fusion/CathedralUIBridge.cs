@@ -10,7 +10,7 @@ using System.Linq;
 namespace JRPGPrototype.Logic.Fusion.Bridges
 {
     /// <summary>
-    /// The UI authority for the Cathedral of Shadows.
+    /// The high-fidelity UI authority for the Cathedral of Shadows.
     /// Handles ritual presentation, deterministic skill inheritance, 
     /// and Compendium visualization.
     /// </summary>
@@ -163,33 +163,41 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
 
         /// <summary>
         /// Final confirmation screen displaying the results of the planned fusion.
+        /// Implemented using onHighlight to show the child preview in Yellow during the decision.
         /// </summary>
         public bool ConfirmRitual(PersonaData result, List<string> inheritedSkills, int playerLevel)
         {
-            _io.Clear();
-            _io.WriteLine("=== RITUAL PREVIEW ===", ConsoleColor.Yellow);
-            _io.WriteLine($"Resulting Form: {result.Name}");
-            _io.WriteLine($"Arcana        : {result.Arcana}");
-            _io.WriteLine($"Base Level    : {result.Level}");
-            _io.WriteLine("------------------------------");
-            _io.WriteLine("Inherited Skill Pool:");
-            foreach (var s in inheritedSkills)
-            {
-                _io.WriteLine($" > {s}", ConsoleColor.Cyan);
-            }
-            _io.WriteLine("------------------------------");
-
-            // Level Constraint Check (Visual Warning)
+            // Requirement: Level Constraint Check (Forbidden fusions cannot be confirmed)
             if (result.Level > playerLevel)
             {
-                _io.WriteLine($"ERROR: Your current level ({playerLevel}) is insufficient to control this being.", ConsoleColor.Red);
-                _io.WriteLine("The ritual is forbidden.", ConsoleColor.Gray);
+                _io.Clear();
+                _io.WriteLine("=== RITUAL FORBIDDEN ===", ConsoleColor.Red);
+                _io.WriteLine($"The resulting being, {result.Name} (Lv.{result.Level}), exceeds your authority.");
+                _io.WriteLine($"Your current level: {playerLevel}", ConsoleColor.Gray);
+                _io.WriteLine("\nThe spirits refuse to stabilize.", ConsoleColor.Red);
                 _io.Wait(2000);
                 return false;
             }
 
             List<string> options = new List<string> { "Commence Ritual", "Wait" };
-            return _io.RenderMenu("Is this creation acceptable?", options, 0) == 0;
+
+            // We use onHighlight to render the preview data consistently beneath the menu
+            int choice = _io.RenderMenu("Is this creation acceptable?", options, 0, null, (idx) =>
+            {
+                _io.WriteLine("\n--- PROJECTED RESULT ---", ConsoleColor.Yellow);
+                _io.WriteLine($"Form   : {result.Name}", ConsoleColor.Yellow);
+                _io.WriteLine($"Arcana : {result.Arcana}", ConsoleColor.Yellow);
+                _io.WriteLine($"Level  : {result.Level}", ConsoleColor.Yellow);
+                _io.WriteLine("------------------------");
+                _io.WriteLine("Inherited Skill Pool:");
+                foreach (var s in inheritedSkills)
+                {
+                    _io.WriteLine($" > {s}", ConsoleColor.Yellow);
+                }
+                _io.WriteLine("------------------------");
+            });
+
+            return choice == 0;
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ namespace JRPGPrototype.Logic
         public void AddMacca(int amount)
         {
             Macca += amount;
-            // Removed Console.WriteLine to keep headless. Notifications handled by IO layer in Managers.
         }
 
         public bool SpendMacca(int amount)

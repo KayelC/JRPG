@@ -92,7 +92,7 @@ namespace JRPGPrototype.Logic.Fusion
         /// </summary>
         private void PerformFusionRitual(bool isSacrificial)
         {
-            // 1. Participant Selection
+            // 1. Establish the pool of participants based on Character Class
             // Logic: Source pools are class-dependent to ensure stock integrity.
             List<object> participantPool = new List<object>();
             switch (_player.Class)
@@ -179,6 +179,7 @@ namespace JRPGPrototype.Logic.Fusion
             if (selectedSkills == null) return; // User aborted
 
             // 4. Verification and Ritual
+            // Fusion proceeds ONLY if ConfirmRitual returns true
             if (!_uiBridge.ConfirmRitual(resultData, selectedSkills, _player.Level)) return;
 
             // 5. Ritual Execution

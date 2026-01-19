@@ -15,5 +15,6 @@ namespace JRPGPrototype.Logic.Field
         public int DungeonMenuIndex { get; set; } = 0;
         public int StatusHubIndex { get; set; } = 0;
         public int EquipListIndex { get; set; } = 0;
+        public int StatAllocationIndex { get; set; } = 0;
     }
 }

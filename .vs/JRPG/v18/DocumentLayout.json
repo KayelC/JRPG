@@ -1,42 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\",
+  "WorkspaceRootPath": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\",
   "Documents": [
     {
       "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\field\\fieldconductor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\field\\fieldconductor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\field\\bridges\\statusuibridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\field\\bridges\\statusuibridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\field\\fielduistate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\field\\fielduistate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\field\\bridges\\serviceuibridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\field\\bridges\\serviceuibridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\fusion\\fusionconductor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\fusion\\fusionconductor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\fusion\\fusionmutator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\fusion\\fusionmutator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\fusion\\fusioncalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\fusion\\fusioncalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\fusion\\cathedraluibridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\fusion\\cathedraluibridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\logic\\fusion\\compendiumregistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\logic\\fusion\\compendiumregistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\data\\jsons\\fusion_table.json||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\data\\jsons\\fusion_table.json||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -57,118 +37,72 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{f4e46f1e-cf83-40aa-b568-a627394bc994}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
               "RelativeDocumentMoniker": "JRPG\\Program.cs",
-              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
+              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Program.cs",
               "RelativeToolTip": "JRPG\\Program.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwDsAAABQAAAAAAAAAA==",
+              "ViewState": "AgIAADQAAAAAAAAAAAAQwEAAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T10:53:37.858Z",
+              "WhenOpened": "2026-01-19T08:06:28.24Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FieldConductor.cs",
-              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\FieldConductor.cs",
-              "RelativeDocumentMoniker": "JRPG\\Logic\\Field\\FieldConductor.cs",
-              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\FieldConductor.cs",
-              "RelativeToolTip": "JRPG\\Logic\\Field\\FieldConductor.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAswBEAAAASAAAAAAAAAA==",
+              "Title": "StatusUIBridge.cs",
+              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\Bridges\\StatusUIBridge.cs",
+              "RelativeDocumentMoniker": "JRPG\\Logic\\Field\\Bridges\\StatusUIBridge.cs",
+              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\Bridges\\StatusUIBridge.cs",
+              "RelativeToolTip": "JRPG\\Logic\\Field\\Bridges\\StatusUIBridge.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAAHIBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T10:49:26.307Z",
+              "WhenOpened": "2026-01-19T08:04:00.467Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ServiceUIBridge.cs",
-              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\Bridges\\ServiceUIBridge.cs",
-              "RelativeDocumentMoniker": "JRPG\\Logic\\Field\\Bridges\\ServiceUIBridge.cs",
-              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\Bridges\\ServiceUIBridge.cs",
-              "RelativeToolTip": "JRPG\\Logic\\Field\\Bridges\\ServiceUIBridge.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAQwEwAAAAaAAAAAAAAAA==",
+              "Title": "FieldUIState.cs",
+              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\FieldUIState.cs",
+              "RelativeDocumentMoniker": "JRPG\\Logic\\Field\\FieldUIState.cs",
+              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\FieldUIState.cs",
+              "RelativeToolTip": "JRPG\\Logic\\Field\\FieldUIState.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA9wBEAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T10:47:45.015Z",
+              "WhenOpened": "2026-01-19T08:03:28.715Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "FusionConductor.cs",
-              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\FusionConductor.cs",
-              "RelativeDocumentMoniker": "JRPG\\Logic\\Fusion\\FusionConductor.cs",
-              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\FusionConductor.cs",
-              "RelativeToolTip": "JRPG\\Logic\\Fusion\\FusionConductor.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAABUAAAA0AAAAAAAAAA==",
+              "Title": "ServiceUIBridge.cs",
+              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\Bridges\\ServiceUIBridge.cs",
+              "RelativeDocumentMoniker": "JRPG\\Logic\\Field\\Bridges\\ServiceUIBridge.cs",
+              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Field\\Bridges\\ServiceUIBridge.cs",
+              "RelativeToolTip": "JRPG\\Logic\\Field\\Bridges\\ServiceUIBridge.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAQwEwAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T10:10:15.03Z",
+              "WhenOpened": "2026-01-17T10:47:45.015Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CathedralUIBridge.cs",
-              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\CathedralUIBridge.cs",
-              "RelativeDocumentMoniker": "JRPG\\Logic\\Fusion\\CathedralUIBridge.cs",
-              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\CathedralUIBridge.cs",
-              "RelativeToolTip": "JRPG\\Logic\\Fusion\\CathedralUIBridge.cs",
-              "ViewState": "AgIAAOwAAAAAAAAAAAAAAA8BAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T10:08:18.43Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CompendiumRegistry.cs",
-              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\CompendiumRegistry.cs",
-              "RelativeDocumentMoniker": "JRPG\\Logic\\Fusion\\CompendiumRegistry.cs",
-              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\CompendiumRegistry.cs",
-              "RelativeToolTip": "JRPG\\Logic\\Fusion\\CompendiumRegistry.cs",
-              "ViewState": "AgIAAIsAAAAAAAAAAAAAABIAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T10:00:46.632Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FusionMutator.cs",
-              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\FusionMutator.cs",
-              "RelativeDocumentMoniker": "JRPG\\Logic\\Fusion\\FusionMutator.cs",
-              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\FusionMutator.cs",
-              "RelativeToolTip": "JRPG\\Logic\\Fusion\\FusionMutator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T09:55:46.937Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FusionCalculator.cs",
-              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\FusionCalculator.cs",
-              "RelativeDocumentMoniker": "JRPG\\Logic\\Fusion\\FusionCalculator.cs",
-              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Logic\\Fusion\\FusionCalculator.cs",
-              "RelativeToolTip": "JRPG\\Logic\\Fusion\\FusionCalculator.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAswBMAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-17T09:47:39.036Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "fusion_table.json",
-              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\fusion_table.json",
-              "RelativeDocumentMoniker": "JRPG\\Data\\Jsons\\fusion_table.json",
-              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\fusion_table.json",
-              "RelativeToolTip": "JRPG\\Data\\Jsons\\fusion_table.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-17T09:42:24.591Z"
             }
           ]
         }

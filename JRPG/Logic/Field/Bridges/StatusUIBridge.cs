@@ -94,11 +94,14 @@ namespace JRPGPrototype.Logic.Field.Bridges
 
             foreach (StatType s in stats)
             {
-                options.Add($"{s}: {player.CharacterStats[s]}");
+                options.Add($"{s,-5}: {player.CharacterStats[s]}");
             }
             options.Add("Back");
 
-            int idx = _io.RenderMenu($"=== STAT ALLOCATION (Pts: {player.StatPoints}) ===", options, 0, null, (index) =>
+            // Ensure index is within bounds (safety check for data changes)
+            if (_uiState.StatAllocationIndex >= options.Count) _uiState.StatAllocationIndex = 0;
+
+            int idx = _io.RenderMenu($"=== STAT ALLOCATION (Pts: {player.StatPoints}) ===", options, _uiState.StatAllocationIndex, null, (index) =>
             {
                 if (index >= 0 && index < stats.Count)
                 {
@@ -116,7 +119,15 @@ namespace JRPGPrototype.Logic.Field.Bridges
                 }
             });
 
-            if (idx == -1 || idx == options.Count - 1) return null;
+            // If user cancels or hits back, reset the index for next time they enter the menu and return null
+            if (idx == -1 || idx == options.Count - 1)
+            {
+                _uiState.StatAllocationIndex = 0;
+                return null;
+            }
+
+            // Save the current index so assignment doesn't jump the cursor
+            _uiState.StatAllocationIndex = idx;
             return stats[idx];
         }
 
@@ -284,14 +295,8 @@ namespace JRPGPrototype.Logic.Field.Bridges
                 int baseVal = entity.CharacterStats[stat];
                 int mod = total - baseVal;
 
-                if (mod > 0)
-                {
-                    output += $"{stat,-4}: {total,3} (+{mod})\n";
-                }
-                else
-                {
-                    output += $"{stat,-4}: {total,3}\n";
-                }
+                if (mod > 0) output += $"{stat,-4}: {total,3} (+{mod})\n";
+                else output += $"{stat,-4}: {total,3}\n";
             }
             output += "-----------------------------";
             return output;

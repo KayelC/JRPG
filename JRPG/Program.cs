@@ -61,6 +61,9 @@ namespace JRPGPrototype
                     break;
             }
 
+            // stat debug :
+            player.StatPoints = 5;
+
             player.RecalculateResources();
             player.CurrentHP = player.MaxHP;
             player.CurrentSP = player.MaxSP;

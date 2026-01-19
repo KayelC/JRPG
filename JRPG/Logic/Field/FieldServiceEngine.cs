@@ -43,7 +43,6 @@ namespace JRPGPrototype.Logic.Field
 
         #region Shop and Equipment
 
-  
         public void OpenShop(Combatant player, ShopType shopType)
         {
             _shopManager.OpenShop(player, shopType);
@@ -173,7 +172,10 @@ namespace JRPGPrototype.Logic.Field
                         _io.WriteLine($"{target.Name} was cured of their ailment!");
                         effectApplied = true;
                     }
-                    else _io.WriteLine("The item had no effect.");
+                    else
+                    {
+                        _io.WriteLine("The item had no effect.");
+                    }
                     break;
             }
 
@@ -236,7 +238,10 @@ namespace JRPGPrototype.Logic.Field
                         _io.WriteLine($"{target.Name} was healed.");
                         applied = true;
                     }
-                    else _io.WriteLine($"{target.Name} is already at full health.");
+                    else
+                    {
+                        _io.WriteLine($"{target.Name} is already at full health.");
+                    }
                 }
             }
 
@@ -252,7 +257,6 @@ namespace JRPGPrototype.Logic.Field
 
         #region Stat Allocation logic
 
-
         // Handles the menu loop and selection for stat allocation.
         public void AllocateStatPoint(Combatant player, StatType type)
         {
@@ -261,7 +265,8 @@ namespace JRPGPrototype.Logic.Field
             // Hard Cap Check
             if (player.CharacterStats[type] >= 40)
             {
-                _io.WriteLine($"{type} has already reached the maximum cap of 40.", ConsoleColor.Yellow);
+                _io.WriteLine($"{type} has already reached the maximum cap of 40.",
+                ConsoleColor.Yellow);
                 _io.Wait(800);
                 return;
             }

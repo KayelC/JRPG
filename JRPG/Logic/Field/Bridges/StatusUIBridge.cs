@@ -99,7 +99,8 @@ namespace JRPGPrototype.Logic.Field.Bridges
             options.Add("Back");
 
             // Ensure index is within bounds (safety check for data changes)
-            if (_uiState.StatAllocationIndex >= options.Count) _uiState.StatAllocationIndex = 0;
+            if (_uiState.StatAllocationIndex >= options.Count)
+                _uiState.StatAllocationIndex = 0;
 
             int idx = _io.RenderMenu($"=== STAT ALLOCATION (Pts: {player.StatPoints}) ===", options, _uiState.StatAllocationIndex, null, (index) =>
             {
@@ -131,10 +132,36 @@ namespace JRPGPrototype.Logic.Field.Bridges
             return stats[idx];
         }
 
-        // Confirmation Window For Stat Alloc
-        public bool ShowStatConfirmation()
+        /// <summary>
+        /// Confirmation Window For Stat Alloc
+        /// Displays the differential between original and newly allocated stats.
+        /// Stats that have increased are highlighted in Yellow.
+        /// </summary>
+        public bool ShowStatConfirmation(Combatant player, Dictionary<StatType, int> initialStats)
         {
             _io.Clear();
+            _io.WriteLine("=== STAT ALLOCATION REVIEW ===");
+            _io.WriteLine("Review your changes before committing spiritual energy:\n");
+
+            foreach (StatType st in Enum.GetValues(typeof(StatType)))
+            {
+                int current = player.CharacterStats[st];
+                int original = initialStats[st];
+
+                if (current > original)
+                {
+                    // Highlight altered stats in Yellow
+                    _io.Write($"{st,-5}: {current}", ConsoleColor.Yellow);
+                    _io.WriteLine($" (+{current - original})", ConsoleColor.Yellow);
+                }
+                else
+                {
+                    // Standard display for unchanged stats
+                    _io.WriteLine($"{st,-5}: {current}");
+                }
+            }
+
+            _io.WriteLine("\n------------------------------");
             List<string> options = new List<string> { "Yes, Apply Changes", "No, Revert Changes" };
             int choice = _io.RenderMenu("Points have been allocated. Apply changes permanently?", options, 0);
             return choice == 0;
@@ -275,6 +302,10 @@ namespace JRPGPrototype.Logic.Field.Bridges
             return player.DemonStock[idx];
         }
 
+        #endregion
+
+        #region Helper Renderers
+
         /// <summary>
         /// Displays detailed stat sheet for a demon Combatant.
         /// </summary>
@@ -284,10 +315,6 @@ namespace JRPGPrototype.Logic.Field.Bridges
             List<string> options = new List<string> { "Back" };
             _io.RenderMenu(header, options, 0);
         }
-
-        #endregion
-
-        #region Helper Renderers
 
         public string RenderHumanStatusToString(Combatant entity)
         {

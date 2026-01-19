@@ -389,6 +389,7 @@ namespace JRPGPrototype.Logic.Field
 
         /// <summary>
         /// FIX: Implemented Transactional Stat Allocation with Rollback support.
+        /// Now passes initialStats to the confirmation bridge to show change visualization.
         /// </summary>
         private void OpenStatAllocation()
         {
@@ -412,7 +413,8 @@ namespace JRPGPrototype.Logic.Field
             // Only prompt if points were actually spent
             if (_player.StatPoints < initialPoints)
             {
-                bool save = _statusUI.ShowStatConfirmation();
+                // Pass the snapshot to the bridge for visual differential
+                bool save = _statusUI.ShowStatConfirmation(_player, initialStats);
                 if (!save)
                 {
                     // Perform Rollback

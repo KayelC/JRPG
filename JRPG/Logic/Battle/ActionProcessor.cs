@@ -49,7 +49,7 @@ namespace JRPGPrototype.Logic.Battle
             if (target.IsDead) return new CombatResult { Type = HitType.Miss, DamageDealt = 0 };
 
             Element element = attacker.WeaponElement;
-            // Logic Change: PWR for standard attack is considered 15 for the formula
+            // PWR for standard attack is considered 15 for the formula
             int power = GetActionPower(attacker, 15);
 
             _io.WriteLine($"{attacker.Name} attacks {target.Name}!");
@@ -225,6 +225,7 @@ namespace JRPGPrototype.Logic.Battle
         {
             _io.Clear();
             _io.WriteLine($"=== ANALYSIS: {target.Name} ===", ConsoleColor.Yellow);
+
             _io.WriteLine($"Level: {target.Level} | HP: {target.CurrentHP}/{target.MaxHP} | SP: {target.CurrentSP}/{target.MaxSP}");
             _io.WriteLine("--------------------------------------------------");
             _io.WriteLine("Affinities:");
@@ -233,7 +234,23 @@ namespace JRPGPrototype.Logic.Battle
             {
                 if (elem == Element.None) continue;
                 Affinity aff = target.ActivePersona?.GetAffinity(elem) ?? Affinity.Normal;
-                _io.WriteLine($"  {elem,-10}: {aff}");
+
+                // Manual State Management
+                // We want the element name white, but the affinity highlighted
+                _io.Write($" {elem,-10}: ");
+
+                ConsoleColor affColor = aff switch
+                {
+                    Affinity.Weak => ConsoleColor.Red,
+                    Affinity.Resist => ConsoleColor.Green,
+                    Affinity.Null => ConsoleColor.Cyan,
+                    Affinity.Repel => ConsoleColor.Blue,
+                    Affinity.Absorb => ConsoleColor.Magenta,
+                    _ => ConsoleColor.White
+                };
+
+                _io.WriteLine($"{aff}", affColor);
+
                 _knowledge.Learn(target.SourceId, elem, aff);
             }
 
@@ -245,7 +262,7 @@ namespace JRPGPrototype.Logic.Battle
         private CombatResult ProcessOffensiveSkill(Combatant attacker, Combatant target, SkillData skill)
         {
             Element element = ElementHelper.FromCategory(skill.Category);
-            // Logic Change: Power for skills is parsed from data
+            // Power for skills is parsed from data
             int power = GetActionPower(attacker, skill.GetPowerVal());
 
             bool isInstantKill = skill.Effect.ToLower().Contains("instant kill");
@@ -308,7 +325,10 @@ namespace JRPGPrototype.Logic.Battle
             if (skillName == "Dekaja")
             {
                 var keys = target.Buffs.Keys.ToList();
-                foreach (var k in keys) if (target.Buffs[k] > 0) target.Buffs[k] = 0;
+                foreach (var k in keys)
+                {
+                    if (target.Buffs[k] > 0) target.Buffs[k] = 0;
+                }
                 _io.WriteLine($"{target.Name}'s stat bonuses were nullified!");
             }
 
@@ -316,7 +336,10 @@ namespace JRPGPrototype.Logic.Battle
             if (skillName == "Dekunda")
             {
                 var keys = target.Buffs.Keys.ToList();
-                foreach (var k in keys) if (target.Buffs[k] < 0) target.Buffs[k] = 0;
+                foreach (var k in keys)
+                {
+                    if (target.Buffs[k] < 0) target.Buffs[k] = 0;
+                }
                 _io.WriteLine($"{target.Name}'s stat penalties were nullified!");
             }
 
@@ -334,7 +357,8 @@ namespace JRPGPrototype.Logic.Battle
                 Element el = ElementHelper.FromCategory(skillName);
                 if (el != Element.Almighty)
                 {
-                    if (target.BrokenAffinities.ContainsKey(el)) target.BrokenAffinities[el] = 3;
+                    if (target.BrokenAffinities.ContainsKey(el))
+                        target.BrokenAffinities[el] = 3;
                     else target.BrokenAffinities.Add(el, 3);
                     _io.WriteLine($"{target.Name}'s {el} resistance was broken!");
                 }
@@ -394,8 +418,8 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// SMT III High-Fidelity Attack Power calculation.
-        /// Logic: Demons use dynamic scaling (Lv+STR)*PWR/15. Humans use Weapon Power or Lv+(STR*2).
+        /// Attack Power calculation.
+        /// Demons use dynamic scaling (Lv+STR)*PWR/15. Humans use Weapon Power or Lv+(STR*2).
         /// </summary>
         private int GetActionPower(Combatant c, int pwrValue)
         {

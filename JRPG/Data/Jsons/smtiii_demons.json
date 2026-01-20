@@ -1,0 +1,317 @@
+[
+  {
+    "Id": "pixie",
+    "Name": "Pixie",
+    "Race": "Fairy",
+    "Level": 2,
+    "Stats": {
+      "St": 3,
+      "Ma": 6,
+      "Vi": 4,
+      "Ag": 2,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Phys": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Resist",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dia",
+      "Zio"
+    ],
+    "LearnedSkills": {
+      "4": "Rakunda",
+      "5": "Posmudi",
+      "6": "Magaru"
+    }
+  },
+  {
+    "Id": "jack_frost",
+    "Name": "Jack Frost",
+    "Race": "Fairy",
+    "Level": 7,
+    "Stats": {
+      "St": 5,
+      "Ma": 8,
+      "Vi": 6,
+      "Ag": 4,
+      "Lu": 4
+    },
+    "Affinities": {
+      "Phys": "Normal",
+      "Fire": "Weak",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Bufu",
+      "Pulinpa"
+    ],
+    "LearnedSkills": {
+      "10": "Mabufu",
+      "11": "Sonic Punch",
+      "12": "Freeze Boost",
+      "13": "Ice Boost"
+    }
+  },
+  {
+    "Id": "high_pixie",
+    "Name": "High Pixie",
+    "Race": "Fairy",
+    "Level": 10,
+    "Stats": {
+      "St": 4,
+      "Ma": 6,
+      "Vi": 4,
+      "Ag": 6,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Phys": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Resist",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Media",
+      "Mazio",
+      "Pulinpa"
+    ],
+    "LearnedSkills": {
+      "11": "Dodge Wind",
+      "12": "Me Patra",
+      "14": "Recarm"
+    }
+  },
+  {
+    "Id": "jack_o_lantern",
+    "Name": "Jack-o'-Lantern",
+    "Race": "Fairy",
+    "Level": 19,
+    "Stats": {
+      "St": 8,
+      "Ma": 10,
+      "Vi": 8,
+      "Ag": 6,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Phys": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Agi",
+      "Maragi"
+    ],
+    "LearnedSkills": {
+      "20": "Stun Gaze",
+      "21": "Lunge",
+      "22": "Agilao",
+      "23": "Resist Ice"
+    }
+  },
+  {
+    "Id": "kelpie",
+    "Name": "Kelpie",
+    "Race": "Fairy",
+    "Level": 26,
+    "Stats": {
+      "St": 9,
+      "Ma": 13,
+      "Vi": 9,
+      "Ag": 8,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Phys": "Normal",
+      "Fire": "Normal",
+      "Ice": "Resist",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Pulinpa",
+      "Paraladi"
+    ],
+    "LearnedSkills": {
+      "27": "Stun Bite",
+      "28": "Null Nerve",
+      "29": "Marin Karin",
+      "30": "Diarama
+    }
+  },
+  {
+    "Id": "troll",
+    "Name": "Troll",
+    "Race": "Fairy",
+    "Level": 38,
+    "Stats": {
+      "St": 14,
+      "Ma": 10,
+      "Vi": 21,
+      "Ag": 4,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Phys": "Normal",
+      "Fire": "Normal",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mabufula",
+      "Mutudi"
+    ],
+    "LearnedSkills": {
+      "39": "Berserk",
+      "41": "Life Gain",
+      "43": "Diarahan"
+        
+    }
+  },
+  {
+    "Id": "setanta",
+    "Name": "Setanta",
+    "Race": "Fairy",
+    "Level": 43,
+    "Stats": {
+      "St": 17,
+      "Ma": 12,
+      "Vi": 20,
+      "Ag": 12,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Phys": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Guillotine",
+      "Sukukaja"
+    ],
+    "LearnedSkills": {
+      "44": "Focus",
+      "45": "Counterstrike",
+      "46": "Null Curse",
+      "47": "Tempest"
+    }
+  },
+  {
+    "Id": "oberon",
+    "Name": "Oberon",
+    "Race": "Fairy",
+    "Level": 46,
+    "Stats": {
+      "St": 16,
+      "Ma": 19,
+      "Vi": 13,
+      "Ag": 8,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Phys": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Heat Wave",
+      "Mediarama",
+      "Makarakarn"
+    ],
+    "LearnedSkills": {
+      "48": "Diarahan",
+      "49": "Garudyne",
+      "50": "Bufudyne",
+      "51": "Ziodyne"  
+    }
+  },
+  {
+    "Id": "titania",
+    "Name": "Titania",
+    "Race": "Fairy",
+    "Level": 57,
+    "Stats": {
+      "St": 14,
+      "Ma": 23,
+      "Vi": 15,
+      "Ag": 12,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Phys": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mediarahan",
+      "Diamond Dust",
+      "Magarudyne"
+    ],
+    "LearnedSkills": {
+      "59": "Pulinpa",
+      "60": "Mana Surge"
+      "62": "Prayer"
+    }
+  }
+]

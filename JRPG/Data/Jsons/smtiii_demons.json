@@ -5,10 +5,10 @@
     "Race": "Deity",
     "Level": 38,
     "Stats": {
-      "St": 15,
-      "Ma": 17,
-      "Vi": 11,
-      "Ag": 13,
+      "St": 12,
+      "Ma": 16,
+      "Vi": 14,
+      "Ag": 21,
       "Lu": 10
     },
     "Affinities": {
@@ -42,11 +42,11 @@
     "Race": "Deity",
     "Level": 47,
     "Stats": {
-      "St": 21,
-      "Ma": 15,
-      "Vi": 16,
+      "St": 24,
+      "Ma": 14,
+      "Vi": 20,
       "Ag": 10,
-      "Lu": 10
+      "Lu": 14
     },
     "Affinities": {
       "Strike": "Resist",
@@ -79,9 +79,9 @@
     "Level": 56,
     "Stats": {
       "St": 19,
-      "Ma": 26,
-      "Vi": 16,
-      "Ag": 15,
+      "Ma": 23,
+      "Vi": 17,
+      "Ag": 16,
       "Lu": 16
     },
     "Affinities": {
@@ -115,11 +115,11 @@
     "Race": "Deity",
     "Level": 65,
     "Stats": {
-      "St": 22,
-      "Ma": 26,
-      "Vi": 19,
-      "Ag": 15,
-      "Lu": 15
+      "St": 24,
+      "Ma": 25,
+      "Vi": 18,
+      "Ag": 17,
+      "Lu": 16
     },
     "Affinities": {
       "Strike": "Normal",

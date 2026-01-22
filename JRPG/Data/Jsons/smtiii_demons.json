@@ -1,5 +1,229 @@
 [
   {
+    "Id": "horus",
+    "Name": "Horus",
+    "Race": "Deity",
+    "Level": 38,
+    "Stats": {
+      "St": 15,
+      "Ma": 17,
+      "Vi": 11,
+      "Ag": 13,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Growth 2",
+      "Mahama"
+  ],
+    "LearnedSkills": {
+      "39": "Mana Gain",
+      "40": "Dekunda",
+      "41": "Mediarama",
+      "42": "Kouga"
+    }
+  },
+  {
+    "Id": "atavaka",
+    "Name": "Atavaka",
+    "Race": "Deity",
+    "Level": 47,
+    "Stats": {
+      "St": 21,
+      "Ma": 15,
+      "Vi": 16,
+      "Ag": 10,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Swift Strike",
+      "Endure"
+    ],
+    "LearnedSkills": {
+      "48": "Bewilder",
+      "49": "Counterstrike",
+      "50": "Getsu-ei"
+    }
+  },
+  {
+    "Id": "amaterasu",
+    "Name": "Amaterasu",
+    "Race": "Deity",
+    "Level": 56,
+    "Stats": {
+      "St": 19,
+      "Ma": 26,
+      "Vi": 16,
+      "Ag": 15,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tetrakarn",
+      "Maragidyne"
+    ],
+    "LearnedSkills": {
+      "57": "Divine Judgment",
+      "58": "Debilitate",
+      "59": "Repel Fire",
+      "60": "Prayer"
+    }
+  },
+  {
+    "Id": "odin",
+    "Name": "Odin",
+    "Race": "Deity",
+    "Level": 65,
+    "Stats": {
+      "St": 22,
+      "Ma": 26,
+      "Vi": 19,
+      "Ag": 15,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Null",
+      "Wind": "Weak",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Bufudyne",
+      "Agidyne"
+    ],
+    "LearnedSkills": {
+      "66": "Deathbound",
+      "67": "Evil Smile",
+      "68": "Mabufudyne",
+      "69": "Maragidyne"
+    }
+  },
+  {
+    "Id": "mithra",
+    "Name": "Mithra",
+    "Race": "Deity",
+    "Level": 78,
+    "Stats": {
+      "St": 27,
+      "Ma": 25,
+      "Vi": 27,
+      "Ag": 16,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Debilitate",
+      "Megidola",
+      "Mamudoon"
+    ],
+    "LearnedSkills": {
+      "79": "Divine Judgment",
+      "80": "Mahamaon",
+      "81": "Mana Surge"
+    }
+  },
+  {
+    "Id": "vishnu",
+    "Name": "Vishnu",
+    "Race": "Deity",
+    "Level": 93,
+    "Stats": {
+      "St": 27,
+      "Ma": 35,
+      "Vi": 25,
+      "Ag": 20,
+      "Lu": 26
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Repel",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Prayer",
+      "Divine Judgment",
+      "Hell Gaze"
+
+    ],
+    "LearnedSkills": {
+      "94": "Maragidyne",
+      "95": "Vorpal Blade",
+      "96": "Makougaon",
+      "97": "Repel Phys"
+
+    }
+  },
+  {
     "Id": "pixie",
     "Name": "Pixie",
     "Race": "Fairy",
@@ -12,7 +236,9 @@
       "Lu": 7
     },
     "Affinities": {
-      "Phys": "Normal",
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
       "Fire": "Normal",
       "Ice": "Normal",
       "Elec": "Resist",
@@ -46,7 +272,9 @@
       "Lu": 4
     },
     "Affinities": {
-      "Phys": "Normal",
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
       "Fire": "Weak",
       "Ice": "Absorb",
       "Elec": "Normal",
@@ -81,7 +309,9 @@
       "Lu": 10
     },
     "Affinities": {
-      "Phys": "Normal",
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
       "Fire": "Normal",
       "Ice": "Normal",
       "Elec": "Resist",
@@ -116,7 +346,9 @@
       "Lu": 7
     },
     "Affinities": {
-      "Phys": "Normal",
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
       "Fire": "Absorb",
       "Ice": "Weak",
       "Elec": "Normal",
@@ -151,7 +383,9 @@
       "Lu": 7
     },
     "Affinities": {
-      "Phys": "Normal",
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
       "Fire": "Normal",
       "Ice": "Resist",
       "Elec": "Normal",
@@ -186,7 +420,9 @@
       "Lu": 9
     },
     "Affinities": {
-      "Phys": "Normal",
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
       "Fire": "Normal",
       "Ice": "Absorb",
       "Elec": "Normal",
@@ -221,7 +457,9 @@
       "Lu": 6
     },
     "Affinities": {
-      "Phys": "Normal",
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
       "Fire": "Normal",
       "Ice": "Normal",
       "Elec": "Normal",
@@ -256,7 +494,9 @@
       "Lu": 10
     },
     "Affinities": {
-      "Phys": "Resist",
+      "Strike": "Normal",
+      "Slash": "Resist",
+      "Pierce": "Resist",
       "Fire": "Normal",
       "Ice": "Normal",
       "Elec": "Normal",
@@ -292,7 +532,9 @@
       "Lu": 13
     },
     "Affinities": {
-      "Phys": "Normal",
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
       "Fire": "Resist",
       "Ice": "Resist",
       "Elec": "Resist",

@@ -275,6 +275,15 @@
       "Category": "Darkness Skills"
     },
     {
+      "Skill": "Hell Gaze",
+      "Effect": "Darkness: instant kill, 1 foe (very high). (70% chance).",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "10 SP",
+      "Category": "Darkness Skills"
+    },
+    {
       "Skill": "Eiha",
       "Effect": "Deals light Dark damage to one foe.",
       "Power": 60,
@@ -1353,6 +1362,15 @@
     {
       "Skill": "Absorb Pierce",
       "Effect": "Drains damage from Pierce attacks.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Repel Phys",
+      "Effect": "Reflects damage from Pierce, Strike and Slash attacks.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -2681,7 +2699,7 @@
     },
     {
       "Skill": "Vorpal Blade",
-      "Effect": "Deals heavy Slash damage to all foes. (2x \"Great\" condition bonus)",
+      "Effect": "Deals heavy Slash damage to all foes.",
       "Power": "500",
       "Accuracy": "99%",
       "Critical": "5%",

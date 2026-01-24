@@ -224,6 +224,188 @@
     }
   },
   {
+    "Id": "scathach",
+    "Name": "Scathach",
+    "Race": "Megami",
+    "Level": 64,
+    "Stats": {
+      "St": 21,
+      "Ma": 26,
+      "Vi": 17,
+      "Ag": 18,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+     "Magarudyne"
+    ],
+    "LearnedSkills": {
+     "65": "Repel Wind",
+     "66": "Divine Judgment",
+     "67": "Mana Aid",
+
+    }
+  },
+  {
+    "Id": "lakshmi",
+    "Name": "Lakshmi",
+    "Race": "Megami",
+    "Level": 54,
+    "Stats": {
+      "St": 14,
+      "Ma": 24,
+      "Vi": 15,
+      "Ag": 13,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+     "Mediarahan"
+    ],
+    "LearnedSkills": {
+     "55": "Mana Aid",
+     "56": "Evil Smile",   
+     "57": "Mana Surge",
+     "58": "Samarecarm",
+     "59": "Recarmdra"
+    }
+  },
+  {
+    "Id": "sati",
+    "Name": "Sati",
+    "Race": "Megami",
+    "Level": 48,
+    "Stats": {
+      "St": 11,
+      "Ma": 20,
+      "Vi": 13,
+      "Ag": 15,
+      "Lu": 17
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Agidyne",
+     "Recarm",
+     "Marin Karin"
+    ],
+    "LearnedSkills": {
+     "49": "Maragidyne",
+     "50": "Sexy Dance",
+    }
+  },
+  {
+    "Id": "sarasvati",
+    "Name": "Sarasvati",
+    "Race": "Megami",
+    "Level": 30,
+    "Stats": {
+      "St": 9,
+      "Ma": 17,
+      "Vi": 11,
+      "Ag": 9,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+     "Bewilder",
+     "Mana Refill"
+    ],
+    "LearnedSkills": {
+     "31": "Recarm",
+     "32": "Magaru",
+     "33": "Wind Boost"
+    }
+  },
+  {
+    "Id": "ame_no_uzume",
+    "Name": "Ame-no-Uzume",
+    "Race": "Megami",
+    "Level": 18,
+    "Stats": {
+      "St": 6,
+      "Ma": 12,
+      "Vi": 8,
+      "Ag": 8,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Media",
+      "Magaru"
+    ],
+    "LearnedSkills": {
+      "19": "Hama",
+      "20": "Life Bonus",
+      "21": "Petradi",
+      "22": "Mana Refill"
+    }
+  },
+  {
     "Id": "pixie",
     "Name": "Pixie",
     "Race": "Fairy",

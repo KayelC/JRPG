@@ -406,6 +406,150 @@
     }
   },
   {
+    "Id": "shiva",
+    "Name": "Shiva",
+    "Race": "Fury",
+    "Level": 95,
+    "Stats": {
+      "St": 32,
+      "Ma": 26,
+      "Vi": 36,
+      "Ag": 26,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+     "Hassohappa",
+     "Victory Cry",
+     "Marin Karin"
+    ],
+    "LearnedSkills": {
+     "96": "Maziodyne",
+     "97": "High Counter",
+     "98": "Megidolaon",
+     "99": "Absorb Phys"
+    }
+  },
+  {
+    "Id": "beidou_xingjun",
+    "Name": "Beidou Xingjun",
+    "Race": "Fury",
+    "Level": 61,
+    "Stats": {
+      "St": 23,
+      "Ma": 24,
+      "Vi": 23,
+      "Ag": 14,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Tempest Slash",
+     "Mana Aid",
+     "Divine Judgment"
+    ],
+    "LearnedSkills": {
+     "62": "Hell Gaze",
+     "63": "Mamudoon",
+     "64": "Holy Wrath"
+    }
+  },
+  {
+    "Id": "qitian_dasheng",
+    "Name": "Qitian Dasheng",
+    "Race": "Fury",
+    "Level": 54,
+    "Stats": {
+      "St": 22,
+      "Ma": 13,
+      "Vi": 18,
+      "Ag": 20,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+     "55": "Hassohappa",
+     "56": "Attack All",
+     "57": "High Counter"
+    }
+  },
+  {
+    "Id": "dionysus",
+    "Name": "Dionysus",
+    "Race": "Fury",
+    "Level": 44,
+    "Stats": {
+      "St": 16,
+      "Ma": 20,
+      "Vi": 15,
+      "Ag": 13,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Maragion",
+     "Null Fire",
+    ],
+    "LearnedSkills": {
+     "45": "Dismal Tune",
+     "46": "Tempest",
+     "47": "Maragidyne"
+    }
+  },
+  {
     "Id": "pixie",
     "Name": "Pixie",
     "Race": "Fairy",

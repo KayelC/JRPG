@@ -1,5 +1,14 @@
 {
   "Ailment Skills": [
+      {
+      "Skill": "Dismal Tune",
+      "Effect": "Instills Fear in 1 foe. (15% chance)",
+      "Power": "350",
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "5 SP",
+      "Category": "Ailment Skills"
+    },
     {
       "Skill": "Evil Touch",
       "Effect": "Instills Fear in 1 foe. (40% chance)",
@@ -276,7 +285,7 @@
     },
     {
       "Skill": "Hell Gaze",
-      "Effect": "Darkness: instant kill, 1 foe (very high). (70% chance).",
+      "Effect": "Darkness: instant kill, 1 foe (very high). (50% chance).",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -940,6 +949,15 @@
       "Critical": NaN,
       "Cost": "38 SP",
       "Category": "Light Skills"
+    },
+    {
+      "Skill": "Holy Wrath",
+      "Effect": "Reduces HP by 50% to all foes.",
+      "Power": NaN,
+      "Accuracy": "90%",
+      "Critical": NaN,
+      "Cost": "46 SP",
+      "Category": "Light Skills"
     }
   ],
   "Navigator Skills": [
@@ -1371,6 +1389,15 @@
     {
       "Skill": "Repel Phys",
       "Effect": "Reflects damage from Pierce, Strike and Slash attacks.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Absorb Phys",
+      "Effect": "Absorbs damage from Pierce, Strike and Slash attacks.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -2668,6 +2695,15 @@
       "Accuracy": "95%",
       "Critical": "10%",
       "Cost": "13% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Tempest",
+      "Effect": "Deals heavy Slash damage to all foe.",
+      "Power": "350",
+      "Accuracy": "70%",
+      "Critical": "30%",
+      "Cost": "25% HP",
       "Category": "Slash Skills"
     },
     {

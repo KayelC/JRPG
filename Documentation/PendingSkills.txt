@@ -1,0 +1,8 @@
+Hassohappa
+Mana Aid
+Life Aid
+Life Gain
+Life Surge
+Mana Gain
+Mana Surge
+Attack All

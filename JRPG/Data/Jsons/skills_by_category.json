@@ -2397,6 +2397,15 @@
       "Category": "Pierce Skills"
     },
     {
+      "Skill": "Hell Thrust",
+      "Effect": "Deals light Pierce damage to one foe. (High Critical Chance)",
+      "Power": "65",
+      "Accuracy": "67%%",
+      "Critical": "33%",
+      "Cost": "12% HP",
+      "Category": "Pierce Skills"
+    },
+    {
       "Skill": "Cruel Attack",
       "Effect": "Deals medium Pierce damage to one foe. (2x to Downed foes)",
       "Power": "225",
@@ -2405,6 +2414,7 @@
       "Cost": "10% HP",
       "Category": "Pierce Skills"
     },
+    
     {
       "Skill": "Poison Arrow",
       "Effect": "Deals heavy Pierce damage / Poisons one foe. (50% chance)",
@@ -2626,6 +2636,15 @@
       "Category": "Slash Skills"
     },
     {
+      "Skill": "Blight",
+      "Effect": "Deals light Pierce damage / Poisons one foe. (20% chance) and High critical Chance",
+      "Power": "40",
+      "Accuracy": "100%",
+      "Critical": "36%",
+      "Cost": "36% HP",
+      "Category": "Pierce Skills"
+    },
+    {
       "Skill": "Cleave",
       "Effect": "Deals light Slash damage to one foe.",
       "Power": "30",
@@ -2668,6 +2687,15 @@
       "Accuracy": "95%",
       "Critical": "3%",
       "Cost": "14% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Iron Claw",
+      "Effect": "Deals medium Slash damage to one foes. (High Critical Chance)",
+      "Power": "100",
+      "Accuracy": "55%",
+      "Critical": "45%",
+      "Cost": "15% HP",
       "Category": "Slash Skills"
     },
     {
@@ -2825,6 +2853,15 @@
       "Accuracy": "80%",
       "Critical": "3%",
       "Cost": "15% HP",
+      "Category": "Strike Skills"
+    },
+    {
+      "Skill": "Hades Blast",
+      "Effect": "Deals medium Strike damage to one foes. (High Critical Chance)",
+      "Power": "82",
+      "Accuracy": "100%",
+      "Critical": "43%",
+      "Cost": "32% HP",
       "Category": "Strike Skills"
     },
     {

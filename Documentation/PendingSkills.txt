@@ -23,6 +23,7 @@ Feral Claw
 Drain Attack
 Liftoma
 Estoma
+Riberama
 Kamikaze
 Lullaby
 Resist Mind
@@ -35,3 +36,5 @@ Dormina
 Analyze
 Makatora
 Taunt
+Eternal Rest
+Trafuri

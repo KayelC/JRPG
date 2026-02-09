@@ -2208,5 +2208,231 @@
      "15": "Life Aid"
 
     }
+  },
+  {
+    "Id": "flauros",
+    "Name": "Flauros",
+    "Race": "Fallen",
+    "Level": 68,
+    "Stats": {
+      "St": 27,
+      "Ma": 14,
+      "Vi": 22,
+      "Ag": 13,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Iron Claw",
+     "War Cry"
+    ],
+    "LearnedSkills": {
+     "69": "Deathbound",
+     "70": "Endure",
+     "71": "Hades Blast",
+     "72": "Life Surge",
+     "73": "Hassohappa"
+    }
+  },
+  {
+    "Id": "decarabia",
+    "Name": "Decarabia",
+    "Race": "Fallen",
+    "Level": 58,
+    "Stats": {
+      "St": 15,
+      "Ma": 22,
+      "Vi": 17,
+      "Ag": 12,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Analyze",
+     "Tetrakarn"
+    ],
+    "LearnedSkills": {
+     "59": "Sukukaja",  
+     "60": "Hell Gaze",
+     "61": "Eternal Rest",
+     "62": "Trafuri",
+     "63": "Megido"
+    }
+  },
+  {
+    "Id": "ose",
+    "Name": "Ose",
+    "Race": "Fallen",
+    "Level": 45,
+    "Stats": {
+      "St": 17,
+      "Ma": 11,
+      "Vi": 14,
+      "Ag": 12,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Rakukaja",
+     "Blight",
+     "War Cry"
+    ],
+    "LearnedSkills": {
+     "46": "Dekaja",
+     "47": "Dekunda",
+     "48": "Focus",
+     "49": "Makarakarn"
+    }
+  },
+  {
+    "Id": "berith",
+    "Name": "Berith",
+    "Race": "Fallen",
+    "Level": 37,
+    "Stats": {
+      "St": 16,
+      "Ma": 10,
+      "Vi": 17,
+      "Ag": 8,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Mudo",
+     "Heat Wave"
+    ],
+    "LearnedSkills": {
+     "38": "Dekaja",
+     "39": "Maragion",
+     "40": "Dismal Tune",
+     "41": "Fire Boost"
+    }
+  },
+  {
+    "Id": "eligor",
+    "Name": "Eligor",
+    "Race": "Fallen",
+    "Level": 29,
+    "Stats": {
+      "St": 14,
+      "Ma": 9,
+      "Vi": 14,
+      "Ag": 6,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Hell Thrust",
+     "Rakukaja",
+     "Dark Might"
+    ],
+    "LearnedSkills": {
+     "30": "Mudo",
+     "31": "Cruel Attack",
+     "32": "Riberama",
+     "33": "Evil Smile"
+    }
+  },
+  {
+    "Id": "forneus",
+    "Name": "Forneus",
+    "Race": "Fallen",
+    "Level": 20,
+    "Stats": {
+      "St": 10,
+      "Ma": 7,
+      "Vi": 10,
+      "Ag": 5,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Absorb",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Double Fangs",
+     "Riberama"
+    ],
+    "LearnedSkills": {
+     "21": "Bufula",
+     "22": "Sukunda",
+     "23": "Resist Elec",
+     "24": "Mabufula"
+    }
   }
 ]

@@ -2847,7 +2847,7 @@
     },
     {
       "Skill": "Weary Thrust",
-      "Effect": "Deals heavy Strike damage to one foe. (1.5x \"Tired\" condition bonus)",
+      "Effect": "Deals heavy Strike damage to one foe. (1.5x if target is Panicked)",
       "Power": "405",
       "Accuracy": "99%",
       "Critical": "5%",

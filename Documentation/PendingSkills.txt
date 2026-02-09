@@ -6,3 +6,5 @@ Life Surge
 Mana Gain
 Mana Surge
 Attack All
+Paraladi
+Makakaja

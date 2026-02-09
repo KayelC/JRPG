@@ -550,6 +550,182 @@
     }
   },
   {
+    "Id": "skadi",
+    "Name": "Skadi",
+    "Race": "Lady",
+    "Level": 74,
+    "Stats": {
+      "St": 23,
+      "Ma": 29,
+      "Vi": 21,
+      "Ag": 18,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+     "75": "Tentarafoo",
+     "76": "Makakaja",
+     "77": "Repel Elec",
+     "78": "Vicious Strike"
+    }
+  },
+  {
+    "Id": "kali",
+    "Name": "Kali",
+    "Race": "Lady",
+    "Level": 67,
+    "Stats": {
+      "St": 25,
+      "Ma": 19,
+      "Vi": 23,
+      "Ag": 19,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Tentarafoo",
+     "Deathbound"
+    ],
+    "LearnedSkills": {
+     "68": "High Counter",
+     "69": "Masukunda",
+     "70": "Life Surge",
+     "71": "Tempest Slash"
+    }
+  },
+  {
+    "Id": "parvati",
+    "Name": "Parvati",
+    "Race": "Lady",
+    "Level": 57,
+    "Stats": {
+      "St": 15,
+      "Ma": 23,
+      "Vi": 15,
+      "Ag": 16,
+      "Lu": 20
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+     "58": "Mediarama",
+     "59": "Tetrakarn",
+     "60": "Divine Judgment",
+     "61": "Makouga"
+    }
+  },
+  {
+    "Id": "kushinada",
+    "Name": "Kushinada",
+    "Race": "Lady",
+    "Level": 41,
+    "Stats": {
+      "St": 12,
+      "Ma": 19,
+      "Vi": 14,
+      "Ag": 10,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Mediarama",
+     "Poison Arrow"
+    ],
+    "LearnedSkills": {
+     "42": "Maragion",
+     "43": "Paraladi",
+    }
+  },
+  {
+    "Id": "kikuri_hime",
+    "Name": "Kikuri-Hime",
+    "Race": "Lady",
+    "Level": 24,
+    "Stats": {
+      "St": 10,
+      "Ma": 16,
+      "Vi": 11,
+      "Ag": 8,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Diarama",
+     "Marin Karin"
+    ],
+    "LearnedSkills": {
+     "25": "Posmudi",
+     "25": "Me Patra",
+     "26": "Recarm"
+    }
+  },
+  {
     "Id": "pixie",
     "Name": "Pixie",
     "Race": "Fairy",

@@ -726,6 +726,337 @@
     }
   },
   {
+    "Id": "thor",
+    "Name": "Thor",
+    "Race": "Kishin",
+    "Level": 76,
+    "Stats": {
+      "St": 28,
+      "Ma": 20,
+      "Vi": 26,
+      "Ag": 12,
+      "Lu": 17
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+     "Highcounter",
+     "Ziodyne",
+     "Herculean Strike"
+    ],
+    "LearnedSkills": {
+     "77": "Mediarahan",
+     "78": "Marziodyne",
+     "79": "Stasis Blade",
+     "80": "Fire Repel"
+
+    }
+  },
+  {
+    "Id": "bishamonten",
+    "Name": "Bishamonten",
+    "Race": "Kishin",
+    "Level": 72,
+    "Stats": {
+      "St": 25,
+      "Ma": 17,
+      "Vi": 25,
+      "Ag": 17,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Repel",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Divine Judgment",
+     "Attack All"
+    ],
+    "LearnedSkills": {
+     "73": "Maragidyne",
+     "74": "Fire Boost",
+     "75": "Endure",
+     "76": "Hassohappa"
+    }
+  },
+  {
+    "Id": "futomimi",
+    "Name": "Futomimi",
+    "Race": "Kishin",
+    "Level": 63,
+    "Stats": {
+      "St": 20,
+      "Ma": 26,
+      "Vi": 20,
+      "Ag": 15,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+     "Focus",
+     "War Cry",
+     "Pulinpa",
+     "Lunge"
+    ],
+    "LearnedSkills": {
+     "64": "Might",
+     "65": "Life Surge",
+     "66": "Mana Surge",
+    }
+  },
+  {
+    "Id": "jikokuten",
+    "Name": "Jikokuten",
+    "Race": "Kishin",
+    "Level": 52,
+    "Stats": {
+      "St": 21,
+      "Ma": 16,
+      "Vi": 19,
+      "Ag": 11,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Stasis Blade",
+     "Diarahan"
+    ],
+    "LearnedSkills": {
+     "53": "Dekunda",
+     "54": "Mabufudyne",
+     "55": "Magarudyne",
+     "56": "Mazionga"
+    }
+  },
+  {
+    "Id": "take_mikazuchi",
+    "Name": "Take-Mikazuchi",
+    "Race": "Kishin",
+    "Level": 45,
+    "Stats": {
+      "St": 19,
+      "Ma": 14,
+      "Vi": 17,
+      "Ag": 11,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Repel",
+      "Wind": "Weak",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Ziodyne",
+     "Mazionga"
+    ],
+    "LearnedSkills": {
+     "46": "Dark Sword",
+     "47": "Life Refill",
+     "48": "Maziodyne",
+    }
+  },
+  {
+    "Id": "okuninushi",
+    "Name": "Okuninushi",
+    "Race": "Kishin",
+    "Level": 39,
+    "Stats": {
+      "St": 16,
+      "Ma": 16,
+      "Vi": 13,
+      "Ag": 11,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Chaos Blade",
+     "Mamudo"
+    ],
+    "LearnedSkills": {
+     "41" : "Agidyne",
+     "42" : "Tentarafoo",
+    }
+  },
+  {
+    "Id": "koumokuten",
+    "Name": "Koumokuten",
+    "Race": "Kishin",
+    "Level": 33,
+    "Stats": {
+      "St": 16,
+      "Ma": 12,
+      "Vi": 14,
+      "Ag": 9,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Repel",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Kill Rush",
+     "Magaru"
+    ],
+    "LearnedSkills": {
+     "34": "Life Gain",
+     "35": "Mana Bonus",
+     "36": "Tetraja"
+    }
+  },
+  {
+    "Id": "zouchouten",
+    "Name": "Zouchouten",
+    "Race": "Kishin",
+    "Level": 27,
+    "Stats": {
+      "St": 15,
+      "Ma": 10,
+      "Vi": 12,
+      "Ag": 7,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+     "Brutal Slash",
+     "Agilao",
+     "Mahama"
+    ],
+    "LearnedSkills": {
+     "28": "Resist Dark"
+    }
+  },
+  {
+    "Id": "take_minakata",
+    "Name": "Take-Minakata",
+    "Race": "Kishin",
+    "Level": 17,
+    "Stats": {
+      "St": 11,
+      "Ma": 8,
+      "Vi": 11,
+      "Ag": 9,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Repel",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Mazio",
+     "Zionga"
+    ],
+    "LearnedSkills": {
+     "18": "Pulinpa",
+     "19": "Bewilder",
+     "20": "Dekaja",
+     "21": "Focus"
+
+    }
+  },
+  {
     "Id": "pixie",
     "Name": "Pixie",
     "Race": "Fairy",

@@ -1943,5 +1943,270 @@
       "60": "Mana Surge",
       "62": "Prayer"
     }
+  },
+  {
+    "Id": "throne",
+    "Name": "Throne",
+    "Race": "Divine",
+    "Level": 64,
+    "Stats": {
+      "St": 18,
+      "Ma": 22,
+      "Vi": 18,
+      "Ag": 15,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Mahamaon",
+     "Makougaon",
+     "Maragidyne"
+    ],
+    "LearnedSkills": {
+     "65": "Mediarahan",
+     "66": "Diarahan",
+     "67": "Bewilder",
+     "68": "Divine Judgment",
+     "69": "Debilitate"
+    }
+  },
+  {
+    "Id": "dominion",
+    "Name": "Dominion",
+    "Race": "Divine",
+    "Level": 50,
+    "Stats": {
+      "St": 15,
+      "Ma": 18,
+      "Vi": 15,
+      "Ag": 11,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+     "Diarahan",
+     "Kouga"
+    ],
+    "LearnedSkills": {
+     "51": "Tetrakarn",
+     "52": "Makakaja",
+     "53": "Tentarafoo",
+     "54": "Mahamaon",
+    }
+  },
+  {
+    "Id": "virtue",
+    "Name": "Virtue",
+    "Race": "Divine",
+    "Level": 41,
+    "Stats": {
+      "St": 12,
+      "Ma": 17,
+      "Vi": 17,
+      "Ag": 8,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Mahama",
+     "Makouga",
+     "Mediarama"
+    ],
+    "LearnedSkills": {
+     "42": "Torrent Shot",
+     "43": "Makarakarn",
+     "44": "Mazionga",
+     "45": "Divine Judgment"
+    }
+  },
+  {
+    "Id": "power",
+    "Name": "Power",
+    "Race": "Divine",
+    "Level": 33,
+    "Stats": {
+      "St": 16,
+      "Ma": 8,
+      "Vi": 16,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Dark Might",
+     "Tarukaja"
+    ],
+    "LearnedSkills": {
+     "34": "Guillotine",
+     "35": "Mahama",
+     "36": "Kouga",
+     "37": "Hamaon",
+     "38": "Null Nerve"
+    }
+  },
+  {
+    "Id": "principality",
+    "Name": "Principality",
+    "Race": "Divine",
+    "Level": 28,
+    "Stats": {
+      "St": 11,
+      "Ma": 12,
+      "Vi": 9,
+      "Ag": 7,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Weak",
+      "Mind": "Weak",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Bright Might",
+     "Garula"
+    ],
+    "LearnedSkills": {
+     "29": "Diarama",
+     "30": "Mana Bonus",
+     "31": "Hamaon",
+     "32": "Heat Wave"
+    }
+  },
+  {
+    "Id": "archangel",
+    "Name": "Archangel",
+    "Race": "Divine",
+    "Level": 18,
+    "Stats": {
+      "St": 11,
+      "Ma": 6,
+      "Vi": 8,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Power Slash",
+     "Tarukaja"
+    ],
+    "LearnedSkills": {
+     "19": "Hama",
+     "20": "Estoma",
+     "21": "Magaru",
+     "22": "Diarama"
+    }
+  },
+  {
+    "Id": "angel",
+    "Name": "Angel",
+    "Race": "Divine",
+    "Level": 11,
+    "Stats": {
+      "St": 4,
+      "Ma": 7,
+      "Vi": 7,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Null",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Dia",
+     "Hama",
+     "Kouha"
+    ],
+    "LearnedSkills": {
+     "12": "Patra",
+     "13": "Posumudi",
+     "14": "Holy Arrow",
+     "15": "Life Aid"
+
+    }
   }
 ]

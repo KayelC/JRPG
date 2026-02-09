@@ -1,4 +1,5 @@
 Hassohappa
+Guillotine
 Mana Aid
 Life Aid
 Life Gain
@@ -10,16 +11,18 @@ Paraladi
 Makakaja
 Brutal Slash
 Tetraja
-Shock
 Dark Sword
 Chaos Blade
 Stasis Blade
 War Cry
 Lunge
 Might
+Bright Might
+Dark Might
 Feral Claw
 Drain Attack
 Liftoma
+Estoma
 Kamikaze
 Lullaby
 Resist Mind

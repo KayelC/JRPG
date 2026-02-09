@@ -91,6 +91,15 @@
       "Category": "Ailment Skills"
     },
     {
+      "Skill": "Venom Bite",
+      "Effect": "Poisons 1 foe. (20% chance)",
+      "Power": "60",
+      "Accuracy": "76%",
+      "Critical": "24%",
+      "Cost": "18% HP",
+      "Category": "Ailment Skills"
+    },
+    {
       "Skill": "Poison Mist",
       "Effect": "Poisons all foes. (35% chance)",
       "Power": NaN,

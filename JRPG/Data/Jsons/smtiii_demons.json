@@ -1232,7 +1232,7 @@
     ],
     "LearnedSkills": {
      "22": "Life Refill",
-     "23": "Dismal Tune",
+     "23": "Evil Touch",
      "24": "Tetraja",
      "25": "Me Patra",
      "26": "Diarama"
@@ -1275,6 +1275,342 @@
      "17": "Resist Fire"
     }
   },    
+  {
+    "Id": "efreet",
+    "Name": "Efreet",
+    "Race": "Yoma",
+    "Level": 52,
+    "Stats": {
+      "St": 15,
+      "Ma": 23,
+      "Vi": 15,
+      "Ag": 14,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Agidyne",
+     "Taunt"
+    ],
+    "LearnedSkills": {
+     "53": "Makakaja",
+     "54": "Mana Aid",
+     "55": "Maragidyne",
+    }
+  },
+  {
+    "Id": "pulukishi",
+    "Name": "Pulukishi",
+    "Race": "Yoma",
+    "Level": 48,
+    "Stats": {
+      "St": 19,
+      "Ma": 15,
+      "Vi": 17,
+      "Ag": 9,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Growth",
+     "Eerie Sound"
+    ],
+    "LearnedSkills": {
+     "49": "Stasis Blade",
+     "50": "Sonic Wave",
+     "51": "Wind Boost",
+     "52": "Garula",
+     "53": "Chaos Blade",
+     "54": "Magarudyne"
+    }
+  },
+  {
+    "Id": "jinn",
+    "Name": "Jinn",
+    "Race": "Yoma",
+    "Level": 44,
+    "Stats": {
+      "St": 14,
+      "Ma": 19,
+      "Vi": 13,
+      "Ag": 14,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Absorb",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Wind Boost",
+     "Garudyne",
+     "Garula"
+    ],
+    "LearnedSkills": {
+     "45": "Diarama",
+     "46": "Kamikaze",
+     "47": "Taunt",
+    }
+  },
+  {
+    "Id": "ongkhot",
+    "Name": "Ongkhot",
+    "Race": "Yoma",
+    "Level": 37,
+    "Stats": {
+      "St": 14,
+      "Ma": 9,
+      "Vi": 11,
+      "Ag": 15,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+     "Kill Rush",
+     "Might",
+     "Tarukaja"
+    ],
+    "LearnedSkills": {
+     "38": "Tetrakarn",
+     "39": "Brutal Slash",
+     "40": "Sukukaja",
+     "41": "Kamikaze"
+    }
+  },
+  {
+    "Id": "karasu_tengu",
+    "Name": "Karasu Tengu",
+    "Race": "Yoma",
+    "Level": 28,
+    "Stats": {
+      "St": 12,
+      "Ma": 11,
+      "Vi": 11,
+      "Ag": 10,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+     "Magarula",
+     "Tarukaja"
+    ],
+    "LearnedSkills": {
+     "29": "Mana Gain",
+     "30": "Mahama",
+     "31": "Might",
+     "32": "Resist Elec",
+     "33": "Garudyne"
+    }
+  },
+  {
+    "Id": "dis",
+    "Name": "Dis",
+    "Race": "Yoma",
+    "Level": 23,
+    "Stats": {
+      "St": 10,
+      "Ma": 14,
+      "Vi": 10,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Tetraja",
+     "Agilao",
+     "Pulinpa"
+    ],
+    "LearnedSkills": {
+     "24": "Diarama",
+     "25": "Makatora",
+     "26": "Me Patra",
+    }
+  },
+  {
+    "Id": "koppa_tengu",
+    "Name": "Koppa Tengu",
+    "Race": "Yoma",
+    "Level": 19,
+    "Stats": {
+      "St": 7,
+      "Ma": 10,
+      "Vi": 5,
+      "Ag": 13,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Null",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+     "Magaru",
+     "Tarukaja"
+    ],
+    "LearnedSkills": {
+     "20": "Bewilder",
+     "21": "Makatora",
+     "22": "Kamikaze",
+     "23": "Garula"
+    }
+  },
+  {
+    "Id": "isora",
+    "Name": "Isora",
+    "Race": "Yoma",
+    "Level": 14,
+    "Stats": {
+      "St": 9,
+      "Ma": 8,
+      "Vi": 8,
+      "Ag": 6,
+      "Lu": 3
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Resist",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Venom Bite"
+     "Analyze"
+    ],
+    "LearnedSkills": {
+     "15": "Lullaby",
+     "16": "Mabufula",
+     "17": "Media"
+    }
+  },
+  {
+    "Id": "apsaras",
+    "Name": "Apsaras",
+    "Race": "Yoma",
+    "Level": 8,
+    "Stats": {
+      "St": 6,
+      "Ma": 6,
+      "Vi": 6,
+      "Ag": 5,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Absorb",
+      "Elec": "Resist",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Lullaby",
+     "Patra",
+    ],
+    "LearnedSkills": {
+     "9": "Mabufu",
+     "10": "Resist Mind",
+     "11": "Pulinpa",
+     "12": "Dormina",
+     "13": "Mazio"
+    }
+  },
   {
     "Id": "pixie",
     "Name": "Pixie",

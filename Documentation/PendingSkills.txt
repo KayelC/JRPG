@@ -12,12 +12,23 @@ Brutal Slash
 Tetraja
 Shock
 Dark Sword
+Chaos Blade
 Stasis Blade
 War Cry
 Lunge
 Might
-Prominence
 Feral Claw
 Drain Attack
 Liftoma
 Kamikaze
+Lullaby
+Resist Mind
+Resist Nerve
+Resist Curse
+Null Mind
+Null Nerve
+Null Curse
+Dormina
+Analyze
+Makatora
+Taunt

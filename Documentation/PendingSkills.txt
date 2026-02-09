@@ -17,3 +17,7 @@ War Cry
 Lunge
 Might
 Prominence
+Feral Claw
+Drain Attack
+Liftoma
+Kamikaze

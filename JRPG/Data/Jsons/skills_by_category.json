@@ -46,6 +46,15 @@
       "Category": "Ailment Skills"
     },
     {
+      "Skill": "Sonic Wave",
+      "Effect": "Makes all foes Panic. (20% chance)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "9 SP",
+      "Category": "Ailment Skills"
+    },
+    {
       "Skill": "Tentarafoo",
       "Effect": "Makes all foes Panic. (40% chance)",
       "Power": NaN,

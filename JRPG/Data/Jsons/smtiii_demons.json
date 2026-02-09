@@ -1057,6 +1057,225 @@
     }
   },
   {
+    "Id": "chimera",
+    "Name": "Chimera",
+    "Race": "Holy",
+    "Level": 55,
+    "Stats": {
+      "St": 23,
+      "Ma": 13,
+      "Vi": 16,
+      "Ag": 17,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Weak",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Maragion",
+     "Fire Boost",
+     "War Cry"
+    ],
+    "LearnedSkills": {
+     "56": "Cruel Attack",
+     "57": "Kamikaze",
+     "58": "Sonic Wave",
+    }
+  },
+  {
+    "Id": "baihu",
+    "Name": "Baihu",
+    "Race": "Holy",
+    "Level": 43,
+    "Stats": {
+      "St": 19,
+      "Ma": 8,
+      "Vi": 15,
+      "Ag": 17,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Double Fangs",
+     "Life Aid",
+     "Mabufula"
+    ],
+    "LearnedSkills": {
+     "44": "Might",
+     "45": "Focus",
+     "46": "Bufudyne"
+    }
+  },
+  {
+    "Id": "zhuque",
+    "Name": "Zhuque",
+    "Race": "Holy",
+    "Level": 36,
+    "Stats": {
+      "St": 10,
+      "Ma": 10,
+      "Vi": 10,
+      "Ag": 17,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Liftoma",
+     "Magaru",
+     "Maragi"
+    ],
+    "LearnedSkills": {
+     "38": "Recarm",
+     "39": "Mazionga",
+     "40": "Life Aid"
+    }
+  },
+  {
+    "Id": "senri",
+    "Name": "Senri",
+    "Race": "Holy",
+    "Level": 27,
+    "Stats": {
+      "St": 10,
+      "Ma": 14,
+      "Vi": 9,
+      "Ag": 12,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Absorb",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+     "28": "Magarula",
+     "31": "Drain Attack
+    }
+  },
+  {
+    "Id": "unicorn",
+    "Name": "Unicorn",
+    "Race": "Holy",
+    "Level": 21,
+    "Stats": {
+      "St": 9,
+      "Ma": 12,
+      "Vi": 10,
+      "Ag": 7,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+     "Rakukaja",
+     "Mabufu",
+     "Media"
+    ],
+    "LearnedSkills": {
+     "22": "Life Refill",
+     "23": "Dismal Tune",
+     "24": "Tetraja",
+     "25": "Me Patra",
+     "26": "Diarama"
+    }
+  },
+  {
+    "Id": "shiisaa",
+    "Name": "Shiisaa",
+    "Race": "Holy",
+    "Level": 13,
+    "Stats": {
+      "St": 9,
+      "Ma": 6,
+      "Vi": 7,
+      "Ag": 9,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Mazio",
+     "Feral Claw"
+    ],
+    "LearnedSkills": {
+     "14": "War Cry",
+     "15": "Evil Touch",
+     "16": "Counter",
+     "17": "Resist Fire"
+    }
+  },    
+  {
     "Id": "pixie",
     "Name": "Pixie",
     "Race": "Fairy",

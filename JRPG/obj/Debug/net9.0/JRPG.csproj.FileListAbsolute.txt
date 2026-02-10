@@ -29,3 +29,4 @@ C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\tartarus.j
 C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\weapons.json
 C:\Users\Kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\questions.json
 C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\fusion_table.json
+C:\Users\kayel\Documents\GitHub\JRPG\JRPG\bin\Debug\net9.0\Data\Jsons\smtiii_demons.json

@@ -1,5 +1,14 @@
 {
   "Ailment Skills": [
+      {
+      "Skill": "Dismal Tune",
+      "Effect": "Instills Fear in 1 foe. (15% chance)",
+      "Power": "350",
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "5 SP",
+      "Category": "Ailment Skills"
+    },
     {
       "Skill": "Evil Touch",
       "Effect": "Instills Fear in 1 foe. (40% chance)",
@@ -37,6 +46,15 @@
       "Category": "Ailment Skills"
     },
     {
+      "Skill": "Sonic Wave",
+      "Effect": "Makes all foes Panic. (20% chance)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "9 SP",
+      "Category": "Ailment Skills"
+    },
+    {
       "Skill": "Tentarafoo",
       "Effect": "Makes all foes Panic. (40% chance)",
       "Power": NaN,
@@ -70,6 +88,15 @@
       "Accuracy": NaN,
       "Critical": NaN,
       "Cost": "5 SP",
+      "Category": "Ailment Skills"
+    },
+    {
+      "Skill": "Venom Bite",
+      "Effect": "Poisons 1 foe. (20% chance)",
+      "Power": "60",
+      "Accuracy": "76%",
+      "Critical": "24%",
+      "Cost": "18% HP",
       "Category": "Ailment Skills"
     },
     {
@@ -272,6 +299,15 @@
       "Accuracy": NaN,
       "Critical": NaN,
       "Cost": "40 SP",
+      "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Hell Gaze",
+      "Effect": "Darkness: instant kill, 1 foe (very high). (50% chance).",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "10 SP",
       "Category": "Darkness Skills"
     },
     {
@@ -931,6 +967,15 @@
       "Critical": NaN,
       "Cost": "38 SP",
       "Category": "Light Skills"
+    },
+    {
+      "Skill": "Holy Wrath",
+      "Effect": "Reduces HP by 50% to all foes.",
+      "Power": NaN,
+      "Accuracy": "90%",
+      "Critical": NaN,
+      "Cost": "46 SP",
+      "Category": "Light Skills"
     }
   ],
   "Navigator Skills": [
@@ -1353,6 +1398,24 @@
     {
       "Skill": "Absorb Pierce",
       "Effect": "Drains damage from Pierce attacks.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Repel Phys",
+      "Effect": "Reflects damage from Pierce, Strike and Slash attacks.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Absorb Phys",
+      "Effect": "Absorbs damage from Pierce, Strike and Slash attacks.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -2334,6 +2397,15 @@
       "Category": "Pierce Skills"
     },
     {
+      "Skill": "Hell Thrust",
+      "Effect": "Deals light Pierce damage to one foe. (High Critical Chance)",
+      "Power": "65",
+      "Accuracy": "67%%",
+      "Critical": "33%",
+      "Cost": "12% HP",
+      "Category": "Pierce Skills"
+    },
+    {
       "Skill": "Cruel Attack",
       "Effect": "Deals medium Pierce damage to one foe. (2x to Downed foes)",
       "Power": "225",
@@ -2342,6 +2414,7 @@
       "Cost": "10% HP",
       "Category": "Pierce Skills"
     },
+    
     {
       "Skill": "Poison Arrow",
       "Effect": "Deals heavy Pierce damage / Poisons one foe. (50% chance)",
@@ -2563,6 +2636,15 @@
       "Category": "Slash Skills"
     },
     {
+      "Skill": "Blight",
+      "Effect": "Deals light Pierce damage / Poisons one foe. (20% chance) and High critical Chance",
+      "Power": "40",
+      "Accuracy": "100%",
+      "Critical": "36%",
+      "Cost": "36% HP",
+      "Category": "Pierce Skills"
+    },
+    {
       "Skill": "Cleave",
       "Effect": "Deals light Slash damage to one foe.",
       "Power": "30",
@@ -2605,6 +2687,15 @@
       "Accuracy": "95%",
       "Critical": "3%",
       "Cost": "14% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Iron Claw",
+      "Effect": "Deals medium Slash damage to one foes. (High Critical Chance)",
+      "Power": "100",
+      "Accuracy": "55%",
+      "Critical": "45%",
+      "Cost": "15% HP",
       "Category": "Slash Skills"
     },
     {
@@ -2653,6 +2744,15 @@
       "Category": "Slash Skills"
     },
     {
+      "Skill": "Tempest",
+      "Effect": "Deals heavy Slash damage to all foe.",
+      "Power": "350",
+      "Accuracy": "70%",
+      "Critical": "30%",
+      "Cost": "25% HP",
+      "Category": "Slash Skills"
+    },
+    {
       "Skill": "Heaven's Blade",
       "Effect": "Deals severe Slash damage to one foe. Michael exclusive.",
       "Power": "500",
@@ -2681,7 +2781,7 @@
     },
     {
       "Skill": "Vorpal Blade",
-      "Effect": "Deals heavy Slash damage to all foes. (2x \"Great\" condition bonus)",
+      "Effect": "Deals heavy Slash damage to all foes.",
       "Power": "500",
       "Accuracy": "99%",
       "Critical": "5%",
@@ -2756,6 +2856,15 @@
       "Category": "Strike Skills"
     },
     {
+      "Skill": "Hades Blast",
+      "Effect": "Deals medium Strike damage to one foes. (High Critical Chance)",
+      "Power": "82",
+      "Accuracy": "100%",
+      "Critical": "43%",
+      "Cost": "32% HP",
+      "Category": "Strike Skills"
+    },
+    {
       "Skill": "Herculean Strike",
       "Effect": "Deals medium Strike damage to all foes.",
       "Power": "210",
@@ -2793,7 +2902,7 @@
     },
     {
       "Skill": "Weary Thrust",
-      "Effect": "Deals heavy Strike damage to one foe. (1.5x \"Tired\" condition bonus)",
+      "Effect": "Deals heavy Strike damage to one foe. (1.5x if target is Panicked)",
       "Power": "405",
       "Accuracy": "99%",
       "Critical": "5%",

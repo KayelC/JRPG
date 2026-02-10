@@ -24,6 +24,7 @@ Drain Attack
 Liftoma
 Estoma
 Riberama
+Sacrifice
 Kamikaze
 Lullaby
 Resist Mind
@@ -32,6 +33,7 @@ Resist Curse
 Null Mind
 Null Nerve
 Null Curse
+Drain Attack
 Dormina
 Analyze
 Makatora

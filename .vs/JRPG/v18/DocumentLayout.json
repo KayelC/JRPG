@@ -1,14 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\",
+  "WorkspaceRootPath": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\",
   "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\data\\jsons\\smtiii_demons.json||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\data\\jsons\\smtiii_demons.json||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
     {
       "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\data\\jsons\\skills_by_category.json||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\data\\jsons\\skills_by_category.json||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|c:\\users\\kayel\\documents\\github\\jrpg\\jrpg\\data\\jsons\\smtiii_demons.json||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{ED2EA793-DBC9-41B3-98A3-BFD75FA56F7C}|JRPG\\JRPG.csproj|solutionrelative:jrpg\\data\\jsons\\smtiii_demons.json||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\Documentation\\PendingSkills.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -60,9 +60,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "persona_data.json",
-              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\persona_data.json",
+              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\persona_data.json",
               "RelativeDocumentMoniker": "JRPG\\Data\\Jsons\\persona_data.json",
-              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\persona_data.json",
+              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\persona_data.json",
               "RelativeToolTip": "JRPG\\Data\\Jsons\\persona_data.json",
               "ViewState": "AgIAAGcYAAAAAAAAAAAAAHAYAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -72,9 +72,9 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "enemies.json",
-              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\enemies.json",
+              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\enemies.json",
               "RelativeDocumentMoniker": "JRPG\\Data\\Jsons\\enemies.json",
-              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\enemies.json",
+              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\enemies.json",
               "RelativeToolTip": "JRPG\\Data\\Jsons\\enemies.json",
               "ViewState": "AgIAAIMFAAAAAAAAAAAvwJcFAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -84,37 +84,37 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "PendingSkills.txt",
-              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\Documentation\\PendingSkills.txt",
+              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\Documentation\\PendingSkills.txt",
               "RelativeDocumentMoniker": "Documentation\\PendingSkills.txt",
-              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\Documentation\\PendingSkills.txt",
+              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\Documentation\\PendingSkills.txt",
               "RelativeToolTip": "Documentation\\PendingSkills.txt",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACEAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2026-01-26T07:50:43.629Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "skills_by_category.json",
-              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\skills_by_category.json",
+              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\skills_by_category.json",
               "RelativeDocumentMoniker": "JRPG\\Data\\Jsons\\skills_by_category.json",
-              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\skills_by_category.json",
+              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\skills_by_category.json",
               "RelativeToolTip": "JRPG\\Data\\Jsons\\skills_by_category.json",
-              "ViewState": "AgIAABULAAAAAAAAAAAvwCgLAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAvwFkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-01-20T09:10:23.75Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "smtiii_demons.json",
-              "DocumentMoniker": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\smtiii_demons.json",
+              "DocumentMoniker": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\smtiii_demons.json",
               "RelativeDocumentMoniker": "JRPG\\Data\\Jsons\\smtiii_demons.json",
-              "ToolTip": "C:\\Users\\Kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\smtiii_demons.json",
+              "ToolTip": "C:\\Users\\kayel\\Documents\\GitHub\\JRPG\\JRPG\\Data\\Jsons\\smtiii_demons.json",
               "RelativeToolTip": "JRPG\\Data\\Jsons\\smtiii_demons.json",
-              "ViewState": "AgIAAJsIAAAAAAAAAAAswLEIAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAG0JAAAAAAAAAAAswKcJAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-01-20T08:50:34.798Z",
               "EditorCaption": ""

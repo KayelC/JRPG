@@ -2461,17 +2461,8 @@
       "Nerve": "Weak",
       "Curse": "Weak"
     },
-    "BaseSkills": [
-     "Ziodyne"
-     "Rakukaja"
-     "Mazionga"
-    ],
-    "LearnedSkills": {
-     "67": "Elec Boost",
-     "68": "Mediarahan",
-     "69": "Samarecarm",
-     "70": "Garudyne"
-    }
+    "BaseSkills": [],
+    "LearnedSkills": {}
   },
   {
     "Id": "quetzalcoatl",
@@ -2499,17 +2490,8 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [
-     "Venom Bite",
-     "Mabufula"
-    ],
-    "LearnedSkills": {
-     "56": "Kill Rush",
-     "57": "Ice Boost",
-     "58": "Ice Drain",
-     "59": "Poisma",
-     "60": "Recarmdra"
-    }
+    "BaseSkills": [],
+    "LearnedSkills": {}
   },
   {
     "Id": "naga_raja",
@@ -2537,15 +2519,8 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [
-     "Drain Attack",
-     "Tarukaja"
-    ],
-    "LearnedSkills": {
-     "38": "Counter",
-     "39": "Slithering Slash",
-     "40": "Null Fire"
-    }
+    "BaseSkills": [],
+    "LearnedSkills": {}
   },
   {
     "Id": "mizuchi",
@@ -2573,17 +2548,8 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [
-     "Bufula",
-     "Mabufula",
-     "Makakaja"
-    ],
-    "LearnedSkills": {
-     "35": "Makarakarn",
-     "36": "Me Patra",
-     "37": "Kill Rush",
-     "38": "Sukunda"
-    }
+    "BaseSkills": [],
+    "LearnedSkills": {}
   },
   {
     "Id": "naga",
@@ -2612,15 +2578,9 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Drain Attack",
-     "Tarukaja"
+    
     ],
-    "LearnedSkills": {
-     "29": "Life Gain",
-     "30": "Sukunda",
-     "31": "Hell Thrust",
-     "32": "Zionga"
-    }
+    "LearnedSkills": {}
   },
   {
     "Id": "nozuchi",

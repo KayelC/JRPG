@@ -2699,6 +2699,15 @@
       "Category": "Slash Skills"
     },
     {
+      "Skill": "Slithering Slash",
+      "Effect": "Deals medium Slash damage to all foes.",
+      "Power": "82",
+      "Accuracy": "70%",
+      "Critical": "30%",
+      "Cost": "25% HP",
+      "Category": "Slash Skills"
+    },
+    {
       "Skill": "Mighty Swing",
       "Effect": "Deals medium Slash damage to one foe.",
       "Power": "220",

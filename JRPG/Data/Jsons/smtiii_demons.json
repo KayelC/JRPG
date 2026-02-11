@@ -4272,6 +4272,43 @@
     }
   },
   {
+    "Id": "kudlak",
+    "Name": "Kudlak",
+    "Race": "Tyrant",
+    "Level": 46,
+    "Stats": {
+      "St": 14,
+      "Ma": 20,
+      "Vi": 20,
+      "Ag": 12,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Resist",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "bufula",
+      "Dormina"
+    ],
+    "LearnedSkills": {
+      "53": "Bufula",
+      "54": "Kyuketsu",
+      "55": "Mana Gain",
+      "56": "Mudoon"
+    }
+  },
+  {
     "Id": "lilith",
     "Name": "Lilith",
     "Race": "Night",
@@ -5681,6 +5718,147 @@
       "34": "Guillotine",
       "35": "Counter",
       "36": "Might"
+    }
+  },
+  {
+    "Id": "kresnik",
+    "Name": "Kresnik",
+    "Race": "Genma",
+    "Level": 58,
+    "Stats": {
+      "St": 18,
+      "Ma": 18,
+      "Vi": 17,
+      "Ag": 20,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Null",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Hamaon",
+      "Mana Aid",
+      "Grand Tack"
+    ],
+    "LearnedSkills": {
+      "53": "Debilitate",
+      "54": "Divine Judgement",
+      "55": "Heaven's Bow",
+      "56": "Pierce Boost",
+      "57": "Pierec Amp"
+    }
+  },
+  {
+    "Id": "cu_chulainn",
+    "Name": "Cu Chulainn",
+    "Race": "Genma",
+    "Level": 52,
+    "Stats": {
+      "St": 21,
+      "Ma": 15,
+      "Vi": 17,
+      "Ag": 14,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "53": "Garudyne",
+      "54": "Divine Judgement",
+      "55": "Blight",
+      "56": "Attack All"
+    }
+  },
+  {
+    "Id": "hanuman",
+    "Name": "Hanuman",
+    "Race": "Genma",
+    "Level": 46,
+    "Stats": {
+      "St": 17,
+      "Ma": 12,
+      "Vi": 15,
+      "Ag": 19,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "47": "Rakukaja",
+      "48": "Endure",
+      "49": "Life Surge"
+    }
+  },
+  {
+    "Id": "kurama_tengu",
+    "Name": "Kurama Tengu",
+    "Race": "Genma",
+    "Level": 38,
+    "Stats": {
+      "St": 13,
+      "Ma": 17,
+      "Vi": 13,
+      "Ag": 17,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Absorb",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "39": "Kouga",
+      "40": "Wind Boost",
+      "41": "Sukunda",
+      "42": "Garudyne",
+      "43": "Makouga"
     }
   }
 ]

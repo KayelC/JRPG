@@ -174,6 +174,15 @@
       "Category": "Almighty Skills"
     },
     {
+      "Skill": "Kyuketsu",
+      "Effect": "Drains HP and SP from one foe. (Kudlak Exclusive)",
+      "Power": "60",
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "5 SP",
+      "Category": "Almighty Skills"
+    },
+    {
       "Skill": "Foul Breath",
       "Effect": "Increases ailment susceptibility by 1.5x* to one foe for three turns.",
       "Power": "-",
@@ -2530,6 +2539,24 @@
       "Accuracy": "87%",
       "Critical": "5%",
       "Cost": "19% HP",
+      "Category": "Pierce Skills"
+    },
+    {
+      "Skill": "Grand Tack",
+      "Effect": "Deals heavy Pierce damage to one foe. (Kresnik Exclusive)",
+      "Power": "350",
+      "Accuracy": "99%",
+      "Critical": "25%",
+      "Cost": "11% HP",
+      "Category": "Pierce Skills"
+    },
+    {
+      "Skill": "Heaven's Bow",
+      "Effect": "Deals severe Pierce damage to all foes. (Kresnik Exclusive)",
+      "Power": "550",
+      "Accuracy": "99%",
+      "Critical": "20%",
+      "Cost": "33% HP",
       "Category": "Pierce Skills"
     },
     {

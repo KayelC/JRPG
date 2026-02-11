@@ -5615,5 +5615,72 @@
       "76": "Megidola",
       "77": "Radiance"
     }
+  },
+  {
+    "Id": "ganesha",
+    "Name": "Ganesha",
+    "Race": "Wargod",
+    "Level": 58,
+    "Stats": {
+      "St": 21,
+      "Ma": 21,
+      "Vi": 21,
+      "Ag": 12,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "59": "Endure",
+      "60": "Absorb Wind",
+      "61": "Debilitate",
+      "62": "Tempest"
+    }
+  },
+  {
+    "Id": "valkyrie",
+    "Name": "Valkyrie",
+    "Race": "Wargod",
+    "Level": 33,
+    "Stats": {
+      "St": 15,
+      "Ma": 12,
+      "Vi": 14,
+      "Ag": 12,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "34": "Guillotine",
+      "35": "Counter",
+      "36": "Might"
+    }
   }
 ]

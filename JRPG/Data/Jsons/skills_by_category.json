@@ -55,6 +55,15 @@
       "Category": "Ailment Skills"
     },
     {
+      "Skill": "Intoxicate",
+      "Effect": "Makes all foes Panic. (60% chance)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "15 SP",
+      "Category": "Ailment Skills"
+    },
+    {
       "Skill": "Tentarafoo",
       "Effect": "Makes all foes Panic. (40% chance)",
       "Power": NaN,
@@ -3064,6 +3073,15 @@
       "Cost": "24 SP",
       "Category": "Wind Skills"
     },
+    {
+      "Skill": "Wet Wind",
+      "Effect": "Deals medium Wind damage to all foe. (20% Stun) Pazuzu exclusive.",
+      "Power": "120",
+      "Accuracy": "99%",
+      "Critical": NaN,
+      "Cost": "25 SP",
+      "Category": "Wind Skills"
+    }
     {
       "Skill": "Panta Rhei",
       "Effect": "Deals severe Wind damage to one foe. Norn exclusive.",

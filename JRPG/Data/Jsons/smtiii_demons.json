@@ -3762,5 +3762,262 @@
       "9": "Patra",
       "10": "Dormina"
     }
+  },
+   {
+    "Id": "mada",
+    "Name": "Mada",
+    "Race": "Vile",
+    "Level": 83,
+    "Stats": {
+      "St": 30,
+      "Ma": 21,
+      "Vi": 30,
+      "Ag": 14,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Absorb",
+      "Slash": "Absorb",
+      "Pierce": "Absorb",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Hades Blast",
+      "Debilitate"
+    ],
+    "LearnedSkills": {
+      "84": "Intoxicate",
+      "85": "Diarahan",
+      "86": "Tarukaja",
+      "87": "Life Surge"
+    }
+  },
+  {
+    "Id": "samael",
+    "Name": "Samael",
+    "Race": "Vile",
+    "Level": 73,
+    "Stats": {
+      "St": 19,
+      "Ma": 26,
+      "Vi": 23,
+      "Ag": 19,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mahamaon",
+      "Mamudoon",
+      "Maragidyne"
+    ],
+    "LearnedSkills": {
+      "74": "Samarecarm",
+      "75": "Tetrakarn",
+      "76": "Retaliate",
+      "77": "Repel Phys"
+    }
+  },
+  {
+    "Id": "taotie",
+    "Name": "Taotie",
+    "Race": "Vile",
+    "Level": 65,
+    "Stats": {
+      "St": 18,
+      "Ma": 21,
+      "Vi": 21,
+      "Ag": 15,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Megido",
+      "Tetraja"
+    ],
+    "LearnedSkills": {
+      "66": "Life Drain",
+      "67": "Hell Gaze",
+      "68": "Mana Aid",
+      "69": "Tentarafoo"
+    }
+  },
+  {
+    "Id": "girimekhala",
+    "Name": "Girimekhala",
+    "Race": "Vile",
+    "Level": 58,
+    "Stats": {
+      "St": 22,
+      "Ma": 17,
+      "Vi": 21,
+      "Ag": 13,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Repel",
+      "Slash": "Repel",
+      "Pierce": "Repel",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Binding Cry",
+      "Chaos Blade"
+    ],
+    "LearnedSkills": {
+      "59": "Mazionga",
+      "60": "Debilitate",
+      "61": "Tempest"
+    }
+  },
+  {
+    "Id": "pazuzu",
+    "Name": "Pazuzu",
+    "Race": "Vile",
+    "Level": 45,
+    "Stats": {
+      "St": 16,
+      "Ma": 19,
+      "Vi": 20,
+      "Ag": 10,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Hell Gaze",
+      "Mediarama"
+    ],
+    "LearnedSkills": {
+      "46": "Null Wind",
+      "47": "Stun Needle",
+      "48": "Tentarafoo",
+      "49": "Wet Wind"
+    }
+  },
+  {
+    "Id": "baphomet",
+    "Name": "Baphomet",
+    "Race": "Vile",
+    "Level": 33,
+    "Stats": {
+      "St": 8,
+      "Ma": 17,
+      "Vi": 17,
+      "Ag": 9,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Makakaja"
+    ],
+    "LearnedSkills": {
+      "34": "Evil Gaze",
+      "35": "Maragion",
+      "36": "Eternal Rest"
+    }
+  },
+  {
+    "Id": "arahabaki",
+    "Name": "Arahabaki",
+    "Race": "Vile",
+    "Level": 30,
+    "Stats": {
+      "St": 14,
+      "Ma": 10,
+      "Vi": 19,
+      "Ag": 6,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Weak",
+      "Wind": "Weak",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Weak",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Bash",
+      "Focus"
+    ],
+    "LearnedSkills": {
+      "31": "Mabufula",
+      "32": "Mudo",
+      "33": "Sonic Wave",
+      "34": "Drain Attack"
+    }
   }
 ]

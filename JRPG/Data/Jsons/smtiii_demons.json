@@ -720,7 +720,7 @@
      "Marin Karin"
     ],
     "LearnedSkills": {
-     "25": "Posmudi",
+     "25": "Posumudi",
      "26": "Me Patra",
      "27": "Recarm"
     }
@@ -1643,7 +1643,7 @@
     ],
     "LearnedSkills": {
       "4": "Rakunda",
-      "5": "Posmudi",
+      "5": "Posumudi",
       "6": "Magaru"
     }
   },
@@ -4639,6 +4639,231 @@
       "9": "Analyze",
       "10": "Tarunda",
       "11": "Mazio"
+    }
+  },
+  {
+    "Id": "hresvelgr",
+    "Name": "Hresvelgr",
+    "Race": "Wilder",
+    "Level": 75,
+    "Stats": {
+      "St": 20,
+      "Ma": 20,
+      "Vi": 19,
+      "Ag": 25,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Ice Boost",
+      "Magarula"
+    ],
+    "LearnedSkills": {
+      "76": "Null Strike",
+      "77": "Iron Claw",
+      "78": "Life Aid",
+      "79": "Repel Elec"
+    }
+  },
+  {
+    "Id": "mothman",
+    "Name": "Mothman",
+    "Race": "Wilder",
+    "Level": 43,
+    "Stats": {
+      "St": 11,
+      "Ma": 18,
+      "Vi": 18,
+      "Ag": 8,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Evil Gaze",
+      "Stun Claw"
+    ],
+    "LearnedSkills": {
+      "44": "Trafuri",
+      "45": "Sonic Wave",
+      "46": "Maragion",
+      "47": "Null Elec"
+    }
+  },
+  {
+    "Id": "nue",
+    "Name": "Nue",
+    "Race": "Wilder",
+    "Level": 31,
+    "Stats": {
+      "St": 14,
+      "Ma": 9,
+      "Vi": 12,
+      "Ag": 8,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stun Claw",
+      "War Cry"
+    ],
+    "LearnedSkills": {
+      "32": "Mabufula",
+      "33": "Sonic Wave",
+      "34": "Ice Boost",
+      "35": "Mamudo"
+    }
+  },
+  {
+    "Id": "raiju",
+    "Name": "Raiju",
+    "Race": "Wilder",
+    "Level": 25,
+    "Stats": {
+      "St": 8,
+      "Ma": 15,
+      "Vi": 9,
+      "Ag": 8,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Weak",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Zionga",
+      "Lightoma"
+    ],
+    "LearnedSkills": {
+      "26": "Feral Claw",
+      "27": "Mazio",
+      "28": "Needle Rush",
+      "29": "Elec Boost"
+    }
+  },
+  {
+    "Id": "bicorn",
+    "Name": "Bicorn",
+    "Race": "Wilder",
+    "Level": 15,
+    "Stats": {
+      "St": 10,
+      "Ma": 6,
+      "Vi": 10,
+      "Ag": 5,
+      "Lu": 4
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Charm Bite",
+      "Sukukaja"
+    ],
+    "LearnedSkills": {
+      "16": "Maragi",
+      "17": "Bright Might",
+      "18": "Resist Nerve",
+      "19": "Pulinpa",
+      "20": "Stun Gaze"
+    }
+  },
+  {
+    "Id": "zhen",
+    "Name": "Zhen",
+    "Race": "Wilder",
+    "Level": 6,
+    "Stats": {
+      "St": 4,
+      "Ma": 6,
+      "Vi": 6,
+      "Ag": 5,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Pulinpa",
+      "Posumudi",
+      "Garu"
+    ],
+    "LearnedSkills": {
+      "7": "Toxic Sting",
+      "8": "Tarunda",
+      "9": "Magaru",
+      "10": "Null Nerve"
     }
   }
 ]

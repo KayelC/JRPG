@@ -2452,7 +2452,16 @@
     },
     {
       "Skill": "Stun Needle",
-      "Effect": "Deals light Pierce damage to one foe. (40% Stun)",
+      "Effect": "Deals light Pierce damage to one foe, with a chance to Stun. (40% Stun)",
+      "Power": "62",
+      "Accuracy": "76%",
+      "Critical": "24%",
+      "Cost": "7% HP",
+      "Category": "Pierce Skills"
+    },
+    {
+      "Skill": "Toxic Sting",
+      "Effect": "Deals light Pierce damage to one foe, with a chance to Poison (40% Poison)",
       "Power": "62",
       "Accuracy": "76%",
       "Critical": "24%",

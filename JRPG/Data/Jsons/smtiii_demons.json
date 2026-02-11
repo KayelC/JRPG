@@ -3097,5 +3097,332 @@
       "4": "Dia",
       "5": "Bash"
     }
+  },
+  {
+    "Id": "ongyo_ki",
+    "Name": "Ongyo-Ki",
+    "Race": "Brute",
+    "Level": 81,
+    "Stats": {
+      "St": 23,
+      "Ma": 27,
+      "Vi": 23,
+      "Ag": 20,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Dark Sword",
+      "Tentarafoo"
+    ],
+    "LearnedSkills": {
+      "82": "Megido",
+      "83": "Mudoon",
+      "84": "Blight",
+      "85": "Victory Cry",
+    }
+  },
+  {
+    "Id": "fuu_ki",
+    "Name": "Fuu-Ki",
+    "Race": "Brute",
+    "Level": 66,
+    "Stats": {
+      "St": 18,
+      "Ma": 21,
+      "Vi": 20,
+      "Ag": 19,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Null",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Magarudyne",
+      "Garudyne"
+    ],
+    "LearnedSkills": {
+      "67": "Binding Cry",
+      "68": "Chaos Blade",
+      "69": "Sukunda"
+    }
+  },
+  {
+    "Id": "sui_ki",
+    "Name": "Sui-Ki",
+    "Race": "Brute",
+    "Level": 62,
+    "Stats": {
+      "St": 18,
+      "Ma": 24,
+      "Vi": 20,
+      "Ag": 14,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dekaja",
+      "Mabufula",
+      "Ice Boost"
+    ],
+    "LearnedSkills": {
+      "63": "Evil Gaze",
+      "64": "Bufudyne"
+    }
+  },
+  {
+    "Id": "kin_ki",
+    "Name": "Kin-Ki",
+    "Race": "Brute",
+    "Level": 59,
+    "Stats": {
+      "St": 23,
+      "Ma": 13,
+      "Vi": 24,
+      "Ag": 7,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Kill Rush",
+      "Focus",
+      "Rakukaja"
+    ],
+    "LearnedSkills": {
+      "60": "Taunt",
+      "61": "Sacrifice",
+      "62": "Tempest"
+    }
+  },
+  {
+    "Id": "shiki_ouji",
+    "Name": "Shiki-Ouji",
+    "Race": "Brute",
+    "Level": 54,
+    "Stats": {
+      "St": 14,
+      "Ma": 24,
+      "Vi": 16,
+      "Ag": 10,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stun Needle",
+      "Mamudoon",
+      "Dekaja"
+    ],
+    "LearnedSkills": {
+      "55": "Bewilder",
+      "56": "Mahamaon",
+      "57": "Megido"
+    }
+  },
+  {
+    "Id": "yomotsu_ikusa",
+    "Name": "Yomotsu-Ikusa",
+    "Race": "Brute",
+    "Level": 44,
+    "Stats": {
+      "St": 17,
+      "Ma": 15,
+      "Vi": 13,
+      "Ag": 9,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Hell Thrust",
+      "Me Patra",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "45": "Zan-ei",
+      "46": "Mudoon"
+    }
+  },
+  {
+    "Id": "oni",
+    "Name": "Oni",
+    "Race": "Brute",
+    "Level": 25,
+    "Stats": {
+      "St": 13,
+      "Ma": 7,
+      "Vi": 12,
+      "Ag": 6,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Rakunda",
+      "Kill Rush"
+    ],
+    "LearnedSkills": {
+      "26": "War Cry",
+      "27": "Estoma",
+      "28": "Life Gain",
+      "29": "Dark Sword"
+    }
+  },
+  {
+    "Id": "momunofu",
+    "Name": "Momunofu",
+    "Race": "Brute",
+    "Level": 20,
+    "Stats": {
+      "St": 13,
+      "Ma": 6,
+      "Vi": 10,
+      "Ag": 7,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Weak",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Bash",
+      "Focus"
+    ],
+    "LearnedSkills": {
+      "21": "Life Bonus",
+      "22": "Brutal Slash",
+      "23": "Kamikaze"
+    }
+  },
+  {
+    "Id": "shikigami",
+    "Name": "Shikigami",
+    "Race": "Brute",
+    "Level": 4,
+    "Stats": {
+      "St": 5,
+      "Ma": 5,
+      "Vi": 4,
+      "Ag": 5,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Repel",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Zio"
+    ],
+    "LearnedSkills": {
+      "5": "Tarunda",
+      "6": "Sukunda",
+      "7": "Tarukaja"
+    }
   }
 ]

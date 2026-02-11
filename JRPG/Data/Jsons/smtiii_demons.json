@@ -3132,7 +3132,7 @@
       "82": "Megido",
       "83": "Mudoon",
       "84": "Blight",
-      "85": "Victory Cry",
+      "85": "Victory Cry"
     }
   },
   {
@@ -3423,6 +3423,344 @@
       "5": "Tarunda",
       "6": "Sukunda",
       "7": "Tarukaja"
+    }
+  },
+   {
+    "Id": "rangda",
+    "Name": "Rangda",
+    "Race": "Femme",
+    "Level": 72,
+    "Stats": {
+      "St": 19,
+      "Ma": 24,
+      "Vi": 20,
+      "Ag": 14,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Repel",
+      "Slash": "Repel",
+      "Pierce": "Repel",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stun Claw",
+      "Debilitate",
+      "Dekaja"
+    ],
+    "LearnedSkills": {
+      "73": "Mana Aid",
+      "74": "Eerie Sound",
+      "75": "Maragidyne",
+      "76": "Retaliate"
+    }
+  },
+  {
+    "Id": "atropos",
+    "Name": "Atropos",
+    "Race": "Femme",
+    "Level": 67,
+    "Stats": {
+      "St": 16,
+      "Ma": 28,
+      "Vi": 17,
+      "Ag": 15,
+      "Lu": 14
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Ziodyne",
+      "Garudyne",
+      "Bufudyne"
+    ],
+    "LearnedSkills": {
+      "68": "Elec Boost",
+      "69": "Wind Boost",
+      "70": "Ice Boost",
+      "71": "Mana Surge",
+      "72": "Megidola"
+    }
+  },
+  {
+    "Id": "lachesis",
+    "Name": "Lachesis",
+    "Race": "Femme",
+    "Level": 63,
+    "Stats": {
+      "St": 16,
+      "Ma": 26,
+      "Vi": 19,
+      "Ag": 10,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Makakaja",
+      "Rakukaja",
+      "Makarakarn"
+    ],
+    "LearnedSkills": {
+      "64": "Sukukaja",
+      "65": "Dormina",
+      "66": "Tetrakarn",
+      "67": "Rakunda",
+      "68": "Trafuri"
+    }
+  },
+  {
+    "Id": "clotho",
+    "Name": "Clotho",
+    "Race": "Femme",
+    "Level": 58,
+    "Stats": {
+      "St": 16,
+      "Ma": 22,
+      "Vi": 15,
+      "Ag": 16,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Hell Gaze",
+      "Mahamaon",
+      "Kougaon"
+    ],
+    "LearnedSkills": {
+      "59": "Mediarahan",
+      "60": "Eternal Rest",
+      "61": "Marin Karin",
+      "62": "Samarecarm"
+    }
+  },
+  {
+    "Id": "dakini",
+    "Name": "Dakini",
+    "Race": "Femme",
+    "Level": 52,
+    "Stats": {
+      "St": 21,
+      "Ma": 11,
+      "Vi": 17,
+      "Ag": 13,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mamudo",
+      "Life Aid"
+    ],
+    "LearnedSkills": {
+      "53": "Agidyne",
+      "54": "Blight",
+      "55": "Endure"
+    }
+  },
+  {
+    "Id": "yaksini",
+    "Name": "Yaksini",
+    "Race": "Femme",
+    "Level": 43,
+    "Stats": {
+      "St": 17,
+      "Ma": 11,
+      "Vi": 15,
+      "Ag": 11,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Guillotine",
+      "Riberama,"
+    ],
+    "LearnedSkills": {
+      "44": "Binding Cry",
+      "45": "Null Ice",
+      "46": "Tentarafoo",
+      "47": "Retaliate"
+    }
+  },
+  {
+    "Id": "yomotsu_shikome",
+    "Name": "Yomotsu-Shikome",
+    "Race": "Femme",
+    "Level": 32,
+    "Stats": {
+      "St": 8,
+      "Ma": 16,
+      "Vi": 9,
+      "Ag": 10,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Resist",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Magarula",
+      "Shibaboo"
+    ],
+    "LearnedSkills": {
+      "33": "Resist Dark",
+      "34": "Sonic Wave",
+      "35": "Stun Needle",
+      "36": "Drain Attack"
+    }
+  },
+  {
+    "Id": "taraka",
+    "Name": "Taraka",
+    "Race": "Femme",
+    "Level": 20,
+    "Stats": {
+      "St": 10,
+      "Ma": 6,
+      "Vi": 11,
+      "Ag": 6,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Shibaboo",
+      "Taunt",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "21": "Rakukaja",
+      "22": "Kamikaze",
+      "23": "Zionga",
+      "24": "Heat Wave"
+    }
+  },
+  {
+    "Id": "datsue_ba",
+    "Name": "Datsue-Ba",
+    "Race": "Femme",
+    "Level": 7,
+    "Stats": {
+      "St": 4,
+      "Ma": 8,
+      "Vi": 5,
+      "Ag": 4,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Needle Rush",
+      "Shibaboo"
+    ],
+    "LearnedSkills": {
+      "8": "Bufu",
+      "9": "Patra",
+      "10": "Dormina"
     }
   }
 ]

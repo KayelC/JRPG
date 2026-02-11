@@ -2398,8 +2398,8 @@
     },
     {
       "Skill": "Needle Rush",
-      "Effect": "Deals medium Pierce damage to one foe.",
-      "Power": "82",
+      "Effect": "Deals light Pierce damage to one foe.",
+      "Power": "62",
       "Accuracy": "76%",
       "Critical": "24%",
       "Cost": "10% HP",

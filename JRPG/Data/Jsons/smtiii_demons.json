@@ -4085,7 +4085,7 @@
     ],
     "LearnedSkills": {
       "91": "Absorb Wind",
-      "92": "Megidoloan"
+      "92": "Megidolaon"
     }
   },
   {
@@ -4116,7 +4116,7 @@
     },
     "BaseSkills": [
       "Maziodyne",
-      "Megidoloan"
+      "Megidolaon"
     ],
     "LearnedSkills": {
       "85": "Growth 3",
@@ -4269,6 +4269,376 @@
       "53": "Trafuri",
       "54": "Mudoon",
       "55": "Mana Gain"
+    }
+  },
+  {
+    "Id": "lilith",
+    "Name": "Lilith",
+    "Race": "Night",
+    "Level": 80,
+    "Stats": {
+      "St": 17,
+      "Ma": 30,
+      "Vi": 21,
+      "Ag": 17,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "81": "Sexy Dance",
+      "82": "Maziodyne",
+      "83": "Life Drain",
+      "84": "Hell Fang",
+      "85": "Mana Surge",
+      "86": "Megidolaon"
+    }
+  },
+  {
+    "Id": "nyx",
+    "Name": "Nyx",
+    "Race": "Night",
+    "Level": 70,
+    "Stats": {
+      "St": 15,
+      "Ma": 27,
+      "Vi": 17,
+      "Ag": 16,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dormina",
+      "Makarakarn",
+      "Eternal Rest"
+    ],
+    "LearnedSkills": {
+      "71": "Debilitate",
+      "72": "Spirit Drain",
+      "73": "Ice Age",
+      "74": "Absorb Fire"
+    }
+  },
+  {
+    "Id": "black_frost",
+    "Name": "Black Frost",
+    "Race": "Night",
+    "Level": 66,
+    "Stats": {
+      "St": 24,
+      "Ma": 24,
+      "Vi": 13,
+      "Ag": 16,
+      "Lu": 24
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Repel",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Mamudoon",
+      "Kill Rush"
+    ],
+    "LearnedSkills": {
+      "67": "Diarama",
+      "68": "Null Curse",
+      "69": "Null Nerve",
+      "70": "Null Mind"
+    }
+  },
+  {
+    "Id": "queen_mab",
+    "Name": "Queen Mab",
+    "Race": "Night",
+    "Level": 56,
+    "Stats": {
+      "St": 12,
+      "Ma": 21,
+      "Vi": 12,
+      "Ag": 12,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "57": "Mediarahan",
+      "58": "Makarakarn",
+      "59": "Dormina",
+      "60": "Tetraja",
+      "61": "Maziodyne"
+    }
+  },
+  {
+    "Id": "loa",
+    "Name": "Loa",
+    "Race": "Night",
+    "Level": 53,
+    "Stats": {
+      "St": 16,
+      "Ma": 22,
+      "Vi": 16,
+      "Ag": 12,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Mamudo",
+      "Tetraja",
+      "Dekunda"
+    ],
+    "LearnedSkills": {
+      "54": "Venom Bite",
+      "55": "Evil Gaze",
+      "56": "Kamikaze",
+      "57": "Mamudoon",
+      "58": "Debilitate"
+    }
+  },
+  {
+    "Id": "kaiwan",
+    "Name": "Kaiwan",
+    "Race": "Night",
+    "Level": 47,
+    "Stats": {
+      "St": 14,
+      "Ma": 19,
+      "Vi": 15,
+      "Ag": 11,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mudoon",
+      "Charm Bite",
+      "Sonic Wave"
+    ],
+    "LearnedSkills": {
+      "48": "Sukukaja",
+      "49": "Rakukaja",
+      "50": "Evil Gaze",
+      "51": "Null Light"
+    }
+  },
+  {
+    "Id": "succubus",
+    "Name": "Succubus",
+    "Race": "Night",
+    "Level": 37,
+    "Stats": {
+      "St": 10,
+      "Ma": 16,
+      "Vi": 11,
+      "Ag": 10,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dormina",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "38": "Eternal Rest",
+      "39": "Sexy Dance",
+      "40": "Spirit Drain",
+      "41": "Tentarafoo"
+    }
+  },
+  {
+    "Id": "incubus",
+    "Name": "Incubus",
+    "Race": "Night",
+    "Level": 25,
+    "Stats": {
+      "St": 7,
+      "Ma": 14,
+      "Vi": 8,
+      "Ag": 9,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Marin Karin",
+      "Magarula"
+    ],
+    "LearnedSkills": {
+      "26": "Stun Claw",
+      "27": "Evil Gaze",
+      "28": "Life Drain"
+    }
+  },
+  {
+    "Id": "fomorian",
+    "Name": "Fomorian",
+    "Race": "Night",
+    "Level": 18,
+    "Stats": {
+      "St": 8,
+      "Ma": 7,
+      "Vi": 14,
+      "Ag": 4,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Bufu",
+      "Lullaby"
+    ],
+    "LearnedSkills": {
+      "19": "Bash",
+      "20": "Life Bonus",
+      "21": "Mabufu",
+      "22": "Kill Rush"
+    }
+  },
+  {
+    "Id": "lilim",
+    "Name": "Lilim",
+    "Race": "Night",
+    "Level": 8,
+    "Stats": {
+      "St": 4,
+      "Ma": 8,
+      "Vi": 5,
+      "Ag": 7,
+      "Lu": 4
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Null",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Rakunda",
+      "Marin Karin"
+    ],
+    "LearnedSkills": {
+      "9": "Analyze",
+      "10": "Tarunda",
+      "11": "Mazio"
     }
   }
 ]

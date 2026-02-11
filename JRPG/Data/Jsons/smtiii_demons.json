@@ -5860,5 +5860,73 @@
       "42": "Garudyne",
       "43": "Makouga"
     }
+  },
+  {
+    "Id": "qing_long",
+    "Name": "Qing Long",
+    "Race": "Dragon",
+    "Level": 44,
+    "Stats": {
+      "St": 15,
+      "Ma": 13,
+      "Vi": 22,
+      "Ag": 9,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "45": "Life Gain",
+      "46": "Venom Bite",
+      "47": "Mabufula",
+      "48": "Kouga"
+    }
+  },
+  {
+    "Id": "xuanwu",
+    "Name": "Xuanwu",
+    "Race": "Dragon",
+    "Level": 24,
+    "Stats": {
+      "St": 9,
+      "Ma": 11,
+      "Vi": 16,
+      "Ag": 4,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Absorb",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "25": "Bufula",
+      "26": "Estoma",
+      "27": "Ice Boost",
+      "28": "Mabufula"
+    }
   }
 ]

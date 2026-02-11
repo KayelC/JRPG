@@ -40,3 +40,4 @@ Makatora
 Taunt
 Eternal Rest
 Trafuri
+"Binding Cry"

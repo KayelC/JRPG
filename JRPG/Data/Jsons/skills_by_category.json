@@ -2260,6 +2260,15 @@
       "Category": "Passive Skills"
     },
     {
+      "Skill": "Retaliate",
+      "Effect": "Counter physical attacks (very high odds). (50% chance)",
+      "Power": "50",
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
       "Skill": "Alertness",
       "Effect": "Lowers odds of being taken by surprise.",
       "Power": NaN,
@@ -2379,6 +2388,15 @@
       "Category": "Pierce Skills"
     },
     {
+      "Skill": "Needle Rush",
+      "Effect": "Deals medium Pierce damage to one foe.",
+      "Power": "82",
+      "Accuracy": "76%",
+      "Critical": "24%",
+      "Cost": "10% HP",
+      "Category": "Pierce Skills"
+    },
+    {
       "Skill": "Twin Shot",
       "Effect": "Deals medium Pierce damage to one foe. (2 hits)",
       "Power": "100",
@@ -2394,6 +2412,15 @@
       "Accuracy": "82%",
       "Critical": "5%",
       "Cost": "10% HP",
+      "Category": "Pierce Skills"
+    },
+    {
+      "Skill": "Stun Needle",
+      "Effect": "Deals light Pierce damage to one foe. (40% Stun)",
+      "Power": "62",
+      "Accuracy": "76%",
+      "Critical": "24%",
+      "Cost": "7% HP",
       "Category": "Pierce Skills"
     },
     {
@@ -2645,6 +2672,33 @@
       "Category": "Pierce Skills"
     },
     {
+      "Skill": "Feral Claw",
+      "Effect": "Deals light Slash damage to one foes.",
+      "Power": "68",
+      "Accuracy": "75%",
+      "Critical": "25%",
+      "Cost": "6% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Stun Claw",
+      "Effect": "Deals light Slash damage to one foes. (40% Stun)",
+      "Power": "88",
+      "Accuracy": "70%",
+      "Critical": "30%",
+      "Cost": "17% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Venom Claw",
+      "Effect": "Deals light Slash damage to one foes. (40% Poison)",
+      "Power": "82",
+      "Accuracy": "76%",
+      "Critical": "24%",
+      "Cost": "18% HP",
+      "Category": "Slash Skills"
+    },
+    {
       "Skill": "Cleave",
       "Effect": "Deals light Slash damage to one foe.",
       "Power": "30",
@@ -2693,6 +2747,15 @@
       "Skill": "Iron Claw",
       "Effect": "Deals medium Slash damage to one foes. (High Critical Chance)",
       "Power": "100",
+      "Accuracy": "55%",
+      "Critical": "45%",
+      "Cost": "15% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Hell Fang",
+      "Effect": "Deals medium Slash damage to one foes. (High Critical Chance)",
+      "Power": "112",
       "Accuracy": "55%",
       "Critical": "45%",
       "Cost": "15% HP",

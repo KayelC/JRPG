@@ -2657,5 +2657,225 @@
      "16": "Rakukaja",
      "17": "Sacrifice"
     }
+  },
+  {
+    "Id": "cerberus",
+    "Name": "Cerberus",
+    "Race": "Beast",
+    "Level": 61,
+    "Stats": {
+      "St": 23,
+      "Ma": 14,
+      "Vi": 15,
+      "Ag": 17,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Repel",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Iron Claw",
+     "Binding Cry",
+     "Sukunda"
+    ],
+    "LearnedSkills": {
+     "62": "Retaliate",
+     "63": "Maragidyne",
+     "64": "Attack All"
+    }
+  },
+  {
+    "Id": "suparna",
+    "Name": "Suparna",
+    "Race": "Beast",
+    "Level": 54,
+    "Stats": {
+      "St": 13,
+      "Ma": 19,
+      "Vi": 14,
+      "Ag": 22,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+     "Garudyne",
+     "Sukunda",
+     "Sukukaja"
+    ],
+    "LearnedSkills": {
+     "55": "Magarudyne",
+     "56": "Venom Claw",
+     "57": "Diarahan"
+    }
+  },
+  {
+    "Id": "orthrus",
+    "Name": "Orthrus",
+    "Race": "Beast",
+    "Level": 34,
+    "Stats": {
+      "St": 16,
+      "Ma": 8,
+      "Vi": 13,
+      "Ag": 11,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Agilao",
+     "Stun Claw"
+    ],
+    "LearnedSkills": {
+     "35": "Fire Boost",
+     "36": "War Cry",
+     "37": "Hell Fang"
+    }
+  },
+  {
+    "Id": "badb_catha",
+    "Name": "Badb Catha",
+    "Race": "Beast",
+    "Level": 23,
+    "Stats": {
+      "St": 11,
+      "Ma": 6,
+      "Vi": 8,
+      "Ag": 12,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Needle Rush",
+     "Liftoma"
+    ],
+    "LearnedSkills": {
+     "24": "Magaru",
+     "25": "Resist Wind",
+     "26": "Mana Aid"
+    }
+  },
+  {
+    "Id": "nekomata",
+    "Name": "Nekomata",
+    "Race": "Beast",
+    "Level": 18,
+    "Stats": {
+      "St": 7,
+      "Ma": 12,
+      "Vi": 8,
+      "Ag": 7,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Absorb",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Stun Needle",
+     "Marin Karin",
+     "Paraladi"
+    ],
+    "LearnedSkills": {
+     "19": "Mana Bonus",
+     "20": "Feral Claw",
+     "21": "Evil Touch"
+    }
+  },
+  {
+    "Id": "inugami",
+    "Name": "Inugami",
+    "Race": "Beast",
+    "Level": 13,
+    "Stats": {
+      "St": 10,
+      "Ma": 7,
+      "Vi": 9,
+      "Ag": 6,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+     "Maragi",
+     "Double Fangs"
+    ],
+    "LearnedSkills": {
+     "14": "Media",
+     "15": "Rakunda",
+     "16": "Sukunda",
+     "17": "Pulinpa"
+    }
   }
 ]

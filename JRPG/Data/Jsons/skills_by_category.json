@@ -311,6 +311,15 @@
       "Category": "Darkness Skills"
     },
     {
+      "Skill": "Death Flies",
+      "Effect": "Darkness: instant kill, all foes. (100% chance when not immune to Darkness) Beelzebub Fly exclusive.",
+      "Power": "90",
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "60 SP",
+      "Category": "Darkness Skills"
+    },
+    {
       "Skill": "Hell Gaze",
       "Effect": "Darkness: instant kill, 1 foe (very high). (50% chance).",
       "Power": NaN,

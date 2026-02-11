@@ -4019,5 +4019,256 @@
       "33": "Sonic Wave",
       "34": "Drain Attack"
     }
+  },
+  {
+    "Id": "beelzebub_fly",
+    "Name": "Beelzebub Fly",
+    "Race": "Tyrant",
+    "Level": 95,
+    "Stats": {
+      "St": 35,
+      "Ma": 29,
+      "Vi": 28,
+      "Ag": 29,
+      "Lu": 21
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "96": "Death Flies",
+      "97": "Victory Cry"
+    }
+  },
+  {
+    "Id": "mot",
+    "Name": "Mot",
+    "Race": "Tyrant",
+    "Level": 91,
+    "Stats": {
+      "St": 25,
+      "Ma": 32,
+      "Vi": 31,
+      "Ag": 16,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Maragidyne",
+      "Magarudyne",
+      "Makakaja"
+    ],
+    "LearnedSkills": {
+      "91": "Absorb Wind",
+      "92": "Megidoloan"
+    }
+  },
+  {
+    "Id": "beelzebub",
+    "Name": "Beelzebub",
+    "Race": "Tyrant",
+    "Level": 84,
+    "Stats": {
+      "St": 32,
+      "Ma": 27,
+      "Vi": 27,
+      "Ag": 19,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Maziodyne",
+      "Megidoloan"
+    ],
+    "LearnedSkills": {
+      "85": "Growth 3",
+      "86": "Elec Boost"
+    }
+  },
+  {
+    "Id": "alciel",
+    "Name": "Alciel",
+    "Race": "Tyrant",
+    "Level": 77,
+    "Stats": {
+      "St": 29,
+      "Ma": 25,
+      "Vi": 27,
+      "Ag": 14,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Attack All",
+      "Mabufudyne"
+    ],
+    "LearnedSkills": {
+      "78": "Life Surge",
+      "79": "Tetrakarn",
+      "80": "Hell Fang",
+      "81": "Victory Cry"
+    }
+  },
+  {
+    "Id": "surt",
+    "Name": "Surt",
+    "Race": "Tyrant",
+    "Level": 74,
+    "Stats": {
+      "St": 28,
+      "Ma": 20,
+      "Vi": 24,
+      "Ag": 15,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Resist",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Maragidyne",
+      "Heat Wave",
+      "War Cry",
+      "Attack Fire"
+    ],
+    "LearnedSkills": {
+      "75": "Absorb Elec",
+      "76": "Attack All",
+      "77": "Ragnarok"
+    }
+  },
+  {
+    "Id": "abaddon",
+    "Name": "Abaddon",
+    "Race": "Tyrant",
+    "Level": 69,
+    "Stats": {
+      "St": 26,
+      "Ma": 24,
+      "Vi": 25,
+      "Ag": 13,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Attack All",
+      "Eerie Sound"
+    ],
+    "LearnedSkills": {
+      "70": "Mabufudyne",
+      "71": "Retaliate",
+      "72": "Repel Ice",
+      "73": "Hades Blast"
+    }
+  },
+  {
+    "Id": "loki",
+    "Name": "Loki",
+    "Race": "Tyrant",
+    "Level": 52,
+    "Stats": {
+      "St": 16,
+      "Ma": 20,
+      "Vi": 20,
+      "Ag": 12,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Tentarafoo"
+    ],
+    "LearnedSkills": {
+      "53": "Trafuri",
+      "54": "Mudoon",
+      "55": "Mana Gain"
+    }
   }
 ]

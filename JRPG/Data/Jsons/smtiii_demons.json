@@ -5127,5 +5127,261 @@
       "7": "Venom Claw",
       "8": "Sukunda"
     }
+  },
+  {
+    "Id": "shadow",
+    "Name": "Shadow",
+    "Race": "Foul",
+    "Level": 52,
+    "Stats": {
+      "St": 10,
+      "Ma": 20,
+      "Vi": 18,
+      "Ag": 16,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "sakahagi",
+    "Name": "Sakahagi",
+    "Race": "Foul",
+    "Level": 45,
+    "Stats": {
+      "St": 17,
+      "Ma": 17,
+      "Vi": 15,
+      "Ag": 15,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "phantom",
+    "Name": "Phantom",
+    "Race": "Foul",
+    "Level": 42,
+    "Stats": {
+      "St": 9,
+      "Ma": 17,
+      "Vi": 14,
+      "Ag": 15,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "black_ooze",
+    "Name": "Black Ooze",
+    "Race": "Foul",
+    "Level": 28,
+    "Stats": {
+      "St": 11,
+      "Ma": 9,
+      "Vi": 16,
+      "Ag": 6,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "blob",
+    "Name": "Blob",
+    "Race": "Foul",
+    "Level": 16,
+    "Stats": {
+      "St": 8,
+      "Ma": 6,
+      "Vi": 10,
+      "Ag": 5,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "mou_ryo",
+    "Name": "Mou-Ryo",
+    "Race": "Foul",
+    "Level": 7,
+    "Stats": {
+      "St": 6,
+      "Ma": 7,
+      "Vi": 4,
+      "Ag": 5,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Pulinpa",
+      "Toxic Sting"
+    ],
+    "LearnedSkills": {
+      "8": "Garu",
+      "9": "Deathtouch",
+      "10": "Mana Aid",
+      "11": "Magaru"
+    }
+  },
+  {
+    "Id": "slime",
+    "Name": "Slime",
+    "Race": "Foul",
+    "Level": 6,
+    "Stats": {
+      "St": 6,
+      "Ma": 5,
+      "Vi": 3,
+      "Ag": 5,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Deathtouch",
+      "Venom Bite"
+    ],
+    "LearnedSkills": {
+      "7": "Sukunda",
+      "8": "Sacrifice",
+      "9": "War Cry",
+      "10": "Sonic Wave"
+    }
+  },
+  {
+    "Id": "will_o_wisp",
+    "Name": "Will o' Wisp",
+    "Race": "Foul",
+    "Level": 1,
+    "Stats": {
+      "St": 4,
+      "Ma": 5,
+      "Vi": 4,
+      "Ag": 5,
+      "Lu": 3
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Weak",
+      "Ice": "Weak",
+      "Elec": "Weak",
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Needle Rush"
+    ],
+    "LearnedSkills": {
+      "2": "Garu",
+      "3": "Riberama",
+      "4": "Deathtouch",
+      "5": "Sacrifice",
+      "6": "Makakaja"
+    }
   }
 ]

@@ -21,6 +21,7 @@ Bright Might
 Dark Might
 Feral Claw
 Drain Attack
+Attack Fire (Turns base attack to Fire Type)
 Liftoma
 Estoma
 Lightoma
@@ -43,3 +44,5 @@ Eternal Rest
 Trafuri
 Binding Cry
 Stun Gaze
+Shibaboo
+Deathtouch

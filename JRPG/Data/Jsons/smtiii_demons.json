@@ -4865,5 +4865,267 @@
       "9": "Magaru",
       "10": "Null Nerve"
     }
+  },
+  {
+    "Id": "vetala",
+    "Name": "Vetala",
+    "Race": "Haunt",
+    "Level": 63,
+    "Stats": {
+      "St": 22,
+      "Ma": 20,
+      "Vi": 16,
+      "Ag": 11,
+      "Lu": 14
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stun Claw",
+      "Sacrifice"
+    ],
+    "LearnedSkills": {
+      "64" : "Life Drain",
+      "65" : "Rakunda",
+      "66" : "Retaliate",
+      "67" : "Megido",
+      "68" : "Kill Rush"
+    }
+  },
+  {
+    "Id": "legion",
+    "Name": "Legion",
+    "Race": "Haunt",
+    "Level": 49,
+    "Stats": {
+      "St": 19,
+      "Ma": 11,
+      "Vi": 21,
+      "Ag": 9,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tetrakarn",
+      "Deathtouch"
+    ],
+    "LearnedSkills": {
+      "50": "Resist Slash",
+      "51": "Tempest",
+      "52": "Hell Gaze",
+      "53": "Pulinpa",
+      "54": "Mamudoon"
+    }
+  },
+  {
+    "Id": "pisaca",
+    "Name": "Pisaca",
+    "Race": "Haunt",
+    "Level": 28,
+    "Stats": {
+      "St": 8,
+      "Ma": 10,
+      "Vi": 17,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Venom Bite",
+      "Sukunda"
+    ],
+    "LearnedSkills": {
+      "29": "Stun Gaze",
+      "30": "Life Drain",
+      "31": "Sonic Wave",
+      "32": "Dekunda",
+      "33": "Mazionga"
+    }
+  },
+  {
+    "Id": "chatterskull",
+    "Name": "Chatterskull",
+    "Race": "Haunt",
+    "Level": 20,
+    "Stats": {
+      "St": 7,
+      "Ma": 12,
+      "Vi": 6,
+      "Ag": 7,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Sukunda",
+      "Stun Gaze"
+    ],
+    "LearnedSkills": {
+      "21": "Dekaja",
+      "22": "Dormina",
+      "23": "Sacrifice",
+      "24": "Hell Thrust"
+    }
+  },
+  {
+    "Id": "yaka",
+    "Name": "Yaka",
+    "Race": "Haunt",
+    "Level": 17,
+    "Stats": {
+      "St": 8,
+      "Ma": 10,
+      "Vi": 8,
+      "Ag": 5,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Deathtouch",
+      "Tarunda"
+    ],
+    "LearnedSkills": {
+      "18": "Mazio",
+      "19": "Taunt",
+      "20": "Dia",
+      "21": "Venom Claw",
+      "22": "Diarama"
+    }
+  },
+  {
+    "Id": "choronzon",
+    "Name": "Choronzon",
+    "Race": "Haunt",
+    "Level": 11,
+    "Stats": {
+      "St": 9,
+      "Ma": 4,
+      "Vi": 15,
+      "Ag": 1,
+      "Lu": 2
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Absorb",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Agi",
+      "Sukunda"
+    ],
+    "LearnedSkills": {
+      "12": "Maragi",
+      "13": "Kill Rush",
+      "14": "Trafuri"
+    }
+  },
+  {
+    "Id": "preta",
+    "Name": "Preta",
+    "Race": "Haunt",
+    "Level": 4,
+    "Stats": {
+      "St": 5,
+      "Ma": 4,
+      "Vi": 5,
+      "Ag": 6,
+      "Lu": 4
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Weak",
+      "Elec": "Weak",
+      "Wind": "Weak",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Feral Claw",
+      "Sukukaja"
+    ],
+    "LearnedSkills": {
+      "5": "Agi",
+      "6": "Deathtouch",
+      "7": "Venom Claw",
+      "8": "Sukunda"
+    }
   }
 ]

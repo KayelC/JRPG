@@ -157,8 +157,8 @@
   "Almighty Skills": [
     {
       "Skill": "Life Drain",
-      "Effect": "Drains 35 HP from one foe.",
-      "Power": "-",
+      "Effect": "Drains HP from one foe.",
+      "Power": "15",
       "Accuracy": "100%",
       "Critical": NaN,
       "Cost": "5 SP",
@@ -166,8 +166,8 @@
     },
     {
       "Skill": "Spirit Drain",
-      "Effect": "Drains 20 SP from one foe.",
-      "Power": "-",
+      "Effect": "Drains SP from one foe.",
+      "Power": "15",
       "Accuracy": "100%",
       "Critical": NaN,
       "Cost": "5 SP",

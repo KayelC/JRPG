@@ -5154,8 +5154,18 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Resist Phys",
+      "Mudoon"
+    ],
+    "LearnedSkills": {
+      "53": "Mazionga",
+      "54": "Spirit Drain",
+      "55": "Makakaja",
+      "56": "Tarukaja",
+      "57": "Rakukaja",
+      "58": "Sukukaja"
+    }
   },
   {
     "Id": "sakahagi",
@@ -5183,8 +5193,18 @@
       "Nerve": "Null",
       "Curse": "Null"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Maragion",
+      "Mabufula",
+      "Mazionga",
+      "Magarula",
+      "Pulinpa",
+      "War Cry"
+    ],
+    "LearnedSkills": {
+      "46": "Null Wind",
+      "47": "Null Elec"
+    }
   },
   {
     "Id": "phantom",
@@ -5212,8 +5232,17 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Spirit Drain",
+      "Sacrifice"
+    ],
+    "LearnedSkills": {
+      "43": "Mazionga",
+      "44": "Kamikaze",
+      "45": "Tarunda",
+      "46": "Dekaja",
+      "47": "Ziodyne"
+    }
   },
   {
     "Id": "black_ooze",
@@ -5241,8 +5270,16 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Evil Touch",
+      "Charm Bite"
+    ],
+    "LearnedSkills": {
+      "29": "Sacrifice",
+      "30": "Deathtouch",
+      "31": "Spirit Drain",
+      "32": "Sonic Wave"
+    }
   },
   {
     "Id": "blob",
@@ -5270,8 +5307,16 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+     "Tarunda",
+     "Sacrifice"
+    ],
+    "LearnedSkills": {
+     "17": "Toxic Sting",
+     "18": "Marin Karin",
+     "19": "Spirit Drain",
+     "20": "Garula"
+    }
   },
   {
     "Id": "mou_ryo",

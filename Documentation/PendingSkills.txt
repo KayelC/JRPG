@@ -23,6 +23,7 @@ Feral Claw
 Drain Attack
 Liftoma
 Estoma
+Lightoma
 Riberama
 Sacrifice
 Kamikaze
@@ -40,4 +41,5 @@ Makatora
 Taunt
 Eternal Rest
 Trafuri
-"Binding Cry"
+Binding Cry
+Stun Gaze

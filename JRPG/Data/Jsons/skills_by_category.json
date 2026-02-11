@@ -322,8 +322,8 @@
     {
       "Skill": "Eiga",
       "Effect": "Deals medium Dark damage to one foe.",
-      "Power": 140,
-      "Accuracy": 99,
+      "Power": "140",
+      "Accuracy": "99%",
       "Critical": NaN,
       "Cost": "8 SP",
       "Category": "Darkness Skills"
@@ -331,8 +331,8 @@
     {
       "Skill": "Eigaon",
       "Effect": "Deals heavy Dark damage to one foe.",
-      "Power": 350,
-      "Accuracy": 99,
+      "Power": "350",
+      "Accuracy": "99%",
       "Critical": NaN,
       "Cost": "15 SP",
       "Category": "Darkness Skills"
@@ -340,8 +340,8 @@
     {
       "Skill": "Maeiha",
       "Effect": "Deals light Dark damage to all foes.",
-      "Power": 60,
-      "Accuracy": 95,
+      "Power": "60",
+      "Accuracy": "95%",
       "Critical": NaN,
       "Cost": "10 SP",
       "Category": "Darkness Skills"
@@ -349,8 +349,8 @@
     {
       "Skill": "Maeiga",
       "Effect": "Deals medium Dark damage to all foes.",
-      "Power": 140,
-      "Accuracy": 95,
+      "Power": "140",
+      "Accuracy": "95%",
       "Critical": NaN,
       "Cost": "16 SP",
       "Category": "Darkness Skills"
@@ -358,10 +358,19 @@
     {
       "Skill": "Maeigaon",
       "Effect": "Deals heavy Dark damage to all foes.",
-      "Power": 350,
-      "Accuracy": 95,
+      "Power": "350",
+      "Accuracy": "95%",
       "Critical": NaN,
       "Cost": "25 SP",
+      "Category": "Darkness Skills"
+    },
+    {
+      "Skill": "Evil Gaze",
+      "Effect": "Reduces 1 foe's HP by 50%.",
+      "Power": NaN,
+      "Accuracy": "55%",
+      "Critical": NaN,
+      "Cost": "8 SP",
       "Category": "Darkness Skills"
     },
     {
@@ -376,8 +385,8 @@
     {
       "Skill": "Magatsu Mandala",
       "Effect": "Deals Dark damage to all enemies (30% chance of inflicting Fear on hit).",
-      "Power": 300,
-      "Accuracy": 95,
+      "Power": "300",
+      "Accuracy": "95%",
       "Critical": NaN,
       "Cost": "38 SP",
       "Category": "Darkness Skills"

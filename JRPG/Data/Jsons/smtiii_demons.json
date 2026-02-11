@@ -255,7 +255,7 @@
     "LearnedSkills": {
      "65": "Repel Wind",
      "66": "Divine Judgment",
-     "67": "Mana Aid",
+     "67": "Mana Aid"
 
     }
   },
@@ -329,7 +329,7 @@
     ],
     "LearnedSkills": {
      "49": "Maragidyne",
-     "50": "Sexy Dance",
+     "50": "Sexy Dance"
     }
   },
   {
@@ -541,7 +541,7 @@
     },
     "BaseSkills": [
      "Maragion",
-     "Null Fire",
+     "Null Fire"
     ],
     "LearnedSkills": {
      "45": "Dismal Tune",
@@ -686,7 +686,7 @@
     ],
     "LearnedSkills": {
      "42": "Maragion",
-     "43": "Paraladi",
+     "43": "Paraladi"
     }
   },
   {
@@ -721,8 +721,8 @@
     ],
     "LearnedSkills": {
      "25": "Posmudi",
-     "25": "Me Patra",
-     "26": "Recarm"
+     "26": "Me Patra",
+     "27": "Recarm"
     }
   },
   {
@@ -836,7 +836,7 @@
     "LearnedSkills": {
      "64": "Might",
      "65": "Life Surge",
-     "66": "Mana Surge",
+     "66": "Mana Surge"
     }
   },
   {
@@ -909,7 +909,7 @@
     "LearnedSkills": {
      "46": "Dark Sword",
      "47": "Life Refill",
-     "48": "Maziodyne",
+     "48": "Maziodyne"
     }
   },
   {
@@ -944,7 +944,7 @@
     ],
     "LearnedSkills": {
      "41" : "Agidyne",
-     "42" : "Tentarafoo",
+     "42" : "Tentarafoo"
     }
   },
   {
@@ -1090,7 +1090,7 @@
     "LearnedSkills": {
      "56": "Cruel Attack",
      "57": "Kamikaze",
-     "58": "Sonic Wave",
+     "58": "Sonic Wave"
     }
   },
   {
@@ -1308,7 +1308,7 @@
     "LearnedSkills": {
      "53": "Makakaja",
      "54": "Mana Aid",
-     "55": "Maragidyne",
+     "55": "Maragidyne"
     }
   },
   {
@@ -1384,7 +1384,7 @@
     "LearnedSkills": {
      "45": "Diarama",
      "46": "Kamikaze",
-     "47": "Taunt",
+     "47": "Taunt"
     }
   },
   {
@@ -1497,7 +1497,7 @@
     "LearnedSkills": {
      "24": "Diarama",
      "25": "Makatora",
-     "26": "Me Patra",
+     "26": "Me Patra"
     }
   },
   {
@@ -1564,7 +1564,7 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Venom Bite"
+     "Venom Bite",
      "Analyze"
     ],
     "LearnedSkills": {
@@ -1601,7 +1601,7 @@
     },
     "BaseSkills": [
      "Lullaby",
-     "Patra",
+     "Patra"
     ],
     "LearnedSkills": {
      "9": "Mabufu",
@@ -2017,7 +2017,7 @@
      "51": "Tetrakarn",
      "52": "Makakaja",
      "53": "Tentarafoo",
-     "54": "Mahamaon",
+     "54": "Mahamaon"
     }
   },
   {
@@ -2462,8 +2462,8 @@
       "Curse": "Weak"
     },
     "BaseSkills": [
-     "Ziodyne"
-     "Rakukaja"
+     "Ziodyne",
+     "Rakukaja",
      "Mazionga"
     ],
     "LearnedSkills": {
@@ -2876,6 +2876,226 @@
      "15": "Rakunda",
      "16": "Sukunda",
      "17": "Pulinpa"
+    }
+  },
+    {
+    "Id": "gogmagog",
+    "Name": "Gogmagog",
+    "Race": "Jirae",
+    "Level": 55,
+    "Stats": {
+      "St": 22,
+      "Ma": 14,
+      "Vi": 21,
+      "Ag": 7,
+      "Lu": 14
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Magarula",
+      "Kill Rush",
+      "Diarama"
+    ],
+    "LearnedSkills": {
+      "56": "Life Surge",
+      "57": "Tarunda",
+      "58": "Evil Gaze",
+      "59": "Rakunda",
+      "60": "Sukunda"
+    }
+  },
+  {
+    "Id": "titan",
+    "Name": "Titan",
+    "Race": "Jirae",
+    "Level": 49,
+    "Stats": {
+      "St": 21,
+      "Ma": 10,
+      "Vi": 17,
+      "Ag": 8,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Guillotine",
+      "Taunt"
+    ],
+    "LearnedSkills": {
+      "50": "Stun Gaze",
+      "51": "Life Surge",
+      "52": "Retaliate",
+      "53": "Maragion"
+    }
+  },
+  {
+    "Id": "sarutahiko",
+    "Name": "Sarutahiko",
+    "Race": "Jirae",
+    "Level": 35,
+    "Stats": {
+      "St": 18,
+      "Ma": 7,
+      "Vi": 17,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Kill Rush",
+      "Lightoma"
+    ],
+    "LearnedSkills": {
+      "36": "Me Patra",
+      "37": "Counter",
+      "38": "Focus",
+      "39": "Hell Thrust"
+    }
+  },
+  {
+    "Id": "sudama",
+    "Name": "Sudama",
+    "Race": "Jirae",
+    "Level": 13,
+    "Stats": {
+      "St": 7,
+      "Ma": 7,
+      "Vi": 3,
+      "Ag": 8,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Garu"
+    ],
+    "LearnedSkills": {
+      "14": "Magaru",
+      "15": "Kamikaze",
+      "16": "Makatora",
+      "17": "Makakaja",
+      "18": "Sukukaja"
+    }
+  },
+  {
+    "Id": "hua_po",
+    "Name": "Hua Po",
+    "Race": "Jirae",
+    "Level": 5,
+    "Stats": {
+      "St": 4,
+      "Ma": 5,
+      "Vi": 5,
+      "Ag": 6,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Agi"
+    ],
+    "LearnedSkills": {
+      "6": "Patra",
+      "7": "Marin Karin",
+      "8": "Rakukaja",
+      "9": "Maragi"
+    }
+  },
+  {
+    "Id": "kodama",
+    "Name": "Kodama",
+    "Race": "Jirae",
+    "Level": 3,
+    "Stats": {
+      "St": 4,
+      "Ma": 4,
+      "Vi": 4,
+      "Ag": 6,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Garu"
+    ],
+    "LearnedSkills": {
+      "4": "Dia",
+      "5": "Bash"
     }
   }
 ]

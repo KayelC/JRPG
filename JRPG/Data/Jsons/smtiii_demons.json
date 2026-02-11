@@ -5428,5 +5428,192 @@
       "5": "Sacrifice",
       "6": "Makakaja"
     }
+  },
+   {
+    "Id": "metatron",
+    "Name": "Metatron",
+    "Race": "Seraph",
+    "Level": 95,
+    "Stats": {
+      "St": 32,
+      "Ma": 34,
+      "Vi": 29,
+      "Ag": 24,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Normal",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Mahamaon",
+      "Megidolaon",
+      "Heat Riser",
+      "Debilitate"
+    ],
+    "LearnedSkills": {
+      "96": "Holy Wrath",
+      "97": "Radiance",
+      "98": "Fire of Sinai",
+      "99": "Victory Cry"
+    }
+  },
+  {
+    "Id": "michael",
+    "Name": "Michael",
+    "Race": "Seraph",
+    "Level": 90,
+    "Stats": {
+      "St": 29,
+      "Ma": 30,
+      "Vi": 23,
+      "Ag": 25,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Null",
+      "Elec": "Null",
+      "Wind": "Null",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Deathbound",
+      "Endure"
+    ],
+    "LearnedSkills": {
+      "91": "Victory Cry",
+      "92": "Heat Riser",
+      "93": "Mana Surge",
+      "94": "Megidolaon",
+      "95": "Radiance"
+    }
+  },
+  {
+    "Id": "gabriel",
+    "Name": "Gabriel",
+    "Race": "Seraph",
+    "Level": 87,
+    "Stats": {
+      "St": 24,
+      "Ma": 30,
+      "Vi": 22,
+      "Ag": 24,
+      "Lu": 22
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Null",
+      "Wind": "Null",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Samarecarm",
+      "Ziodyne",
+      "Maziodyne"
+    ],
+    "LearnedSkills": {
+      "88": "Blight",
+      "89": "Elec Boost",
+      "90": "Radiance"
+    }
+  },
+  {
+    "Id": "raphael",
+    "Name": "Raphael",
+    "Race": "Seraph",
+    "Level": 84,
+    "Stats": {
+      "St": 26,
+      "Ma": 26,
+      "Vi": 22,
+      "Ag": 28,
+      "Lu": 17
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Null",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Makarakarn",
+      "Tetrakarn",
+      "Mana Surge"
+    ],
+    "LearnedSkills": {
+      "85": "Prayer",
+      "86": "Mahamaon",
+      "87": "Stasis Blade",
+      "88": "Holy Wrath",
+      "89": "Radiance"
+    }
+  },
+  {
+    "Id": "uriel",
+    "Name": "Uriel",
+    "Race": "Seraph",
+    "Level": 73,
+    "Stats": {
+      "St": 25,
+      "Ma": 24,
+      "Vi": 20,
+      "Ag": 21,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "74": "Heat Wave",
+      "75": "Drain Attack",
+      "76": "Megidola",
+      "77": "Radiance"
+    }
   }
 ]

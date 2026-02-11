@@ -969,10 +969,19 @@
       "Category": "Light Skills"
     },
     {
+      "Skill": "Radiance",
+      "Effect": "Deals heavy Light Damage to all foes. (Seraph Exclusive)",
+      "Power": "450",
+      "Accuracy": "90%",
+      "Critical": NaN,
+      "Cost": "25 SP",
+      "Category": "Light Skills"
+    },
+    {
       "Skill": "Shining Arrows",
       "Effect": "Deals weak Light damage to all foes (4-8 hits).",
-      "Power": 15,
-      "Accuracy": 90,
+      "Power": "15",
+      "Accuracy": "90%",
       "Critical": NaN,
       "Cost": "24 SP",
       "Category": "Light Skills"

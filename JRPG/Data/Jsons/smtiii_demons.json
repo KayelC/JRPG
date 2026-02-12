@@ -5928,5 +5928,151 @@
       "27": "Ice Boost",
       "28": "Mabufula"
     }
+  },
+  {
+    "Id": "barong",
+    "Name": "Barong",
+    "Race": "Avatar",
+    "Level": 60,
+    "Stats": {
+      "St": 22,
+      "Ma": 22,
+      "Vi": 16,
+      "Ag": 16,
+      "Lu": 14
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Maziodyne",
+      "Binding Cry"
+    ],
+    "LearnedSkills": {
+      "61": "Iron Claw",
+      "62": "Mediarahan",
+      "63": "Mabufudyne",
+      "64": "Null Dark"
+    }
+  },
+  {
+    "Id": "yatagarasu",
+    "Name": "Yatagarasu",
+    "Race": "Avatar",
+    "Level": 46,
+    "Stats": {
+      "St": 13,
+      "Ma": 19,
+      "Vi": 12,
+      "Ag": 16,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mana Aid",
+      "Kougaon"
+    ],
+    "LearnedSkills": {
+      "47": "Garudyne",
+      "48": "Mana Gain",
+      "49": "Wind Amp",
+      "50": "Recarmdra"
+    }
+  },
+  {
+    "Id": "xiezhai",
+    "Name": "Xiezhai",
+    "Race": "Avatar",
+    "Level": 26,
+    "Stats": {
+      "St": 13,
+      "Ma": 12,
+      "Vi": 9,
+      "Ag": 9,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Weak",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Venom Claw",
+      "Hell Thrust",
+      "Patra"
+    ],
+    "LearnedSkills": {
+      "27": "Hamaon",
+      "28": "Kouga",
+      "29": "Enradi",
+      "30": "Mabufula"
+    }
+  },
+  {
+    "Id": "makami",
+    "Name": "Makami",
+    "Race": "Avatar",
+    "Level": 22,
+    "Stats": {
+      "St": 11,
+      "Ma": 14,
+      "Vi": 9,
+      "Ag": 7,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "23": "Null Mind",
+      "24": "Me Patra",
+      "25": "Diarama",
+      "26": "Recarm"
+    }
   }
 ]

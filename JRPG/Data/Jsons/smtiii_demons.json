@@ -6631,5 +6631,121 @@
     },
     "BaseSkills": [],
     "LearnedSkills": {}
+  },
+  {
+    "Id": "saki_mitama",
+    "Name": "Saki Mitama",
+    "Race": "Mitama",
+    "Level": 35,
+    "Stats": {
+      "St": 10,
+      "Ma": 11,
+      "Vi": 10,
+      "Ag": 11,
+      "Lu": 20
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kusi_mitama",
+    "Name": "Kusi Mitama",
+    "Race": "Mitama",
+    "Level": 32,
+    "Stats": {
+      "St": 9,
+      "Ma": 18,
+      "Vi": 8,
+      "Ag": 12,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "nigi_mitama",
+    "Name": "Nigi Mitama",
+    "Race": "Mitama",
+    "Level": 29,
+    "Stats": {
+      "St": 10,
+      "Ma": 10,
+      "Vi": 10,
+      "Ag": 16,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "ara_mitama",
+    "Name": "Ara Mitama",
+    "Race": "Mitama",
+    "Level": 25,
+    "Stats": {
+      "St": 12,
+      "Ma": 10,
+      "Vi": 10,
+      "Ag": 10,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
   }
 ]

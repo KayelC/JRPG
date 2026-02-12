@@ -6145,5 +6145,39 @@
       "66": "Mazionga",
       "67": "Maeigaon"
     }
+  },
+   {
+    "Id": "albion",
+    "Name": "Albion",
+    "Race": "Entity",
+    "Level": 64,
+    "Stats": {
+      "St": 25,
+      "Ma": 20,
+      "Vi": 25,
+      "Ag": 10,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "65": "Drain Attack",
+      "66": "Absorb Phys",
+      "67": "Recarmdra",
+      "68": "Hades Blast"
+    }
   }
 ]

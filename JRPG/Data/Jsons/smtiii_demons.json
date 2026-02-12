@@ -6107,5 +6107,43 @@
       "65": "Garudyne",
       "66": "Endure"
     }
+  },
+  {
+    "Id": "gurulu",
+    "Name": "Gurulu",
+    "Race": "Raptor",
+    "Level": 63,
+    "Stats": {
+      "St": 18,
+      "Ma": 22,
+      "Vi": 19,
+      "Ag": 24,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Weak",
+      "Dark": "Repel",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Garudyne",
+      "Sukunda",
+      "Growth"
+    ],
+    "LearnedSkills": {
+      "64": "Magarudyne",
+      "65": "Mamudoon",
+      "66": "Mazionga",
+      "67": "Maeigaon"
+    }
   }
 ]

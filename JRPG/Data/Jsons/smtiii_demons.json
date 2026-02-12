@@ -6179,5 +6179,341 @@
       "67": "Recarmdra",
       "68": "Hades Blast"
     }
+  },
+   {
+    "Id": "trumpeter",
+    "Name": "Trumpeter",
+    "Race": "Fiend",
+    "Level": 77,
+    "Stats": {
+      "St": 21,
+      "Ma": 31,
+      "Vi": 21,
+      "Ag": 24,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Holy Melody",
+      "Maragidyne",
+      "Mabufudyne",
+      "Maziodyne",
+      "Mazandyne"
+    ],
+    "LearnedSkills": {
+      "78": "Makakaja",
+      "79": "Dekaja",
+      "80": "Megidolaon",
+      "81": "Evil Melody"
+    }
+  },
+  {
+    "Id": "mother_harlot",
+    "Name": "Mother Harlot",
+    "Race": "Fiend",
+    "Level": 69,
+    "Stats": {
+      "St": 23,
+      "Ma": 24,
+      "Vi": 19,
+      "Ag": 19,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Repel",
+      "Slash": "Repel",
+      "Pierce": "Repel",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Death Lust",
+      "Ziodyne",
+      "Tentarafoo"
+    ],
+    "LearnedSkills": {
+      "70": "Dekunda",
+      "71": "Makakaja",
+      "72": "Maziodyne",
+      "73": "Beast Roar"
+    }
+  },
+  {
+    "Id": "pale_rider",
+    "Name": "Pale Rider",
+    "Race": "Fiend",
+    "Level": 63,
+    "Stats": {
+      "St": 24,
+      "Ma": 26,
+      "Vi": 18,
+      "Ag": 17,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Pestilence",
+      "Mabufudyne"
+    ],
+    "LearnedSkills": {
+      "64": "Eternal Rest",
+      "65": "Blight",
+      "66": "Dark Might",
+      "67": "Bright Might"
+    }
+  },
+  {
+    "Id": "black_rider",
+    "Name": "Black Rider",
+    "Race": "Fiend",
+    "Level": 61,
+    "Stats": {
+      "St": 22,
+      "Ma": 25,
+      "Vi": 16,
+      "Ag": 20,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Soul Divide",
+      "Mabufudyne"
+    ],
+    "LearnedSkills": {
+      "62": "Spirit Drain",
+      "63": "Mamudoon",
+      "64": "Megidola",
+      "65": "Mana Surge",
+      "66": "Megidolaon"
+    }
+  },
+  {
+    "Id": "red_rider",
+    "Name": "Red Rider",
+    "Race": "Fiend",
+    "Level": 55,
+    "Stats": {
+      "St": 23,
+      "Ma": 21,
+      "Vi": 18,
+      "Ag": 15,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Null",
+      "Wind": "Null",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Terror Blade",
+      "Garudyne"
+    ],
+    "LearnedSkills": {
+      "55": "Maziodyne",
+      "56": "Dekunda",
+      "57": "Retaliate"
+    }
+  },
+  {
+    "Id": "white_rider",
+    "Name": "White Rider",
+    "Race": "Fiend",
+    "Level": 52,
+    "Stats": {
+      "St": 23,
+      "Ma": 17,
+      "Vi": 16,
+      "Ag": 18,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "God's Bow",
+      "Maragidyne"
+    ],
+    "LearnedSkills": {
+      "53": "Tetraja",
+      "54": "Dekaja",
+      "55": "Mana Aid"
+    }
+  },
+  {
+    "Id": "hell_biker",
+    "Name": "Hell Biker",
+    "Race": "Fiend",
+    "Level": 42,
+    "Stats": {
+      "St": 17,
+      "Ma": 14,
+      "Vi": 14,
+      "Ag": 17,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Absorb",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Hell Spin",
+      "Hell Burner"
+    ],
+    "LearnedSkills": {
+      "43": "Hell Exhaust",
+      "44": "Attack All"
+    }
+  },
+  {
+    "Id": "daisoujou",
+    "Name": "Daisoujou",
+    "Race": "Fiend",
+    "Level": 37,
+    "Stats": {
+      "St": 12,
+      "Ma": 21,
+      "Vi": 11,
+      "Ag": 13,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Absorb",
+      "Nerve": "Null",
+      "Curse": "Absorb"
+    },
+    "BaseSkills": [
+      "Meditation",
+      "Mahamaon"
+    ],
+    "LearnedSkills": {
+      "38": "Makougaon",
+      "39": "Mamudoon",
+      "40": "Maeigaon",
+      "41": "Salvation",
+      "42": "Preach"
+
+    }
+  },
+  {
+    "Id": "matador",
+    "Name": "Matador",
+    "Race": "Fiend",
+    "Level": 30,
+    "Stats": {
+      "St": 12,
+      "Ma": 9,
+      "Vi": 11,
+      "Ag": 19,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Null",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Magaru",
+      "Andalucia"
+    ],
+    "LearnedSkills": {
+      "31": "Dekunda",
+      "32": "Focus",
+      "33": "Taunt",
+      "34": "Red Capote"
+    }
   }
 ]

@@ -10,6 +10,15 @@
       "Category": "Ailment Skills"
     },
     {
+      "Skill": "Preach",
+      "Effect": "Instills Sleep, Panic or Charm on all foes. (40% chance) (Daisoujou Exclusive)",
+      "Power": "40",
+      "Accuracy": "80%",
+      "Critical": NaN,
+      "Cost": "15 SP",
+      "Category": "Ailment Skills"
+    },
+    {
       "Skill": "Evil Touch",
       "Effect": "Instills Fear in 1 foe. (40% chance)",
       "Power": NaN,
@@ -180,6 +189,15 @@
       "Accuracy": "100%",
       "Critical": NaN,
       "Cost": "5 SP",
+      "Category": "Almighty Skills"
+    },
+    {
+      "Skill": "Meditation",
+      "Effect": "Drains HP and SP from one foe. (Daisoujou Exclusive)",
+      "Power": "45",
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "10 SP",
       "Category": "Almighty Skills"
     },
     {
@@ -2750,6 +2768,15 @@
       "Accuracy": "100%",
       "Critical": "36%",
       "Cost": "36% HP",
+      "Category": "Pierce Skills"
+    },
+    {
+      "Skill": "Andalucia",
+      "Effect": "Deals light Pierce damage. (1-4 hits) (Matador Exclusive)",
+      "Power": "64",
+      "Accuracy": "90%",
+      "Critical": "20%",
+      "Cost": "6% HP",
       "Category": "Pierce Skills"
     },
     {

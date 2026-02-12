@@ -40,6 +40,7 @@ Dormina
 Analyze
 Makatora
 Taunt
+Red Capote
 Eternal Rest
 Trafuri
 Binding Cry
@@ -47,3 +48,14 @@ Stun Gaze
 Shibaboo
 Deathtouch
 Fire of Sinai (Metatron Exclusive)
+Hell Spin (Hell Biker Exclusive)
+Hell Burner (Hell Biker Exclusive)
+Hell Exhaust (Hell Biker Exclusive)
+God's Bow (White Rider Exclusive)
+Terror Blade (Red Rider Exclusive) aka "Terrorblade" in smtiiidb
+Soul Divide (Black Rider Exclusive)
+Pestilence (Pale Rider Exclusive)
+Death Lust (Mother Harlot Exclusive)
+Beast Roar (Mother Harlot Exclusive)
+Holy Melody (Trumpeter Exclusive)
+Evil Melody (Trumpeter Exclusive)

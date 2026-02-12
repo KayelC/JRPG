@@ -1,0 +1,6961 @@
+[
+  {
+    "Id": "horus",
+    "Name": "Horus",
+    "Race": "Deity",
+    "Level": 38,
+    "Stats": {
+      "St": 12,
+      "Ma": 16,
+      "Vi": 14,
+      "Ag": 21,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Repel",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Null",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Growth 2",
+      "Mahama"
+    ],
+    "LearnedSkills": {
+      "39": "Mana Gain",
+      "40": "Dekunda",
+      "41": "Mediarama",
+      "42": "Kouga"
+    }
+  },
+  {
+    "Id": "atavaka",
+    "Name": "Atavaka",
+    "Race": "Deity",
+    "Level": 47,
+    "Stats": {
+      "St": 24,
+      "Ma": 14,
+      "Vi": 20,
+      "Ag": 10,
+      "Lu": 14
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Null",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Swift Strike",
+      "Endure"
+    ],
+    "LearnedSkills": {
+      "48": "Bewilder",
+      "49": "Counterstrike",
+      "50": "Getsu-ei"
+    }
+  },
+  {
+    "Id": "amaterasu",
+    "Name": "Amaterasu",
+    "Race": "Deity",
+    "Level": 56,
+    "Stats": {
+      "St": 19,
+      "Ma": 23,
+      "Vi": 17,
+      "Ag": 16,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tetrakarn",
+      "Maragidyne"
+    ],
+    "LearnedSkills": {
+      "57": "Divine Judgment",
+      "58": "Debilitate",
+      "59": "Repel Fire",
+      "60": "Prayer"
+    }
+  },
+  {
+    "Id": "odin",
+    "Name": "Odin",
+    "Race": "Deity",
+    "Level": 65,
+    "Stats": {
+      "St": 24,
+      "Ma": 25,
+      "Vi": 18,
+      "Ag": 17,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Null",
+      "Wind": "Weak",
+      "Earth": "Null",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Bufudyne",
+      "Agidyne"
+    ],
+    "LearnedSkills": {
+      "66": "Deathbound",
+      "67": "Evil Smile",
+      "68": "Mabufudyne",
+      "69": "Maragidyne"
+    }
+  },
+  {
+    "Id": "mithra",
+    "Name": "Mithra",
+    "Race": "Deity",
+    "Level": 78,
+    "Stats": {
+      "St": 27,
+      "Ma": 25,
+      "Vi": 27,
+      "Ag": 16,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Debilitate",
+      "Megidola",
+      "Mamudoon"
+    ],
+    "LearnedSkills": {
+      "79": "Divine Judgment",
+      "80": "Mahamaon",
+      "81": "Mana Surge"
+    }
+  },
+  {
+    "Id": "vishnu",
+    "Name": "Vishnu",
+    "Race": "Deity",
+    "Level": 93,
+    "Stats": {
+      "St": 27,
+      "Ma": 35,
+      "Vi": 25,
+      "Ag": 20,
+      "Lu": 26
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Resist",
+      "Light": "Repel",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Prayer",
+      "Divine Judgment",
+      "Hell Gaze"
+    ],
+    "LearnedSkills": {
+      "94": "Maragidyne",
+      "95": "Vorpal Blade",
+      "96": "Makougaon",
+      "97": "Repel Phys"
+    }
+  },
+  {
+    "Id": "scathach",
+    "Name": "Scathach",
+    "Race": "Megami",
+    "Level": 64,
+    "Stats": {
+      "St": 21,
+      "Ma": 26,
+      "Vi": 17,
+      "Ag": 18,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Magarudyne"
+    ],
+    "LearnedSkills": {
+      "65": "Repel Wind",
+      "66": "Divine Judgment",
+      "67": "Mana Aid"
+    }
+  },
+  {
+    "Id": "lakshmi",
+    "Name": "Lakshmi",
+    "Race": "Megami",
+    "Level": 54,
+    "Stats": {
+      "St": 14,
+      "Ma": 24,
+      "Vi": 15,
+      "Ag": 13,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Repel",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Mediarahan"
+    ],
+    "LearnedSkills": {
+      "55": "Mana Aid",
+      "56": "Evil Smile",
+      "57": "Mana Surge",
+      "58": "Samarecarm",
+      "59": "Recarmdra"
+    }
+  },
+  {
+    "Id": "sati",
+    "Name": "Sati",
+    "Race": "Megami",
+    "Level": 48,
+    "Stats": {
+      "St": 11,
+      "Ma": 20,
+      "Vi": 13,
+      "Ag": 15,
+      "Lu": 17
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Agidyne",
+      "Recarm",
+      "Marin Karin"
+    ],
+    "LearnedSkills": {
+      "49": "Maragidyne",
+      "50": "Sexy Dance"
+    }
+  },
+  {
+    "Id": "sarasvati",
+    "Name": "Sarasvati",
+    "Race": "Megami",
+    "Level": 30,
+    "Stats": {
+      "St": 9,
+      "Ma": 17,
+      "Vi": 11,
+      "Ag": 9,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Bewilder",
+      "Mana Refill"
+    ],
+    "LearnedSkills": {
+      "31": "Recarm",
+      "32": "Magaru",
+      "33": "Wind Boost"
+    }
+  },
+  {
+    "Id": "ame_no_uzume",
+    "Name": "Ame-no-Uzume",
+    "Race": "Megami",
+    "Level": 18,
+    "Stats": {
+      "St": 6,
+      "Ma": 12,
+      "Vi": 8,
+      "Ag": 8,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Earth": "Resist",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tera",
+      "Media",
+      "Magaru"
+    ],
+    "LearnedSkills": {
+      "19": "Matera",
+      "20": "Hama",
+      "21": "Life Bonus",
+      "22": "Petradi",
+      "23": "Mana Refill"
+    }
+  },
+  {
+    "Id": "shiva",
+    "Name": "Shiva",
+    "Race": "Fury",
+    "Level": 95,
+    "Stats": {
+      "St": 32,
+      "Ma": 26,
+      "Vi": 36,
+      "Ag": 26,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Hassohappa",
+      "Victory Cry",
+      "Marin Karin"
+    ],
+    "LearnedSkills": {
+      "96": "Maziodyne",
+      "97": "High Counter",
+      "98": "Megidolaon",
+      "99": "Absorb Phys"
+    }
+  },
+  {
+    "Id": "beidou_xingjun",
+    "Name": "Beidou Xingjun",
+    "Race": "Fury",
+    "Level": 61,
+    "Stats": {
+      "St": 23,
+      "Ma": 24,
+      "Vi": 23,
+      "Ag": 14,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tempest Slash",
+      "Mana Aid",
+      "Divine Judgment"
+    ],
+    "LearnedSkills": {
+      "62": "Hell Gaze",
+      "63": "Mamudoon",
+      "64": "Holy Wrath"
+    }
+  },
+  {
+    "Id": "qitian_dasheng",
+    "Name": "Qitian Dasheng",
+    "Race": "Fury",
+    "Level": 54,
+    "Stats": {
+      "St": 22,
+      "Ma": 13,
+      "Vi": 18,
+      "Ag": 20,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Repel",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "55": "Hassohappa",
+      "56": "Attack All",
+      "57": "High Counter"
+    }
+  },
+  {
+    "Id": "dionysus",
+    "Name": "Dionysus",
+    "Race": "Fury",
+    "Level": 44,
+    "Stats": {
+      "St": 16,
+      "Ma": 20,
+      "Vi": 15,
+      "Ag": 13,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Maragion",
+      "Null Fire"
+    ],
+    "LearnedSkills": {
+      "45": "Dismal Tune",
+      "46": "Tempest",
+      "47": "Maragidyne"
+    }
+  },
+  {
+    "Id": "skadi",
+    "Name": "Skadi",
+    "Race": "Lady",
+    "Level": 74,
+    "Stats": {
+      "St": 23,
+      "Ma": 29,
+      "Vi": 21,
+      "Ag": 18,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "75": "Tentarafoo",
+      "76": "Makakaja",
+      "77": "Repel Elec",
+      "78": "Vicious Strike"
+    }
+  },
+  {
+    "Id": "kali",
+    "Name": "Kali",
+    "Race": "Lady",
+    "Level": 67,
+    "Stats": {
+      "St": 25,
+      "Ma": 19,
+      "Vi": 23,
+      "Ag": 19,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tentarafoo",
+      "Deathbound"
+    ],
+    "LearnedSkills": {
+      "68": "High Counter",
+      "69": "Masukunda",
+      "70": "Life Surge",
+      "71": "Tempest Slash"
+    }
+  },
+  {
+    "Id": "parvati",
+    "Name": "Parvati",
+    "Race": "Lady",
+    "Level": 57,
+    "Stats": {
+      "St": 15,
+      "Ma": 23,
+      "Vi": 15,
+      "Ag": 16,
+      "Lu": 20
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Repel",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "58": "Mediarama",
+      "59": "Tetrakarn",
+      "60": "Divine Judgment",
+      "61": "Makougaon",
+      "62": "Teradyne",
+      "63": "Materadyne"
+    }
+  },
+  {
+    "Id": "kushinada",
+    "Name": "Kushinada",
+    "Race": "Lady",
+    "Level": 41,
+    "Stats": {
+      "St": 12,
+      "Ma": 19,
+      "Vi": 14,
+      "Ag": 10,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Resist",
+      "Earth": "Resist",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Terazi",
+      "Mediarama",
+      "Poison Arrow"
+    ],
+    "LearnedSkills": {
+      "42": "Maragion",
+      "43": "Paraladi",
+      "44": "Materazi"
+    }
+  },
+  {
+    "Id": "kikuri_hime",
+    "Name": "Kikuri-Hime",
+    "Race": "Lady",
+    "Level": 24,
+    "Stats": {
+      "St": 10,
+      "Ma": 16,
+      "Vi": 11,
+      "Ag": 8,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Absorb",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Diarama",
+      "Marin Karin"
+    ],
+    "LearnedSkills": {
+      "25": "Posumudi",
+      "26": "Me Patra",
+      "27": "Recarm"
+    }
+  },
+  {
+    "Id": "thor",
+    "Name": "Thor",
+    "Race": "Kishin",
+    "Level": 76,
+    "Stats": {
+      "St": 28,
+      "Ma": 20,
+      "Vi": 26,
+      "Ag": 12,
+      "Lu": 17
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Highcounter",
+      "Ziodyne",
+      "Herculean Strike"
+    ],
+    "LearnedSkills": {
+      "77": "Mediarahan",
+      "78": "Marziodyne",
+      "79": "Stasis Blade",
+      "80": "Fire Repel"
+    }
+  },
+  {
+    "Id": "bishamonten",
+    "Name": "Bishamonten",
+    "Race": "Kishin",
+    "Level": 72,
+    "Stats": {
+      "St": 25,
+      "Ma": 17,
+      "Vi": 25,
+      "Ag": 17,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Repel",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Divine Judgment",
+      "Attack All"
+    ],
+    "LearnedSkills": {
+      "73": "Maragidyne",
+      "74": "Fire Boost",
+      "75": "Endure",
+      "76": "Hassohappa"
+    }
+  },
+  {
+    "Id": "futomimi",
+    "Name": "Futomimi",
+    "Race": "Kishin",
+    "Level": 63,
+    "Stats": {
+      "St": 20,
+      "Ma": 26,
+      "Vi": 20,
+      "Ag": 15,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Focus",
+      "War Cry",
+      "Pulinpa",
+      "Lunge"
+    ],
+    "LearnedSkills": {
+      "64": "Might",
+      "65": "Life Surge",
+      "66": "Mana Surge"
+    }
+  },
+  {
+    "Id": "jikokuten",
+    "Name": "Jikokuten",
+    "Race": "Kishin",
+    "Level": 52,
+    "Stats": {
+      "St": 21,
+      "Ma": 16,
+      "Vi": 19,
+      "Ag": 11,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stasis Blade",
+      "Diarahan",
+      "Terazi"
+    ],
+    "LearnedSkills": {
+      "53": "Dekunda",
+      "54": "Mabufudyne",
+      "55": "Magarudyne",
+      "56": "Mazionga",
+      "57": "Materazi"
+    }
+  },
+  {
+    "Id": "take_mikazuchi",
+    "Name": "Take-Mikazuchi",
+    "Race": "Kishin",
+    "Level": 45,
+    "Stats": {
+      "St": 19,
+      "Ma": 14,
+      "Vi": 17,
+      "Ag": 11,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Repel",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Ziodyne",
+      "Mazionga"
+    ],
+    "LearnedSkills": {
+      "46": "Dark Sword",
+      "47": "Life Refill",
+      "48": "Maziodyne"
+    }
+  },
+  {
+    "Id": "okuninushi",
+    "Name": "Okuninushi",
+    "Race": "Kishin",
+    "Level": 39,
+    "Stats": {
+      "St": 16,
+      "Ma": 16,
+      "Vi": 13,
+      "Ag": 11,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Resist",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Repel",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Chaos Blade",
+      "Mamudo"
+    ],
+    "LearnedSkills": {
+      "41": "Agidyne",
+      "42": "Tentarafoo",
+      "43": "Teradyne"
+    }
+  },
+  {
+    "Id": "koumokuten",
+    "Name": "Koumokuten",
+    "Race": "Kishin",
+    "Level": 33,
+    "Stats": {
+      "St": 16,
+      "Ma": 12,
+      "Vi": 14,
+      "Ag": 9,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Repel",
+      "Earth": "Resist",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Kill Rush",
+      "Magaru",
+      "Matera"
+    ],
+    "LearnedSkills": {
+      "34": "Life Gain",
+      "35": "Mana Bonus",
+      "36": "Tetraja"
+    }
+  },
+  {
+    "Id": "zouchouten",
+    "Name": "Zouchouten",
+    "Race": "Kishin",
+    "Level": 27,
+    "Stats": {
+      "St": 15,
+      "Ma": 10,
+      "Vi": 12,
+      "Ag": 7,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Brutal Slash",
+      "Agilao",
+      "Mahama"
+    ],
+    "LearnedSkills": {
+      "28": "Resist Dark",
+      "29": "Terazi"
+    }
+  },
+  {
+    "Id": "take_minakata",
+    "Name": "Take-Minakata",
+    "Race": "Kishin",
+    "Level": 17,
+    "Stats": {
+      "St": 11,
+      "Ma": 8,
+      "Vi": 11,
+      "Ag": 9,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Repel",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mazio",
+      "Zionga"
+    ],
+    "LearnedSkills": {
+      "18": "Pulinpa",
+      "19": "Bewilder",
+      "20": "Dekaja",
+      "21": "Focus"
+    }
+  },
+  {
+    "Id": "chimera",
+    "Name": "Chimera",
+    "Race": "Holy",
+    "Level": 55,
+    "Stats": {
+      "St": 23,
+      "Ma": 13,
+      "Vi": 16,
+      "Ag": 17,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Weak",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Maragion",
+      "Fire Boost",
+      "War Cry"
+    ],
+    "LearnedSkills": {
+      "56": "Cruel Attack",
+      "57": "Kamikaze",
+      "58": "Sonic Wave"
+    }
+  },
+  {
+    "Id": "Byakko",
+    "Name": "Byakko",
+    "Race": "Holy",
+    "Level": 43,
+    "Stats": {
+      "St": 19,
+      "Ma": 8,
+      "Vi": 15,
+      "Ag": 17,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Double Fangs",
+      "Life Aid",
+      "Maragion"
+    ],
+    "LearnedSkills": {
+      "44": "Might",
+      "45": "Focus",
+      "46": "Agidyne"
+    }
+  },
+  {
+    "Id": "Suzaku",
+    "Name": "Suzaku",
+    "Race": "Holy",
+    "Level": 36,
+    "Stats": {
+      "St": 10,
+      "Ma": 10,
+      "Vi": 10,
+      "Ag": 17,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Liftoma",
+      "Magaru",
+      "Maragi",
+      "Matera"
+    ],
+    "LearnedSkills": {
+      "38": "Recarm",
+      "39": "Mazionga",
+      "40": "Life Aid"
+    }
+  },
+  {
+    "Id": "senri",
+    "Name": "Senri",
+    "Race": "Holy",
+    "Level": 27,
+    "Stats": {
+      "St": 10,
+      "Ma": 14,
+      "Vi": 9,
+      "Ag": 12,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Absorb",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "28": "Magarula",
+      "31": "Drain Attack"
+    }
+  },
+  {
+    "Id": "unicorn",
+    "Name": "Unicorn",
+    "Race": "Holy",
+    "Level": 21,
+    "Stats": {
+      "St": 9,
+      "Ma": 12,
+      "Vi": 10,
+      "Ag": 7,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Rakukaja",
+      "Mabufu",
+      "Media"
+    ],
+    "LearnedSkills": {
+      "22": "Life Refill",
+      "23": "Evil Touch",
+      "24": "Tetraja",
+      "25": "Me Patra",
+      "26": "Diarama"
+    }
+  },
+  {
+    "Id": "shiisaa",
+    "Name": "Shiisaa",
+    "Race": "Holy",
+    "Level": 13,
+    "Stats": {
+      "St": 9,
+      "Ma": 6,
+      "Vi": 7,
+      "Ag": 9,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mazio",
+      "Feral Claw"
+    ],
+    "LearnedSkills": {
+      "14": "War Cry",
+      "15": "Evil Touch",
+      "16": "Counter",
+      "17": "Resist Fire"
+    }
+  },
+  {
+    "Id": "efreet",
+    "Name": "Efreet",
+    "Race": "Yoma",
+    "Level": 52,
+    "Stats": {
+      "St": 15,
+      "Ma": 23,
+      "Vi": 15,
+      "Ag": 14,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Agidyne",
+      "Taunt"
+    ],
+    "LearnedSkills": {
+      "53": "Makakaja",
+      "54": "Mana Aid",
+      "55": "Maragidyne"
+    }
+  },
+  {
+    "Id": "pulukishi",
+    "Name": "Pulukishi",
+    "Race": "Yoma",
+    "Level": 48,
+    "Stats": {
+      "St": 19,
+      "Ma": 15,
+      "Vi": 17,
+      "Ag": 9,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Earth": "Null",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Growth",
+      "Eerie Sound",
+      "Terazi",
+      "Earth Boost"
+    ],
+    "LearnedSkills": {
+      "49": "Stasis Blade",
+      "50": "Sonic Wave",
+      "51": "Wind Boost",
+      "52": "Garula",
+      "53": "Chaos Blade",
+      "54": "Magarudyne"
+    }
+  },
+  {
+    "Id": "jinn",
+    "Name": "Jinn",
+    "Race": "Yoma",
+    "Level": 44,
+    "Stats": {
+      "St": 14,
+      "Ma": 19,
+      "Vi": 13,
+      "Ag": 14,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Absorb",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Wind Boost",
+      "Garudyne",
+      "Garula"
+    ],
+    "LearnedSkills": {
+      "45": "Diarama",
+      "46": "Kamikaze",
+      "47": "Taunt"
+    }
+  },
+  {
+    "Id": "ongkhot",
+    "Name": "Ongkhot",
+    "Race": "Yoma",
+    "Level": 37,
+    "Stats": {
+      "St": 14,
+      "Ma": 9,
+      "Vi": 11,
+      "Ag": 15,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Kill Rush",
+      "Might",
+      "Tarukaja"
+    ],
+    "LearnedSkills": {
+      "38": "Tetrakarn",
+      "39": "Brutal Slash",
+      "40": "Sukukaja",
+      "41": "Kamikaze"
+    }
+  },
+  {
+    "Id": "karasu_tengu",
+    "Name": "Karasu Tengu",
+    "Race": "Yoma",
+    "Level": 28,
+    "Stats": {
+      "St": 12,
+      "Ma": 11,
+      "Vi": 11,
+      "Ag": 10,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Magarula",
+      "Tarukaja"
+    ],
+    "LearnedSkills": {
+      "29": "Mana Gain",
+      "30": "Mahama",
+      "31": "Might",
+      "32": "Resist Elec",
+      "33": "Garudyne"
+    }
+  },
+  {
+    "Id": "dis",
+    "Name": "Dis",
+    "Race": "Yoma",
+    "Level": 23,
+    "Stats": {
+      "St": 10,
+      "Ma": 14,
+      "Vi": 10,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tetraja",
+      "Agilao",
+      "Pulinpa"
+    ],
+    "LearnedSkills": {
+      "24": "Diarama",
+      "25": "Makatora",
+      "26": "Me Patra"
+    }
+  },
+  {
+    "Id": "koppa_tengu",
+    "Name": "Koppa Tengu",
+    "Race": "Yoma",
+    "Level": 19,
+    "Stats": {
+      "St": 7,
+      "Ma": 10,
+      "Vi": 5,
+      "Ag": 13,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Null",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Magaru",
+      "Tarukaja"
+    ],
+    "LearnedSkills": {
+      "20": "Bewilder",
+      "21": "Makatora",
+      "22": "Kamikaze",
+      "23": "Garula"
+    }
+  },
+  {
+    "Id": "isora",
+    "Name": "Isora",
+    "Race": "Yoma",
+    "Level": 14,
+    "Stats": {
+      "St": 9,
+      "Ma": 8,
+      "Vi": 8,
+      "Ag": 6,
+      "Lu": 3
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Resist",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Venom Bite",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "15": "Lullaby",
+      "16": "Mabufula",
+      "17": "Media"
+    }
+  },
+  {
+    "Id": "apsaras",
+    "Name": "Apsaras",
+    "Race": "Yoma",
+    "Level": 8,
+    "Stats": {
+      "St": 6,
+      "Ma": 6,
+      "Vi": 6,
+      "Ag": 5,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Absorb",
+      "Elec": "Resist",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Lullaby",
+      "Patra"
+    ],
+    "LearnedSkills": {
+      "9": "Mabufu",
+      "10": "Resist Mind",
+      "11": "Pulinpa",
+      "12": "Dormina",
+      "13": "Mazio"
+    }
+  },
+  {
+    "Id": "pixie",
+    "Name": "Pixie",
+    "Race": "Fairy",
+    "Level": 2,
+    "Stats": {
+      "St": 3,
+      "Ma": 6,
+      "Vi": 4,
+      "Ag": 2,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Resist",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dia",
+      "Zio"
+    ],
+    "LearnedSkills": {
+      "4": "Rakunda",
+      "5": "Posumudi",
+      "6": "Magaru"
+    }
+  },
+  {
+    "Id": "jack_frost",
+    "Name": "Jack Frost",
+    "Race": "Fairy",
+    "Level": 7,
+    "Stats": {
+      "St": 5,
+      "Ma": 8,
+      "Vi": 6,
+      "Ag": 4,
+      "Lu": 4
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Bufu",
+      "Pulinpa"
+    ],
+    "LearnedSkills": {
+      "10": "Mabufu",
+      "11": "Sonic Punch",
+      "12": "Freeze Boost",
+      "13": "Ice Boost"
+    }
+  },
+  {
+    "Id": "high_pixie",
+    "Name": "High Pixie",
+    "Race": "Fairy",
+    "Level": 10,
+    "Stats": {
+      "St": 4,
+      "Ma": 6,
+      "Vi": 4,
+      "Ag": 6,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Resist",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Media",
+      "Mazio",
+      "Pulinpa"
+    ],
+    "LearnedSkills": {
+      "11": "Dodge Wind",
+      "12": "Me Patra",
+      "14": "Recarm"
+    }
+  },
+  {
+    "Id": "jack_o_lantern",
+    "Name": "Jack-o'-Lantern",
+    "Race": "Fairy",
+    "Level": 19,
+    "Stats": {
+      "St": 8,
+      "Ma": 10,
+      "Vi": 8,
+      "Ag": 6,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Agi",
+      "Maragi"
+    ],
+    "LearnedSkills": {
+      "20": "Stun Gaze",
+      "21": "Lunge",
+      "22": "Agilao",
+      "23": "Resist Ice"
+    }
+  },
+  {
+    "Id": "kelpie",
+    "Name": "Kelpie",
+    "Race": "Fairy",
+    "Level": 26,
+    "Stats": {
+      "St": 9,
+      "Ma": 13,
+      "Vi": 9,
+      "Ag": 8,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Resist",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Pulinpa",
+      "Paraladi"
+    ],
+    "LearnedSkills": {
+      "27": "Stun Bite",
+      "28": "Null Nerve",
+      "29": "Marin Karin",
+      "30": "Diarama"
+    }
+  },
+  {
+    "Id": "troll",
+    "Name": "Troll",
+    "Race": "Fairy",
+    "Level": 38,
+    "Stats": {
+      "St": 14,
+      "Ma": 10,
+      "Vi": 21,
+      "Ag": 4,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mabufula",
+      "Mutudi",
+      "Materazi"
+    ],
+    "LearnedSkills": {
+      "39": "Berserk",
+      "41": "Life Gain",
+      "43": "Diarahan"
+    }
+  },
+  {
+    "Id": "setanta",
+    "Name": "Setanta",
+    "Race": "Fairy",
+    "Level": 43,
+    "Stats": {
+      "St": 17,
+      "Ma": 12,
+      "Vi": 20,
+      "Ag": 12,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Guillotine",
+      "Sukukaja"
+    ],
+    "LearnedSkills": {
+      "44": "Focus",
+      "45": "Counterstrike",
+      "46": "Null Curse",
+      "47": "Tempest"
+    }
+  },
+  {
+    "Id": "oberon",
+    "Name": "Oberon",
+    "Race": "Fairy",
+    "Level": 46,
+    "Stats": {
+      "St": 16,
+      "Ma": 19,
+      "Vi": 13,
+      "Ag": 8,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Heat Wave",
+      "Mediarama",
+      "Makarakarn"
+    ],
+    "LearnedSkills": {
+      "48": "Diarahan",
+      "49": "Garudyne",
+      "50": "Bufudyne",
+      "51": "Ziodyne"
+    }
+  },
+  {
+    "Id": "titania",
+    "Name": "Titania",
+    "Race": "Fairy",
+    "Level": 57,
+    "Stats": {
+      "St": 14,
+      "Ma": 23,
+      "Vi": 15,
+      "Ag": 12,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Resist",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mediarahan",
+      "Diamond Dust",
+      "Magarudyne"
+    ],
+    "LearnedSkills": {
+      "59": "Pulinpa",
+      "60": "Mana Surge",
+      "62": "Prayer"
+    }
+  },
+  {
+    "Id": "throne",
+    "Name": "Throne",
+    "Race": "Divine",
+    "Level": 64,
+    "Stats": {
+      "St": 18,
+      "Ma": 22,
+      "Vi": 18,
+      "Ag": 15,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mahamaon",
+      "Makougaon",
+      "Maragidyne"
+    ],
+    "LearnedSkills": {
+      "65": "Mediarahan",
+      "66": "Diarahan",
+      "67": "Bewilder",
+      "68": "Divine Judgment",
+      "69": "Debilitate"
+    }
+  },
+  {
+    "Id": "dominion",
+    "Name": "Dominion",
+    "Race": "Divine",
+    "Level": 50,
+    "Stats": {
+      "St": 15,
+      "Ma": 18,
+      "Vi": 15,
+      "Ag": 11,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Diarahan",
+      "Kouga"
+    ],
+    "LearnedSkills": {
+      "51": "Tetrakarn",
+      "52": "Makakaja",
+      "53": "Tentarafoo",
+      "54": "Mahamaon"
+    }
+  },
+  {
+    "Id": "virtue",
+    "Name": "Virtue",
+    "Race": "Divine",
+    "Level": 41,
+    "Stats": {
+      "St": 12,
+      "Ma": 17,
+      "Vi": 17,
+      "Ag": 8,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Resist",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mahama",
+      "Makouga",
+      "Mediarama"
+    ],
+    "LearnedSkills": {
+      "42": "Torrent Shot",
+      "43": "Makarakarn",
+      "44": "Mazionga",
+      "45": "Divine Judgment"
+    }
+  },
+  {
+    "Id": "power",
+    "Name": "Power",
+    "Race": "Divine",
+    "Level": 33,
+    "Stats": {
+      "St": 16,
+      "Ma": 8,
+      "Vi": 16,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dark Might",
+      "Tarukaja"
+    ],
+    "LearnedSkills": {
+      "34": "Guillotine",
+      "35": "Mahama",
+      "36": "Kouga",
+      "37": "Hamaon",
+      "38": "Null Nerve"
+    }
+  },
+  {
+    "Id": "principality",
+    "Name": "Principality",
+    "Race": "Divine",
+    "Level": 28,
+    "Stats": {
+      "St": 11,
+      "Ma": 12,
+      "Vi": 9,
+      "Ag": 7,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Weak",
+      "Mind": "Weak",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Bright Might",
+      "Garula"
+    ],
+    "LearnedSkills": {
+      "29": "Diarama",
+      "30": "Mana Bonus",
+      "31": "Hamaon",
+      "32": "Heat Wave"
+    }
+  },
+  {
+    "Id": "archangel",
+    "Name": "Archangel",
+    "Race": "Divine",
+    "Level": 18,
+    "Stats": {
+      "St": 11,
+      "Ma": 6,
+      "Vi": 8,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Null",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Power Slash",
+      "Tarukaja"
+    ],
+    "LearnedSkills": {
+      "19": "Hama",
+      "20": "Estoma",
+      "21": "Magaru",
+      "22": "Diarama"
+    }
+  },
+  {
+    "Id": "angel",
+    "Name": "Angel",
+    "Race": "Divine",
+    "Level": 11,
+    "Stats": {
+      "St": 4,
+      "Ma": 7,
+      "Vi": 7,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dia",
+      "Hama",
+      "Kouha"
+    ],
+    "LearnedSkills": {
+      "12": "Patra",
+      "13": "Posumudi",
+      "14": "Holy Arrow",
+      "15": "Life Aid"
+    }
+  },
+  {
+    "Id": "flauros",
+    "Name": "Flauros",
+    "Race": "Fallen",
+    "Level": 68,
+    "Stats": {
+      "St": 27,
+      "Ma": 14,
+      "Vi": 22,
+      "Ag": 13,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Iron Claw",
+      "War Cry"
+    ],
+    "LearnedSkills": {
+      "69": "Deathbound",
+      "70": "Endure",
+      "71": "Hades Blast",
+      "72": "Life Surge",
+      "73": "Hassohappa"
+    }
+  },
+  {
+    "Id": "decarabia",
+    "Name": "Decarabia",
+    "Race": "Fallen",
+    "Level": 58,
+    "Stats": {
+      "St": 15,
+      "Ma": 22,
+      "Vi": 17,
+      "Ag": 12,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Analyze",
+      "Tetrakarn"
+    ],
+    "LearnedSkills": {
+      "59": "Sukukaja",
+      "60": "Hell Gaze",
+      "61": "Eternal Rest",
+      "62": "Trafuri",
+      "63": "Megido"
+    }
+  },
+  {
+    "Id": "ose",
+    "Name": "Ose",
+    "Race": "Fallen",
+    "Level": 45,
+    "Stats": {
+      "St": 17,
+      "Ma": 11,
+      "Vi": 14,
+      "Ag": 12,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Rakukaja",
+      "Blight",
+      "War Cry"
+    ],
+    "LearnedSkills": {
+      "46": "Dekaja",
+      "47": "Dekunda",
+      "48": "Focus",
+      "49": "Makarakarn"
+    }
+  },
+  {
+    "Id": "berith",
+    "Name": "Berith",
+    "Race": "Fallen",
+    "Level": 37,
+    "Stats": {
+      "St": 16,
+      "Ma": 10,
+      "Vi": 17,
+      "Ag": 8,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mudo",
+      "Heat Wave"
+    ],
+    "LearnedSkills": {
+      "38": "Dekaja",
+      "39": "Maragion",
+      "40": "Dismal Tune",
+      "41": "Fire Boost"
+    }
+  },
+  {
+    "Id": "eligor",
+    "Name": "Eligor",
+    "Race": "Fallen",
+    "Level": 29,
+    "Stats": {
+      "St": 14,
+      "Ma": 9,
+      "Vi": 14,
+      "Ag": 6,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Hell Thrust",
+      "Rakukaja",
+      "Dark Might"
+    ],
+    "LearnedSkills": {
+      "30": "Mudo",
+      "31": "Cruel Attack",
+      "32": "Riberama",
+      "33": "Evil Smile"
+    }
+  },
+  {
+    "Id": "forneus",
+    "Name": "Forneus",
+    "Race": "Fallen",
+    "Level": 20,
+    "Stats": {
+      "St": 10,
+      "Ma": 7,
+      "Vi": 10,
+      "Ag": 5,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Absorb",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Double Fangs",
+      "Riberama"
+    ],
+    "LearnedSkills": {
+      "21": "Bufula",
+      "22": "Sukunda",
+      "23": "Resist Elec",
+      "24": "Mabufula"
+    }
+  },
+  {
+    "Id": "yurlungur",
+    "Name": "Yurlungur",
+    "Race": "Snake",
+    "Level": 66,
+    "Stats": {
+      "St": 18,
+      "Ma": 16,
+      "Vi": 30,
+      "Ag": 9,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Resist",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Null",
+      "Elec": "Null",
+      "Wind": "Null",
+      "Earth": "Weak",
+      "Light": "Normal",
+      "Dark": "Resist",
+      "Mind": "Weak",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Ziodyne",
+      "Rakukaja",
+      "Mazionga"
+    ],
+    "LearnedSkills": {
+      "67": "Elec Boost",
+      "68": "Mediarahan",
+      "69": "Samarecarm",
+      "70": "Garudyne"
+    }
+  },
+  {
+    "Id": "quetzalcoatl",
+    "Name": "Quetzalcoatl",
+    "Race": "Snake",
+    "Level": 55,
+    "Stats": {
+      "St": 16,
+      "Ma": 12,
+      "Vi": 27,
+      "Ag": 9,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Venom Bite",
+      "Mabufula"
+    ],
+    "LearnedSkills": {
+      "56": "Kill Rush",
+      "57": "Ice Boost",
+      "58": "Ice Drain",
+      "59": "Poisma",
+      "60": "Recarmdra"
+    }
+  },
+  {
+    "Id": "naga_raja",
+    "Name": "Naga Raja",
+    "Race": "Snake",
+    "Level": 37,
+    "Stats": {
+      "St": 15,
+      "Ma": 9,
+      "Vi": 21,
+      "Ag": 8,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Drain Attack",
+      "Tarukaja",
+      "Terazi"
+    ],
+    "LearnedSkills": {
+      "38": "Counter",
+      "39": "Slithering Slash",
+      "40": "Null Fire",
+      "41": "Materazi"
+    }
+  },
+  {
+    "Id": "mizuchi",
+    "Name": "Mizuchi",
+    "Race": "Snake",
+    "Level": 34,
+    "Stats": {
+      "St": 12,
+      "Ma": 13,
+      "Vi": 19,
+      "Ag": 7,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Elec": "Absorb",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Bufula",
+      "Mabufula",
+      "Makakaja"
+    ],
+    "LearnedSkills": {
+      "35": "Makarakarn",
+      "36": "Me Patra",
+      "37": "Kill Rush",
+      "38": "Sukunda"
+    }
+  },
+  {
+    "Id": "naga",
+    "Name": "Naga",
+    "Race": "Snake",
+    "Level": 28,
+    "Stats": {
+      "St": 13,
+      "Ma": 8,
+      "Vi": 16,
+      "Ag": 7,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Drain Attack",
+      "Tarukaja"
+    ],
+    "LearnedSkills": {
+      "29": "Life Gain",
+      "30": "Sukunda",
+      "31": "Hell Thrust",
+      "32": "Zionga"
+    }
+  },
+  {
+    "Id": "nozuchi",
+    "Name": "Nozuchi",
+    "Race": "Snake",
+    "Level": 14,
+    "Stats": {
+      "St": 11,
+      "Ma": 6,
+      "Vi": 10,
+      "Ag": 4,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Absorb",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Bash",
+      "Tera",
+      "Poisma"
+    ],
+    "LearnedSkills": {
+      "15": "Counter",
+      "16": "Rakukaja",
+      "17": "Matera",
+      "18": "Sacrifice"
+    }
+  },
+  {
+    "Id": "cerberus",
+    "Name": "Cerberus",
+    "Race": "Beast",
+    "Level": 61,
+    "Stats": {
+      "St": 23,
+      "Ma": 14,
+      "Vi": 15,
+      "Ag": 17,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Repel",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Iron Claw",
+      "Binding Cry",
+      "Sukunda"
+    ],
+    "LearnedSkills": {
+      "62": "Retaliate",
+      "63": "Maragidyne",
+      "64": "Attack All"
+    }
+  },
+  {
+    "Id": "suparna",
+    "Name": "Suparna",
+    "Race": "Beast",
+    "Level": 54,
+    "Stats": {
+      "St": 13,
+      "Ma": 19,
+      "Vi": 14,
+      "Ag": 22,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Weak",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Earth": "Null",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Garudyne",
+      "Sukunda",
+      "Sukukaja"
+    ],
+    "LearnedSkills": {
+      "55": "Magarudyne",
+      "56": "Venom Claw",
+      "57": "Diarahan"
+    }
+  },
+  {
+    "Id": "orthrus",
+    "Name": "Orthrus",
+    "Race": "Beast",
+    "Level": 34,
+    "Stats": {
+      "St": 16,
+      "Ma": 8,
+      "Vi": 13,
+      "Ag": 11,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Agilao",
+      "Stun Claw"
+    ],
+    "LearnedSkills": {
+      "35": "Fire Boost",
+      "36": "War Cry",
+      "37": "Hell Fang"
+    }
+  },
+  {
+    "Id": "badb_catha",
+    "Name": "Badb Catha",
+    "Race": "Beast",
+    "Level": 23,
+    "Stats": {
+      "St": 11,
+      "Ma": 6,
+      "Vi": 8,
+      "Ag": 12,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Weak",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Resist",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Needle Rush",
+      "Liftoma"
+    ],
+    "LearnedSkills": {
+      "24": "Magaru",
+      "25": "Resist Wind",
+      "26": "Mana Aid"
+    }
+  },
+  {
+    "Id": "nekomata",
+    "Name": "Nekomata",
+    "Race": "Beast",
+    "Level": 18,
+    "Stats": {
+      "St": 7,
+      "Ma": 12,
+      "Vi": 8,
+      "Ag": 7,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Absorb",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stun Needle",
+      "Marin Karin",
+      "Paraladi",
+      "Tera"
+    ],
+    "LearnedSkills": {
+      "19": "Mana Bonus",
+      "20": "Feral Claw",
+      "21": "Evil Touch"
+    }
+  },
+  {
+    "Id": "inugami",
+    "Name": "Inugami",
+    "Race": "Beast",
+    "Level": 13,
+    "Stats": {
+      "St": 10,
+      "Ma": 7,
+      "Vi": 9,
+      "Ag": 6,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Null",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tera",
+      "Maragi",
+      "Double Fangs"
+    ],
+    "LearnedSkills": {
+      "14": "Media",
+      "15": "Rakunda",
+      "16": "Sukunda",
+      "17": "Pulinpa"
+    }
+  },
+  {
+    "Id": "gogmagog",
+    "Name": "Gogmagog",
+    "Race": "Jirae",
+    "Level": 55,
+    "Stats": {
+      "St": 22,
+      "Ma": 14,
+      "Vi": 21,
+      "Ag": 7,
+      "Lu": 14
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Absorb",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Magarula",
+      "Materazi",
+      "Kill Rush",
+      "Diarama"
+    ],
+    "LearnedSkills": {
+      "56": "Life Surge",
+      "57": "Tarunda",
+      "58": "Evil Gaze",
+      "59": "Rakunda",
+      "60": "Sukunda"
+    }
+  },
+  {
+    "Id": "titan",
+    "Name": "Titan",
+    "Race": "Jirae",
+    "Level": 49,
+    "Stats": {
+      "St": 21,
+      "Ma": 10,
+      "Vi": 17,
+      "Ag": 8,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Earth": "Null",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Guillotine",
+      "Taunt"
+    ],
+    "LearnedSkills": {
+      "50": "Stun Gaze",
+      "51": "Life Surge",
+      "52": "Retaliate",
+      "53": "Maragion"
+    }
+  },
+  {
+    "Id": "sarutahiko",
+    "Name": "Sarutahiko",
+    "Race": "Jirae",
+    "Level": 35,
+    "Stats": {
+      "St": 18,
+      "Ma": 7,
+      "Vi": 17,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Kill Rush",
+      "Lightoma"
+    ],
+    "LearnedSkills": {
+      "36": "Me Patra",
+      "37": "Counter",
+      "38": "Focus",
+      "39": "Hell Thrust"
+    }
+  },
+  {
+    "Id": "sudama",
+    "Name": "Sudama",
+    "Race": "Jirae",
+    "Level": 13,
+    "Stats": {
+      "St": 7,
+      "Ma": 7,
+      "Vi": 3,
+      "Ag": 8,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Garu"
+    ],
+    "LearnedSkills": {
+      "14": "Tera",
+      "15": "Magaru",
+      "16": "Kamikaze",
+      "17": "Makatora",
+      "18": "Makakaja",
+      "19": "Sukukaja"
+    }
+  },
+  {
+    "Id": "hua_po",
+    "Name": "Hua Po",
+    "Race": "Jirae",
+    "Level": 5,
+    "Stats": {
+      "St": 4,
+      "Ma": 5,
+      "Vi": 5,
+      "Ag": 6,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Agi"
+    ],
+    "LearnedSkills": {
+      "6": "Patra",
+      "7": "Marin Karin",
+      "8": "Rakukaja",
+      "9": "Maragi"
+    }
+  },
+  {
+    "Id": "kodama",
+    "Name": "Kodama",
+    "Race": "Jirae",
+    "Level": 3,
+    "Stats": {
+      "St": 4,
+      "Ma": 4,
+      "Vi": 4,
+      "Ag": 6,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Garu"
+    ],
+    "LearnedSkills": {
+      "4": "Dia",
+      "5": "Bash"
+    }
+  },
+  {
+    "Id": "ongyo_ki",
+    "Name": "Ongyo-Ki",
+    "Race": "Brute",
+    "Level": 81,
+    "Stats": {
+      "St": 23,
+      "Ma": 27,
+      "Vi": 23,
+      "Ag": 20,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Dark Sword",
+      "Tentarafoo"
+    ],
+    "LearnedSkills": {
+      "82": "Megido",
+      "83": "Mudoon",
+      "84": "Blight",
+      "85": "Victory Cry"
+    }
+  },
+  {
+    "Id": "fuu_ki",
+    "Name": "Fuu-Ki",
+    "Race": "Brute",
+    "Level": 66,
+    "Stats": {
+      "St": 18,
+      "Ma": 21,
+      "Vi": 20,
+      "Ag": 19,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Null",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Magarudyne",
+      "Garudyne"
+    ],
+    "LearnedSkills": {
+      "67": "Binding Cry",
+      "68": "Chaos Blade",
+      "69": "Sukunda",
+      "70": "Repel Earth"
+    }
+  },
+  {
+    "Id": "sui_ki",
+    "Name": "Sui-Ki",
+    "Race": "Brute",
+    "Level": 62,
+    "Stats": {
+      "St": 18,
+      "Ma": 24,
+      "Vi": 20,
+      "Ag": 14,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dekaja",
+      "Mabufula",
+      "Ice Boost"
+    ],
+    "LearnedSkills": {
+      "63": "Evil Gaze",
+      "64": "Bufudyne"
+    }
+  },
+  {
+    "Id": "kin_ki",
+    "Name": "Kin-Ki",
+    "Race": "Brute",
+    "Level": 59,
+    "Stats": {
+      "St": 23,
+      "Ma": 13,
+      "Vi": 24,
+      "Ag": 7,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Kill Rush",
+      "Focus",
+      "Rakukaja"
+    ],
+    "LearnedSkills": {
+      "60": "Taunt",
+      "61": "Sacrifice",
+      "62": "Tempest"
+    }
+  },
+  {
+    "Id": "shiki_ouji",
+    "Name": "Shiki-Ouji",
+    "Race": "Brute",
+    "Level": 54,
+    "Stats": {
+      "St": 14,
+      "Ma": 24,
+      "Vi": 16,
+      "Ag": 10,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Repel",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stun Needle",
+      "Mamudoon",
+      "Dekaja"
+    ],
+    "LearnedSkills": {
+      "55": "Bewilder",
+      "56": "Mahamaon",
+      "57": "Megido"
+    }
+  },
+  {
+    "Id": "yomotsu_ikusa",
+    "Name": "Yomotsu-Ikusa",
+    "Race": "Brute",
+    "Level": 44,
+    "Stats": {
+      "St": 17,
+      "Ma": 15,
+      "Vi": 13,
+      "Ag": 9,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Absorb",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Hell Thrust",
+      "Me Patra",
+      "Terazi"
+    ],
+    "LearnedSkills": {
+      "45": "Zan-ei",
+      "46": "Mudoon",
+      "47": "Materazi"
+    }
+  },
+  {
+    "Id": "oni",
+    "Name": "Oni",
+    "Race": "Brute",
+    "Level": 25,
+    "Stats": {
+      "St": 13,
+      "Ma": 7,
+      "Vi": 12,
+      "Ag": 6,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Rakunda",
+      "Kill Rush"
+    ],
+    "LearnedSkills": {
+      "26": "War Cry",
+      "27": "Estoma",
+      "28": "Life Gain",
+      "29": "Dark Sword",
+      "30": "Resist Earth"
+    }
+  },
+  {
+    "Id": "momunofu",
+    "Name": "Momunofu",
+    "Race": "Brute",
+    "Level": 20,
+    "Stats": {
+      "St": 13,
+      "Ma": 6,
+      "Vi": 10,
+      "Ag": 7,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Weak",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Bash",
+      "Focus"
+    ],
+    "LearnedSkills": {
+      "21": "Life Bonus",
+      "22": "Brutal Slash",
+      "23": "Kamikaze"
+    }
+  },
+  {
+    "Id": "shikigami",
+    "Name": "Shikigami",
+    "Race": "Brute",
+    "Level": 4,
+    "Stats": {
+      "St": 5,
+      "Ma": 5,
+      "Vi": 4,
+      "Ag": 5,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Repel",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Zio"
+    ],
+    "LearnedSkills": {
+      "5": "Tarunda",
+      "6": "Sukunda",
+      "7": "Tarukaja"
+    }
+  },
+  {
+    "Id": "rangda",
+    "Name": "Rangda",
+    "Race": "Femme",
+    "Level": 72,
+    "Stats": {
+      "St": 19,
+      "Ma": 24,
+      "Vi": 20,
+      "Ag": 14,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Repel",
+      "Slash": "Repel",
+      "Pierce": "Repel",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stun Claw",
+      "Debilitate",
+      "Dekaja"
+    ],
+    "LearnedSkills": {
+      "73": "Mana Aid",
+      "74": "Eerie Sound",
+      "75": "Maragidyne",
+      "76": "Retaliate"
+    }
+  },
+  {
+    "Id": "atropos",
+    "Name": "Atropos",
+    "Race": "Femme",
+    "Level": 67,
+    "Stats": {
+      "St": 16,
+      "Ma": 28,
+      "Vi": 17,
+      "Ag": 15,
+      "Lu": 14
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Ziodyne",
+      "Garudyne",
+      "Bufudyne",
+      "Teradyne"
+    ],
+    "LearnedSkills": {
+      "68": "Elec Amp",
+      "69": "Wind Amp",
+      "70": "Ice Amp",
+      "71": "Earth Amp",
+      "72": "Mana Surge",
+      "73": "Megidola"
+    }
+  },
+  {
+    "Id": "lachesis",
+    "Name": "Lachesis",
+    "Race": "Femme",
+    "Level": 63,
+    "Stats": {
+      "St": 16,
+      "Ma": 26,
+      "Vi": 19,
+      "Ag": 10,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Makakaja",
+      "Rakukaja",
+      "Makarakarn"
+    ],
+    "LearnedSkills": {
+      "64": "Sukukaja",
+      "65": "Dormina",
+      "66": "Tetrakarn",
+      "67": "Rakunda",
+      "68": "Trafuri"
+    }
+  },
+  {
+    "Id": "clotho",
+    "Name": "Clotho",
+    "Race": "Femme",
+    "Level": 58,
+    "Stats": {
+      "St": 16,
+      "Ma": 22,
+      "Vi": 15,
+      "Ag": 16,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Hell Gaze",
+      "Mahamaon",
+      "Kougaon"
+    ],
+    "LearnedSkills": {
+      "59": "Mediarahan",
+      "60": "Eternal Rest",
+      "61": "Marin Karin",
+      "62": "Samarecarm"
+    }
+  },
+  {
+    "Id": "dakini",
+    "Name": "Dakini",
+    "Race": "Femme",
+    "Level": 52,
+    "Stats": {
+      "St": 21,
+      "Ma": 11,
+      "Vi": 17,
+      "Ag": 13,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mamudo",
+      "Life Aid",
+      "Terazi"
+    ],
+    "LearnedSkills": {
+      "53": "Agidyne",
+      "54": "Blight",
+      "55": "Endure"
+    }
+  },
+  {
+    "Id": "yaksini",
+    "Name": "Yaksini",
+    "Race": "Femme",
+    "Level": 43,
+    "Stats": {
+      "St": 17,
+      "Ma": 11,
+      "Vi": 15,
+      "Ag": 11,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Guillotine",
+      "Riberama,"
+    ],
+    "LearnedSkills": {
+      "44": "Binding Cry",
+      "45": "Null Ice",
+      "46": "Tentarafoo",
+      "47": "Retaliate"
+    }
+  },
+  {
+    "Id": "yomotsu_shikome",
+    "Name": "Yomotsu-Shikome",
+    "Race": "Femme",
+    "Level": 32,
+    "Stats": {
+      "St": 8,
+      "Ma": 16,
+      "Vi": 9,
+      "Ag": 10,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Resist",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Magarula",
+      "Shibaboo"
+    ],
+    "LearnedSkills": {
+      "33": "Materazi",
+      "34": "Resist Dark",
+      "35": "Sonic Wave",
+      "36": "Stun Needle",
+      "37": "Drain Attack"
+    }
+  },
+  {
+    "Id": "taraka",
+    "Name": "Taraka",
+    "Race": "Femme",
+    "Level": 20,
+    "Stats": {
+      "St": 10,
+      "Ma": 6,
+      "Vi": 11,
+      "Ag": 6,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Shibaboo",
+      "Taunt",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "21": "Rakukaja",
+      "22": "Kamikaze",
+      "23": "Zionga",
+      "24": "Heat Wave"
+    }
+  },
+  {
+    "Id": "datsue_ba",
+    "Name": "Datsue-Ba",
+    "Race": "Femme",
+    "Level": 7,
+    "Stats": {
+      "St": 4,
+      "Ma": 8,
+      "Vi": 5,
+      "Ag": 4,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Needle Rush",
+      "Shibaboo",
+      "Tera"
+    ],
+    "LearnedSkills": {
+      "8": "Bufu",
+      "9": "Patra",
+      "10": "Dormina"
+    }
+  },
+  {
+    "Id": "mada",
+    "Name": "Mada",
+    "Race": "Vile",
+    "Level": 83,
+    "Stats": {
+      "St": 30,
+      "Ma": 21,
+      "Vi": 30,
+      "Ag": 14,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Absorb",
+      "Slash": "Absorb",
+      "Pierce": "Absorb",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Hades Blast",
+      "Debilitate"
+    ],
+    "LearnedSkills": {
+      "84": "Intoxicate",
+      "85": "Diarahan",
+      "86": "Tarukaja",
+      "87": "Life Surge"
+    }
+  },
+  {
+    "Id": "samael",
+    "Name": "Samael",
+    "Race": "Vile",
+    "Level": 73,
+    "Stats": {
+      "St": 19,
+      "Ma": 26,
+      "Vi": 23,
+      "Ag": 19,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mahamaon",
+      "Mamudoon",
+      "Maragidyne"
+    ],
+    "LearnedSkills": {
+      "74": "Samarecarm",
+      "75": "Tetrakarn",
+      "76": "Retaliate",
+      "77": "Repel Phys"
+    }
+  },
+  {
+    "Id": "taotie",
+    "Name": "Taotie",
+    "Race": "Vile",
+    "Level": 65,
+    "Stats": {
+      "St": 18,
+      "Ma": 21,
+      "Vi": 21,
+      "Ag": 15,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Absorb",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Megido",
+      "Tetraja"
+    ],
+    "LearnedSkills": {
+      "66": "Life Drain",
+      "67": "Hell Gaze",
+      "68": "Mana Aid",
+      "69": "Tentarafoo"
+    }
+  },
+  {
+    "Id": "girimekhala",
+    "Name": "Girimekhala",
+    "Race": "Vile",
+    "Level": 58,
+    "Stats": {
+      "St": 22,
+      "Ma": 17,
+      "Vi": 21,
+      "Ag": 13,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Repel",
+      "Slash": "Repel",
+      "Pierce": "Repel",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Absorb",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Binding Cry",
+      "Chaos Blade"
+    ],
+    "LearnedSkills": {
+      "59": "Mazionga",
+      "60": "Debilitate",
+      "61": "Tempest"
+    }
+  },
+  {
+    "Id": "pazuzu",
+    "Name": "Pazuzu",
+    "Race": "Vile",
+    "Level": 45,
+    "Stats": {
+      "St": 16,
+      "Ma": 19,
+      "Vi": 20,
+      "Ag": 10,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Hell Gaze",
+      "Mediarama"
+    ],
+    "LearnedSkills": {
+      "46": "Null Wind",
+      "47": "Stun Needle",
+      "48": "Tentarafoo",
+      "49": "Wet Wind"
+    }
+  },
+  {
+    "Id": "baphomet",
+    "Name": "Baphomet",
+    "Race": "Vile",
+    "Level": 33,
+    "Stats": {
+      "St": 8,
+      "Ma": 17,
+      "Vi": 17,
+      "Ag": 9,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Makakaja"
+    ],
+    "LearnedSkills": {
+      "34": "Evil Gaze",
+      "35": "Maragion",
+      "36": "Eternal Rest"
+    }
+  },
+  {
+    "Id": "arahabaki",
+    "Name": "Arahabaki",
+    "Race": "Vile",
+    "Level": 30,
+    "Stats": {
+      "St": 14,
+      "Ma": 10,
+      "Vi": 19,
+      "Ag": 6,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Weak",
+      "Wind": "Weak",
+      "Earth": "Repel",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Weak",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Bash",
+      "Focus"
+    ],
+    "LearnedSkills": {
+      "31": "Mabufula",
+      "32": "Mudo",
+      "33": "Sonic Wave",
+      "34": "Drain Attack"
+    }
+  },
+  {
+    "Id": "beelzebub_fly",
+    "Name": "Beelzebub Fly",
+    "Race": "Tyrant",
+    "Level": 95,
+    "Stats": {
+      "St": 35,
+      "Ma": 29,
+      "Vi": 28,
+      "Ag": 29,
+      "Lu": 21
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Resist",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "96": "Death Flies",
+      "97": "Victory Cry"
+    }
+  },
+  {
+    "Id": "mot",
+    "Name": "Mot",
+    "Race": "Tyrant",
+    "Level": 91,
+    "Stats": {
+      "St": 25,
+      "Ma": 32,
+      "Vi": 31,
+      "Ag": 16,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Maragidyne",
+      "Magarudyne",
+      "Makakaja"
+    ],
+    "LearnedSkills": {
+      "91": "Absorb Wind",
+      "92": "Megidolaon"
+    }
+  },
+  {
+    "Id": "beelzebub",
+    "Name": "Beelzebub",
+    "Race": "Tyrant",
+    "Level": 84,
+    "Stats": {
+      "St": 32,
+      "Ma": 27,
+      "Vi": 27,
+      "Ag": 19,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Maziodyne",
+      "Megidolaon"
+    ],
+    "LearnedSkills": {
+      "85": "Growth 3",
+      "86": "Elec Boost"
+    }
+  },
+  {
+    "Id": "alciel",
+    "Name": "Alciel",
+    "Race": "Tyrant",
+    "Level": 77,
+    "Stats": {
+      "St": 29,
+      "Ma": 25,
+      "Vi": 27,
+      "Ag": 14,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Attack All",
+      "Mabufudyne"
+    ],
+    "LearnedSkills": {
+      "78": "Life Surge",
+      "79": "Tetrakarn",
+      "80": "Hell Fang",
+      "81": "Victory Cry"
+    }
+  },
+  {
+    "Id": "surt",
+    "Name": "Surt",
+    "Race": "Tyrant",
+    "Level": 74,
+    "Stats": {
+      "St": 28,
+      "Ma": 20,
+      "Vi": 24,
+      "Ag": 15,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Resist",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Maragidyne",
+      "Heat Wave",
+      "War Cry",
+      "Attack Fire"
+    ],
+    "LearnedSkills": {
+      "75": "Absorb Elec",
+      "76": "Attack All",
+      "77": "Ragnarok"
+    }
+  },
+  {
+    "Id": "abaddon",
+    "Name": "Abaddon",
+    "Race": "Tyrant",
+    "Level": 69,
+    "Stats": {
+      "St": 26,
+      "Ma": 24,
+      "Vi": 25,
+      "Ag": 13,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Attack All",
+      "Eerie Sound"
+    ],
+    "LearnedSkills": {
+      "70": "Mabufudyne",
+      "71": "Retaliate",
+      "72": "Repel Ice",
+      "73": "Hades Blast"
+    }
+  },
+  {
+    "Id": "loki",
+    "Name": "Loki",
+    "Race": "Tyrant",
+    "Level": 52,
+    "Stats": {
+      "St": 16,
+      "Ma": 20,
+      "Vi": 20,
+      "Ag": 12,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Tentarafoo"
+    ],
+    "LearnedSkills": {
+      "53": "Trafuri",
+      "54": "Mudoon",
+      "55": "Mana Gain"
+    }
+  },
+  {
+    "Id": "kudlak",
+    "Name": "Kudlak",
+    "Race": "Tyrant",
+    "Level": 46,
+    "Stats": {
+      "St": 14,
+      "Ma": 20,
+      "Vi": 20,
+      "Ag": 12,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Resist",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "bufula",
+      "Dormina"
+    ],
+    "LearnedSkills": {
+      "53": "Bufula",
+      "54": "Kyuketsu",
+      "55": "Mana Gain",
+      "56": "Mudoon"
+    }
+  },
+  {
+    "Id": "lilith",
+    "Name": "Lilith",
+    "Race": "Night",
+    "Level": 80,
+    "Stats": {
+      "St": 17,
+      "Ma": 30,
+      "Vi": 21,
+      "Ag": 17,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "81": "Sexy Dance",
+      "82": "Maziodyne",
+      "83": "Life Drain",
+      "84": "Hell Fang",
+      "85": "Mana Surge",
+      "86": "Megidolaon"
+    }
+  },
+  {
+    "Id": "nyx",
+    "Name": "Nyx",
+    "Race": "Night",
+    "Level": 70,
+    "Stats": {
+      "St": 15,
+      "Ma": 27,
+      "Vi": 17,
+      "Ag": 16,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dormina",
+      "Makarakarn",
+      "Eternal Rest"
+    ],
+    "LearnedSkills": {
+      "71": "Debilitate",
+      "72": "Spirit Drain",
+      "73": "Ice Age",
+      "74": "Absorb Fire"
+    }
+  },
+  {
+    "Id": "black_frost",
+    "Name": "Black Frost",
+    "Race": "Night",
+    "Level": 66,
+    "Stats": {
+      "St": 24,
+      "Ma": 24,
+      "Vi": 13,
+      "Ag": 16,
+      "Lu": 24
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Repel",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Mamudoon",
+      "Kill Rush"
+    ],
+    "LearnedSkills": {
+      "67": "Diarama",
+      "68": "Null Curse",
+      "69": "Null Nerve",
+      "70": "Null Mind"
+    }
+  },
+  {
+    "Id": "queen_mab",
+    "Name": "Queen Mab",
+    "Race": "Night",
+    "Level": 56,
+    "Stats": {
+      "St": 12,
+      "Ma": 21,
+      "Vi": 12,
+      "Ag": 12,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Repel",
+      "Light": "Normal",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "57": "Mediarahan",
+      "58": "Makarakarn",
+      "59": "Dormina",
+      "60": "Tetraja",
+      "61": "Maziodyne"
+    }
+  },
+  {
+    "Id": "loa",
+    "Name": "Loa",
+    "Race": "Night",
+    "Level": 53,
+    "Stats": {
+      "St": 16,
+      "Ma": 22,
+      "Vi": 16,
+      "Ag": 12,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Mamudo",
+      "Tetraja",
+      "Dekunda"
+    ],
+    "LearnedSkills": {
+      "54": "Venom Bite",
+      "55": "Evil Gaze",
+      "56": "Kamikaze",
+      "57": "Mamudoon",
+      "58": "Debilitate"
+    }
+  },
+  {
+    "Id": "kaiwan",
+    "Name": "Kaiwan",
+    "Race": "Night",
+    "Level": 47,
+    "Stats": {
+      "St": 14,
+      "Ma": 19,
+      "Vi": 15,
+      "Ag": 11,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mudoon",
+      "Charm Bite",
+      "Sonic Wave"
+    ],
+    "LearnedSkills": {
+      "48": "Sukukaja",
+      "49": "Rakukaja",
+      "50": "Evil Gaze",
+      "51": "Null Light"
+    }
+  },
+  {
+    "Id": "succubus",
+    "Name": "Succubus",
+    "Race": "Night",
+    "Level": 37,
+    "Stats": {
+      "St": 10,
+      "Ma": 16,
+      "Vi": 11,
+      "Ag": 10,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Weak",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Weak",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Dormina",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "38": "Eternal Rest",
+      "39": "Sexy Dance",
+      "40": "Spirit Drain",
+      "41": "Tentarafoo"
+    }
+  },
+  {
+    "Id": "incubus",
+    "Name": "Incubus",
+    "Race": "Night",
+    "Level": 25,
+    "Stats": {
+      "St": 7,
+      "Ma": 14,
+      "Vi": 8,
+      "Ag": 9,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Marin Karin",
+      "Magarula"
+    ],
+    "LearnedSkills": {
+      "26": "Stun Claw",
+      "27": "Evil Gaze",
+      "28": "Life Drain"
+    }
+  },
+  {
+    "Id": "fomorian",
+    "Name": "Fomorian",
+    "Race": "Night",
+    "Level": 18,
+    "Stats": {
+      "St": 8,
+      "Ma": 7,
+      "Vi": 14,
+      "Ag": 4,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Bufu",
+      "Lullaby"
+    ],
+    "LearnedSkills": {
+      "19": "Bash",
+      "20": "Life Bonus",
+      "21": "Mabufu",
+      "22": "Kill Rush"
+    }
+  },
+  {
+    "Id": "lilim",
+    "Name": "Lilim",
+    "Race": "Night",
+    "Level": 8,
+    "Stats": {
+      "St": 4,
+      "Ma": 8,
+      "Vi": 5,
+      "Ag": 7,
+      "Lu": 4
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Null",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Normal",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Rakunda",
+      "Marin Karin"
+    ],
+    "LearnedSkills": {
+      "9": "Analyze",
+      "10": "Tarunda",
+      "11": "Mazio"
+    }
+  },
+  {
+    "Id": "hresvelgr",
+    "Name": "Hresvelgr",
+    "Race": "Wilder",
+    "Level": 75,
+    "Stats": {
+      "St": 20,
+      "Ma": 20,
+      "Vi": 19,
+      "Ag": 25,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mabufudyne",
+      "Ice Boost",
+      "Magarula"
+    ],
+    "LearnedSkills": {
+      "76": "Null Strike",
+      "77": "Iron Claw",
+      "78": "Life Aid",
+      "79": "Repel Elec"
+    }
+  },
+  {
+    "Id": "mothman",
+    "Name": "Mothman",
+    "Race": "Wilder",
+    "Level": 43,
+    "Stats": {
+      "St": 11,
+      "Ma": 18,
+      "Vi": 18,
+      "Ag": 8,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Evil Gaze",
+      "Stun Claw"
+    ],
+    "LearnedSkills": {
+      "44": "Trafuri",
+      "45": "Sonic Wave",
+      "46": "Maragion",
+      "47": "Null Elec",
+      "48": "Absorb Earth"
+    }
+  },
+  {
+    "Id": "nue",
+    "Name": "Nue",
+    "Race": "Wilder",
+    "Level": 31,
+    "Stats": {
+      "St": 14,
+      "Ma": 9,
+      "Vi": 12,
+      "Ag": 8,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stun Claw",
+      "War Cry"
+    ],
+    "LearnedSkills": {
+      "32": "Mabufula",
+      "33": "Sonic Wave",
+      "34": "Ice Boost",
+      "35": "Mamudo"
+    }
+  },
+  {
+    "Id": "raiju",
+    "Name": "Raiju",
+    "Race": "Wilder",
+    "Level": 25,
+    "Stats": {
+      "St": 8,
+      "Ma": 15,
+      "Vi": 9,
+      "Ag": 8,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Zionga",
+      "Lightoma"
+    ],
+    "LearnedSkills": {
+      "26": "Feral Claw",
+      "27": "Mazio",
+      "28": "Needle Rush",
+      "29": "Elec Boost"
+    }
+  },
+  {
+    "Id": "bicorn",
+    "Name": "Bicorn",
+    "Race": "Wilder",
+    "Level": 15,
+    "Stats": {
+      "St": 10,
+      "Ma": 6,
+      "Vi": 10,
+      "Ag": 5,
+      "Lu": 4
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Charm Bite",
+      "Sukukaja"
+    ],
+    "LearnedSkills": {
+      "16": "Maragi",
+      "17": "Bright Might",
+      "18": "Resist Nerve",
+      "19": "Pulinpa",
+      "20": "Stun Gaze"
+    }
+  },
+  {
+    "Id": "zhen",
+    "Name": "Zhen",
+    "Race": "Wilder",
+    "Level": 6,
+    "Stats": {
+      "St": 4,
+      "Ma": 6,
+      "Vi": 6,
+      "Ag": 5,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Pulinpa",
+      "Posumudi",
+      "Garu"
+    ],
+    "LearnedSkills": {
+      "7": "Toxic Sting",
+      "8": "Tarunda",
+      "9": "Magaru",
+      "10": "Null Nerve"
+    }
+  },
+  {
+    "Id": "vetala",
+    "Name": "Vetala",
+    "Race": "Haunt",
+    "Level": 63,
+    "Stats": {
+      "St": 22,
+      "Ma": 20,
+      "Vi": 16,
+      "Ag": 11,
+      "Lu": 14
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Stun Claw",
+      "Sacrifice"
+    ],
+    "LearnedSkills": {
+      "64": "Life Drain",
+      "65": "Rakunda",
+      "66": "Retaliate",
+      "67": "Megido",
+      "68": "Kill Rush"
+    }
+  },
+  {
+    "Id": "legion",
+    "Name": "Legion",
+    "Race": "Haunt",
+    "Level": 49,
+    "Stats": {
+      "St": 19,
+      "Ma": 11,
+      "Vi": 21,
+      "Ag": 9,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Repel",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tetrakarn",
+      "Deathtouch"
+    ],
+    "LearnedSkills": {
+      "50": "Resist Slash",
+      "51": "Tempest",
+      "52": "Hell Gaze",
+      "53": "Pulinpa",
+      "54": "Mamudoon"
+    }
+  },
+  {
+    "Id": "pisaca",
+    "Name": "Pisaca",
+    "Race": "Haunt",
+    "Level": 28,
+    "Stats": {
+      "St": 8,
+      "Ma": 10,
+      "Vi": 17,
+      "Ag": 7,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Normal",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Venom Bite",
+      "Sukunda"
+    ],
+    "LearnedSkills": {
+      "29": "Stun Gaze",
+      "30": "Life Drain",
+      "31": "Sonic Wave",
+      "32": "Dekunda",
+      "33": "Mazionga"
+    }
+  },
+  {
+    "Id": "chatterskull",
+    "Name": "Chatterskull",
+    "Race": "Haunt",
+    "Level": 20,
+    "Stats": {
+      "St": 7,
+      "Ma": 12,
+      "Vi": 6,
+      "Ag": 7,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Sukunda",
+      "Stun Gaze"
+    ],
+    "LearnedSkills": {
+      "21": "Dekaja",
+      "22": "Dormina",
+      "23": "Sacrifice",
+      "24": "Hell Thrust"
+    }
+  },
+  {
+    "Id": "yaka",
+    "Name": "Yaka",
+    "Race": "Haunt",
+    "Level": 17,
+    "Stats": {
+      "St": 8,
+      "Ma": 10,
+      "Vi": 8,
+      "Ag": 5,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Deathtouch",
+      "Tarunda"
+    ],
+    "LearnedSkills": {
+      "18": "Mazio",
+      "19": "Taunt",
+      "20": "Dia",
+      "21": "Venom Claw",
+      "22": "Diarama"
+    }
+  },
+  {
+    "Id": "choronzon",
+    "Name": "Choronzon",
+    "Race": "Haunt",
+    "Level": 11,
+    "Stats": {
+      "St": 9,
+      "Ma": 4,
+      "Vi": 15,
+      "Ag": 1,
+      "Lu": 2
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Absorb",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Agi",
+      "Sukunda"
+    ],
+    "LearnedSkills": {
+      "12": "Maragi",
+      "13": "Kill Rush",
+      "14": "Trafuri"
+    }
+  },
+  {
+    "Id": "preta",
+    "Name": "Preta",
+    "Race": "Haunt",
+    "Level": 4,
+    "Stats": {
+      "St": 5,
+      "Ma": 4,
+      "Vi": 5,
+      "Ag": 6,
+      "Lu": 4
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Weak",
+      "Elec": "Weak",
+      "Wind": "Weak",
+      "Earth": "Weak",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Feral Claw",
+      "Sukukaja"
+    ],
+    "LearnedSkills": {
+      "5": "Agi",
+      "6": "Deathtouch",
+      "7": "Venom Claw",
+      "8": "Sukunda"
+    }
+  },
+  {
+    "Id": "shadow",
+    "Name": "Shadow",
+    "Race": "Foul",
+    "Level": 52,
+    "Stats": {
+      "St": 10,
+      "Ma": 20,
+      "Vi": 18,
+      "Ag": 16,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Resist Phys",
+      "Mudoon"
+    ],
+    "LearnedSkills": {
+      "53": "Mazionga",
+      "54": "Spirit Drain",
+      "55": "Makakaja",
+      "56": "Tarukaja",
+      "57": "Rakukaja",
+      "58": "Sukukaja"
+    }
+  },
+  {
+    "Id": "sakahagi",
+    "Name": "Sakahagi",
+    "Race": "Foul",
+    "Level": 45,
+    "Stats": {
+      "St": 17,
+      "Ma": 17,
+      "Vi": 15,
+      "Ag": 15,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Maragion",
+      "Mabufula",
+      "Mazionga",
+      "Magarula",
+      "Pulinpa",
+      "War Cry"
+    ],
+    "LearnedSkills": {
+      "46": "Null Wind",
+      "47": "Null Elec"
+    }
+  },
+  {
+    "Id": "phantom",
+    "Name": "Phantom",
+    "Race": "Foul",
+    "Level": 42,
+    "Stats": {
+      "St": 9,
+      "Ma": 17,
+      "Vi": 14,
+      "Ag": 15,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Spirit Drain",
+      "Sacrifice"
+    ],
+    "LearnedSkills": {
+      "43": "Mazionga",
+      "44": "Kamikaze",
+      "45": "Tarunda",
+      "46": "Dekaja",
+      "47": "Ziodyne"
+    }
+  },
+  {
+    "Id": "black_ooze",
+    "Name": "Black Ooze",
+    "Race": "Foul",
+    "Level": 28,
+    "Stats": {
+      "St": 11,
+      "Ma": 9,
+      "Vi": 16,
+      "Ag": 6,
+      "Lu": 6
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Evil Touch",
+      "Charm Bite"
+    ],
+    "LearnedSkills": {
+      "29": "Sacrifice",
+      "30": "Deathtouch",
+      "31": "Spirit Drain",
+      "32": "Sonic Wave"
+    }
+  },
+  {
+    "Id": "blob",
+    "Name": "Blob",
+    "Race": "Foul",
+    "Level": 16,
+    "Stats": {
+      "St": 8,
+      "Ma": 6,
+      "Vi": 10,
+      "Ag": 5,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Tera",
+      "Tarunda",
+      "Sacrifice"
+    ],
+    "LearnedSkills": {
+      "17": "Toxic Sting",
+      "18": "Marin Karin",
+      "19": "Spirit Drain",
+      "20": "Garula"
+    }
+  },
+  {
+    "Id": "mou_ryo",
+    "Name": "Mou-Ryo",
+    "Race": "Foul",
+    "Level": 7,
+    "Stats": {
+      "St": 6,
+      "Ma": 7,
+      "Vi": 4,
+      "Ag": 5,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Resist",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Pulinpa",
+      "Toxic Sting"
+    ],
+    "LearnedSkills": {
+      "8": "Agi",
+      "9": "Deathtouch",
+      "10": "Mana Aid",
+      "11": "Maragi"
+    }
+  },
+  {
+    "Id": "slime",
+    "Name": "Slime",
+    "Race": "Foul",
+    "Level": 6,
+    "Stats": {
+      "St": 6,
+      "Ma": 5,
+      "Vi": 3,
+      "Ag": 5,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Weak",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Weak",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Deathtouch",
+      "Venom Bite"
+    ],
+    "LearnedSkills": {
+      "7": "Sukunda",
+      "8": "Sacrifice",
+      "9": "War Cry",
+      "10": "Sonic Wave"
+    }
+  },
+  {
+    "Id": "will_o_wisp",
+    "Name": "Will o' Wisp",
+    "Race": "Foul",
+    "Level": 1,
+    "Stats": {
+      "St": 4,
+      "Ma": 5,
+      "Vi": 4,
+      "Ag": 5,
+      "Lu": 3
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Weak",
+      "Ice": "Weak",
+      "Elec": "Weak",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Weak",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Needle Rush"
+    ],
+    "LearnedSkills": {
+      "2": "Garu",
+      "3": "Riberama",
+      "4": "Deathtouch",
+      "5": "Sacrifice",
+      "6": "Makakaja"
+    }
+  },
+  {
+    "Id": "metatron",
+    "Name": "Metatron",
+    "Race": "Seraph",
+    "Level": 95,
+    "Stats": {
+      "St": 32,
+      "Ma": 34,
+      "Vi": 29,
+      "Ag": 24,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Resist",
+      "Ice": "Normal",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Mahamaon",
+      "Megidolaon",
+      "Heat Riser",
+      "Debilitate"
+    ],
+    "LearnedSkills": {
+      "96": "Holy Wrath",
+      "97": "Radiance",
+      "98": "Fire of Sinai",
+      "99": "Victory Cry"
+    }
+  },
+  {
+    "Id": "michael",
+    "Name": "Michael",
+    "Race": "Seraph",
+    "Level": 90,
+    "Stats": {
+      "St": 29,
+      "Ma": 30,
+      "Vi": 23,
+      "Ag": 25,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Null",
+      "Elec": "Null",
+      "Wind": "Null",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Deathbound",
+      "Endure"
+    ],
+    "LearnedSkills": {
+      "91": "Victory Cry",
+      "92": "Heat Riser",
+      "93": "Mana Surge",
+      "94": "Megidolaon",
+      "95": "Radiance"
+    }
+  },
+  {
+    "Id": "gabriel",
+    "Name": "Gabriel",
+    "Race": "Seraph",
+    "Level": 87,
+    "Stats": {
+      "St": 24,
+      "Ma": 30,
+      "Vi": 22,
+      "Ag": 24,
+      "Lu": 22
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Null",
+      "Wind": "Null",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Samarecarm",
+      "Ziodyne",
+      "Maziodyne"
+    ],
+    "LearnedSkills": {
+      "88": "Blight",
+      "89": "Elec Boost",
+      "90": "Radiance"
+    }
+  },
+  {
+    "Id": "raphael",
+    "Name": "Raphael",
+    "Race": "Seraph",
+    "Level": 84,
+    "Stats": {
+      "St": 26,
+      "Ma": 26,
+      "Vi": 22,
+      "Ag": 28,
+      "Lu": 17
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Null",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Makarakarn",
+      "Tetrakarn",
+      "Mana Surge"
+    ],
+    "LearnedSkills": {
+      "85": "Prayer",
+      "86": "Mahamaon",
+      "87": "Stasis Blade",
+      "88": "Holy Wrath",
+      "89": "Radiance"
+    }
+  },
+  {
+    "Id": "uriel",
+    "Name": "Uriel",
+    "Race": "Seraph",
+    "Level": 73,
+    "Stats": {
+      "St": 25,
+      "Ma": 24,
+      "Vi": 20,
+      "Ag": 21,
+      "Lu": 18
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "74": "Heat Wave",
+      "75": "Drain Attack",
+      "76": "Megidola",
+      "77": "Radiance"
+    }
+  },
+  {
+    "Id": "ganesha",
+    "Name": "Ganesha",
+    "Race": "Wargod",
+    "Level": 58,
+    "Stats": {
+      "St": 21,
+      "Ma": 21,
+      "Vi": 21,
+      "Ag": 12,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Weak",
+      "Wind": "Null",
+      "Earth": "Resist",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "59": "Endure",
+      "60": "Absorb Wind",
+      "61": "Debilitate",
+      "62": "Tempest"
+    }
+  },
+  {
+    "Id": "valkyrie",
+    "Name": "Valkyrie",
+    "Race": "Wargod",
+    "Level": 33,
+    "Stats": {
+      "St": 15,
+      "Ma": 12,
+      "Vi": 14,
+      "Ag": 12,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "34": "Guillotine",
+      "35": "Counter",
+      "36": "Might"
+    }
+  },
+  {
+    "Id": "kresnik",
+    "Name": "Kresnik",
+    "Race": "Genma",
+    "Level": 58,
+    "Stats": {
+      "St": 18,
+      "Ma": 18,
+      "Vi": 17,
+      "Ag": 20,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Null",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Hamaon",
+      "Mana Aid",
+      "Grand Tack"
+    ],
+    "LearnedSkills": {
+      "53": "Debilitate",
+      "54": "Divine Judgement",
+      "55": "Heaven's Bow",
+      "56": "Pierce Boost",
+      "57": "Pierec Amp"
+    }
+  },
+  {
+    "Id": "cu_chulainn",
+    "Name": "Cu Chulainn",
+    "Race": "Genma",
+    "Level": 52,
+    "Stats": {
+      "St": 21,
+      "Ma": 15,
+      "Vi": 17,
+      "Ag": 14,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "53": "Garudyne",
+      "54": "Divine Judgement",
+      "55": "Blight",
+      "56": "Attack All"
+    }
+  },
+  {
+    "Id": "hanuman",
+    "Name": "Hanuman",
+    "Race": "Genma",
+    "Level": 46,
+    "Stats": {
+      "St": 17,
+      "Ma": 12,
+      "Vi": 15,
+      "Ag": 19,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "47": "Rakukaja",
+      "48": "Endure",
+      "49": "Life Surge"
+    }
+  },
+  {
+    "Id": "kurama_tengu",
+    "Name": "Kurama Tengu",
+    "Race": "Genma",
+    "Level": 38,
+    "Stats": {
+      "St": 13,
+      "Ma": 17,
+      "Vi": 13,
+      "Ag": 17,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Absorb",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "39": "Kouga",
+      "40": "Wind Boost",
+      "41": "Sukunda",
+      "42": "Garudyne",
+      "43": "Makouga"
+    }
+  },
+  {
+    "Id": "qing_long",
+    "Name": "Qing Long",
+    "Race": "Dragon",
+    "Level": 44,
+    "Stats": {
+      "St": 15,
+      "Ma": 13,
+      "Vi": 22,
+      "Ag": 9,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "45": "Life Gain",
+      "46": "Venom Bite",
+      "47": "Mabufula",
+      "48": "Kouga"
+    }
+  },
+  {
+    "Id": "xuanwu",
+    "Name": "Xuanwu",
+    "Race": "Dragon",
+    "Level": 24,
+    "Stats": {
+      "St": 9,
+      "Ma": 11,
+      "Vi": 16,
+      "Ag": 4,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Absorb",
+      "Elec": "Weak",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "25": "Bufula",
+      "26": "Estoma",
+      "27": "Ice Boost",
+      "28": "Mabufula"
+    }
+  },
+  {
+    "Id": "barong",
+    "Name": "Barong",
+    "Race": "Avatar",
+    "Level": 60,
+    "Stats": {
+      "St": 22,
+      "Ma": 22,
+      "Vi": 16,
+      "Ag": 16,
+      "Lu": 14
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Maziodyne",
+      "Binding Cry"
+    ],
+    "LearnedSkills": {
+      "61": "Iron Claw",
+      "62": "Mediarahan",
+      "63": "Mabufudyne",
+      "64": "Null Dark"
+    }
+  },
+  {
+    "Id": "yatagarasu",
+    "Name": "Yatagarasu",
+    "Race": "Avatar",
+    "Level": 46,
+    "Stats": {
+      "St": 13,
+      "Ma": 19,
+      "Vi": 12,
+      "Ag": 16,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Mana Aid",
+      "Kougaon"
+    ],
+    "LearnedSkills": {
+      "47": "Garudyne",
+      "48": "Mana Gain",
+      "49": "Wind Amp",
+      "50": "Recarmdra"
+    }
+  },
+  {
+    "Id": "xiezhai",
+    "Name": "Xiezhai",
+    "Race": "Avatar",
+    "Level": 26,
+    "Stats": {
+      "St": 13,
+      "Ma": 12,
+      "Vi": 9,
+      "Ag": 9,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Weak",
+      "Nerve": "Weak",
+      "Curse": "Weak"
+    },
+    "BaseSkills": [
+      "Venom Claw",
+      "Hell Thrust",
+      "Patra"
+    ],
+    "LearnedSkills": {
+      "27": "Hamaon",
+      "28": "Kouga",
+      "29": "Enradi",
+      "30": "Mabufula"
+    }
+  },
+  {
+    "Id": "makami",
+    "Name": "Makami",
+    "Race": "Avatar",
+    "Level": 22,
+    "Stats": {
+      "St": 11,
+      "Ma": 14,
+      "Vi": 9,
+      "Ag": 7,
+      "Lu": 11
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "23": "Null Mind",
+      "24": "Me Patra",
+      "25": "Diarama",
+      "26": "Recarm"
+    }
+  },
+  {
+    "Id": "garuda",
+    "Name": "Garuda",
+    "Race": "Avian",
+    "Level": 63,
+    "Stats": {
+      "St": 22,
+      "Ma": 18,
+      "Vi": 19,
+      "Ag": 24,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Repel",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Repel",
+      "Earth": "Repel",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "64": "Mahamaon",
+      "65": "Garudyne",
+      "66": "Endure"
+    }
+  },
+  {
+    "Id": "gurulu",
+    "Name": "Gurulu",
+    "Race": "Raptor",
+    "Level": 63,
+    "Stats": {
+      "St": 18,
+      "Ma": 22,
+      "Vi": 19,
+      "Ag": 24,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Null",
+      "Light": "Weak",
+      "Dark": "Repel",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [
+      "Garudyne",
+      "Sukunda",
+      "Growth"
+    ],
+    "LearnedSkills": {
+      "64": "Magarudyne",
+      "65": "Mamudoon",
+      "66": "Mazionga",
+      "67": "Maeigaon"
+    }
+  },
+  {
+    "Id": "albion",
+    "Name": "Albion",
+    "Race": "Entity",
+    "Level": 64,
+    "Stats": {
+      "St": 25,
+      "Ma": 20,
+      "Vi": 25,
+      "Ag": 10,
+      "Lu": 16
+    },
+    "Affinities": {
+      "Strike": "Null",
+      "Slash": "Null",
+      "Pierce": "Null",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Normal",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "65": "Drain Attack",
+      "66": "Absorb Phys",
+      "67": "Recarmdra",
+      "68": "Hades Blast"
+    }
+  },
+  {
+    "Id": "trumpeter",
+    "Name": "Trumpeter",
+    "Race": "Fiend",
+    "Level": 77,
+    "Stats": {
+      "St": 21,
+      "Ma": 31,
+      "Vi": 21,
+      "Ag": 24,
+      "Lu": 15
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Holy Melody",
+      "Maragidyne",
+      "Mabufudyne",
+      "Maziodyne",
+      "Mazandyne"
+    ],
+    "LearnedSkills": {
+      "78": "Makakaja",
+      "79": "Dekaja",
+      "80": "Megidolaon",
+      "81": "Evil Melody"
+    }
+  },
+  {
+    "Id": "mother_harlot",
+    "Name": "Mother Harlot",
+    "Race": "Fiend",
+    "Level": 69,
+    "Stats": {
+      "St": 23,
+      "Ma": 24,
+      "Vi": 19,
+      "Ag": 19,
+      "Lu": 19
+    },
+    "Affinities": {
+      "Strike": "Repel",
+      "Slash": "Repel",
+      "Pierce": "Repel",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Absorb",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Death Lust",
+      "Ziodyne",
+      "Tentarafoo"
+    ],
+    "LearnedSkills": {
+      "70": "Dekunda",
+      "71": "Makakaja",
+      "72": "Maziodyne",
+      "73": "Beast Roar"
+    }
+  },
+  {
+    "Id": "pale_rider",
+    "Name": "Pale Rider",
+    "Race": "Fiend",
+    "Level": 63,
+    "Stats": {
+      "St": 24,
+      "Ma": 26,
+      "Vi": 18,
+      "Ag": 17,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Null",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Pestilence",
+      "Mabufudyne"
+    ],
+    "LearnedSkills": {
+      "64": "Eternal Rest",
+      "65": "Blight",
+      "66": "Dark Might",
+      "67": "Bright Might"
+    }
+  },
+  {
+    "Id": "black_rider",
+    "Name": "Black Rider",
+    "Race": "Fiend",
+    "Level": 61,
+    "Stats": {
+      "St": 22,
+      "Ma": 25,
+      "Vi": 16,
+      "Ag": 20,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Absorb",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Soul Divide",
+      "Mabufudyne"
+    ],
+    "LearnedSkills": {
+      "62": "Spirit Drain",
+      "63": "Mamudoon",
+      "64": "Megidola",
+      "65": "Mana Surge",
+      "66": "Megidolaon"
+    }
+  },
+  {
+    "Id": "red_rider",
+    "Name": "Red Rider",
+    "Race": "Fiend",
+    "Level": 55,
+    "Stats": {
+      "St": 23,
+      "Ma": 21,
+      "Vi": 18,
+      "Ag": 15,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Null",
+      "Wind": "Null",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Terror Blade",
+      "Garudyne"
+    ],
+    "LearnedSkills": {
+      "55": "Maziodyne",
+      "56": "Dekunda",
+      "57": "Retaliate"
+    }
+  },
+  {
+    "Id": "white_rider",
+    "Name": "White Rider",
+    "Race": "Fiend",
+    "Level": 52,
+    "Stats": {
+      "St": 23,
+      "Ma": 17,
+      "Vi": 16,
+      "Ag": 18,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "God's Bow",
+      "Maragidyne"
+    ],
+    "LearnedSkills": {
+      "53": "Tetraja",
+      "54": "Dekaja",
+      "55": "Mana Aid"
+    }
+  },
+  {
+    "Id": "hell_biker",
+    "Name": "Hell Biker",
+    "Race": "Fiend",
+    "Level": 42,
+    "Stats": {
+      "St": 17,
+      "Ma": 14,
+      "Vi": 14,
+      "Ag": 17,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Null",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Absorb",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Hell Spin",
+      "Hell Burner"
+    ],
+    "LearnedSkills": {
+      "43": "Hell Exhaust",
+      "44": "Attack All"
+    }
+  },
+  {
+    "Id": "daisoujou",
+    "Name": "Daisoujou",
+    "Race": "Fiend",
+    "Level": 37,
+    "Stats": {
+      "St": 12,
+      "Ma": 21,
+      "Vi": 11,
+      "Ag": 13,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Repel",
+      "Dark": "Repel",
+      "Mind": "Absorb",
+      "Nerve": "Null",
+      "Curse": "Absorb"
+    },
+    "BaseSkills": [
+      "Meditation",
+      "Mahamaon"
+    ],
+    "LearnedSkills": {
+      "38": "Makougaon",
+      "39": "Mamudoon",
+      "40": "Maeigaon",
+      "41": "Salvation",
+      "42": "Preach"
+    }
+  },
+  {
+    "Id": "matador",
+    "Name": "Matador",
+    "Race": "Fiend",
+    "Level": 30,
+    "Stats": {
+      "St": 12,
+      "Ma": 9,
+      "Vi": 11,
+      "Ag": 19,
+      "Lu": 9
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Null",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [
+      "Magaru",
+      "Andalucia"
+    ],
+    "LearnedSkills": {
+      "31": "Dekunda",
+      "32": "Focus",
+      "33": "Taunt",
+      "34": "Red Capote"
+    }
+  },
+  {
+    "Id": "flaemis",
+    "Name": "Flaemis",
+    "Race": "Element",
+    "Level": 20,
+    "Stats": {
+      "St": 10,
+      "Ma": 12,
+      "Vi": 6,
+      "Ag": 6,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "aquans",
+    "Name": "Aquans",
+    "Race": "Element",
+    "Level": 15,
+    "Stats": {
+      "St": 6,
+      "Ma": 10,
+      "Vi": 6,
+      "Ag": 6,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "aeros",
+    "Name": "Aeros",
+    "Race": "Element",
+    "Level": 11,
+    "Stats": {
+      "St": 5,
+      "Ma": 8,
+      "Vi": 6,
+      "Ag": 8,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "erthys",
+    "Name": "Erthys",
+    "Race": "Element",
+    "Level": 7,
+    "Stats": {
+      "St": 6,
+      "Ma": 5,
+      "Vi": 8,
+      "Ag": 4,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "saki_mitama",
+    "Name": "Saki Mitama",
+    "Race": "Mitama",
+    "Level": 35,
+    "Stats": {
+      "St": 10,
+      "Ma": 11,
+      "Vi": 10,
+      "Ag": 11,
+      "Lu": 20
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "kusi_mitama",
+    "Name": "Kusi Mitama",
+    "Race": "Mitama",
+    "Level": 32,
+    "Stats": {
+      "St": 9,
+      "Ma": 18,
+      "Vi": 8,
+      "Ag": 12,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "nigi_mitama",
+    "Name": "Nigi Mitama",
+    "Race": "Mitama",
+    "Level": 29,
+    "Stats": {
+      "St": 10,
+      "Ma": 10,
+      "Vi": 10,
+      "Ag": 16,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "ara_mitama",
+    "Name": "Ara Mitama",
+    "Race": "Mitama",
+    "Level": 25,
+    "Stats": {
+      "St": 12,
+      "Ma": 10,
+      "Vi": 10,
+      "Ag": 10,
+      "Lu": 10
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Earth": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Null",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  }
+]

@@ -6074,5 +6074,38 @@
       "25": "Diarama",
       "26": "Recarm"
     }
+  },
+   {
+    "Id": "garuda",
+    "Name": "Garuda",
+    "Race": "Avian",
+    "Level": 63,
+    "Stats": {
+      "St": 22,
+      "Ma": 18,
+      "Vi": 19,
+      "Ag": 24,
+      "Lu": 12
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Repel",
+      "Dark": "Weak",
+      "Mind": "Normal",
+      "Nerve": "Null",
+      "Curse": "Null"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {
+      "64": "Mahamaon",
+      "65": "Garudyne",
+      "66": "Endure"
+    }
   }
 ]

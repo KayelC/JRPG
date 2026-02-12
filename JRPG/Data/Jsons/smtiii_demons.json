@@ -6515,5 +6515,121 @@
       "33": "Taunt",
       "34": "Red Capote"
     }
+  },
+  {
+    "Id": "flaemis",
+    "Name": "Flaemis",
+    "Race": "Element",
+    "Level": 20,
+    "Stats": {
+      "St": 10,
+      "Ma": 12,
+      "Vi": 6,
+      "Ag": 6,
+      "Lu": 7
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Absorb",
+      "Ice": "Weak",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "aquans",
+    "Name": "Aquans",
+    "Race": "Element",
+    "Level": 15,
+    "Stats": {
+      "St": 6,
+      "Ma": 10,
+      "Vi": 6,
+      "Ag": 6,
+      "Lu": 8
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Weak",
+      "Ice": "Repel",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "aeros",
+    "Name": "Aeros",
+    "Race": "Element",
+    "Level": 11,
+    "Stats": {
+      "St": 5,
+      "Ma": 8,
+      "Vi": 6,
+      "Ag": 8,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Resist",
+      "Ice": "Resist",
+      "Elec": "Resist",
+      "Wind": "Resist",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
+  },
+  {
+    "Id": "erthys",
+    "Name": "Erthys",
+    "Race": "Element",
+    "Level": 7,
+    "Stats": {
+      "St": 6,
+      "Ma": 5,
+      "Vi": 8,
+      "Ag": 4,
+      "Lu": 5
+    },
+    "Affinities": {
+      "Strike": "Normal",
+      "Slash": "Normal",
+      "Pierce": "Normal",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Weak",
+      "Light": "Null",
+      "Dark": "Null",
+      "Mind": "Normal",
+      "Nerve": "Normal",
+      "Curse": "Normal"
+    },
+    "BaseSkills": [],
+    "LearnedSkills": {}
   }
 ]

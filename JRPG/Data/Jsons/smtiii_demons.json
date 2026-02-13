@@ -5833,6 +5833,45 @@
     }
   },
   {
+    "Id": "yoshitsune",
+    "Name": "Yoshitsune",
+    "Race": "Wargod",
+    "Level": 65,
+    "Stats": {
+      "St": 27,
+      "Ma": 5,
+      "Vi": 25,
+      "Ag": 25,
+      "Lu": 13
+    },
+    "Affinities": {
+      "Strike": "Resist",
+      "Slash": "Resist",
+      "Pierce": "Resist",
+      "Fire": "Normal",
+      "Ice": "Normal",
+      "Elec": "Normal",
+      "Wind": "Normal",
+      "Earth": "Normal",
+      "Light": "Normal",
+      "Dark": "Weak",
+      "Mind": "Resist",
+      "Nerve": "Resist",
+      "Curse": "Resist"
+    },
+    "BaseSkills": [
+      "Hassou Tobi",
+      "Hassohappa"
+    ],
+    "LearnedSkills": {
+      "66": "Rakunda",
+      "67": "War Cry",
+      "68": "Retaliate",
+      "69": "Endure"
+
+    }
+  },
+  {
     "Id": "ganesha",
     "Name": "Ganesha",
     "Race": "Wargod",

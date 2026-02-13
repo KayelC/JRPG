@@ -514,11 +514,20 @@
     },
     {
       "Skill": "Tarukaja",
-      "Effect": "Increases 1 ally's Attack by 25%*.",
+      "Effect": "Increases 1 ally's Physical Attack by 25%*.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
       "Cost": "6 SP",
+      "Category": "Enhance Skills"
+    },
+    {
+      "Skill": "Makakaja",
+      "Effect": "Increases party's Magic Attack by 25%*.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "15 SP",
       "Category": "Enhance Skills"
     },
     {
@@ -731,6 +740,15 @@
     {
       "Skill": "Makarakarn",
       "Effect": "Barrier that reflects magic damage 1x per ally.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "55 SP",
+      "Category": "Enhance Skills"
+    }
+    {
+      "Skill": "Tetraja",
+      "Effect": "Barrier that nullifies Light or Dark damage 1x per ally.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -1092,6 +1110,69 @@
     {
       "Skill": "Vidyaraja's Blessing",
       "Effect": "Increases Evasion against Slash, Strike, and Pierce skills by 1.15x.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Mana Aid",
+      "Effect": "Restores 10% MP after a battle.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Life Aid",
+      "Effect": "Restores 10% HP after a battle.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Mana Gain",
+      "Effect": "Max MP +20%. Stacks with Mana Surge for 50%",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Life Gain",
+      "Effect": "Max HP +20%. Stacks with Life Surge for 50%",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Mana Surge",
+      "Effect": "Max HP +30%. Stacks with Mana Gain for 50%",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Life Surge",
+      "Effect": "Max HP +30%. Stacks with Life Gain for 50%",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Attack All",
+      "Effect": "Makes base attacks target all foes.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -2679,6 +2760,15 @@
       "Category": "Recovery Skills"
     },
     {
+      "Skill": "Paraladi",
+      "Effect": "Dispels Stun (1 ally).",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "3 SP",
+      "Category": "Recovery Skills"
+    },
+    {
       "Skill": "Patra",
       "Effect": "Dispels Panic, Fear, and Distress (1 ally).",
       "Power": NaN,
@@ -2762,6 +2852,24 @@
       "Category": "Slash Skills"
     },
     {
+      "Skill": "Brutal Slash",
+      "Effect": "Deals medium Slash damage to 1 foe. (Power Scales with Max HP)",
+      "Power": "150",
+      "Accuracy": "70%",
+      "Critical": "26%",
+      "Cost": "13% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Dark Sword",
+      "Effect": "Deals medium Slash damage to 1 foe with 40% Chance of inflicting Fear (Power Scales with Max HP)",
+      "Power": "175",
+      "Accuracy": "60%",
+      "Critical": "40%",
+      "Cost": "22% HP",
+      "Category": "Slash Skills"
+    },
+    {
       "Skill": "Blight",
       "Effect": "Deals light Pierce damage / Poisons one foe. (20% chance) and High critical Chance",
       "Power": "40",
@@ -2822,6 +2930,24 @@
       "Accuracy": "92%",
       "Critical": "5%",
       "Cost": "10% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Hassou Tobi",
+      "Effect": "Deals light Slash damage to all foes, always hits Critical (8 hits)",
+      "Power": "100",
+      "Accuracy": "75%",
+      "Critical": "100%",
+      "Cost": "33% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Chaos Blade",
+      "Effect": "Deals light Slash damage to all foes (1-5 hits) (Power Scales with Max HP)",
+      "Power": "44",
+      "Accuracy": "99%",
+      "Critical": "20%",
+      "Cost": "32% HP",
       "Category": "Slash Skills"
     },
     {
@@ -2924,6 +3050,24 @@
       "Category": "Slash Skills"
     },
     {
+      "Skill": "Guillotine",
+      "Effect": "Deals heavy Slash damage to one foe, with 40% Chance to Stun (Power Scales with Max HP).",
+      "Power": "390",
+      "Accuracy": "67%",
+      "Critical": "33%",
+      "Cost": "17% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Stasis Blade",
+      "Effect": "Deals heavy Slash damage to one foe, with 65% Chance to Stun (Power Scales with Max HP).",
+      "Power": "280",
+      "Accuracy": "60%",
+      "Critical": "40%",
+      "Cost": "22% HP",
+      "Category": "Slash Skills"
+    },
+    {
       "Skill": "Tempest",
       "Effect": "Deals heavy Slash damage to all foe.",
       "Power": "350",
@@ -2939,6 +3083,15 @@
       "Accuracy": "95%",
       "Critical": "25%",
       "Cost": "13% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Hassohappa",
+      "Effect": "Deals severe Slash damage to all foes. (Power Scales with Max HP)",
+      "Power": "550",
+      "Accuracy": "89%",
+      "Critical": "46%",
+      "Cost": "35% HP",
       "Category": "Slash Skills"
     },
     {
@@ -2961,7 +3114,7 @@
     },
     {
       "Skill": "Vorpal Blade",
-      "Effect": "Deals heavy Slash damage to all foes.",
+      "Effect": "Deals severe Slash damage to all foes.",
       "Power": "500",
       "Accuracy": "99%",
       "Critical": "5%",

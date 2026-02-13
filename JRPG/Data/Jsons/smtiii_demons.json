@@ -17,8 +17,9 @@
       "Pierce": "Normal",
       "Fire": "Normal",
       "Ice": "Normal",
-      "Elec": "Normal",
+      "Elec": "Repel",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Null",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -28,7 +29,7 @@
     "BaseSkills": [
       "Growth 2",
       "Mahama"
-  ],
+    ],
     "LearnedSkills": {
       "39": "Mana Gain",
       "40": "Dekunda",
@@ -56,10 +57,11 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Null",
-      "Dark": "Null",
+      "Dark": "Repel",
       "Mind": "Normal",
-      "Nerve": "Normal",
+      "Nerve": "Null",
       "Curse": "Normal"
     },
     "BaseSkills": [
@@ -92,6 +94,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -129,6 +132,7 @@
       "Ice": "Normal",
       "Elec": "Null",
       "Wind": "Weak",
+      "Earth": "Null",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -166,6 +170,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -203,6 +208,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Repel",
       "Dark": "Null",
       "Mind": "Resist",
@@ -213,14 +219,12 @@
       "Prayer",
       "Divine Judgment",
       "Hell Gaze"
-
     ],
     "LearnedSkills": {
       "94": "Maragidyne",
       "95": "Vorpal Blade",
       "96": "Makougaon",
       "97": "Repel Phys"
-
     }
   },
   {
@@ -243,6 +247,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Null",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -250,13 +255,12 @@
       "Curse": "Null"
     },
     "BaseSkills": [
-     "Magarudyne"
+      "Magarudyne"
     ],
     "LearnedSkills": {
-     "65": "Repel Wind",
-     "66": "Divine Judgment",
-     "67": "Mana Aid"
-
+      "65": "Repel Wind",
+      "66": "Divine Judgment",
+      "67": "Mana Aid"
     }
   },
   {
@@ -279,6 +283,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Repel",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Null",
@@ -286,14 +291,14 @@
       "Curse": "Null"
     },
     "BaseSkills": [
-     "Mediarahan"
+      "Mediarahan"
     ],
     "LearnedSkills": {
-     "55": "Mana Aid",
-     "56": "Evil Smile",   
-     "57": "Mana Surge",
-     "58": "Samarecarm",
-     "59": "Recarmdra"
+      "55": "Mana Aid",
+      "56": "Evil Smile",
+      "57": "Mana Surge",
+      "58": "Samarecarm",
+      "59": "Recarmdra"
     }
   },
   {
@@ -316,6 +321,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -323,13 +329,13 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Agidyne",
-     "Recarm",
-     "Marin Karin"
+      "Agidyne",
+      "Recarm",
+      "Marin Karin"
     ],
     "LearnedSkills": {
-     "49": "Maragidyne",
-     "50": "Sexy Dance"
+      "49": "Maragidyne",
+      "50": "Sexy Dance"
     }
   },
   {
@@ -352,6 +358,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Null",
@@ -359,13 +366,13 @@
       "Curse": "Null"
     },
     "BaseSkills": [
-     "Bewilder",
-     "Mana Refill"
+      "Bewilder",
+      "Mana Refill"
     ],
     "LearnedSkills": {
-     "31": "Recarm",
-     "32": "Magaru",
-     "33": "Wind Boost"
+      "31": "Recarm",
+      "32": "Magaru",
+      "33": "Wind Boost"
     }
   },
   {
@@ -388,6 +395,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Null",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -395,14 +403,16 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
+      "Tera",
       "Media",
       "Magaru"
     ],
     "LearnedSkills": {
-      "19": "Hama",
-      "20": "Life Bonus",
-      "21": "Petradi",
-      "22": "Mana Refill"
+      "19": "Matera",
+      "20": "Hama",
+      "21": "Life Bonus",
+      "22": "Petradi",
+      "23": "Mana Refill"
     }
   },
   {
@@ -425,6 +435,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Resist",
@@ -432,15 +443,15 @@
       "Curse": "Resist"
     },
     "BaseSkills": [
-     "Hassohappa",
-     "Victory Cry",
-     "Marin Karin"
+      "Hassohappa",
+      "Victory Cry",
+      "Marin Karin"
     ],
     "LearnedSkills": {
-     "96": "Maziodyne",
-     "97": "High Counter",
-     "98": "Megidolaon",
-     "99": "Absorb Phys"
+      "96": "Maziodyne",
+      "97": "High Counter",
+      "98": "Megidolaon",
+      "99": "Absorb Phys"
     }
   },
   {
@@ -463,6 +474,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -470,14 +482,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Tempest Slash",
-     "Mana Aid",
-     "Divine Judgment"
+      "Tempest Slash",
+      "Mana Aid",
+      "Divine Judgment"
     ],
     "LearnedSkills": {
-     "62": "Hell Gaze",
-     "63": "Mamudoon",
-     "64": "Holy Wrath"
+      "62": "Hell Gaze",
+      "63": "Mamudoon",
+      "64": "Holy Wrath"
     }
   },
   {
@@ -500,6 +512,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Repel",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -508,9 +521,9 @@
     },
     "BaseSkills": [],
     "LearnedSkills": {
-     "55": "Hassohappa",
-     "56": "Attack All",
-     "57": "High Counter"
+      "55": "Hassohappa",
+      "56": "Attack All",
+      "57": "High Counter"
     }
   },
   {
@@ -533,6 +546,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -540,13 +554,13 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Maragion",
-     "Null Fire"
+      "Maragion",
+      "Null Fire"
     ],
     "LearnedSkills": {
-     "45": "Dismal Tune",
-     "46": "Tempest",
-     "47": "Maragidyne"
+      "45": "Dismal Tune",
+      "46": "Tempest",
+      "47": "Maragidyne"
     }
   },
   {
@@ -569,6 +583,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Null",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -577,10 +592,10 @@
     },
     "BaseSkills": [],
     "LearnedSkills": {
-     "75": "Tentarafoo",
-     "76": "Makakaja",
-     "77": "Repel Elec",
-     "78": "Vicious Strike"
+      "75": "Tentarafoo",
+      "76": "Makakaja",
+      "77": "Repel Elec",
+      "78": "Vicious Strike"
     }
   },
   {
@@ -603,6 +618,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -610,14 +626,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Tentarafoo",
-     "Deathbound"
+      "Tentarafoo",
+      "Deathbound"
     ],
     "LearnedSkills": {
-     "68": "High Counter",
-     "69": "Masukunda",
-     "70": "Life Surge",
-     "71": "Tempest Slash"
+      "68": "High Counter",
+      "69": "Masukunda",
+      "70": "Life Surge",
+      "71": "Tempest Slash"
     }
   },
   {
@@ -640,6 +656,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Repel",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -648,10 +665,12 @@
     },
     "BaseSkills": [],
     "LearnedSkills": {
-     "58": "Mediarama",
-     "59": "Tetrakarn",
-     "60": "Divine Judgment",
-     "61": "Makouga"
+      "58": "Mediarama",
+      "59": "Tetrakarn",
+      "60": "Divine Judgment",
+      "61": "Makougaon",
+      "62": "Teradyne",
+      "63": "Materadyne"
     }
   },
   {
@@ -673,7 +692,8 @@
       "Fire": "Normal",
       "Ice": "Normal",
       "Elec": "Normal",
-      "Wind": "Normal",
+      "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Repel",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -681,12 +701,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Mediarama",
-     "Poison Arrow"
+      "Terazi",
+      "Mediarama",
+      "Poison Arrow"
     ],
     "LearnedSkills": {
-     "42": "Maragion",
-     "43": "Paraladi"
+      "42": "Maragion",
+      "43": "Paraladi",
+      "44": "Materazi"
     }
   },
   {
@@ -709,6 +731,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Absorb",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Null",
@@ -716,13 +739,13 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Diarama",
-     "Marin Karin"
+      "Diarama",
+      "Marin Karin"
     ],
     "LearnedSkills": {
-     "25": "Posumudi",
-     "26": "Me Patra",
-     "27": "Recarm"
+      "25": "Posumudi",
+      "26": "Me Patra",
+      "27": "Recarm"
     }
   },
   {
@@ -745,6 +768,7 @@
       "Ice": "Normal",
       "Elec": "Absorb",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -752,16 +776,15 @@
       "Curse": "Weak"
     },
     "BaseSkills": [
-     "Highcounter",
-     "Ziodyne",
-     "Herculean Strike"
+      "Highcounter",
+      "Ziodyne",
+      "Herculean Strike"
     ],
     "LearnedSkills": {
-     "77": "Mediarahan",
-     "78": "Marziodyne",
-     "79": "Stasis Blade",
-     "80": "Fire Repel"
-
+      "77": "Mediarahan",
+      "78": "Marziodyne",
+      "79": "Stasis Blade",
+      "80": "Fire Repel"
     }
   },
   {
@@ -784,6 +807,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -791,14 +815,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Divine Judgment",
-     "Attack All"
+      "Divine Judgment",
+      "Attack All"
     ],
     "LearnedSkills": {
-     "73": "Maragidyne",
-     "74": "Fire Boost",
-     "75": "Endure",
-     "76": "Hassohappa"
+      "73": "Maragidyne",
+      "74": "Fire Boost",
+      "75": "Endure",
+      "76": "Hassohappa"
     }
   },
   {
@@ -821,6 +845,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -828,15 +853,15 @@
       "Curse": "Null"
     },
     "BaseSkills": [
-     "Focus",
-     "War Cry",
-     "Pulinpa",
-     "Lunge"
+      "Focus",
+      "War Cry",
+      "Pulinpa",
+      "Lunge"
     ],
     "LearnedSkills": {
-     "64": "Might",
-     "65": "Life Surge",
-     "66": "Mana Surge"
+      "64": "Might",
+      "65": "Life Surge",
+      "66": "Mana Surge"
     }
   },
   {
@@ -859,6 +884,7 @@
       "Ice": "Repel",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -866,14 +892,16 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Stasis Blade",
-     "Diarahan"
+      "Stasis Blade",
+      "Diarahan",
+      "Terazi"
     ],
     "LearnedSkills": {
-     "53": "Dekunda",
-     "54": "Mabufudyne",
-     "55": "Magarudyne",
-     "56": "Mazionga"
+      "53": "Dekunda",
+      "54": "Mabufudyne",
+      "55": "Magarudyne",
+      "56": "Mazionga",
+      "57": "Materazi"
     }
   },
   {
@@ -896,6 +924,7 @@
       "Ice": "Normal",
       "Elec": "Repel",
       "Wind": "Weak",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -903,13 +932,13 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Ziodyne",
-     "Mazionga"
+      "Ziodyne",
+      "Mazionga"
     ],
     "LearnedSkills": {
-     "46": "Dark Sword",
-     "47": "Life Refill",
-     "48": "Maziodyne"
+      "46": "Dark Sword",
+      "47": "Life Refill",
+      "48": "Maziodyne"
     }
   },
   {
@@ -926,12 +955,13 @@
     },
     "Affinities": {
       "Strike": "Normal",
-      "Slash": "Normal",
+      "Slash": "Resist",
       "Pierce": "Normal",
       "Fire": "Normal",
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Repel",
       "Dark": "Null",
       "Mind": "Normal",
@@ -939,12 +969,13 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Chaos Blade",
-     "Mamudo"
+      "Chaos Blade",
+      "Mamudo"
     ],
     "LearnedSkills": {
-     "41" : "Agidyne",
-     "42" : "Tentarafoo"
+      "41": "Agidyne",
+      "42": "Tentarafoo",
+      "43": "Teradyne"
     }
   },
   {
@@ -967,6 +998,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Repel",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -974,13 +1006,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Kill Rush",
-     "Magaru"
+      "Kill Rush",
+      "Magaru",
+      "Matera"
     ],
     "LearnedSkills": {
-     "34": "Life Gain",
-     "35": "Mana Bonus",
-     "36": "Tetraja"
+      "34": "Life Gain",
+      "35": "Mana Bonus",
+      "36": "Tetraja"
     }
   },
   {
@@ -1003,6 +1036,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1010,12 +1044,13 @@
       "Curse": "Null"
     },
     "BaseSkills": [
-     "Brutal Slash",
-     "Agilao",
-     "Mahama"
+      "Brutal Slash",
+      "Agilao",
+      "Mahama"
     ],
     "LearnedSkills": {
-     "28": "Resist Dark"
+      "28": "Resist Dark",
+      "29": "Terazi"
     }
   },
   {
@@ -1038,6 +1073,7 @@
       "Ice": "Normal",
       "Elec": "Repel",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1045,15 +1081,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Mazio",
-     "Zionga"
+      "Mazio",
+      "Zionga"
     ],
     "LearnedSkills": {
-     "18": "Pulinpa",
-     "19": "Bewilder",
-     "20": "Dekaja",
-     "21": "Focus"
-
+      "18": "Pulinpa",
+      "19": "Bewilder",
+      "20": "Dekaja",
+      "21": "Focus"
     }
   },
   {
@@ -1076,6 +1111,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Weak",
@@ -1083,19 +1119,19 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Maragion",
-     "Fire Boost",
-     "War Cry"
+      "Maragion",
+      "Fire Boost",
+      "War Cry"
     ],
     "LearnedSkills": {
-     "56": "Cruel Attack",
-     "57": "Kamikaze",
-     "58": "Sonic Wave"
+      "56": "Cruel Attack",
+      "57": "Kamikaze",
+      "58": "Sonic Wave"
     }
   },
   {
-    "Id": "baihu",
-    "Name": "Baihu",
+    "Id": "Byakko",
+    "Name": "Byakko",
     "Race": "Holy",
     "Level": 43,
     "Stats": {
@@ -1109,10 +1145,11 @@
       "Strike": "Normal",
       "Slash": "Normal",
       "Pierce": "Normal",
-      "Fire": "Weak",
-      "Ice": "Null",
+      "Fire": "Null",
+      "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1120,19 +1157,19 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Double Fangs",
-     "Life Aid",
-     "Mabufula"
+      "Double Fangs",
+      "Life Aid",
+      "Maragion"
     ],
     "LearnedSkills": {
-     "44": "Might",
-     "45": "Focus",
-     "46": "Bufudyne"
+      "44": "Might",
+      "45": "Focus",
+      "46": "Agidyne"
     }
   },
   {
-    "Id": "zhuque",
-    "Name": "Zhuque",
+    "Id": "Suzaku",
+    "Name": "Suzaku",
     "Race": "Holy",
     "Level": 36,
     "Stats": {
@@ -1150,6 +1187,7 @@
       "Ice": "Weak",
       "Elec": "Absorb",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1157,14 +1195,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Liftoma",
-     "Magaru",
-     "Maragi"
+      "Liftoma",
+      "Magaru",
+      "Maragi",
+      "Matera"
     ],
     "LearnedSkills": {
-     "38": "Recarm",
-     "39": "Mazionga",
-     "40": "Life Aid"
+      "38": "Recarm",
+      "39": "Mazionga",
+      "40": "Life Aid"
     }
   },
   {
@@ -1187,6 +1226,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Absorb",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1195,8 +1235,8 @@
     },
     "BaseSkills": [],
     "LearnedSkills": {
-     "28": "Magarula",
-     "31": "Drain Attack"
+      "28": "Magarula",
+      "31": "Drain Attack"
     }
   },
   {
@@ -1219,6 +1259,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Null",
@@ -1226,16 +1267,16 @@
       "Curse": "Null"
     },
     "BaseSkills": [
-     "Rakukaja",
-     "Mabufu",
-     "Media"
+      "Rakukaja",
+      "Mabufu",
+      "Media"
     ],
     "LearnedSkills": {
-     "22": "Life Refill",
-     "23": "Evil Touch",
-     "24": "Tetraja",
-     "25": "Me Patra",
-     "26": "Diarama"
+      "22": "Life Refill",
+      "23": "Evil Touch",
+      "24": "Tetraja",
+      "25": "Me Patra",
+      "26": "Diarama"
     }
   },
   {
@@ -1258,6 +1299,7 @@
       "Ice": "Normal",
       "Elec": "Absorb",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1265,16 +1307,16 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Mazio",
-     "Feral Claw"
+      "Mazio",
+      "Feral Claw"
     ],
     "LearnedSkills": {
-     "14": "War Cry",
-     "15": "Evil Touch",
-     "16": "Counter",
-     "17": "Resist Fire"
+      "14": "War Cry",
+      "15": "Evil Touch",
+      "16": "Counter",
+      "17": "Resist Fire"
     }
-  },    
+  },
   {
     "Id": "efreet",
     "Name": "Efreet",
@@ -1295,6 +1337,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1302,13 +1345,13 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Agidyne",
-     "Taunt"
+      "Agidyne",
+      "Taunt"
     ],
     "LearnedSkills": {
-     "53": "Makakaja",
-     "54": "Mana Aid",
-     "55": "Maragidyne"
+      "53": "Makakaja",
+      "54": "Mana Aid",
+      "55": "Maragidyne"
     }
   },
   {
@@ -1331,6 +1374,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Null",
+      "Earth": "Null",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1338,16 +1382,18 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Growth",
-     "Eerie Sound"
+      "Growth",
+      "Eerie Sound",
+      "Terazi",
+      "Earth Boost"
     ],
     "LearnedSkills": {
-     "49": "Stasis Blade",
-     "50": "Sonic Wave",
-     "51": "Wind Boost",
-     "52": "Garula",
-     "53": "Chaos Blade",
-     "54": "Magarudyne"
+      "49": "Stasis Blade",
+      "50": "Sonic Wave",
+      "51": "Wind Boost",
+      "52": "Garula",
+      "53": "Chaos Blade",
+      "54": "Magarudyne"
     }
   },
   {
@@ -1370,6 +1416,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Absorb",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1377,14 +1424,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Wind Boost",
-     "Garudyne",
-     "Garula"
+      "Wind Boost",
+      "Garudyne",
+      "Garula"
     ],
     "LearnedSkills": {
-     "45": "Diarama",
-     "46": "Kamikaze",
-     "47": "Taunt"
+      "45": "Diarama",
+      "46": "Kamikaze",
+      "47": "Taunt"
     }
   },
   {
@@ -1407,6 +1454,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1414,15 +1462,15 @@
       "Curse": "Weak"
     },
     "BaseSkills": [
-     "Kill Rush",
-     "Might",
-     "Tarukaja"
+      "Kill Rush",
+      "Might",
+      "Tarukaja"
     ],
     "LearnedSkills": {
-     "38": "Tetrakarn",
-     "39": "Brutal Slash",
-     "40": "Sukukaja",
-     "41": "Kamikaze"
+      "38": "Tetrakarn",
+      "39": "Brutal Slash",
+      "40": "Sukukaja",
+      "41": "Kamikaze"
     }
   },
   {
@@ -1445,6 +1493,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Repel",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1452,15 +1501,15 @@
       "Curse": "Weak"
     },
     "BaseSkills": [
-     "Magarula",
-     "Tarukaja"
+      "Magarula",
+      "Tarukaja"
     ],
     "LearnedSkills": {
-     "29": "Mana Gain",
-     "30": "Mahama",
-     "31": "Might",
-     "32": "Resist Elec",
-     "33": "Garudyne"
+      "29": "Mana Gain",
+      "30": "Mahama",
+      "31": "Might",
+      "32": "Resist Elec",
+      "33": "Garudyne"
     }
   },
   {
@@ -1483,6 +1532,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1490,14 +1540,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Tetraja",
-     "Agilao",
-     "Pulinpa"
+      "Tetraja",
+      "Agilao",
+      "Pulinpa"
     ],
     "LearnedSkills": {
-     "24": "Diarama",
-     "25": "Makatora",
-     "26": "Me Patra"
+      "24": "Diarama",
+      "25": "Makatora",
+      "26": "Me Patra"
     }
   },
   {
@@ -1520,6 +1570,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Null",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1527,14 +1578,14 @@
       "Curse": "Weak"
     },
     "BaseSkills": [
-     "Magaru",
-     "Tarukaja"
+      "Magaru",
+      "Tarukaja"
     ],
     "LearnedSkills": {
-     "20": "Bewilder",
-     "21": "Makatora",
-     "22": "Kamikaze",
-     "23": "Garula"
+      "20": "Bewilder",
+      "21": "Makatora",
+      "22": "Kamikaze",
+      "23": "Garula"
     }
   },
   {
@@ -1557,6 +1608,7 @@
       "Ice": "Resist",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1564,13 +1616,13 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Venom Bite",
-     "Analyze"
+      "Venom Bite",
+      "Analyze"
     ],
     "LearnedSkills": {
-     "15": "Lullaby",
-     "16": "Mabufula",
-     "17": "Media"
+      "15": "Lullaby",
+      "16": "Mabufula",
+      "17": "Media"
     }
   },
   {
@@ -1593,6 +1645,7 @@
       "Ice": "Absorb",
       "Elec": "Resist",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1600,15 +1653,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Lullaby",
-     "Patra"
+      "Lullaby",
+      "Patra"
     ],
     "LearnedSkills": {
-     "9": "Mabufu",
-     "10": "Resist Mind",
-     "11": "Pulinpa",
-     "12": "Dormina",
-     "13": "Mazio"
+      "9": "Mabufu",
+      "10": "Resist Mind",
+      "11": "Pulinpa",
+      "12": "Dormina",
+      "13": "Mazio"
     }
   },
   {
@@ -1631,6 +1684,7 @@
       "Ice": "Normal",
       "Elec": "Resist",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1667,6 +1721,7 @@
       "Ice": "Absorb",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1704,6 +1759,7 @@
       "Ice": "Normal",
       "Elec": "Resist",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1741,6 +1797,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1778,6 +1835,7 @@
       "Ice": "Resist",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1815,6 +1873,7 @@
       "Ice": "Absorb",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1823,13 +1882,13 @@
     },
     "BaseSkills": [
       "Mabufula",
-      "Mutudi"
+      "Mutudi",
+      "Materazi"
     ],
     "LearnedSkills": {
       "39": "Berserk",
       "41": "Life Gain",
       "43": "Diarahan"
-        
     }
   },
   {
@@ -1852,6 +1911,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Repel",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1889,6 +1949,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -1904,7 +1965,7 @@
       "48": "Diarahan",
       "49": "Garudyne",
       "50": "Bufudyne",
-      "51": "Ziodyne"  
+      "51": "Ziodyne"
     }
   },
   {
@@ -1927,6 +1988,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Repel",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -1964,6 +2026,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -1971,16 +2034,16 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Mahamaon",
-     "Makougaon",
-     "Maragidyne"
+      "Mahamaon",
+      "Makougaon",
+      "Maragidyne"
     ],
     "LearnedSkills": {
-     "65": "Mediarahan",
-     "66": "Diarahan",
-     "67": "Bewilder",
-     "68": "Divine Judgment",
-     "69": "Debilitate"
+      "65": "Mediarahan",
+      "66": "Diarahan",
+      "67": "Bewilder",
+      "68": "Divine Judgment",
+      "69": "Debilitate"
     }
   },
   {
@@ -2003,6 +2066,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -2010,14 +2074,14 @@
       "Curse": "Weak"
     },
     "BaseSkills": [
-     "Diarahan",
-     "Kouga"
+      "Diarahan",
+      "Kouga"
     ],
     "LearnedSkills": {
-     "51": "Tetrakarn",
-     "52": "Makakaja",
-     "53": "Tentarafoo",
-     "54": "Mahamaon"
+      "51": "Tetrakarn",
+      "52": "Makakaja",
+      "53": "Tentarafoo",
+      "54": "Mahamaon"
     }
   },
   {
@@ -2040,6 +2104,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Resist",
       "Light": "Repel",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -2047,15 +2112,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Mahama",
-     "Makouga",
-     "Mediarama"
+      "Mahama",
+      "Makouga",
+      "Mediarama"
     ],
     "LearnedSkills": {
-     "42": "Torrent Shot",
-     "43": "Makarakarn",
-     "44": "Mazionga",
-     "45": "Divine Judgment"
+      "42": "Torrent Shot",
+      "43": "Makarakarn",
+      "44": "Mazionga",
+      "45": "Divine Judgment"
     }
   },
   {
@@ -2078,6 +2143,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -2085,15 +2151,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Dark Might",
-     "Tarukaja"
+      "Dark Might",
+      "Tarukaja"
     ],
     "LearnedSkills": {
-     "34": "Guillotine",
-     "35": "Mahama",
-     "36": "Kouga",
-     "37": "Hamaon",
-     "38": "Null Nerve"
+      "34": "Guillotine",
+      "35": "Mahama",
+      "36": "Kouga",
+      "37": "Hamaon",
+      "38": "Null Nerve"
     }
   },
   {
@@ -2116,6 +2182,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Weak",
       "Mind": "Weak",
@@ -2123,14 +2190,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Bright Might",
-     "Garula"
+      "Bright Might",
+      "Garula"
     ],
     "LearnedSkills": {
-     "29": "Diarama",
-     "30": "Mana Bonus",
-     "31": "Hamaon",
-     "32": "Heat Wave"
+      "29": "Diarama",
+      "30": "Mana Bonus",
+      "31": "Hamaon",
+      "32": "Heat Wave"
     }
   },
   {
@@ -2153,6 +2220,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -2160,14 +2228,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Power Slash",
-     "Tarukaja"
+      "Power Slash",
+      "Tarukaja"
     ],
     "LearnedSkills": {
-     "19": "Hama",
-     "20": "Estoma",
-     "21": "Magaru",
-     "22": "Diarama"
+      "19": "Hama",
+      "20": "Estoma",
+      "21": "Magaru",
+      "22": "Diarama"
     }
   },
   {
@@ -2190,6 +2258,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -2197,16 +2266,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Dia",
-     "Hama",
-     "Kouha"
+      "Dia",
+      "Hama",
+      "Kouha"
     ],
     "LearnedSkills": {
-     "12": "Patra",
-     "13": "Posumudi",
-     "14": "Holy Arrow",
-     "15": "Life Aid"
-
+      "12": "Patra",
+      "13": "Posumudi",
+      "14": "Holy Arrow",
+      "15": "Life Aid"
     }
   },
   {
@@ -2229,6 +2297,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -2236,15 +2305,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Iron Claw",
-     "War Cry"
+      "Iron Claw",
+      "War Cry"
     ],
     "LearnedSkills": {
-     "69": "Deathbound",
-     "70": "Endure",
-     "71": "Hades Blast",
-     "72": "Life Surge",
-     "73": "Hassohappa"
+      "69": "Deathbound",
+      "70": "Endure",
+      "71": "Hades Blast",
+      "72": "Life Surge",
+      "73": "Hassohappa"
     }
   },
   {
@@ -2267,6 +2336,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -2274,15 +2344,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Analyze",
-     "Tetrakarn"
+      "Analyze",
+      "Tetrakarn"
     ],
     "LearnedSkills": {
-     "59": "Sukukaja",  
-     "60": "Hell Gaze",
-     "61": "Eternal Rest",
-     "62": "Trafuri",
-     "63": "Megido"
+      "59": "Sukukaja",
+      "60": "Hell Gaze",
+      "61": "Eternal Rest",
+      "62": "Trafuri",
+      "63": "Megido"
     }
   },
   {
@@ -2305,6 +2375,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -2312,15 +2383,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Rakukaja",
-     "Blight",
-     "War Cry"
+      "Rakukaja",
+      "Blight",
+      "War Cry"
     ],
     "LearnedSkills": {
-     "46": "Dekaja",
-     "47": "Dekunda",
-     "48": "Focus",
-     "49": "Makarakarn"
+      "46": "Dekaja",
+      "47": "Dekunda",
+      "48": "Focus",
+      "49": "Makarakarn"
     }
   },
   {
@@ -2343,6 +2414,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -2350,14 +2422,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Mudo",
-     "Heat Wave"
+      "Mudo",
+      "Heat Wave"
     ],
     "LearnedSkills": {
-     "38": "Dekaja",
-     "39": "Maragion",
-     "40": "Dismal Tune",
-     "41": "Fire Boost"
+      "38": "Dekaja",
+      "39": "Maragion",
+      "40": "Dismal Tune",
+      "41": "Fire Boost"
     }
   },
   {
@@ -2380,6 +2452,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -2387,15 +2460,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Hell Thrust",
-     "Rakukaja",
-     "Dark Might"
+      "Hell Thrust",
+      "Rakukaja",
+      "Dark Might"
     ],
     "LearnedSkills": {
-     "30": "Mudo",
-     "31": "Cruel Attack",
-     "32": "Riberama",
-     "33": "Evil Smile"
+      "30": "Mudo",
+      "31": "Cruel Attack",
+      "32": "Riberama",
+      "33": "Evil Smile"
     }
   },
   {
@@ -2418,6 +2491,7 @@
       "Ice": "Absorb",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -2425,14 +2499,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Double Fangs",
-     "Riberama"
+      "Double Fangs",
+      "Riberama"
     ],
     "LearnedSkills": {
-     "21": "Bufula",
-     "22": "Sukunda",
-     "23": "Resist Elec",
-     "24": "Mabufula"
+      "21": "Bufula",
+      "22": "Sukunda",
+      "23": "Resist Elec",
+      "24": "Mabufula"
     }
   },
   {
@@ -2449,28 +2523,29 @@
     },
     "Affinities": {
       "Strike": "Normal",
-      "Slash": "Normal",
+      "Slash": "Resist",
       "Pierce": "Normal",
       "Fire": "Null",
       "Ice": "Null",
       "Elec": "Null",
       "Wind": "Null",
+      "Earth": "Weak",
       "Light": "Normal",
-      "Dark": "Normal",
+      "Dark": "Resist",
       "Mind": "Weak",
       "Nerve": "Weak",
       "Curse": "Weak"
     },
     "BaseSkills": [
-     "Ziodyne",
-     "Rakukaja",
-     "Mazionga"
+      "Ziodyne",
+      "Rakukaja",
+      "Mazionga"
     ],
     "LearnedSkills": {
-     "67": "Elec Boost",
-     "68": "Mediarahan",
-     "69": "Samarecarm",
-     "70": "Garudyne"
+      "67": "Elec Boost",
+      "68": "Mediarahan",
+      "69": "Samarecarm",
+      "70": "Garudyne"
     }
   },
   {
@@ -2493,6 +2568,7 @@
       "Ice": "Null",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -2500,15 +2576,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Venom Bite",
-     "Mabufula"
+      "Venom Bite",
+      "Mabufula"
     ],
     "LearnedSkills": {
-     "56": "Kill Rush",
-     "57": "Ice Boost",
-     "58": "Ice Drain",
-     "59": "Poisma",
-     "60": "Recarmdra"
+      "56": "Kill Rush",
+      "57": "Ice Boost",
+      "58": "Ice Drain",
+      "59": "Poisma",
+      "60": "Recarmdra"
     }
   },
   {
@@ -2531,6 +2607,7 @@
       "Ice": "Normal",
       "Elec": "Absorb",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -2538,13 +2615,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Drain Attack",
-     "Tarukaja"
+      "Drain Attack",
+      "Tarukaja",
+      "Terazi"
     ],
     "LearnedSkills": {
-     "38": "Counter",
-     "39": "Slithering Slash",
-     "40": "Null Fire"
+      "38": "Counter",
+      "39": "Slithering Slash",
+      "40": "Null Fire",
+      "41": "Materazi"
     }
   },
   {
@@ -2566,7 +2645,8 @@
       "Fire": "Weak",
       "Ice": "Null",
       "Elec": "Absorb",
-      "Wind": "Normal",
+      "Wind": "Resist",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -2574,15 +2654,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Bufula",
-     "Mabufula",
-     "Makakaja"
+      "Bufula",
+      "Mabufula",
+      "Makakaja"
     ],
     "LearnedSkills": {
-     "35": "Makarakarn",
-     "36": "Me Patra",
-     "37": "Kill Rush",
-     "38": "Sukunda"
+      "35": "Makarakarn",
+      "36": "Me Patra",
+      "37": "Kill Rush",
+      "38": "Sukunda"
     }
   },
   {
@@ -2605,6 +2685,7 @@
       "Ice": "Normal",
       "Elec": "Absorb",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -2612,14 +2693,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Drain Attack",
-     "Tarukaja"
+      "Drain Attack",
+      "Tarukaja"
     ],
     "LearnedSkills": {
-     "29": "Life Gain",
-     "30": "Sukunda",
-     "31": "Hell Thrust",
-     "32": "Zionga"
+      "29": "Life Gain",
+      "30": "Sukunda",
+      "31": "Hell Thrust",
+      "32": "Zionga"
     }
   },
   {
@@ -2642,6 +2723,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Absorb",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -2649,13 +2731,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Bash",
-     "Poisma"
+      "Bash",
+      "Tera",
+      "Poisma"
     ],
     "LearnedSkills": {
-     "15": "Counter",
-     "16": "Rakukaja",
-     "17": "Sacrifice"
+      "15": "Counter",
+      "16": "Rakukaja",
+      "17": "Matera",
+      "18": "Sacrifice"
     }
   },
   {
@@ -2678,6 +2762,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -2685,14 +2770,14 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Iron Claw",
-     "Binding Cry",
-     "Sukunda"
+      "Iron Claw",
+      "Binding Cry",
+      "Sukunda"
     ],
     "LearnedSkills": {
-     "62": "Retaliate",
-     "63": "Maragidyne",
-     "64": "Attack All"
+      "62": "Retaliate",
+      "63": "Maragidyne",
+      "64": "Attack All"
     }
   },
   {
@@ -2710,11 +2795,12 @@
     "Affinities": {
       "Strike": "Normal",
       "Slash": "Normal",
-      "Pierce": "Normal",
+      "Pierce": "Weak",
       "Fire": "Normal",
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Repel",
+      "Earth": "Null",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Null",
@@ -2722,14 +2808,14 @@
       "Curse": "Null"
     },
     "BaseSkills": [
-     "Garudyne",
-     "Sukunda",
-     "Sukukaja"
+      "Garudyne",
+      "Sukunda",
+      "Sukukaja"
     ],
     "LearnedSkills": {
-     "55": "Magarudyne",
-     "56": "Venom Claw",
-     "57": "Diarahan"
+      "55": "Magarudyne",
+      "56": "Venom Claw",
+      "57": "Diarahan"
     }
   },
   {
@@ -2752,6 +2838,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -2759,13 +2846,13 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Agilao",
-     "Stun Claw"
+      "Agilao",
+      "Stun Claw"
     ],
     "LearnedSkills": {
-     "35": "Fire Boost",
-     "36": "War Cry",
-     "37": "Hell Fang"
+      "35": "Fire Boost",
+      "36": "War Cry",
+      "37": "Hell Fang"
     }
   },
   {
@@ -2783,25 +2870,26 @@
     "Affinities": {
       "Strike": "Resist",
       "Slash": "Resist",
-      "Pierce": "Resist",
+      "Pierce": "Weak",
       "Fire": "Normal",
       "Ice": "Normal",
       "Elec": "Weak",
-      "Wind": "Normal",
+      "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Normal",
-      "Dark": "Normal",
+      "Dark": "Null",
       "Mind": "Normal",
       "Nerve": "Normal",
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Needle Rush",
-     "Liftoma"
+      "Needle Rush",
+      "Liftoma"
     ],
     "LearnedSkills": {
-     "24": "Magaru",
-     "25": "Resist Wind",
-     "26": "Mana Aid"
+      "24": "Magaru",
+      "25": "Resist Wind",
+      "26": "Mana Aid"
     }
   },
   {
@@ -2824,6 +2912,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Absorb",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -2831,14 +2920,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Stun Needle",
-     "Marin Karin",
-     "Paraladi"
+      "Stun Needle",
+      "Marin Karin",
+      "Paraladi",
+      "Tera"
     ],
     "LearnedSkills": {
-     "19": "Mana Bonus",
-     "20": "Feral Claw",
-     "21": "Evil Touch"
+      "19": "Mana Bonus",
+      "20": "Feral Claw",
+      "21": "Evil Touch"
     }
   },
   {
@@ -2861,6 +2951,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Null",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -2868,17 +2959,18 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Maragi",
-     "Double Fangs"
+      "Tera",
+      "Maragi",
+      "Double Fangs"
     ],
     "LearnedSkills": {
-     "14": "Media",
-     "15": "Rakunda",
-     "16": "Sukunda",
-     "17": "Pulinpa"
+      "14": "Media",
+      "15": "Rakunda",
+      "16": "Sukunda",
+      "17": "Pulinpa"
     }
   },
-    {
+  {
     "Id": "gogmagog",
     "Name": "Gogmagog",
     "Race": "Jirae",
@@ -2898,6 +2990,7 @@
       "Ice": "Null",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Absorb",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -2906,6 +2999,7 @@
     },
     "BaseSkills": [
       "Magarula",
+      "Materazi",
       "Kill Rush",
       "Diarama"
     ],
@@ -2937,6 +3031,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Null",
+      "Earth": "Null",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -2974,6 +3069,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -3011,6 +3107,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Resist",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3021,11 +3118,12 @@
       "Garu"
     ],
     "LearnedSkills": {
-      "14": "Magaru",
-      "15": "Kamikaze",
-      "16": "Makatora",
-      "17": "Makakaja",
-      "18": "Sukukaja"
+      "14": "Tera",
+      "15": "Magaru",
+      "16": "Kamikaze",
+      "17": "Makatora",
+      "18": "Makakaja",
+      "19": "Sukukaja"
     }
   },
   {
@@ -3048,6 +3146,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3084,6 +3183,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Resist",
+      "Earth": "Weak",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3118,6 +3218,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Null",
@@ -3155,6 +3256,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Null",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -3168,7 +3270,8 @@
     "LearnedSkills": {
       "67": "Binding Cry",
       "68": "Chaos Blade",
-      "69": "Sukunda"
+      "69": "Sukunda",
+      "70": "Repel Earth"
     }
   },
   {
@@ -3191,6 +3294,7 @@
       "Ice": "Null",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -3227,6 +3331,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3264,6 +3369,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Repel",
       "Light": "Repel",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -3301,8 +3407,9 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Absorb",
       "Light": "Normal",
-      "Dark": "Normal",
+      "Dark": "Null",
       "Mind": "Normal",
       "Nerve": "Null",
       "Curse": "Normal"
@@ -3310,11 +3417,12 @@
     "BaseSkills": [
       "Hell Thrust",
       "Me Patra",
-      "Analyze"
+      "Terazi"
     ],
     "LearnedSkills": {
       "45": "Zan-ei",
-      "46": "Mudoon"
+      "46": "Mudoon",
+      "47": "Materazi"
     }
   },
   {
@@ -3337,6 +3445,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3351,7 +3460,8 @@
       "26": "War Cry",
       "27": "Estoma",
       "28": "Life Gain",
-      "29": "Dark Sword"
+      "29": "Dark Sword",
+      "30": "Resist Earth"
     }
   },
   {
@@ -3374,6 +3484,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Weak",
@@ -3410,6 +3521,7 @@
       "Ice": "Normal",
       "Elec": "Repel",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3425,7 +3537,7 @@
       "7": "Tarukaja"
     }
   },
-   {
+  {
     "Id": "rangda",
     "Name": "Rangda",
     "Race": "Femme",
@@ -3445,6 +3557,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3483,6 +3596,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -3492,14 +3606,16 @@
     "BaseSkills": [
       "Ziodyne",
       "Garudyne",
-      "Bufudyne"
+      "Bufudyne",
+      "Teradyne"
     ],
     "LearnedSkills": {
-      "68": "Elec Boost",
-      "69": "Wind Boost",
-      "70": "Ice Boost",
-      "71": "Mana Surge",
-      "72": "Megidola"
+      "68": "Elec Amp",
+      "69": "Wind Amp",
+      "70": "Ice Amp",
+      "71": "Earth Amp",
+      "72": "Mana Surge",
+      "73": "Megidola"
     }
   },
   {
@@ -3522,6 +3638,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Null",
@@ -3561,6 +3678,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -3599,6 +3717,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3607,7 +3726,8 @@
     },
     "BaseSkills": [
       "Mamudo",
-      "Life Aid"
+      "Life Aid",
+      "Terazi"
     ],
     "LearnedSkills": {
       "53": "Agidyne",
@@ -3635,6 +3755,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Null",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3672,6 +3793,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Resist",
@@ -3683,10 +3805,11 @@
       "Shibaboo"
     ],
     "LearnedSkills": {
-      "33": "Resist Dark",
-      "34": "Sonic Wave",
-      "35": "Stun Needle",
-      "36": "Drain Attack"
+      "33": "Materazi",
+      "34": "Resist Dark",
+      "35": "Sonic Wave",
+      "36": "Stun Needle",
+      "37": "Drain Attack"
     }
   },
   {
@@ -3709,6 +3832,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -3747,6 +3871,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Null",
@@ -3755,7 +3880,8 @@
     },
     "BaseSkills": [
       "Needle Rush",
-      "Shibaboo"
+      "Shibaboo",
+      "Tera"
     ],
     "LearnedSkills": {
       "8": "Bufu",
@@ -3763,7 +3889,7 @@
       "10": "Dormina"
     }
   },
-   {
+  {
     "Id": "mada",
     "Name": "Mada",
     "Race": "Vile",
@@ -3779,10 +3905,11 @@
       "Strike": "Absorb",
       "Slash": "Absorb",
       "Pierce": "Absorb",
-      "Fire": "Normal",
+      "Fire": "Weak",
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -3820,6 +3947,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Repel",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -3858,6 +3986,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Absorb",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -3895,6 +4024,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Absorb",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -3931,6 +4061,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -3968,6 +4099,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Weak",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -4003,6 +4135,7 @@
       "Ice": "Repel",
       "Elec": "Weak",
       "Wind": "Weak",
+      "Earth": "Repel",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Weak",
@@ -4040,6 +4173,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Repel",
       "Dark": "Repel",
       "Mind": "Null",
@@ -4072,6 +4206,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -4108,6 +4243,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Repel",
       "Mind": "Null",
@@ -4143,6 +4279,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -4180,6 +4317,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Resist",
       "Dark": "Null",
       "Mind": "Null",
@@ -4218,6 +4356,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -4255,6 +4394,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Resist",
@@ -4291,6 +4431,7 @@
       "Ice": "Repel",
       "Elec": "Resist",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Resist",
@@ -4328,6 +4469,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -4364,6 +4506,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -4402,6 +4545,7 @@
       "Ice": "Absorb",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -4440,8 +4584,9 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Repel",
       "Light": "Normal",
-      "Dark": "Normal",
+      "Dark": "Repel",
       "Mind": "Normal",
       "Nerve": "Normal",
       "Curse": "Normal"
@@ -4475,6 +4620,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -4514,6 +4660,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -4550,12 +4697,13 @@
       "Pierce": "Normal",
       "Fire": "Normal",
       "Ice": "Normal",
-      "Elec": "Normal",
+      "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Weak",
       "Dark": "Normal",
       "Mind": "Null",
-      "Nerve": "Normal",
+      "Nerve": "Weak",
       "Curse": "Normal"
     },
     "BaseSkills": [
@@ -4589,6 +4737,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Null",
@@ -4625,6 +4774,7 @@
       "Ice": "Null",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -4662,6 +4812,7 @@
       "Ice": "Weak",
       "Elec": "Null",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Normal",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -4698,6 +4849,7 @@
       "Ice": "Repel",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -4736,6 +4888,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -4750,7 +4903,8 @@
       "44": "Trafuri",
       "45": "Sonic Wave",
       "46": "Maragion",
-      "47": "Null Elec"
+      "47": "Null Elec",
+      "48": "Absorb Earth"
     }
   },
   {
@@ -4773,6 +4927,7 @@
       "Ice": "Null",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -4810,6 +4965,7 @@
       "Ice": "Normal",
       "Elec": "Absorb",
       "Wind": "Weak",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Normal",
@@ -4847,6 +5003,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Resist",
@@ -4885,6 +5042,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Resist",
@@ -4923,6 +5081,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Weak",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -4934,11 +5093,11 @@
       "Sacrifice"
     ],
     "LearnedSkills": {
-      "64" : "Life Drain",
-      "65" : "Rakunda",
-      "66" : "Retaliate",
-      "67" : "Megido",
-      "68" : "Kill Rush"
+      "64": "Life Drain",
+      "65": "Rakunda",
+      "66": "Retaliate",
+      "67": "Megido",
+      "68": "Kill Rush"
     }
   },
   {
@@ -4961,6 +5120,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Weak",
       "Dark": "Repel",
       "Mind": "Normal",
@@ -4999,6 +5159,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Repel",
       "Light": "Normal",
       "Dark": "Null",
       "Mind": "Null",
@@ -5033,10 +5194,11 @@
       "Strike": "Normal",
       "Slash": "Normal",
       "Pierce": "Normal",
-      "Fire": "Absorb",
-      "Ice": "Normal",
+      "Fire": "Weak",
+      "Ice": "Null",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5074,6 +5236,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5112,6 +5275,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Normal",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5148,6 +5312,7 @@
       "Ice": "Weak",
       "Elec": "Weak",
       "Wind": "Weak",
+      "Earth": "Weak",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5185,6 +5350,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Normal",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5224,6 +5390,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -5263,6 +5430,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Normal",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5301,6 +5469,7 @@
       "Ice": "Normal",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5338,6 +5507,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5345,14 +5515,15 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
-     "Tarunda",
-     "Sacrifice"
+      "Tera",
+      "Tarunda",
+      "Sacrifice"
     ],
     "LearnedSkills": {
-     "17": "Toxic Sting",
-     "18": "Marin Karin",
-     "19": "Spirit Drain",
-     "20": "Garula"
+      "17": "Toxic Sting",
+      "18": "Marin Karin",
+      "19": "Spirit Drain",
+      "20": "Garula"
     }
   },
   {
@@ -5371,10 +5542,11 @@
       "Strike": "Normal",
       "Slash": "Normal",
       "Pierce": "Normal",
-      "Fire": "Normal",
-      "Ice": "Normal",
+      "Fire": "Null",
+      "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Resist",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5386,10 +5558,10 @@
       "Toxic Sting"
     ],
     "LearnedSkills": {
-      "8": "Garu",
+      "8": "Agi",
       "9": "Deathtouch",
       "10": "Mana Aid",
-      "11": "Magaru"
+      "11": "Maragi"
     }
   },
   {
@@ -5409,9 +5581,10 @@
       "Slash": "Resist",
       "Pierce": "Resist",
       "Fire": "Weak",
-      "Ice": "Normal",
+      "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5449,6 +5622,7 @@
       "Ice": "Weak",
       "Elec": "Weak",
       "Wind": "Weak",
+      "Earth": "Weak",
       "Light": "Weak",
       "Dark": "Null",
       "Mind": "Normal",
@@ -5466,7 +5640,7 @@
       "6": "Makakaja"
     }
   },
-   {
+  {
     "Id": "metatron",
     "Name": "Metatron",
     "Race": "Seraph",
@@ -5486,6 +5660,7 @@
       "Ice": "Normal",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -5525,6 +5700,7 @@
       "Ice": "Null",
       "Elec": "Null",
       "Wind": "Null",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5563,6 +5739,7 @@
       "Ice": "Normal",
       "Elec": "Null",
       "Wind": "Null",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5600,6 +5777,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Null",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5639,6 +5817,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5673,6 +5852,7 @@
       "Ice": "Null",
       "Elec": "Weak",
       "Wind": "Null",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5707,6 +5887,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5740,6 +5921,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Null",
@@ -5779,6 +5961,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Repel",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5813,6 +5996,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5846,6 +6030,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Absorb",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5881,6 +6066,7 @@
       "Ice": "Absorb",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5915,6 +6101,7 @@
       "Ice": "Absorb",
       "Elec": "Weak",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -5949,6 +6136,7 @@
       "Ice": "Normal",
       "Elec": "Absorb",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Repel",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -5986,6 +6174,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Repel",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -6023,6 +6212,7 @@
       "Ice": "Null",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Weak",
@@ -6061,6 +6251,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Weak",
       "Light": "Repel",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -6075,7 +6266,7 @@
       "26": "Recarm"
     }
   },
-   {
+  {
     "Id": "garuda",
     "Name": "Garuda",
     "Race": "Avian",
@@ -6090,11 +6281,12 @@
     "Affinities": {
       "Strike": "Normal",
       "Slash": "Normal",
-      "Pierce": "Normal",
+      "Pierce": "Repel",
       "Fire": "Normal",
       "Ice": "Normal",
       "Elec": "Normal",
-      "Wind": "Normal",
+      "Wind": "Repel",
+      "Earth": "Repel",
       "Light": "Repel",
       "Dark": "Weak",
       "Mind": "Normal",
@@ -6128,6 +6320,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Null",
       "Light": "Weak",
       "Dark": "Repel",
       "Mind": "Null",
@@ -6146,7 +6339,7 @@
       "67": "Maeigaon"
     }
   },
-   {
+  {
     "Id": "albion",
     "Name": "Albion",
     "Race": "Entity",
@@ -6166,6 +6359,7 @@
       "Ice": "Null",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Normal",
       "Mind": "Normal",
@@ -6180,7 +6374,7 @@
       "68": "Hades Blast"
     }
   },
-   {
+  {
     "Id": "trumpeter",
     "Name": "Trumpeter",
     "Race": "Fiend",
@@ -6200,6 +6394,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6240,6 +6435,7 @@
       "Ice": "Normal",
       "Elec": "Absorb",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6278,6 +6474,7 @@
       "Ice": "Null",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6315,6 +6512,7 @@
       "Ice": "Absorb",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6353,6 +6551,7 @@
       "Ice": "Normal",
       "Elec": "Null",
       "Wind": "Null",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6389,6 +6588,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6425,6 +6625,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Absorb",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6460,6 +6661,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Repel",
       "Mind": "Absorb",
@@ -6476,7 +6678,6 @@
       "40": "Maeigaon",
       "41": "Salvation",
       "42": "Preach"
-
     }
   },
   {
@@ -6499,6 +6700,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Null",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6536,6 +6738,7 @@
       "Ice": "Weak",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -6565,6 +6768,7 @@
       "Ice": "Repel",
       "Elec": "Normal",
       "Wind": "Normal",
+      "Earth": "Normal",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -6594,6 +6798,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -6623,6 +6828,7 @@
       "Ice": "Normal",
       "Elec": "Normal",
       "Wind": "Weak",
+      "Earth": "Absorb",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Normal",
@@ -6652,6 +6858,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6681,6 +6888,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6710,6 +6918,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",
@@ -6739,6 +6948,7 @@
       "Ice": "Resist",
       "Elec": "Resist",
       "Wind": "Resist",
+      "Earth": "Resist",
       "Light": "Null",
       "Dark": "Null",
       "Mind": "Null",

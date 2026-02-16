@@ -6784,8 +6784,16 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Maragi",
+      "Bright Might"
+    ],
+    "LearnedSkills": {
+      "21": "Makakaja",
+      "22": "Media",
+      "23": "Null Mind",
+      "24": "Agilao"
+    }
   },
   {
     "Id": "aquans",
@@ -6814,8 +6822,15 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Sukukaja",
+      "Mabufu"
+    ],
+    "LearnedSkills": {
+      "16": "Null Nerve",
+      "17": "Life Bonus",
+      "18": "Bufula"
+    }
   },
   {
     "Id": "aeros",
@@ -6844,8 +6859,16 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Garu",
+      "Zio"
+    ],
+    "LearnedSkills": {
+      "12": "Lullaby",
+      "13": "Marin Karin",
+      "14": "Null Curse",
+      "15": "Toxic Sting"
+    }
   },
   {
     "Id": "erthys",
@@ -6874,8 +6897,15 @@
       "Nerve": "Normal",
       "Curse": "Normal"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Tera",
+      "Patra"
+    ],
+    "LearnedSkills": {
+      "8": "Rakukaja",
+      "9": "Tarukaja",
+      "10": "Matera"
+    }
   },
   {
     "Id": "saki_mitama",
@@ -6904,8 +6934,15 @@
       "Nerve": "Null",
       "Curse": "Null"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Dormina",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "36": "Magarula",
+      "37": "Mazionga",
+      "38": "Tetrakarn"
+    }
   },
   {
     "Id": "kusi_mitama",
@@ -6934,8 +6971,18 @@
       "Nerve": "Null",
       "Curse": "Null"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Sukukaja",
+      "Dekaja",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "33": "Evade Wind",
+      "34": "Evade Ice",
+      "35": "Evade Elec",
+      "36": "Evade Fire",
+      "37": "Evade Earth"
+    }
   },
   {
     "Id": "nigi_mitama",
@@ -6964,8 +7011,17 @@
       "Nerve": "Null",
       "Curse": "Null"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Rakunda",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "30": "Fire Boost",
+      "31": "Elec Boost",
+      "32": "Ice Boost",
+      "33": "Wind Boost",
+      "34": "Earth Boost"
+    }
   },
   {
     "Id": "ara_mitama",
@@ -6994,7 +7050,16 @@
       "Nerve": "Null",
       "Curse": "Null"
     },
-    "BaseSkills": [],
-    "LearnedSkills": {}
+    "BaseSkills": [
+      "Tarukaja",
+      "Bright Might",
+      "Analyze"
+    ],
+    "LearnedSkills": {
+      "26": "Life Aid",
+      "27": "Life Refill",
+      "28": "Counter",
+      "29": "Bash"
+    }
   }
 ]

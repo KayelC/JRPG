@@ -24,7 +24,7 @@ namespace JRPGPrototype.Logic.Battle
 
         /// <summary>
         /// Records an affinity discovery. 
-        /// In SMT III, hitting a target with an element reveals that affinity forever.
+        /// Hitting a target with an element reveals that affinity forever.
         /// </summary>
         /// <param name="sourceId">The unique ID of the enemy species.</param>
         /// <param name="element">The element used in the attack.</param>
@@ -93,7 +93,7 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// SMT III UI Support: Checks if an enemy type has been "Scanned" or fully 
+        /// UI Support: Checks if an enemy type has been "Scanned" or fully 
         /// interacted with for a specific element.
         /// </summary>
         public bool HasDiscovery(string sourceId, Element element)

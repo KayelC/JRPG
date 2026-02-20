@@ -6791,7 +6791,7 @@
   {
     "Id": "qitian-dasheng",
     "Name": "Qitian Dasheng",
-    "Race": "Tower",
+    "Race": "Fury",
     "Level": 67,
     "Stats": {
       "St": 52,
@@ -6830,7 +6830,7 @@
   {
     "Id": "horus",
     "Name": "Horus",
-    "Race": "Sun",
+    "Race": "Deity",
     "Level": 67,
     "Stats": {
       "St": 42,
@@ -6869,7 +6869,7 @@
   {
     "Id": "skadi",
     "Name": "Skadi",
-    "Race": "Empress",
+    "Race": "Lady",
     "Level": 68,
     "Stats": {
       "St": 52,
@@ -6908,7 +6908,7 @@
   {
     "Id": "arahabaki",
     "Name": "Arahabaki",
-    "Race": "Hermit",
+    "Race": "Vile",
     "Level": 68,
     "Stats": {
       "St": 47,
@@ -6947,7 +6947,7 @@
   {
     "Id": "alice",
     "Name": "Alice",
-    "Race": "Death",
+    "Race": "Fiend",
     "Level": 68,
     "Stats": {
       "St": 35,
@@ -6986,7 +6986,7 @@
   {
     "Id": "loki",
     "Name": "Loki",
-    "Race": "Fool",
+    "Race": "Tyrant",
     "Level": 69,
     "Stats": {
       "St": 48,
@@ -7026,7 +7026,7 @@
   {
     "Id": "houou",
     "Name": "Houou",
-    "Race": "Star",
+    "Race": "Avian",
     "Level": 70,
     "Stats": {
       "St": 35,
@@ -7065,7 +7065,7 @@
   {
     "Id": "michael",
     "Name": "Michael",
-    "Race": "Judgement",
+    "Race": "Seraph",
     "Level": 70,
     "Stats": {
       "St": 56,
@@ -7104,7 +7104,7 @@
   {
     "Id": "kohryu",
     "Name": "Kohryu",
-    "Race": "Hierophant",
+    "Race": "Dragon",
     "Level": 71,
     "Stats": {
       "St": 44,
@@ -7143,7 +7143,7 @@
   {
     "Id": "yurlungur",
     "Name": "Yurlungur",
-    "Race": "Temperance",
+    "Race": "Snake",
     "Level": 71,
     "Stats": {
       "St": 41,
@@ -7182,7 +7182,7 @@
   {
     "Id": "atavaka",
     "Name": "Atavaka",
-    "Race": "Strength",
+    "Race": "Deity",
     "Level": 72,
     "Stats": {
       "St": 58,
@@ -7220,7 +7220,7 @@
   {
     "Id": "baal-zebul",
     "Name": "Baal Zebul",
-    "Race": "Moon",
+    "Race": "Tyrant",
     "Level": 72,
     "Stats": {
       "St": 51,
@@ -7259,7 +7259,7 @@
   {
     "Id": "lakshmi",
     "Name": "Lakshmi",
-    "Race": "Fortune",
+    "Race": "Megami",
     "Level": 73,
     "Stats": {
       "St": 39,
@@ -7298,7 +7298,7 @@
   {
     "Id": "attis",
     "Name": "Attis",
-    "Race": "Hanged",
+    "Race": "Kishin",
     "Level": 73,
     "Stats": {
       "St": 45,
@@ -7337,7 +7337,7 @@
   {
     "Id": "ananta",
     "Name": "Ananta",
-    "Race": "Aeon",
+    "Race": "Dragon",
     "Level": 73,
     "Stats": {
       "St": 51,
@@ -7376,7 +7376,7 @@
   {
     "Id": "futsunushi",
     "Name": "Futsunushi",
-    "Race": "Magician",
+    "Race": "Kishin",
     "Level": 74,
     "Stats": {
       "St": 62,
@@ -7415,7 +7415,7 @@
   {
     "Id": "odin",
     "Name": "Odin",
-    "Race": "Emperor",
+    "Race": "Deity",
     "Level": 74,
     "Stats": {
       "St": 44,
@@ -7454,7 +7454,7 @@
   {
     "Id": "scathach",
     "Name": "Scathach",
-    "Race": "Priestess",
+    "Race": "Megami",
     "Level": 75,
     "Stats": {
       "St": 55,
@@ -7492,7 +7492,7 @@
   {
     "Id": "mara",
     "Name": "Mara",
-    "Race": "Tower",
+    "Race": "Tyrant",
     "Level": 75,
     "Stats": {
       "St": 60,
@@ -7531,7 +7531,7 @@
   {
     "Id": "abaddon",
     "Name": "Abaddon",
-    "Race": "Devil",
+    "Race": "Tyrant",
     "Level": 76,
     "Stats": {
       "St": 53,
@@ -7570,7 +7570,7 @@
   {
     "Id": "saturnus",
     "Name": "Saturnus",
-    "Race": "Star",
+    "Race": "Deity",
     "Level": 76,
     "Stats": {
       "St": 43,
@@ -7609,7 +7609,7 @@
   {
     "Id": "susano-o",
     "Name": "Susano-o",
-    "Race": "Fool",
+    "Race": "Fury",
     "Level": 77,
     "Stats": {
       "St": 71,
@@ -7648,7 +7648,7 @@
   {
     "Id": "mother-harlot",
     "Name": "Mother Harlot",
-    "Race": "Empress",
+    "Race": "Fiend",
     "Level": 77,
     "Stats": {
       "St": 44,
@@ -7687,7 +7687,7 @@
   {
     "Id": "thanatos",
     "Name": "Thanatos",
-    "Race": "Death",
+    "Race": "Fiend",
     "Level": 78,
     "Stats": {
       "St": 52,
@@ -7726,7 +7726,7 @@
   {
     "Id": "vishnu",
     "Name": "Vishnu",
-    "Race": "Sun",
+    "Race": "Deity",
     "Level": 78,
     "Stats": {
       "St": 65,
@@ -7765,7 +7765,7 @@
   {
     "Id": "masakado",
     "Name": "Masakado",
-    "Race": "Tower",
+    "Race": "Entity",
     "Level": 79,
     "Stats": {
       "St": 67,
@@ -7804,7 +7804,7 @@
   {
     "Id": "sandalphon",
     "Name": "Sandalphon",
-    "Race": "Moon",
+    "Race": "Seraph",
     "Level": 80,
     "Stats": {
       "St": 53,
@@ -7843,7 +7843,7 @@
   {
     "Id": "beelzebub",
     "Name": "Beelzebub",
-    "Race": "Devil",
+    "Race": "Tyrant",
     "Level": 81,
     "Stats": {
       "St": 50,
@@ -7882,7 +7882,7 @@
   {
     "Id": "shiva",
     "Name": "Shiva",
-    "Race": "Tower",
+    "Race": "Deity",
     "Level": 82,
     "Stats": {
       "St": 63,
@@ -7921,7 +7921,7 @@
   {
     "Id": "satan",
     "Name": "Satan",
-    "Race": "Judgement",
+    "Race": "Fallen",
     "Level": 82,
     "Stats": {
       "St": 55,
@@ -7961,7 +7961,7 @@
   {
     "Id": "alilat",
     "Name": "Alilat",
-    "Race": "Empress",
+    "Race": "Entity",
     "Level": 84,
     "Stats": {
       "St": 51,
@@ -8000,7 +8000,7 @@
   {
     "Id": "asura",
     "Name": "Asura",
-    "Race": "Sun",
+    "Race": "Deity",
     "Level": 85,
     "Stats": {
       "St": 75,
@@ -8039,7 +8039,7 @@
   {
     "Id": "chi-you",
     "Name": "Chi You",
-    "Race": "Tower",
+    "Race": "Tyrant",
     "Level": 86,
     "Stats": {
       "St": 69,
@@ -8078,7 +8078,7 @@
   {
     "Id": "metatron",
     "Name": "Metatron",
-    "Race": "Aeon",
+    "Race": "Seraph",
     "Level": 87,
     "Stats": {
       "St": 60,
@@ -8117,7 +8117,7 @@
   {
     "Id": "helel",
     "Name": "Helel",
-    "Race": "Star",
+    "Race": "Seraph",
     "Level": 88,
     "Stats": {
       "St": 63,
@@ -8156,7 +8156,7 @@
   {
     "Id": "satanael",
     "Name": "Satanael",
-    "Race": "Fool",
+    "Race": "Tyrant",
     "Level": 89,
     "Stats": {
       "St": 63,
@@ -8195,7 +8195,7 @@
   {
     "Id": "lucifer",
     "Name": "Lucifer",
-    "Race": "Judgement",
+    "Race": "Tyrant",
     "Level": 89,
     "Stats": {
       "St": 70,
@@ -8234,7 +8234,7 @@
   {
     "Id": "orpheus-telos",
     "Name": "Orpheus Telos",
-    "Race": "Fool",
+    "Race": "Yoma",
     "Level": 91,
     "Stats": {
       "St": 63,
@@ -8266,7 +8266,7 @@
   {
     "Id": "messiah",
     "Name": "Messiah",
-    "Race": "Judgement",
+    "Race": "Avatar",
     "Level": 91,
     "Stats": {
       "St": 65,

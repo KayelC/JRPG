@@ -149,7 +149,7 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// SMT III High Fidelity: Sabotages the team when Charmed.
+        /// Sabotages the team when Charmed.
         /// </summary>
         private (SkillData, List<Combatant>) DetermineConfusedAction(Combatant actor, List<Combatant> allies, List<Combatant> opponents)
         {

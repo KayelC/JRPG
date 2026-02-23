@@ -505,7 +505,7 @@
     },
     {
       "Skill": "Heat Riser",
-      "Effect": "Increases 1 ally's Attack, Defense and Agility by 25%",
+      "Effect": "Increases 1 ally's Physical Attack, Magic Attack, Defense and Agility by 25%",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -523,6 +523,15 @@
     },
     {
       "Skill": "Makakaja",
+      "Effect": "Increases 1 ally's Magic Attack by 25%*.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "6 SP",
+      "Category": "Enhance Skills"
+    },
+    {
+      "Skill": "Mamakakaja",
       "Effect": "Increases party's Magic Attack by 25%*.",
       "Power": NaN,
       "Accuracy": NaN,
@@ -532,7 +541,7 @@
     },
     {
       "Skill": "Tarunda",
-      "Effect": "Decreases 1 foe's Attack by 25%*.",
+      "Effect": "Decreases 1 foe's Physical Attack and Magic Attack by 25%*.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -541,7 +550,7 @@
     },
     {
       "Skill": "Matarukaja",
-      "Effect": "Increases party's Attack by 25%*.",
+      "Effect": "Increases party's Physical Attack by 25%*.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -550,7 +559,7 @@
     },
     {
       "Skill": "Matarunda",
-      "Effect": "Decreases all foe's Attack by 25%*.",
+      "Effect": "Decreases all foe's Physical Attack and Magic Attack by 25%*.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -640,7 +649,7 @@
     },
     {
       "Skill": "Debilitate",
-      "Effect": "Decreases 1 foe's Attack, Defense, and Hit/Evasion by 25%. ",
+      "Effect": "Decreases 1 foe's Physical Attack, Magic Attack, Defense, and Hit/Evasion by 25%. ",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,

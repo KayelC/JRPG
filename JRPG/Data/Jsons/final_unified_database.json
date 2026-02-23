@@ -1631,7 +1631,7 @@
         ],
         "LearnedSkills": {
             "51": "Tetrakarn",
-            "52": "Makakaja",
+            "52": "Mamakakaja",
             "53": "Tentarafoo",
             "54": "Mahamaon"
         }
@@ -3928,7 +3928,7 @@
             "Curse": "Null"
         },
         "BaseSkills": [
-            "Makakaja",
+            "Mamakakaja",
             "Rakukaja",
             "Makarakarn"
         ],
@@ -4544,7 +4544,7 @@
             "Mazandyne"
         ],
         "LearnedSkills": {
-            "78": "Makakaja",
+            "78": "Mamakakaja",
             "79": "Dekaja",
             "80": "Megidolaon",
             "81": "Evil Melody"
@@ -7858,7 +7858,7 @@
         "BaseSkills": [],
         "LearnedSkills": {
             "75": "Tentarafoo",
-            "76": "Makakaja",
+            "76": "Mamakakaja",
             "77": "Repel Elec",
             "78": "Vicious Strike"
         }
@@ -10591,7 +10591,7 @@
         "BaseSkills": [
             "Maragidyne",
             "Magarudyne",
-            "Makakaja"
+            "Mamakakaja"
         ],
         "LearnedSkills": {
             "91": "Absorb Wind",
@@ -11816,7 +11816,7 @@
             "Taunt"
         ],
         "LearnedSkills": {
-            "53": "Makakaja",
+            "53": "Mamakakaja",
             "54": "Mana Aid",
             "55": "Maragidyne"
         }

@@ -1,8 +1,8 @@
-using System;
-using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Entities;
-using JRPGPrototype.Data;
+using System;
+using System.Linq;
+using System.Text.RegularExpressions; // Added for skill parsing
 
 namespace JRPGPrototype.Logic.Battle
 {
@@ -14,9 +14,66 @@ namespace JRPGPrototype.Logic.Battle
     {
         private static readonly Random _rnd = new Random();
 
+        // --- NEW YIELD CALCULATIONS ---
+
         /// <summary>
-        /// SMT Square-root Damage Formula: 5.0 * sqrt(Power * (Atk/Def))
-        /// Implements Linear Stacking Multipliers: +4 = 2.0x, -4 = 0.5x.
+        /// Calculates EXP based on the Cubic progression curve: 1.5 * Level^3.
+        /// Adjusted for group encounters (approx 3-4 enemies per battle) and normalized stat bonus.
+        /// </summary>
+        public static int CalculateExpYield(Combatant enemy)
+        {
+            // DIVISOR: How many enemies of the same level required to gain 1 level?
+            // Set to 50.0 to target approx. 14-16 battles per level given 3-4 enemies per battle.
+            const double EnemiesPerLevel = 50.0;
+
+            // 1. Base Yield matching player's Cubic progression
+            double baseYield = (1.5 * Math.Pow(enemy.Level, 3)) / EnemiesPerLevel;
+
+            // 2. Normalized Stat Density Bonus
+            // Calculates how "strong" this enemy is compared to an average enemy of that level.
+            // Average SMT stats ~ (Level * 3) + 15
+            double expectedStats = (enemy.Level * 3) + 15;
+            double actualStats = enemy.GetStat(StatType.St) + enemy.GetStat(StatType.Ma) +
+                                 enemy.GetStat(StatType.Vi) + enemy.GetStat(StatType.Ag) +
+                                 enemy.GetStat(StatType.Lu);
+
+            // Bonus: 1% extra EXP for every point above the average curve. Capped at 2.0x total multiplier.
+            // This ensures Bosses/Beefy demons give more, but standard demons don't inflate.
+            double statMultiplier = 1.0 + Math.Max(0, (actualStats - expectedStats) / 100.0);
+            statMultiplier = Math.Min(2.0, statMultiplier);
+
+            double finalExpValue = baseYield * statMultiplier;
+
+            // Ensure the final integer value is at least 1 to prevent infinite loops at low levels
+            return Math.Max(1, (int)Math.Floor(finalExpValue));
+        }
+
+        /// <summary>
+        /// Calculates Macca based on a Quadratic curve (Level^2).
+        /// Scaled down to account for higher kill counts in group battles, and adjusted to hit 3-6M by Lv99.
+        /// </summary>
+        public static int CalculateMaccaYield(Combatant enemy)
+        {
+            // MACCA_MULTIPLIER: Adjusted to 0.25 to target 3-6 million Macca by Lv99.
+            const double MACCA_BASE_MULTIPLIER = 0.25;
+
+            // 1. Quadratic Base: MACCA_BASE_MULTIPLIER * Level^2
+            double baseMacca = MACCA_BASE_MULTIPLIER * Math.Pow(enemy.Level, 2);
+
+            // 2. Luck Bonus (High Lu enemies drop more cash)
+            // Luck contributes linearly to Macca yield
+            double luckBonus = enemy.GetStat(StatType.Lu) * 5;
+
+            // 3. Variance (+/- 10%)
+            double variance = 0.9 + (_rnd.NextDouble() * 0.2);
+
+            return (int)Math.Floor((baseMacca + luckBonus) * variance);
+        }
+
+        // --- SMT III Damage Formula: 5.0 * sqrt(Power * (Atk/Def)) ---
+        /// <summary>
+        /// Calculates the damage an attacker deals to a target.
+        /// Implements linear stacking multipliers: +4 = 2.0x, -4 = 0.5x.
         /// </summary>
         /// <param name="attacker">The entity performing the action.</param>
         /// <param name="target">The entity receiving the action.</param>
@@ -40,11 +97,13 @@ namespace JRPGPrototype.Logic.Battle
             // Determine if the attack is Physical or Magical
             bool isPhysical = (element == Element.Slash || element == Element.Strike || element == Element.Pierce);
 
-            // Select the correct Attack Stat
-            StatType atkStat = isPhysical ? StatType.St : StatType.Ma;
-            double atkPower = attacker.GetStat(atkStat);
+            // Select the correct Attack Stat (SMT Standard: Phys = St, Magic = Ma)
+            // UPDATED: Use new StatType enum names
+            StatType atkStatType = isPhysical ? StatType.St : StatType.Ma;
+            double atkPower = attacker.GetStat(atkStatType);
 
-            // Determine the Defensive Stat (Endurance + Armor Defense)
+            // Determine the Defensive Stat (Vi + Armor Defense)
+            // UPDATED: Use new StatType enum name
             double defPower = target.GetStat(StatType.Vi) + target.GetDefense();
 
             // Apply Stacking Multipliers (Kaja/Nda)
@@ -72,7 +131,7 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             // Calculate Base Ratio and Execute Formula
-            double ratio = atkPower / Math.Max(1.0, defPower);
+            double ratio = atkPower / Math.Max(1.0, defPower); // Ensure no division by zero or negative defense
 
             // Execute Square-root Formula
             double dmgBase = 5.0 * Math.Sqrt(skillPower * ratio);
@@ -111,7 +170,9 @@ namespace JRPGPrototype.Logic.Battle
                 // Return 0. The ActionProcessor will see the 'Repel' affinity 
                 // and then call CalculateReflectedDamage.
                 case Affinity.Absorb:
-                    return (int)Math.Floor(dmgBase) * -1;
+                    return (int)Math.Floor(dmgBase) * -1; // Absorb deals negative damage (heals)
+                default:
+                    break;
             }
 
             // Damage Variance (95% to 105%)
@@ -128,7 +189,6 @@ namespace JRPGPrototype.Logic.Battle
         {
             if (stacks == 0) return 1.0;
             if (stacks > 0) return 1.0 + (stacks * 0.25);
-
             // For negative stacks, we use 0.125 to reach 0.5 at -4 linearly
             return 1.0 + (stacks * 0.125);
         }
@@ -156,20 +216,22 @@ namespace JRPGPrototype.Logic.Battle
 
         public static bool CalculateInstantKill(Combatant attacker, Combatant target, string skillAccuracy)
         {
-            int baseAccuracy = 40;
+            int baseAccuracy = 40; // Default for instant kill skills
             if (!string.IsNullOrEmpty(skillAccuracy) && int.TryParse(skillAccuracy.Replace("%", ""), out int parsed))
-            
+            {
                 baseAccuracy = parsed;
+            }
 
             int lukDiff = attacker.GetStat(StatType.Lu) - target.GetStat(StatType.Lu);
             double multi = GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0));
 
+            // Clamp the final chance
             return _rnd.Next(0, 100) < Math.Clamp((baseAccuracy + lukDiff) * multi, 5, 95);
         }
 
         public static int CalculateReflectedDamage(Combatant originalAttacker, int skillPower, Element element)
         {
-            // Reflected damage is calculated against the original attacker's 
+            // Reflected damage is calculated against the original attacker's
             // stats and affinities. 
             // We pass false for isCritical because reflected hits cannot crit the attacker.
             return CalculateDamage(originalAttacker, originalAttacker, skillPower, element, out _);
@@ -192,11 +254,11 @@ namespace JRPGPrototype.Logic.Battle
             if (skills.Contains("Apt Pupil")) multi *= 2.0;
             if (skills.Contains("Rebellion")) multi *= 1.2;
 
+            // Clamp the final chance
             return (int)Math.Clamp(chance * multi, 2, 40);
         }
 
         /// <summary>
-        /// SMT III High Fidelity Affinity Resolution.
         /// Prioritizes Shields > Breaks > Base Persona Affinities.
         /// </summary>
         public static Affinity GetEffectiveAffinity(Combatant target, Element element)
@@ -209,17 +271,24 @@ namespace JRPGPrototype.Logic.Battle
             // 2. Check for Elemental Breaks (Reduces immunity to Normal)
             if (target.BrokenAffinities.ContainsKey(element)) return Affinity.Normal;
 
+            // 3. Almighty and None elements cannot be resisted/nullified
             if (element == Element.Almighty || element == Element.None) return Affinity.Normal;
 
+            // 4. Base Persona/Demon Affinity (from PersonaData)
             Affinity baseAff = target.ActivePersona?.GetAffinity(element) ?? Affinity.Normal;
 
+            // 5. Guarding (reduces Weakness to Normal)
             if (target.IsGuarding && baseAff == Affinity.Weak) return Affinity.Normal;
 
+            // 6. Rigid Body (Freeze/Shocked) negates physical resistances but keeps weaknesses.
+            // SMT III Rule: If rigid, physical Null/Resist/Repel becomes Normal, Absorb becomes Normal.
+            // Weakness remains.
             if (target.IsRigidBody && isPhysical)
             {
-                // Rigid Body (Freeze/Shock) negates physical resistances but keeps weaknesses.
-                if (baseAff == Affinity.Resist || baseAff == Affinity.Null || baseAff == Affinity.Repel)
+                if (baseAff == Affinity.Resist || baseAff == Affinity.Null || baseAff == Affinity.Repel || baseAff == Affinity.Absorb)
+                {
                     return Affinity.Normal;
+                }
             }
 
             return baseAff;
@@ -228,46 +297,55 @@ namespace JRPGPrototype.Logic.Battle
         /// <summary>
         /// SMT III Initiative Roll: Weighted Agility variance.
         /// </summary>
-        public static bool RollInitiative(double playerAvgAgi, double enemyAvgAgi)
+        public static bool RollInitiative(double playerAvgAg, double enemyAvgAg)
         {
-            double pRoll = playerAvgAgi * (0.9 + _rnd.NextDouble() * 0.2);
-            double eRoll = enemyAvgAgi * (0.9 + _rnd.NextDouble() * 0.2);
+            // Rolls are 90%-110% of average agility
+            double pRoll = playerAvgAg * (0.9 + _rnd.NextDouble() * 0.2);
+            double eRoll = enemyAvgAg * (0.9 + _rnd.NextDouble() * 0.2);
+
             return pRoll >= eRoll;
         }
 
         /// <summary>
-        /// SMT III High-Fidelity Hit/Evasion check.
-        /// Formula: SkillAccuracy + (AttackerAGI - TargetAGI) * 2 + (AttackerLUK - TargetLUK)
+        /// Hit/Evasion check.
+        /// Formula: SkillAccuracy + (AttackerAg - TargetAg) * 2 + (AttackerLu - TargetLu)
         /// </summary>
         public static bool CheckHit(Combatant attacker, Combatant target, Element element, string skillAccuracy)
         {
+            // If target is Rigid (Frozen/Shocked), all attacks hit
             if (target.IsRigidBody) return true;
 
-            // Data-Driven Accuracy: Use value from JSON.
-            // MODIFIED: Basic attacks (where skillAccuracy is empty) now use 90%.
-            int baseAccuracy = 90;
+            // 1. Data-Driven Accuracy: Use value from JSON.
+            int baseAccuracy = 90; // Default for basic attacks if skillAccuracy is empty
             if (!string.IsNullOrEmpty(skillAccuracy) && int.TryParse(skillAccuracy.Replace("%", ""), out int parsed))
+            {
                 baseAccuracy = parsed;
+            }
 
-            // Passive Accuracy/Evasion skills
+            // 2. Passive Accuracy/Evasion skills (Vidyaraja's Blessing, Dodge/Evade)
             double hitMult = 1.0;
             var attackerSkills = attacker.GetConsolidatedSkills();
-            if (attackerSkills.Contains("Vidyaraja's Blessing")) hitMult *= 1.15;
+            if (attackerSkills.Contains("Vidyaraja's Blessing")) hitMult *= 1.15; // 15% hit bonus
 
             double evadeMult = 1.0;
             var targetSkills = target.GetConsolidatedSkills();
             string elName = element.ToString();
-            if (targetSkills.Any(s => s.Contains(elName) && s.Contains("Dodge"))) evadeMult *= 0.85;
-            if (targetSkills.Any(s => s.Contains(elName) && s.Contains("Evade"))) evadeMult *= 0.60;
-                
-            // Agility Influence: (AGI Diff * 2) 
-            int attackerAgi = attacker.GetStat(StatType.Ag);
-            int targetAgi = target.GetStat(StatType.Ag);
+            // Dodge/Evade apply to specific element types
+            if (targetSkills.Any(s => s.Contains("Dodge") && s.Contains(elName))) evadeMult *= 0.85; // 15% evade bonus
+            if (targetSkills.Any(s => s.Contains("Evade") && s.Contains(elName))) evadeMult *= 0.60; // 40% evade bonus
 
-            double atkValue = (attackerAgi * GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0))) * hitMult;
-            double defValue = (targetAgi * GetStatMultiplier(target.Buffs.GetValueOrDefault("Agility", 0))) * evadeMult;
+            // 3. Agility & Luck Influence
+            // UPDATED: Use new StatType enum names
+            int attackerAg = attacker.GetStat(StatType.Ag);
+            int targetAg = target.GetStat(StatType.Ag);
+            int attackerLu = attacker.GetStat(StatType.Lu);
+            int targetLu = target.GetStat(StatType.Lu);
 
-            double finalChance = baseAccuracy + ((atkValue - defValue) * 2) + (attacker.GetStat(StatType.Lu) - target.GetStat(StatType.Lu));
+            double atkValue = (attackerAg * GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0))) * hitMult;
+            double defValue = (targetAg * GetStatMultiplier(target.Buffs.GetValueOrDefault("Agility", 0))) * evadeMult;
+
+            // Final Chance Calculation: Clamped between 5% and 99%
+            double finalChance = baseAccuracy + ((atkValue - defValue) * 2) + (attackerLu - targetLu);
 
             return _rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 99);
         }

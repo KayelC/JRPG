@@ -1,0 +1,21 @@
+# IDE-specific files
+.vs/
+.idea/
+
+# Visual Studio user specific files
+*.suo
+*.user
+*.userosscache
+
+# Visual Studio Code specific files
+.vscode/
+
+# Build artifacts
+bin/
+obj/
+
+# Package directories
+packages/
+
+# Other common generated files
+*.log

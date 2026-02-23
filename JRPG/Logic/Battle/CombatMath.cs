@@ -40,7 +40,7 @@ namespace JRPGPrototype.Logic.Battle
             // Determine if the attack is Physical or Magical
             bool isPhysical = (element == Element.Slash || element == Element.Strike || element == Element.Pierce);
 
-            // Select the correct Attack Stat (SMT Standard: Phys = STR, Magic = MAG)
+            // Select the correct Attack Stat
             StatType atkStat = isPhysical ? StatType.St : StatType.Ma;
             double atkPower = attacker.GetStat(atkStat);
 
@@ -161,7 +161,7 @@ namespace JRPGPrototype.Logic.Battle
             
                 baseAccuracy = parsed;
 
-            int lukDiff = attacker.GetStat(StatType.LUK) - target.GetStat(StatType.LUK);
+            int lukDiff = attacker.GetStat(StatType.Lu) - target.GetStat(StatType.Lu);
             double multi = GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0));
 
             return _rnd.Next(0, 100) < Math.Clamp((baseAccuracy + lukDiff) * multi, 5, 95);
@@ -180,8 +180,8 @@ namespace JRPGPrototype.Logic.Battle
         /// </summary>
         public static int CalculateCritChance(Combatant attacker, Combatant target)
         {
-            int attackerLuck = attacker.GetStat(StatType.LUK);
-            int targetLuck = target.GetStat(StatType.LUK);
+            int attackerLuck = attacker.GetStat(StatType.Lu);
+            int targetLuck = target.GetStat(StatType.Lu);
             int chance = ((attackerLuck - targetLuck) / 2) + 5;
 
             // Apply Agility/Luck buff influence on crit
@@ -259,15 +259,15 @@ namespace JRPGPrototype.Logic.Battle
             string elName = element.ToString();
             if (targetSkills.Any(s => s.Contains(elName) && s.Contains("Dodge"))) evadeMult *= 0.85;
             if (targetSkills.Any(s => s.Contains(elName) && s.Contains("Evade"))) evadeMult *= 0.60;
-
+                
             // Agility Influence: (AGI Diff * 2) 
-            int attackerAgi = attacker.GetStat(StatType.AGI);
-            int targetAgi = target.GetStat(StatType.AGI);
+            int attackerAgi = attacker.GetStat(StatType.Ag);
+            int targetAgi = target.GetStat(StatType.Ag);
 
             double atkValue = (attackerAgi * GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0))) * hitMult;
             double defValue = (targetAgi * GetStatMultiplier(target.Buffs.GetValueOrDefault("Agility", 0))) * evadeMult;
 
-            double finalChance = baseAccuracy + ((atkValue - defValue) * 2) + (attacker.GetStat(StatType.LUK) - target.GetStat(StatType.LUK));
+            double finalChance = baseAccuracy + ((atkValue - defValue) * 2) + (attacker.GetStat(StatType.Lu) - target.GetStat(StatType.Lu));
 
             return _rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 99);
         }

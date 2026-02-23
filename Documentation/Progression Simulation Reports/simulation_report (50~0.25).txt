@@ -1,0 +1,40 @@
+MONTE CARLO SIMULATION REPORT
+=============================
+
+Configuration:
+ - Simulation Runs: 1000
+ - EXP Divisor: 50.0
+ - Macca Multiplier: 0.25
+
+=== PACING ANALYSIS (Battles per Level) ===
+Level      | Avg Battles    
+------------------------------
+Lv 1       | 1.0            
+Lv 5       | 15.4           
+Lv 10      | 16.3           
+Lv 20      | 16.6           
+Lv 30      | 16.4           
+Lv 40      | 16.4           
+Lv 50      | 16.5           
+Lv 60      | 16.2           
+Lv 70      | 16.1           
+Lv 80      | 16.0           
+Lv 90      | 15.9           
+Lv 98      | 15.8           
+
+=== ECONOMY ANALYSIS (Accumulated Wealth) ===
+Level      | Total Macca    
+------------------------------
+Lv 1       | 40             
+Lv 5       | 3,338          
+Lv 10      | 15,318         
+Lv 20      | 73,036         
+Lv 30      | 195,467        
+Lv 40      | 405,883        
+Lv 50      | 727,335        
+Lv 60      | 1,182,165      
+Lv 70      | 1,791,975      
+Lv 80      | 2,578,302      
+Lv 90      | 3,562,265      
+Lv 98      | 4,505,505      
+------------------------------

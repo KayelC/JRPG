@@ -10,10 +10,73 @@
       "Category": "Ailment Skills"
     },
     {
+      "Skill": "Eternal Rest",
+      "Effect": "Instantly kills all foes who are asleep.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "16 SP",
+      "Category": "Ailment Skills"
+    },
+    {
+      "Skill": "Shibaboo",
+      "Effect": "Chance of Stunning 1 foe. (40% chance)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "5 SP",
+      "Category": "Ailment Skills"
+    },
+    {
+      "Skill": "Shibaboo",
+      "Effect": "Chance of Binding 1 foe. (65% chance)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "5 SP",
+      "Category": "Ailment Skills"
+    },
+    {
+      "Skill": "Binding Cry",
+      "Effect": "Chance of Binding all foes. (20% chance)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "14 SP",
+      "Category": "Ailment Skills"
+    },
+    {
+      "Skill": "Lullaby",
+      "Effect": "Instills Sleep. (70% chance)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "6 SP",
+      "Category": "Ailment Skills"
+    },
+    {
+      "Skill": "Dormina",
+      "Effect": "Instills Sleep on all foes. (30% chance)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "9 SP",
+      "Category": "Ailment Skills"
+    },
+    {
       "Skill": "Preach",
       "Effect": "Instills Sleep, Panic or Charm on all foes. (40% chance) (Daisoujou Exclusive)",
       "Power": "40",
       "Accuracy": "80%",
+      "Critical": NaN,
+      "Cost": "15 SP",
+      "Category": "Ailment Skills"
+    },
+    {
+      "Skill": "Preach",
+      "Effect": "Instills Charm on all foes. (50% chance) (Mother Harlot Exclusive)",
+      "Power": "100",
+      "Accuracy": "90%",
       "Critical": NaN,
       "Cost": "15 SP",
       "Category": "Ailment Skills"
@@ -165,12 +228,57 @@
   ],
   "Almighty Skills": [
     {
+      "Skill": "Pestilence",
+      "Effect": "Deals light Almighty damage to all foes, instant kill if foes are Poisoned. (Pale Rider Exclusive)",
+      "Power": "50",
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "26 SP",
+      "Category": "Almighty Skills"
+    },
+    {
+      "Skill": "Sacrifice",
+      "Effect": "Deals Almighty damage to all foes proportional to half of the user's current HP.",
+      "Power": NaN,
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "100% HP",
+      "Category": "Almighty Skills"
+    },
+    {
+      "Skill": "Kamikaze",
+      "Effect": "Deals Almighty damage to 1 foe proportional to the user's current HP.",
+      "Power": NaN,
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "100% HP",
+      "Category": "Almighty Skills"
+    },
+    {
+      "Skill": "Deathtouch",
+      "Effect": "Drains HP from one foe.",
+      "Power": "3",
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "5 SP",
+      "Category": "Almighty Skills"
+    },
+    {
       "Skill": "Life Drain",
       "Effect": "Drains HP from one foe.",
       "Power": "15",
       "Accuracy": "100%",
       "Critical": NaN,
       "Cost": "5 SP",
+      "Category": "Almighty Skills"
+    },
+    {
+      "Skill": "Beast Roar",
+      "Effect": "Drains HP from all foes. (Mother Harlot Exclusive)",
+      "Power": "40",
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "37 SP",
       "Category": "Almighty Skills"
     },
     {
@@ -198,6 +306,15 @@
       "Accuracy": "100%",
       "Critical": NaN,
       "Cost": "10 SP",
+      "Category": "Almighty Skills"
+    },
+    {
+      "Skill": "Evil Melody",
+      "Effect": "Instant kill one foe with lowest current HP %. (Trumpeter Exclusive)",
+      "Power": NaN,
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "100 SP",
       "Category": "Almighty Skills"
     },
     {
@@ -419,6 +536,15 @@
       "Category": "Darkness Skills"
     },
     {
+      "Skill": "Soul Divide",
+      "Effect": "Reduces 1 foe's HP by 50%, and 30% chance of instilling Fear. (Black Rider Exclusive)",
+      "Power": NaN,
+      "Accuracy": "100%",
+      "Critical": NaN,
+      "Cost": "50 SP",
+      "Category": "Darkness Skills"
+    },
+    {
       "Skill": "Magatsu Mandala",
       "Effect": "Deals Dark damage to all enemies (30% chance of inflicting Fear on hit).",
       "Power": "300",
@@ -603,12 +729,30 @@
       "Category": "Enhance Skills"
     },
     {
+      "Skill": "Taunt",
+      "Effect": "Decreases all foe's Defense by 25%* and chance of inflicting Rage (60%).",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "20 SP",
+      "Category": "Enhance Skills"
+    },
+    {
       "Skill": "Sukukaja",
       "Effect": "Increases 1 ally's Hit/Evasion rate by 10%*.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
       "Cost": "6 SP",
+      "Category": "Enhance Skills"
+    },
+    {
+      "Skill": "Red Capote",
+      "Effect": "Increases casters Hit/Evasion rate by 40%*. (Matador Exclusive)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "24 SP",
       "Category": "Enhance Skills"
     },
     {
@@ -636,6 +780,15 @@
       "Accuracy": NaN,
       "Critical": NaN,
       "Cost": "12 SP",
+      "Category": "Enhance Skills"
+    },
+    {
+      "Skill": "War Cry",
+      "Effect": "Decreases all foe's Hit/Evasion rate by 20%*.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "18 SP",
       "Category": "Enhance Skills"
     },
     {
@@ -767,6 +920,15 @@
   ],
   "Fire Skills": [
     {
+      "Skill": "Hell Burner",
+      "Effect": "Deals medium Fire damage to all foes. (Hell Biker Exclusive)",
+      "Power": "120",
+      "Accuracy": "95%",
+      "Critical": NaN,
+      "Cost": "8 SP",
+      "Category": "Fire Skills"
+    },
+    {
       "Skill": "Agi",
       "Effect": "Deals light Fire damage to one foe.",
       "Power": "50",
@@ -827,6 +989,15 @@
       "Accuracy": "99%",
       "Critical": NaN,
       "Cost": "30 SP",
+      "Category": "Fire Skills"
+    },
+    {
+      "Skill": "Fire of Sinai",
+      "Effect": "Deals severe Fire damage to all foes. Metatron exclusive.",
+      "Power": "800",
+      "Accuracy": "99%",
+      "Critical": NaN,
+      "Cost": "50 SP",
       "Category": "Fire Skills"
     },
     {
@@ -961,11 +1132,20 @@
     },
     {
       "Skill": "Samsara",
-      "Effect": "Light: instant kill, all foes (very high). (45% chance) Daisoujou exclusive.",
+      "Effect": "Light: instant kill, all foes (very high). (45% chance) (Daisoujou exclusive)",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
       "Cost": "40 SP",
+      "Category": "Light Skills"
+    },
+    {
+      "Skill": "God's Bow",
+      "Effect": "Light: instant kill, 1 foe. (White Rider exclusive)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "100 SP",
       "Category": "Light Skills"
     },
     {
@@ -1061,12 +1241,12 @@
   ],
   "Navigator Skills": [
     {
-      "Skill": "Full Analysis",
+      "Skill": "Analyze",
       "Effect": "Displays detailed enemy information (stats, resistances, and skills).",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
-      "Cost": NaN,
+      "Cost": "2 SP",
       "Category": "Navigator Skills"
     },
     {
@@ -1114,11 +1294,47 @@
       "Cost": NaN,
       "Category": "Navigator Skills"
     }
+    {
+      "Skill": "Trafuri",
+      "Effect": "Guaranteed escape from battle. (100% chance) (random encounters only)",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Navigator Skills"
+    }
   ],
   "Passive Skills": [
     {
       "Skill": "Vidyaraja's Blessing",
       "Effect": "Increases Evasion against Slash, Strike, and Pierce skills by 1.15x.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Might",
+      "Effect": "12% chance for normal attack to crit.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Bright Might",
+      "Effect": "Normal attacks always crit during full Kagutsuchi",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Dark Might",
+      "Effect": "Normal attacks always crit during new Kagutsuchi",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -1351,6 +1567,24 @@
       "Category": "Passive Skills"
     },
     {
+      "Skill": "Drain Attack",
+      "Effect": "Normal attack absorbs HP equal to damage dealt.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Attack Fire",
+      "Effect": "Normal attack deals Fire instead of Strike.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
       "Skill": "Insta-Heal",
       "Effect": "Recovers from ailments in 1 turn.",
       "Power": NaN,
@@ -1371,6 +1605,60 @@
     {
       "Skill": "Life Aid",
       "Effect": "Recover 8% of max HP and SP after winning a battle.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Resist Mind",
+      "Effect": "Reduces chance of being inflicted by Mind ailments. (50% chance to resist).",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Resist Curse",
+      "Effect": "Reduces chance of being inflicted by Curse ailments. (50% chance to resist).",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Resist Nerve",
+      "Effect": "Reduces chance of being inflicted by Nerve ailments. (50% chance to resist).",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Null Mind",
+      "Effect": "Nullifies Mind ailments.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Null Curse",
+      "Effect": "Nullifies Curse ailments.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": NaN,
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Null Nerve",
+      "Effect": "Nullifies Nerve ailments.",
       "Power": NaN,
       "Accuracy": NaN,
       "Critical": NaN,
@@ -2458,6 +2746,42 @@
       "Category": "Passive Skills"
     },
     {
+      "Skill": "Liftoma",
+      "Effect": "Negates damage floors until new Kagutsuchi.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "12 SP",
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Lightoma",
+      "Effect": "Lights up dark areas until new Kagutsuchi.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "10 SP",
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Estoma",
+      "Effect": "Lowers encounter rate until new Kagutsuchi.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "10 SP",
+      "Category": "Passive Skills"
+    },
+    {
+      "Skill": "Riberama",
+      "Effect": "Increases encounter rate until new Kagutsuchi.  ",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "10 SP",
+      "Category": "Passive Skills"
+    },
+    {
       "Skill": "Weapons Master",
       "Effect": "1.25x damage dealt with weapons. (Basic Attack)",
       "Power": NaN,
@@ -2538,6 +2862,15 @@
       "Accuracy": "85%",
       "Critical": "1%",
       "Cost": "9% HP",
+      "Category": "Pierce Skills"
+    },
+    {
+      "Skill": "Feral Claw",
+      "Effect": "Deals light Pierce damage to one foe.",
+      "Power": "34",
+      "Accuracy": "75%",
+      "Critical": "1%",
+      "Cost": "6% HP",
       "Category": "Pierce Skills"
     },
     {
@@ -2694,6 +3027,15 @@
       "Accuracy": NaN,
       "Critical": NaN,
       "Cost": "4 SP",
+      "Category": "Recovery Skills"
+    },
+    {
+      "Skill": "Makatora",
+      "Effect": "Slightly (10) restores 1 ally's SP.",
+      "Power": NaN,
+      "Accuracy": NaN,
+      "Critical": NaN,
+      "Cost": "10 SP",
       "Category": "Recovery Skills"
     },
     {
@@ -2858,6 +3200,15 @@
       "Accuracy": "90%",
       "Critical": "30%",
       "Cost": "24% HP",
+      "Category": "Slash Skills"
+    },
+    {
+      "Skill": "Terror Blade",
+      "Effect": "Deals heavy Slash damage to all foes. 30% chance of causing Panic. ",
+      "Power": "300",
+      "Accuracy": "88%",
+      "Critical": NaN,
+      "Cost": "10 SP",
       "Category": "Slash Skills"
     },
     {
@@ -3153,6 +3504,15 @@
   ],
   "Strike Skills": [
     {
+      "Skill": "Hell Spin",
+      "Effect": "Deals heavy Strike damage to all foes. (Hell Biker Exclusive)",
+      "Power": "150",
+      "Accuracy": "90%",
+      "Critical": "5%",
+      "Cost": "25% HP",
+      "Category": "Strike Skills"
+    },
+    {
       "Skill": "Bash",
       "Effect": "Deals light Strike damage to one foe.",
       "Power": "30",
@@ -3271,6 +3631,15 @@
     }
   ],
   "Wind Skills": [
+    {
+      "Skill": "Hell Exhaust",
+      "Effect": "Deals heavy Wind damage to all foes. (Hell Biker Exclusive)",
+      "Power": "180",
+      "Accuracy": "95%",
+      "Critical": NaN,
+      "Cost": "15 SP",
+      "Category": "Wind Skills"
+    },
     {
       "Skill": "Garu",
       "Effect": "Deals light Wind damage to one foe.",

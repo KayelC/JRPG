@@ -2512,7 +2512,7 @@
         ],
         "LearnedSkills": {
             "20": "Stun Gaze",
-            "21": "Lunge",
+            "21": "Bash",
             "22": "Agilao",
             "23": "Resist Ice"
         }
@@ -7107,7 +7107,7 @@
             "Focus",
             "War Cry",
             "Pulinpa",
-            "Lunge"
+            "Bash"
         ],
         "LearnedSkills": {
             "64": "Might",

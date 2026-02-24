@@ -13,12 +13,12 @@ namespace JRPGPrototype.Logic.Battle
     /// </summary>
     public enum TurnStartResult
     {
-        CanAct,          // Normal turn
-        Skip,            // Turn lost (Freeze, Shock)
-        ForcedPhysical,  // Must perform a basic attack on a random enemy (Rage)
-        ForcedConfusion, // Must perform a random skill on an ally or heal an enemy (Charm)
-        FleeBattle,      // Protagonist flees (Battle Ends via Escape)
-        ReturnToCOMP     // Demon flees (Combatant returns to stock)
+        CanAct,         // Normal turn
+        Skip,           // Turn lost (Freeze, Shock)
+        ForcedPhysical, // Must perform a basic attack on a random enemy (Rage)
+        ForcedConfusion,// Must perform a random skill on an ally or heal an enemy (Charm)
+        FleeBattle,     // Protagonist flees (Battle Ends via Escape)
+        ReturnToCOMP    // Demon flees (Combatant returns to stock)
     }
 
     /// <summary>
@@ -43,6 +43,8 @@ namespace JRPGPrototype.Logic.Battle
             var targetPassives = target.GetConsolidatedSkills();
             if (targetPassives.Contains("Unshaken Will"))
             {
+                // In a full implementation, we'd check if the ailment is mental. 
+                // For now, assuming Unshaken Will blocks most status effects as a safeguard.
                 return false;
             }
 
@@ -62,7 +64,7 @@ namespace JRPGPrototype.Logic.Battle
             Match match = Regex.Match(skillEffect, @"(\d+)%");
             if (match.Success) baseChance = int.Parse(match.Groups[1].Value);
 
-            int finalChance = baseChance + (attacker.GetStat(StatType.LUK) - target.GetStat(StatType.LUK));
+            int finalChance = baseChance + (attacker.GetStat(StatType.Lu) - target.GetStat(StatType.Lu));
 
             if (_rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 95))
             {
@@ -217,7 +219,7 @@ namespace JRPGPrototype.Logic.Battle
 
                 actor.CurrentHP -= damage;
                 // Poison cannot kill a combatant, it leaves them at 1 HP.
-                // if (actor.CurrentHP < 1) actor.CurrentHP = 1; 
+                // if (actor.CurrentHP < 1) actor.CurrentHP = 1;
                 // I decided to make Poison Lethal by commenting it out, I can always add it back by Uncommenting if needed.
 
                 logs.Add($"{actor.Name} is hurt by {ailment.Name}! ({damage} DMG)");
@@ -234,7 +236,7 @@ namespace JRPGPrototype.Logic.Battle
             // Natural Recovery (Luck Roll)
             else if (ailment.RemovalTriggers.Contains("NaturalRoll"))
             {
-                int recoveryChance = 20 + (actor.GetStat(StatType.LUK) / 2);
+                int recoveryChance = 20 + (actor.GetStat(StatType.Lu) / 2);
                 if (_rnd.Next(0, 100) < recoveryChance)
                 {
                     actor.RemoveAilment();

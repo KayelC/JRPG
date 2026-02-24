@@ -10,7 +10,7 @@ namespace JRPGPrototype.Logic.Battle
 {
     /// <summary>
     /// The Root Orchestrator of the Battle Sub-System.
-    /// Manages the high-level flow of the SMT III Press Turn battle loop.
+    /// Manages the high-level flow of the Press Turn battle loop.
     /// Delegates specific logic to the Math, Turn, Status, AI, and UI sub-modules.
     /// </summary>
     public class BattleConductor
@@ -78,8 +78,9 @@ namespace JRPGPrototype.Logic.Battle
             _io.Wait(1200);
 
             // 1. Initiative Roll (Weighted Agility)
-            double pAvgAgi = _party.GetAliveMembers().Any() ? _party.GetAliveMembers().Average(c => c.GetStat(StatType.AGI)) : 0;
-            double eAvgAgi = _enemies.Any(e => !e.IsDead) ? _enemies.Where(e => !e.IsDead).Average(c => c.GetStat(StatType.AGI)) : 0;
+            double pAvgAgi = _party.GetAliveMembers().Any() ? _party.GetAliveMembers().Average(c => c.GetStat(StatType.Ag)) : 0;
+            double eAvgAgi = _enemies.Any(e => !e.IsDead) ? _enemies.Where(e => !e.IsDead).Average(c => c.GetStat(StatType.Ag)) : 0;
+
             bool isPlayerTurn = CombatMath.RollInitiative(pAvgAgi, eAvgAgi);
 
             _io.WriteLine(isPlayerTurn ? "Player Party attacks first!" : "Enemy Party attacks first!",
@@ -93,7 +94,7 @@ namespace JRPGPrototype.Logic.Battle
                 foreach (var actor in allies)
                 {
                     _statusRegistry.ProcessInitialPassives(actor, allies);
-            }
+                }
             }
             else
             {
@@ -102,7 +103,7 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     // For Enemy Passives, allies = entire enemy side
                     _statusRegistry.ProcessInitialPassives(actor, enemies);
-            }
+                }
             }
             // Show HUD update for turn 1 buffs
             _ui.ForceRefreshHUD();
@@ -390,7 +391,7 @@ namespace JRPGPrototype.Logic.Battle
                     {
                         // Reprompt if the item had no effect
                         ExecuteAction(actor, isPlayerSide, turnState);
-                }
+                    }
                 }
                 else if (skill == null)
                 {
@@ -424,20 +425,23 @@ namespace JRPGPrototype.Logic.Battle
                 case NegotiationResult.Success:
                     _io.WriteLine($"{target.Name} joined your party!");
 
-                    // Look up the EnemyData to find the correct PersonaId for instantiation.
-                    if (Database.Enemies.TryGetValue(target.SourceId, out var enemyData))
-                    {
-                        var newDemon = Combatant.CreateDemon(enemyData.PersonaId, target.Level);
-                        actor.DemonStock.Add(newDemon);
-                        _sessionRecruitedIds.Add(target.SourceId); // Track for this battle
-                        _enemies.Remove(target);
-                        _turnEngine.ConsumeAction(HitType.Normal, false);
-                    }
+                    // Use the Factory to create the demon to ensure correct stats
+                    // We can use the target.SourceId directly as CreateEnemy handles ID resolution
+                    var newDemon = Combatant.CreateEnemy(target.SourceId);
+
+                    // Add to player's stock
+                    actor.DemonStock.Add(newDemon);
+                    _sessionRecruitedIds.Add(target.SourceId); // Track for this battle
+
+                    _enemies.Remove(target);
+                    _turnEngine.ConsumeAction(HitType.Normal, false);
                     break;
+
                 case NegotiationResult.Failure:
                     _io.WriteLine("Negotiation failed! Your turn ends.");
                     _turnEngine.TerminatePhase();
                     break;
+
                 case NegotiationResult.Trick:
                 case NegotiationResult.Flee:
                 case NegotiationResult.FamiliarFlee:
@@ -453,8 +457,9 @@ namespace JRPGPrototype.Logic.Battle
             string tactic = _ui.GetTacticsChoice(_isBossBattle, actor.Class == ClassType.Operator);
             if (tactic == "Escape")
             {
-                int pAgi = actor.GetStat(StatType.AGI);
-                double eAvgAgi = _enemies.Any() ? _enemies.Average(e => e.GetStat(StatType.AGI)) : 1;
+                int pAgi = actor.GetStat(StatType.Ag);
+                double eAvgAgi = _enemies.Any() ? _enemies.Average(e => e.GetStat(StatType.Ag)) : 1;
+
                 if (new Random().Next(0, 100) < Math.Clamp(10.0 + 40.0 * (pAgi / eAvgAgi), 5.0, 95.0))
                 {
                     Escaped = true;
@@ -506,8 +511,10 @@ namespace JRPGPrototype.Logic.Battle
             if (PlayerWon)
             {
                 _io.WriteLine("\nVICTORY!", ConsoleColor.Green);
-                int totalExp = _enemies.Sum(e => Database.Enemies.TryGetValue(e.SourceId, out var d) ? d.ExpYield : 0);
-                int totalMacca = _enemies.Sum(e => Database.Enemies.TryGetValue(e.SourceId, out var d) ? d.MaccaYield : 0);
+
+                // Use CombatMath for dynamic reward calculation
+                int totalExp = _enemies.Sum(e => CombatMath.CalculateExpYield(e));
+                int totalMacca = _enemies.Sum(e => CombatMath.CalculateMaccaYield(e));
 
                 _io.WriteLine($"Gained {totalExp} EXP and {totalMacca} Macca.");
 

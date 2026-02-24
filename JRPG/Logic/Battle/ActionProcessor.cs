@@ -357,8 +357,7 @@ namespace JRPGPrototype.Logic.Battle
                 Element el = ElementHelper.FromCategory(skillName);
                 if (el != Element.Almighty)
                 {
-                    if (target.BrokenAffinities.ContainsKey(el))
-                        target.BrokenAffinities[el] = 3;
+                    if (target.BrokenAffinities.ContainsKey(el)) target.BrokenAffinities[el] = 3;
                     else target.BrokenAffinities.Add(el, 3);
                     _io.WriteLine($"{target.Name}'s {el} resistance was broken!");
                 }
@@ -427,7 +426,7 @@ namespace JRPGPrototype.Logic.Battle
             if (c.Class == ClassType.Demon || c.Class == ClassType.Avatar)
             {
                 // (Lv + STR) * PWR / 15
-                double demonPwr = (c.Level + c.GetStat(StatType.STR)) * pwrValue / 15.0;
+                double demonPwr = (c.Level + c.GetStat(StatType.St)) * pwrValue / 15.0;
                 return (int)Math.Max(1, Math.Floor(demonPwr));
             }
 
@@ -435,7 +434,7 @@ namespace JRPGPrototype.Logic.Battle
             if (c.EquippedWeapon != null) return c.EquippedWeapon.Power;
 
             // Case 3: Humans without weapons (Unarmed)
-            return c.Level + (c.GetStat(StatType.STR) * 2);
+            return c.Level + (c.GetStat(StatType.St) * 2);
         }
 
         private bool IsOffensive(SkillData skill)

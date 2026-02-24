@@ -39,7 +39,7 @@ namespace JRPGPrototype.Logic.Field
 
         /// <summary>
         /// Logic for moving to a higher floor.
-        /// Feature: Automatically updates the MaxFloorReached flag via DungeonManager.
+        /// Automatically updates the MaxFloorReached flag via DungeonManager.
         /// </summary>
         public DungeonFloorResult PerformAscension()
         {
@@ -118,21 +118,18 @@ namespace JRPGPrototype.Logic.Field
         #region Encounter Preparation
 
         /// <summary>
-        /// Translates raw Enemy IDs into a hydrated list of Combatants.
-        /// Feature: SMT Grouping Logic. If multiple enemies of the same species appear,
-        /// they are assigned alphabetical suffixes (e.g., Pixie A, Pixie B).
+        /// Translates raw Enemy IDs into a hydrated list of Combatants using the new factory.
+        /// Feature: SMT Grouping Logic (Pixie A, Pixie B).
         /// </summary>
         public List<Combatant> PrepareEncounter(List<string> enemyIds)
         {
             List<Combatant> enemies = new List<Combatant>();
 
-            // 1. Hydrate the combatants from the database
+            // 1. Hydrate the combatants using the new factory method
             foreach (string id in enemyIds)
             {
-                if (Database.Enemies.TryGetValue(id, out var eData))
-                {
-                    enemies.Add(Combatant.CreateFromData(eData));
-                }
+                // Updated to use the programmatic factory
+                enemies.Add(Combatant.CreateEnemy(id));
             }
 
             // 2. High-Fidelity Naming Logic (Grouping)

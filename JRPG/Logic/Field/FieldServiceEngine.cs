@@ -79,7 +79,6 @@ namespace JRPGPrototype.Logic.Field
         /// Calculates the Macca cost to fully restore a combatant.
         /// Logic: 1 Macca per 1 HP, 5 Macca per 1 SP.
         /// </summary>
-
         public int CalculateRestorationCost(Combatant patient)
         {
             int hpMissing = patient.MaxHP - patient.CurrentHP;
@@ -263,10 +262,10 @@ namespace JRPGPrototype.Logic.Field
             if (player.StatPoints <= 0) return;
 
             // Hard Cap Check
-            if (player.CharacterStats[type] >= 40)
+            if (player.CharacterStats.ContainsKey(type) && player.CharacterStats[type] >= 40)
             {
                 _io.WriteLine($"{type} has already reached the maximum cap of 40.",
-                ConsoleColor.Yellow);
+                    ConsoleColor.Yellow);
                 _io.Wait(800);
                 return;
             }
@@ -277,7 +276,7 @@ namespace JRPGPrototype.Logic.Field
         }
 
         /// <summary>
-        /// FIX: Rollback method to revert stats and points to a previous snapshot.
+        /// Rollback method to revert stats and points to a previous snapshot if player cancels.
         /// </summary>
         public void RollbackStats(Combatant player, Dictionary<StatType, int> statBackup, int pointBackup)
         {
@@ -320,7 +319,7 @@ namespace JRPGPrototype.Logic.Field
         }
 
 
-        /// Persistently unlocks a terminal for future warping.
+        // Persistently unlocks a terminal for future warping.
         public void UnlockTerminal(int floor)
         {
             _dungeonState.UnlockTerminal(floor);

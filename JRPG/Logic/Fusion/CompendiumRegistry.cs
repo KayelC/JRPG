@@ -15,7 +15,7 @@ namespace JRPGPrototype.Logic.Fusion
     /// </summary>
     public class CompendiumRegistry
     {
-        // Key: Normalized Species ID (e.g., "pixie", not "E_pixie")
+        // Key: Normalized Species ID (matching the final_unified_database IDs)
         // Value: The snapshot of the Combatant
         private readonly Dictionary<string, Combatant> _demonEntries;
 
@@ -41,7 +41,7 @@ namespace JRPGPrototype.Logic.Fusion
                 return;
             }
 
-            // High Fidelity Fix: Ensure we are using the base species ID, not the instance/enemy ID.
+            // Ensure we use the canonical ID for registration
             string speciesId = ResolveSpeciesId(demon);
 
             // Create an immutable snapshot
@@ -71,7 +71,7 @@ namespace JRPGPrototype.Logic.Fusion
         /// </summary>
         public int CalculateRecallCost(string speciesId)
         {
-            string cleanId = speciesId.Replace("E_", ""); // Safety normalization
+            string cleanId = speciesId.ToLower();
 
             if (!_demonEntries.TryGetValue(cleanId, out var snapshot))
             {
@@ -105,7 +105,7 @@ namespace JRPGPrototype.Logic.Fusion
         /// </summary>
         public Combatant GetRecallEntry(string speciesId)
         {
-            string cleanId = speciesId.Replace("E_", ""); // Safety normalization
+            string cleanId = speciesId.ToLower();
 
             if (_demonEntries.TryGetValue(cleanId, out var snapshot))
             {
@@ -129,8 +129,7 @@ namespace JRPGPrototype.Logic.Fusion
 
         public bool HasEntry(string speciesId)
         {
-            string cleanId = speciesId.Replace("E_", "");
-            return _demonEntries.ContainsKey(cleanId);
+            return _demonEntries.ContainsKey(speciesId.ToLower());
         }
 
         #endregion
@@ -143,17 +142,14 @@ namespace JRPGPrototype.Logic.Fusion
         /// </summary>
         private string ResolveSpeciesId(Combatant c)
         {
-            // If the demon has an active persona template, that is its true species ID.
-            // Since Persona instances don't store their ID, we strip the "E_" from SourceId
-            // or rely on the fact that player-owned demons should be normalized.
-            return c.SourceId.Replace("E_", "").ToLower();
+            return c.SourceId.ToLower();
         }
 
         private Combatant CloneCombatant(Combatant original)
         {
             Combatant clone = new Combatant(original.Name, original.Class)
             {
-                SourceId = original.SourceId.Replace("E_", ""), // Force normalization on clone
+                SourceId = original.SourceId.ToLower(),
                 Level = original.Level,
                 Exp = original.Exp,
                 StatPoints = original.StatPoints,
@@ -167,7 +163,10 @@ namespace JRPGPrototype.Logic.Fusion
 
             foreach (var stat in original.CharacterStats)
             {
-                clone.CharacterStats[stat.Key] = stat.Value;
+                if (clone.CharacterStats.ContainsKey(stat.Key))
+                    clone.CharacterStats[stat.Key] = stat.Value;
+                else
+                    clone.CharacterStats.Add(stat.Key, stat.Value);
             }
 
             foreach (var skill in original.ExtraSkills)

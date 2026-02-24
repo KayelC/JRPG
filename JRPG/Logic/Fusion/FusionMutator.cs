@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace JRPGPrototype.Logic.Fusion
 {
@@ -107,7 +107,8 @@ namespace JRPGPrototype.Logic.Fusion
         }
 
         /// <summary>
-        /// Logic for consuming biological Demon entities to create a new Combatant.
+        /// Logic for consuming biological Demon entities to create a new Allied Combatant.
+        /// Allies follow progression rules (start with base skills).
         /// </summary>
         private void ExecuteDemonToDemonFusion(Combatant owner, List<Combatant> materials, string resultId, List<string> chosenSkills, Combatant sacrifice)
         {
@@ -127,10 +128,11 @@ namespace JRPGPrototype.Logic.Fusion
                 owner.DemonStock.Remove(participant);
             }
 
-            // 2. Transaction Phase: Instantiate Child
-            Combatant child = Combatant.CreateDemon(resultId, Database.Personas[resultId].Level);
+            // 2. Transaction Phase: Instantiate Allied Child
+            // Uses CreateDemon which follows progression (Base Skills only)
+            Combatant child = Combatant.CreateDemon(resultId, Database.Personas[resultId.ToLower()].Level);
 
-            // 3. Chosen Skill Injection
+            // 3. Chosen Skill Injection (Inheritance)
             foreach (var skill in chosenSkills)
             {
                 if (!child.ExtraSkills.Contains(skill))
@@ -181,11 +183,11 @@ namespace JRPGPrototype.Logic.Fusion
                 owner.PersonaStock.Remove(persona);
             }
 
-            // 2. Transaction Phase: Create new Persona essence
-            PersonaData template = Database.Personas[resultId];
+            // 2. Transaction Phase: Create new Persona essence from template
+            PersonaData template = Database.Personas[resultId.ToLower()];
             Persona child = template.ToPersona();
 
-            // 3. Chosen Skill Injection
+            // 3. Chosen Skill Injection (Inheritance)
             foreach (var skill in chosenSkills)
             {
                 if (!child.SkillSet.Contains(skill))

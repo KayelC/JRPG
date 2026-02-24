@@ -12,7 +12,7 @@ namespace JRPGPrototype.Logic.Fusion
 {
     /// <summary>
     /// The mathematical kernel for the Fusion Sub-System.
-    /// Manages Arcana-based lookups and tier-matching logic based on SMT III: Nocturne formulas.
+    /// Manages Race-based lookups and tier-matching logic based on SMT III: Nocturne formulas.
     /// Handles deterministic skill inheritance calculations and accident probabilities.
     /// </summary>
     public class FusionCalculator
@@ -20,43 +20,36 @@ namespace JRPGPrototype.Logic.Fusion
         private readonly IGameIO _io;
         private readonly Random _rnd = new Random();
 
-        // Lookup dictionary: Dictionary<ArcanaA, Dictionary<ArcanaB, ResultArcana>>
-        private Dictionary<string, Dictionary<string, string>> _arcanaTable;
+        // Lookup dictionary: Dictionary<RaceA, Dictionary<RaceB, ResultRace>>
+        private Dictionary<string, Dictionary<string, string>> _raceTable;
 
         public FusionCalculator(IGameIO io)
         {
             _io = io;
-            _arcanaTable = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
+            _raceTable = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
             LoadFusionTable();
         }
 
         /// <summary>
-        /// Hydrates the internal Arcana mapping from fusion_table.json.
+        /// Hydrates the internal Race mapping from the centrally loaded Database.
         /// Ensures the sub-system remains data-driven and easily balanced.
         /// </summary>
         private void LoadFusionTable()
         {
             try
             {
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Jsons", "fusion_table.json");
-                if (File.Exists(path))
+                if (Database.FusionRecipes != null && Database.FusionRecipes.Count > 0)
                 {
-                    string json = File.ReadAllText(path);
-                    var content = JsonConvert.DeserializeObject<FusionTableSchema>(json);
-
-                    if (content != null && content.Recipes != null)
+                    foreach (var recipe in Database.FusionRecipes)
                     {
-                        foreach (var recipe in content.Recipes)
-                        {
-                            RegisterMapping(recipe.ParentA, recipe.ParentB, recipe.Result);
-                            // Ensure commutativity: A + B yields the same as B + A
-                            RegisterMapping(recipe.ParentB, recipe.ParentA, recipe.Result);
-                        }
+                        RegisterMapping(recipe.ParentA, recipe.ParentB, recipe.Result);
+                        // Ensure commutativity: A + B yields the same as B + A
+                        RegisterMapping(recipe.ParentB, recipe.ParentA, recipe.Result);
                     }
                 }
                 else
                 {
-                    _io.WriteLine("[FusionCalculator] Warning: fusion_table.json not found. Fusion will be unavailable.", ConsoleColor.Yellow);
+                    _io.WriteLine("[FusionCalculator] Warning: Fusion recipes not found in Database. Fusion will be unavailable.", ConsoleColor.Yellow);
                 }
             }
             catch (Exception ex)
@@ -70,11 +63,11 @@ namespace JRPGPrototype.Logic.Fusion
         /// </summary>
         private void RegisterMapping(string a, string b, string res)
         {
-            if (!_arcanaTable.ContainsKey(a))
+            if (!_raceTable.ContainsKey(a))
             {
-                _arcanaTable[a] = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                _raceTable[a] = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             }
-            _arcanaTable[a][b] = res;
+            _raceTable[a][b] = res;
         }
 
         /// <summary>
@@ -87,13 +80,13 @@ namespace JRPGPrototype.Logic.Fusion
         /// <returns>A tuple containing the Resulting Persona ID and an accident flag.</returns>
         public (string resultPersonaId, bool isAccident) CalculateResult(Combatant a, Combatant b, int moonPhase)
         {
-            string arcanaA = a.ActivePersona?.Arcana ?? "Unknown";
-            string arcanaB = b.ActivePersona?.Arcana ?? "Unknown";
+            string raceA = a.ActivePersona?.Race ?? "Unknown";
+            string raceB = b.ActivePersona?.Race ?? "Unknown";
 
-            // 1. Identify Resulting Arcana from the lookup table
-            if (!_arcanaTable.TryGetValue(arcanaA, out var branch) || !branch.TryGetValue(arcanaB, out string resultArcana))
+            // 1. Identify Resulting Race from the lookup table
+            if (!_raceTable.TryGetValue(raceA, out var branch) || !branch.TryGetValue(raceB, out string resultRace))
             {
-                return (null, false); // Fusion is impossible for these specific Arcana combinations
+                return (null, false); // Fusion is impossible for these specific Race combinations
             }
 
             // 2. Accident Logic
@@ -105,13 +98,13 @@ namespace JRPGPrototype.Logic.Fusion
             // Fidelity Note: Use the Persona's Base Level (Template Level), not the parent's current level.
             int targetLevel = ((a.ActivePersona.Level + b.ActivePersona.Level) / 2) + 1;
 
-            // 4. Fetch all candidates within the resulting Arcana from the global database
-            var arcanaPool = Database.Personas.Values
-                .Where(p => p.Arcana.Equals(resultArcana, StringComparison.OrdinalIgnoreCase))
+            // 4. Fetch all candidates within the resulting Race from the global database
+            var racePool = Database.Personas.Values
+                .Where(p => p.Race.Equals(resultRace, StringComparison.OrdinalIgnoreCase))
                 .OrderBy(p => p.Level)
                 .ToList();
 
-            if (!arcanaPool.Any())
+            if (!racePool.Any())
             {
                 return (null, false);
             }
@@ -122,13 +115,13 @@ namespace JRPGPrototype.Logic.Fusion
             {
                 // Dynamic Accident logic: Returns a lower-rank demon of the same race as the intended result.
                 // This simulates a ritual collapse while still providing a usable entity.
-                resultData = arcanaPool.First();
+                resultData = racePool.First();
             }
             else
             {
                 // Standard Success logic: Find the nearest match where p.Level >= targetLevel.
                 // If no higher-level demon exists in the race, default to the highest available (Last).
-                resultData = arcanaPool.FirstOrDefault(p => p.Level >= targetLevel) ?? arcanaPool.Last();
+                resultData = racePool.FirstOrDefault(p => p.Level >= targetLevel) ?? racePool.Last();
             }
 
             return (resultData.Id, isAccident);
@@ -176,32 +169,6 @@ namespace JRPGPrototype.Logic.Fusion
             return 1;
         }
 
-        #region Data Schema
 
-        /// <summary>
-        /// Internal schema used for deserializing fusion_table.json.
-        /// </summary>
-        private class FusionTableSchema
-        {
-            [JsonProperty("recipes")]
-            public List<FusionRecipeEntry> Recipes { get; set; }
-        }
-
-        /// <summary>
-        /// Represents a single Arcana combination entry in the JSON data.
-        /// </summary>
-        private class FusionRecipeEntry
-        {
-            [JsonProperty("parentA")]
-            public string ParentA { get; set; }
-
-            [JsonProperty("parentB")]
-            public string ParentB { get; set; }
-
-            [JsonProperty("result")]
-            public string Result { get; set; }
-        }
-
-        #endregion
     }
 }

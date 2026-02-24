@@ -9,7 +9,7 @@ namespace JRPGPrototype.Entities
     {
         public string Name { get; set; } = string.Empty;
         public int Level { get; set; }
-        public string Arcana { get; set; } = string.Empty;
+        public string Race { get; set; } = string.Empty;
 
         // Stats & affinities
         public Dictionary<Element, Affinity> AffinityMap { get; set; } = new Dictionary<Element, Affinity>();

@@ -13,19 +13,14 @@ namespace JRPGPrototype.Data
         public static Dictionary<string, PersonaData> Personas = new Dictionary<string, PersonaData>();
         public static Dictionary<string, AilmentData> Ailments = new Dictionary<string, AilmentData>();
         public static Dictionary<string, ItemData> Items = new Dictionary<string, ItemData>();
-        public static Dictionary<string, EnemyData> Enemies = new Dictionary<string, EnemyData>();
         public static Dictionary<string, DungeonData> Dungeons = new Dictionary<string, DungeonData>();
         public static Dictionary<string, WeaponData> Weapons = new Dictionary<string, WeaponData>();
         public static Dictionary<string, ArmorData> Armors = new Dictionary<string, ArmorData>();
         public static Dictionary<string, BootData> Boots = new Dictionary<string, BootData>();
         public static Dictionary<string, AccessoryData> Accessories = new Dictionary<string, AccessoryData>();
 
-        // Added support for the Fusion Recipe Table
         public static List<FusionRecipe> FusionRecipes = new List<FusionRecipe>();
-
-        // Initialize the property to prevent null reference on failed load
         public static NegotiationQuestionRoot NegotiationQuestions { get; private set; } = new NegotiationQuestionRoot();
-
         public static List<ShopEntry> ShopInventory = new List<ShopEntry>();
 
         /// <summary>
@@ -44,23 +39,20 @@ namespace JRPGPrototype.Data
                 }
             });
 
-            LoadFile(io, "persona_data.json", (json) => {
+            LoadFile(io, "final_unified_database.json", (json) => {
                 var pList = JsonConvert.DeserializeObject<List<PersonaData>>(json);
                 if (pList != null)
                 {
-                    foreach (var p in pList) if (!Personas.ContainsKey(p.Id))
-                            Personas.Add(p.Id, p);
-                    io.WriteLine($"[System] Loaded {Personas.Count} personas.", ConsoleColor.Green);
-                }
-            });
-
-            LoadFile(io, "enemies.json", (json) => {
-                var eList = JsonConvert.DeserializeObject<List<EnemyData>>(json);
-                if (eList != null)
-                {
-                    foreach (var e in eList) if (!Enemies.ContainsKey(e.Id))
-                            Enemies.Add(e.Id, e);
-                    io.WriteLine($"[System] Loaded {Enemies.Count} enemies.", ConsoleColor.Green);
+                    foreach (var p in pList)
+                    {
+                        // Ensure all IDs are lowercase to prevent case-sensitivity lookup issues later
+                        string id = p.Id.ToLower();
+                        if (!Personas.ContainsKey(id))
+                        {
+                            Personas.Add(id, p);
+                        }
+                    }
+                    io.WriteLine($"[System] Loaded {Personas.Count} entities (Personas/Demons).", ConsoleColor.Green);
                 }
             });
 
@@ -179,7 +171,6 @@ namespace JRPGPrototype.Data
             }
             else
             {
-                // Fix: Errors now reported via IGameIO with red highlight
                 io.WriteLine($"[Error] Data integrity failure: {filename} not found at {path}!", ConsoleColor.Red);
             }
         }
@@ -191,7 +182,7 @@ namespace JRPGPrototype.Data
     {
         [JsonProperty("recipes")]
         public List<FusionRecipe> Recipes { get; set; }
-    }
+        }
 
     public class FusionRecipe
     {

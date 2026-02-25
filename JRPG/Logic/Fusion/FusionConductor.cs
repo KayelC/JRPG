@@ -104,9 +104,9 @@ namespace JRPGPrototype.Logic.Fusion
                     participantPool = demons.Distinct().Cast<object>().ToList();
                     break;
 
-                case ClassType.PersonaUser:
+                // Only WildCard can fuse Personas
                 case ClassType.WildCard:
-                    // PersonaUsers draw from ActivePersona and PersonaStock
+                    // WildCards draw from ActivePersona and PersonaStock
                     var personas = new List<Persona>();
                     if (_player.ActivePersona != null) personas.Add(_player.ActivePersona);
                     personas.AddRange(_player.PersonaStock);
@@ -144,7 +144,7 @@ namespace JRPGPrototype.Logic.Fusion
             Combatant sacrifice = null;
             if (isSacrificial)
             {
-                // Fidelity Note: Sacrifices are always Demons (Combatants) even for Persona Users
+                // Fidelity Note: Sacrifices are always Demons (Combatants) even for WildCards
                 var sacrificePool = _mutator.GetFusibleDemonPool(_player);
                 sacrifice = _uiBridge.SelectRitualParticipant(sacrificePool, "CHOOSE THE SACRIFICIAL OFFERING:", new List<Combatant>());
                 if (sacrifice == null) return;
@@ -157,7 +157,8 @@ namespace JRPGPrototype.Logic.Fusion
 
             var (resultId, isAccident) = _calculator.CalculateResult(parentA, parentB, MoonPhaseSystem.CurrentPhase);
 
-            if (string.IsNullOrEmpty(resultId) || !Database.Personas.TryGetValue(resultId, out var resultData))
+            // Fetch template ensuring ID is canonicalized
+            if (string.IsNullOrEmpty(resultId) || !Database.Personas.TryGetValue(resultId.ToLower(), out var resultData))
             {
                 _io.WriteLine("The spirits remain silent. This combination yields no result.", ConsoleColor.Red);
                 _io.Wait(1000);
@@ -271,7 +272,7 @@ namespace JRPGPrototype.Logic.Fusion
                     _compendium.RegisterDemon(selected);
                 }
             }
-            else
+            else // PersonaUser or WildCard
             {
                 // Registration source for PersonaUsers is their PersonaStock
                 Persona p = _uiBridge.SelectRitualParticipant(_player.PersonaStock, "SELECT PERSONA TO RECORD:", new List<Persona>());
@@ -293,10 +294,18 @@ namespace JRPGPrototype.Logic.Fusion
         /// </summary>
         private Combatant CreateTransientCombatant(Persona p)
         {
+            // Create a new Persona instance to avoid modifying the original
+            var transientPersona = new Persona
+            {
+                Name = p.Name,
+                Level = p.Level,
+                Race = p.Race // UPDATED: Ensure Race is passed
+            };
+
             Combatant c = new Combatant(p.Name, ClassType.Demon)
             {
                 Level = p.Level,
-                ActivePersona = p
+                ActivePersona = transientPersona // Use the new instance
             };
             return c;
         }

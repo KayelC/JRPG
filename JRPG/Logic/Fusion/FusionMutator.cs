@@ -1,10 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace JRPGPrototype.Logic.Fusion
 {
@@ -129,8 +129,8 @@ namespace JRPGPrototype.Logic.Fusion
             }
 
             // 2. Transaction Phase: Instantiate Allied Child
-            // Uses CreateDemon which follows progression (Base Skills only)
-            Combatant child = Combatant.CreateDemon(resultId, Database.Personas[resultId.ToLower()].Level);
+            // Use CreatePlayerDemon to ensure progression rules are followed.
+            Combatant child = Combatant.CreatePlayerDemon(resultId, Database.Personas[resultId.ToLower()].Level);
 
             // 3. Chosen Skill Injection (Inheritance)
             foreach (var skill in chosenSkills)
@@ -179,7 +179,6 @@ namespace JRPGPrototype.Logic.Fusion
                 {
                     owner.ActivePersona = null;
                 }
-
                 owner.PersonaStock.Remove(persona);
             }
 
@@ -245,7 +244,7 @@ namespace JRPGPrototype.Logic.Fusion
                     // We must extract the ActivePersona from the Combatant snapshot
                     Persona essence = snapshot.ActivePersona;
 
-                    // Fidelity Requirement: Deep-copy skills from the combatant back to the persona 
+                    // Fidelity Requirement: Deep-copy skills from the combatant back to the persona
                     // This ensures learned skills from the registration snapshot are preserved.
                     var combinedSkills = snapshot.GetConsolidatedSkills();
                     essence.SkillSet.Clear();

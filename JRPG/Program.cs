@@ -56,13 +56,13 @@ namespace JRPGPrototype
                 case '4':
                     player.Class = ClassType.Operator;
                     // UPDATED: Use CreateDemon to ensure proper skill progression
-                    //player.DemonStock.Add(Combatant.CreateDemon("pixie", 1));
-                    player.DemonStock.Add(Combatant.CreateDemon("michael", 99));
-                    player.DemonStock.Add(Combatant.CreateDemon("pixie", 50));
-                    player.DemonStock.Add(Combatant.CreateDemon("orpheus", 50));
-                    player.DemonStock.Add(Combatant.CreateDemon("io", 50));
-                    player.DemonStock.Add(Combatant.CreateDemon("hermes", 50));
-                    player.DemonStock.Add(Combatant.CreateDemon("medea", 50));
+                    //player.DemonStock.Add(Combatant.CreatePlayerDemon("pixie", 1));
+                    player.DemonStock.Add(Combatant.CreatePlayerDemon("michael", 99));
+                    player.DemonStock.Add(Combatant.CreatePlayerDemon("pixie", 50));
+                    player.DemonStock.Add(Combatant.CreatePlayerDemon("orpheus", 50));
+                    player.DemonStock.Add(Combatant.CreatePlayerDemon("io", 50));
+                    player.DemonStock.Add(Combatant.CreatePlayerDemon("hermes", 50));
+                    player.DemonStock.Add(Combatant.CreatePlayerDemon("medea", 50));
                     break;
             }
 

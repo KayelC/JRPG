@@ -907,7 +907,7 @@
       "Critical": NaN,
       "Cost": "55 SP",
       "Category": "Enhance Skills"
-    }
+    },
     {
       "Skill": "Tetraja",
       "Effect": "Barrier that nullifies Light or Dark damage 1x per ally.",
@@ -1293,7 +1293,7 @@
       "Critical": NaN,
       "Cost": NaN,
       "Category": "Navigator Skills"
-    }
+    },
     {
       "Skill": "Trafuri",
       "Effect": "Guaranteed escape from battle. (100% chance) (random encounters only)",
@@ -3702,7 +3702,7 @@
       "Critical": NaN,
       "Cost": "25 SP",
       "Category": "Wind Skills"
-    }
+    },
     {
       "Skill": "Panta Rhei",
       "Effect": "Deals severe Wind damage to one foe. Norn exclusive.",

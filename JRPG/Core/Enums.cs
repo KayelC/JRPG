@@ -99,4 +99,13 @@ namespace JRPGPrototype.Core
         Failed,
         RequestDungeonExit
     }
+
+    public enum FusionOperationType
+    {
+        CreateNewDemon, // The result is a specific demon ID to be created.
+        RankUpParent,    // Signal to rank up one of the parents.
+        RankDownParent,  // Signal to rank down one of the parents.
+        StatBoostFusion, // Signal that Mitama fusion for stat boosting should occur
+        NoFusionPossible // The combination yields nothing.
+    }
 }

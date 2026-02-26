@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
@@ -21,7 +19,7 @@ namespace JRPGPrototype.Logic.Fusion
         private readonly Random _rnd = new Random();
 
         // Lookup dictionary: Dictionary<RaceA, Dictionary<RaceB, ResultRace>>
-        private Dictionary<string, Dictionary<string, string>> _raceTable;
+        private readonly Dictionary<string, Dictionary<string, string>> _raceTable;
 
         public FusionCalculator(IGameIO io)
         {
@@ -71,65 +69,85 @@ namespace JRPGPrototype.Logic.Fusion
         }
 
         /// <summary>
-        /// Predicts the fusion result using the SMT III Formula: (Avg Base Lvl) + 1.
+        /// Predicts the fusion result, handling normal, special, rank, and Mitama fusions.
         /// Accounts for Moon Phase influence on Fusion Accidents.
         /// </summary>
-        /// <param name="a">The first parent participant.</param>
-        /// <param name="b">The second parent participant.</param>
-        /// <param name="moonPhase">The current phase from the MoonPhaseSystem.</param>
-        /// <returns>A tuple containing the Resulting Persona ID and an accident flag.</returns>
-        public (string resultPersonaId, bool isAccident) CalculateResult(Combatant a, Combatant b, int moonPhase)
+        public (FusionOperationType operation, string targetEntityId, bool isAccident) CalculateResult(Combatant a, Combatant b, int moonPhase)
         {
             string raceA = a.ActivePersona?.Race ?? "Unknown";
             string raceB = b.ActivePersona?.Race ?? "Unknown";
 
-            // 1. Identify Resulting Race from the lookup table
-            if (!_raceTable.TryGetValue(raceA, out var branch) || !branch.TryGetValue(raceB, out string resultRace))
-            {
-                return (null, false); // Fusion is impossible for these specific Race combinations
-            }
-
-            // 2. Accident Logic
-            // Normal base chance is very low (~0.4%). Full Moon (Phase 8) increases this to ~12.5%.
+            // 1. Accident Logic (calculated upfront)
             int accidentThreshold = (moonPhase == 8) ? 12 : 1;
             bool isAccident = _rnd.Next(0, 100) < accidentThreshold;
 
-            // 3. Level Tiering Logic
-            // Fidelity Note: Use the Persona's Base Level (Template Level), not the parent's current level.
-            int targetLevel = ((a.ActivePersona.Level + b.ActivePersona.Level) / 2) + 1;
+            // 2. Mitama Fusion Check (Highest Priority)
+            if (raceA == "Mitama" || raceB == "Mitama")
+            {
+                Combatant parentToBoost = (raceA == "Mitama") ? b : a;
+                return (FusionOperationType.StatBoostFusion, parentToBoost.SourceId.ToLower(), isAccident);
+            }
 
-            // 4. Fetch all candidates within the resulting Race from the global database
+            // 3. Identify Resulting string from the lookup table
+            if (!_raceTable.TryGetValue(raceA, out var branch) || !branch.TryGetValue(raceB, out string resultString))
+            {
+                return (FusionOperationType.NoFusionPossible, null, false);
+            }
+
+            // 4. Handle Special Cases: Rank Up/Down
+            if (resultString == "1" || resultString == "-1")
+            {
+                Combatant parentToRank = null;
+                // The parent to modify is the one that is NOT an Elemental
+                if (a.ActivePersona?.Race != "Element") { parentToRank = a; }
+                else if (b.ActivePersona?.Race != "Element") { parentToRank = b; }
+
+                if (parentToRank != null)
+                {
+                    var operation = (resultString == "1") ? FusionOperationType.RankUpParent : FusionOperationType.RankDownParent;
+                    return (operation, parentToRank.SourceId.ToLower(), isAccident);
+                }
+                else
+                {
+                    // This case is invalid if fusion table is correct (e.g. Element + Element can't rank up)
+                    return (FusionOperationType.NoFusionPossible, null, false);
+                }
+            }
+
+            // 5. Handle Special Cases: Direct ID results (Elementals)
+            if (Database.Personas.ContainsKey(resultString.ToLower()))
+            {
+                return (FusionOperationType.CreateNewDemon, resultString, isAccident);
+            }
+
+            // 6. Normal Race Fusion (Level-Based)
+            int targetLevel = ((a.ActivePersona.Level + b.ActivePersona.Level) / 2) + 1;
             var racePool = Database.Personas.Values
-                .Where(p => p.Race.Equals(resultRace, StringComparison.OrdinalIgnoreCase))
+                .Where(p => p.Race.Equals(resultString, StringComparison.OrdinalIgnoreCase))
                 .OrderBy(p => p.Level)
                 .ToList();
 
             if (!racePool.Any())
             {
-                return (null, false);
+                return (FusionOperationType.NoFusionPossible, null, false);
             }
 
             PersonaData resultData;
-
             if (isAccident)
             {
-                // Dynamic Accident logic: Returns a lower-rank demon of the same race as the intended result.
-                // This simulates a ritual collapse while still providing a usable entity.
-                resultData = racePool.First();
+                resultData = racePool.First(); // Accident results in the lowest rank of the target race
             }
             else
             {
-                // Standard Success logic: Find the nearest match where p.Level >= targetLevel.
-                // If no higher-level demon exists in the race, default to the highest available (Last).
+                // Find nearest match where p.Level >= targetLevel, or default to highest available.
                 resultData = racePool.FirstOrDefault(p => p.Level >= targetLevel) ?? racePool.Last();
             }
 
-            return (resultData.Id, isAccident);
+            return (FusionOperationType.CreateNewDemon, resultData.Id, isAccident);
         }
 
         /// <summary>
         /// Aggregates all unique skills from parents to determine the total inheritable pool.
-        /// Works with variable parent counts (Binary or Sacrificial).
         /// </summary>
         public List<string> GetInheritableSkills(params Combatant[] parents)
         {
@@ -147,7 +165,6 @@ namespace JRPGPrototype.Logic.Fusion
 
         /// <summary>
         /// Calculates the number of skill slots available for inheritance based on total unique parent skills.
-        /// Implements the standard SMT III scaling tiers.
         /// </summary>
         public int GetInheritanceSlotCount(params Combatant[] parents)
         {
@@ -168,7 +185,5 @@ namespace JRPGPrototype.Logic.Fusion
 
             return 1;
         }
-
-
     }
 }

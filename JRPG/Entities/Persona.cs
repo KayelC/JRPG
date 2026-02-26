@@ -10,6 +10,7 @@ namespace JRPGPrototype.Entities
         public string Name { get; set; } = string.Empty;
         public int Level { get; set; }
         public string Race { get; set; } = string.Empty;
+        public int Rank { get; set; }
 
         // Stats & affinities
         public Dictionary<Element, Affinity> AffinityMap { get; set; } = new Dictionary<Element, Affinity>();

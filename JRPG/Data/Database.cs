@@ -28,7 +28,7 @@ namespace JRPGPrototype.Data
         /// </summary>
         public static void LoadData(IGameIO io)
         {
-            LoadFile(io, "skills_by_category.json", (json) => {
+            LoadFile(io, "skills_database.json", (json) => {
                 var skillCats = JsonConvert.DeserializeObject<Dictionary<string, List<SkillData>>>(json);
                 if (skillCats != null)
                 {
@@ -39,7 +39,7 @@ namespace JRPGPrototype.Data
                 }
             });
 
-            LoadFile(io, "final_unified_database.json", (json) => {
+            LoadFile(io, "entity_database.json", (json) => {
                 var pList = JsonConvert.DeserializeObject<List<PersonaData>>(json);
                 if (pList != null)
                 {
@@ -66,7 +66,7 @@ namespace JRPGPrototype.Data
                 }
             });
 
-            // Loading logic for the fusion recipes (Arcana-based)
+            // Loading logic for the fusion recipes
             LoadFile(io, "fusion_table.json", (json) => {
                 var root = JsonConvert.DeserializeObject<FusionTableRoot>(json);
                 if (root != null && root.Recipes != null)

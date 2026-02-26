@@ -87,7 +87,7 @@ namespace JRPGPrototype.Logic.Fusion
         #region Fusion Ritual Sequence
 
         /// <summary>
-        /// Manages the multi-step workflow of creating a new entity.
+        /// Manages the multi-step workflow of creating a new entity or modifying an existing one via fusion.
         /// Logic: Handles participant selection, result prediction, and deterministic skill inheritance.
         /// </summary>
         private void PerformFusionRitual(bool isSacrificial)
@@ -144,51 +144,87 @@ namespace JRPGPrototype.Logic.Fusion
             Combatant sacrifice = null;
             if (isSacrificial)
             {
-                // Fidelity Note: Sacrifices are always Demons (Combatants) even for WildCards
+                // Sacrifices are always Demons (Combatants) even for WildCards
                 var sacrificePool = _mutator.GetFusibleDemonPool(_player);
                 sacrifice = _uiBridge.SelectRitualParticipant(sacrificePool, "CHOOSE THE SACRIFICIAL OFFERING:", new List<Combatant>());
                 if (sacrifice == null) return;
             }
 
-            // 2. Result Calculation
+            // 3. Result Calculation (now returns operation type and target ID)
             // We create transient Combatants for Persona participants so the Calculator can remain type-pure.
             Combatant parentA = (p1 is Combatant c1) ? c1 : CreateTransientCombatant((Persona)p1);
             Combatant parentB = (p2 is Combatant c2) ? c2 : CreateTransientCombatant((Persona)p2);
 
-            var (resultId, isAccident) = _calculator.CalculateResult(parentA, parentB, MoonPhaseSystem.CurrentPhase);
+            var (operation, targetEntityId, isAccident) = _calculator.CalculateResult(parentA, parentB, MoonPhaseSystem.CurrentPhase);
 
-            // Fetch template ensuring ID is canonicalized
-            if (string.IsNullOrEmpty(resultId) || !Database.Personas.TryGetValue(resultId.ToLower(), out var resultData))
+            // If NoFusionPossible, immediately return.
+            if (operation == FusionOperationType.NoFusionPossible)
             {
                 _io.WriteLine("The spirits remain silent. This combination yields no result.", ConsoleColor.Red);
                 _io.Wait(1000);
                 return;
             }
 
-            // 3. Skill Inheritance
-            // Build the collective parent list for inheritance math
-            var parentList = new List<Combatant> { parentA, parentB };
-            if (sacrifice != null) parentList.Add(sacrifice);
+            // --- Skill Inheritance (only for new demon creation) ---
+            List<string> selectedSkills = new List<string>();
+            if (operation == FusionOperationType.CreateNewDemon)
+            {
+                var parentList = new List<Combatant> { parentA, parentB };
+                if (sacrifice != null) parentList.Add(sacrifice);
 
-            var inheritablePool = _calculator.GetInheritableSkills(parentList.ToArray());
-            int maxInheritSlots = _calculator.GetInheritanceSlotCount(parentList.ToArray());
+                var inheritablePool = _calculator.GetInheritableSkills(parentList.ToArray());
+                int maxInheritSlots = _calculator.GetInheritanceSlotCount(parentList.ToArray());
 
-            // Sacrificial Bonus: Boost slots by 2 (Max 8)
-            if (isSacrificial) maxInheritSlots = Math.Min(8, maxInheritSlots + 2);
+                // Sacrificial Bonus: Boost slots by 2 (Max 8)
+                if (isSacrificial) maxInheritSlots = Math.Min(8, maxInheritSlots + 2);
 
-            List<string> selectedSkills = _uiBridge.SelectInheritedSkills(inheritablePool, maxInheritSlots);
-            if (selectedSkills == null) return; // User aborted
+                selectedSkills = _uiBridge.SelectInheritedSkills(inheritablePool, maxInheritSlots);
+                if (selectedSkills == null) return; // User aborted
+            }
 
-            // 4. Verification and Ritual
-            // Fusion proceeds ONLY if ConfirmRitual returns true
-            if (!_uiBridge.ConfirmRitual(resultData, selectedSkills, _player.Level)) return;
+            // --- Verification and Ritual ---
+            // Only confirm if it's a new demon creation. Rank/Stat boosts have different UX.
+            if (operation == FusionOperationType.CreateNewDemon)
+            {
+                // Fetch resultData for UI preview
+                if (!Database.Personas.TryGetValue(targetEntityId.ToLower(), out var resultData))
+                {
+                    _io.WriteLine("Error: Resulting demon template not found.", ConsoleColor.Red);
+                    _io.Wait(1000);
+                    return;
+                }
 
-            // 5. Ritual Execution
+                // Fusion proceeds ONLY if ConfirmRitual returns true
+                if (!_uiBridge.ConfirmRitual(resultData, selectedSkills, _player.Level)) return;
+            }
+
+            // --- Ritual Execution Visuals ---
             _uiBridge.DisplayRitualSequence(isAccident);
 
-            // 6. State Mutation
-            // This atomic transaction handles the consumption of parents and instantiation of the child.
-            _mutator.ExecuteFusion(_player, parents, resultData.Id, selectedSkills, sacrifice);
+            // --- 6. State Mutation based on FusionOperationType ---
+            switch (operation)
+            {
+                case FusionOperationType.CreateNewDemon:
+                    _mutator.ExecuteFusion(_player, parents, targetEntityId, selectedSkills, sacrifice);
+                    break;
+                case FusionOperationType.RankUpParent:
+                    // parentA is the base for rank changes, as per discussion
+                    _mutator.ExecuteRankUpFusion(_player, parentA, sacrifice);
+                    break;
+                case FusionOperationType.RankDownParent:
+                    _mutator.ExecuteRankDownFusion(_player, parentA, sacrifice);
+                    break;
+                case FusionOperationType.StatBoostFusion:
+                    // For Stat Boost, parentA is the demon to boost, parentB is the Mitama (or vice versa)
+                    Combatant demonToBoost = (parentA.ActivePersona.Race == "Mitama") ? parentB : parentA;
+                    Combatant mitamaParent = (parentA.ActivePersona.Race == "Mitama") ? parentA : parentB;
+                    _mutator.ExecuteStatBoostFusion(_player, demonToBoost, mitamaParent, sacrifice);
+                    break;
+                case FusionOperationType.NoFusionPossible:
+                    // Already handled above, but included for completeness.
+                    _io.WriteLine("The fusion yielded no result.", ConsoleColor.Red);
+                    break;
+            }
 
             _io.Wait(1500);
         }
@@ -216,11 +252,14 @@ namespace JRPGPrototype.Logic.Fusion
                     // Operators need room in either party or demon stock
                     hasAvailableSlot = (_partyManager.ActiveParty.Count < 4 || _partyManager.HasOpenDemonStockSlot(_player));
                     break;
-                case ClassType.PersonaUser:
                 case ClassType.WildCard:
-                    // Persona users need room in their persona stock
+                    // WildCard users need room in their persona stock
                     hasAvailableSlot = _partyManager.HasOpenPersonaStockSlot(_player);
                     break;
+                default: // PersonaUser or Human should not try to recall demons
+                    _io.WriteLine("Your class cannot recall demons.", ConsoleColor.Red);
+                    _io.Wait(1000);
+                    return;
             }
 
             if (!hasAvailableSlot)
@@ -251,13 +290,13 @@ namespace JRPGPrototype.Logic.Fusion
 
         /// <summary>
         /// Handles the UI flow for recording current progress to the Compendium.
-        /// Logic: Operators register all Demons (Party + Stock); PersonaUsers register spiritual masks.
+        /// Logic: Operators register all Demons (Party + Stock); WildCards register spiritual masks.
         /// </summary>
         private void HandleRegistration()
         {
             if (_player.Class == ClassType.Operator)
             {
-                // Refinement: Operators now pool all demons at their disposal (Active Party + DemonStock)
+                // Operators now pool all demons at their disposal (Active Party + DemonStock)
                 var registrationPool = _partyManager.ActiveParty
                     .Where(c => c.Class == ClassType.Demon)
                     .ToList();
@@ -272,15 +311,20 @@ namespace JRPGPrototype.Logic.Fusion
                     _compendium.RegisterDemon(selected);
                 }
             }
-            else // PersonaUser or WildCard
+            else if (_player.Class == ClassType.WildCard)
             {
-                // Registration source for PersonaUsers is their PersonaStock
+                // Registration source for WildCards is their PersonaStock
                 Persona p = _uiBridge.SelectRitualParticipant(_player.PersonaStock, "SELECT PERSONA TO RECORD:", new List<Persona>());
                 if (p != null)
                 {
                     // Convert Persona to transient Combatant for Compendium format compatibility
                     _compendium.RegisterDemon(CreateTransientCombatant(p));
                 }
+            }
+            else // PersonaUser or Human cannot register demons/personas
+            {
+                _io.WriteLine("Your class cannot register demons.", ConsoleColor.Red);
+                _io.Wait(1000);
             }
         }
 
@@ -299,7 +343,8 @@ namespace JRPGPrototype.Logic.Fusion
             {
                 Name = p.Name,
                 Level = p.Level,
-                Race = p.Race // UPDATED: Ensure Race is passed
+                Race = p.Race,
+                Rank = p.Rank
             };
 
             Combatant c = new Combatant(p.Name, ClassType.Demon)

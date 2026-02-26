@@ -72,6 +72,10 @@ namespace JRPGPrototype.Logic.Fusion
         /// Predicts the fusion result, handling normal, special, rank, and Mitama fusions.
         /// Accounts for Moon Phase influence on Fusion Accidents.
         /// </summary>
+        /// <param name="a">The first parent participant.</param>
+        /// <param name="b">The second parent participant.</param>
+        /// <param name="moonPhase">The current phase from the MoonPhaseSystem.</param>
+        /// <returns>A tuple containing the fusion operation type, a target ID, and an accident flag.</returns>
         public (FusionOperationType operation, string targetEntityId, bool isAccident) CalculateResult(Combatant a, Combatant b, int moonPhase)
         {
             string raceA = a.ActivePersona?.Race ?? "Unknown";
@@ -85,6 +89,11 @@ namespace JRPGPrototype.Logic.Fusion
             if (raceA == "Mitama" || raceB == "Mitama")
             {
                 Combatant parentToBoost = (raceA == "Mitama") ? b : a;
+                // Ensure Mitama fusion is only with a non-Mitama demon
+                if (parentToBoost == null || parentToBoost.ActivePersona?.Race == "Mitama")
+                {
+                    return (FusionOperationType.NoFusionPossible, null, false);
+                }
                 return (FusionOperationType.StatBoostFusion, parentToBoost.SourceId.ToLower(), isAccident);
             }
 
@@ -115,13 +124,19 @@ namespace JRPGPrototype.Logic.Fusion
             }
 
             // 5. Handle Special Cases: Direct ID results (Elementals)
+            // If the result string directly matches a key in the Entity Database, it's a direct creation.
             if (Database.Personas.ContainsKey(resultString.ToLower()))
             {
-                return (FusionOperationType.CreateNewDemon, resultString, isAccident);
+                return (FusionOperationType.CreateNewDemon, resultString.ToLower(), isAccident);
             }
 
             // 6. Normal Race Fusion (Level-Based)
-            int targetLevel = ((a.ActivePersona.Level + b.ActivePersona.Level) / 2) + 1;
+            // Use Base Level from PersonaData for fusion result level, plus a random nudge.
+            PersonaData templateA = Database.Personas[a.SourceId.ToLower()];
+            PersonaData templateB = Database.Personas[b.SourceId.ToLower()];
+            int avgBaseLevel = (templateA.Level + templateB.Level) / 2;
+            int targetLevel = avgBaseLevel + _rnd.Next(1, 6); // Add 1 to 5 to the average base level.
+
             var racePool = Database.Personas.Values
                 .Where(p => p.Race.Equals(resultString, StringComparison.OrdinalIgnoreCase))
                 .OrderBy(p => p.Level)

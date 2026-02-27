@@ -83,11 +83,13 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                 if (item is Combatant c)
                 {
                     string race = c.ActivePersona?.Race ?? "Unknown";
-                    labels.Add($"{c.Name,-15} (Lv.{c.Level}) {race}");
+                    string rank = c.ActivePersona?.Rank > 0 ? $"(Rk.{c.ActivePersona.Rank})" : "";
+                    labels.Add($"{c.Name,-15} (Lv.{c.Level}) {race} {rank}");
                 }
                 else if (item is Persona p)
                 {
-                    labels.Add($"{p.Name,-15} (Lv.{p.Level}) {p.Race}");
+                    string rank = p.Rank > 0 ? $"(Rk.{p.Rank})" : "";
+                    labels.Add($"{p.Name,-15} (Lv.{p.Level}) {p.Race} {rank}");
                 }
             }
             labels.Add("Cancel");
@@ -164,16 +166,22 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
 
         /// <summary>
         /// Final confirmation screen displaying the results of the planned fusion.
-        /// Implemented using onHighlight to show the child preview in Yellow during the decision.
+        /// This method is now adapted to show previews for all fusion operation types.
         /// </summary>
-        public bool ConfirmRitual(PersonaData result, List<string> inheritedSkills, int playerLevel)
+        /// <param name="stagedDemon">The Combatant representing the FINAL state of the demon AFTER fusion.</param>
+        /// <param name="originalParent">The original parent demon (for Rank/Stat boost "Before" comparison).</param>
+        /// <param name="inheritedSkills">Skills to be inherited (only relevant for CreateNewDemon/RankUp/Down).</param>
+        /// <param name="playerLevel">Current player level for level check.</param>
+        /// <param name="operationType">The type of fusion operation.</param>
+        /// <returns>True if player confirms, false if cancels.</returns>
+        public bool ConfirmRitual(Combatant stagedDemon, Combatant originalParent, List<string> inheritedSkills, int playerLevel, FusionOperationType operationType)
         {
-            // Requirement: Level Constraint Check (Forbidden fusions cannot be confirmed)
-            if (result.Level > playerLevel)
+            // Level constraint check for ALL new demon/ranked demon results
+            if (stagedDemon.Level > playerLevel)
             {
                 _io.Clear();
                 _io.WriteLine("=== RITUAL FORBIDDEN ===", ConsoleColor.Red);
-                _io.WriteLine($"The resulting being, {result.Name} (Lv.{result.Level}), exceeds your authority.");
+                _io.WriteLine($"The resulting being, {stagedDemon.Name} (Lv.{stagedDemon.Level}), exceeds your authority.");
                 _io.WriteLine($"Your current level: {playerLevel}", ConsoleColor.Gray);
                 _io.WriteLine("\nThe spirits refuse to stabilize.", ConsoleColor.Red);
                 _io.Wait(2000);
@@ -186,17 +194,75 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
             int choice = _io.RenderMenu("Is this creation acceptable?", options, 0, null, (idx) =>
             {
                 _io.WriteLine("\n--- PROJECTED RESULT ---", ConsoleColor.Yellow);
-                _io.WriteLine($"Form   : {result.Name}", ConsoleColor.Yellow);
-               _io.WriteLine($"Race   : {result.Race}", ConsoleColor.Yellow);
 
-                _io.WriteLine($"Level  : {result.Level}", ConsoleColor.Yellow);
-                _io.WriteLine("------------------------");
-                _io.WriteLine("Inherited Skill Pool:");
-                foreach (var s in inheritedSkills)
+                switch (operationType)
                 {
-                    _io.WriteLine($" > {s}", ConsoleColor.Yellow);
+                    case FusionOperationType.CreateNewDemon:
+                        _io.WriteLine($"Form   : {stagedDemon.Name}", ConsoleColor.Yellow);
+                        _io.WriteLine($"Race   : {stagedDemon.ActivePersona.Race}", ConsoleColor.Yellow);
+                        _io.WriteLine($"Rank   : {stagedDemon.ActivePersona.Rank}", ConsoleColor.Yellow);
+                        _io.WriteLine($"Level  : {stagedDemon.Level}", ConsoleColor.Yellow);
+                        _io.WriteLine("------------------------");
+                        _io.WriteLine("Inherited Skill Pool:", ConsoleColor.Yellow);
+                        foreach (var s in inheritedSkills)
+                        {
+                            _io.WriteLine($" > {s}", ConsoleColor.Yellow);
+                        }
+                        _io.WriteLine("------------------------");
+                        break;
+
+                    case FusionOperationType.RankUpParent:
+                    case FusionOperationType.RankDownParent:
+                        _io.WriteLine($"Original: {originalParent.Name} (Lv.{originalParent.Level}) {originalParent.ActivePersona.Race} (Rk.{originalParent.ActivePersona.Rank})", ConsoleColor.Yellow);
+                        _io.WriteLine($"Result  : {stagedDemon.Name} (Lv.{stagedDemon.Level}) {stagedDemon.ActivePersona.Race} (Rk.{stagedDemon.ActivePersona.Rank})", ConsoleColor.Yellow);
+                        _io.WriteLine("------------------------");
+                        _io.WriteLine("Stat Changes:", ConsoleColor.Yellow);
+                        foreach (StatType st in Enum.GetValues(typeof(StatType)))
+                        {
+                            int originalVal = originalParent.GetStat(st);
+                            int stagedVal = stagedDemon.GetStat(st);
+                            if (stagedVal != originalVal)
+                            {
+                                _io.WriteLine($" {st}: {originalVal} -> {stagedVal} ({(stagedVal > originalVal ? "+" : "")}{stagedVal - originalVal})", ConsoleColor.Green);
+                            }
+                            else
+                            {
+                                _io.WriteLine($" {st}: {originalVal}", ConsoleColor.Yellow);
+                            }
+                        }
+                        _io.WriteLine("------------------------");
+                        _io.WriteLine("Inherited Skill Pool:", ConsoleColor.Yellow);
+                        foreach (var s in inheritedSkills) // Skills from stagedDemon (after elemental has added theirs)
+                        {
+                            _io.WriteLine($" > {s}", ConsoleColor.Yellow);
+                        }
+                        _io.WriteLine("------------------------");
+                        break;
+
+                    case FusionOperationType.StatBoostFusion:
+                        _io.WriteLine($"Demon: {originalParent.Name} (Lv.{originalParent.Level})", ConsoleColor.Yellow);
+                        _io.WriteLine("------------------------");
+                        _io.WriteLine("Stat Boosts:", ConsoleColor.Yellow);
+                        foreach (StatType st in Enum.GetValues(typeof(StatType)))
+                        {
+                            int originalVal = originalParent.GetStat(st);
+                            int stagedVal = stagedDemon.GetStat(st);
+                            if (stagedVal != originalVal)
+                            {
+                                _io.WriteLine($" {st}: {originalVal} -> {stagedVal} (+{stagedVal - originalVal})", ConsoleColor.Green);
+                            }
+                            else if (originalVal == 40)
+                            {
+                                _io.WriteLine($" {st}: {originalVal} (Maxed - no boost)", ConsoleColor.Yellow);
+                            }
+                            else
+                            {
+                                _io.WriteLine($" {st}: {originalVal} (No change)", ConsoleColor.Gray); // Clarify no change for other stats
+                            }
+                        }
+                        _io.WriteLine("------------------------");
+                        break;
                 }
-                _io.WriteLine("------------------------");
             });
 
             return choice == 0;
@@ -216,6 +282,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
             _io.WriteLine("The streams of energy collide and begin to merge...");
             _io.Wait(1200);
 
+            // Fusion accident is a surprise, revealed only after confirmation and animation
             if (isAccident)
             {
                 _io.WriteLine("!!! WARNING: LUNAR INTERFERENCE DETECTED !!!", ConsoleColor.Red);
@@ -248,7 +315,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
             foreach (var entry in entries)
             {
                 int cost = _compendium.CalculateRecallCost(entry.SourceId);
-                labels.Add($"{entry.Name,-15} (Lv.{entry.Level}) | {cost} M");
+                labels.Add($"{entry.Name,-15} (Lv.{entry.Level}) {entry.ActivePersona?.Race} (Rk.{entry.ActivePersona?.Rank}) | {cost} M");
             }
             labels.Add("Back");
 
@@ -273,7 +340,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
             }
 
             string header = "=== REGISTER DEMON ===\nSelect a demon to overwrite its current snapshot in the registry.\n";
-            List<string> labels = demonsOnly.Select(d => $"{d.Name,-15} (Lv.{d.Level})").ToList();
+            List<string> labels = demonsOnly.Select(d => $"{d.Name,-15} (Lv.{d.Level}) {d.ActivePersona?.Race} (Rk.{d.ActivePersona?.Rank})").ToList();
             labels.Add("Cancel");
 
             int choice = _io.RenderMenu(header, labels, 0);

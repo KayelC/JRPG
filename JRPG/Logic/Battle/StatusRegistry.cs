@@ -75,7 +75,7 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// High-Fidelity Curing Logic. 
+        /// Curing Logic. 
         /// Checks if the skill effect explicitly lists the target's current ailment or uses "Cure all".
         /// </summary>
         public bool CheckAndExecuteCure(Combatant target, string skillEffect)
@@ -96,7 +96,7 @@ namespace JRPGPrototype.Logic.Battle
 
         /// <summary>
         /// Executes Auto-Kaja passives at the start of battle.
-        /// High Fidelity: Correctly distinguishes between Single-Target and Party-Wide (Ma) variants.
+        /// Correctly distinguishes between Single-Target and Party-Wide (Ma) variants.
         /// </summary>
         /// <param name="actor">The owner of the passive skill.</param>
         /// <param name="allies">The list of all living allies on the actor's side.</param>

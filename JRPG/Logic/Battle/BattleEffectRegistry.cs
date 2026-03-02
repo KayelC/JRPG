@@ -6,10 +6,9 @@ using JRPGPrototype.Logic.Battle.Effects;
 namespace JRPGPrototype.Logic.Battle
 {
     /// <summary>
-    /// The Strategy Registry. 
-    /// This class maps JSON identifiers to concrete IBattleEffect implementations.
-    /// This satisfies the "Open/Closed Principle": To add a new effect, you add it here,
-    /// and the rest of the engine updates automatically.
+    /// The Central Strategy Hub.
+    /// Maps JSON string identifiers (Type/Category) to concrete IBattleEffect implementations.
+    /// This pattern ensures the ActionProcessor remains blind to specific logic implementations.
     /// </summary>
     public class BattleEffectRegistry
     {
@@ -30,6 +29,7 @@ namespace JRPGPrototype.Logic.Battle
             _effects["Cure"] = new CureEffect();
             _effects["Enhance"] = new BuffEffect();
             _effects["Dekaja"] = new DekajaEffect();
+            _effects["Dekunda"] = new DekundaEffect();
             _effects["Charge"] = new ChargeEffect();
             _effects["Shield"] = new ShieldEffect();
 
@@ -49,16 +49,17 @@ namespace JRPGPrototype.Logic.Battle
         }
 
         /// <summary>
-        /// Retrieves the strategy for a given key.
+        /// Retrieves the logic strategy associated with a data key.
         /// </summary>
         public IBattleEffect GetEffect(string effectKey)
         {
-            if (_effects.TryGetValue(effectKey, out var effect))
+            if (string.IsNullOrEmpty(effectKey)) return null;
+
+            if (_effects.TryGetValue(effectKey, out var strategy))
             {
-                return effect;
+                return strategy;
             }
 
-            // Return null or a 'NullEffect' if no match is found
             return null;
         }
     }

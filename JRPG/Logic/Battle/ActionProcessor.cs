@@ -11,29 +11,19 @@ namespace JRPGPrototype.Logic.Battle
     /// <summary>
     /// The authoritative executor of battle actions.
     /// Manages the live-reactive interaction between combatants, handling damage, reflection, and data analysis.
+    /// Uses the IBattleMessenger mediator for all broadcasts.
     /// </summary>
     public class ActionProcessor
     {
-        // THE OBSERVER EVENT
-        // UI classes (like BattleLogger) can subscribe to this to know when to print text.
-        public event EventHandler<BattleMessageArgs> OnActionPerformed;
-
         private readonly StatusRegistry _status;
         private readonly BattleKnowledge _knowledge;
+        private readonly IBattleMessenger _messenger;
 
-        public ActionProcessor(StatusRegistry status, BattleKnowledge knowledge)
+        public ActionProcessor(StatusRegistry status, BattleKnowledge knowledge, IBattleMessenger messenger)
         {
             _status = status;
             _knowledge = knowledge;
-        }
-
-        /// <summary>
-        /// Helper to broadcast an event.
-        /// </summary>
-        private void Publish(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0)
-        {
-            // The ?. invokes the event only if a subscriber (BattleLogger) is listening.
-            OnActionPerformed?.Invoke(this, new BattleMessageArgs(message, color, delay));
+            _messenger = messenger;
         }
 
         /// <summary>
@@ -61,12 +51,12 @@ namespace JRPGPrototype.Logic.Battle
             // PWR for standard attack is considered 15 for the formula
             int power = GetActionPower(attacker, 15);
 
-            Publish($"{attacker.Name} attacks {target.Name}!");
+            _messenger.Publish($"{attacker.Name} attacks {target.Name}!");
 
             if (!CombatMath.CheckHit(attacker, target, element, "90%"))
             {
                 _knowledge.Learn(target.SourceId, element, Affinity.Normal);
-                Publish("MISS!", ConsoleColor.Gray, 400);
+                _messenger.Publish("MISS!", ConsoleColor.Gray, 400);
 
                 // Missing consumes charge
                 attacker.IsCharged = false;
@@ -77,7 +67,7 @@ namespace JRPGPrototype.Logic.Battle
 
             if (aff == Affinity.Repel)
             {
-                Publish($"{target.Name} repelled the attack!", ConsoleColor.Red);
+                _messenger.Publish($"{target.Name} repelled the attack!", ConsoleColor.Red);
                 attacker.IsCharged = false;
                 return ProcessRepelEvent(attacker, element, power);
             }
@@ -92,14 +82,13 @@ namespace JRPGPrototype.Logic.Battle
 
             // Consume physical charge
             attacker.IsCharged = false;
-
             return result;
         }
 
         public List<CombatResult> ExecuteSkill(Combatant attacker, List<Combatant> targets, SkillData skill)
         {
             List<CombatResult> results = new List<CombatResult>();
-            Publish($"{attacker.Name} uses {skill.Name}!", ConsoleColor.White, 200);
+            _messenger.Publish($"{attacker.Name} uses {skill.Name}!", ConsoleColor.White, 200);
 
             // 1. Calculate Cost with Passive Deductions (Spell/Arms Master)
             var cost = skill.ParseCost();
@@ -166,18 +155,18 @@ namespace JRPGPrototype.Logic.Battle
         public bool ExecuteItem(Combatant user, List<Combatant> targets, ItemData item)
         {
             bool anyEffect = false;
-            Publish($"{user.Name} used {item.Name}!", ConsoleColor.White, 200);
+            _messenger.Publish($"{user.Name} used {item.Name}!", ConsoleColor.White, 200);
 
             // TRAESTO GEM: Battle Escape (Player remains on floor)
             if (item.Name == "Traesto Gem")
             {
-                Publish("A blinding light creates a path to safety!", ConsoleColor.White, 800);
+                _messenger.Publish("A blinding light creates a path to safety!", ConsoleColor.White, 800);
                 return true;
             }
 
             if (item.Name == "Goho-M")
             {
-                Publish($"{item.Name} cannot be used in the heat of battle!", ConsoleColor.Gray, 100);
+                _messenger.Publish($"{item.Name} cannot be used in the heat of battle!", ConsoleColor.Gray, 100);
                 return false;
             }
 
@@ -194,7 +183,7 @@ namespace JRPGPrototype.Logic.Battle
                             int heal = item.EffectValue >= 9999 ? target.MaxHP : item.EffectValue;
                             int oldHP = target.CurrentHP;
                             target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
-                            Publish($"{target.Name} recovered {target.CurrentHP - oldHP} HP.");
+                            _messenger.Publish($"{target.Name} recovered {target.CurrentHP - oldHP} HP.");
                             anyEffect = true;
                         }
                         break;
@@ -204,7 +193,7 @@ namespace JRPGPrototype.Logic.Battle
                         {
                             int oldSP = target.CurrentSP;
                             target.CurrentSP = Math.Min(target.MaxSP, target.CurrentSP + item.EffectValue);
-                            Publish($"{target.Name} recovered {target.CurrentSP - oldSP} SP.");
+                            _messenger.Publish($"{target.Name} recovered {target.CurrentSP - oldSP} SP.");
                             anyEffect = true;
                         }
                         break;
@@ -214,7 +203,7 @@ namespace JRPGPrototype.Logic.Battle
                         {
                             int revVal = item.EffectValue >= 100 ? target.MaxHP : target.MaxHP / 2;
                             target.CurrentHP = revVal;
-                            Publish($"{target.Name} was revived!", ConsoleColor.Green);
+                            _messenger.Publish($"{target.Name} was revived!", ConsoleColor.Green);
                             anyEffect = true;
                         }
                         break;
@@ -222,22 +211,21 @@ namespace JRPGPrototype.Logic.Battle
                     case "Cure":
                         if (_status.CheckAndExecuteCure(target, item.Name))
                         {
-                            Publish($"{target.Name} was cured.");
+                            _messenger.Publish($"{target.Name} was cured.");
                             anyEffect = true;
                         }
                         break;
                 }
             }
 
-            if (!anyEffect) Publish("It had no effect...");
+            if (!anyEffect) _messenger.Publish("It had no effect...");
             return anyEffect;
         }
 
-        public event EventHandler<Combatant> OnAnalysisRequested;
-
+        // Orchestrates the analysis logic and requests a UI display via the messenger.
         public void ExecuteAnalyze(Combatant target)
         {
-            // 1. LOGIC: Update the Knowledge Database (State Change)
+            // 1. LOGIC: Update the Knowledge Database (Record all current affinities)
             foreach (Element elem in Enum.GetValues(typeof(Element)))
             {
                 if (elem == Element.None) continue;
@@ -245,15 +233,15 @@ namespace JRPGPrototype.Logic.Battle
                 _knowledge.Learn(target.SourceId, elem, aff);
             }
 
-            // 2. OBSERVER: Notify the UI to draw the Analysis screen
-            // We pass the 'target' so the UI knows whose stats to draw.
-            OnAnalysisRequested?.Invoke(this, target);
+            // 2. BROADCAST: Pass the target to the messenger. 
+            // The BattleLogger will pick this up and draw the Analysis screen.
+            _messenger.Publish(message: null, analysisTarget: target);
         }
 
         private CombatResult ProcessRepelEvent(Combatant attacker, Element element, int power)
         {
             int reflectedDmg = CombatMath.CalculateReflectedDamage(attacker, power, element);
-            Publish($"{attacker.Name} is hit by the reflection!", ConsoleColor.Red);
+            _messenger.Publish($"{attacker.Name} is hit by the reflection!", ConsoleColor.Red);
 
             CombatResult result = attacker.ReceiveDamage(reflectedDmg, element, false);
             ReportDamageResult(result, attacker.Name);
@@ -278,7 +266,7 @@ namespace JRPGPrototype.Logic.Battle
                 if (ikAff == Affinity.Null || ikAff == Affinity.Repel || ikAff == Affinity.Absorb)
                 {
                     _knowledge.Learn(target.SourceId, element, ikAff);
-                    Publish("Blocked!", ConsoleColor.Gray);
+                    _messenger.Publish("Blocked!", ConsoleColor.Gray);
                     return new CombatResult { Type = HitType.Null, Message = "Blocked!" };
                 }
 
@@ -288,14 +276,14 @@ namespace JRPGPrototype.Logic.Battle
                     int hpBefore = target.CurrentHP;
                     target.CurrentHP = 0; // Death
                     _knowledge.Learn(target.SourceId, element, ikAff);
-                    Publish("INSTANT KILL!", ConsoleColor.Red);
+                    _messenger.Publish("INSTANT KILL!", ConsoleColor.Red);
                     return new CombatResult { Type = HitType.Weakness, DamageDealt = hpBefore, Message = "INSTANT KILL!" };
                 }
                 else
                 {
                     // IK Rule: Miss only costs 1 Icon.
                     _knowledge.Learn(target.SourceId, element, Affinity.Normal);
-                    Publish("MISS!", ConsoleColor.Gray);
+                    _messenger.Publish("MISS!", ConsoleColor.Gray);
                     return new CombatResult { Type = HitType.Normal, Message = "MISS!" };
                 }
             }
@@ -304,7 +292,7 @@ namespace JRPGPrototype.Logic.Battle
             if (!CombatMath.CheckHit(attacker, target, element, skill.Accuracy))
             {
                 _knowledge.Learn(target.SourceId, element, Affinity.Normal);
-                Publish("MISS!", ConsoleColor.Gray);
+                _messenger.Publish("MISS!", ConsoleColor.Gray);
                 return new CombatResult { Type = HitType.Miss, Message = "MISS!" };
             }
 
@@ -318,7 +306,7 @@ namespace JRPGPrototype.Logic.Battle
             {
                 if (_status.TryInflict(attacker, target, skill.Effect))
                 {
-                    Publish($"Infected with {skill.Effect}!", ConsoleColor.Magenta);
+                    _messenger.Publish($"Infected with {skill.Effect}!", ConsoleColor.Magenta);
                 }
             }
 
@@ -339,7 +327,7 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     if (target.Buffs[k] > 0) target.Buffs[k] = 0;
                 }
-                Publish($"{target.Name}'s stat bonuses were nullified!");
+                _messenger.Publish($"{target.Name}'s stat bonuses were nullified!");
             }
             // 2. DEKUNDA: Remove negative debuffs from allies
             else if (skillName == "Dekunda")
@@ -349,29 +337,29 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     if (target.Buffs[k] < 0) target.Buffs[k] = 0;
                 }
-                Publish($"{target.Name}'s stat penalties were nullified!");
+                _messenger.Publish($"{target.Name}'s stat penalties were nullified!");
             }
             // 3. KARNS: Reflect Shields
             else if (skillName == "Tetrakarn")
             {
                 target.PhysKarnActive = true;
-                Publish("Physical Shield deployed.");
+                _messenger.Publish("Physical Shield deployed.");
             }
             else if (skillName == "Makarakarn")
             {
                 target.MagicKarnActive = true;
-                Publish("Magic Shield deployed.");
+                _messenger.Publish("Magic Shield deployed.");
             }
             // 4. CHARGES: Power / Mind Charge
             else if (skillName == "Power Charge")
             {
                 target.IsCharged = true;
-                Publish($"{target.Name} is focusing power!");
+                _messenger.Publish($"{target.Name} is focusing power!");
             }
             else if (skillName == "Mind Charge")
             {
                 target.IsMindCharged = true;
-                Publish($"{target.Name} is focusing spiritual energy!");
+                _messenger.Publish($"{target.Name} is focusing spiritual energy!");
             }
             // 5. BREAKS: Elemental Resistance Removal
             else if (skillName.Contains("Break"))
@@ -381,7 +369,7 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     if (target.BrokenAffinities.ContainsKey(el)) target.BrokenAffinities[el] = 3;
                     else target.BrokenAffinities.Add(el, 3);
-                    Publish($"{target.Name}'s {el} resistance was broken!");
+                    _messenger.Publish($"{target.Name}'s {el} resistance was broken!");
                 }
             }
             // 6. Healing / Recovery
@@ -392,13 +380,13 @@ namespace JRPGPrototype.Logic.Battle
                 if (skill.Effect.Contains("Cure"))
                 {
                     cured = _status.CheckAndExecuteCure(target, skill.Effect);
-                    if (cured) Publish($"{target.Name} was cured!");
+                    if (cured) _messenger.Publish($"{target.Name} was cured!");
                 }
 
                 if (target.IsDead && skill.Effect.Contains("Revive"))
                 {
                     target.CurrentHP = skill.Effect.Contains("fully") ? target.MaxHP : target.MaxHP / 2;
-                    Publish($"{target.Name} was revived!", ConsoleColor.Green);
+                    _messenger.Publish($"{target.Name} was revived!", ConsoleColor.Green);
                 }
                 else if (!target.IsDead)
                 {
@@ -417,14 +405,14 @@ namespace JRPGPrototype.Logic.Battle
                     target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
 
                     int actualHealed = target.CurrentHP - oldHP;
-                    if (!cured) Publish($"{target.Name} recovered {actualHealed} HP.");
+                    if (!cured) _messenger.Publish($"{target.Name} recovered {actualHealed} HP.");
                 }
             }
             // Standard Buffs/Debuffs (Kaja/Nda)
             else if (skill.Category.Contains("Enhance"))
             {
                 _status.ApplyStatChange(skill.Name, target);
-                Publish($"{target.Name}'s stats were modified!");
+                _messenger.Publish($"{target.Name}'s stats were modified!");
             }
 
             return new CombatResult { Type = HitType.Normal, Message = "Success" };
@@ -437,15 +425,15 @@ namespace JRPGPrototype.Logic.Battle
                 string msg = $"{targetName} took {result.DamageDealt} damage";
                 if (result.IsCritical) msg += " (CRITICAL)";
                 if (result.Type == HitType.Weakness) msg += " (WEAKNESS)";
-                Publish(msg);
+                _messenger.Publish(msg);
             }
             else if (result.Type == HitType.Absorb)
             {
-                Publish($"{targetName} absorbed the attack!", ConsoleColor.Green);
+                _messenger.Publish($"{targetName} absorbed the attack!", ConsoleColor.Green);
             }
             else if (result.Type == HitType.Null)
             {
-                Publish($"{targetName} blocked the attack!");
+                _messenger.Publish($"{targetName} blocked the attack!");
             }
         }
 

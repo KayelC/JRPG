@@ -7,8 +7,8 @@ namespace JRPGPrototype.Logic.Battle
 {
     /// <summary>
     /// The Subscriber (Observer) for the Battle System.
-    /// It listens to the ActionProcessor's broadcasts and renders them to the Console via IGameIO.
-    /// This keeps the visual representation completely separate from the mathematical calculation.
+    /// It listens to the centralized Messenger and renders data to the Console.
+    /// This keeps the visual representation completely separate from the logic.
     /// </summary>
     public class BattleLogger
     {
@@ -19,31 +19,31 @@ namespace JRPGPrototype.Logic.Battle
             _io = io;
         }
 
-        // Hooks into the logic engine to start receiving updates.
-        public void Subscribe(ActionProcessor processor)
+        public void Subscribe(IBattleMessenger messenger)
         {
-            processor.OnActionPerformed += HandleBattleMessage;
-            processor.OnAnalysisRequested += HandleAnalysisDisplay;
+            messenger.OnMessagePublished += HandleBattleMessage;
         }
 
-        /// <summary>
-        /// Unhooks from the logic engine. 
-        /// Important in Game Dev to prevent memory leaks when objects are destroyed (e.g., leaving battle).
-        /// </summary>
-        public void Unsubscribe(ActionProcessor processor)
+        public void Unsubscribe(IBattleMessenger messenger)
         {
-            processor.OnActionPerformed -= HandleBattleMessage;
-            processor.OnAnalysisRequested -= HandleAnalysisDisplay;
+            messenger.OnMessagePublished -= HandleBattleMessage;
         }
 
-        /// <summary>
-        /// The actual event handler. 
-        /// Translates the raw data (BattleMessageArgs) into user feedback (Console writes/waits).
-        /// </summary>
+        // Global entry point for all battle messages.
         private void HandleBattleMessage(object sender, BattleMessageArgs e)
         {
-            // 1. Render the text with the requested color
-            _io.WriteLine(e.Message, e.Color);
+            // If the message contains a target, perform a full Analysis UI render
+            if (e.AnalysisTarget != null)
+            {
+                HandleAnalysisDisplay(e.AnalysisTarget);
+                return;
+            }
+
+            // Otherwise, render a standard log line
+            if (!string.IsNullOrEmpty(e.Message))
+            {
+                _io.WriteLine(e.Message, e.Color);
+            }
 
             // 2. Handle dramatic pacing (if requested by logic)
             if (e.Delay > 0)
@@ -54,12 +54,13 @@ namespace JRPGPrototype.Logic.Battle
             // 3. Handle forced pauses (e.g., tutorial prompts or major events)
             if (e.WaitForInput)
             {
-                _io.WriteLine("Press any key...");
+                _io.WriteLine("Press any key to continue...", ConsoleColor.Gray);
                 _io.ReadKey();
             }
         }
 
-        private void HandleAnalysisDisplay(object sender, Combatant target)
+        // Handles the complex multi-line rendering of an enemy's stat sheet.
+        private void HandleAnalysisDisplay(Combatant target)
         {
             _io.Clear();
             _io.WriteLine($"=== ANALYSIS: {target.Name} ===", ConsoleColor.Yellow);
@@ -72,10 +73,10 @@ namespace JRPGPrototype.Logic.Battle
             {
                 if (elem == Element.None) continue;
 
-                // Note: The UI just reads the data, it doesn't calculate anything.
+                // The UI reads the data from the ActivePersona
                 Affinity aff = target.ActivePersona?.GetAffinity(elem) ?? Affinity.Normal;
 
-                _io.Write($" {elem,-10}: ");
+                _io.Write($"  {elem,-10}: ");
 
                 ConsoleColor affColor = aff switch
                 {
@@ -91,7 +92,7 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             _io.WriteLine("--------------------------------------------------");
-            _io.WriteLine("Press any key to continue...", ConsoleColor.Gray);
+            _io.WriteLine("Press any key to return to battle...", ConsoleColor.Gray);
             _io.ReadKey();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using JRPGPrototype.Entities;
 
 namespace JRPGPrototype.Logic.Battle
 {
@@ -17,15 +18,20 @@ namespace JRPGPrototype.Logic.Battle
         // How long (in milliseconds) the UI should pause after showing this message to create dramatic pacing.
         public int Delay { get; }
 
+
         // If true, the UI should halt execution until the player acknowledges the message.
         public bool WaitForInput { get; }
 
-        public BattleMessageArgs(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false)
+        // Allows the logic to pass a full combatant for complex UI rendering (Analysis)
+        public Combatant AnalysisTarget { get; }
+
+        public BattleMessageArgs(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false, Combatant analysisTarget = null)
         {
             Message = message;
             Color = color;
             Delay = delay;
             WaitForInput = waitForInput;
+            AnalysisTarget = analysisTarget;
         }
     }
 }

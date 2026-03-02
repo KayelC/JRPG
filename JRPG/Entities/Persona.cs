@@ -29,7 +29,7 @@ namespace JRPGPrototype.Entities
             return AffinityMap.ContainsKey(elem) ? AffinityMap[elem] : Affinity.Normal;
         }
 
-        public void GainExp(int amount, IGameIO io = null)
+        public void GainExp(int amount, IGameIO? io = null)
         {
             Exp += amount;
             while (Exp >= ExpRequired)

@@ -97,7 +97,7 @@ namespace JRPGPrototype.Logic.Battle
             return options[choice];
         }
 
-        public List<Combatant> SelectTarget(Combatant actor, SkillData skill = null, ItemData item = null, bool isTalk = false)
+        public List<Combatant>? SelectTarget(Combatant actor, SkillData? skill = null, ItemData? item = null, bool isTalk = false)
         {
             string context = GetBattleContext(actor);
             bool targetsAllies = false;

@@ -9,7 +9,7 @@ namespace JRPGPrototype.Services
     /// </summary>
     public static class MenuUI
     {
-        public static int RenderMenu(IGameIO io, string header, List<string> options, int initialIndex = 0, List<bool> disabledOptions = null, Action<int> onHighlight = null)
+        public static int RenderMenu(IGameIO io, string header, List<string> options, int initialIndex = 0, List<bool>? disabledOptions = null, Action<int>? onHighlight = null)
         {
             int selectedIndex = initialIndex;
             if (selectedIndex < 0) selectedIndex = 0;

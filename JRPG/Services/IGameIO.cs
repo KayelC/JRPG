@@ -28,6 +28,6 @@ namespace JRPGPrototype.Services
         void SetCursorVisible(bool visible);
 
         // Abstracting the Menu System
-        int RenderMenu(string header, List<string> options, int initialIndex, List<bool> disabledOptions = null, Action<int> onHighlight = null);
+        int RenderMenu(string header, List<string> options, int initialIndex, List<bool>? disabledOptions = null, Action<int>? onHighlight = null);
     }
 }

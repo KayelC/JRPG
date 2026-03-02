@@ -83,7 +83,7 @@ namespace JRPGPrototype.Logic.Fusion
         /// Commits the fusion ritual to the game state.
         /// Dispatches the transaction to specific logic paths based on the owner's ClassType.
         /// </summary>
-        public void ExecuteFusion(Combatant owner, List<object> materials, string resultId, List<string> chosenSkills, Combatant sacrifice = null)
+        public void ExecuteFusion(Combatant owner, List<object> materials, string resultId, List<string> chosenSkills, Combatant? sacrifice = null)
         {
             switch (owner.Class)
             {
@@ -107,7 +107,7 @@ namespace JRPGPrototype.Logic.Fusion
         /// Logic for consuming biological Demon entities to create a new Allied Combatant.
         /// Allies follow progression rules (start with base skills).
         /// </summary>
-        private void ExecuteDemonToDemonFusion(Combatant owner, List<Combatant> materials, string resultId, List<string> chosenSkills, Combatant sacrifice)
+        private void ExecuteDemonToDemonFusion(Combatant owner, List<Combatant> materials, string resultId, List<string> chosenSkills, Combatant? sacrifice)
         {
             // 1. Transaction Start: Remove all materials from the world
             List<Combatant> allParticipants = new List<Combatant>(materials);
@@ -213,7 +213,7 @@ namespace JRPGPrototype.Logic.Fusion
         /// <param name="owner">The player combatant performing the fusion.</param>
         /// <param name="parentToModify">The specific combatant demon (not elemental) to rank up.</param>
         /// <param name="sacrifice">An optional third demon sacrificed for bonus XP.</param>
-        public void ExecuteRankUpFusion(Combatant owner, object parentToModify, List<string> chosenSkills, Combatant sacrifice)
+        public void ExecuteRankUpFusion(Combatant owner, object parentToModify, List<string> chosenSkills, Combatant? sacrifice)
         {
             ExecuteRankChange(owner, parentToModify, 1, chosenSkills, sacrifice);
         }
@@ -224,7 +224,7 @@ namespace JRPGPrototype.Logic.Fusion
         /// <param name="owner">The player combatant performing the fusion.</param>
         /// <param name="parentToModify">The specific combatant demon (not elemental) to rank down.</param>
         /// <param name="sacrifice">An optional third demon sacrificed for bonus XP.</param>
-        public void ExecuteRankDownFusion(Combatant owner, object parentToModify, List<string> chosenSkills, Combatant sacrifice)
+        public void ExecuteRankDownFusion(Combatant owner, object parentToModify, List<string> chosenSkills, Combatant? sacrifice)
         {
             ExecuteRankChange(owner, parentToModify, -1, chosenSkills, sacrifice);
         }
@@ -236,7 +236,7 @@ namespace JRPGPrototype.Logic.Fusion
         /// <param name="parentToModify">The original combatant demon undergoing the rank change.</param>
         /// <param name="rankDirection">+1 for Rank Up, -1 for Rank Down.</param>
         /// <param name="sacrifice">An optional third demon sacrificed for bonus XP.</param>
-        private void ExecuteRankChange(Combatant owner, object parentToModify, int rankDirection, List<string> chosenSkills, Combatant sacrifice)
+        private void ExecuteRankChange(Combatant owner, object parentToModify, int rankDirection, List<string> chosenSkills, Combatant? sacrifice)
         {
             if (owner.Class == ClassType.Operator)
             {
@@ -304,7 +304,7 @@ namespace JRPGPrototype.Logic.Fusion
         /// <param name="demonToBoost">The demon whose stats will be boosted.</param>
         /// <param name="mitamaParent">The Mitama demon being consumed for the boost.</param>
         /// <param name="sacrifice">An optional third demon sacrificed for bonus XP.</param>
-        public void ExecuteStatBoostFusion(Combatant owner, object entityToBoost, object mitamaParent, List<string> chosenSkills, Combatant sacrifice)
+        public void ExecuteStatBoostFusion(Combatant owner, object entityToBoost, object mitamaParent, List<string> chosenSkills, Combatant? sacrifice)
         {
             if (owner.Class == ClassType.Operator)
             {

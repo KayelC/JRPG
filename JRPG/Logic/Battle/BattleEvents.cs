@@ -28,7 +28,7 @@ namespace JRPGPrototype.Logic.Battle
         // Allows the logic to pass a full combatant for complex UI rendering (Analysis)
         public Combatant AnalysisTarget { get; }
 
-        public BattleMessageArgs(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false, Combatant analysisTarget = null, bool clearScreen = false)
+        public BattleMessageArgs(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false, Combatant? analysisTarget = null, bool clearScreen = false)
         {
             Message = message;
             Color = color;

@@ -24,9 +24,7 @@ namespace JRPGPrototype.Services
             Console.ForegroundColor = previousColor;
         }
 
-        /// <summary>
-        /// Writes text with the specified color without a trailing newline.
-        /// </summary>
+        // Writes text with the specified color without a trailing newline.
         public void Write(string message, ConsoleColor color = ConsoleColor.White)
         {
             ConsoleColor previousColor = Console.ForegroundColor;
@@ -47,7 +45,7 @@ namespace JRPGPrototype.Services
 
         #region User Input
 
-        public string ReadLine() => Console.ReadLine();
+        public string ReadLine() => Console.ReadLine() ?? string.Empty;
 
         public ConsoleKeyInfo ReadKey(bool intercept = true) => Console.ReadKey(intercept);
 
@@ -55,25 +53,13 @@ namespace JRPGPrototype.Services
 
         #region Terminal State Management
 
-        public void SetForegroundColor(ConsoleColor color)
-        {
-            Console.ForegroundColor = color;
-        }
+        public void SetForegroundColor(ConsoleColor color) => Console.ForegroundColor = color;
 
-        public void SetBackgroundColor(ConsoleColor color)
-        {
-            Console.BackgroundColor = color;
-        }
+        public void SetBackgroundColor(ConsoleColor color) => Console.BackgroundColor = color;
 
-        public void ResetColor()
-        {
-            Console.ResetColor();
-        }
+        public void ResetColor() => Console.ResetColor();
 
-        public void SetCursorVisible(bool visible)
-        {
-            Console.CursorVisible = visible;
-        }
+        public void SetCursorVisible(bool visible) => Console.CursorVisible = visible;
 
         #endregion
 
@@ -81,9 +67,9 @@ namespace JRPGPrototype.Services
 
         /// <summary>
         /// Renders a dynamic menu via the MenuUI utility.
-        /// Fix: Now passes 'this' as the IGameIO provider to MenuUI.
+        /// Now passes 'this' as the IGameIO provider to MenuUI.
         /// </summary>
-        public int RenderMenu(string header, List<string> options, int initialIndex, List<bool> disabledOptions = null, Action<int> onHighlight = null)
+        public int RenderMenu(string header, List<string> options, int initialIndex, List<bool>? disabledOptions = null, Action<int>? onHighlight = null)
         {
             return MenuUI.RenderMenu(this, header, options, initialIndex, disabledOptions, onHighlight);
         }

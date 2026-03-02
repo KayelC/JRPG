@@ -10,10 +10,10 @@ namespace JRPGPrototype.Logic.Battle
     {
         public event EventHandler<BattleMessageArgs> OnMessagePublished;
 
-        public void Publish(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false)
+        public void Publish(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false, Combat analysisTarget = null, bool clearScreen = false)
         {
             // Broadcast to anyone listening
-            OnMessagePublished?.Invoke(this, new BattleMessageArgs(message, color, delay, waitForInput));
+            OnMessagePublished?.Invoke(this, new BattleMessageArgs(message, color, delay, waitForInput, analysisTarget, clearScreen));
         }
     }
 }

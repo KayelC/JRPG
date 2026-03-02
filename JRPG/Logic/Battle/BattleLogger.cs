@@ -29,29 +29,38 @@ namespace JRPGPrototype.Logic.Battle
             messenger.OnMessagePublished -= HandleBattleMessage;
         }
 
-        // Global entry point for all battle messages.
+        /// <summary>
+        /// Translates BattleMessageArgs into physical output.
+        /// Handles Clearing, Writing, Pacing, and Analysis screens.
+        /// </summary>
         private void HandleBattleMessage(object sender, BattleMessageArgs e)
         {
-            // If the message contains a target, perform a full Analysis UI render
+            // 1. Handle screen clear requests from Logic
+            if (e.ClearScreen)
+            {
+                _io.Clear();
+            }
+
+            // 2. Handle full Analysis stat-sheet rendering
             if (e.AnalysisTarget != null)
             {
                 HandleAnalysisDisplay(e.AnalysisTarget);
                 return;
             }
 
-            // Otherwise, render a standard log line
+            // 3. Standard Logging Logic
             if (!string.IsNullOrEmpty(e.Message))
             {
                 _io.WriteLine(e.Message, e.Color);
             }
 
-            // 2. Handle dramatic pacing (if requested by logic)
+            // 4. Handle Delay requests
             if (e.Delay > 0)
             {
                 _io.Wait(e.Delay);
             }
 
-            // 3. Handle forced pauses (e.g., tutorial prompts or major events)
+            // 5. Handle forced user acknowledgments
             if (e.WaitForInput)
             {
                 _io.WriteLine("Press any key to continue...", ConsoleColor.Gray);
@@ -59,7 +68,10 @@ namespace JRPGPrototype.Logic.Battle
             }
         }
 
-        // Handles the complex multi-line rendering of an enemy's stat sheet.
+        /// <summary>
+        /// Handles the complex multi-line rendering of an enemy's stat sheet.
+        /// Moved from ActionProcessor to maintain UI/Logic separation.
+        /// </summary>
         private void HandleAnalysisDisplay(Combatant target)
         {
             _io.Clear();

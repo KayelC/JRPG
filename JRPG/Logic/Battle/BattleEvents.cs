@@ -22,16 +22,20 @@ namespace JRPGPrototype.Logic.Battle
         // If true, the UI should halt execution until the player acknowledges the message.
         public bool WaitForInput { get; }
 
+        // Clears the UI
+        public bool ClearScreen { get; }
+
         // Allows the logic to pass a full combatant for complex UI rendering (Analysis)
         public Combatant AnalysisTarget { get; }
 
-        public BattleMessageArgs(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false, Combatant analysisTarget = null)
+        public BattleMessageArgs(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false, Combatant analysisTarget = null, bool clearScreen = false)
         {
             Message = message;
             Color = color;
             Delay = delay;
             WaitForInput = waitForInput;
             AnalysisTarget = analysisTarget;
+            ClearScreen = clearScreen;
         }
     }
 }

@@ -12,6 +12,6 @@ namespace JRPGPrototype.Logic.Battle
         event EventHandler<BattleMessageArgs> OnMessagePublished;
 
         // Common method to send a message into the event pipeline.
-        void Publish(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false);
+        void Publish(string message, ConsoleColor color = ConsoleColor.Gray, int delay = 0, bool waitForInput = false, Combatant analysisTarget = null, bool clearScreen = false);
     }
 }

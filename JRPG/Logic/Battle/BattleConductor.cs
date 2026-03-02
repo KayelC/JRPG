@@ -73,7 +73,7 @@ namespace JRPGPrototype.Logic.Battle
             // Pass the messenger into the logic processor
             _processor = new ActionProcessor(_statusRegistry, _playerKnowledge, _messenger);
 
-            // The Logger subscribes to the shared mediator tower
+            // 3. Initialize the Observer
             _logger = new BattleLogger(_io);
             _logger.Subscribe(_messenger);
 
@@ -85,10 +85,13 @@ namespace JRPGPrototype.Logic.Battle
         // Entry point for the encounter. Handles initiative and the phase loop.
         public void StartBattle()
         {
-            _io.Clear();
-            _io.WriteLine("=== ENEMY ENCOUNTER ===");
-            foreach (var e in _enemies) _io.WriteLine($"Appeared: {e.Name} (Lv.{e.Level})");
-            _io.Wait(1200);
+
+            _messenger.Publish("=== ENEMY ENCOUNTER ===", ConsoleColor.White, 1200, clearScreen: true);
+
+            foreach (var e in _enemies)
+            {
+                _messenger.Publish($"Appeared: {e.Name} (Lv.{e.Level})");
+            }
 
             // 1. Initiative Roll (Weighted Agility)
             double pAvgAgi = _party.GetAliveMembers().Any() ? _party.GetAliveMembers().Average(c => c.GetStat(StatType.Ag)) : 0;
@@ -96,9 +99,9 @@ namespace JRPGPrototype.Logic.Battle
 
             bool isPlayerTurn = CombatMath.RollInitiative(pAvgAgi, eAvgAgi);
 
-            _io.WriteLine(isPlayerTurn ? "Player Party attacks first!" : "Enemy Party attacks first!",
-                isPlayerTurn ? ConsoleColor.Cyan : ConsoleColor.Red);
-            _io.Wait(1000);
+            // Event-driven initiative report
+            _messenger.Publish(isPlayerTurn ? "Player Party attacks first!" : "Enemy Party attacks first!",
+                isPlayerTurn ? ConsoleColor.Cyan : ConsoleColor.Red, 1000);
 
             // Auto-Kaja Passives on Turn 1
             if (isPlayerTurn)
@@ -107,7 +110,7 @@ namespace JRPGPrototype.Logic.Battle
                 foreach (var actor in allies)
                 {
                     _statusRegistry.ProcessInitialPassives(actor, allies);
-            }
+                }
             }
             else
             {
@@ -116,11 +119,12 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     // For Enemy Passives, allies = entire enemy side
                     _statusRegistry.ProcessInitialPassives(actor, enemies);
+                }
             }
-            }
+
             // Show HUD update for turn 1 buffs
             _ui.ForceRefreshHUD();
-            _io.Wait(800);
+            _messenger.Publish(null, delay: 800);
 
             // 2. Main Phase Loop
             while (!BattleEnded)
@@ -136,7 +140,7 @@ namespace JRPGPrototype.Logic.Battle
             // 3. Post-Battle Resolution
             ResolveBattleEnd();
 
-            // Clean up subscription to messenger
+            // Cleanup: Always unsubscribe when leaving battle to prevent memory leaks
             _logger.Unsubscribe(_messenger);
         }
 
@@ -405,7 +409,7 @@ namespace JRPGPrototype.Logic.Battle
                     {
                         // Reprompt if the item had no effect
                         ExecuteAction(actor, isPlayerSide, turnState);
-                    }
+                }
                 }
                 else if (skill == null)
                 {
@@ -422,7 +426,8 @@ namespace JRPGPrototype.Logic.Battle
                     }
                     else _turnEngine.ConsumeAction(HitType.Normal, false);
                 }
-                _io.Wait(1000);
+
+                _messenger.Publish(null, delay: 1000);
             }
         }
 
@@ -461,7 +466,7 @@ namespace JRPGPrototype.Logic.Battle
         {
             // Check session-recruited list before starting
             if (_sessionRecruitedIds.Contains(target.SourceId))
-            {   
+            {
                 // We treat this as a "Familiar" encounter but simplified
                 _messenger.Publish($"{target.Name} has already been spoken to.", ConsoleColor.Gray, 800);
                 return; // Does not consume a turn
@@ -526,13 +531,13 @@ namespace JRPGPrototype.Logic.Battle
         {
             if (PlayerWon)
             {
-                _io.WriteLine("\nVICTORY!", ConsoleColor.Green);
+                _messenger.Publish("\nVICTORY!", ConsoleColor.Green, 500);
 
                 // Use CombatMath for dynamic reward calculation
                 int totalExp = _enemies.Sum(e => CombatMath.CalculateExpYield(e));
                 int totalMacca = _enemies.Sum(e => CombatMath.CalculateMaccaYield(e));
 
-                _io.WriteLine($"Gained {totalExp} EXP and {totalMacca} Macca.");
+                _messenger.Publish($"Gained {totalExp} EXP and {totalMacca} Macca.", ConsoleColor.Gray, 800);
 
                 foreach (var m in _party.GetAliveMembers())
                 {
@@ -543,7 +548,7 @@ namespace JRPGPrototype.Logic.Battle
             }
             else if (!Escaped && !TraestoUsed)
             {
-                _io.WriteLine("\nDEFEAT...", ConsoleColor.Red);
+                _messenger.Publish("\nDEFEAT...", ConsoleColor.Red, 1000);
             }
 
             foreach (var member in _party.ActiveParty.Concat(_party.ReserveMembers))
@@ -551,8 +556,7 @@ namespace JRPGPrototype.Logic.Battle
                 member.CleanupBattleState();
             }
 
-            _io.WriteLine("Press any key to exit battle...");
-            _io.ReadKey();
+            _messenger.Publish("Press any key to exit battle...", ConsoleColor.Gray, waitForInput: true);
         }
     }
 }

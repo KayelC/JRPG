@@ -12,6 +12,7 @@ namespace JRPGPrototype.Logic.Battle
     /// The Root Orchestrator of the Battle Sub-System.
     /// Manages the high-level flow of the Press Turn battle loop.
     /// Delegates specific logic to the Math, Turn, Status, AI, and UI sub-modules.
+    /// Utilizes the IBattleMessenger mediator to decouple logic from presentation.
     /// </summary>
     public class BattleConductor
     {
@@ -21,10 +22,14 @@ namespace JRPGPrototype.Logic.Battle
         private readonly InventoryManager _inv;
         private readonly EconomyManager _eco;
 
+        // Shared Communication Mediator
+        private readonly IBattleMessenger _messenger;
+
         // Sub-System Engines
         private readonly PressTurnEngine _turnEngine;
         private readonly StatusRegistry _statusRegistry;
         private readonly ActionProcessor _processor;
+        private readonly BattleLogger _logger;
         private readonly BehaviorEngine _ai;
         private readonly InteractionBridge _ui;
         private readonly NegotiationEngine _negotiationEngine;
@@ -58,18 +63,26 @@ namespace JRPGPrototype.Logic.Battle
             _playerKnowledge = playerKnowledge;
             _isBossBattle = isBoss;
 
-            // Initialize Sub-Systems
+            // 1. Initialize the Mediator (The Transmission Tower)
+            _messenger = new BattleMessenger();
+
+            // 2. Initialize Sub-Systems
             _turnEngine = new PressTurnEngine();
             _statusRegistry = new StatusRegistry();
-            _processor = new ActionProcessor(_io, _statusRegistry, _playerKnowledge);
+
+            // Pass the messenger into the logic processor
+            _processor = new ActionProcessor(_statusRegistry, _playerKnowledge, _messenger);
+
+            // The Logger subscribes to the shared mediator tower
+            _logger = new BattleLogger(_io);
+            _logger.Subscribe(_messenger);
+
             _ai = new BehaviorEngine(_statusRegistry);
             _ui = new InteractionBridge(_io, _party, _inv, _enemies, _turnEngine, _playerKnowledge);
             _negotiationEngine = new NegotiationEngine(_io, _party, _inv, _eco);
         }
 
-        /// <summary>
-        /// Entry point for the encounter. Handles initiative and the phase loop.
-        /// </summary>
+        // Entry point for the encounter. Handles initiative and the phase loop.
         public void StartBattle()
         {
             _io.Clear();
@@ -94,7 +107,7 @@ namespace JRPGPrototype.Logic.Battle
                 foreach (var actor in allies)
                 {
                     _statusRegistry.ProcessInitialPassives(actor, allies);
-                }
+            }
             }
             else
             {
@@ -103,7 +116,7 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     // For Enemy Passives, allies = entire enemy side
                     _statusRegistry.ProcessInitialPassives(actor, enemies);
-                }
+            }
             }
             // Show HUD update for turn 1 buffs
             _ui.ForceRefreshHUD();
@@ -122,11 +135,12 @@ namespace JRPGPrototype.Logic.Battle
 
             // 3. Post-Battle Resolution
             ResolveBattleEnd();
+
+            // Clean up subscription to messenger
+            _logger.Unsubscribe(_messenger);
         }
 
-        /// <summary>
-        /// Orchestrates a single side's phase (Player or Enemy).
-        /// </summary>
+        // Orchestrates a single side's phase (Player or Enemy).
         private void ExecutePhase(bool isPlayerSide)
         {
             var activeSide = isPlayerSide ? _party.GetAliveMembers() : _enemies.Where(e => !e.IsDead).ToList();
@@ -152,13 +166,12 @@ namespace JRPGPrototype.Logic.Battle
 
                 if (turnState == TurnStartResult.Skip)
                 {
-                    _io.WriteLine($"{actor.Name} is unable to move!", ConsoleColor.Magenta);
+                    _messenger.Publish($"{actor.Name} is unable to move!", ConsoleColor.Magenta, 800);
                     _turnEngine.ConsumeAction(HitType.Normal, false); // Losing turn skips 1 icon
-                    _io.Wait(800);
                 }
                 else if (turnState == TurnStartResult.FleeBattle)
                 {
-                    _io.WriteLine($"{actor.Name} fled in fear!", ConsoleColor.Red);
+                    _messenger.Publish($"{actor.Name} fled in fear!", ConsoleColor.Red, 1000);
                     Escaped = true;
                     BattleEnded = true;
                     return;
@@ -168,12 +181,12 @@ namespace JRPGPrototype.Logic.Battle
                     // Differentiate between Player Demon and Enemy Demon fleeing
                     if (isPlayerSide)
                     {
-                        _io.WriteLine($"{actor.Name} returned to COMP in terror!", ConsoleColor.Red);
+                        _messenger.Publish($"{actor.Name} returned to COMP in terror!", ConsoleColor.Red, 400);
                         _party.ReturnDemon(actor, actor); // Self-return logic
                     }
                     else
                     {
-                        _io.WriteLine($"{actor.Name} has fled!", ConsoleColor.Yellow);
+                        _messenger.Publish($"{actor.Name} has fled!", ConsoleColor.Yellow, 400);
                         _enemies.Remove(actor);
                         actorRemoved = true;
                     }
@@ -190,14 +203,14 @@ namespace JRPGPrototype.Logic.Battle
 
                 // --- 2. TURN END (Recovery & Decay) ---
                 var endLogs = _statusRegistry.ProcessTurnEnd(actor);
-                foreach (var log in endLogs) _io.WriteLine(log, ConsoleColor.Gray);
+                foreach (var log in endLogs) _messenger.Publish(log, ConsoleColor.Gray);
 
                 // Handle demons dying and returning to stock
                 foreach (var p in _party.ActiveParty.ToList())
                 {
                     if (p.IsDead && p.Class == ClassType.Demon)
                     {
-                        _io.WriteLine($"{p.Name} faded away and returned to stock...");
+                        _messenger.Publish($"{p.Name} faded away and returned to stock...");
                         // Use actor as owner assuming player owns all party demons in current build
                         _party.ReturnDemon(actor, p);
                     }
@@ -257,7 +270,7 @@ namespace JRPGPrototype.Logic.Battle
                     else if (choice == "Guard")
                     {
                         actor.IsGuarding = true;
-                        _io.WriteLine($"{actor.Name} is guarding.");
+                        _messenger.Publish($"{actor.Name} is guarding.");
                         _turnEngine.ConsumeAction(HitType.Normal, false);
                         actionCommitted = true;
                         return; // Turn finished
@@ -281,7 +294,7 @@ namespace JRPGPrototype.Logic.Battle
                             // ATOMIC TRANSACTION: PartyManager handles stock and party state
                             if (_party.SummonDemon(actor, comp.target))
                             {
-                                _io.WriteLine($"{actor.Name} summoned {comp.target.Name}!");
+                                _messenger.Publish($"{actor.Name} summoned {comp.target.Name}!");
                                 _turnEngine.ConsumeAction(HitType.Normal, false);
                                 actionCommitted = true;
                                 return;
@@ -292,7 +305,7 @@ namespace JRPGPrototype.Logic.Battle
                             // ATOMIC TRANSACTION: PartyManager handles stock and party state
                             if (_party.ReturnDemon(actor, comp.target))
                             {
-                                _io.WriteLine($"{actor.Name} returned {comp.target.Name} to stock.");
+                                _messenger.Publish($"{actor.Name} returned {comp.target.Name} to stock.");
                                 _turnEngine.ConsumeAction(HitType.Normal, false);
                                 actionCommitted = true;
                                 return;
@@ -309,7 +322,7 @@ namespace JRPGPrototype.Logic.Battle
                     else if (choice == "Pass")
                     {
                         _turnEngine.Pass();
-                        _io.WriteLine($"{actor.Name} passes.");
+                        _messenger.Publish($"{actor.Name} passes.");
                         actionCommitted = true;
                         return;
                     }
@@ -330,16 +343,17 @@ namespace JRPGPrototype.Logic.Battle
                             actionCommitted = true;
                         }
                     }
-                    else if (choice == "Tactics")
-                    {
-                        HandleTactics(actor);
-                        return;
-                    }
                     else if (choice == "Talk")
                     {
                         targets = _ui.SelectTarget(actor, null, null, true);
                         if (targets != null) HandleNegotiation(actor, targets[0]);
                         return;
+                    }
+                    else if (choice == "Tactics")
+                    {
+                        HandleTactics(actor);
+                        if (BattleEnded) { actionCommitted = true; return; }
+                        continue;
                     }
                 }
                 // 3. Heuristic AI
@@ -367,7 +381,7 @@ namespace JRPGPrototype.Logic.Battle
                 if (targets != null && targets.Count == 0 && skill == null)
                 {
                     _turnEngine.Pass();
-                    _io.WriteLine($"{actor.Name} passes.");
+                    _messenger.Publish($"{actor.Name} passes.");
                     return;
                 }
 
@@ -401,54 +415,14 @@ namespace JRPGPrototype.Logic.Battle
                 else
                 {
                     var results = _processor.ExecuteSkill(actor, targets, skill);
-                    if (results.Any()) { HitType worst = results.Max(r => r.Type); _turnEngine.ConsumeAction(worst, results.Any(r => r.IsCritical)); }
+                    if (results.Any())
+                    {
+                        HitType worst = results.Max(r => r.Type);
+                        _turnEngine.ConsumeAction(worst, results.Any(r => r.IsCritical));
+                    }
                     else _turnEngine.ConsumeAction(HitType.Normal, false);
                 }
                 _io.Wait(1000);
-            }
-        }
-
-        private void HandleNegotiation(Combatant actor, Combatant target)
-        {
-            // Check session-recruited list before starting
-            if (_sessionRecruitedIds.Contains(target.SourceId))
-            {
-                // We treat this as a "Familiar" encounter but simplified
-                _io.WriteLine($"{target.Name} has already been spoken to.");
-                _io.Wait(800);
-                return; // Does not consume a turn
-            }
-
-            NegotiationResult result = _negotiationEngine.StartNegotiation(actor, target, _enemies);
-            switch (result)
-            {
-                case NegotiationResult.Success:
-                    _io.WriteLine($"{target.Name} joined your party!");
-
-                    // Use the Factory to create the demon to ensure correct stats
-                    // We can use the target.SourceId directly as CreateEnemy handles ID resolution
-                    var newDemon = Combatant.CreateEnemy(target.SourceId);
-
-                    // Add to player's stock
-                    actor.DemonStock.Add(newDemon);
-                    _sessionRecruitedIds.Add(target.SourceId); // Track for this battle
-
-                    _enemies.Remove(target);
-                    _turnEngine.ConsumeAction(HitType.Normal, false);
-                    break;
-
-                case NegotiationResult.Failure:
-                    _io.WriteLine("Negotiation failed! Your turn ends.");
-                    _turnEngine.TerminatePhase();
-                    break;
-
-                case NegotiationResult.Trick:
-                case NegotiationResult.Flee:
-                case NegotiationResult.FamiliarFlee:
-                    _io.WriteLine($"{target.Name} left the battle.");
-                    _enemies.Remove(target);
-                    _turnEngine.ConsumeAction(HitType.Miss, false);
-                    break;
             }
         }
 
@@ -464,22 +438,64 @@ namespace JRPGPrototype.Logic.Battle
                 {
                     Escaped = true;
                     BattleEnded = true;
-                    _io.WriteLine("Escaped safely!");
-                    _io.Wait(1000);
-                    return;
+                    _messenger.Publish("Escaped safely!", ConsoleColor.Cyan, 1000);
                 }
-                _io.WriteLine("Failed to escape!");
-                _io.Wait(1000);
-                _turnEngine.ConsumeAction(HitType.Normal, false);
+                else
+                {
+                    _messenger.Publish("Failed to escape!", ConsoleColor.Yellow, 1000);
+                    _turnEngine.ConsumeAction(HitType.Normal, false);
+                }
             }
-            if (tactic == "Strategy")
+            else if (tactic == "Strategy")
             {
                 var stratTarget = _ui.SelectStrategyTarget();
                 if (stratTarget != null)
                 {
                     stratTarget.BattleControl = (stratTarget.BattleControl == ControlState.ActFreely) ? ControlState.DirectControl : ControlState.ActFreely;
-                    _io.WriteLine($"{stratTarget.Name} is now set to {stratTarget.BattleControl}.");
+                    _messenger.Publish($"{stratTarget.Name} is now set to {stratTarget.BattleControl}.", ConsoleColor.Gray, 800);
                 }
+            }
+        }
+
+        private void HandleNegotiation(Combatant actor, Combatant target)
+        {
+            // Check session-recruited list before starting
+            if (_sessionRecruitedIds.Contains(target.SourceId))
+            {   
+                // We treat this as a "Familiar" encounter but simplified
+                _messenger.Publish($"{target.Name} has already been spoken to.", ConsoleColor.Gray, 800);
+                return; // Does not consume a turn
+            }
+
+            NegotiationResult result = _negotiationEngine.StartNegotiation(actor, target, _enemies);
+            switch (result)
+            {
+                case NegotiationResult.Success:
+                    _messenger.Publish($"{target.Name} joined your party!", ConsoleColor.Green);
+                    // Use the Factory to create the demon to ensure correct stats
+                    // We can use the target.SourceId directly as CreateEnemy handles ID resolution
+                    var newDemon = Combatant.CreateEnemy(target.SourceId);
+
+                    // Add to player's stock
+                    actor.DemonStock.Add(newDemon);
+                    _sessionRecruitedIds.Add(target.SourceId); // Track for this battle
+
+                    _enemies.Remove(target);
+                    _turnEngine.ConsumeAction(HitType.Normal, false);
+                    break;
+
+                case NegotiationResult.Failure:
+                    _messenger.Publish("Negotiation failed! Your turn ends.", ConsoleColor.Red);
+                    _turnEngine.TerminatePhase();
+                    break;
+
+                case NegotiationResult.Trick:
+                case NegotiationResult.Flee:
+                case NegotiationResult.FamiliarFlee:
+                    _messenger.Publish($"{target.Name} left the battle.");
+                    _enemies.Remove(target);
+                    _turnEngine.ConsumeAction(HitType.Miss, false);
+                    break;
             }
         }
 

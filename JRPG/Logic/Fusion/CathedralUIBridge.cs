@@ -82,7 +82,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                     string race = c.ActivePersona?.Race ?? "Unknown";
                     string rank = c.ActivePersona?.Rank > 0 ? $"(Rk.{c.ActivePersona.Rank})" : "";
                     labels.Add($"{c.Name,-15} (Lv.{c.Level}) {race} {rank}");
-            }
+                }
                 else if (item is Persona p)
                 {
                     string rank = p.Rank > 0 ? $"(Rk.{p.Rank})" : "";
@@ -105,6 +105,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
         /// Deterministic Skill Selection.
         /// Allows the player to manually select exactly which skills pass to the child.
         /// Now "Grays Out" skills that the target already possesses in its base kit.
+        /// Allows confirming 0 skills to avoid soft-locks when all are known.
         /// </summary>
         public List<string> SelectInheritedSkills(List<string> pool, int maxSlots, List<string> inherentSkills)
         {
@@ -135,13 +136,15 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
 
                     labels.Add(label);
 
-                    // Logic: Disable if already picked OR if it's already in the base kit
+                    // Disable if already picked OR if it's already in the base kit
                     disabledList.Add(isPicked || isAlreadyKnown);
                 }
 
-                if (selected.Count > 0) labels.Add("Confirm Selection");
-                else labels.Add("Abort Fusion");
+                // Always provide both options separately to allow Zero-Inheritance paths
+                labels.Add("Confirm Selection");
+                disabledList.Add(false);
 
+                labels.Add("Abort Fusion");
                 disabledList.Add(false);
 
                 // Render with secondary info callback to show skill effect descriptions
@@ -156,11 +159,16 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
 
                 if (choice == -1) return null;
 
-                // Handle the "Confirm/Abort" bottom option
+                // Handle the Abort option
                 if (choice == labels.Count - 1)
                 {
-                    if (selected.Count == 0) return null; // Abort
-                    break; // Confirm
+                    return null;
+                }
+
+                // Handle Confirm
+                if (choice == labels.Count - 2)
+                {
+                    break;
                 }
 
                 selected.Add(pool[choice]);
@@ -208,30 +216,30 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                 switch (operationType)
                 {
                     case FusionOperationType.CreateNewDemon:
-                    _io.WriteLine($"Form  : {stagedDemon.Name}", ConsoleColor.Yellow);
+                        _io.WriteLine($"Form  : {stagedDemon.Name}", ConsoleColor.Yellow);
                         _io.WriteLine($"Race  : {stagedDemon.ActivePersona.Race}", ConsoleColor.Yellow);
                         _io.WriteLine($"Rank  : {stagedDemon.ActivePersona.Rank}", ConsoleColor.Yellow);
-                    _io.WriteLine($"Level : {stagedDemon.Level}", ConsoleColor.Yellow);
+                        _io.WriteLine($"Level : {stagedDemon.Level}", ConsoleColor.Yellow);
                         break;
 
                     case FusionOperationType.RankUpParent:
                     case FusionOperationType.RankDownParent:
                     case FusionOperationType.StatBoostFusion:
-                    _io.WriteLine($"Result: {stagedDemon.Name} (Lv.{stagedDemon.Level})", ConsoleColor.Yellow);
+                        _io.WriteLine($"Result: {stagedDemon.Name} (Lv.{stagedDemon.Level})", ConsoleColor.Yellow);
                         _io.WriteLine("------------------------");
                         _io.WriteLine("Stat Changes:", ConsoleColor.Yellow);
-                    foreach (StatType st in Enum.GetValues(typeof(StatType)))
-                    {
+                        foreach (StatType st in Enum.GetValues(typeof(StatType)))
+                        {
                             int originalVal = originalParent.GetStat(st);
                             int stagedVal = stagedDemon.GetStat(st);
                             if (stagedVal != originalVal)
                             {
                                 _io.WriteLine($" {st}: {originalVal} -> {stagedVal} ({(stagedVal > originalVal ? "+" : "")}{stagedVal - originalVal})", ConsoleColor.Green);
-                    }
+                            }
                             else
                             {
                                 _io.WriteLine($" {st}: {originalVal}", ConsoleColor.DarkGray);
-                }
+                            }
                         }
                         break;
                 }
@@ -248,7 +256,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                     foreach (var s in baseSkills)
                     {
                         _io.WriteLine($" * {s}", ConsoleColor.Cyan);
-                }
+                    }
                 }
 
                 // 2. Show Chosen Inherited Skills
@@ -258,7 +266,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                     foreach (var s in inheritedSkills)
                     {
                         _io.WriteLine($" + {s}", ConsoleColor.Green);
-                }
+                    }
                 }
 
                 _io.WriteLine("------------------------");
@@ -287,7 +295,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                 _io.WriteLine("!!! WARNING: LUNAR INTERFERENCE DETECTED !!!", ConsoleColor.Red);
                 _io.WriteLine("The fusion process has become unstable!", ConsoleColor.Red);
                 _io.Wait(2000);
-        }
+            }
         }
 
         #endregion

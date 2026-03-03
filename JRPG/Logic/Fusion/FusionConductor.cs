@@ -207,6 +207,7 @@ namespace JRPGPrototype.Logic.Fusion
             if (isSacrificial) maxInheritSlots = Math.Min(8, maxInheritSlots + 2);
 
             // Pass inherentSkills to the UI so it can gray them out
+            // The Conductor remains simple; it receives 'null' if Abort was hit, or a list (empty or not) if Confirm was hit.
             List<string> selectedSkills = _uiBridge.SelectInheritedSkills(inheritablePool, maxInheritSlots, inherentSkills);
             if (selectedSkills == null) return; // User aborted
 
@@ -293,6 +294,7 @@ namespace JRPGPrototype.Logic.Fusion
             switch (_player.Class)
             {
                 case ClassType.Operator:
+                    // Operators need room in either party or demon stock
                     hasAvailableSlot = (_partyManager.ActiveParty.Count < 4 || _partyManager.HasOpenDemonStockSlot(_player));
                     break;
                 case ClassType.WildCard:
@@ -318,6 +320,7 @@ namespace JRPGPrototype.Logic.Fusion
                 return;
             }
 
+            // Transaction commitment
             Combatant snapshot = _compendium.GetRecallEntry(entry.SourceId);
             if (snapshot != null)
             {

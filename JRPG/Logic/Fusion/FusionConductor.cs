@@ -158,14 +158,45 @@ namespace JRPGPrototype.Logic.Fusion
             var (operation, targetEntityId, isAccident) = _calculator.CalculateResult(parentA, parentB, MoonPhaseSystem.CurrentPhase);
 
             // If NoFusionPossible, immediately return.
-            if (operation == FusionOperationType.NoFusionPossible)
+            if (operation == FusionOperationType.NoFusionPossible || string.IsNullOrEmpty(targetEntityId))
             {
                 _io.WriteLine("The spirits remain silent. This combination yields no result.", ConsoleColor.Red);
                 _io.Wait(1000);
                 return;
             }
 
-            // --- 4. Skill Inheritance ---
+            // --- Identify Result and Inherent Skills early for UI duplicate-checking ---
+            List<string> inherentSkills = new List<string>();
+            PersonaData resultTemplate = null;
+
+            if (operation == FusionOperationType.CreateNewDemon)
+            {
+                Database.Personas.TryGetValue(targetEntityId.ToLower(), out resultTemplate);
+                inherentSkills = resultTemplate?.BaseSkills ?? new List<string>();
+            }
+            else if (operation == FusionOperationType.RankUpParent || operation == FusionOperationType.RankDownParent)
+            {
+                Combatant rankTarget = (parentA.ActivePersona.Race != "Element") ? parentA : parentB;
+                int rankDir = operation == FusionOperationType.RankUpParent ? 1 : -1;
+                resultTemplate = Database.Personas.Values
+                    .Where(p => p.Race == rankTarget.ActivePersona.Race && p.Rank == rankTarget.ActivePersona.Rank + rankDir)
+                    .OrderBy(p => p.Level).FirstOrDefault();
+                inherentSkills = resultTemplate?.BaseSkills ?? new List<string>();
+            }
+            else if (operation == FusionOperationType.StatBoostFusion)
+            {
+                // In Stat Boost, the "Inherent Skills" are the skills the target already has
+                Combatant boostTarget = (parentA.ActivePersona.Race == "Mitama") ? parentB : parentA;
+                inherentSkills = boostTarget.GetConsolidatedSkills();
+            }
+
+            if (resultTemplate == null && operation != FusionOperationType.StatBoostFusion)
+            {
+                _io.WriteLine("Target data not found.", ConsoleColor.Red);
+                return;
+            }
+
+            // --- Skill Selection (Now duplicate-aware) ---
             var parentList = new List<Combatant> { parentA, parentB };
             if (sacrifice != null) parentList.Add(sacrifice);
 
@@ -175,72 +206,32 @@ namespace JRPGPrototype.Logic.Fusion
             // Sacrificial Bonus: Boost slots by 2 (Max 8)
             if (isSacrificial) maxInheritSlots = Math.Min(8, maxInheritSlots + 2);
 
-            // Prompt UI for skill selection for ALL fusion types
-            List<string> selectedSkills = _uiBridge.SelectInheritedSkills(inheritablePool, maxInheritSlots);
+            // Pass inherentSkills to the UI so it can gray them out
+            List<string> selectedSkills = _uiBridge.SelectInheritedSkills(inheritablePool, maxInheritSlots, inherentSkills);
             if (selectedSkills == null) return; // User aborted
 
-            // --- 5. Verification and Ritual ---
+            // --- Verification and Staging ---
             Combatant stagedDemon = null;
             Combatant originalParent = null;
 
             if (operation == FusionOperationType.CreateNewDemon)
             {
-                // Fetch resultData for UI preview
-                if (!Database.Personas.TryGetValue(targetEntityId.ToLower(), out var resultData))
-                {
-                    _io.WriteLine("Error: Resulting template not found.", ConsoleColor.Red);
-                    _io.Wait(1000);
-                    return;
-                }
-                stagedDemon = Combatant.CreatePlayerDemon(resultData.Id, resultData.Level);
-                // Apply selected skills to preview
-                stagedDemon.ExtraSkills.AddRange(selectedSkills);
+                stagedDemon = Combatant.CreatePlayerDemon(resultTemplate.Id, resultTemplate.Level);
             }
             else if (operation == FusionOperationType.RankUpParent || operation == FusionOperationType.RankDownParent)
             {
-                Combatant rankTargetCom = (parentA.ActivePersona.Race != "Element") ? parentA : parentB;
-                originalParent = rankTargetCom;
-                int rankDir = operation == FusionOperationType.RankUpParent ? 1 : -1;
-
-                var nextData = Database.Personas.Values
-                    .Where(p => p.Race == rankTargetCom.ActivePersona.Race && p.Rank == rankTargetCom.ActivePersona.Rank + rankDir)
-                    .OrderBy(p => p.Level)
-                    .FirstOrDefault();
-
-                if (nextData == null)
-                {
-                    _io.WriteLine($"{rankTargetCom.Name} is already the highest/lowest rank. Fusion impossible.", ConsoleColor.Yellow);
-                    _io.Wait(1000);
-                    return;
-                }
-                stagedDemon = Combatant.CreatePlayerDemon(nextData.Id, nextData.Level);
-
-                stagedDemon.ExtraSkills.Clear();
-                stagedDemon.ExtraSkills.AddRange(selectedSkills);
+                originalParent = (parentA.ActivePersona.Race != "Element") ? parentA : parentB;
+                stagedDemon = Combatant.CreatePlayerDemon(resultTemplate.Id, resultTemplate.Level);
             }
             else if (operation == FusionOperationType.StatBoostFusion)
             {
-                Combatant boostTargetCom = (parentA.ActivePersona.Race == "Mitama") ? parentB : parentA;
+                originalParent = (parentA.ActivePersona.Race == "Mitama") ? parentB : parentA;
                 Combatant mitamaCom = (parentA.ActivePersona.Race == "Mitama") ? parentA : parentB;
-                originalParent = boostTargetCom;
-
-                stagedDemon = Combatant.CreatePlayerDemon(boostTargetCom.SourceId, boostTargetCom.Level);
-
-                // Copy exact current stats to the preview dummy
-                foreach (var st in boostTargetCom.CharacterStats) stagedDemon.CharacterStats[st.Key] = st.Value;
-                foreach (var mod in boostTargetCom.ActivePersona.StatModifiers) stagedDemon.ActivePersona.StatModifiers[mod.Key] = mod.Value;
-
-                string mName = mitamaCom.ActivePersona.Name;
-                if (mName == "Ara Mitama") { ApplyPreviewBoost(stagedDemon, StatType.St, 2); ApplyPreviewBoost(stagedDemon, StatType.Ag, 1); }
-                else if (mName == "Nigi Mitama") { ApplyPreviewBoost(stagedDemon, StatType.Ma, 2); ApplyPreviewBoost(stagedDemon, StatType.Lu, 1); }
-                else if (mName == "Kushi Mitama" || mName == "Kusi Mitama") { ApplyPreviewBoost(stagedDemon, StatType.Vi, 2); ApplyPreviewBoost(stagedDemon, StatType.Ag, 1); }
-                else if (mName == "Saki Mitama") { ApplyPreviewBoost(stagedDemon, StatType.Vi, 2); ApplyPreviewBoost(stagedDemon, StatType.Lu, 1); }
-
+                stagedDemon = Combatant.CreatePlayerDemon(originalParent.SourceId, originalParent.Level);
+                foreach (var st in originalParent.CharacterStats) stagedDemon.CharacterStats[st.Key] = st.Value;
+                foreach (var mod in originalParent.ActivePersona.StatModifiers) stagedDemon.ActivePersona.StatModifiers[mod.Key] = mod.Value;
+                ApplyMitamaStatBoost(stagedDemon, mitamaCom.ActivePersona.Name);
                 stagedDemon.RecalculateResources();
-
-                // Apply selected skills to preview
-                stagedDemon.ExtraSkills.Clear();
-                stagedDemon.ExtraSkills.AddRange(selectedSkills);
             }
 
             // Universal Confirmation - Level Cap and Consent checked here for ALL operations
@@ -250,7 +241,7 @@ namespace JRPGPrototype.Logic.Fusion
             // --- Ritual Execution Visuals ---
             _uiBridge.DisplayRitualSequence(isAccident);
 
-            // --- 6. State Mutation based on FusionOperationType ---
+            // --- State Mutation based on FusionOperationType ---
             switch (operation)
             {
                 case FusionOperationType.CreateNewDemon:
@@ -259,33 +250,32 @@ namespace JRPGPrototype.Logic.Fusion
 
                 case FusionOperationType.RankUpParent:
                 case FusionOperationType.RankDownParent:
-                    object rankTarget = (parentA.ActivePersona.Race != "Element") ? p1 : p2;
-                    if (operation == FusionOperationType.RankUpParent)
-                        _mutator.ExecuteRankUpFusion(_player, rankTarget, selectedSkills, sacrifice);
-                    else
-                        _mutator.ExecuteRankDownFusion(_player, rankTarget, selectedSkills, sacrifice);
+                    object rankObj = (parentA.ActivePersona.Race != "Element") ? p1 : p2;
+                    if (operation == FusionOperationType.RankUpParent) _mutator.ExecuteRankUpFusion(_player, rankObj, selectedSkills, sacrifice);
+                    else _mutator.ExecuteRankDownFusion(_player, rankObj, selectedSkills, sacrifice);
                     break;
-
                 case FusionOperationType.StatBoostFusion:
-                    object targetToBoost = (parentA.ActivePersona.Race == "Mitama") ? p2 : p1;
-                    object mitamaToConsume = (parentA.ActivePersona.Race == "Mitama") ? p1 : p2;
-                    _mutator.ExecuteStatBoostFusion(_player, targetToBoost, mitamaToConsume, selectedSkills, sacrifice);
+                    object boostObj = (parentA.ActivePersona.Race == "Mitama") ? p2 : p1;
+                    object mitamaObj = (parentA.ActivePersona.Race == "Mitama") ? p1 : p2;
+                    _mutator.ExecuteStatBoostFusion(_player, boostObj, mitamaObj, selectedSkills, sacrifice);
                     break;
             }
 
             _io.Wait(1500);
         }
 
-        private void ApplyPreviewBoost(Combatant demon, StatType stat, int amount)
+        private void ApplyMitamaStatBoost(Combatant demon, string mitamaName)
         {
             var mods = demon.ActivePersona.StatModifiers;
-            int current = mods.GetValueOrDefault(stat, 0);
-            mods[stat] = Math.Min(40, current + amount);
+            if (mitamaName == "Ara Mitama") { mods[StatType.St] = Math.Min(40, mods.GetValueOrDefault(StatType.St) + 2); mods[StatType.Ag] = Math.Min(40, mods.GetValueOrDefault(StatType.Ag) + 1); }
+            else if (mitamaName == "Nigi Mitama") { mods[StatType.Ma] = Math.Min(40, mods.GetValueOrDefault(StatType.Ma) + 2); mods[StatType.Lu] = Math.Min(40, mods.GetValueOrDefault(StatType.Lu) + 1); }
+            else if (mitamaName.Contains("Kus")) { mods[StatType.Vi] = Math.Min(40, mods.GetValueOrDefault(StatType.Vi) + 2); mods[StatType.Ag] = Math.Min(40, mods.GetValueOrDefault(StatType.Ag) + 1); }
+            else if (mitamaName == "Saki Mitama") { mods[StatType.Vi] = Math.Min(40, mods.GetValueOrDefault(StatType.Vi) + 2); mods[StatType.Lu] = Math.Min(40, mods.GetValueOrDefault(StatType.Lu) + 1); }
         }
 
         #endregion
 
-        #region Compendium Registration and Recall
+        #region Compendium and Helpers
 
         /// <summary>
         /// Handles the UI flow and logic for Compendium recruitment.

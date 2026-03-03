@@ -52,6 +52,7 @@ namespace JRPGPrototype
                     player.Class = ClassType.WildCard;
                     if (Database.Personas.TryGetValue("orpheus", out var p2)) player.ActivePersona = p2.ToPersona();
                     if (Database.Personas.TryGetValue("pixie", out var p3)) player.PersonaStock.Add(p3.ToPersona());
+                    if (Database.Personas.TryGetValue("high_pixie", out var p4)) player.PersonaStock.Add(p4.ToPersona());
                     break;
                 case '4':
                     player.Class = ClassType.Operator;

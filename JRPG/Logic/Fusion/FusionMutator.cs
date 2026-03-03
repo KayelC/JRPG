@@ -148,4 +148,5 @@ namespace JRPGPrototype.Logic.Fusion
 
         #endregion
     }
+        #endregion
 }

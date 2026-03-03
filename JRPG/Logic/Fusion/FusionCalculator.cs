@@ -79,21 +79,53 @@ namespace JRPGPrototype.Logic.Fusion
             if (a.ActivePersona == null || b.ActivePersona == null)
                 return (FusionOperationType.NoFusionPossible, null, false);
 
-            // 1. Establish Identifiers
+            // Establish Identifiers
             string idA = a.SourceId;
             string idB = b.SourceId;
             string raceA = a.ActivePersona.Race;
             string raceB = b.ActivePersona.Race;
 
-            // 2. Multi-Tier Table Lookup
+            // Accident Roll
+            int accidentThreshold = (moonPhase == 8) ? 12 : 1;
+            bool isAccident = _rnd.Next(0, 100) < accidentThreshold;
+
+            // --- TIER 0: GLOBAL MITAMA OVERRIDE ---
+            // If one parent is a Mitama, it's always a Stat Boost, unless the other is also a Mitama.
+            bool aIsMitama = raceA.Equals("Mitama", StringComparison.OrdinalIgnoreCase);
+            bool bIsMitama = raceB.Equals("Mitama", StringComparison.OrdinalIgnoreCase);
+
+            if (aIsMitama || bIsMitama)
+            {
+                // If both are Mitamas, typically no result
+                if (aIsMitama && bIsMitama)
+                {
+                    _io.WriteLine($"[Fusion Trace] Mitama + Mitama fusion is not supported.", ConsoleColor.DarkGray);
+                    return (FusionOperationType.NoFusionPossible, null, false);
+                }
+
+                // Identify the non-Mitama parent to receive the boost
+                Combatant target = aIsMitama ? b : a;
+
+                // Check: Non-Mitama parent cannot be an Element (Elements only Rank Up/Down)
+                if (target.ActivePersona.Race.Equals("Element", StringComparison.OrdinalIgnoreCase))
+                {
+                    _io.WriteLine($"[Fusion Trace] Elements cannot receive Mitama stat boosts.", ConsoleColor.DarkGray);
+                    return (FusionOperationType.NoFusionPossible, null, false);
+                }
+
+                _io.WriteLine($"[Fusion Trace] Mitama Global Override: Stat boosting {target.Name}", ConsoleColor.DarkGray);
+                return (FusionOperationType.StatBoostFusion, target.SourceId.ToLower(), isAccident);
+            }
+
+            // --- TIER 1 & 2: TABLE LOOKUP ---
             string? resultString = null;
 
-            // Tier 1: Try searching by Specific IDs (Required for Mitama fusions)
+            // Search by Specific IDs
             if (_raceTable.TryGetValue(idA, out var idBranch) && idBranch.TryGetValue(idB, out resultString))
             {
                 _io.WriteLine($"[Fusion Trace] Match found via Specific IDs: {idA} + {idB}", ConsoleColor.DarkGray);
             }
-            // Tier 2: Try searching by Races (Required for Standard/Element creation)
+            // Search by Races
             else if (_raceTable.TryGetValue(raceA, out var raceBranch) && raceBranch.TryGetValue(raceB, out resultString))
             {
                 _io.WriteLine($"[Fusion Trace] Match found via Races: {raceA} + {raceB}", ConsoleColor.DarkGray);
@@ -105,12 +137,7 @@ namespace JRPGPrototype.Logic.Fusion
                 return (FusionOperationType.NoFusionPossible, null, false);
             }
 
-            // 3. Logic: Accident Roll
-            int accidentThreshold = (moonPhase == 8) ? 12 : 1;
-            bool isAccident = _rnd.Next(0, 100) < accidentThreshold;
-
-            // 4. PRIORITY 1: Literal ID Search (Normalization Fix)
-            // We check the lowercase version of the result against the database
+            // PRIORITY 1: Literal ID Search (Element/Mitama Creation)
             string lookupId = resultString.ToLower();
             if (Database.Personas.ContainsKey(lookupId))
             {
@@ -118,7 +145,7 @@ namespace JRPGPrototype.Logic.Fusion
                 return (FusionOperationType.CreateNewDemon, lookupId, isAccident);
             }
 
-            // 5. PRIORITY 2: Rank Up/Down Logic
+            // PRIORITY 2: Rank Up/Down Logic
             if (resultString == "1" || resultString == "-1")
             {
                 Combatant? parentToRank = null;
@@ -133,7 +160,7 @@ namespace JRPGPrototype.Logic.Fusion
                 return (FusionOperationType.NoFusionPossible, null, false);
             }
 
-            // 5. PRIORITY 3: Normal Race Fusion (Level-Based)
+            // PRIORITY 3: Normal Race Fusion (Level-Based)
             // At this point, resultString is assumed to be a Race Name (e.g., "Fury")
 
             // Get templates to find Base Levels

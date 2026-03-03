@@ -27,7 +27,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
             _compendium = compendium;
         }
 
-        #region Navigation Menus
+        #region Navigation and Ritual Selection
 
         /// <summary>
         /// Renders the main portal to the Cathedral.
@@ -36,10 +36,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
         public string ShowCathedralMainMenu(int moonPhase)
         {
             _io.Clear();
-            string phaseName = MoonPhaseSystem.GetPhaseName();
-            string header = $"=== CATHEDRAL OF SHADOWS === [LUNAR PHASE: {phaseName}]\n" +
-                            "\"The convergence of souls begins here.\"\n";
-
+            string header = $"=== CATHEDRAL OF SHADOWS === [LUNAR PHASE: {MoonPhaseSystem.GetPhaseName()}]\n\"The convergence of souls begins here.\"\n";
             List<string> options = new List<string> { "Binary Fusion" };
 
             // Sacrificial Fusion is unlocked strictly on Full Moon (Phase 8)
@@ -85,7 +82,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                     string race = c.ActivePersona?.Race ?? "Unknown";
                     string rank = c.ActivePersona?.Rank > 0 ? $"(Rk.{c.ActivePersona.Rank})" : "";
                     labels.Add($"{c.Name,-15} (Lv.{c.Level}) {race} {rank}");
-                }
+            }
                 else if (item is Persona p)
                 {
                     string rank = p.Rank > 0 ? $"(Rk.{p.Rank})" : "";
@@ -107,8 +104,9 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
         /// <summary>
         /// Deterministic Skill Selection.
         /// Allows the player to manually select exactly which skills pass to the child.
+        /// Now "Grays Out" skills that the target already possesses in its base kit.
         /// </summary>
-        public List<string> SelectInheritedSkills(List<string> pool, int maxSlots)
+        public List<string> SelectInheritedSkills(List<string> pool, int maxSlots, List<string> inherentSkills)
         {
             List<string> selected = new List<string>();
 
@@ -124,8 +122,21 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                 foreach (var skillName in pool)
                 {
                     bool isPicked = selected.Contains(skillName);
-                    labels.Add(isPicked ? $"[X] {skillName}" : $"[ ] {skillName}");
-                    disabledList.Add(isPicked);
+                    bool isAlreadyKnown = inherentSkills.Contains(skillName); // NEW Check
+
+                    // Visual Feedback: Show [-] and a tag for duplicate skills
+                    string prefix = isPicked ? "[X]" : (isAlreadyKnown ? "[-]" : "[ ]");
+                    string label = $"{prefix} {skillName}";
+
+                    if (isAlreadyKnown)
+                    {
+                        label += " (Already Known)";
+                    }
+
+                    labels.Add(label);
+
+                    // Logic: Disable if already picked OR if it's already in the base kit
+                    disabledList.Add(isPicked || isAlreadyKnown);
                 }
 
                 if (selected.Count > 0) labels.Add("Confirm Selection");
@@ -139,9 +150,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                     if (idx >= 0 && idx < pool.Count)
                     {
                         if (Database.Skills.TryGetValue(pool[idx], out var data))
-                        {
                             _io.WriteLine($"Skill Detail: {data.Effect}", ConsoleColor.Cyan);
-                        }
                     }
                 });
 
@@ -199,37 +208,37 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                 switch (operationType)
                 {
                     case FusionOperationType.CreateNewDemon:
-                        _io.WriteLine($"Form  : {stagedDemon.Name}", ConsoleColor.Yellow);
+                    _io.WriteLine($"Form  : {stagedDemon.Name}", ConsoleColor.Yellow);
                         _io.WriteLine($"Race  : {stagedDemon.ActivePersona.Race}", ConsoleColor.Yellow);
                         _io.WriteLine($"Rank  : {stagedDemon.ActivePersona.Rank}", ConsoleColor.Yellow);
-                        _io.WriteLine($"Level : {stagedDemon.Level}", ConsoleColor.Yellow);
+                    _io.WriteLine($"Level : {stagedDemon.Level}", ConsoleColor.Yellow);
                         break;
 
                     case FusionOperationType.RankUpParent:
                     case FusionOperationType.RankDownParent:
                     case FusionOperationType.StatBoostFusion:
-                        _io.WriteLine($"Result: {stagedDemon.Name} (Lv.{stagedDemon.Level})", ConsoleColor.Yellow);
+                    _io.WriteLine($"Result: {stagedDemon.Name} (Lv.{stagedDemon.Level})", ConsoleColor.Yellow);
                         _io.WriteLine("------------------------");
                         _io.WriteLine("Stat Changes:", ConsoleColor.Yellow);
-                        foreach (StatType st in Enum.GetValues(typeof(StatType)))
-                        {
+                    foreach (StatType st in Enum.GetValues(typeof(StatType)))
+                    {
                             int originalVal = originalParent.GetStat(st);
                             int stagedVal = stagedDemon.GetStat(st);
                             if (stagedVal != originalVal)
                             {
                                 _io.WriteLine($" {st}: {originalVal} -> {stagedVal} ({(stagedVal > originalVal ? "+" : "")}{stagedVal - originalVal})", ConsoleColor.Green);
-                            }
+                    }
                             else
                             {
                                 _io.WriteLine($" {st}: {originalVal}", ConsoleColor.DarkGray);
-                            }
+                }
                         }
                         break;
                 }
 
                 _io.WriteLine("------------------------");
 
-                // --- Skill Preview Section (Updated) ---
+                // --- Skill Preview Section ---
 
                 // 1. Show Inherent Base Skills
                 var baseSkills = stagedDemon.ActivePersona.SkillSet;
@@ -239,7 +248,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                     foreach (var s in baseSkills)
                     {
                         _io.WriteLine($" * {s}", ConsoleColor.Cyan);
-                    }
+                }
                 }
 
                 // 2. Show Chosen Inherited Skills
@@ -249,7 +258,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                     foreach (var s in inheritedSkills)
                     {
                         _io.WriteLine($" + {s}", ConsoleColor.Green);
-                    }
+                }
                 }
 
                 _io.WriteLine("------------------------");
@@ -278,7 +287,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                 _io.WriteLine("!!! WARNING: LUNAR INTERFERENCE DETECTED !!!", ConsoleColor.Red);
                 _io.WriteLine("The fusion process has become unstable!", ConsoleColor.Red);
                 _io.Wait(2000);
-            }
+        }
         }
 
         #endregion

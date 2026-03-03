@@ -92,177 +92,188 @@ namespace JRPGPrototype.Logic.Fusion
         /// </summary>
         private void PerformFusionRitual(bool isSacrificial)
         {
-            // 1. Establish the pool of participants based on Character Class
-            // Logic: Source pools are class-dependent to ensure stock integrity.
-            List<object> participantPool = new List<object>();
-            switch (_player.Class)
+            while (true) // OUTER LOOP: Participant Selection
             {
-                case ClassType.Operator:
-                    // Operators draw from Active Party and DemonStock
-                    var demons = _partyManager.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
-                    demons.AddRange(_player.DemonStock);
-                    participantPool = demons.Distinct().Cast<object>().ToList();
-                    break;
+                // 1. Establish the pool of participants based on Character Class
+                // Logic: Source pools are class-dependent to ensure stock integrity.
+                List<object> participantPool = new List<object>();
+                switch (_player.Class)
+                {
+                    case ClassType.Operator:
+                        // Operators draw from Active Party and DemonStock
+                        var demons = _partyManager.ActiveParty.Where(c => c.Class == ClassType.Demon).ToList();
+                        demons.AddRange(_player.DemonStock);
+                        participantPool = demons.Distinct().Cast<object>().ToList();
+                        break;
 
-                // Only WildCard can fuse Personas
-                case ClassType.WildCard:
-                    // WildCards draw from ActivePersona and PersonaStock
-                    var personas = new List<Persona>();
-                    if (_player.ActivePersona != null) personas.Add(_player.ActivePersona);
-                    personas.AddRange(_player.PersonaStock);
-                    participantPool = personas.Distinct().Cast<object>().ToList();
-                    break;
+                    // Only WildCard can fuse Personas
+                    case ClassType.WildCard:
+                        // WildCards draw from ActivePersona and PersonaStock
+                        var personas = new List<Persona>();
+                        if (_player.ActivePersona != null) personas.Add(_player.ActivePersona);
+                        personas.AddRange(_player.PersonaStock);
+                        participantPool = personas.Distinct().Cast<object>().ToList();
+                        break;
 
-                default:
-                    _io.WriteLine("Your current essence is incompatible with the ritual circle.", ConsoleColor.Red);
+                    default:
+                        _io.WriteLine("Your current essence is incompatible with the ritual circle.", ConsoleColor.Red);
+                        _io.Wait(1000);
+                        return;
+                }
+
+                if (participantPool.Count < (isSacrificial ? 3 : 2))
+                {
+                    string countNeeded = isSacrificial ? "three" : "two";
+                    _io.WriteLine($"You need at least {countNeeded} participants for this ritual.", ConsoleColor.Red);
                     _io.Wait(1000);
                     return;
+                }
+
+                // 2. Participant Selection
+                List<object> parents = new List<object>();
+
+                // Select Parent 1
+                object p1 = _uiBridge.SelectRitualParticipant(participantPool, "CHOOSE THE FIRST PARTICIPANT:", parents);
+                if (p1 == null) return;
+                parents.Add(p1);
+
+                // Select Parent 2
+                object p2 = _uiBridge.SelectRitualParticipant(participantPool, "CHOOSE THE SECOND PARTICIPANT:", parents);
+                if (p2 == null) continue; // Go back to start of parent selection
+                parents.Add(p2);
+
+                // Select Sacrifice (Full Moon only)
+                Combatant sacrifice = null;
+                if (isSacrificial)
+                {
+                    // Sacrifices are always Demons (Combatants) even for WildCards
+                    var sacrificePool = _mutator.GetFusibleDemonPool(_player);
+                    sacrifice = _uiBridge.SelectRitualParticipant(sacrificePool, "CHOOSE THE SACRIFICIAL OFFERING:", new List<Combatant>());
+                    if (sacrifice == null) continue; // Go back to start of parent selection
+                }
+
+                // 3. Result Calculation (now returns operation type and target ID)
+                // We create transient Combatants for Persona participants so the Calculator can remain type-pure.
+                Combatant parentA = (p1 is Combatant c1) ? c1 : CreateTransientCombatant((Persona)p1);
+                Combatant parentB = (p2 is Combatant c2) ? c2 : CreateTransientCombatant((Persona)p2);
+
+                var (operation, targetEntityId, isAccident) = _calculator.CalculateResult(parentA, parentB, MoonPhaseSystem.CurrentPhase);
+
+                // If NoFusionPossible, immediately return.
+                if (operation == FusionOperationType.NoFusionPossible || string.IsNullOrEmpty(targetEntityId))
+                {
+                    _io.WriteLine("The spirits remain silent. This combination yields no result.", ConsoleColor.Red);
+                    _io.Wait(1000);
+                    continue; // Go back to start of parent selection
+                }
+
+                // --- Identify Result and Inherent Skills early for UI duplicate-checking ---
+                List<string> inherentSkills = new List<string>();
+                PersonaData resultTemplate = null;
+
+                if (operation == FusionOperationType.CreateNewDemon)
+                {
+                    Database.Personas.TryGetValue(targetEntityId.ToLower(), out resultTemplate);
+                    inherentSkills = resultTemplate?.BaseSkills ?? new List<string>();
+                }
+                else if (operation == FusionOperationType.RankUpParent || operation == FusionOperationType.RankDownParent)
+                {
+                    Combatant rankTarget = (parentA.ActivePersona.Race != "Element") ? parentA : parentB;
+                    int rankDir = operation == FusionOperationType.RankUpParent ? 1 : -1;
+                    resultTemplate = Database.Personas.Values
+                        .Where(p => p.Race == rankTarget.ActivePersona.Race && p.Rank == rankTarget.ActivePersona.Rank + rankDir)
+                        .OrderBy(p => p.Level).FirstOrDefault();
+                    inherentSkills = resultTemplate?.BaseSkills ?? new List<string>();
+                }
+                else if (operation == FusionOperationType.StatBoostFusion)
+                {
+                    // In Stat Boost, the "Inherent Skills" are the skills the target already has
+                    Combatant boostTarget = (parentA.ActivePersona.Race == "Mitama") ? parentB : parentA;
+                    inherentSkills = boostTarget.GetConsolidatedSkills();
+                }
+
+                if (resultTemplate == null && operation != FusionOperationType.StatBoostFusion)
+                {
+                    _io.WriteLine("Target data not found.", ConsoleColor.Red);
+                    continue;
+                }
+
+                while (true) // INNER LOOP: Skill Inheritance <-> Result Preview
+                {
+                    // --- Skill Selection (Now duplicate-aware) ---
+                    var parentList = new List<Combatant> { parentA, parentB };
+                    if (sacrifice != null) parentList.Add(sacrifice);
+
+                    var inheritablePool = _calculator.GetInheritableSkills(parentList.ToArray());
+                    int maxInheritSlots = _calculator.GetInheritanceSlotCount(parentList.ToArray());
+
+                    // Sacrificial Bonus: Boost slots by 2 (Max 8)
+                    if (isSacrificial) maxInheritSlots = Math.Min(8, maxInheritSlots + 2);
+
+                    // Pass inherentSkills to the UI so it can gray them out
+                    List<string> selectedSkills = _uiBridge.SelectInheritedSkills(inheritablePool, maxInheritSlots, inherentSkills);
+
+                    if (selectedSkills == null) break; // User aborted skills -> break inner loop to go back to participant selection
+
+                    // --- Verification and Staging ---
+                    Combatant stagedDemon = null;
+                    Combatant originalParent = null;
+
+                    if (operation == FusionOperationType.CreateNewDemon)
+                    {
+                        stagedDemon = Combatant.CreatePlayerDemon(resultTemplate.Id, resultTemplate.Level);
+                    }
+                    else if (operation == FusionOperationType.RankUpParent || operation == FusionOperationType.RankDownParent)
+                    {
+                        originalParent = (parentA.ActivePersona.Race != "Element") ? parentA : parentB;
+                        stagedDemon = Combatant.CreatePlayerDemon(resultTemplate.Id, resultTemplate.Level);
+                    }
+                    else if (operation == FusionOperationType.StatBoostFusion)
+                    {
+                        originalParent = (parentA.ActivePersona.Race == "Mitama") ? parentB : parentA;
+                        Combatant mitamaCom = (parentA.ActivePersona.Race == "Mitama") ? parentA : parentB;
+                        stagedDemon = Combatant.CreatePlayerDemon(originalParent.SourceId, originalParent.Level);
+                        foreach (var st in originalParent.CharacterStats) stagedDemon.CharacterStats[st.Key] = st.Value;
+                        foreach (var mod in originalParent.ActivePersona.StatModifiers) stagedDemon.ActivePersona.StatModifiers[mod.Key] = mod.Value;
+                        ApplyMitamaStatBoost(stagedDemon, mitamaCom.ActivePersona.Name);
+                        stagedDemon.RecalculateResources();
+                    }
+
+                    // Universal Confirmation - Handles "Commence", "Wait/Back", or "Cancel"
+                    int confirmationResult = _uiBridge.ConfirmRitual(stagedDemon, originalParent, selectedSkills, _player.Level, operation);
+
+                    if (confirmationResult == 1) continue; // "Wait (Back to Skills)" -> restart inner loop
+                    if (confirmationResult == 2) break;    // "Cancel Fusion" -> break inner loop to go back to participant selection
+
+                    // 0 = Commence Ritual
+
+                    // --- Ritual Execution Visuals ---
+                    _uiBridge.DisplayRitualSequence(isAccident);
+
+                    // --- State Mutation based on FusionOperationType ---
+                    switch (operation)
+                    {
+                        case FusionOperationType.CreateNewDemon:
+                            _mutator.ExecuteFusion(_player, parents, targetEntityId, selectedSkills, sacrifice);
+                            break;
+
+                        case FusionOperationType.RankUpParent:
+                        case FusionOperationType.RankDownParent:
+                            object rankObj = (parentA.ActivePersona.Race != "Element") ? p1 : p2;
+                            if (operation == FusionOperationType.RankUpParent) _mutator.ExecuteRankUpFusion(_player, rankObj, selectedSkills, sacrifice);
+                            else _mutator.ExecuteRankDownFusion(_player, rankObj, selectedSkills, sacrifice);
+                            break;
+                        case FusionOperationType.StatBoostFusion:
+                            object boostObj = (parentA.ActivePersona.Race == "Mitama") ? p2 : p1;
+                            object mitamaObj = (parentA.ActivePersona.Race == "Mitama") ? p1 : p2;
+                            _mutator.ExecuteStatBoostFusion(_player, boostObj, mitamaObj, selectedSkills, sacrifice);
+                            break;
+                    }
+
+                    _io.Wait(1500);
+                    return; // Entire fusion process complete
+                }
             }
-
-            if (participantPool.Count < (isSacrificial ? 3 : 2))
-            {
-                string countNeeded = isSacrificial ? "three" : "two";
-                _io.WriteLine($"You need at least {countNeeded} participants for this ritual.", ConsoleColor.Red);
-                _io.Wait(1000);
-                return;
-            }
-
-            // 2. Participant Selection
-            List<object> parents = new List<object>();
-
-            // Select Parent 1
-            object p1 = _uiBridge.SelectRitualParticipant(participantPool, "CHOOSE THE FIRST PARTICIPANT:", parents);
-            if (p1 == null) return;
-            parents.Add(p1);
-
-            // Select Parent 2
-            object p2 = _uiBridge.SelectRitualParticipant(participantPool, "CHOOSE THE SECOND PARTICIPANT:", parents);
-            if (p2 == null) return;
-            parents.Add(p2);
-
-            // Select Sacrifice (Full Moon only)
-            Combatant sacrifice = null;
-            if (isSacrificial)
-            {
-                // Sacrifices are always Demons (Combatants) even for WildCards
-                var sacrificePool = _mutator.GetFusibleDemonPool(_player);
-                sacrifice = _uiBridge.SelectRitualParticipant(sacrificePool, "CHOOSE THE SACRIFICIAL OFFERING:", new List<Combatant>());
-                if (sacrifice == null) return;
-            }
-
-            // 3. Result Calculation (now returns operation type and target ID)
-            // We create transient Combatants for Persona participants so the Calculator can remain type-pure.
-            Combatant parentA = (p1 is Combatant c1) ? c1 : CreateTransientCombatant((Persona)p1);
-            Combatant parentB = (p2 is Combatant c2) ? c2 : CreateTransientCombatant((Persona)p2);
-
-            var (operation, targetEntityId, isAccident) = _calculator.CalculateResult(parentA, parentB, MoonPhaseSystem.CurrentPhase);
-
-            // If NoFusionPossible, immediately return.
-            if (operation == FusionOperationType.NoFusionPossible || string.IsNullOrEmpty(targetEntityId))
-            {
-                _io.WriteLine("The spirits remain silent. This combination yields no result.", ConsoleColor.Red);
-                _io.Wait(1000);
-                return;
-            }
-
-            // --- Identify Result and Inherent Skills early for UI duplicate-checking ---
-            List<string> inherentSkills = new List<string>();
-            PersonaData resultTemplate = null;
-
-            if (operation == FusionOperationType.CreateNewDemon)
-            {
-                Database.Personas.TryGetValue(targetEntityId.ToLower(), out resultTemplate);
-                inherentSkills = resultTemplate?.BaseSkills ?? new List<string>();
-            }
-            else if (operation == FusionOperationType.RankUpParent || operation == FusionOperationType.RankDownParent)
-            {
-                Combatant rankTarget = (parentA.ActivePersona.Race != "Element") ? parentA : parentB;
-                int rankDir = operation == FusionOperationType.RankUpParent ? 1 : -1;
-                resultTemplate = Database.Personas.Values
-                    .Where(p => p.Race == rankTarget.ActivePersona.Race && p.Rank == rankTarget.ActivePersona.Rank + rankDir)
-                    .OrderBy(p => p.Level).FirstOrDefault();
-                inherentSkills = resultTemplate?.BaseSkills ?? new List<string>();
-            }
-            else if (operation == FusionOperationType.StatBoostFusion)
-            {
-                // In Stat Boost, the "Inherent Skills" are the skills the target already has
-                Combatant boostTarget = (parentA.ActivePersona.Race == "Mitama") ? parentB : parentA;
-                inherentSkills = boostTarget.GetConsolidatedSkills();
-            }
-
-            if (resultTemplate == null && operation != FusionOperationType.StatBoostFusion)
-            {
-                _io.WriteLine("Target data not found.", ConsoleColor.Red);
-                return;
-            }
-
-            // --- Skill Selection (Now duplicate-aware) ---
-            var parentList = new List<Combatant> { parentA, parentB };
-            if (sacrifice != null) parentList.Add(sacrifice);
-
-            var inheritablePool = _calculator.GetInheritableSkills(parentList.ToArray());
-            int maxInheritSlots = _calculator.GetInheritanceSlotCount(parentList.ToArray());
-
-            // Sacrificial Bonus: Boost slots by 2 (Max 8)
-            if (isSacrificial) maxInheritSlots = Math.Min(8, maxInheritSlots + 2);
-
-            // Pass inherentSkills to the UI so it can gray them out
-            // The Conductor remains simple; it receives 'null' if Abort was hit, or a list (empty or not) if Confirm was hit.
-            List<string> selectedSkills = _uiBridge.SelectInheritedSkills(inheritablePool, maxInheritSlots, inherentSkills);
-            if (selectedSkills == null) return; // User aborted
-
-            // --- Verification and Staging ---
-            Combatant stagedDemon = null;
-            Combatant originalParent = null;
-
-            if (operation == FusionOperationType.CreateNewDemon)
-            {
-                stagedDemon = Combatant.CreatePlayerDemon(resultTemplate.Id, resultTemplate.Level);
-            }
-            else if (operation == FusionOperationType.RankUpParent || operation == FusionOperationType.RankDownParent)
-            {
-                originalParent = (parentA.ActivePersona.Race != "Element") ? parentA : parentB;
-                stagedDemon = Combatant.CreatePlayerDemon(resultTemplate.Id, resultTemplate.Level);
-            }
-            else if (operation == FusionOperationType.StatBoostFusion)
-            {
-                originalParent = (parentA.ActivePersona.Race == "Mitama") ? parentB : parentA;
-                Combatant mitamaCom = (parentA.ActivePersona.Race == "Mitama") ? parentA : parentB;
-                stagedDemon = Combatant.CreatePlayerDemon(originalParent.SourceId, originalParent.Level);
-                foreach (var st in originalParent.CharacterStats) stagedDemon.CharacterStats[st.Key] = st.Value;
-                foreach (var mod in originalParent.ActivePersona.StatModifiers) stagedDemon.ActivePersona.StatModifiers[mod.Key] = mod.Value;
-                ApplyMitamaStatBoost(stagedDemon, mitamaCom.ActivePersona.Name);
-                stagedDemon.RecalculateResources();
-            }
-
-            // Universal Confirmation - Level Cap and Consent checked here for ALL operations
-            if (!_uiBridge.ConfirmRitual(stagedDemon, originalParent, selectedSkills, _player.Level, operation))
-                return;
-
-            // --- Ritual Execution Visuals ---
-            _uiBridge.DisplayRitualSequence(isAccident);
-
-            // --- State Mutation based on FusionOperationType ---
-            switch (operation)
-            {
-                case FusionOperationType.CreateNewDemon:
-                    _mutator.ExecuteFusion(_player, parents, targetEntityId, selectedSkills, sacrifice);
-                    break;
-
-                case FusionOperationType.RankUpParent:
-                case FusionOperationType.RankDownParent:
-                    object rankObj = (parentA.ActivePersona.Race != "Element") ? p1 : p2;
-                    if (operation == FusionOperationType.RankUpParent) _mutator.ExecuteRankUpFusion(_player, rankObj, selectedSkills, sacrifice);
-                    else _mutator.ExecuteRankDownFusion(_player, rankObj, selectedSkills, sacrifice);
-                    break;
-                case FusionOperationType.StatBoostFusion:
-                    object boostObj = (parentA.ActivePersona.Race == "Mitama") ? p2 : p1;
-                    object mitamaObj = (parentA.ActivePersona.Race == "Mitama") ? p1 : p2;
-                    _mutator.ExecuteStatBoostFusion(_player, boostObj, mitamaObj, selectedSkills, sacrifice);
-                    break;
-            }
-
-            _io.Wait(1500);
         }
 
         private void ApplyMitamaStatBoost(Combatant demon, string mitamaName)

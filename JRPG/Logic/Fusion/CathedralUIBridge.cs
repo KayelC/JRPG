@@ -192,7 +192,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
         /// <param name="playerLevel">Current player level for level check.</param>
         /// <param name="operationType">The type of fusion operation.</param>
         /// <returns>True if player confirms, false if cancels.</returns>
-        public bool ConfirmRitual(Combatant stagedDemon, Combatant originalParent, List<string> inheritedSkills, int playerLevel, FusionOperationType operationType)
+        public int ConfirmRitual(Combatant stagedDemon, Combatant originalParent, List<string> inheritedSkills, int playerLevel, FusionOperationType operationType)
         {
             // Level constraint check for ALL new demon/ranked demon results
             if (stagedDemon.Level > playerLevel)
@@ -203,10 +203,10 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                 _io.WriteLine($"Your current level: {playerLevel}", ConsoleColor.Gray);
                 _io.WriteLine("\nThe spirits refuse to stabilize.", ConsoleColor.Red);
                 _io.Wait(2000);
-                return false;
+                return 2;
             }
 
-            List<string> options = new List<string> { "Commence Ritual", "Wait" };
+            List<string> options = new List<string> { "Commence Ritual", "Wait", "Cancel Fusion" };
 
             // We use onHighlight to render the preview data consistently beneath the menu
             int choice = _io.RenderMenu("Is this creation acceptable?", options, 0, null, (idx) =>
@@ -272,7 +272,8 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
                 _io.WriteLine("------------------------");
             });
 
-            return choice == 0;
+            if (choice == -1) return 2; // Abort
+            return choice;
         }
 
         /// <summary>
@@ -317,7 +318,7 @@ namespace JRPGPrototype.Logic.Fusion.Bridges
             string header = "=== DEMONIC COMPENDIUM ===\nRecall the data of a previously registered demon.\n";
             List<string> labels = new List<string>();
 
-            foreach (var entry in entries)
+            foreach (var entry in entries)  
             {
                 int cost = _compendium.CalculateRecallCost(entry.SourceId);
                 labels.Add($"{entry.Name,-15} (Lv.{entry.Level}) {entry.ActivePersona?.Race} (Rk.{entry.ActivePersona?.Rank}) | {cost} M");

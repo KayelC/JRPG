@@ -24,15 +24,18 @@ namespace JRPGPrototype.Logic.Fusion.Strategies
         private void ExecuteOperatorFusion(FusionContext context)
         {
             List<Combatant> allParticipants = context.Materials.Cast<Combatant>().ToList();
-            if (context.Sacrifice is Combatant sacrificialCom) allParticipants.Add(sacrificialCom);
+            if (context.Sacrifice is Combatant sacrificialCom)
+                allParticipants.Add(sacrificialCom);
 
             foreach (var participant in allParticipants)
             {
-                if (context.Party.ActiveParty.Contains(participant)) context.Party.ReturnDemon(context.Owner, participant);
+                if (context.Party.ActiveParty.Contains(participant))
+                    context.Party.ReturnDemon(context.Owner, participant);
                 context.Owner.DemonStock.Remove(participant);
             }
 
-            Combatant child = Combatant.CreatePlayerDemon(context.ResultId, Database.Personas[context.ResultId.ToLower()].Level);
+            Combatant child = Combatant.CreatePlayerDemon(context.ResultId,
+                Database.Personas[context.ResultId.ToLower()].Level);
             child.ExtraSkills.Clear();
             child.ExtraSkills.AddRange(context.ChosenSkills);
 
@@ -42,7 +45,8 @@ namespace JRPGPrototype.Logic.Fusion.Strategies
             child.CurrentHP = child.MaxHP;
             child.CurrentSP = child.MaxSP;
 
-            if (!context.Party.SummonDemon(context.Owner, child)) context.Owner.DemonStock.Add(child);
+            if (!context.Party.SummonDemon(context.Owner, child))
+                context.Owner.DemonStock.Add(child);
             context.Messenger.Publish($"{child.Name} joined!", ConsoleColor.Green);
         }
 
@@ -57,13 +61,20 @@ namespace JRPGPrototype.Logic.Fusion.Strategies
 
             if (context.Sacrifice is Persona sacrificialPer)
             {
-                if (context.Owner.ActivePersona == sacrificialPer) context.Owner.ActivePersona = null;
+                if (context.Owner.ActivePersona == sacrificialPer)
+                    context.Owner.ActivePersona = null;
                 context.Owner.PersonaStock.Remove(sacrificialPer);
             }
 
             Persona child = Database.Personas[context.ResultId.ToLower()].ToPersona();
             child.SkillSet.Clear();
             child.SkillSet.AddRange(context.ChosenSkills);
+
+            if (context.Sacrifice is Persona offer)
+            {
+                int expBonus = (int)(offer.Level * 250);
+                child.GainExp(expBonus);
+            }
 
             context.Owner.PersonaStock.Add(child);
             if (context.Owner.ActivePersona == null) context.Owner.ActivePersona = child;

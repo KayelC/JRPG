@@ -17,7 +17,8 @@ namespace JRPGPrototype.Logic.Fusion.Strategies
             if (context.Owner.Class == ClassType.Operator)
             {
                 // Identify the non-elemental target undergoing the rank change
-                Combatant original = (Combatant)context.Materials.First(m => ((Combatant)m).ActivePersona.Race != "Element");
+                Combatant original = (Combatant)context.Materials.First(m =>
+                    ((Combatant)m).ActivePersona.Race != "Element");
 
                 // Handle Operator-class Sacrifice (Combatant)
                 if (context.Sacrifice is Combatant sacrificialCom)
@@ -31,7 +32,8 @@ namespace JRPGPrototype.Logic.Fusion.Strategies
                 }
 
                 // Create the new higher/lower tier demon combatant
-                Combatant newD = Combatant.CreatePlayerDemon(context.ResultId, Database.Personas[context.ResultId.ToLower()].Level);
+                Combatant newD = Combatant.CreatePlayerDemon(context.ResultId,
+                    Database.Personas[context.ResultId.ToLower()].Level);
 
                 // Rule - Inherit the exact chosen skill set from the sequence
                 newD.ExtraSkills.Clear();
@@ -77,6 +79,13 @@ namespace JRPGPrototype.Logic.Fusion.Strategies
 
                 // Carry over modifiers
                 foreach (var mod in original.StatModifiers) newP.StatModifiers[mod.Key] = mod.Value;
+
+                // Apply Sacrificial EXP bonus for WildCards
+                if (context.Sacrifice is Persona offer)
+                {
+                    int expBonus = (int)(offer.Level * 250);
+                    newP.GainExp(expBonus);
+                }
 
                 context.Messenger.Publish($"{original.Name} has transformed into {newP.Name}!", ConsoleColor.Magenta);
                 ReplacePersona(context, original, newP);

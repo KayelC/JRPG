@@ -27,7 +27,8 @@ namespace JRPGPrototype.Logic.Fusion.Strategies
                 // Handle sacrifice consumption
                 if (context.Sacrifice is Combatant sacrificialCom)
                 {
-                    if (context.Party.ActiveParty.Contains(sacrificialCom)) context.Party.ReturnDemon(context.Owner, sacrificialCom);
+                    if (context.Party.ActiveParty.Contains(sacrificialCom))
+                        context.Party.ReturnDemon(context.Owner, sacrificialCom);
                     context.Owner.DemonStock.Remove(sacrificialCom);
                 }
 
@@ -61,7 +62,8 @@ namespace JRPGPrototype.Logic.Fusion.Strategies
                 context.Owner.PersonaStock.Remove(mitama);
 
                 // Handle sacrifice consumption
-                if (context.Sacrifice is Persona sacrificialPer) context.Owner.PersonaStock.Remove(sacrificialPer);
+                if (context.Sacrifice is Persona sacrificialPer)
+                    context.Owner.PersonaStock.Remove(sacrificialPer);
 
                 // Clone base template and restore state
                 var template = Database.Personas.Values.First(p => p.Name == target.Name);
@@ -75,6 +77,13 @@ namespace JRPGPrototype.Logic.Fusion.Strategies
 
                 // Apply Mitama math
                 ApplyBoosts(newP, mitamaName, context.Messenger);
+
+                // Apply Sacrificial EXP bonus for WildCards
+                if (context.Sacrifice is Persona offer)
+                {
+                    int expBonus = (int)(offer.Level * 250);
+                    newP.GainExp(expBonus);
+                }
 
                 context.Messenger.Publish($"{target.Name}'s stats have been enhanced!", ConsoleColor.Magenta);
                 ReplacePersona(context, target, newP);

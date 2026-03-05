@@ -22,11 +22,12 @@ namespace JRPGPrototype.Logic.Battle
         private void InitializeRegistry()
         {
             // 1. Recovery & Utility (Mapping Item 'Type' and Skill 'Category')
+            _effects["Recovery"] = new RecoveryEffect();
             _effects["Healing"] = new HealEffect();
             _effects["Healing_All"] = new HealEffect();
-            _effects["Spirit"] = new SpiritEffect();
             _effects["Revive"] = new ReviveEffect();
             _effects["Cure"] = new CureEffect();
+            _effects["Spirit"] = new SpiritEffect();
             _effects["Enhance"] = new BuffEffect();
             _effects["Dekaja"] = new DekajaEffect();
             _effects["Dekunda"] = new DekundaEffect();
@@ -50,17 +51,42 @@ namespace JRPGPrototype.Logic.Battle
 
         /// <summary>
         /// Retrieves the logic strategy associated with a data key.
+        /// Performs string cleaning to handle suffixes like " Skills".
         /// </summary>
-        public IBattleEffect GetEffect(string effectKey)
+        public IBattleEffect? GetEffect(string effectKey)
         {
             if (string.IsNullOrEmpty(effectKey)) return null;
 
+            // First, try direct match
             if (_effects.TryGetValue(effectKey, out var strategy))
             {
                 return strategy;
             }
 
+            // Second, clean the key (e.g., "Fire Skills" -> "Fire") and try again
+            string cleanKey = CleanKey(effectKey);
+            if (_effects.TryGetValue(cleanKey, out strategy))
+            {
+                return strategy;
+            }
+
+            // Final fallback: Manual search for substring (Restores old .Contains logic)
+            foreach (var key in _effects.Keys)
+            {
+                if (effectKey.Contains(key, StringComparison.OrdinalIgnoreCase))
+                {
+                    return _effects[key];
+                }
+            }
+
             return null;
+        }
+
+        private string CleanKey(string input)
+        {
+            return input.Replace("Skills", "", StringComparison.OrdinalIgnoreCase)
+                        .Replace("Skill", "", StringComparison.OrdinalIgnoreCase)
+                        .Trim();
         }
     }
 }

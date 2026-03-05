@@ -41,15 +41,15 @@ namespace JRPGPrototype.Logic.Battle
             // 1. UI: Report the attempt
             _messenger.Publish($"{attacker.Name} attacks {target.Name}!");
 
-            // 2. STRATEGY: Get the damage logic for the specific weapon element
-            IBattleEffect strategy = _registry.GetEffect(attacker.WeaponElement.ToString());
+            // Reuses the DamageEffect logic based on current weapon element
+            IBattleEffect? strategy = _registry.GetEffect(attacker.WeaponElement.ToString());
 
             if (strategy == null) return new CombatResult { Type = HitType.Miss };
 
-            // 3. EXECUTION: Melee attacks have a standard power of 15
+            // 3. Unarmed / Base Demon Melee attacks have a standard power of 15
             var results = strategy.Apply(attacker, new List<Combatant> { target }, 15, "", _messenger, _status, _knowledge);
 
-            // 4. CHARGE: Rule - Any physical offensive action consumes the charge
+            // 4. Rule - Any physical offensive action consumes the charge
             attacker.IsCharged = false;
 
             return results.FirstOrDefault() ?? new CombatResult { Type = HitType.Miss };
@@ -58,17 +58,18 @@ namespace JRPGPrototype.Logic.Battle
         // Handles Skill execution: Deducts costs and delegates to the correct strategy.
         public List<CombatResult> ExecuteSkill(Combatant attacker, List<Combatant> targets, SkillData skill)
         {
-            // --- 1. ENGINE LOGIC: Cost Calculation & Resource Deduction ---
+            // --- 1. Resource Cost Calculation ---
             var cost = skill.ParseCost();
             int costValue = cost.value;
             var passives = attacker.GetConsolidatedSkills();
 
-            // Determine if it's physical for cost and charge logic
-            bool isPhysElement = skill.Category == "Slash" || skill.Category == "Strike" || skill.Category == "Pierce";
+            // Logic Fidelity: Use the core ElementHelper to verify if the category is Physical
+            Element skillElement = ElementHelper.FromCategory(skill.Category);
+            bool isPhys = skillElement == Element.Slash || skillElement == Element.Strike || skillElement == Element.Pierce;
 
             // Arms Master / Spell Master Logic
-            if (cost.isHP && isPhysElement && passives.Contains("Arms Master")) costValue /= 2;
-            else if (!cost.isHP && !isPhysElement && passives.Contains("Spell Master")) costValue /= 2;
+            if (cost.isHP && isPhys && passives.Contains("Arms Master")) costValue /= 2;
+            else if (!cost.isHP && !isPhys && passives.Contains("Spell Master")) costValue /= 2;
 
             if (cost.isHP)
             {
@@ -82,8 +83,8 @@ namespace JRPGPrototype.Logic.Battle
 
             _messenger.Publish($"{attacker.Name} uses {skill.Name}!", ConsoleColor.White, 200);
 
-            // --- 2. STRATEGY LOGIC: Behavior Delegation ---
-            IBattleEffect strategy = _registry.GetEffect(skill.Category);
+            // --- 2. Strategy Execution ---
+            IBattleEffect? strategy = _registry.GetEffect(skill.Category);
             List<CombatResult> results;
 
             if (strategy != null)
@@ -100,7 +101,7 @@ namespace JRPGPrototype.Logic.Battle
             // --- 3. ENGINE LOGIC: Charge Management ---
             // Charges are cleared regardless of hit/miss once the action is spent
             // Physical skills consume Physical Charge, Magic consumes Mind Charge
-            if (isPhysElement) attacker.IsCharged = false;
+            if (isPhys) attacker.IsCharged = false;
             else attacker.IsMindCharged = false;
 
             return results;
@@ -119,7 +120,7 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             // Route standard items (Healing, Cure, Revive) to their corresponding strategies
-            IBattleEffect strategy = _registry.GetEffect(item.Type);
+            IBattleEffect? strategy = _registry.GetEffect(item.Type);
 
             if (strategy != null)
             {

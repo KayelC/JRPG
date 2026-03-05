@@ -26,7 +26,7 @@ namespace JRPGPrototype.Logic.Battle
         /// The primary entry point for AI decision making.
         /// Implements the Tiered Priority Ladder: Kill > Weakness > Crisis > Rigid > Pass > Pressure.
         /// </summary>
-        public (SkillData skill, List<Combatant> targets) DetermineBestAction(
+        public (SkillData? skill, List<Combatant> targets) DetermineBestAction(
             Combatant actor,
             List<Combatant> allies,
             List<Combatant> opponents,
@@ -71,7 +71,7 @@ namespace JRPGPrototype.Logic.Battle
                     var targets = DetermineTargetList(actor, null, allies, opponents, skill);
                     foreach (var target in targets)
                     {
-                        int estDmg = CombatMath.CalculateDamage(actor, target, skill.GetPowerVal(), ElementHelper.FromCategory(skill.Category), out _);
+                        int estDmg = CombatMath.CalculateDamage(actor, target, skill!.GetPowerVal(), ElementHelper.FromCategory(skill.Category), out _);
                         if (estDmg >= target.CurrentHP)
                         {
                             return (skill, targets);
@@ -86,7 +86,7 @@ namespace JRPGPrototype.Logic.Battle
             {
                 if (IsOffensive(skill))
                 {
-                    Element element = ElementHelper.FromCategory(skill.Category);
+                    Element element = ElementHelper.FromCategory(skill!.Category);
                     var targets = DetermineTargetList(actor, null, allies, opponents, skill);
                     if (targets.Any(t => knowledge.IsWeaknessKnown(t.SourceId, element)))
                     {
@@ -104,7 +104,7 @@ namespace JRPGPrototype.Logic.Battle
             var criticalAlly = allies.FirstOrDefault(a => !a.IsDead && (double)a.CurrentHP / a.MaxHP < 0.35);
             if (criticalAlly != null)
             {
-                var healSkill = validSkills.FirstOrDefault(s => s.Category.Contains("Recovery") && !s.Effect.Contains("Revive"));
+                var healSkill = validSkills.FirstOrDefault(s => s != null && s.Category.Contains("Recovery") && !s.Effect.Contains("Revive"));
                 if (healSkill != null)
                 {
                     return (healSkill, DetermineTargetList(actor, criticalAlly, allies, opponents, healSkill));
@@ -116,7 +116,7 @@ namespace JRPGPrototype.Logic.Battle
             var rigidTarget = opponents.FirstOrDefault(o => !o.IsDead && o.IsRigidBody);
             if (rigidTarget != null)
             {
-                var physSkill = validSkills.FirstOrDefault(s => IsPhysical(s));
+                var physSkill = validSkills.FirstOrDefault(s => s != null && IsPhysical(s));
                 if (physSkill != null) return (physSkill, DetermineTargetList(actor, rigidTarget, allies, opponents, physSkill));
                 // Basic Attack (Physical)
                 return (null, new List<Combatant> { rigidTarget });
@@ -136,7 +136,7 @@ namespace JRPGPrototype.Logic.Battle
 
             // TIER 6: STANDARD PRESSURE
             // Use highest power offensive skill that isn't a known risk.
-            var offensiveOptions = validSkills.Where(s => IsOffensive(s)).OrderByDescending(s => s.GetPowerVal()).ToList();
+            var offensiveOptions = validSkills.Where(s => IsOffensive(s)).OrderByDescending(s => s!.GetPowerVal()).ToList();
             if (offensiveOptions.Any())
             {
                 var bestSkill = offensiveOptions.First();
@@ -151,7 +151,7 @@ namespace JRPGPrototype.Logic.Battle
         /// <summary>
         /// Sabotages the team when Charmed.
         /// </summary>
-        private (SkillData, List<Combatant>) DetermineConfusedAction(Combatant actor, List<Combatant> allies, List<Combatant> opponents)
+        private (SkillData? skill, List<Combatant> targets) DetermineConfusedAction(Combatant actor, List<Combatant> allies, List<Combatant> opponents)
         {
             var skills = actor.GetConsolidatedSkills()
                 .Select(s => Database.Skills.TryGetValue(s, out var data) ? data : null)
@@ -161,7 +161,7 @@ namespace JRPGPrototype.Logic.Battle
             // 50% Chance: Aid the enemies
             if (_rnd.Next(0, 100) < 50)
             {
-                var healSkill = skills.FirstOrDefault(s => s.Category.Contains("Recovery") && !s.Effect.Contains("Revive"));
+                var healSkill = skills.FirstOrDefault(s => s != null && s.Category.Contains("Recovery") && !s.Effect.Contains("Revive"));
                 if (healSkill != null) return (healSkill, new List<Combatant> { opponents[_rnd.Next(opponents.Count)] });
             }
 
@@ -173,7 +173,7 @@ namespace JRPGPrototype.Logic.Battle
         /// <summary>
         /// The Effectiveness Gate: Prevents the AI from taking turns that do nothing.
         /// </summary>
-        private bool IsActionEffective(Combatant actor, SkillData skill, List<Combatant> allies, List<Combatant> opponents, BattleKnowledge knowledge)
+        private bool IsActionEffective(Combatant actor, SkillData? skill, List<Combatant> allies, List<Combatant> opponents, BattleKnowledge knowledge)
         {
             // Basic attacks are always "effective" as a baseline.
             if (skill == null) return true;
@@ -221,13 +221,13 @@ namespace JRPGPrototype.Logic.Battle
 
             foreach (var skill in skills)
             {
-                Element e = ElementHelper.FromCategory(skill.Category);
+                Element e = ElementHelper.FromCategory(skill!.Category);
                 if (opponents.Any(o => !o.IsDead && knowledge.IsWeaknessKnown(o.SourceId, e))) return true;
             }
             return false;
         }
 
-        private List<Combatant> DetermineTargetList(Combatant actor, Combatant primaryTarget, List<Combatant> allies, List<Combatant> opponents, SkillData skill)
+        private List<Combatant> DetermineTargetList(Combatant actor, Combatant? primaryTarget, List<Combatant> allies, List<Combatant> opponents, SkillData? skill)
         {
             List<Combatant> targets = new List<Combatant>();
             if (skill == null) // Basic Attack
@@ -244,7 +244,7 @@ namespace JRPGPrototype.Logic.Battle
             {
                 return new List<Combatant> { actor };
             }
-            
+
             // --- REFINED MULTI-TARGET LOGIC ---
             // Checks for Maha (Ma-) or Media (Me-) prefixes, or explicit group keywords.
             // Avoids the "Heal 1 ally" greedy bug by checking for "all allies" or "party".
@@ -307,14 +307,14 @@ namespace JRPGPrototype.Logic.Battle
             return actor.CurrentSP >= cost.value;
         }
 
-        private bool IsOffensive(SkillData skill)
+        private bool IsOffensive(SkillData? skill)
         {
             if (skill == null) return true;
             string cat = skill.Category.ToLower();
             return !cat.Contains("recovery") && !cat.Contains("enhance");
         }
 
-        private bool IsPhysical(SkillData skill)
+        private bool IsPhysical(SkillData? skill)
         {
             if (skill == null) return true;
             Element element = ElementHelper.FromCategory(skill.Category);

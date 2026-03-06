@@ -157,9 +157,22 @@ namespace JRPGPrototype.Logic.Fusion
 
                 if (parentToRank != null)
                 {
-                    var op = (resultString == "1") ? FusionOperationType.RankUpParent : FusionOperationType.RankDownParent;
-                    _messenger.Publish($"[Fusion Trace] Rank Mutation: Target {parentToRank.Name} identified.", ConsoleColor.DarkGray);
-                    return (op, parentToRank.SourceId.ToLower(), isAccident);
+                    int rankDir = (resultString == "1") ? 1 : -1;
+                    int targetRank = parentToRank.ActivePersona.Rank + rankDir;
+
+                    // Find the new entity in the database that matches the Race and the Target Rank
+                    var nextRankData = Database.Personas.Values.FirstOrDefault(p =>
+                        p.Race.Equals(parentToRank.ActivePersona.Race, StringComparison.OrdinalIgnoreCase) &&
+                        p.Rank == targetRank);
+
+                    if (nextRankData != null)
+                    {
+                        var op = (resultString == "1") ? FusionOperationType.RankUpParent : FusionOperationType.RankDownParent;
+                        _messenger.Publish($"[Fusion Trace] Rank Mutation: Target {nextRankData.Name} identified.", ConsoleColor.DarkGray);
+
+                        // Return the NEW ID, not the parent's ID
+                        return (op, nextRankData.Id.ToLower(), isAccident);
+                    }
                 }
                 return (FusionOperationType.NoFusionPossible, null, false);
             }

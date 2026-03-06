@@ -5,6 +5,9 @@ using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Services;
+using JRPGPrototype.Logic.Fusion.Strategies;
+using JRPGPrototype.Logic.Fusion.Messaging;
+using JRPGPrototype.Logic.Fusion.Bridges;
 
 namespace JRPGPrototype.Logic.Fusion
 {

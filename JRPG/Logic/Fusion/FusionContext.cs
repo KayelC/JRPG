@@ -1,6 +1,9 @@
 using JRPGPrototype.Entities;
 using JRPGPrototype.Logic.Field;
 using System.Collections.Generic;
+using JRPGPrototype.Logic.Fusion.Strategies;
+using JRPGPrototype.Logic.Fusion.Messaging;
+using JRPGPrototype.Logic.Fusion.Bridges;
 
 namespace JRPGPrototype.Logic.Fusion
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace JRPGPrototype.Logic.Fusion
+namespace JRPGPrototype.Logic.Fusion.Messaging
 {
     /// <summary>
     /// A centralized messenger that handles the distribution of fusion-related events.

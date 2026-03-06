@@ -1,7 +1,7 @@
 using JRPGPrototype.Services;
 using System;
 
-namespace JRPGPrototype.Logic.Fusion
+namespace JRPGPrototype.Logic.Fusion.Messaging
 {
     /// <summary>
     /// The Subscriber (Observer) for the Fusion Sub-System.

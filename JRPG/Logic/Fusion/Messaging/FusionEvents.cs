@@ -1,6 +1,6 @@
 using System;
 
-namespace JRPGPrototype.Logic.Fusion
+namespace JRPGPrototype.Logic.Fusion.Messaging
 {
     /// <summary>
     /// Represents the payload data sent when a fusion event occurs.

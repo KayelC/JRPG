@@ -7,6 +7,9 @@ using JRPGPrototype.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JRPGPrototype.Logic.Fusion.Strategies;
+using JRPGPrototype.Logic.Fusion.Messaging;
+using JRPGPrototype.Logic.Fusion.Bridges;
 
 namespace JRPGPrototype.Logic.Fusion
 {

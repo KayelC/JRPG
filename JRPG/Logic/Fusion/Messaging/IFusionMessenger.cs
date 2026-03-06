@@ -1,6 +1,6 @@
 using System;
 
-namespace JRPGPrototype.Logic.Fusion
+namespace JRPGPrototype.Logic.Fusion.Messaging
 {
     // Defines a centralized contract for broadcasting fusion events.
     public interface IFusionMessenger

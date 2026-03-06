@@ -1,8 +1,7 @@
 using JRPGPrototype.Core;
-using JRPGPrototype.Logic.Fusion.Strategies;
 using System.Collections.Generic;
 
-namespace JRPGPrototype.Logic.Fusion
+namespace JRPGPrototype.Logic.Fusion.Strategies
 {
     public class FusionStrategyRegistry
     {

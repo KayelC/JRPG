@@ -1,4 +1,4 @@
-namespace JRPGPrototype.Logic.Fusion
+namespace JRPGPrototype.Logic.Fusion.Strategies
 {
 	// Interface for a specific fusion logic implementation.
 	public interface IFusionStrategy

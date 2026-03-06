@@ -1,0 +1,23 @@
+Logic\Fusion\
+│
+├── FusionConductor.cs               <-- The Entry Point / Game Loop
+├── FusionCalculator.cs              <-- The Math / Lookup Kernel
+├── FusionMutator.cs                 <-- The Core Executor
+├── FusionContext.cs                 <-- The Data Transfer Object
+├── CompendiumRegistry.cs            <-- The Save/State Authority
+│
+├── Strategies\                      [The Strategy Pattern Sub-module]
+│   ├── FusionStrategyRegistry.cs    <-- Manages the strategies
+│   ├── IFusionStrategy.cs
+│   ├── StandardFusionStrategy.cs
+│   ├── RankMutationStrategy.cs
+│   └── StatBoostStrategy.cs
+│
+├── Messaging\                       [The Mediator & Observer Sub-module]
+│   ├── IFusionMessenger.cs          
+│   ├── FusionMessenger.cs           
+│   ├── FusionEvents.cs              (Contains FusionMessageArgs)
+│   └── FusionLogger.cs              
+│
+└── Bridges\                         [UI / IO Adapters]
+    └── CathedralUIBridge.cs

@@ -185,9 +185,8 @@ namespace JRPGPrototype.Logic.Battle
         /// Handles turn-end logic including Poison damage, Recovery rolls, and Passive Restoration.
         /// Distressed, Weak, etc., are handled by CombatMath, but this manages their duration.
         /// </summary>
-        public List<string> ProcessTurnEnd(Combatant actor)
+        public void ProcessTurnEnd(Combatant actor)
         {
-            List<string> logs = new List<string>();
 
             // --- PASSIVE TRIGGER: Turn-End Restoration ---
             var skills = actor.GetConsolidatedSkills();
@@ -203,7 +202,7 @@ namespace JRPGPrototype.Logic.Battle
             if (hpRecovery > 0 && actor.CurrentHP < actor.MaxHP)
             {
                 actor.CurrentHP = Math.Min(actor.MaxHP, actor.CurrentHP + hpRecovery);
-                logs.Add($"{actor.Name} restored {hpRecovery} HP via passives.");
+                _messenger?.Publish($"{actor.Name} restored {hpRecovery} HP via passives.");
             }
 
             // 2. SP Restoration (Invigorate)
@@ -215,10 +214,10 @@ namespace JRPGPrototype.Logic.Battle
             if (spRecovery > 0 && actor.CurrentSP < actor.MaxSP)
             {
                 actor.CurrentSP = Math.Min(actor.MaxSP, actor.CurrentSP + spRecovery);
-                logs.Add($"{actor.Name} restored {spRecovery} SP via passives.");
+                _messenger?.Publish($"{actor.Name} restored {spRecovery} SP via passives.");
             }
 
-            if (actor.CurrentAilment == null) return logs;
+            if (actor.CurrentAilment == null) return;
 
             AilmentData ailment = actor.CurrentAilment;
 
@@ -233,15 +232,15 @@ namespace JRPGPrototype.Logic.Battle
                 // if (actor.CurrentHP < 1) actor.CurrentHP = 1;
                 // I decided to make Poison Lethal by commenting it out, I can always add it back by Uncommenting if needed.
 
-                logs.Add($"{actor.Name} is hurt by {ailment.Name}! ({damage} DMG)");
+                _messenger?.Publish($"{actor.Name} is hurt by {ailment.Name}! ({damage} DMG)");
             }
 
             // Immediate Removal Triggers
             if (ailment.RemovalTriggers.Contains("OneTurn"))
             {
                 actor.RemoveAilment();
-                logs.Add($"{actor.Name} is no longer {ailment.Name}.");
-                return logs;
+                _messenger?.Publish($"{actor.Name} is no longer {ailment.Name}.");
+                return;
             }
 
             // Natural Recovery (Luck Roll)
@@ -251,8 +250,8 @@ namespace JRPGPrototype.Logic.Battle
                 if (_rnd.Next(0, 100) < recoveryChance)
                 {
                     actor.RemoveAilment();
-                    logs.Add($"{actor.Name} recovered from {ailment.Name}!");
-                    return logs;
+                    _messenger?.Publish($"{actor.Name} recovered from {ailment.Name}!");
+                    return;
                 }
             }
 
@@ -261,10 +260,10 @@ namespace JRPGPrototype.Logic.Battle
             if (actor.AilmentDuration <= 0 && actor.CurrentAilment != null)
             {
                 actor.RemoveAilment();
-                logs.Add($"{actor.Name}'s {ailment.Name} wore off.");
+                _messenger?.Publish($"{actor.Name}'s {ailment.Name} wore off.");
             }
 
-            return logs;
+            return;
         }
 
         /// <summary>

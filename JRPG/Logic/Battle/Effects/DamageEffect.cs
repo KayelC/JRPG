@@ -10,7 +10,7 @@ namespace JRPGPrototype.Logic.Battle.Effects
 {
     /// <summary>
     /// The primary strategy for all offensive actions (Physical and Magical).
-    /// Handles Affinities, Critical Hits, Reflection, Instant Kills, and Knowledge discovery.
+    /// Handles Accuracy, Affinities, Critical Hits, Reflection, Instant Kills, and Knowledge discovery.
     /// </summary>
     public class DamageEffect : IBattleEffect
     {
@@ -36,11 +36,31 @@ namespace JRPGPrototype.Logic.Battle.Effects
             // Determine if this is an Instant Kill skill (e.g., Hama, Mudo)
             bool isInstantKill = metadata.ToLower().Contains("instant kill");
 
+            // Determine if the element is physical for charge consumption rules
+            bool isPhysical = (_element == Element.Slash || _element == Element.Strike || _element == Element.Pierce);
+
             foreach (var target in targets)
             {
                 if (target.IsDead) continue;
 
-                // 1. Check for Repel (Shields or Innate)
+                // 1. Logic: Accuracy Gate (FIX: Restored Evasion Mechanics)
+                // Extract accuracy percentage from metadata (e.g. "Agilao (90%)") or default to 95%
+                string accStr = "95%";
+                Match accMatch = Regex.Match(metadata, @"(\d+%)");
+                if (accMatch.Success) accStr = accMatch.Value;
+
+                if (!CombatMath.CheckHit(user, target, _element, accStr))
+                {
+                    results.Add(new CombatResult { Type = HitType.Miss });
+
+                    // Rule: Missing an attack still consumes the Charge
+                    if (isPhysical) user.IsCharged = false;
+                    else user.IsMindCharged = false;
+
+                    continue;
+                }
+
+                // 2. Logic: Check for Repel (Shields or Innate)
                 // Repel takes absolute priority in the SMT calculation stack.
                 Affinity aff = CombatMath.GetEffectiveAffinity(target, _element);
 
@@ -63,7 +83,7 @@ namespace JRPGPrototype.Logic.Battle.Effects
                     break;
                 }
 
-                // 2. Handle Instant Kill (Hama/Mudo) logic
+                // 3. Handle Instant Kill (Hama/Mudo) logic
                 if (isInstantKill)
                 {
                     // IK Rule: Null/Absorb function as normal blocks against Instant Kill
@@ -93,20 +113,20 @@ namespace JRPGPrototype.Logic.Battle.Effects
                     }
                 }
 
-                // 3. Logic: Execute Standard Damage Math
+                // 4. Logic: Execute Standard Damage Math
                 // FIX: CalculateDamage now returns RAW potency. Affinities are handled by ReceiveDamage below.
                 int rawDamage = CombatMath.CalculateDamage(user, target, power, _element, out bool isCritical);
 
-                // 4. Body Logic: Target's body applies multipliers (Weak/Resist/Absorb) to the raw potency.
+                // 5. Body Logic: Target's body applies multipliers (Weak/Resist/Absorb) to the raw potency.
                 CombatResult result = target.ReceiveDamage(rawDamage, _element, isCritical);
 
-                // 5. Knowledge: Record the discovery for the Player's UI/AI memory
+                // 6. Knowledge: Record the discovery for the Player's UI/AI memory
                 knowledge.Learn(target.SourceId, _element, aff);
 
-                // 6. UI: Report the result (Damage, Weakness, Block, etc.)
+                // 7. UI: Report the result (Damage, Weakness, Block, etc.)
                 ReportDamageResult(result, target.Name, messenger);
 
-                // 7. Logic: Secondary Ailment Infliction
+                // 8. Logic: Secondary Ailment Infliction
                 // Only try to infect if the attack actually landed (not Nulled or Absorbed)
                 if (result.Type != HitType.Null && result.Type != HitType.Absorb)
                 {

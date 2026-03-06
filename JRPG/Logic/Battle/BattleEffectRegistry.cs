@@ -21,7 +21,7 @@ namespace JRPGPrototype.Logic.Battle
 
         private void InitializeRegistry()
         {
-            // 1. Recovery & Utility (Mapping Item 'Type' and Skill 'Category')
+            // 1. Recovery & Utility Strategies (Mapping Item 'Type' and Skill 'Category')
             _effects["Recovery"] = new RecoveryEffect();
             _effects["Healing"] = new HealEffect();
             _effects["Healing_All"] = new HealEffect();
@@ -33,6 +33,9 @@ namespace JRPGPrototype.Logic.Battle
             _effects["Dekunda"] = new DekundaEffect();
             _effects["Charge"] = new ChargeEffect();
             _effects["Shield"] = new ShieldEffect();
+
+            // NEW: Elemental Break Strategy
+            _effects["Break"] = new BreakEffect();
 
             // 2. Damage Elements (Mapping Skill 'Category' to specific DamageEffect instances)
             // We pass the Element into the constructor so one class can handle all types.
@@ -51,26 +54,26 @@ namespace JRPGPrototype.Logic.Battle
 
         /// <summary>
         /// Retrieves the logic strategy associated with a data key.
-        /// Performs string cleaning to handle suffixes like " Skills".
+        /// Performs string cleaning to handle suffixes like " Skills" and fuzzy .Contains matching.
         /// </summary>
         public IBattleEffect? GetEffect(string effectKey)
         {
             if (string.IsNullOrEmpty(effectKey)) return null;
 
-            // First, try direct match
+            // 1. Try direct match (e.g., "Fire")
             if (_effects.TryGetValue(effectKey, out var strategy))
             {
                 return strategy;
             }
 
-            // Second, clean the key (e.g., "Fire Skills" -> "Fire") and try again
+            // 2. Clean the key (e.g., "Fire Skills" -> "Fire") and try again
             string cleanKey = CleanKey(effectKey);
             if (_effects.TryGetValue(cleanKey, out strategy))
             {
                 return strategy;
             }
 
-            // Final fallback: Manual search for substring (Restores old .Contains logic)
+            // 3. Final fallback: Manual search for substring (Restores legacy .Contains logic)
             foreach (var key in _effects.Keys)
             {
                 if (effectKey.Contains(key, StringComparison.OrdinalIgnoreCase))
@@ -82,6 +85,7 @@ namespace JRPGPrototype.Logic.Battle
             return null;
         }
 
+        // Removes common suffixes from JSON data strings to allow better dictionary mapping.
         private string CleanKey(string input)
         {
             return input.Replace("Skills", "", StringComparison.OrdinalIgnoreCase)

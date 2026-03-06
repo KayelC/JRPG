@@ -72,8 +72,9 @@ namespace JRPGPrototype.Logic.Battle
 
         // --- SMT III Damage Formula: 5.0 * sqrt(Power * (Atk/Def)) ---
         /// <summary>
-        /// Calculates the damage an attacker deals to a target.
-        /// Implements linear stacking multipliers: +4 = 2.0x, -4 = 0.5x.
+        /// Calculates the raw potency an attacker deals to a target.
+        /// Removed affinity multipliers to prevent double-calculation and Absorb bugs.
+        /// 
         /// </summary>
         /// <param name="attacker">The entity performing the action.</param>
         /// <param name="target">The entity receiving the action.</param>
@@ -109,7 +110,8 @@ namespace JRPGPrototype.Logic.Battle
             atkPower *= GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Attack", 0));
             defPower *= GetStatMultiplier(target.Buffs.GetValueOrDefault("Defense", 0));
 
-            // Apply Passive Skills (Amps/Boosts/Drivers) handled via GetStat calls if implemented there, 
+            // Apply Passive Skills (Amps/Boosts/Drivers handled via GetStat calls
+            // if implemented there, otherwise would be here. Preserving current stat-access structure.
             //atkPower *= GetPassiveDamageMultiplier(attacker, element);
 
             // Apply Charges (Power Charge / Mind Charge)
@@ -154,7 +156,55 @@ namespace JRPGPrototype.Logic.Battle
 
             // Damage Variance (95% to 105%)
             double variance = 0.95 + (_rnd.NextDouble() * 0.1);
+
+            // FIX: Removed the Elemental Affinity Multiplier switch from this class.
+            // Affinities are now handled exclusively by Combatant.ReceiveDamage to prevent Absorb sign-flip bugs.
+
             return (int)Math.Floor(dmgBase * variance);
+        }
+
+        /// <summary>
+        /// Hit/Evasion check.
+        /// Formula: SkillAccuracy + (AttackerAg - TargetAg) * 2 + (AttackerLu - TargetLu)
+        /// </summary>
+        public static bool CheckHit(Combatant attacker, Combatant target, Element element, string skillAccuracy)
+        {
+            // If target is Rigid (Frozen/Shocked), all attacks hit
+            if (target.IsRigidBody) return true;
+
+            // 1. Data-Driven Accuracy: Use value from JSON.
+            int baseAccuracy = 90; // Default for basic attacks if skillAccuracy is empty
+            if (!string.IsNullOrEmpty(skillAccuracy) &&
+                int.TryParse(skillAccuracy.Replace("%", ""), out int parsed))
+            {
+                baseAccuracy = parsed;
+            }
+
+            // 2. Passive Accuracy/Evasion skills (Vidyaraja's Blessing, Dodge/Evade)
+            double hitMult = 1.0;
+            var attackerSkills = attacker.GetConsolidatedSkills();
+            if (attackerSkills.Contains("Vidyaraja's Blessing")) hitMult *= 1.15; // 15% hit bonus
+
+            double evadeMult = 1.0;
+            var targetSkills = target.GetConsolidatedSkills();
+            string elName = element.ToString();
+            // Dodge/Evade apply to specific element types
+            if (targetSkills.Any(s => s.Contains("Dodge") && s.Contains(elName))) evadeMult *= 0.85; // 15% evade bonus
+            if (targetSkills.Any(s => s.Contains("Evade") && s.Contains(elName))) evadeMult *= 0.60; // 40% evade bonus
+
+            // 3. Agility & Luck Influence
+            int attackerAg = attacker.GetStat(StatType.Ag);
+            int targetAg = target.GetStat(StatType.Ag);
+            int attackerLu = attacker.GetStat(StatType.Lu);
+            int targetLu = target.GetStat(StatType.Lu);
+
+            double atkValue = (attackerAg * GetStatMultiplier(attacker.Buffs.GetValueOrDefault("Agility", 0))) * hitMult;
+            double defValue = (targetAg * GetStatMultiplier(target.Buffs.GetValueOrDefault("Agility", 0))) * evadeMult;
+
+            // Final Chance Calculation: Clamped between 5% and 99%
+            double finalChance = baseAccuracy + ((atkValue - defValue) * 2) + (attackerLu - targetLu);
+
+            return _rnd.Next(0, 100) < Math.Clamp(finalChance, 5, 99);
         }
 
         /// <summary>
@@ -258,8 +308,7 @@ namespace JRPGPrototype.Logic.Battle
             if (target.IsGuarding && baseAff == Affinity.Weak) return Affinity.Normal;
 
             // 6. Rigid Body (Freeze/Shocked) negates physical resistances but keeps weaknesses.
-            //Rule: If rigid, physical Null/Resist/Repel becomes Normal, Absorb becomes Normal.
-            // Weakness remains.
+            // Rule: If rigid, physical Null/Resist/Repel becomes Normal, Absorb becomes Normal. Weakness remains.
             if (target.IsRigidBody && isPhysical)
             {
                 if (baseAff == Affinity.Resist || baseAff == Affinity.Null || baseAff == Affinity.Repel || baseAff == Affinity.Absorb)

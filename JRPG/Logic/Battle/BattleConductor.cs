@@ -86,7 +86,6 @@ namespace JRPGPrototype.Logic.Battle
         // Entry point for the encounter. Handles initiative and the phase loop.
         public void StartBattle()
         {
-
             _messenger.Publish("=== ENEMY ENCOUNTER ===", ConsoleColor.White, 1200, clearScreen: true);
 
             foreach (var e in _enemies)
@@ -125,7 +124,7 @@ namespace JRPGPrototype.Logic.Battle
 
             // Show HUD update for turn 1 buffs
             _ui.ForceRefreshHUD();
-            _messenger.Publish(null, delay: 800);
+            _messenger.Publish(message: null, delay: 800);
 
             // 2. Main Phase Loop
             while (!BattleEnded)
@@ -207,8 +206,8 @@ namespace JRPGPrototype.Logic.Battle
                 _ui.ForceRefreshHUD();
 
                 // --- 2. TURN END (Recovery & Decay) ---
-                var endLogs = _statusRegistry.ProcessTurnEnd(actor);
-                foreach (var log in endLogs) _messenger.Publish(log, ConsoleColor.Gray);
+                // StatusRegistry now handles its own publishing directly to the messenger.
+                _statusRegistry.ProcessTurnEnd(actor);
 
                 // Handle demons dying and returning to stock
                 foreach (var p in _party.ActiveParty.ToList())
@@ -238,12 +237,12 @@ namespace JRPGPrototype.Logic.Battle
         /// </summary>
         private void ExecuteAction(Combatant actor, bool isPlayerSide, TurnStartResult turnState)
         {
-            SkillData skill = null;
-            ItemData item = null;
-            List<Combatant> targets = null;
+            SkillData? skill = null;
+            ItemData? item = null;
+            List<Combatant>? targets = null;
             bool actionCommitted = false;
 
-            // --- A. ACTION SELECTION LOOP (Replaces recursion to fix "Back" button crash) ---
+            // --- A. ACTION SELECTION LOOP ---
             while (!actionCommitted && !BattleEnded)
             {
                 // Reset temporary selection state
@@ -263,7 +262,6 @@ namespace JRPGPrototype.Logic.Battle
                 else if (isPlayerSide && (actor.Controller == ControllerType.LocalPlayer || actor.BattleControl == ControlState.DirectControl))
                 {
                     string choice = _ui.ShowMainMenu(actor);
-
                     if (choice == "Cancel") continue; // Re-render main menu
 
                     if (choice == "Attack")
@@ -382,7 +380,7 @@ namespace JRPGPrototype.Logic.Battle
             // --- B. EXECUTION ---
             if (actionCommitted && !BattleEnded)
             {
-                // If AI chose to Pass (represented by null skill and empty targets)
+                // Handle Pass (represented by AI returning null skill and empty targets)
                 if (targets != null && targets.Count == 0 && skill == null)
                 {
                     _turnEngine.Pass();
@@ -428,7 +426,7 @@ namespace JRPGPrototype.Logic.Battle
                     else _turnEngine.ConsumeAction(HitType.Normal, false);
                 }
 
-                _messenger.Publish(null, delay: 1000);
+                _messenger.Publish(message: null, delay: 1000);
             }
         }
 
@@ -524,7 +522,6 @@ namespace JRPGPrototype.Logic.Battle
 
             // 3. Full Party Wipe Check
             if (_party.IsPartyWiped()) { PlayerWon = false; BattleEnded = true; return true; }
-
             return false;
         }
 

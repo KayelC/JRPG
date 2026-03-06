@@ -6,7 +6,6 @@ using JRPGPrototype.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 
 namespace JRPGPrototype.Logic.Field
@@ -18,7 +17,7 @@ namespace JRPGPrototype.Logic.Field
     /// </summary>
     public class FieldServiceEngine
     {
-        private readonly IGameIO _io;
+        private readonly IFieldMessenger _messenger;
         private readonly EconomyManager _economy;
         private readonly InventoryManager _inventory;
         private readonly PartyManager _party;
@@ -26,19 +25,19 @@ namespace JRPGPrototype.Logic.Field
         private readonly ShopManager _shopManager;
 
         public FieldServiceEngine(
-            IGameIO io,
+            IFieldMessenger messenger,
             EconomyManager economy,
             InventoryManager inventory,
             PartyManager party,
             DungeonState dungeonState)
         {
-            _io = io;
+            _messenger = messenger;
             _economy = economy;
             _inventory = inventory;
             _party = party;
             _dungeonState = dungeonState;
 
-            _shopManager = new ShopManager(_inventory, _economy, _io);
+             _shopManager = new ShopManager(_inventory, _economy, _messenger);
         }
 
         #region Shop and Equipment
@@ -67,8 +66,7 @@ namespace JRPGPrototype.Logic.Field
             }
 
             player.RecalculateResources();
-            _io.WriteLine("Equipped successfully!");
-            _io.Wait(500);
+            _messenger.Publish("Equipped successfully!", ConsoleColor.Gray, 500);
         }
 
         #endregion
@@ -114,7 +112,7 @@ namespace JRPGPrototype.Logic.Field
 
         /// <summary>
         /// Executes item usage and returns an explicit result signal to the Conductor.
-        /// Fix: Replaces boolean return with ItemUsageResult enum.
+        /// Replaces boolean return with ItemUsageResult enum.
         /// </summary>
         public ItemUsageResult ExecuteItemUsage(ItemData item, Combatant user, Combatant target)
         {
@@ -125,8 +123,7 @@ namespace JRPGPrototype.Logic.Field
             // Specialized Item: Goho-M (Explicit Exit Request)
             if (item.Name == "Goho-M")
             {
-                _io.WriteLine("Using Goho-M... A mystical light surrounds the party.");
-                _io.Wait(1000);
+                _messenger.Publish("Using Goho-M... A mystical light surrounds the party.", ConsoleColor.Gray, 1000);
                 _inventory.RemoveItem(item.Id, 1);
                 _dungeonState.ResetToEntry();
                 return ItemUsageResult.RequestDungeonExit;
@@ -139,13 +136,13 @@ namespace JRPGPrototype.Logic.Field
                 case "Healing_All":
                     if (target.CurrentHP >= target.MaxHP)
                     {
-                        _io.WriteLine($"{target.Name}'s HP is already full.");
+                        _messenger.Publish($"{target.Name}'s HP is already full.");
                     }
                     else
                     {
                         int healAmount = item.EffectValue >= 9999 ? target.MaxHP : item.EffectValue;
                         target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + healAmount);
-                        _io.WriteLine($"{target.Name} recovered health.");
+                        _messenger.Publish($"{target.Name} recovered health.");
                         effectApplied = true;
                     }
                     break;
@@ -153,12 +150,12 @@ namespace JRPGPrototype.Logic.Field
                 case "Spirit":
                     if (target.CurrentSP >= target.MaxSP)
                     {
-                        _io.WriteLine($"{target.Name}'s SP is already full.");
+                        _messenger.Publish($"{target.Name}'s SP is already full.");
                     }
                     else
                     {
                         target.CurrentSP = Math.Min(target.MaxSP, target.CurrentSP + item.EffectValue);
-                        _io.WriteLine($"{target.Name} recovered SP.");
+                        _messenger.Publish($"{target.Name} recovered SP.");
                         effectApplied = true;
                     }
                     break;
@@ -168,12 +165,12 @@ namespace JRPGPrototype.Logic.Field
                     StatusRegistry sr = new StatusRegistry();
                     if (sr.CheckAndExecuteCure(target, item.Name))
                     {
-                        _io.WriteLine($"{target.Name} was cured of their ailment!");
+                        _messenger.Publish($"{target.Name} was cured of their ailment!");
                         effectApplied = true;
                     }
                     else
                     {
-                        _io.WriteLine("The item had no effect.");
+                        _messenger.Publish("The item had no effect.");
                     }
                     break;
             }
@@ -181,7 +178,7 @@ namespace JRPGPrototype.Logic.Field
             if (effectApplied)
             {
                 _inventory.RemoveItem(item.Id, 1);
-                _io.Wait(800);
+                _messenger.Publish(null, ConsoleColor.Gray, 800); // Replaces _io.Wait(800)
                 return ItemUsageResult.Applied;
             }
 
@@ -202,8 +199,7 @@ namespace JRPGPrototype.Logic.Field
 
             if (user.CurrentSP < cost.value)
             {
-                _io.WriteLine($"{user.Name} does not have enough SP.");
-                _io.Wait(800);
+                _messenger.Publish($"{user.Name} does not have enough SP.", ConsoleColor.Gray, 800);
                 return false;
             }
 
@@ -234,12 +230,12 @@ namespace JRPGPrototype.Logic.Field
                     if (target.CurrentHP < target.MaxHP)
                     {
                         target.CurrentHP = Math.Min(target.MaxHP, target.CurrentHP + heal);
-                        _io.WriteLine($"{target.Name} was healed.");
+                        _messenger.Publish($"{target.Name} was healed.");
                         applied = true;
                     }
                     else
                     {
-                        _io.WriteLine($"{target.Name} is already at full health.");
+                        _messenger.Publish($"{target.Name} is already at full health.");
                     }
                 }
             }
@@ -247,7 +243,7 @@ namespace JRPGPrototype.Logic.Field
             if (applied)
             {
                 user.CurrentSP -= cost.value;
-                _io.Wait(800);
+                _messenger.Publish(null, ConsoleColor.Gray, 800); // Replaces _io.Wait(800)
             }
             return applied;
         }
@@ -264,20 +260,15 @@ namespace JRPGPrototype.Logic.Field
             // Hard Cap Check
             if (player.CharacterStats.ContainsKey(type) && player.CharacterStats[type] >= 40)
             {
-                _io.WriteLine($"{type} has already reached the maximum cap of 40.",
-                    ConsoleColor.Yellow);
-                _io.Wait(800);
+                _messenger.Publish($"{type} has already reached the maximum cap of 40.", ConsoleColor.Yellow, 800);
                 return;
             }
 
             player.AllocateStat(type);
-            _io.WriteLine($"{type} increased!");
-            _io.Wait(300);
+            _messenger.Publish($"{type} increased!", ConsoleColor.Gray, 300);
         }
 
-        /// <summary>
-        /// Rollback method to revert stats and points to a previous snapshot if player cancels.
-        /// </summary>
+        // Rollback method to revert stats and points to a previous snapshot if player cancels.
         public void RollbackStats(Combatant player, Dictionary<StatType, int> statBackup, int pointBackup)
         {
             foreach (var stat in statBackup)
@@ -302,9 +293,8 @@ namespace JRPGPrototype.Logic.Field
                 Persona oldActive = player.ActivePersona;
                 player.ActivePersona = newPersona;
                 player.PersonaStock[stockIndex] = oldActive;
-                _io.WriteLine($"Equipped {newPersona.Name}!");
+                _messenger.Publish($"Equipped {newPersona.Name}!", ConsoleColor.Gray, 800);
                 player.RecalculateResources();
-                _io.Wait(800);
             }
         }
 
@@ -317,7 +307,6 @@ namespace JRPGPrototype.Logic.Field
         {
             if (!string.IsNullOrEmpty(bossId)) _dungeonState.MarkBossDefeated(bossId);
         }
-
 
         // Persistently unlocks a terminal for future warping.
         public void UnlockTerminal(int floor)

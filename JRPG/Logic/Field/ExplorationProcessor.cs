@@ -15,20 +15,20 @@ namespace JRPGPrototype.Logic.Field
     /// </summary>
     public class ExplorationProcessor
     {
-        private readonly IGameIO _io;
+        private readonly IFieldMessenger _messenger;
         private readonly DungeonManager _dungeonManager;
         private readonly DungeonState _dungeonState;
         private readonly DungeonUIBridge _dungeonUI;
         private readonly FieldServiceEngine _serviceEngine;
 
         public ExplorationProcessor(
-            IGameIO io,
+            IFieldMessenger messenger,
             DungeonManager dungeonManager,
             DungeonState dungeonState,
             DungeonUIBridge dungeonUI,
             FieldServiceEngine serviceEngine)
         {
-            _io = io;
+            _messenger = messenger;
             _dungeonManager = dungeonManager;
             _dungeonState = dungeonState;
             _dungeonUI = dungeonUI;
@@ -63,8 +63,8 @@ namespace JRPGPrototype.Logic.Field
         /// </summary>
         public DungeonFloorResult PerformWarp(int floor)
         {
-            _io.WriteLine($"Warping to Floor {floor}...");
-            _io.Wait(1000);
+            _messenger.Publish($"Warping to Floor {floor}...", delay: 1000);
+
             _dungeonManager.WarpToFloor(floor);
             return _dungeonManager.ProcessCurrentFloor();
         }
@@ -125,14 +125,14 @@ namespace JRPGPrototype.Logic.Field
         {
             List<Combatant> enemies = new List<Combatant>();
 
-            // 1. Hydrate the combatants using the new factory method
+            // 1. Hydrate the combatants using the programmatic factory method in Combatant.cs
             foreach (string id in enemyIds)
             {
-                // Updated to use the programmatic factory
                 enemies.Add(Combatant.CreateEnemy(id));
             }
 
             // 2. High-Fidelity Naming Logic (Grouping)
+            // Groups enemies by name and appends alphabetical suffixes if duplicates exist.
             var groups = enemies.GroupBy(e => e.Name);
             foreach (var group in groups)
             {
@@ -141,7 +141,7 @@ namespace JRPGPrototype.Logic.Field
                     int counter = 0;
                     foreach (var enemy in group)
                     {
-                        // Assign alphabetical suffix based on occurrence
+                        // Assign alphabetical suffix based on occurrence (A, B, C...)
                         enemy.Name += $" {(char)('A' + counter)}";
                         counter++;
                     }

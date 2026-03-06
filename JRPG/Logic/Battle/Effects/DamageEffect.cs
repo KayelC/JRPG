@@ -11,7 +11,8 @@ namespace JRPGPrototype.Logic.Battle.Effects
     /// <summary>
     /// The primary strategy for all offensive actions (Physical and Magical).
     /// Handles Accuracy, Affinities, Critical Hits, Reflection, Instant Kills, and Knowledge discovery.
-    /// Includes bugfixes for correct Evasion UI tracking and centralized Charge consumption.
+    /// Includes Evasion UI tracking and centralized Charge consumption.
+    /// Includes Vampiric Drain logic based on metadata text.
     /// </summary>
     public class DamageEffect : IBattleEffect
     {
@@ -27,8 +28,11 @@ namespace JRPGPrototype.Logic.Battle.Effects
         {
             var results = new List<CombatResult>();
 
-            // Determine if this is an Instant Kill skill (e.g., Hama, Mudo)
+            // Feature Flags based on the Effect string
             bool isInstantKill = actionEffect.ToLower().Contains("instant kill");
+            bool drainsHP = actionEffect.Contains("Drains HP", StringComparison.OrdinalIgnoreCase);
+            bool drainsSP = actionEffect.Contains("Drains SP", StringComparison.OrdinalIgnoreCase);
+            bool pureSPDrain = drainsSP && !drainsHP; // Identifies skills like "Spirit Drain"
 
             // Determine if the element is physical for charge consumption rules
             bool isPhysical = (_element == Element.Slash || _element == Element.Strike || _element == Element.Pierce);
@@ -46,14 +50,12 @@ namespace JRPGPrototype.Logic.Battle.Effects
                 if (!CombatMath.CheckHit(user, target, _element, accStr))
                 {
                     results.Add(new CombatResult { Type = HitType.Miss });
-
-
                     messenger.Publish("MISS!", ConsoleColor.Gray, 400);
                     continue;
                 }
 
                 // 2. Logic: Check for Repel (Shields or Innate)
-                // Repel takes absolute priority in the SMT calculation stack.
+                // Repel takes absolute priority in the calculation stack.
                 Affinity aff = CombatMath.GetEffectiveAffinity(target, _element);
 
                 if (aff == Affinity.Repel)
@@ -75,7 +77,7 @@ namespace JRPGPrototype.Logic.Battle.Effects
                     break;
                 }
 
-                // 3. Handle Instant Kill (Hama/Mudo) logic
+                // 3. Handle Instant Kill logic
                 if (isInstantKill)
                 {
                     // IK Rule: Null/Absorb function as normal blocks against Instant Kill
@@ -108,24 +110,57 @@ namespace JRPGPrototype.Logic.Battle.Effects
                 // 4. Logic: Execute Standard Damage Math
                 // CalculateDamage now returns RAW potency. Affinities are handled by ReceiveDamage.
                 int rawDamage = CombatMath.CalculateDamage(user, target, power, _element, out bool isCritical);
+                CombatResult result;
 
-                // 5. Body Logic: Target's body applies multipliers (Weak/Resist/Absorb) to the raw potency.
-                CombatResult result = target.ReceiveDamage(rawDamage, _element, isCritical);
+                // 5. Body Logic: Apply Damage (Handling standard vs SP Drains)
+                if (pureSPDrain)
+                {
+                    // SMT Rule: Spirit Drain specifically damages the SP pool, completely bypassing HP.
+                    int spDamage = Math.Min(target.CurrentSP, rawDamage);
+                    target.CurrentSP -= spDamage;
+                    result = new CombatResult { Type = HitType.Normal, DamageDealt = spDamage };
 
-                // 6. Knowledge: Record the discovery for the Player's UI/AI memory
-                knowledge.Learn(target.SourceId, _element, aff);
+                    knowledge.Learn(target.SourceId, _element, aff);
+                    messenger.Publish($"{target.Name} lost {spDamage} SP!");
+                }
+                else
+                {
+                    // Standard HP Damage (Deathtouch, Life Drain, Kyuketsu, Beast Roar)
+                    result = target.ReceiveDamage(rawDamage, _element, isCritical);
+
+                    // 6. Knowledge: Record the discovery for the Player's UI/AI memory
+                    knowledge.Learn(target.SourceId, _element, aff);
 
                 // 7. UI: Report the result (Damage, Weakness, Block, etc.)
-                ReportDamageResult(result, target.Name, messenger);
+                    ReportDamageResult(result, target.Name, messenger);
+                }
 
-                // 8. Logic: Secondary Ailment Infliction
-                // Only try to infect if the attack actually landed (not Nulled or Absorbed)
-                if (result.Type != HitType.Null && result.Type != HitType.Absorb)
+                // 6. Secondary Ailment Infliction
+                if (result.Type != HitType.Null && result.Type != HitType.Absorb && result.Type != HitType.Repel)
                 {
-                    // metadata usually contains the skill effect string (e.g., "Poison 40%")
-                    if (status.TryInflict(user, target, actionEffect))
+                    // Execute the infliction check (it handles its own UI publishing if successful)
+                    _ = status.TryInflict(user, target, actionEffect);
+
+
+                    // --- 7. VAMPIRIC RESTORATION LOGIC ---
+                    if ((drainsHP || drainsSP) && result.DamageDealt > 0)
                     {
-                        // Note: TryInflict handles its own messenger publishing for success
+                        if (drainsHP)
+                        {
+                            int oldHP = user.CurrentHP;
+                            user.CurrentHP = Math.Min(user.MaxHP, user.CurrentHP + result.DamageDealt);
+                            int recovered = user.CurrentHP - oldHP;
+                            if (recovered > 0) messenger.Publish($"{user.Name} drained {recovered} HP!", ConsoleColor.Green);
+                        }
+
+                        if (drainsSP)
+                        {
+                            int oldSP = user.CurrentSP;
+                            // Note: Kyuketsu yields 1:1 SP based on HP damage dealt.
+                            user.CurrentSP = Math.Min(user.MaxSP, user.CurrentSP + result.DamageDealt);
+                            int recovered = user.CurrentSP - oldSP;
+                            if (recovered > 0) messenger.Publish($"{user.Name} drained {recovered} SP!", ConsoleColor.Cyan);
+                        }
                     }
                 }
 

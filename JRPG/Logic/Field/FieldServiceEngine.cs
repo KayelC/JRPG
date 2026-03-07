@@ -72,6 +72,7 @@ namespace JRPGPrototype.Logic.Field
                 case ShopCategory.Weapon:
                     if (Database.Weapons.TryGetValue(canonicalId, out var w))
                     {
+                        if (string.IsNullOrEmpty(w.Name)) PatchMetadata(w, canonicalId);
                         player.EquippedWeapon = w;
                         success = true;
                     }
@@ -79,6 +80,7 @@ namespace JRPGPrototype.Logic.Field
                 case ShopCategory.Armor:
                     if (Database.Armors.TryGetValue(canonicalId, out var a))
                     {
+                        if (string.IsNullOrEmpty(a.Name)) PatchMetadata(a, canonicalId);
                         player.EquippedArmor = a;
                         success = true;
                     }
@@ -87,15 +89,7 @@ namespace JRPGPrototype.Logic.Field
                     // Check plural/singular dictionary naming if your Database.cs varies
                     if (Database.Boots.TryGetValue(canonicalId, out var b))
                     {
-                        // If Name is blank, fetch it from the Shop Metadata
-                        if (string.IsNullOrEmpty(b.Name))
-                        {
-                            var metadata = Database.ShopInventory.FirstOrDefault(x => x.Id == canonicalId);
-                            if (metadata != null) b.Name = metadata.Name;
-                        }
-                        // Ensure ID is set for reference checks in the UI
-                        if (string.IsNullOrEmpty(b.Id)) b.Id = canonicalId;
-
+                        if (string.IsNullOrEmpty(b.Name)) PatchMetadata(b, canonicalId);
                         player.EquippedBoots = b;
                         success = true;
                     }
@@ -103,15 +97,7 @@ namespace JRPGPrototype.Logic.Field
                 case ShopCategory.Accessory:
                     if (Database.Accessories.TryGetValue(canonicalId, out var acc))
                     {
-                        // If Name is blank, fetch it from the Shop Metadata
-                        if (string.IsNullOrEmpty(acc.Name))
-                        {
-                            var metadata = Database.ShopInventory.FirstOrDefault(x => x.Id == canonicalId);
-                            if (metadata != null) acc.Name = metadata.Name;
-                        }
-                        // Ensure ID is set for reference checks in the UI
-                        if (string.IsNullOrEmpty(acc.Id)) acc.Id = canonicalId;
-
+                        if (string.IsNullOrEmpty(acc.Name)) PatchMetadata(acc, canonicalId);
                         player.EquippedAccessory = acc;
                         success = true;
                     }
@@ -127,6 +113,17 @@ namespace JRPGPrototype.Logic.Field
             {
                 _messenger.Publish($"Error: Could not find item data for {canonicalId}.", ConsoleColor.Red, 1000);
             }
+        }
+
+        private void PatchMetadata(object obj, string id)
+        {
+            var meta = Database.ShopInventory.FirstOrDefault(x => x.Id == id);
+            if (meta == null) return;
+
+            if (obj is WeaponData w) { w.Name = meta.Name; w.Id = id; }
+            else if (obj is ArmorData a) { a.Name = meta.Name; a.Id = id; }
+            else if (obj is BootData b) { b.Name = meta.Name; b.Id = id; }
+            else if (obj is AccessoryData acc) { acc.Name = meta.Name; acc.Id = id; }
         }
 
         #endregion

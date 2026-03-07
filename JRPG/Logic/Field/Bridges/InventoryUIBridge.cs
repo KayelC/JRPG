@@ -37,7 +37,6 @@ namespace JRPGPrototype.Logic.Field.Bridges
             string header = "=== INVENTORY ===";
             List<string> options = new List<string> { "Use Item", "Use Skill", "Equipment" };
 
-            // Operator-specific COMP access carried over from monolith
             if (player.Class == ClassType.Operator)
             {
                 options.Add("Demons (COMP)");
@@ -59,11 +58,9 @@ namespace JRPGPrototype.Logic.Field.Bridges
 
         /// <summary>
         /// Logic for selecting an item from the player's stock.
-        /// Feature: Displays item descriptions and handles context-based disabling (Traesto/Goho-M).
         /// </summary>
         public ItemData SelectItem(Combatant user, bool inDungeon)
         {
-            // Only items with quantity > 0 are candidates
             var ownedItems = Database.Items.Values
                 .Where(itm => _inventory.GetQuantity(itm.Id) > 0)
                 .ToList();
@@ -83,14 +80,12 @@ namespace JRPGPrototype.Logic.Field.Bridges
                 string label = $"{item.Name,-20} x{_inventory.GetQuantity(item.Id)}";
                 bool isDisabled = false;
 
-                // Monolith Rule: Traesto Gem is for Battle Escape only
                 if (item.Name == "Traesto Gem")
                 {
                     label += " [BATTLE ONLY]";
                     isDisabled = true;
                 }
 
-                // Monolith Rule: Goho-M is for Dungeon usage only
                 if (item.Name == "Goho-M" && !inDungeon)
                 {
                     label += " [DUNGEON ONLY]";
@@ -104,7 +99,6 @@ namespace JRPGPrototype.Logic.Field.Bridges
             options.Add("Back");
             disabledList.Add(false);
 
-            // Bounds check for persistent index
             if (_uiState.ItemMenuIndex >= options.Count) _uiState.ItemMenuIndex = 0;
 
             int choice = _io.RenderMenu($"User: {user.Name} | Select Item:", options, _uiState.ItemMenuIndex, disabledList, (index) =>
@@ -123,32 +117,112 @@ namespace JRPGPrototype.Logic.Field.Bridges
 
         #endregion
 
-        #region Skill Selection UI
+        #region Equipment Selection UI
 
         /// <summary>
-        /// Selects the character that will perform a field skill.
-        /// Includes humans and, for Operators, demons in the party or stock.
+        /// Renders the specific list of equipment available for the player to equip.
+        /// Includes Robust Name Resolver to fix blank name bugs.
         /// </summary>
+        public string SelectEquipmentFromInventory(Combatant player, List<string> ids, ShopCategory category)
+        {
+            if (ids == null || ids.Count == 0)
+            {
+                _io.WriteLine($"No {category} available in inventory.");
+                _io.Wait(800);
+                return "Back";
+            }
+
+            List<string> names = new List<string>();
+            List<bool> disabled = new List<bool>();
+
+            foreach (var id in ids)
+            {
+                // ROBUST NAME RESOLVER: 
+                // We fetch the name from the metadata if the database object is missing it.
+                string resolvedName = category switch
+                {
+                    ShopCategory.Weapon => Database.Weapons[id].Name,
+                    ShopCategory.Armor => Database.Armors[id].Name,
+                    ShopCategory.Boots => GetRobustEquipmentName(id, Database.Boots[id].Name),
+                    _ => GetRobustEquipmentName(id, Database.Accessories[id].Name)
+                };
+
+                bool equipped = category switch
+                {
+                    ShopCategory.Weapon => player.EquippedWeapon?.Id == id,
+                    ShopCategory.Armor => player.EquippedArmor?.Id == id,
+                    ShopCategory.Boots => player.EquippedBoots?.Id == id,
+                    _ => player.EquippedAccessory?.Id == id
+                };
+
+                names.Add($"{resolvedName}{(equipped ? " [E]" : "")}");
+                disabled.Add(equipped);
+            }
+
+            names.Add("Back");
+            disabled.Add(false);
+
+            int choice = _io.RenderMenu($"=== EQUIP {category.ToString().ToUpper()} ===", names, _uiState.EquipListIndex, disabled, (index) =>
+            {
+                if (index >= 0 && index < ids.Count)
+                {
+                    DisplayEquipmentStats(ids[index], category);
+                }
+            });
+
+            if (choice == -1 || choice == names.Count - 1) return "Back";
+
+            _uiState.EquipListIndex = choice;
+            return ids[choice];
+        }
+
+        private string GetRobustEquipmentName(string id, string existingName)
+        {
+            if (!string.IsNullOrEmpty(existingName)) return existingName;
+
+            // Search the Shop Inventory for the correct name
+            var meta = Database.ShopInventory.FirstOrDefault(x => x.Id == id);
+            return meta?.Name ?? id;
+        }
+
+        private void DisplayEquipmentStats(string id, ShopCategory category)
+        {
+            switch (category)
+            {
+                case ShopCategory.Weapon:
+                    var w = Database.Weapons[id];
+                    _io.WriteLine($"Type: {w.Type} | Pow: {w.Power} Acc: {w.Accuracy}");
+                    break;
+                case ShopCategory.Armor:
+                    var a = Database.Armors[id];
+                    _io.WriteLine($"Def: {a.Defense} Eva: {a.Evasion} | {a.Description}");
+                    break;
+                case ShopCategory.Boots:
+                    var b = Database.Boots[id];
+                    _io.WriteLine($"Eva: {b.Evasion} | {b.Description}");
+                    break;
+                case ShopCategory.Accessory:
+                    var acc = Database.Accessories[id];
+                    _io.WriteLine($"Mod: {acc.ModifierStat} +{acc.ModifierValue} | {acc.Description}");
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Skill Selection UI
+
         public Combatant SelectSkillPerformer(Combatant player)
         {
             List<Combatant> candidates = new List<Combatant>();
-
-            // Humans (except demons) can usually use skills if they have them
-            if (player.Class != ClassType.Demon)
-            {
-                candidates.Add(player);
-            }
-
-            // Operator logic: Can command demons to use skills even if they are in stock
+            if (player.Class != ClassType.Demon) candidates.Add(player);
             if (player.Class == ClassType.Operator)
             {
                 candidates.AddRange(_party.ActiveParty.Where(c => c.Class == ClassType.Demon));
                 candidates.AddRange(player.DemonStock);
             }
 
-            List<string> performerLabels = candidates.Select(c =>
-                $"{c.Name,-15} (SP: {c.CurrentSP,3}/{c.MaxSP,3})").ToList();
-
+            List<string> performerLabels = candidates.Select(c => $"{c.Name,-15} (SP: {c.CurrentSP,3}/{c.MaxSP,3})").ToList();
             performerLabels.Add("Back");
 
             int perfIdx = _io.RenderMenu("Who is performing the skill?", performerLabels, 0);
@@ -166,8 +240,7 @@ namespace JRPGPrototype.Logic.Field.Bridges
         {
             var skillPool = performer.GetConsolidatedSkills()
                 .Select(s => Database.Skills.TryGetValue(s, out var d) ? d : null)
-                .Where(d => d != null && d.Category != "Passive Skills" &&
-                       (d.Category.Contains("Recovery") || d.Effect.Contains("Cure")))
+                .Where(d => d != null && d.Category != "Passive Skills" && (d.Category.Contains("Recovery") || d.Effect.Contains("Cure")))
                 .ToList();
 
             if (!skillPool.Any())
@@ -200,22 +273,14 @@ namespace JRPGPrototype.Logic.Field.Bridges
 
         #region Target Selection UI
 
-        /// <summary>
-        /// General purpose target selection for field items or skills.
-        /// </summary>
+        // General purpose target selection for field items or skills.
         public Combatant SelectFieldTarget(Combatant player, string actionName)
         {
             var targetPool = _party.ActiveParty.ToList();
-
-            List<string> targetLabels = targetPool.Select(c =>
-                $"{c.Name,-15} (HP: {c.CurrentHP,3}/{c.MaxHP,3} SP: {c.CurrentSP,3}/{c.MaxSP,3})").ToList();
-
+            List<string> targetLabels = targetPool.Select(c => $"{c.Name,-15} (HP: {c.CurrentHP,3}/{c.MaxHP,3} SP: {c.CurrentSP,3}/{c.MaxSP,3})").ToList();
             targetLabels.Add("Back");
 
-            string prompt = !string.IsNullOrEmpty(actionName)
-                ? $"Using {actionName}. Select Target:"
-                : "Select Target:";
-
+            string prompt = !string.IsNullOrEmpty(actionName) ? $"Using {actionName}. Select Target:" : "Select Target:";
             int choice = _io.RenderMenu(prompt, targetLabels, 0);
 
             if (choice == -1 || choice == targetLabels.Count - 1) return null;

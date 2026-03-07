@@ -100,6 +100,15 @@ namespace JRPGPrototype.Core
         RequestDungeonExit
     }
 
+    public enum ShopType
+    { 
+        Weapon,
+        Item,
+        Armor,
+        Boots,
+        Accessory
+    }
+
     public enum FusionOperationType
     {
         CreateNewDemon, // The result is a specific demon ID to be created.

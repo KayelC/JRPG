@@ -87,6 +87,15 @@ namespace JRPGPrototype.Logic.Field
                     // Check plural/singular dictionary naming if your Database.cs varies
                     if (Database.Boots.TryGetValue(canonicalId, out var b))
                     {
+                        // If Name is blank, fetch it from the Shop Metadata
+                        if (string.IsNullOrEmpty(b.Name))
+                        {
+                            var metadata = Database.ShopInventory.FirstOrDefault(x => x.Id == canonicalId);
+                            if (metadata != null) b.Name = metadata.Name;
+                        }
+                        // Ensure ID is set for reference checks in the UI
+                        if (string.IsNullOrEmpty(b.Id)) b.Id = canonicalId;
+
                         player.EquippedBoots = b;
                         success = true;
                     }
@@ -94,6 +103,15 @@ namespace JRPGPrototype.Logic.Field
                 case ShopCategory.Accessory:
                     if (Database.Accessories.TryGetValue(canonicalId, out var acc))
                     {
+                        // If Name is blank, fetch it from the Shop Metadata
+                        if (string.IsNullOrEmpty(acc.Name))
+                        {
+                            var metadata = Database.ShopInventory.FirstOrDefault(x => x.Id == canonicalId);
+                            if (metadata != null) acc.Name = metadata.Name;
+                        }
+                        // Ensure ID is set for reference checks in the UI
+                        if (string.IsNullOrEmpty(acc.Id)) acc.Id = canonicalId;
+
                         player.EquippedAccessory = acc;
                         success = true;
                     }

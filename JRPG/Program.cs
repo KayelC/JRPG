@@ -87,9 +87,13 @@ namespace JRPGPrototype
             inventory.AddItem("113", 3);
             inventory.AddEquipment("1", ShopCategory.Weapon);
             inventory.AddEquipment("201", ShopCategory.Armor);
+            inventory.AddEquipment("301", ShopCategory.Boots);
+            inventory.AddEquipment("401", ShopCategory.Accessory);
 
             if (Database.Weapons.TryGetValue("1", out var w)) player.EquippedWeapon = w;
             if (Database.Armors.TryGetValue("201", out var a)) player.EquippedArmor = a;
+            if (Database.Boots.TryGetValue("301", out var b)) player.EquippedBoots = b;
+            if (Database.Accessories.TryGetValue("401", out var acc)) player.EquippedAccessory = acc;
 
             economy.AddMacca(5000000);
 

@@ -63,24 +63,52 @@ namespace JRPGPrototype.Logic.Field
 
         public void PerformEquip(Combatant player, string equipId, ShopCategory category)
         {
+            // SAFETY: Ensure we handle case sensitivity and whitespace
+            string canonicalId = equipId?.Trim() ?? "";
+            bool success = false;
+
             switch (category)
             {
                 case ShopCategory.Weapon:
-                    player.EquippedWeapon = Database.Weapons[equipId];
+                    if (Database.Weapons.TryGetValue(canonicalId, out var w))
+                    {
+                        player.EquippedWeapon = w;
+                        success = true;
+                    }
                     break;
                 case ShopCategory.Armor:
-                    player.EquippedArmor = Database.Armors[equipId];
+                    if (Database.Armors.TryGetValue(canonicalId, out var a))
+                    {
+                        player.EquippedArmor = a;
+                        success = true;
+                    }
                     break;
                 case ShopCategory.Boots:
-                    player.EquippedBoots = Database.Boots[equipId];
+                    // Check plural/singular dictionary naming if your Database.cs varies
+                    if (Database.Boots.TryGetValue(canonicalId, out var b))
+                    {
+                        player.EquippedBoots = b;
+                        success = true;
+                    }
                     break;
                 case ShopCategory.Accessory:
-                    player.EquippedAccessory = Database.Accessories[equipId];
+                    if (Database.Accessories.TryGetValue(canonicalId, out var acc))
+                    {
+                        player.EquippedAccessory = acc;
+                        success = true;
+                    }
                     break;
             }
 
-            player.RecalculateResources();
-            _messenger.Publish("Equipped successfully!", ConsoleColor.Gray, 500);
+            if (success)
+            {
+                player.RecalculateResources();
+                _messenger.Publish("Equipped successfully!", ConsoleColor.Gray, 500);
+            }
+            else
+            {
+                _messenger.Publish($"Error: Could not find item data for {canonicalId}.", ConsoleColor.Red, 1000);
+            }
         }
 
         #endregion

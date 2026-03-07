@@ -3,6 +3,7 @@ using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Logic.Battle;
 using JRPGPrototype.Logic.Battle.Engines;
+using JRPGPrototype.Logic.Field.Bridges;
 using JRPGPrototype.Services;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,15 @@ namespace JRPGPrototype.Logic.Field
     public class FieldServiceEngine
     {
         private readonly IFieldMessenger _messenger;
+        private readonly IGameIO _io;
         private readonly EconomyManager _economy;
         private readonly InventoryManager _inventory;
         private readonly PartyManager _party;
         private readonly DungeonState _dungeonState;
-        private readonly ShopManager _shopManager;
+
+        // Shop Components
+        private readonly ShopEngine _shopEngine;
+        private readonly ShopUIBridge _shopUI;
 
         public FieldServiceEngine(
             IFieldMessenger messenger,
@@ -40,14 +45,20 @@ namespace JRPGPrototype.Logic.Field
             _party = party;
             _dungeonState = dungeonState;
 
-            _shopManager = new ShopManager(_inventory, _economy, _messenger, _io);
+            // Initialize Shop Components
+            _shopEngine = new ShopEngine(_inventory, _economy, _messenger);
+            _shopUI = new ShopUIBridge(_io, _messenger, _shopEngine, _economy, _inventory);
         }
 
         #region Shop and Equipment
 
+        /// <summary>
+        /// Entry point to trigger the shop interactive loop.
+        /// Delegates flow to the ShopUIBridge.
+        /// </summary>
         public void OpenShop(Combatant player, ShopType shopType)
         {
-            _shopManager.OpenShop(player, shopType);
+            _shopUI.OpenShop(player, shopType);
         }
 
         public void PerformEquip(Combatant player, string equipId, ShopCategory category)
@@ -115,7 +126,6 @@ namespace JRPGPrototype.Logic.Field
 
         /// <summary>
         /// Executes item usage and returns an explicit result signal to the Conductor.
-        /// Replaces boolean return with ItemUsageResult enum.
         /// </summary>
         public ItemUsageResult ExecuteItemUsage(ItemData item, Combatant user, Combatant target)
         {
@@ -181,7 +191,7 @@ namespace JRPGPrototype.Logic.Field
             if (effectApplied)
             {
                 _inventory.RemoveItem(item.Id, 1);
-                _messenger.Publish(null, ConsoleColor.Gray, 800); // Replaces _io.Wait(800)
+                _messenger.Publish(null, ConsoleColor.Gray, 800);
                 return ItemUsageResult.Applied;
             }
 
@@ -246,7 +256,7 @@ namespace JRPGPrototype.Logic.Field
             if (applied)
             {
                 user.CurrentSP -= cost.value;
-                _messenger.Publish(null, ConsoleColor.Gray, 800); // Replaces _io.Wait(800)
+                _messenger.Publish(null, ConsoleColor.Gray, 800);
             }
             return applied;
         }

@@ -71,9 +71,10 @@ namespace JRPGPrototype.Logic.Field
             _partyManager = new PartyManager(_player);
             _dungeonManager = new DungeonManager(_dungeonState);
 
-            // 4. Initialize Logic Engines (Injecting Messenger instead of IO)
+            // 4. Initialize Logic Engines
             _logicEngine = new FieldServiceEngine(
                 _messenger,
+                _io, // so the internal ShopUIBridge can render menus.
                 _economy,
                 _inventory,
                 _partyManager,
@@ -405,9 +406,7 @@ namespace JRPGPrototype.Logic.Field
             }
         }
 
-        /// <summary>
-        /// Now passes initialStats to the confirmation bridge to show change visualization.
-        /// </summary>
+        // Now passes initialStats to the confirmation bridge to show change visualization.
         private void OpenStatAllocation()
         {
             // Transactional Stat Allocation with Rollback support.

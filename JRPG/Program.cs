@@ -91,7 +91,7 @@ namespace JRPGPrototype
             if (Database.Weapons.TryGetValue("1", out var w)) player.EquippedWeapon = w;
             if (Database.Armors.TryGetValue("201", out var a)) player.EquippedArmor = a;
 
-            economy.AddMacca(5000);
+            economy.AddMacca(5000000);
 
             for (int i = 0; i < 8; i++)
             {

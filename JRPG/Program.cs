@@ -2,9 +2,11 @@
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Logic;
+using JRPGPrototype.Logic.Core;
 using JRPGPrototype.Logic.Battle;
 using JRPGPrototype.Logic.Battle.Engines;
 using JRPGPrototype.Logic.Field;
+using JRPGPrototype.Logic.Field.Dungeon;
 using JRPGPrototype.Services;
 using System;
 using System.Collections.Generic;

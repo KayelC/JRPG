@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using JRPGPrototype.Logic.Fusion.Strategies;
 using JRPGPrototype.Logic.Fusion.Messaging;
 using JRPGPrototype.Logic.Fusion.Bridges;
+using JRPGPrototype.Logic.Core;
 
 namespace JRPGPrototype.Logic.Fusion
 {

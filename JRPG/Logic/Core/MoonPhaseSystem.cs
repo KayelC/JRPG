@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JRPGPrototype.Logic
+namespace JRPGPrototype.Logic.Core
 {
     /// <summary>
     /// A simple static system to track the lunar cycle.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JRPGPrototype.Logic
+namespace JRPGPrototype.Logic.Field.Dungeon
 {
     public class DungeonState
     {

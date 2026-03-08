@@ -1,7 +1,7 @@
 using System;
 using JRPGPrototype.Services;
 
-namespace JRPGPrototype.Logic.Field
+namespace JRPGPrototype.Logic.Field.Messaging
 {
     /// <summary>
     /// The Observer/Subscriber for Field-based events.

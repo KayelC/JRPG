@@ -6,6 +6,7 @@ using JRPGPrototype.Logic.Field;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JRPGPrototype.Logic.Core;
 using JRPGPrototype.Logic.Fusion.Strategies;
 using JRPGPrototype.Logic.Fusion.Messaging;
 using JRPGPrototype.Logic.Fusion.Bridges;

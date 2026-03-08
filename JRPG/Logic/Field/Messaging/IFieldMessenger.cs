@@ -1,6 +1,6 @@
 using System;
 
-namespace JRPGPrototype.Logic.Field
+namespace JRPGPrototype.Logic.Field.Messaging
 {
     /// <summary>
     /// Centralized contract for broadcasting Field events.

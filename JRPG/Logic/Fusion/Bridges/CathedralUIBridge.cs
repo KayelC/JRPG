@@ -1,11 +1,13 @@
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
+using JRPGPrototype.Logic.Core;
 using JRPGPrototype.Logic.Field;
 using JRPGPrototype.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JRPGPrototype.Logic.Field.State;
 
 namespace JRPGPrototype.Logic.Fusion.Bridges
 {

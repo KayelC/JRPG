@@ -4,7 +4,7 @@ using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 
-namespace JRPGPrototype.Logic
+namespace JRPGPrototype.Logic.Field.Dungeon
 {
     public class DungeonFloorResult
     {

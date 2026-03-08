@@ -4,10 +4,12 @@ using System.Linq;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
+using JRPGPrototype.Logic.Core;
 using JRPGPrototype.Logic.Field;
+using JRPGPrototype.Logic.Field.Messaging;
 using JRPGPrototype.Services;
 
-namespace JRPGPrototype.Logic
+namespace JRPGPrototype.Logic.Field.Engines
 {
     /// <summary>
     /// Pure Logic Engine for Shop transactions.

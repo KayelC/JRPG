@@ -1,0 +1,29 @@
+Logic
+└── Core                        <-- Shared systems used by all modules
+    ├── EconomyManager.cs       (Namespace: JRPGPrototype.Logic.Core)
+    ├── InventoryManager.cs     (Namespace: JRPGPrototype.Logic.Core)
+    ├── PartyManager.cs         (Namespace: JRPGPrototype.Logic.Core)
+    └── MoonPhaseSystem.cs      (Namespace: JRPGPrototype.Logic.Core)
+
+└── Field                       <-- The Field Sub-System
+    ├── Dungeon                 <-- Map and State management
+    │   ├── DungeonManager.cs   (Namespace: JRPGPrototype.Logic.Field.Dungeon)
+    │   └── DungeonState.cs     (Namespace: JRPGPrototype.Logic.Field.Dungeon)
+    ├── Engines                 <-- Passive math and business rules
+    │   ├── ExplorationProcessor.cs
+    │   ├── FieldServiceEngine.cs
+    │   └── ShopEngine.cs       (Moved from root)
+    ├── Bridges                 <-- Interactive UI flow (Bridges)
+    │   ├── DungeonUIBridge.cs
+    │   ├── InventoryUIBridge.cs
+    │   ├── ServiceUIBridge.cs
+    │   ├── ShopUIBridge.cs
+    │   └── StatusUIBridge.cs
+    ├── Messaging               <-- Event-driven infrastructure
+    │   ├── IFieldMessenger.cs
+    │   ├── FieldMessenger.cs
+    │   ├── FieldMessageArgs.cs
+    │   └── FieldLogger.cs
+    ├── State                   <-- Persistent UI data
+    │   └── FieldUIState.cs
+    └── FieldConductor.cs       <-- Root Orchestrator

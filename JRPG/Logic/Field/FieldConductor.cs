@@ -7,7 +7,12 @@ using JRPGPrototype.Entities;
 using JRPGPrototype.Services;
 using JRPGPrototype.Logic.Battle;
 using JRPGPrototype.Logic.Battle.Engines;
+using JRPGPrototype.Logic.Core;
+using JRPGPrototype.Logic.Field.Dungeon;
+using JRPGPrototype.Logic.Field.Engines;
+using JRPGPrototype.Logic.Field.Messaging;
 using JRPGPrototype.Logic.Field.Bridges;
+using JRPGPrototype.Logic.Field.State;
 using JRPGPrototype.Logic.Fusion;
 
 namespace JRPGPrototype.Logic.Field

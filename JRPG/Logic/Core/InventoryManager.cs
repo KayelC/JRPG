@@ -2,7 +2,7 @@
 using System.Linq;
 using JRPGPrototype.Data;
 
-namespace JRPGPrototype.Logic
+namespace JRPGPrototype.Logic.Core
 {
     public class InventoryManager
     {

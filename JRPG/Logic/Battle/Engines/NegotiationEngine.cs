@@ -5,6 +5,7 @@ using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Services;
+using JRPGPrototype.Logic.Core;
 using JRPGPrototype.Logic.Battle;           // For CombatMath
 using JRPGPrototype.Logic.Battle.Messaging; // For IBattleMessenger (used in StatusRegistry)
 

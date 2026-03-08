@@ -1,6 +1,6 @@
 using System;
 
-namespace JRPGPrototype.Logic.Field
+namespace JRPGPrototype.Logic.Field.Messaging
 {
     /// <summary>
     /// Concrete implementation of the Field Messaging system.

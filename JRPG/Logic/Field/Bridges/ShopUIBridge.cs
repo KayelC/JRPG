@@ -5,6 +5,9 @@ using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Services;
+using JRPGPrototype.Logic.Core;
+using JRPGPrototype.Logic.Field.Engines;
+using JRPGPrototype.Logic.Field.Messaging;
 
 namespace JRPGPrototype.Logic.Field.Bridges
 {

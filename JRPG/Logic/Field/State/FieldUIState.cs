@@ -1,4 +1,4 @@
-namespace JRPGPrototype.Logic.Field
+namespace JRPGPrototype.Logic.Field.State
 {
     /// <summary>
     /// Persistent data container for the Field UI.

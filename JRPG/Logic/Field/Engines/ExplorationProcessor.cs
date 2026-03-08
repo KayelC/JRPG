@@ -5,9 +5,12 @@ using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 using JRPGPrototype.Entities;
 using JRPGPrototype.Services;
+using JRPGPrototype.Logic.Core;
+using JRPGPrototype.Logic.Field.Dungeon;
 using JRPGPrototype.Logic.Field.Bridges;
+using JRPGPrototype.Logic.Field.Messaging;
 
-namespace JRPGPrototype.Logic.Field
+namespace JRPGPrototype.Logic.Field.Engines
 {
     /// <summary>
     /// The logic engine for dungeon traversal and environmental events.

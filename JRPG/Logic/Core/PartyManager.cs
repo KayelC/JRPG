@@ -5,7 +5,7 @@ using JRPGPrototype.Entities;
 using JRPGPrototype.Core;
 using JRPGPrototype.Data;
 
-namespace JRPGPrototype.Logic
+namespace JRPGPrototype.Logic.Core
 {
     public class PartyManager
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JRPGPrototype.Logic
+namespace JRPGPrototype.Logic.Core
 {
     public class EconomyManager
     {

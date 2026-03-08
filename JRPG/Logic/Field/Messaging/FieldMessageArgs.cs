@@ -1,6 +1,6 @@
 using System;
 
-namespace JRPGPrototype.Logic.Field
+namespace JRPGPrototype.Logic.Field.Messaging
 {
     /// <summary>
     /// Payload data for Field-based events (Exploration, Shopping, Healing).

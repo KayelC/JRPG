@@ -53,9 +53,45 @@ namespace JRPGPrototype.Logic.Field
         #region Shop and Equipment
 
         /// <summary>
-        /// Entry point to trigger the shop interactive loop.
-        /// Delegates flow to the ShopUIBridge.
+        /// Global method for adding items to inventory (Shop, Boss Drops, Chests).
+        /// Ensures that unhydrated metadata (blank names) is repaired before possession.
         /// </summary>
+        public void AddPossession(string id, ShopCategory category, int quantity = 1)
+        {
+            // 1. Repair metadata before the item is ever seen by the player
+            object? dataObject = category switch
+            {
+                ShopCategory.Weapon => Database.Weapons.TryGetValue(id, out var w) ? w : null,
+                ShopCategory.Armor => Database.Armors.TryGetValue(id, out var a) ? a : null,
+                ShopCategory.Boots => Database.Boots.TryGetValue(id, out var b) ? b : null,
+                ShopCategory.Accessory => Database.Accessories.TryGetValue(id, out var acc) ? acc : null,
+                ShopCategory.Item => Database.Items.TryGetValue(id, out var i) ? i : null,
+                _ => null
+            };
+
+            if (dataObject != null)
+            {
+                ValidateMetadata(dataObject, id);
+            }
+
+            // 2. Add to actual inventory
+            if (category == ShopCategory.Item)
+            {
+                _inventory.AddItem(id, quantity);
+            }
+            else
+            {
+                for (int i = 0; i < quantity; i++)
+                {
+                    _inventory.AddEquipment(id, category);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Shop and Equipment
+
         public void OpenShop(Combatant player, ShopType shopType)
         {
             _shopUI.OpenShop(player, shopType);
@@ -63,41 +99,39 @@ namespace JRPGPrototype.Logic.Field
 
         public void PerformEquip(Combatant player, string equipId, ShopCategory category)
         {
-            // SAFETY: Ensure we handle case sensitivity and whitespace
-            string canonicalId = equipId?.Trim() ?? "";
+            string id = equipId?.Trim() ?? "";
             bool success = false;
 
             switch (category)
             {
                 case ShopCategory.Weapon:
-                    if (Database.Weapons.TryGetValue(canonicalId, out var w))
+                    if (Database.Weapons.TryGetValue(id, out var w))
                     {
-                        if (string.IsNullOrEmpty(w.Name)) PatchMetadata(w, canonicalId);
+                        ValidateMetadata(w, id);
                         player.EquippedWeapon = w;
                         success = true;
                     }
                     break;
                 case ShopCategory.Armor:
-                    if (Database.Armors.TryGetValue(canonicalId, out var a))
+                    if (Database.Armors.TryGetValue(id, out var a))
                     {
-                        if (string.IsNullOrEmpty(a.Name)) PatchMetadata(a, canonicalId);
+                        ValidateMetadata(a, id);
                         player.EquippedArmor = a;
                         success = true;
                     }
                     break;
                 case ShopCategory.Boots:
-                    // Check plural/singular dictionary naming if your Database.cs varies
-                    if (Database.Boots.TryGetValue(canonicalId, out var b))
+                    if (Database.Boots.TryGetValue(id, out var b))
                     {
-                        if (string.IsNullOrEmpty(b.Name)) PatchMetadata(b, canonicalId);
+                        ValidateMetadata(b, id);
                         player.EquippedBoots = b;
                         success = true;
                     }
                     break;
                 case ShopCategory.Accessory:
-                    if (Database.Accessories.TryGetValue(canonicalId, out var acc))
+                    if (Database.Accessories.TryGetValue(id, out var acc))
                     {
-                        if (string.IsNullOrEmpty(acc.Name)) PatchMetadata(acc, canonicalId);
+                        ValidateMetadata(acc, id);
                         player.EquippedAccessory = acc;
                         success = true;
                     }
@@ -111,19 +145,40 @@ namespace JRPGPrototype.Logic.Field
             }
             else
             {
-                _messenger.Publish($"Error: Could not find item data for {canonicalId}.", ConsoleColor.Red, 1000);
+                _messenger.Publish($"Error: ID {id} not found in Database.", ConsoleColor.Red, 1000);
             }
         }
 
-        private void PatchMetadata(object obj, string id)
+        /// <summary>
+        /// Fixes unhydrated Database objects. 
+        /// Priority 1: Use existing name if present.
+        /// Priority 2: Use Shop Registry metadata.
+        /// Priority 3: Fallback to ID-based formatting (Final Safety).
+        /// </summary>
+        private void ValidateMetadata(object obj, string id)
         {
             var meta = Database.ShopInventory.FirstOrDefault(x => x.Id == id);
-            if (meta == null) return;
 
-            if (obj is WeaponData w) { w.Name = meta.Name; w.Id = id; }
-            else if (obj is ArmorData a) { a.Name = meta.Name; a.Id = id; }
-            else if (obj is BootData b) { b.Name = meta.Name; b.Id = id; }
-            else if (obj is AccessoryData acc) { acc.Name = meta.Name; acc.Id = id; }
+            if (obj is WeaponData w)
+            {
+                if (string.IsNullOrEmpty(w.Name)) w.Name = meta?.Name ?? $"Weapon {id}";
+                w.Id = id;
+            }
+            else if (obj is ArmorData a)
+            {
+                if (string.IsNullOrEmpty(a.Name)) a.Name = meta?.Name ?? $"Armor {id}";
+                a.Id = id;
+            }
+            else if (obj is BootData b)
+            {
+                if (string.IsNullOrEmpty(b.Name)) b.Name = meta?.Name ?? $"Boots {id}";
+                b.Id = id;
+            }
+            else if (obj is AccessoryData acc)
+            {
+                if (string.IsNullOrEmpty(acc.Name)) acc.Name = meta?.Name ?? $"Accessory {id}";
+                acc.Id = id;
+            }
         }
 
         #endregion

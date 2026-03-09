@@ -15,7 +15,7 @@ namespace JRPGPrototype.Entities.Components
     {
         /// <summary>
         /// Processes damage application against a combatant and returns a CombatResult.
-        /// Fidelity: Maintains 100% accuracy with original SMT-hybrid damage logic and affinity messaging.
+        /// Maintains 100% accuracy with original SMT-hybrid damage logic and affinity messaging.
         /// </summary>
         /// <param name="target">The combatant receiving the action.</param>
         /// <param name="damage">The raw damage value calculated by the Battle Engine.</param>
@@ -28,6 +28,9 @@ namespace JRPGPrototype.Entities.Components
             // Uses the target's Active Persona to look up resistance levels.
             Affinity aff = target.ActivePersona?.GetAffinity(element) ?? Affinity.Normal;
             var result = new CombatResult();
+
+            // Check if the current element is Physical for Technical logic
+            bool isPhysical = (element == Element.Slash || element == Element.Strike || element == Element.Pierce);
 
             // 2. Guarding State Logic
             // Guarding reduces damage by 50%, prevents critical hits, and negates weaknesses.
@@ -43,7 +46,7 @@ namespace JRPGPrototype.Entities.Components
 
             // 3. Technical/RigidBody Logic (SMT III Fidelity)
             // If the target is under "Freeze" or "Shock", any Physical hit becomes an automatic Critical.
-            if (target.IsRigidBody && (element == Element.Slash || element == Element.Strike || element == Element.Pierce))
+            if (target.IsRigidBody && isPhysical)
             {
                 isCritical = true;
             }
@@ -55,7 +58,19 @@ namespace JRPGPrototype.Entities.Components
                 damage = (int)(damage * 1.5);
             }
 
-            // 5. Affinity Interaction Stack
+            // 5. NEW: Ailment-Based Technical Multipliers (Bind / Stun)
+            // If the target is Bound or Stunned, Physical attacks deal 50% more damage.
+            if (target.CurrentAilment != null && isPhysical)
+            {
+                string ailmentName = target.CurrentAilment.Name;
+                if (ailmentName == "Bind" || ailmentName == "Stun")
+                {
+                    damage = (int)(damage * 1.5);
+                    result.Message = "TECHNICAL!";
+                }
+            }
+
+            // 6. Affinity Interaction Stack
             // This determines how the raw damage is modified by the target's elemental resistances.
             switch (aff)
             {
@@ -68,7 +83,7 @@ namespace JRPGPrototype.Entities.Components
                 case Affinity.Resist:
                     result.Type = HitType.Normal;
                     result.DamageDealt = (int)(damage * 0.5f);
-                    result.Message = isCritical ? "CRITICAL (Resisted)!" : "Resisted.";
+                    result.Message = result.IsCritical ? "CRITICAL (Resisted)!" : "Resisted.";
                     break;
 
                 case Affinity.Null:
@@ -96,24 +111,31 @@ namespace JRPGPrototype.Entities.Components
                 default: // Affinity.Normal
                     result.Type = HitType.Normal;
                     result.DamageDealt = damage;
-                    if (isCritical)
+                    if (result.IsCritical && string.IsNullOrEmpty(result.Message))
                     {
                         result.Message = "CRITICAL HIT!";
                     }
                     break;
             }
 
-            // 6. Apply Final State Mutation
+            // 7. Apply Final State Mutation
             // Deduct HP based on the result, ensuring HP never drops below 0.
             target.CurrentHP = Math.Max(0, target.CurrentHP - result.DamageDealt);
 
-            // 7. Ailment Trigger: Wake on Hit (Sleep)
+            // 8. Ailment Trigger: Removal Logic (e.g., Wake on Hit for Sleep)
             if (result.DamageDealt > 0 && target.CurrentAilment != null)
             {
-                if (target.CurrentAilment.RemovalTriggers.Contains("OnHit"))
+                if (target.CurrentAilment.RemovalTriggers != null &&
+                    target.CurrentAilment.RemovalTriggers.Contains("OnHit"))
                 {
+                    string oldAilment = target.CurrentAilment.Name;
                     target.RemoveAilment();
-                    // result.Message += $" {target.Name} woke up!";
+
+                    // Append feedback to the message so the player knows why the state changed
+                    if (string.IsNullOrEmpty(result.Message))
+                        result.Message = $"{target.Name} recovered from {oldAilment}!";
+                    else
+                        result.Message += $" {target.Name} woke up!";
                 }
             }
 

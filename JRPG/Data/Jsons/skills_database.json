@@ -20,15 +20,6 @@
     },
     {
       "Skill": "Shibaboo",
-      "Effect": "Chance of Stunning 1 foe. (40% chance)",
-      "Power": NaN,
-      "Accuracy": NaN,
-      "Critical": NaN,
-      "Cost": "5 SP",
-      "Category": "Ailment Skills"
-    },
-    {
-      "Skill": "Shibaboo",
       "Effect": "Chance of Binding 1 foe. (65% chance)",
       "Power": NaN,
       "Accuracy": NaN,
@@ -2844,7 +2835,7 @@
       "Accuracy": "76%",
       "Critical": "24%",
       "Cost": "18% HP",
-      "Category": "Ailment Skills"
+      "Category": "Pierce Skills"
     },
     {
       "Skill": "Charm Bite",
@@ -2853,7 +2844,7 @@
       "Accuracy": "76%",
       "Critical": "24%",
       "Cost": "18% HP",
-      "Category": "Ailment Skills"
+      "Category": "Pierce Skills"
     },
     {
       "Skill": "Double Fangs",

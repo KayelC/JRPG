@@ -56,10 +56,22 @@ namespace JRPGPrototype.Logic.Battle
             return results.FirstOrDefault() ?? new CombatResult { Type = HitType.Miss };
         }
 
-        // Handles Skill execution: Deducts costs and delegates to the correct strategy.
+        /// <summary>
+        /// Handles Skill execution: Deducts costs and delegates to the correct strategy.
+        /// Includes the Effectiveness Gate to prevent turn wastage.
+        /// </summary>
         public List<CombatResult> ExecuteSkill(Combatant attacker, List<Combatant> targets, SkillData skill)
         {
-            // --- 1. Resource Cost Calculation ---
+            // --- 1. Effectiveness Gate ---
+            // Before spending SP/HP or consuming turn icons, verify if the action is redundant.
+            if (_status.IsActionRedundant(attacker, skill, targets))
+            {
+                _messenger.Publish("That action would have no effect!", ConsoleColor.Yellow);
+                // Returning an empty list signals the Conductor that the action was aborted/redundant.
+                return new List<CombatResult>();
+            }
+
+            // --- 2. Resource Cost Calculation ---
             var cost = skill.ParseCost();
             int costValue = cost.value;
             var passives = attacker.GetConsolidatedSkills();
@@ -84,7 +96,7 @@ namespace JRPGPrototype.Logic.Battle
 
             _messenger.Publish($"{attacker.Name} uses {skill.Name}!", ConsoleColor.White, 200);
 
-            // --- 2. Strategy Execution ---
+            // --- 3. Strategy Execution ---
             IBattleEffect? strategy = _registry.GetEffect(skill.Category);
             List<CombatResult> results;
 
@@ -102,7 +114,10 @@ namespace JRPGPrototype.Logic.Battle
             return results;
         }
 
-        // Handles Item execution: Delegates behavior to the Registry.
+        /// <summary>
+        /// Handles Item execution: Delegates behavior to the Registry.
+        /// Includes the Effectiveness Gate to prevent turn wastage.
+        /// </summary>
         public bool ExecuteItem(Combatant user, List<Combatant> targets, ItemData item)
         {
             _messenger.Publish($"{user.Name} used {item.Name}!", ConsoleColor.White, 200);
@@ -114,15 +129,18 @@ namespace JRPGPrototype.Logic.Battle
                 return true;
             }
 
-            // Route standard items (Healing, Cure, Revive) to their corresponding strategies
+            // --- Strategy Execution ---
+            // Note: We use the Registry to find the logic matching the Item Type (Healing, Cure, etc.)
             IBattleEffect? strategy = _registry.GetEffect(item.Type);
 
             if (strategy != null)
             {
+                // Note: Items typically don't have a Power field like skills, so we use EffectValue.
                 var results = strategy.Apply(user, targets, item.EffectValue, item.Name, item.Description ?? "", _messenger, _status, _knowledge);
                 return results.Any();
             }
 
+            _messenger.Publish($"[Error] No logic found for Item Type: {item.Type}", ConsoleColor.Red);
             return false;
         }
 

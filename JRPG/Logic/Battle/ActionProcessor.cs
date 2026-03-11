@@ -23,7 +23,8 @@ namespace JRPGPrototype.Logic.Battle
         private readonly IBattleMessenger _messenger;
         private readonly BattleEffectRegistry _registry;
 
-        public ActionProcessor(StatusRegistry status, BattleKnowledge knowledge, IBattleMessenger messenger)
+        public ActionProcessor(StatusRegistry status, BattleKnowledge knowledge,
+        IBattleMessenger messenger)
         {
             _status = status;
             _knowledge = knowledge;
@@ -44,14 +45,15 @@ namespace JRPGPrototype.Logic.Battle
             // 1. UI: Report the attempt
             _messenger.Publish($"{attacker.Name} attacks {target.Name}!");
 
-            // Reuses the DamageEffect logic based on current weapon element
+            // 2. Reuses the DamageEffect logic based on current weapon element
             IBattleEffect? strategy = _registry.GetEffect(attacker.WeaponElement.ToString());
 
             if (strategy == null) return new CombatResult { Type = HitType.Miss };
 
-            // 3. Unarmed / Base Demon Melee attacks have a standard power of 15
-            // Note: Charge consumption is now handled entirely within DamageEffect.
-            var results = strategy.Apply(attacker, new List<Combatant> { target }, 15, "Attack", "", _messenger, _status, _knowledge);
+            // 3. Unarmed / Base Demon Melee attacks have a standard power of 15.
+            // We pass "Attack" as the action name so the strategy can handle specific narration.
+            var results = strategy.Apply(attacker, new List<Combatant> { target }, 15,
+            "Attack", "", _messenger, _status, _knowledge);
 
             return results.FirstOrDefault() ?? new CombatResult { Type = HitType.Miss };
         }
@@ -63,11 +65,12 @@ namespace JRPGPrototype.Logic.Battle
         public List<CombatResult> ExecuteSkill(Combatant attacker, List<Combatant> targets, SkillData skill)
         {
             // --- 1. Effectiveness Gate ---
-            // Before spending SP/HP or consuming turn icons, verify if the action is redundant.
+            // Verify if the action is redundant (e.g. Poisoning an already poisoned foe).
+            // Damaging skills (like Toxic Sting) bypass this via logic inside StatusRegistry.
             if (_status.IsActionRedundant(attacker, skill, targets))
             {
                 _messenger.Publish("That action would have no effect!", ConsoleColor.Yellow);
-                // Returning an empty list signals the Conductor that the action was aborted/redundant.
+                // Returning an empty list signals the Conductor that the turn should be preserved/re-picked.
                 return new List<CombatResult>();
             }
 
@@ -102,7 +105,8 @@ namespace JRPGPrototype.Logic.Battle
 
             if (strategy != null)
             {
-                // Delegation: The 'How' is handled by the specialized Strategy class
+                // Delegation: The 'How' is handled by the specialized Strategy class.
+                // We pass the Skill Name as the ActionName.
                 results = strategy.Apply(attacker, targets, skill.GetPowerVal(), skill.Name, skill.Effect, _messenger, _status, _knowledge);
             }
             else
@@ -130,13 +134,15 @@ namespace JRPGPrototype.Logic.Battle
             }
 
             // --- Strategy Execution ---
-            // Note: We use the Registry to find the logic matching the Item Type (Healing, Cure, etc.)
+            // Items route to strategies based on their 'Type' (Healing, Cure, etc.)
             IBattleEffect? strategy = _registry.GetEffect(item.Type);
 
             if (strategy != null)
             {
-                // Note: Items typically don't have a Power field like skills, so we use EffectValue.
-                var results = strategy.Apply(user, targets, item.EffectValue, item.Name, item.Description ?? "", _messenger, _status, _knowledge);
+                // Note: Items use EffectValue instead of Power.
+                var results = strategy.Apply(user, targets, item.EffectValue, item.Name,
+                item.Description ?? "", _messenger, _status, _knowledge);
+
                 return results.Any();
             }
 

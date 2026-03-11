@@ -166,6 +166,7 @@ namespace JRPGPrototype.Logic.Battle.Bridges
             if (targetsAll)
             {
                 // EFFECTIVENESS GATE (Multi-Target)
+                // Prevents wasting a turn on group heals if everyone is healthy, or group ailments if all are afflicted.
                 if (skill != null && _statusRegistry.IsActionRedundant(actor, skill, selectionPool))
                 {
                     _io.WriteLine("This action would have no effect on any targets.", ConsoleColor.Yellow);
@@ -194,9 +195,11 @@ namespace JRPGPrototype.Logic.Battle.Bridges
             Combatant selectedTarget = selectionPool[choice];
 
             // EFFECTIVENESS GATE (Single-Target)
+            // Checks centralized logic in StatusRegistry. Correctly allows damaging skills (Toxic Sting).
             if (skill != null && _statusRegistry.IsActionRedundant(actor, skill, new List<Combatant> { selectedTarget }))
             {
-                _io.WriteLine($"{selectedTarget.Name} is already afflicted with {selectedTarget.CurrentAilment}", ConsoleColor.Yellow);
+                string reason = selectedTarget.CurrentHP >= selectedTarget.MaxHP ? "is healthy" : "already has that status";
+                _io.WriteLine($"{selectedTarget.Name} {reason}.", ConsoleColor.Yellow);
                 _io.Wait(1200);
                 return null; // Return null to go back to previous menu and preserve turn icons
             }
@@ -320,17 +323,17 @@ namespace JRPGPrototype.Logic.Battle.Bridges
                 var names = summonableDemons.Select(d => $"{d.Name} (Lv.{d.Level})").ToList();
                 names.Add("Back");
 
-                    // Disable dead demons in the selection list.
+                // Disable dead demons in the selection list.
                 List<bool> disabledSummons = summonableDemons.Select(d => d.IsDead).ToList();
-                    disabledSummons.Add(false); // Back button always enabled
+                disabledSummons.Add(false); // Back button always enabled
 
-                    int sub = _io.RenderMenu("Summon Demon:", names, 0, disabledSummons);
-                    if (sub == -1 || sub == names.Count - 1) return ("None", null);
-                    return ("Summon", summonableDemons[sub]);
-                }
+                int sub = _io.RenderMenu("Summon Demon:", names, 0, disabledSummons);
+                if (sub == -1 || sub == names.Count - 1) return ("None", null);
+                return ("Summon", summonableDemons[sub]);
+            }
 
-                if (choice == 1) // Return
-                {
+            if (choice == 1) // Return
+            {
                     var activeDemons = _party.ActiveParty.Where(c => c.Class ==
                     ClassType.Demon).ToList();
                     if (!activeDemons.Any())
@@ -338,21 +341,21 @@ namespace JRPGPrototype.Logic.Battle.Bridges
                         _io.WriteLine("No active demons to return.");
                         _io.Wait(800); return ("None", null);
                     }
-                    var names = activeDemons.Select(d => d.Name).ToList();
-                    names.Add("Back");
-                    int sub = _io.RenderMenu("Return Demon:", names, 0);
-                    if (sub == -1 || sub == names.Count - 1) return ("None", null);
-                    return ("Return", activeDemons[sub]);
-                }
-
-                if (choice == 2) // Analyze
-                {
-                    var targetList = SelectTarget(actor);
-                    if (targetList == null) return ("None", null);
-                    return ("Analyze", targetList[0]);
-                }
-                return ("None", null);
+                var names = activeDemons.Select(d => d.Name).ToList();
+                names.Add("Back");
+                int sub = _io.RenderMenu("Return Demon:", names, 0);
+                if (sub == -1 || sub == names.Count - 1) return ("None", null);
+                return ("Return", activeDemons[sub]);
             }
+
+            if (choice == 2) // Analyze
+            {
+                var targetList = SelectTarget(actor);
+                if (targetList == null) return ("None", null);
+                return ("Analyze", targetList[0]);
+            }
+            return ("None", null);
+        }
 
         public string GetBattleContext(Combatant actor)
         {

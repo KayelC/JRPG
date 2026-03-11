@@ -37,6 +37,14 @@ namespace JRPGPrototype.Logic.Battle.Engines
             string effect = skill.Effect.ToLower();
             string category = skill.Category.ToLower();
 
+            // --- RULE 0: Damaging Skills are NEVER Redundant ---
+            // If the skill has a power value, the primary intent is damage. 
+            // For example : "Toxic Sting" isn't blocked just because the target is already poisoned.
+            if (skill.Power != "-" && skill.Power != "NaN")
+            {
+                return false;
+            }
+
             // 1. Ailment Redundancy
             // Search if we are trying to inflict an ailment the target already has
             foreach (var ailment in Database.Ailments.Values)
@@ -52,7 +60,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
             }
 
             // 2. Recovery Redundancy (HP/SP)
-            if (category.Contains("recovery") && !effect.Contains("revive") && !effect.Contains("cure"))
+            if (category.Contains("recovery") && !effect.Contains("revive") && !effect.Contains("cure") && !effect.Contains("dispel"))
             {
                 bool isSpHeal = effect.Contains("sp") || effect.Contains("spirit");
                 if (isSpHeal)

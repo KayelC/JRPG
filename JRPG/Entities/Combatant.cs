@@ -58,8 +58,15 @@ namespace JRPGPrototype.Entities
         public bool IsGuarding { get; set; }
         public bool IsDead => CurrentHP <= 0;
 
-        // technical check for Physical 100% Critical state (Freeze/Shock).
-        public bool IsRigidBody => CurrentAilment != null && (CurrentAilment.Name == "Freeze" || CurrentAilment.Name == "Shock");
+        /// <summary>
+        /// Technical check for Physical 100% Critical state.
+        /// A body is 'Rigid' if it is immobilized by elemental or physical forces.
+        /// </summary>
+        public bool IsRigidBody => CurrentAilment != null && (
+            CurrentAilment.Name.Equals("Freeze", StringComparison.OrdinalIgnoreCase) ||
+            CurrentAilment.Name.Equals("Shock", StringComparison.OrdinalIgnoreCase) ||
+            CurrentAilment.Name.Equals("Bind", StringComparison.OrdinalIgnoreCase) ||
+            CurrentAilment.Name.Equals("Stun", StringComparison.OrdinalIgnoreCase));
 
         public bool IsCharged { get; set; } // Physical multiplier flag
         public bool IsMindCharged { get; set; } // Magic multiplier flag
@@ -151,7 +158,6 @@ namespace JRPGPrototype.Entities
         public void GainExp(int amount) => GrowthProcessor.GainExp(this, amount);
 
         // Proxy to GrowthProcessor. Handles manual stat point allocation.
-
         public void AllocateStat(StatType type) => GrowthProcessor.AllocateStat(this, type);
 
 

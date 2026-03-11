@@ -29,7 +29,7 @@ namespace JRPGPrototype.Entities.Components
             Affinity aff = target.ActivePersona?.GetAffinity(element) ?? Affinity.Normal;
             var result = new CombatResult();
 
-            // Check if the current element is Physical for Technical/Critical logic
+            // Check if the current element is Physical for Critical logic
             bool isPhysical = (element == Element.Slash || element == Element.Strike || element == Element.Pierce);
 
             // 2. Guarding State Logic
@@ -44,8 +44,8 @@ namespace JRPGPrototype.Entities.Components
                 }
             }
 
-            // 3. Technical/RigidBody Logic (SMT III Fidelity)
-            // If the target is under "Freeze" or "Shock", any Physical hit becomes an automatic Critical.
+            // 3. RigidBody Logic
+            // If the target is under "Freeze", "Shock", "Bind", or "Stun", any Physical hit becomes an automatic Critical.
             if (target.IsRigidBody && isPhysical)
             {
                 isCritical = true;
@@ -58,22 +58,7 @@ namespace JRPGPrototype.Entities.Components
                 damage = (int)(damage * 1.5);
             }
 
-            // 5. NEW: Ailment-Based Technical Multipliers (Bind / Stun)
-            // If the target is Bound or Stunned, Physical attacks deal 50% more damage.
-            if (target.CurrentAilment != null && isPhysical)
-            {
-                string ailmentName = target.CurrentAilment.Name;
-
-                // FIX: Use case-insensitive comparison to ensure Technical procs correctly regardless of JSON casing.
-                if (ailmentName.Equals("Bind", StringComparison.OrdinalIgnoreCase) ||
-                    ailmentName.Equals("Stun", StringComparison.OrdinalIgnoreCase))
-                {
-                    damage = (int)(damage * 1.5);
-                    result.Message = "TECHNICAL!";
-                }
-            }
-
-            // 6. Affinity Interaction Stack
+            // 5. Affinity Interaction Stack
             // This determines how the raw damage is modified by the target's elemental resistances.
             switch (aff)
             {
@@ -114,7 +99,6 @@ namespace JRPGPrototype.Entities.Components
                 default: // Affinity.Normal
                     result.Type = HitType.Normal;
                     result.DamageDealt = damage;
-                    // Only set "CRITICAL HIT!" if a higher priority message (like TECHNICAL!) isn't already set.
                     if (result.IsCritical && string.IsNullOrEmpty(result.Message))
                     {
                         result.Message = "CRITICAL HIT!";
@@ -122,11 +106,11 @@ namespace JRPGPrototype.Entities.Components
                     break;
             }
 
-            // 7. Apply Final State Mutation
+            // 6. Apply Final State Mutation
             // Deduct HP based on the result, ensuring HP never drops below 0.
             target.CurrentHP = Math.Max(0, target.CurrentHP - result.DamageDealt);
 
-            // 8. Ailment Trigger: Removal Logic (e.g., Wake on Hit for Sleep)
+            // 7. Ailment Trigger: Removal Logic (e.g., Wake on Hit for Sleep)
             if (result.DamageDealt > 0 && target.CurrentAilment != null)
             {
                 if (target.CurrentAilment.RemovalTriggers != null &&

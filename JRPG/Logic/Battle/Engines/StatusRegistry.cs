@@ -28,7 +28,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
 
         /// <summary>
         /// Centralized "Effectiveness Gate" logic.
-        /// Returns true if the action would result in zero change to the targets.
+        /// Returns true if the action would result in zero (or negligible) change to the targets.
         /// </summary>
         public bool IsActionRedundant(Combatant actor, SkillData skill, List<Combatant> targets)
         {
@@ -36,6 +36,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
 
             string effect = skill.Effect.ToLower();
             string category = skill.Category.ToLower();
+            string name = skill.Name.ToLower();
 
             // --- RULE 0: Damaging Skills are NEVER Redundant ---
             // If the skill has a power value, the primary intent is damage. 
@@ -60,16 +61,17 @@ namespace JRPGPrototype.Logic.Battle.Engines
             }
 
             // 2. Recovery Redundancy (HP/SP)
+            // AI Logic: Redundant if targets are already above 70% HP (unless it's a Revive/Cure/Dispel)
             if (category.Contains("recovery") && !effect.Contains("revive") && !effect.Contains("cure") && !effect.Contains("dispel"))
             {
                 bool isSpHeal = effect.Contains("sp") || effect.Contains("spirit");
                 if (isSpHeal)
                 {
-                    if (targets.All(t => t.CurrentSP >= t.MaxSP)) return true;
+                    if (targets.All(t => (double)t.CurrentSP / t.MaxSP >= 0.80)) return true;
                 }
                 else
                 {
-                    if (targets.All(t => t.CurrentHP >= t.MaxHP)) return true;
+                    if (targets.All(t => (double)t.CurrentHP / t.MaxHP >= 0.70)) return true;
                 }
             }
 
@@ -78,6 +80,38 @@ namespace JRPGPrototype.Logic.Battle.Engines
             {
                 // Redundant if none of the targets have an ailment to remove
                 if (targets.All(t => t.CurrentAilment == null)) return true;
+            }
+
+            // 4. Stat Change Redundancy (Buff/Debuff Caps)
+            bool isBuff = name.EndsWith("kaja") || name == "heat riser";
+            bool isDebuff = name.EndsWith("nda") || name == "debilitate";
+
+            if (isBuff)
+            {
+                // Redundant if all targets are already at +3 or higher in the relevant stats
+                bool taru = name.Contains("taru") || name == "heat riser";
+                bool raku = name.Contains("raku") || name == "heat riser";
+                bool suku = name.Contains("suku") || name == "heat riser";
+
+                return targets.All(t =>
+                    (!taru || t.Buffs.GetValueOrDefault("Attack", 0) >= 3) &&
+                    (!raku || t.Buffs.GetValueOrDefault("Defense", 0) >= 3) &&
+                    (!suku || t.Buffs.GetValueOrDefault("Agility", 0) >= 3)
+                );
+            }
+
+            if (isDebuff)
+            {
+                // Redundant if all targets are already at -3 or lower
+                bool taru = name.Contains("taru") || name == "debilitate";
+                bool raku = name.Contains("raku") || name == "debilitate";
+                bool suku = name.Contains("suku") || name == "debilitate";
+
+                return targets.All(t =>
+                    (!taru || t.Buffs.GetValueOrDefault("Attack", 0) <= -3) &&
+                    (!raku || t.Buffs.GetValueOrDefault("Defense", 0) <= -3) &&
+                    (!suku || t.Buffs.GetValueOrDefault("Agility", 0) <= -3)
+                );
             }
 
             return false;
@@ -111,7 +145,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
 
             if (ailmentToApply == null) return false;
 
-            // FIX: Match the pattern "(XX% chance)" as seen in skills_database.json
+            // Match the pattern "(XX% chance)" as seen in skills_database.json
             int baseChance = 100;
             Match match = Regex.Match(skillEffect, @"\((\d+)%");
             if (match.Success)
@@ -144,9 +178,9 @@ namespace JRPGPrototype.Logic.Battle.Engines
 
             string effectLower = skillEffect.ToLower();
             bool curesAll = effectLower.Contains("cure all") ||
-                           effectLower.Contains("cures all") ||
-                           effectLower.Contains("amrita") ||
-                           effectLower.Contains("salvation");
+                            effectLower.Contains("cures all") ||
+                            effectLower.Contains("amrita") ||
+                            effectLower.Contains("salvation");
 
             if (curesAll || effectLower.Contains(target.CurrentAilment.Name.ToLower()) ||
                 effectLower.Contains("dispel") || effectLower.Contains("dispels"))
@@ -180,7 +214,6 @@ namespace JRPGPrototype.Logic.Battle.Engines
                 foreach (var ally in allies)
                 {
                     if (ally.IsDead) continue;
-
                     if (skills.Contains("Auto-Mataru")) ApplyStatChange("Matarukaja", ally);
                     if (skills.Contains("Auto-Maraku")) ApplyStatChange("Marakukaja", ally);
                     if (skills.Contains("Auto-Masuku")) ApplyStatChange("Masukukaja", ally);
@@ -218,11 +251,8 @@ namespace JRPGPrototype.Logic.Battle.Engines
                     int fearRoll = _rnd.Next(0, 100);
                     if (fearRoll < 15) // 15% chance to flee
                     {
-                        if (actor.Class != ClassType.Demon)
-                            return TurnStartResult.FleeBattle;
-
-                        if (actor.Class == ClassType.Demon)
-                            return TurnStartResult.ReturnToCOMP;
+                        if (actor.Class != ClassType.Demon) return TurnStartResult.FleeBattle;
+                        if (actor.Class == ClassType.Demon) return TurnStartResult.ReturnToCOMP;
                     }
                     return fearRoll < 55 ? TurnStartResult.Skip : TurnStartResult.CanAct; // 40% skip turn
 
@@ -249,7 +279,6 @@ namespace JRPGPrototype.Logic.Battle.Engines
             // 1. HP Restoration (Regenerate / Spring of Life)
             int hpRecovery = 0;
             if (skills.Contains("Spring of Life")) hpRecovery += (int)(actor.MaxHP * 0.08);
-
             if (skills.Contains("Regenerate 3")) hpRecovery += (int)(actor.MaxHP * 0.06);
             else if (skills.Contains("Regenerate 2")) hpRecovery += (int)(actor.MaxHP * 0.04);
             else if (skills.Contains("Regenerate 1")) hpRecovery += (int)(actor.MaxHP * 0.02);

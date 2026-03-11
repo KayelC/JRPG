@@ -12,7 +12,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
     /// <summary>
     /// The Cognitive Layer of the Battle Sub-System.
     /// Determines the optimal action for an AI combatant using a Unified Tactical Model.
-    /// Prioritizes Press Turn maximization, Technical exploitation, and lethal efficiency.
+    /// Prioritizes Press Turn maximization, Technical (Rigid Body) exploitation, and lethal efficiency.
     /// </summary>
     public class BehaviorEngine
     {
@@ -26,7 +26,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
 
         /// <summary>
         /// The primary entry point for AI decision making.
-        /// Implements the Tiered Priority Ladder: Kill > Weakness/Technical > Crisis > Rigid > Pass > Pressure.
+        /// Implements the Tiered Priority Ladder: Kill > Weakness/Rigid > Crisis > Rigid (Ailment) > Pass > Pressure.
         /// </summary>
         public (SkillData? skill, List<Combatant> targets) DetermineBestAction(
             Combatant actor,
@@ -37,13 +37,12 @@ namespace JRPGPrototype.Logic.Battle.Engines
             int blinkingIcons)
         {
             // --- Step 1: Ailment Hijack Logic (Highest Priority) ---
-            // We check the registry to see if the actor's turn is being dictated by an ailment.
             TurnStartResult turnState = _statusRegistry.ProcessTurnStart(actor);
 
             if (turnState == TurnStartResult.ForcedPhysical)
             {
-                // Rage Logic: Perform a basic attack on a random enemy.
-                // Using DetermineTargetList here to ensure we don't wake a sleeper if other targets are available.
+                // Rage Logic: Perform a basic attack.
+                // Uses DetermineTargetList to ensure we respect targeting rules even while Enraged.
                 var forcedTargets = DetermineTargetList(actor, null, allies, opponents, null);
                 return (null, forcedTargets);
             }
@@ -64,8 +63,13 @@ namespace JRPGPrototype.Logic.Battle.Engines
             // Add basic attack to the potential pool
             actionPool.Add(null);
 
-            // Perform the "Effectiveness Gate" check to prune useless moves
-            var validSkills = actionPool.Where(s => IsActionEffective(actor, s, allies, opponents, knowledge)).ToList();
+            // Perform the "Effectiveness Gate" check to prune redundant moves.
+            var validSkills = actionPool.Where(s =>
+            {
+                if (s == null) return true;
+                var targets = DetermineTargetList(actor, null, allies, opponents, s);
+                return !_statusRegistry.IsActionRedundant(actor, s, targets);
+            }).ToList();
 
             // --- STEP 3: THE PRIORITY LADDER ---
 
@@ -91,8 +95,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
                 }
             }
 
-            // TIER 2: PRESS TURN & TECHNICAL EXPLOITATION
-            // Hunt for known weaknesses OR Technical setups (Bind/Stun) to gain extra actions and deal massive damage.
+            // TIER 2: PRESS TURN & RIGID EXPLOITATION
             foreach (var skill in validSkills)
             {
                 if (IsOffensive(skill))
@@ -100,16 +103,13 @@ namespace JRPGPrototype.Logic.Battle.Engines
                     Element element = skill != null ? ElementHelper.FromCategory(skill.Category) : actor.WeaponElement;
                     var targets = DetermineTargetList(actor, null, allies, opponents, skill);
 
-                    bool hasTechnicalPotential = targets.Any(t => t.CurrentAilment != null &&
-                        (t.CurrentAilment.Name == "Bind" || t.CurrentAilment.Name == "Stun") &&
-                        IsPhysical(skill));
-
+                    bool hasRigidExploit = targets.Any(t => t.IsRigidBody && IsPhysical(skill));
                     bool hasWeaknessPotential = targets.Any(t => knowledge.IsWeaknessKnown(t.SourceId, element));
 
-                    if (hasTechnicalPotential || hasWeaknessPotential)
+                    if (hasRigidExploit || hasWeaknessPotential)
                     {
-                        // SMT Rule: Only use if NO target in the list is known to Null/Repel/Absorb
-                        if (!targets.Any(t => knowledge.IsResistanceKnown(t.SourceId, element)))
+                        // Risk Aversion: Only use if NO target in the list is known to resist/nullify
+                        if (!IsKnownRisk(skill, targets, knowledge))
                         {
                             return (skill, targets);
                         }
@@ -132,7 +132,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
             }
 
             // TIER 4: CRITICAL FISHING (RIGID TARGETS)
-            // If an enemy is Frozen or Shocked, Physical attacks are 100% Critical.
+            // If an enemy is Frozen, Shocked, Bound or Stunned Physical attacks are 100% Critical.
             var rigidTarget = opponents.FirstOrDefault(o => !o.IsDead && o.IsRigidBody);
             if (rigidTarget != null)
             {
@@ -164,7 +164,10 @@ namespace JRPGPrototype.Logic.Battle.Engines
             if (offensiveOptions.Any())
             {
                 var bestSkill = offensiveOptions.First();
-                return (bestSkill, DetermineTargetList(actor, null, allies, opponents, bestSkill));
+                if (!IsKnownRisk(bestSkill, opponents, knowledge))
+                {
+                    return (bestSkill, DetermineTargetList(actor, null, allies, opponents, bestSkill));
+                }
             }
 
             // TIER 7: DESPERATION
@@ -172,7 +175,15 @@ namespace JRPGPrototype.Logic.Battle.Engines
             return (null, DetermineTargetList(actor, null, allies, opponents, null));
         }
 
-        // Sabotages the team when Charmed.
+        // Checks if an offensive skill poses a risk of losing icons based on persistent player knowledge.
+        private bool IsKnownRisk(SkillData? skill, List<Combatant> currentTargets, BattleKnowledge knowledge)
+        {
+            if (skill == null || !IsOffensive(skill)) return false;
+            Element element = ElementHelper.FromCategory(skill.Category);
+            // Rule: One Repel/Absorb/Null in a group skill kills the turn.
+            return currentTargets.Any(target => !target.IsDead && knowledge.IsResistanceKnown(target.SourceId, element));
+        }
+
         private (SkillData? skill, List<Combatant> targets) DetermineConfusedAction(Combatant actor, List<Combatant> allies, List<Combatant> opponents)
         {
             var skills = actor.GetConsolidatedSkills()
@@ -195,47 +206,6 @@ namespace JRPGPrototype.Logic.Battle.Engines
             return (null, new List<Combatant> { allies[_rnd.Next(allies.Count)] });
         }
 
-        // The Effectiveness Gate: Prevents the AI from taking turns that do nothing.
-        private bool IsActionEffective(Combatant actor, SkillData? skill, List<Combatant> allies, List<Combatant> opponents, BattleKnowledge knowledge)
-        {
-            // Basic attacks are always "effective" as a baseline.
-            if (skill == null) return true;
-            string name = skill.Name.ToLower();
-            string effect = skill.Effect.ToLower();
-
-            // 1. Healing check: Don't heal if targets are > 70% HP
-            if (skill.Category.Contains("Recovery") && !effect.Contains("Revive") && !effect.Contains("Cure"))
-            {
-                return allies.Any(a => !a.IsDead && (double)a.CurrentHP / a.MaxHP < 0.70);
-            }
-
-            // 2. Cure check: Don't use cures if no one has ailments
-            if (effect.Contains("cure"))
-            {
-                // Is effective if at least one ally has a removable ailment
-                return allies.Any(a => !a.IsDead && a.CurrentAilment != null);
-            }
-
-            // 3. Buff/Debuff check: Don't buff if at +3, don't debuff if at -3.
-            bool isBuff = name.EndsWith("kaja") || name == "heat riser";
-            bool isDebuff = name.EndsWith("nda") || name == "debilitate";
-
-            if (isBuff) return allies.Any(a => !a.IsDead && a.Buffs.Values.Any(v => v < 3));
-            if (isDebuff) return opponents.Any(o => !o.IsDead && o.Buffs.Values.Any(v => v > -3));
-
-            // 4. Risk check: Don't use elements known to be resisted/blocked
-            if (IsOffensive(skill))
-            {
-                Element element = ElementHelper.FromCategory(skill.Category);
-                if (opponents.Any(o => !o.IsDead && knowledge.IsResistanceKnown(o.SourceId, element)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         private bool HasKnownAdvantage(Combatant ally, List<Combatant> opponents, BattleKnowledge knowledge)
         {
             var skills = ally.GetConsolidatedSkills()
@@ -253,7 +223,9 @@ namespace JRPGPrototype.Logic.Battle.Engines
         private List<Combatant> DetermineTargetList(Combatant actor, Combatant? primaryTarget, List<Combatant> allies, List<Combatant> opponents, SkillData? skill)
         {
             List<Combatant> targets = new List<Combatant>();
-            if (skill == null) // Basic Attack
+
+            // Basic Attack Early Return
+            if (skill == null)
             {
                 targets.Add(primaryTarget ?? opponents[_rnd.Next(opponents.Count)]);
                 return targets;
@@ -264,38 +236,38 @@ namespace JRPGPrototype.Logic.Battle.Engines
 
             if (skill != null)
             {
-                string nameLower = skill.Name.ToLower();
-                string effectLower = skill.Effect.ToLower();
+            string nameLower = skill.Name.ToLower();
+            string effectLower = skill.Effect.ToLower();
 
-                // Self-Targeting logic for Charge skills
-                if (nameLower.Contains("charge"))
-                {
-                    return new List<Combatant> { actor };
-                }
+            // Self-Targeting logic for Charge skills
+            if (nameLower.Contains("charge"))
+            {
+                return new List<Combatant> { actor };
+            }
 
-                // --- REFINED MULTI-TARGET LOGIC ---
+            // --- REFINED MULTI-TARGET LOGIC ---
                 // Checks for Maha (Ma-) or Media (Me-) prefixes, or explicit group keywords.
                 // Avoids the "Heal 1 ally" greedy bug by checking for "all allies" or "party".
                 isMulti = nameLower.StartsWith("ma") ||
-                               nameLower.StartsWith("me") ||
-                               effectLower.Contains("all foes") ||
-                               effectLower.Contains("all allies") ||
-                               effectLower.Contains("party") ||
+                           nameLower.StartsWith("me") ||
+                           effectLower.Contains("all foes") ||
+                           effectLower.Contains("all allies") ||
+                           effectLower.Contains("party") ||
                                nameLower == "debilitate"; // Debilitate is always Multi-Target
 
-                // --- REFINED SIDE IDENTIFICATION ---
+            // --- REFINED SIDE IDENTIFICATION ---
                 // Buffs (kaja/Heat Riser) -> Allies. Debuffs (nda/Debilitate) -> Opponents.
                 bool isBuff = nameLower.EndsWith("kaja") || nameLower == "heat riser";
-                bool isDebuff = nameLower.EndsWith("nda") || nameLower == "debilitate";
+            bool isDebuff = nameLower.EndsWith("nda") || nameLower == "debilitate";
 
                 // Identify which side the skill is intended for
                 targetsAllies = skill.Category.Contains("Recovery") ||
-                            isBuff ||
-                            effectLower.Contains("ally") ||
-                            effectLower.Contains("party");
+                                 isBuff ||
+                                 effectLower.Contains("ally") ||
+                                 effectLower.Contains("party");
 
                 // If it's explicitly a debuff, ensure it targets opponents regardless of category.
-                if (isDebuff) targetsAllies = false;
+            if (isDebuff) targetsAllies = false;
             }
 
             var side = targetsAllies ? allies : opponents;
@@ -304,6 +276,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
             {
                 // Multi-target skills only target living members unless it's a Revive skill
                 targets.AddRange(side.Where(s => skill.Effect.Contains("Revive") ? s.IsDead : !s.IsDead));
+                return targets;
             }
             else
             {
@@ -314,11 +287,10 @@ namespace JRPGPrototype.Logic.Battle.Engines
             // AI: Smart Targeting
             if (!targetsAllies)
             {
-                // 1. If hitting with Physical, prioritize Bind/Stun (Technical)
+                // 1. Rigid Exploitation: Prioritize Rigid targets for Physical hits
                 if (IsPhysical(skill))
                 {
-                    var techTarget = side.FirstOrDefault(s => !s.IsDead &&
-                        (s.CurrentAilment?.Name == "Bind" || s.CurrentAilment?.Name == "Stun"));
+                    var techTarget = side.FirstOrDefault(s => !s.IsDead && s.IsRigidBody);
                     if (techTarget != null)
                     {
                         targets.Add(techTarget);
@@ -326,7 +298,7 @@ namespace JRPGPrototype.Logic.Battle.Engines
                     }
                 }
 
-                // 2. Avoid Sleepers if other targets are available
+                // 2. Crowd Control Awareness: Avoid Sleepers if others are available
                 var nonSleepers = side.Where(s => !s.IsDead && s.CurrentAilment?.Name != "Sleep").ToList();
                 if (nonSleepers.Any())
                 {
@@ -334,27 +306,19 @@ namespace JRPGPrototype.Logic.Battle.Engines
                 }
                 else
                 {
-                    // Everyone is asleep? Just hit a random one (Desperation)
+                    // Everyone is asleep - forced to wake one up
                     var anyTarget = side.Where(s => !s.IsDead).ToList();
                     if (anyTarget.Any()) targets.Add(anyTarget[_rnd.Next(anyTarget.Count)]);
                 }
             }
             else
             {
-                // Healing/Buffing targets random living ally
-                var validAllies = side.Where(s => !s.IsDead).ToList();
-                if (validAllies.Any()) targets.Add(validAllies[_rnd.Next(validAllies.Count)]);
+                // Ally selection: If it's a revive, pick a dead one. Otherwise, pick living.
+                var validSide = skill.Effect.Contains("Revive") ? side.Where(s => s.IsDead).ToList() : side.Where(s => !s.IsDead).ToList();
+                if (validSide.Any()) targets.Add(validSide[_rnd.Next(validSide.Count)]);
             }
 
             return targets;
-        }
-
-        /// Checks if an offensive skill poses a risk of losing icons based on persistent player knowledge.
-        private bool IsKnownRisk(SkillData skill, List<Combatant> opponents, BattleKnowledge knowledge)
-        {
-            if (skill == null || !IsOffensive(skill)) return false;
-            Element element = ElementHelper.FromCategory(skill.Category);
-            return opponents.Any(target => !target.IsDead && knowledge.IsResistanceKnown(target.SourceId, element));
         }
 
         private bool CanAfford(Combatant actor, SkillData skill)

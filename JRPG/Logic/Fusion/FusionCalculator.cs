@@ -234,12 +234,29 @@ namespace JRPGPrototype.Logic.Fusion
             List<string> pool = new List<string>();
             foreach (var p in parents)
             {
-                if (p != null)
+                if (p == null) continue;
+
+                foreach (var skillName in p.GetConsolidatedSkills())
                 {
-                    // Union ensures we only track unique skill names
-                    pool = pool.Union(p.GetConsolidatedSkills()).ToList();
+                    // 1. Find the skill in the database to check its effect text
+                    if (Database.Skills.TryGetValue(skillName, out var skillData))
+                    {
+                        // 2. Check if the description contains "exclusive" (case-insensitive)
+                        bool isExclusive = skillData.Effect.Contains("exclusive", StringComparison.OrdinalIgnoreCase);
+
+                        if (!isExclusive)
+                        {
+                            pool.Add(skillName);
+                        }
+                    }
+                    else
+                    {
+                        // Fallback: If skill isn't in database (data error), don't risk inheriting it
+                        continue;
+                    }
                 }
             }
+            // Use Union or Distinct to prevent duplicates in the pool
             return pool.Distinct().ToList();
         }
 

@@ -68,6 +68,9 @@ namespace JRPGPrototype
                 case '4':
                     player.Class = ClassType.Operator;
                     player.DemonStock.Add(CombatantFactory.CreatePlayerDemon("michael", 99));
+                    player.DemonStock.Add(CombatantFactory.CreatePlayerDemon("alice", 99));
+                    player.DemonStock.Add(CombatantFactory.CreatePlayerDemon("pale_rider", 99));
+                    player.DemonStock.Add(CombatantFactory.CreatePlayerDemon("messiah", 99));
                     player.DemonStock.Add(CombatantFactory.CreatePlayerDemon("pixie", 50));
                     player.DemonStock.Add(CombatantFactory.CreatePlayerDemon("high_pixie", 50));
                     player.DemonStock.Add(CombatantFactory.CreatePlayerDemon("orpheus", 50));

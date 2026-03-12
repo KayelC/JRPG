@@ -9,24 +9,24 @@
           "name": "Block 1: Thebel",
           "floor_range": [2, 20],
           "enemy_pool": [
-            "E_orpheus",
-            "E_hermes",
-            "E_io",
-            "E_pixie",
-            "E_apsaras",
-            "E_nekomata",
-            "E_angel",
-            "E_silky",
-            "E_ara-mitama",
-            "E_forneus",
-            "E_omoikane",
-            "E_onmoraki"
+            "orpheus",
+            "hermes",
+            "io",
+            "pixie",
+            "apsaras",
+            "nekomata",
+            "angel",
+            "silky",
+            "ara-mitama",
+            "forneus",
+            "omoikane",
+            "onmoraki"
           ],
           "fixed_floors": [
             {
               "floor": 5,
               "type": "Boss",
-              "id": "E_chimera",
+              "id": "chimera",
               "description": "Gatekeeper: A beast blocking the path."
             },
             {
@@ -38,7 +38,7 @@
             {
               "floor": 14,
               "type": "Boss",
-              "id": "E_archangel",
+              "id": "archangel",
               "description": "Gatekeeper: A divine trial blocks the stairs."
             },
             {
@@ -54,24 +54,24 @@
           "name": "Block 2: Arqa",
           "floor_range": [21, 60],
           "enemy_pool": [
-            "E_unicorn",
-            "E_valkyrie",
-            "E_slime",
-            "E_tam-lin",
-            "E_berith",
-            "E_polydeuces",
-            "E_jack-o-lantern",
-            "E_naga",
-            "E_captain-kidd",
-            "E_high-pixie",
-            "E_take-minakata",
-            "E_mitra"
+            "unicorn",
+            "valkyrie",
+            "slime",
+            "tam-lin",
+            "berith",
+            "polydeuces",
+            "jack-o-lantern",
+            "naga",
+            "captain-kidd",
+            "high-pixie",
+            "take-minakata",
+            "mitra"
           ],
           "fixed_floors": [
             {
               "floor": 25,
               "type": "Boss",
-              "id": "E_take-mikazuchi",
+              "id": "take-mikazuchi",
               "description": "Gatekeeper: The air crackles with electricity."
             },
             {
@@ -83,7 +83,7 @@
             {
               "floor": 47,
               "type": "Boss",
-              "id": "E_lamia",
+              "id": "lamia",
               "description": "Gatekeeper: A seductive shadow awaits."
             },
             {
@@ -99,18 +99,18 @@
           "name": "Block 3: Yabbashah",
           "floor_range": [61, 110],
           "enemy_pool": [
-            "E_legion",
-            "E_goemon",
-            "E_johanna",
-            "E_queen-medb",
-            "E_baphomet",
-            "E_oni",
-            "E_eligor",
-            "E_king-frost",
-            "E_black-frost",
-            "E_robin-hood",
-            "E_dakini",
-            "E_thoth"
+            "legion",
+            "goemon",
+            "johanna",
+            "queen-medb",
+            "baphomet",
+            "oni",
+            "eligor",
+            "king-frost",
+            "black-frost",
+            "robin-hood",
+            "dakini",
+            "thoth"
           ],
           "fixed_floors": [
             {
@@ -122,13 +122,13 @@
             {
               "floor": 85,
               "type": "Boss",
-              "id": "E_flauros",
+              "id": "flauros",
               "description": "Gatekeeper: Three faces stare you down."
             },
             {
               "floor": 98,
               "type": "Boss",
-              "id": "E_cu-chulainn",
+              "id": "cu-chulainn",
               "description": "Gatekeeper: A warrior of light blocks the path."
             },
             {
@@ -144,20 +144,20 @@
           "name": "Block 4: Tziah",
           "floor_range": [111, 160],
           "enemy_pool": [
-            "E_ose",
-            "E_ganga",
-            "E_hecate",
-            "E_mercurius",
-            "E_lachesis",
-            "E_shiki-ouji",
-            "E_izanagi",
-            "E_kurama-tengu",
-            "E_hecatoncheires",
-            "E_titania",
-            "E_rangda",
-            "E_magatsu-izanagi",
-            "E_koumokuten",
-            "E_decarabia"
+            "ose",
+            "ganga",
+            "hecate",
+            "mercurius",
+            "lachesis",
+            "shiki-ouji",
+            "izanagi",
+            "kurama-tengu",
+            "hecatoncheires",
+            "titania",
+            "rangda",
+            "magatsu-izanagi",
+            "koumokuten",
+            "decarabia"
           ],
           "fixed_floors": [
             {
@@ -169,13 +169,13 @@
             {
               "floor": 135,
               "type": "Boss",
-              "id": "E_mishaguji",
+              "id": "mishaguji",
               "description": "Gatekeeper: A cursed presence looms."
             },
             {
               "floor": 146,
               "type": "Boss",
-              "id": "E_belphegor",
+              "id": "belphegor",
               "description": "Gatekeeper: A towering demon sits on a throne."
             },
             {
@@ -191,24 +191,24 @@
           "name": "Block 5: Harabah",
           "floor_range": [161, 210],
           "enemy_pool": [
-            "E_atropos",
-            "E_chernobog",
-            "E_kali",
-            "E_mot",
-            "E_daisoujou",
-            "E_trumpeter",
-            "E_surt",
-            "E_raphael",
-            "E_bishamonten",
-            "E_gabriel",
-            "E_thor",
-            "E_cerberus",
-            "E_norn",
-            "E_hell-biker",
-            "E_melchizedek",
-            "E_skadi",
-            "E_loki",
-            "E_michael"
+            "atropos",
+            "chernobog",
+            "kali",
+            "mot",
+            "daisoujou",
+            "trumpeter",
+            "surt",
+            "raphael",
+            "bishamonten",
+            "gabriel",
+            "thor",
+            "cerberus",
+            "norn",
+            "hell-biker",
+            "melchizedek",
+            "skadi",
+            "loki",
+            "michael"
           ],
           "fixed_floors": [
             {
@@ -220,7 +220,7 @@
             {
               "floor": 180,
               "type": "Boss",
-              "id": "E_siegfried",
+              "id": "siegfried",
               "description": "Gatekeeper: The dragon slayer challenges you."
             },
             {
@@ -232,7 +232,7 @@
             {
               "floor": 201,
               "type": "Boss",
-              "id": "E_alice",
+              "id": "alice",
               "description": "Gatekeeper: She asks if you want to die for her."
             },
             {
@@ -248,26 +248,26 @@
           "name": "Block 6: Adamah",
           "floor_range": [211, 264],
           "enemy_pool": [
-            "E_kohryu",
-            "E_atavaka",
-            "E_baal-zebul",
-            "E_lakshmi",
-            "E_attis",
-            "E_futsunushi",
-            "E_odin",
-            "E_scathach",
-            "E_mara",
-            "E_abaddon",
-            "E_saturnus",
-            "E_susano-o",
-            "E_mother-harlot",
-            "E_thanatos",
-            "E_vishnu",
-            "E_masakado",
-            "E_sandalphon",
-            "E_beelzebub",
-            "E_shiva",
-            "E_satan"
+            "kohryu",
+            "atavaka",
+            "baal-zebul",
+            "lakshmi",
+            "attis",
+            "futsunushi",
+            "odin",
+            "scathach",
+            "mara",
+            "abaddon",
+            "saturnus",
+            "susano-o",
+            "mother-harlot",
+            "thanatos",
+            "vishnu",
+            "masakado",
+            "sandalphon",
+            "beelzebub",
+            "shiva",
+            "satan"
           ],
           "fixed_floors": [
             {
@@ -279,7 +279,7 @@
             {
               "floor": 236,
               "type": "Boss",
-              "id": "E_metatron",
+              "id": "metatron",
               "description": "Gatekeeper: The voice of god forbids passage."
             },
             {
@@ -291,7 +291,7 @@
             {
               "floor": 255,
               "type": "Boss",
-              "id": "E_lucifer",
+              "id": "lucifer",
               "description": "Gatekeeper: The morning star shines brightly."
             },
             {

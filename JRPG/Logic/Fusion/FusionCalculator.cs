@@ -54,7 +54,7 @@ namespace JRPGPrototype.Logic.Fusion
                 else
                 {
                     _messenger.Publish("[FusionCalculator] Warning: Fusion recipes not found in Database.", ConsoleColor.Yellow);
-            }
+                }
             }
             catch (Exception ex)
             {
@@ -241,7 +241,7 @@ namespace JRPGPrototype.Logic.Fusion
                     // 1. Find the skill in the database to check its effect text
                     if (Database.Skills.TryGetValue(skillName, out var skillData))
                     {
-                        // 2. Check if the description contains "exclusive" (case-insensitive)
+                        // Filter out skills marked as exclusive in their effect description
                         bool isExclusive = skillData.Effect.Contains("exclusive", StringComparison.OrdinalIgnoreCase);
 
                         if (!isExclusive)
@@ -249,10 +249,30 @@ namespace JRPGPrototype.Logic.Fusion
                             pool.Add(skillName);
                         }
                     }
-                    else
+                }
+            }
+            return pool.Distinct().ToList();
+        }
+
+        /// <summary>
+        /// Retrieves skills from parents that are specifically marked as exclusive.
+        /// Used for UI display purposes (graying out).
+        /// </summary>
+        public List<string> GetExclusiveSkills(params Combatant[] parents)
+        {
+            List<string> pool = new List<string>();
+            foreach (var p in parents)
+            {
+                if (p == null) continue;
+
+                foreach (var skillName in p.GetConsolidatedSkills())
+                {
+                    if (Database.Skills.TryGetValue(skillName, out var skillData))
                     {
-                        // Fallback: If skill isn't in database (data error), don't risk inheriting it
-                        continue;
+                        if (skillData.Effect.Contains("exclusive", StringComparison.OrdinalIgnoreCase))
+                        {
+                            pool.Add(skillName);
+                        }
                     }
                 }
             }
@@ -263,6 +283,7 @@ namespace JRPGPrototype.Logic.Fusion
         // Calculates the number of skill slots available for inheritance based on total unique parent skills.
         public int GetInheritanceSlotCount(params Combatant[] parents)
         {
+            // Slots are calculated based on the LEGAL inheritable skills only.
             int uniqueSkillCount = GetInheritableSkills(parents).Count;
 
             // Inheritance Scaling

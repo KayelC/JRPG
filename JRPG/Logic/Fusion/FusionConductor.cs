@@ -188,14 +188,29 @@ namespace JRPGPrototype.Logic.Fusion
                     var parentList = new List<Combatant> { parentA, parentB };
                     if (sacrifice != null) parentList.Add((sacrifice is Combatant sc) ? sc : CreateTransientCombatant((Persona)sacrifice));
 
-                    var pool = _calculator.GetInheritableSkills(parentList.ToArray());
+                    // --- POOL LOGIC ---
+                    // 1. Get the list of pickable skills for the slot logic
+                    var pickablePool = _calculator.GetInheritableSkills(parentList.ToArray());
+
+                    // 2. Get the list of exclusive skills to show them in gray
+                    var exclusivePool = _calculator.GetExclusiveSkills(parentList.ToArray());
+
+                    // 3. Combine both for the UI display
+                    var displayPool = pickablePool.Union(exclusivePool).ToList();
+
+                    // 4. Combine "Inherent" and "Exclusive" for the UI's gray-out list
+                    var unavailablePool = inherentSkills.Union(exclusivePool).ToList();
+
                     int maxSlots = _calculator.GetInheritanceSlotCount(parentList.ToArray()) + (isSacrificial ? 2 : 0);
 
-                    List<string>? chosenSkills = _uiBridge.SelectInheritedSkills(pool, Math.Min(8, maxSlots), inherentSkills);
+                    // Pass the combined pools to the UI
+                    List<string>? chosenSkills = _uiBridge.SelectInheritedSkills(displayPool, Math.Min(8, maxSlots), unavailablePool);
+
                     if (chosenSkills == null) break;
 
                     // 5. Stage Result for UI Preview (Incorporating Sacrificial XP Transfer)
                     Combatant? staged = CreateStagedDemon(operation, targetId, p1, p2, sacrifice, chosenSkills);
+
                     if (staged == null) { _messenger.Publish("Error staging fusion result.", ConsoleColor.Red); break; }
 
                     // Confirmation Logic

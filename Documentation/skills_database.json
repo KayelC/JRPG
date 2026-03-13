@@ -64,6 +64,15 @@
       "Category": "Ailment Skills"
     },
     {
+      "Skill": "Preach",
+      "Effect": "Instills Charm on all foes. (50% chance) (Mother Harlot Exclusive)",
+      "Power": "100",
+      "Accuracy": "90%",
+      "Critical": "-",
+      "Cost": "15 SP",
+      "Category": "Ailment Skills"
+    },
+    {
       "Skill": "Evil Touch",
       "Effect": "Instills Fear in 1 foe. (40% chance)",
       "Power": "-",

@@ -4259,9 +4259,9 @@
       "Earth": "Normal",
       "Light": "Repel",
       "Dark": "Repel",
-      "Mind": "Absorb",
+      "Mind": "Null",
       "Nerve": "Null",
-      "Curse": "Absorb"
+      "Curse": "Null"
     },
     "BaseSkills": [
       "Meditation",

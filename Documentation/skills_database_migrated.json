@@ -2389,6 +2389,72 @@
             "Rank": "6"
         },
         {
+            "Skill": "Dodge Earth",
+            "Effect": "Hit-Rate 0.85x vs Earth attacks.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Earth_Affinity",
+            "Rank": "1"
+        },
+        {
+            "Skill": "Evade Earth",
+            "Effect": "Hit-Rate 0.60x vs Earth attacks.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Earth_Affinity",
+            "Rank": "2"
+        },
+        {
+            "Skill": "Resist Earth",
+            "Effect": "Reduces damage from Earth attacks.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Earth_Affinity",
+            "Rank": "3"
+        },
+        {
+            "Skill": "Null Earth",
+            "Effect": "Nullifies damage from Earth attacks.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Earth_Affinity",
+            "Rank": "4"
+        },
+        {
+            "Skill": "Repel Earth",
+            "Effect": "Reflects damage from Earth attacks.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Earth_Affinity",
+            "Rank": "5"
+        },
+        {
+            "Skill": "Absorb Earth",
+            "Effect": "Drains damage from Earth attacks.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Earth_Affinity",
+            "Rank": "6"
+        },
+        {
             "Skill": "Dodge Elec",
             "Effect": "Hit-Rate 0.85x vs Elec attacks.",
             "Power": "-",

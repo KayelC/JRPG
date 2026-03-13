@@ -1839,6 +1839,17 @@
             "Rank": "3"
         },
         {
+            "Skill": "Earth Driver",
+            "Effect": "Earth damage dealt x1.75.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Earth_Passive",
+            "Rank": "3"
+        },
+        {
             "Skill": "Ice Driver",
             "Effect": "Ice damage dealt x1.75.",
             "Power": "-",
@@ -2661,6 +2672,28 @@
             "Cost": "-",
             "Category": "Passive Skills",
             "Family": "Fire_Passive",
+            "Rank": "2"
+        },
+        {
+            "Skill": "Earth Boost",
+            "Effect": "Strengthens Earth attacks by 25%. Stacks with Earth Amp for 87.5%.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Earth_Passive",
+            "Rank": "1"
+        },
+        {
+            "Skill": "Earth Amp",
+            "Effect": "Greatly strengthens Earth attacks by 50%. Stacks with Earth Boost for 87.5%.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Earth_Passive",
             "Rank": "2"
         },
         {
@@ -3742,8 +3775,8 @@
             "Critical": "-",
             "Cost": "4 SP",
             "Category": "Recovery Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Heal_ST",
+            "Rank": "1"
         },
         {
             "Skill": "Media",
@@ -3753,8 +3786,8 @@
             "Critical": "-",
             "Cost": "8 SP",
             "Category": "Recovery Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Heal_MT",
+            "Rank": "1"
         },
         {
             "Skill": "Diarama",
@@ -3764,8 +3797,8 @@
             "Critical": "-",
             "Cost": "8 SP",
             "Category": "Recovery Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Heal_ST",
+            "Rank": "2"
         },
         {
             "Skill": "Mediarama",
@@ -3775,8 +3808,8 @@
             "Critical": "-",
             "Cost": "16 SP",
             "Category": "Recovery Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Heal_MT",
+            "Rank": "2"
         },
         {
             "Skill": "Diarahan",
@@ -3786,8 +3819,8 @@
             "Critical": "-",
             "Cost": "20 SP",
             "Category": "Recovery Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Heal_ST",
+            "Rank": "3"
         },
         {
             "Skill": "Mediarahan",
@@ -3797,8 +3830,8 @@
             "Critical": "-",
             "Cost": "40 SP",
             "Category": "Recovery Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Heal_MT",
+            "Rank": "3"
         },
         {
             "Skill": "Recarm",
@@ -3808,8 +3841,8 @@
             "Critical": "-",
             "Cost": "20 SP",
             "Category": "Recovery Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Revive",
+            "Rank": "1"
         },
         {
             "Skill": "Samarecarm",
@@ -3819,8 +3852,8 @@
             "Critical": "-",
             "Cost": "40 SP",
             "Category": "Recovery Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Revive",
+            "Rank": "2"
         },
         {
             "Skill": "Paraladi",

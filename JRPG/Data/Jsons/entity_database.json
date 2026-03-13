@@ -5488,6 +5488,7 @@
       "Curse": "Normal"
     },
     "BaseSkills": [
+      "Tera",
       "Magaru",
       "Media",
       "Wind Driver"
@@ -5496,7 +5497,8 @@
       "23": "Garula",
       "24": "Recarm",
       "25": "Divine Grace",
-      "27": "Magarula"
+      "27": "Magarula",
+      "28": "Earth Driver"
     }
   },
   {

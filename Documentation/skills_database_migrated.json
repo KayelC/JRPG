@@ -1235,8 +1235,8 @@
             "Critical": "-",
             "Cost": "4 SP",
             "Category": "Ice Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Ice_ST",
+            "Rank": "1"
         },
         {
             "Skill": "Mabufu",
@@ -1246,8 +1246,8 @@
             "Critical": "-",
             "Cost": "8 SP",
             "Category": "Ice Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Ice_MT",
+            "Rank": "1"
         },
         {
             "Skill": "Bufula",
@@ -1257,8 +1257,8 @@
             "Critical": "-",
             "Cost": "8 SP",
             "Category": "Ice Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Ice_ST",
+            "Rank": "2"
         },
         {
             "Skill": "Mabufula",
@@ -1268,8 +1268,8 @@
             "Critical": "-",
             "Cost": "16 SP",
             "Category": "Ice Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Ice_MT",
+            "Rank": "2"
         },
         {
             "Skill": "Bufudyne",
@@ -1279,8 +1279,8 @@
             "Critical": "-",
             "Cost": "16 SP",
             "Category": "Ice Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Ice_ST",
+            "Rank": "3"
         },
         {
             "Skill": "Mabufudyne",
@@ -1290,8 +1290,8 @@
             "Critical": "-",
             "Cost": "32 SP",
             "Category": "Ice Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Ice_MT",
+            "Rank": "3"
         },
         {
             "Skill": "Diamond Dust",

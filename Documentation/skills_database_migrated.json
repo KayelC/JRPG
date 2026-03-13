@@ -769,8 +769,8 @@
             "Critical": "-",
             "Cost": "6 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Tarukaja",
+            "Rank": "1"
         },
         {
             "Skill": "Makakaja",
@@ -780,8 +780,8 @@
             "Critical": "-",
             "Cost": "6 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Maka",
+            "Rank": "1"
         },
         {
             "Skill": "Mamakakaja",
@@ -791,8 +791,8 @@
             "Critical": "-",
             "Cost": "15 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Maka",
+            "Rank": "2"
         },
         {
             "Skill": "Tarunda",
@@ -802,8 +802,8 @@
             "Critical": "-",
             "Cost": "6 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Tarunda",
+            "Rank": "1"
         },
         {
             "Skill": "Matarukaja",
@@ -813,8 +813,8 @@
             "Critical": "-",
             "Cost": "12 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Tarukaja",
+            "Rank": "2"
         },
         {
             "Skill": "Matarunda",
@@ -824,8 +824,8 @@
             "Critical": "-",
             "Cost": "12 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Tarunda",
+            "Rank": "2"
         },
         {
             "Skill": "Rakukaja",
@@ -835,8 +835,8 @@
             "Critical": "-",
             "Cost": "6 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Rakukaja",
+            "Rank": "1"
         },
         {
             "Skill": "Rakunda",
@@ -846,8 +846,8 @@
             "Critical": "-",
             "Cost": "6 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Rakunda",
+            "Rank": "1"
         },
         {
             "Skill": "Marakukaja",
@@ -857,8 +857,8 @@
             "Critical": "-",
             "Cost": "12 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Rakukaja",
+            "Rank": "2"
         },
         {
             "Skill": "Marakunda",
@@ -868,8 +868,8 @@
             "Critical": "-",
             "Cost": "12 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Rakunda",
+            "Rank": "2"
         },
         {
             "Skill": "Taunt",
@@ -890,8 +890,8 @@
             "Critical": "-",
             "Cost": "6 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Sukukaja",
+            "Rank": "1"
         },
         {
             "Skill": "Red Capote",
@@ -912,8 +912,8 @@
             "Critical": "-",
             "Cost": "6 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Sukunda",
+            "Rank": "1"
         },
         {
             "Skill": "Masukukaja",
@@ -923,8 +923,8 @@
             "Critical": "-",
             "Cost": "12 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Sukukaja",
+            "Rank": "2"
         },
         {
             "Skill": "Masukunda",
@@ -934,8 +934,8 @@
             "Critical": "-",
             "Cost": "12 SP",
             "Category": "Enhance Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Sukunda",
+            "Rank": "2"
         },
         {
             "Skill": "War Cry",
@@ -3012,8 +3012,30 @@
             "Critical": "-",
             "Cost": "-",
             "Category": "Passive Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Tarukaja",
+            "Rank": "3"
+        },
+        {
+            "Skill": "Auto-Makakaja",
+            "Effect": "Automatic Makakaja at the start of battle.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Makakaja",
+            "Rank": "3"
+        },
+        {
+            "Skill": "Auto-Mamakakaja",
+            "Effect": "Automatic Mamakakaja at the start of battle.",
+            "Power": "-",
+            "Accuracy": "-",
+            "Critical": "-",
+            "Cost": "-",
+            "Category": "Passive Skills",
+            "Family": "Makakaja",
+            "Rank": "4"
         },
         {
             "Skill": "Auto-Rakukaja",
@@ -3023,8 +3045,8 @@
             "Critical": "-",
             "Cost": "-",
             "Category": "Passive Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Rakukaja",
+            "Rank": "3"
         },
         {
             "Skill": "Auto-Sukukaja",
@@ -3034,8 +3056,8 @@
             "Critical": "-",
             "Cost": "-",
             "Category": "Passive Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Sukukaja",
+            "Rank": "3"
         },
         {
             "Skill": "Auto-Mataru",
@@ -3045,8 +3067,8 @@
             "Critical": "-",
             "Cost": "-",
             "Category": "Passive Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Tarukaja",
+            "Rank": "4"
         },
         {
             "Skill": "Auto-Maraku",
@@ -3056,8 +3078,8 @@
             "Critical": "-",
             "Cost": "-",
             "Category": "Passive Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Rakukaja",
+            "Rank": "4"
         },
         {
             "Skill": "Auto-Masuku",
@@ -3067,8 +3089,8 @@
             "Critical": "-",
             "Cost": "-",
             "Category": "Passive Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Sukukaja",
+            "Rank": "4"
         },
         {
             "Skill": "Divine Grace",

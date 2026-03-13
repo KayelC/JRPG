@@ -556,8 +556,8 @@
             "Critical": "-",
             "Cost": "4 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_ST",
+            "Rank": "1"
         },
         {
             "Skill": "Eiga",
@@ -568,7 +568,7 @@
             "Cost": "8 SP",
             "Category": "Darkness Skills",
             "Family": "-",
-            "Rank": "-"
+            "Rank": "2"
         },
         {
             "Skill": "Eigaon",
@@ -579,7 +579,7 @@
             "Cost": "15 SP",
             "Category": "Darkness Skills",
             "Family": "-",
-            "Rank": "-"
+            "Rank": "3"
         },
         {
             "Skill": "Maeiha",
@@ -589,8 +589,8 @@
             "Critical": "-",
             "Cost": "10 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_MT",
+            "Rank": "1"
         },
         {
             "Skill": "Maeiga",
@@ -600,8 +600,8 @@
             "Critical": "-",
             "Cost": "16 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_MT",
+            "Rank": "2"
         },
         {
             "Skill": "Maeigaon",
@@ -611,8 +611,8 @@
             "Critical": "-",
             "Cost": "25 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_MT",
+            "Rank": "3"
         },
         {
             "Skill": "Evil Gaze",
@@ -622,8 +622,8 @@
             "Critical": "-",
             "Cost": "8 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_Half",
+            "Rank": "1"
         },
         {
             "Skill": "Demonic Decree",
@@ -633,8 +633,8 @@
             "Critical": "-",
             "Cost": "38 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_Half",
+            "Rank": "2"
         },
         {
             "Skill": "Soul Divide",
@@ -668,8 +668,8 @@
             "Critical": "-",
             "Cost": "4 SP",
             "Category": "Electricity Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Elec_ST",
+            "Rank": "1"
         },
         {
             "Skill": "Mazio",
@@ -679,8 +679,8 @@
             "Critical": "-",
             "Cost": "8 SP",
             "Category": "Electricity Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Elec_MT",
+            "Rank": "1"
         },
         {
             "Skill": "Zionga",
@@ -690,8 +690,8 @@
             "Critical": "-",
             "Cost": "8 SP",
             "Category": "Electricity Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Elec_ST",
+            "Rank": "2"
         },
         {
             "Skill": "Mazionga",
@@ -701,8 +701,8 @@
             "Critical": "-",
             "Cost": "16 SP",
             "Category": "Electricity Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Elec_MT",
+            "Rank": "2"
         },
         {
             "Skill": "Ziodyne",
@@ -712,8 +712,8 @@
             "Critical": "-",
             "Cost": "16 SP",
             "Category": "Electricity Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Elec_ST",
+            "Rank": "3"
         },
         {
             "Skill": "Maziodyne",
@@ -723,8 +723,8 @@
             "Critical": "-",
             "Cost": "32 SP",
             "Category": "Electricity Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Elec_MT",
+            "Rank": "3"
         },
         {
             "Skill": "Thunder Reign",

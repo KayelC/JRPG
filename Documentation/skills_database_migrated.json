@@ -301,8 +301,8 @@
             "Critical": "-",
             "Cost": "5 SP",
             "Category": "Almighty Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Drain_HP",
+            "Rank": "1"
         },
         {
             "Skill": "Life Drain",
@@ -312,8 +312,8 @@
             "Critical": "-",
             "Cost": "5 SP",
             "Category": "Almighty Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Drain_HP",
+            "Rank": "2"
         },
         {
             "Skill": "Beast Roar",
@@ -378,8 +378,8 @@
             "Critical": "-",
             "Cost": "15 SP",
             "Category": "Almighty Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Ailment_Susceptibility",
+            "Rank": "1"
         },
         {
             "Skill": "Stagnant Air",
@@ -389,8 +389,8 @@
             "Critical": "-",
             "Cost": "15 SP",
             "Category": "Almighty Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Ailment_Susceptibility",
+            "Rank": "2"
         },
         {
             "Skill": "Megido",
@@ -400,8 +400,8 @@
             "Critical": "-",
             "Cost": "45 SP",
             "Category": "Almighty Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Megido",
+            "Rank": "1"
         },
         {
             "Skill": "Megidola",
@@ -411,8 +411,8 @@
             "Critical": "-",
             "Cost": "65 SP",
             "Category": "Almighty Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Megido",
+            "Rank": "2"
         },
         {
             "Skill": "Megidolaon",
@@ -422,8 +422,8 @@
             "Critical": "-",
             "Cost": "85 SP",
             "Category": "Almighty Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Megido",
+            "Rank": "3"
         },
         {
             "Skill": "Black Viper",
@@ -479,8 +479,8 @@
             "Critical": "-",
             "Cost": "6 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_IK",
+            "Rank": "1"
         },
         {
             "Skill": "Mamudo",
@@ -490,8 +490,8 @@
             "Critical": "-",
             "Cost": "12 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_IK",
+            "Rank": "2"
         },
         {
             "Skill": "Mudoon",
@@ -501,8 +501,8 @@
             "Critical": "-",
             "Cost": "12 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_IK",
+            "Rank": "3"
         },
         {
             "Skill": "Mamudoon",
@@ -512,8 +512,8 @@
             "Critical": "-",
             "Cost": "24 SP",
             "Category": "Darkness Skills",
-            "Family": "-",
-            "Rank": "-"
+            "Family": "Dark_IK",
+            "Rank": "4"
         },
         {
             "Skill": "Die For Me!",
